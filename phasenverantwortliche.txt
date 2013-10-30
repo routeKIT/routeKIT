@@ -1,0 +1,5 @@
+Pflichtenheft: Anastasia
+Entwurf: Felix, Lucas
+Implementierung: Dominic
+Qualitätssicherung: Kevin
+Präsentation: Fabian
