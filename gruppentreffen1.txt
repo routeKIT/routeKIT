@@ -3,6 +3,7 @@ Klausurpause verschieben (tauschen mit Qualitätssicherung)
 Rendering Bildkacheln verwenden erlaubt?
 Online/Offline mode? 
 OSM Daten speichern, Datenbank? HashMap RAM?
+Nach implementieren und vor Testen? Was soll das sein?
 
 Weitere Musskriterien nötig oder nur die vorgebenen?
 
@@ -12,4 +13,3 @@ Kartengröße??
 Schwerpunkt: Fahrbeschränkungen.
 
 User defined constraints?
-
