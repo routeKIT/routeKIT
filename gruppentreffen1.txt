@@ -1,0 +1,15 @@
+Klausurpause verschieben (tauschen mit Qualitätssicherung)
+14.-28.2.  ?
+Rendering Bildkacheln verwenden erlaubt?
+Online/Offline mode? 
+OSM Daten speichern, Datenbank? HashMap RAM?
+
+Weitere Musskriterien nötig oder nur die vorgebenen?
+
+Wir machen Auto!
+Kartengröße??
+
+Schwerpunkt: Fahrbeschränkungen.
+
+User defined constraints?
+
