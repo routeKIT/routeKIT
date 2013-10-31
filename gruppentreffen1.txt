@@ -1,15 +1,15 @@
-Klausurpause verschieben (tauschen mit Qualitätssicherung)
+ï»¿Klausurpause verschieben (tauschen mit QualitÃ¤tssicherung)
 14.-28.2.  ?
 Rendering Bildkacheln verwenden erlaubt?
 Online/Offline mode? 
 OSM Daten speichern, Datenbank? HashMap RAM?
 Nach implementieren und vor Testen? Was soll das sein?
 
-Weitere Musskriterien nötig oder nur die vorgebenen?
+Weitere Musskriterien nÃ¶tig oder nur die vorgebenen?
 
 Wir machen Auto!
-Kartengröße??
+KartengrÃ¶ÃŸe??
 
-Schwerpunkt: Fahrbeschränkungen.
+Schwerpunkt: FahrbeschrÃ¤nkungen.
 
 User defined constraints?
