@@ -1,0 +1,6 @@
+MapRender:
+  In-RAM-Tree,
+
+Beschränkungen:
+  Vorberechnung Teil des Programms. (Beeinflusbar/Profile)
+  Oder lokaler Dijkstra ?
