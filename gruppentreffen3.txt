@@ -1,4 +1,4 @@
-Zus‰tzliche Einschr‰nkungen mit lokalem Dijkstra? Beides.
+ÔªøZus√§tzliche Einschr√§nkungen mit lokalem Dijkstra? Beides.
 
 Nutzen von Beschleunigungstechniken? JA
 
@@ -6,6 +6,6 @@ Nutzen von Beschleunigungstechniken? JA
 
 
 Fragen:
-Groﬂe Karten mit externem Speichern? Mˆglich wegen Vorberechnung?
+Gro√üe Karten mit externem Speichern? M√∂glich wegen Vorberechnung?
 praktische Usability vs Alogrithmik.
 Was ist ein Systemmodell?
