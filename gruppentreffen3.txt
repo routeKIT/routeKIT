@@ -1,0 +1,11 @@
+Zusätzliche Einschränkungen mit lokalem Dijkstra? Beides.
+
+Nutzen von Beschleunigungstechniken? JA
+
+
+
+
+Fragen:
+Große Karten mit externem Speichern? Möglich wegen Vorberechnung?
+praktische Usability vs Alogrithmik.
+Was ist ein Systemmodell?
