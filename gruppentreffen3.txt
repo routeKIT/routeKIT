@@ -1,4 +1,4 @@
-﻿Zusätzliche Einschränkungen mit lokalem Dijkstra? Beides.
+﻿Zusätzliche Einschränkungen mit lokalem Dijkstra? Beides. -> Weglassen
 
 Nutzen von Beschleunigungstechniken? JA
 
@@ -6,6 +6,11 @@ Nutzen von Beschleunigungstechniken? JA
 
 
 Fragen:
-Große Karten mit externem Speichern? Möglich wegen Vorberechnung?
-praktische Usability vs Alogrithmik.
-Was ist ein Systemmodell?
+Große Karten mit externem Speichern? Möglich wegen Vorberechnung? -> Nicht nötig, da die Deutschland-Karte in den RAM passt
+praktische Usability vs Alogrithmik. -> Algorithmik ist wichtiger! Usability nur für uns selbst
+Was ist ein Systemmodell? -> Auf den Folien
+
+Wichtige Punkte:
+-Renderer
+-Vorberechnung mit Ark-Flags und Profilen
+-Routenplanung mit kd-Bäume(?)
