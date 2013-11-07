@@ -1,7 +1,9 @@
+# LaTeX build results
 *.gz
 *.toc
 *.aux
 *.log
 *.pdf
+*.dvi
 *.bbl
 *.blg
