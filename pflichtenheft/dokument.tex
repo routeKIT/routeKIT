@@ -9,6 +9,19 @@
 %\author{}
 %\date{}
 
+%Hack for referencing labels
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{%
+  \let\orglabel\label
+  \let\label\@gobble
+  \edef\@currentlabel{#1}%
+  \let\label\orglabel
+  \orgdescriptionlabel{#1}%
+}
+\makeatother
+% End: Hack for referencing labels
+
 % hier beginnt das Dokument
 \begin{document}
 \shorthandoff{"}
