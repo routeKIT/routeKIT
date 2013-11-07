@@ -1,6 +1,6 @@
-MapRender:
+﻿MapRender:
   In-RAM-Tree,
 
-Beschr�nkungen:
+Beschränkungen:
   Vorberechnung Teil des Programms. (Beeinflusbar/Profile)
   Oder lokaler Dijkstra ?
