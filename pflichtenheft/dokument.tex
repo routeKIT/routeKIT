@@ -79,10 +79,51 @@ Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberech
 %Kevin
 \section{Funktionale Anforderungen}
 % Felix
-\begin{itemize}
-\item Berechnen des nächsten Punkts zu Geokoordinaten auf der Karte.
-\item 
-\end{itemize}
+\subsection{Kernfunktionen}
+\begin{description}
+\item [/F10/]
+Berechnen des nächsten Knotens zu Geokoordinaten auf der Karte.\\
+Für das Auflösen eines geklickten Punkts in einen Knoten, wird Programmcode benötigt, der einen Punkt in Geokoordinaten auf den nächstliegenden Weg projeziert.
+\item[/F20/]
+Berechnen einer Route zwischen zwei Knoten des Straßengraphs.\\
+Für die Nutzung der Programms wird ein optimierter Routenplanungsalogrithmus benötigt, der die Kernfunktionalität darstellt.
+\end{description}
+\subsection{Benutzerschnittstelle}
+\begin{description}
+\item[/F30/]
+Berechnen einer Bildkachel aus lokalen Kartendaten.\\
+Darstellung der lokalen Kartendaten in verschiedenen Zoom- und Genauigkeitsstufen. Dazu wird zunächst \ref{F40} benötigt.
+\item[/F40/\label{F40}]
+Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt.\\
+
+\item[/F50/]
+Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln
+\item[/F60/]
+Darstellen von Kartenkacheln
+\item[/F70/]
+Bestimmen der Geokoordinaten zu einer gegebenen Positon auf der angezeigten Karte.
+\item[/F80/]
+Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
+\item[/F90/]
+Anzeigen einer berechneter Route auf den dargestellten Kacheln.
+\end{description}
+\subsection{Wegbeschreibung}
+\begin{description}
+\item[/F100/]
+Bestimmen aller Abbiegevorgänge einer Route
+\item[/F110/]
+Bestimmen der Anweisung aus einem Abbiegevorgang
+\item[/F120/]
+Erzeugen einer HTML-Datei aus einer Wegbeschreibung
+\item[/F130/]
+Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navis.
+\end{description}
+\subsection{Suche}
+\begin{description}
+\item[/F140/]
+Erstellen eines Suchindexes für Addressen.
+
+\end{description}
 \section{Produktdaten}
 %Anastasia
 \section{Systemmodell}
