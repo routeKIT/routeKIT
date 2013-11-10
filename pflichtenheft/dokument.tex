@@ -142,14 +142,59 @@ Erstellen eines Suchindexes für Addressen.
 \end{enumerate}
 % Dominic
 \section{Benutzeroberfläche}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./mockup screenshot}
+\caption[Erster Entwurf]{}
+\caption{}
+\label{fig:mockupscreenshot}
+\end{figure}
+% FIXME Warum kann ich das nicht kompilieren?
 % Fabian
 \section{Qualitätsziele}
 % Dominic
 \section{Globale Testfälle und Szenarien}
+\subsection{Funktionssequenzen}
+\begin{description}
+\item[/TF10/]
+Start auswählen, Ziel auswählen, Route berechnen\\
+\item[/TF20/]
+Karte bewegen, heranzoomen, Karte bewegen, herauszoomen\\
+\item[/TF30/]
+Profilerstellung, Vorberechnung, Route berechnen, Profil löschen\\
+\item[/TF40/]
+Route berechnen, Profil wechseln, Route berechnen\\
+\item[/TF50/]
+Neue Kartendaten laden, Vorberechnung, Route berechnen\\
+\item[/TF60]
+Route berechnen, Karte wechseln, Route berechnen\\
+\item[/TF70/]
+Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden\\
+\end{description}
+\subsection{Datenkonsistenzen}
+\begin{description}
+\item[/TD10/]
+Eine Route kann nur berechnet werden, wenn Kartendaten vorliegen, ein Profil ausgewählt wurde und die Vorberechnung für dieses Profil für diese Karte abgeschlossen ist.\\
+\item[/TD20/]
+Kartendaten müssen als gültige osm-Datei vorliegen.\\
+\item[/TD30/]
+Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete Profil nicht mehr vorhanden sind.\\
+\item[/TD40/]
+Das Standardprofil kann nicht gelöscht werden.\\
+\end{description}
 % Fabian
 
 \section{Entwicklungsumgebung}
 % Kevin
 \section{Glossar}
-
+\begin{description}
+\item[Kartendaten] Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält\\
+\item[Profil]
+Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs\\
+\item[Route]
+Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird\\
+\item[Standardprofil]
+Ein vorinstalliertes Profil für gängige PKWs\\
+\item[Vorberechnung] Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden.
+\end{description}
 \end{document}
