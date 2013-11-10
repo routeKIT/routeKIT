@@ -4,6 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{hyperref} % clickable refs
+\usepackage[toc, numberedsection, style=altlist]{glossaries}
+\makeglossary
 
  
 \title{Pflichtenheft}
@@ -22,6 +24,28 @@
 }
 \makeatother
 % End: Hack for referencing labels
+
+\renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
+
+% Glossar
+
+% So sieht ein Glossar-Eintrag aus:
+%
+%\newglossaryentry{dijkstra}{
+%  name={Dijkstra’s Algorithmus},
+%  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+%}
+%\newglossaryentry{arc}{
+%  name={Arc-Flags},
+%  description={eine Technik, um Routenberechnung zu beschleunigen},
+%  see=[siehe auch]{dijkstra}
+%}
+%
+% Und so kann er im Dokument verwendet werden:
+%
+% lorem ipsum dolor sit \gls{arc}, consectetur
+%
+% End: Glossar
 
 % hier beginnt das Dokument
 \begin{document}
@@ -150,6 +174,7 @@ Erstellen eines Suchindexes für Addressen.
 % Fabian
 \section{Entwicklungsumgebung}
 % Kevin
-\section{Glossar}
+
+\printglossary[type=main, title={Glossar}, toctitle={Glossar}]
 
 \end{document}
