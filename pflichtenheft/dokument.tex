@@ -24,6 +24,9 @@
 \makeatother
 % End: Hack for referencing labels
 
+% usage: \oitem{F40} -> item /F40/ with label F40
+\newcommand{\oitem}[1]{\item[/#1/\label{#1}]}
+
 % hier beginnt das Dokument
 \begin{document}
 \shorthandoff{"}
