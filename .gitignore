@@ -8,3 +8,7 @@
 *.bbl
 *.blg
 *.out
+*.glg
+*.glo
+*.gls
+*.ist

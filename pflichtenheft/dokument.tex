@@ -5,6 +5,8 @@
 \usepackage[ngerman]{babel}
 \usepackage{hyperref} % clickable refs
 \usepackage{graphicx}
+\usepackage[toc, numberedsection, style=altlist]{glossaries}
+\makeglossary
 
  
 \title{Pflichtenheft}
@@ -23,6 +25,50 @@
 }
 \makeatother
 % End: Hack for referencing labels
+
+% Glossar: alle Einträge, aber ohne extra Referenzen
+% http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
+\newcommand*{\glsgobblenumber}[1]{}
+\makeatletter
+\newcommand*{\glsaddnp}[2][]{
+  \glsdoifexists{#2}{
+    \def\@glsnumberformat{glsgobblenumber}
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}
+    \setkeys{glossadd}{#1}
+    \@gls@saveentrycounter
+    \@do@wrglossary{#2}
+  }
+}
+\newcommand{\glsaddallunused}[1][]{
+  \edef\@glo@type{\@glo@types}
+  \setkeys{glossadd}{#1}
+  \forallglsentries[\@glo@type]{\@glo@entry}{
+    \ifglsused{\@glo@entry}{}{
+      \glsaddnp[#1]{\@glo@entry}}}
+}
+\makeatother
+
+\renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
+
+% Glossar
+
+% So sieht ein Glossar-Eintrag aus:
+%
+%\newglossaryentry{dijkstra}{
+%  name={Dijkstra’s Algorithmus},
+%  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+%}
+%\newglossaryentry{arc}{
+%  name={Arc-Flags},
+%  description={eine Technik, um Routenberechnung zu beschleunigen},
+%  see=[siehe auch]{dijkstra}
+%}
+%
+% Und so kann er im Dokument verwendet werden:
+%
+% lorem ipsum dolor sit \gls{arc}, consectetur
+%
+% End: Glossar
 
 % usage: \oitem{F40} -> item /F40/ with label F40
 \newcommand{\oitem}[1]{\item[/#1/\label{#1}]}
@@ -238,7 +284,7 @@ Das Standardprofil kann nicht gelöscht werden.
   \item[Qualitätssicherung] JUnit, CodeCover
 \end{description}
 % Kevin
-\section{Glossar}
+\section{manuelles Glossar}
 \begin{description}
 \item[Kartendaten] Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält
 \item[Profil]
@@ -249,4 +295,8 @@ Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird
 Ein vorinstalliertes Profil für gängige PKWs
 \item[Vorberechnung] Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden.
 \end{description}
+
+\glsaddallunused
+\printglossary[type=main, title={Glossar}, toctitle={Glossar}]
+
 \end{document}
