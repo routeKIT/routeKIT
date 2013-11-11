@@ -249,6 +249,15 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 % Dominic
 \section{Globale Testfälle und Szenarien}
 \subsection{Funktionssequenzen}
+\subsection{Datenkonsistenzen}
+\newglossaryentry{route}{
+  name={Route},
+  description={Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird}
+}
+\newglossaryentry{profil}{
+  name={Profil},
+  description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs}
+}
 \begin{description}
 \oitem{TF10}
 Start auswählen, Ziel auswählen, Route berechnen
@@ -257,7 +266,7 @@ Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
 \oitem{TF30}
 Profilerstellung, Vorberechnung, Route berechnen, Profil löschen
 \oitem{TF40}
-Route berechnen, Profil wechseln, Route berechnen
+Route berechnen, \gls{profil} wechseln, Route berechnen
 \oitem{TF50}
 Neue Kartendaten laden, Vorberechnung, Route berechnen
 \oitem{TF60}
@@ -266,15 +275,28 @@ Route berechnen, Karte wechseln, Route berechnen
 Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
 \end{description}
 \subsection{Datenkonsistenzen}
+\newglossaryentry{kartendaten}{
+  name={Kartendaten},
+  description={Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
+}
+\newglossaryentry{standardprofil}{
+  name={Standardprofil},
+  description={Ein vorinstalliertes Profil für gängige PKWs}
+}
+\newglossaryentry{vorberechnung}{
+  name={Vorberechnung},
+  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden}
+}
+
 \begin{description}
 \oitem{TD10}
-Eine Route kann nur berechnet werden, wenn Kartendaten vorliegen, ein Profil ausgewählt wurde und die Vorberechnung für dieses Profil für diese Karte abgeschlossen ist.
+Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein Profil ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
 \oitem{TD20}
-Kartendaten müssen als gültige osm-Datei vorliegen.
+\gls{kartendaten} müssen als gültige osm-Datei vorliegen.
 \oitem{TD30}
-Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete Profil nicht mehr vorhanden sind.
+Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete \gls{profil} nicht mehr vorhanden sind.
 \oitem{TD40}
-Das Standardprofil kann nicht gelöscht werden.
+Das \gls{standardprofil} kann nicht gelöscht werden.
 \end{description}
 % Fabian
 \section{Entwicklungsumgebung}
@@ -284,17 +306,6 @@ Das Standardprofil kann nicht gelöscht werden.
   \item[Qualitätssicherung] JUnit, CodeCover
 \end{description}
 % Kevin
-\section{manuelles Glossar}
-\begin{description}
-\item[Kartendaten] Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält
-\item[Profil]
-Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs
-\item[Route]
-Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird
-\item[Standardprofil]
-Ein vorinstalliertes Profil für gängige PKWs
-\item[Vorberechnung] Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden.
-\end{description}
 
 \glsaddallunused
 \printglossary[type=main, title={Glossar}, toctitle={Glossar}]
