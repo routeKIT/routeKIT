@@ -1,4 +1,4 @@
-% das Papierformat zuerst
+﻿% das Papierformat zuerst
 \documentclass[a4paper, 11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -138,6 +138,38 @@ Erstellen eines Suchindexes für Addressen.
 \end{description}
 \section{Produktdaten}
 %Anastasia
+\subsection{Profildaten}
+\begin{description}
+\item [/D10/\label{D10}]
+Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.\\
+\item [/D20/]
+Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.\\
+\item [/D30/]
+Für ein Fahrzeug vom Typ  LKW werden folgende Daten gespeichert:\\
+Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit  .\\
+\item [/D40/]
+Für ein Fahrzeug vom Typ Bus werden folgende Daten gespeichert:\\
+Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit  .\\
+\end{description}
+
+\subsection{Kartendaten}
+\begin{description}
+\item [/D50/\label{D50}]
+Es wird eine OSM-Datei gespeichert.
+\item [/D60/\label{D60}]
+Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird ein Graph gespeichert.
+\item [/D70/]
+Für einen Graphen wie in \ref{D60} werden  folgende Daten gespeichert:\\
+Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
+\item [/D80/]
+Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine unikale Identifikationsnummer.
+\end{description}
+
+\subsection{Historydaten}
+\begin{description}
+\item [/D90/]
+Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
+\end{description}
 \section{Systemmodell}
 %Anastasia
 \section{Nichtfunktionale Anforderungen}
