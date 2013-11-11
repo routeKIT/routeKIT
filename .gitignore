@@ -12,3 +12,6 @@
 *.glo
 *.gls
 *.ist
+
+# Windows
+Thumbs.db
