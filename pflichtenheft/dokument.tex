@@ -149,15 +149,15 @@ Erstellen eines Suchindexes für Addressen.
 \subsection{Profildaten}
 \begin{description}
 \item [/D10/\label{D10}]
-Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.\\
+Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.
 \item [/D20/]
-Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.\\
+Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.
 \item [/D30/]
 Für ein Fahrzeug vom Typ  LKW werden folgende Daten gespeichert:\\
-Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit  .\\
+Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit.
 \item [/D40/]
 Für ein Fahrzeug vom Typ Bus werden folgende Daten gespeichert:\\
-Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit  .\\
+Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit.
 \end{description}
 
 \subsection{Kartendaten}
@@ -201,30 +201,30 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 \subsection{Funktionssequenzen}
 \begin{description}
 \item[/TF10/]
-Start auswählen, Ziel auswählen, Route berechnen\\
+Start auswählen, Ziel auswählen, Route berechnen
 \item[/TF20/]
-Karte bewegen, heranzoomen, Karte bewegen, herauszoomen\\
+Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
 \item[/TF30/]
-Profilerstellung, Vorberechnung, Route berechnen, Profil löschen\\
+Profilerstellung, Vorberechnung, Route berechnen, Profil löschen
 \item[/TF40/]
-Route berechnen, Profil wechseln, Route berechnen\\
+Route berechnen, Profil wechseln, Route berechnen
 \item[/TF50/]
-Neue Kartendaten laden, Vorberechnung, Route berechnen\\
+Neue Kartendaten laden, Vorberechnung, Route berechnen
 \item[/TF60]
-Route berechnen, Karte wechseln, Route berechnen\\
+Route berechnen, Karte wechseln, Route berechnen
 \item[/TF70/]
-Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden\\
+Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
 \end{description}
 \subsection{Datenkonsistenzen}
 \begin{description}
 \item[/TD10/]
-Eine Route kann nur berechnet werden, wenn Kartendaten vorliegen, ein Profil ausgewählt wurde und die Vorberechnung für dieses Profil für diese Karte abgeschlossen ist.\\
+Eine Route kann nur berechnet werden, wenn Kartendaten vorliegen, ein Profil ausgewählt wurde und die Vorberechnung für dieses Profil für diese Karte abgeschlossen ist.
 \item[/TD20/]
-Kartendaten müssen als gültige osm-Datei vorliegen.\\
+Kartendaten müssen als gültige osm-Datei vorliegen.
 \item[/TD30/]
-Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete Profil nicht mehr vorhanden sind.\\
+Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete Profil nicht mehr vorhanden sind.
 \item[/TD40/]
-Das Standardprofil kann nicht gelöscht werden.\\
+Das Standardprofil kann nicht gelöscht werden.
 \end{description}
 % Fabian
 \section{Entwicklungsumgebung}
@@ -236,13 +236,13 @@ Das Standardprofil kann nicht gelöscht werden.\\
 % Kevin
 \section{Glossar}
 \begin{description}
-\item[Kartendaten] Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält\\
+\item[Kartendaten] Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält
 \item[Profil]
-Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs\\
+Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs
 \item[Route]
-Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird\\
+Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird
 \item[Standardprofil]
-Ein vorinstalliertes Profil für gängige PKWs\\
+Ein vorinstalliertes Profil für gängige PKWs
 \item[Vorberechnung] Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden.
 \end{description}
 \end{document}
