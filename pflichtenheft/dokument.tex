@@ -107,26 +107,34 @@ Berechnen einer Bildkachel aus lokalen Kartendaten.\\
 Darstellung der lokalen Kartendaten in verschiedenen Zoom- und Genauigkeitsstufen. Dazu wird zunächst \ref{F40} benötigt.
 \item[/F40/\label{F40}]
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt.\\
-
+Mit einer angepassten Datenstruktur sollen solche Anfragen effizient abgearbeitet werden.
 \item[/F50/]
-Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln
-\item[/F60/]
-Darstellen von Kartenkacheln
-\item[/F70/]
-Bestimmen der Geokoordinaten zu einer gegebenen Positon auf der angezeigten Karte.
+Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.\\
+Online-Kacheln sollen in Echtzeit von einem gegebenen HTTP-Server.
+\item[/F60/\label{F60}]
+Darstellen von Kartenkacheln\\
+Die Kacheln der entsprechenden Zoomstufe sollen an der richtigen Stelle im GUI angezeigt werden.
+\item[/F70/\label{F70}]
+Bestimmen der Geokoordinaten zu einer gegebenen Position auf der angezeigten Karte.\\
+Mithilfe der aktuellen Zoomstufe und der Kartenpostiton soll aus dem geklickten Pixel die entprechender Geokoordinaten berechnet werden.
 \item[/F80/]
-Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
+Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.\\
+Benutzeraktionen wie Drag Events oder Mausrad Events sollen auf die aktuelle Kartenposition/Zoomstufe angewendet werden. (Benötigt evtl. \ref{F70})
 \item[/F90/]
-Anzeigen einer berechneter Route auf den dargestellten Kacheln.
+Anzeigen einer berechneter Route auf den dargestellten Kacheln.\\
+Zusätzlich zu \ref{F60} soll auf der selben Fläche die berechnete Route visuell dargestellt werden (Beispiel in  Abbildung \ref{fig:mockupscreenshot}).
 \end{description}
 \subsection{Wegbeschreibung}
 \begin{description}
 \item[/F100/]
-Bestimmen aller Abbiegevorgänge einer Route
+Bestimmen aller Abbiegevorgänge einer Route.\\
+Die entsprechenden Abbiegevorgänge müssen dabei klassifiziert werden (Richtung, ist Kreisverkehr).
 \item[/F110/]
-Bestimmen der Anweisung aus einem Abbiegevorgang
+Bestimmen der Anweisung aus einem Abbiegevorgang.\\
+Aus definierten extern gespeicherten Textvorlagen soll die richtige Beschreibung generiert werden.
 \item[/F120/]
-Erzeugen einer HTML-Datei aus einer Wegbeschreibung
+Erzeugen einer HTML-Datei aus einer Wegbeschreibung\\
+Die Wegbeschreibung soll nachher aus dem Programm in eine HTML-Datei exportiert werden.
 \item[/F130/]
 Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navis.
 \end{description}
