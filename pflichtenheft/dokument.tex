@@ -244,7 +244,7 @@ Es wird eine OSM-Datei gespeichert.
 \oitem{D60}
 Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird ein Graph gespeichert.
 \oitem{D70}
-Für einen Graphen wie in \ref{D60} werden  folgende Daten gespeichert:\\
+Für einen Graphen wie in \ref{D60} werden folgende Daten gespeichert:\\
 Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
 \oitem{D80}
 Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine unikale Identifikationsnummer.
@@ -261,8 +261,9 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 \section{Nichtfunktionale Anforderungen}
 
 \begin{enumerate}
-\item Suchen der Route schneller als 5 Sekunden. (  mit Arcflags)
-
+\item \ref{F20} (Berechnung der Route) ist schneller als fünf Sekunden.
+\item \ref{F10} benötigt höchstens 500 ms.
+\item Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
 \end{enumerate}
 % Dominic
 \section{Benutzeroberfläche}
