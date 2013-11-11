@@ -96,54 +96,54 @@ Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberech
 % Felix
 \subsection{Kernfunktionen}
 \begin{description}
-\item [/F10/]
+\oitem{F10}
 Berechnen des nächsten Knotens zu Geokoordinaten auf der Karte.\\
 Für das Auflösen eines geklickten Punkts in einen Knoten, wird Programmcode benötigt, der einen Punkt in Geokoordinaten auf den nächstliegenden Weg projeziert.
-\item[/F20/]
+\oitem{F20}
 Berechnen einer Route zwischen zwei Knoten des Straßengraphs.\\
 Für die Nutzung der Programms wird ein optimierter Routenplanungsalogrithmus benötigt, der die Kernfunktionalität darstellt.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
-\item[/F30/]
+\oitem{F30}
 Berechnen einer Bildkachel aus lokalen Kartendaten.\\
 Darstellung der lokalen Kartendaten in verschiedenen Zoom- und Genauigkeitsstufen. Dazu wird zunächst \ref{F40} benötigt.
-\item[/F40/\label{F40}]
+\oitem{F40}
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt.\\
 Mit einer angepassten Datenstruktur sollen solche Anfragen effizient abgearbeitet werden.
-\item[/F50/]
+\oitem{F50}
 Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.\\
 Online-Kacheln sollen in Echtzeit von einem gegebenen HTTP-Server.
-\item[/F60/\label{F60}]
+\oitem{F60}
 Darstellen von Kartenkacheln\\
 Die Kacheln der entsprechenden Zoomstufe sollen an der richtigen Stelle im GUI angezeigt werden.
-\item[/F70/\label{F70}]
+\oitem{F70}
 Bestimmen der Geokoordinaten zu einer gegebenen Position auf der angezeigten Karte.\\
 Mithilfe der aktuellen Zoomstufe und der Kartenpostiton soll aus dem geklickten Pixel die entprechender Geokoordinaten berechnet werden.
-\item[/F80/]
+\oitem{F80}
 Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.\\
 Benutzeraktionen wie Drag Events oder Mausrad Events sollen auf die aktuelle Kartenposition/Zoomstufe angewendet werden. (Benötigt evtl. \ref{F70})
-\item[/F90/]
+\oitem{F90}
 Anzeigen einer berechneter Route auf den dargestellten Kacheln.\\
 Zusätzlich zu \ref{F60} soll auf der selben Fläche die berechnete Route visuell dargestellt werden (Beispiel in  Abbildung \ref{fig:mockupscreenshot}).
 \end{description}
 \subsection{Wegbeschreibung}
 \begin{description}
-\item[/F100/]
+\oitem{F100}
 Bestimmen aller Abbiegevorgänge einer Route.\\
 Die entsprechenden Abbiegevorgänge müssen dabei klassifiziert werden (Richtung, ist Kreisverkehr).
-\item[/F110/]
+\oitem{F110}
 Bestimmen der Anweisung aus einem Abbiegevorgang.\\
 Aus definierten extern gespeicherten Textvorlagen soll die richtige Beschreibung generiert werden.
-\item[/F120/]
+\oitem{F120}
 Erzeugen einer HTML-Datei aus einer Wegbeschreibung\\
 Die Wegbeschreibung soll nachher aus dem Programm in eine HTML-Datei exportiert werden.
-\item[/F130/]
+\oitem{F130}
 Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navis.
 \end{description}
 \subsection{Suche}
 \begin{description}
-\item[/F140/]
+\oitem{F140}
 Erstellen eines Suchindexes für Addressen.
 
 \end{description}
@@ -151,34 +151,34 @@ Erstellen eines Suchindexes für Addressen.
 %Anastasia
 \subsection{Profildaten}
 \begin{description}
-\item [/D10/\label{D10}]
+\oitem{D10}
 Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.
-\item [/D20/]
+\oitem{D20}
 Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.
-\item [/D30/]
+\oitem{D30}
 Für ein Fahrzeug vom Typ  LKW werden folgende Daten gespeichert:\\
 Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit.
-\item [/D40/]
+\oitem{D40}
 Für ein Fahrzeug vom Typ Bus werden folgende Daten gespeichert:\\
 Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit.
 \end{description}
 
 \subsection{Kartendaten}
 \begin{description}
-\item [/D50/\label{D50}]
+\oitem{D50}
 Es wird eine OSM-Datei gespeichert.
-\item [/D60/\label{D60}]
+\oitem{D60}
 Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird ein Graph gespeichert.
-\item [/D70/]
+\oitem{D70}
 Für einen Graphen wie in \ref{D60} werden  folgende Daten gespeichert:\\
 Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
-\item [/D80/]
+\oitem{D80}
 Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine unikale Identifikationsnummer.
 \end{description}
 
 \subsection{Historydaten}
 \begin{description}
-\item [/D90/]
+\oitem{D90}
 Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
 \end{description}
 \section{Systemmodell}
@@ -204,30 +204,30 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 \section{Globale Testfälle und Szenarien}
 \subsection{Funktionssequenzen}
 \begin{description}
-\item[/TF10/]
+\oitem{TF10}
 Start auswählen, Ziel auswählen, Route berechnen
-\item[/TF20/]
+\oitem{TF20}
 Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
-\item[/TF30/]
+\oitem{TF30}
 Profilerstellung, Vorberechnung, Route berechnen, Profil löschen
-\item[/TF40/]
+\oitem{TF40}
 Route berechnen, Profil wechseln, Route berechnen
-\item[/TF50/]
+\oitem{TF50}
 Neue Kartendaten laden, Vorberechnung, Route berechnen
-\item[/TF60]
+\oitem{TF60}
 Route berechnen, Karte wechseln, Route berechnen
-\item[/TF70/]
+\oitem{TF70}
 Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
 \end{description}
 \subsection{Datenkonsistenzen}
 \begin{description}
-\item[/TD10/]
+\oitem{TD10}
 Eine Route kann nur berechnet werden, wenn Kartendaten vorliegen, ein Profil ausgewählt wurde und die Vorberechnung für dieses Profil für diese Karte abgeschlossen ist.
-\item[/TD20/]
+\oitem{TD20}
 Kartendaten müssen als gültige osm-Datei vorliegen.
-\item[/TD30/]
+\oitem{TD30}
 Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete Profil nicht mehr vorhanden sind.
-\item[/TD40/]
+\oitem{TD40}
 Das Standardprofil kann nicht gelöscht werden.
 \end{description}
 % Fabian
