@@ -25,6 +25,28 @@
 \makeatother
 % End: Hack for referencing labels
 
+% Glossar: alle Einträge, aber ohne extra Referenzen
+% http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
+\newcommand*{\glsgobblenumber}[1]{}
+\makeatletter
+\newcommand*{\glsaddnp}[2][]{
+  \glsdoifexists{#2}{
+    \def\@glsnumberformat{glsgobblenumber}
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}
+    \setkeys{glossadd}{#1}
+    \@gls@saveentrycounter
+    \@do@wrglossary{#2}
+  }
+}
+\newcommand{\glsaddallunused}[1][]{
+  \edef\@glo@type{\@glo@types}
+  \setkeys{glossadd}{#1}
+  \forallglsentries[\@glo@type]{\@glo@entry}{
+    \ifglsused{\@glo@entry}{}{
+      \glsaddnp[#1]{\@glo@entry}}}
+}
+\makeaddother
+
 \renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
 
 % Glossar
@@ -175,6 +197,7 @@ Erstellen eines Suchindexes für Addressen.
 \section{Entwicklungsumgebung}
 % Kevin
 
+\glsaddallunused
 \printglossary[type=main, title={Glossar}, toctitle={Glossar}]
 
 \end{document}
