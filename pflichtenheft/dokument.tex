@@ -85,6 +85,14 @@
 \begin{document}
 \shorthandoff{"}
 
+% place a symbol before clickable links
+% this has to come *after* \begin{document} because hyperref installs a \AtBeginDocument hook that updates the ref command.
+\newcommand{\refsymbol}[0]{\scalebox{0.5}{$\nearrow$}}
+\let\oldref\ref
+\renewcommand{\ref}[1]{\refsymbol\oldref{#1}}
+\let\oldgls\gls
+\renewcommand{\gls}[1]{\refsymbol\oldgls{#1}}
+
 \maketitle
 \newpage
 \tableofcontents
