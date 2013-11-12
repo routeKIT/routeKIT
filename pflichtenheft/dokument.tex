@@ -70,6 +70,9 @@
 % usage: \oitem{F40} -> item /F40/ with label F40
 \newcommand{\oitem}[1]{\item[\namedlabel{#1}{/#1/}]}
 
+% Betreuer: Rand reduzieren.
+% Betreuer: Wichtig, viel Kriterien, GUI, Testfälle
+% Betreuer: Präzise!!!
 % hier beginnt das Dokument
 \begin{document}
 \shorthandoff{"}
@@ -78,13 +81,14 @@
 \newpage
 \tableofcontents
 \newpage
-
-
+% Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten)
+% Betreuer: Profile exakt welcher Typ
 \section{Einleitung}
 % FIXME less buzzwords, more content
 In unserer zunehmend vernetzten Welt ist persönliche Mobilität von hoher Bedeutung für berufliche Flexibilität und persönliche Selbstverwirklichung. Dabei ist Unterstützung durch IT-Systeme entscheidend, um den Menschen das Leben so einfach wie möglich zu machen. Ein Baustein dieser Unterstützung sind Werkzeuge und Programme, um eine unter bestimmten Kriterien optimale Route zwischen zwei Punkten zu finden.
 %Lucas
 
+% Betreuer: Abbiegungbeschränkung, "Route berechnen", 
 \section{Zielbestimmung}
 Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die optimale (schnellste) Route zwischen zwei Punkten berechnet und anzeigt.
 Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs, ...) bei der Berechnung der Route berücksichtigt.
@@ -95,10 +99,12 @@ Die Kartendaten stammen aus dem OpenStreetMap-Projekt. Aufgrund der schieren Men
 %Lucas
 
 \subsection{Musskriterien}
+% Betreuer: Automatisch Nummerieren
+% Betreuer: Ausführlicher.
 \begin{itemize}
 \item "Ausreichend komfortables GUI"
 \begin{itemize}
-\item Rechtsklick auf die Karte, "hier Start", "hier Ziel"
+\item Rechtsklick auf die Karte, "hier Start", "hier Ziel" % Rechtsklick
 \item Karte anzeigen
 \item Karte ziehen/zoomen
 \item Weg anfragen
@@ -109,13 +115,15 @@ Die Kartendaten stammen aus dem OpenStreetMap-Projekt. Aufgrund der schieren Men
 \subsection{Wunschkriterien}
 \begin{itemize}
 \item Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
-Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung.
+Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung. % Aufsplitten, ungenau.
 
 \item Wegbeschreibung anzeigen. (Bei Kreisverkehren: Ausfahrten zählen)
 \item Berechnungsanfragen speichern. History/Favoriten
 \item Export der Route.
 
 \item Optional OSM-Kacheln
+% Betreuer: Profile
+
 \end{itemize}
 \subsection{Abgerenzungskriterien}
 
@@ -169,6 +177,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \end{itemize}
 
 \section{Funktionale Anforderungen}
+% Betreuer: Weniger Text
 % Felix
 \subsection{Kernfunktionen}
 \begin{description}
@@ -225,6 +234,7 @@ Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräte
 \end{description}
 
 \section{Produktdaten}
+% Betreuer: Darstellung und Berechnung nur aus eigenen Daten. Steht noch nicht da.
 %Anastasia
 \subsection{Profildaten}
 \begin{description}
@@ -246,7 +256,7 @@ Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit.
 Es wird eine OSM-Datei gespeichert.
 \oitem{D60}
 Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird ein Graph gespeichert.
-\oitem{D70}
+\oitem{D70} % Betreuer: aufsplitten
 Für einen Graphen wie in \ref{D60} werden folgende Daten gespeichert:\\
 Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
 \oitem{D80}
@@ -258,7 +268,7 @@ Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine
 \oitem{D90}
 Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrzeugs wie in \ref{D10} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
 \end{description}
-\section{Systemmodell}
+\section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Systemmodell1}
 %Anastasia
 \section{Nichtfunktionale Anforderungen}
@@ -270,6 +280,8 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 \end{description}
 % Dominic
 \section{Benutzeroberfläche}
+% Betreuer: weniger Klicks? Startknopf.
+% Betreuer: Elemente durchnummerieren. Einzeln erklären.
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{mockup_screenshot}
@@ -280,6 +292,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 \section{Qualitätsziele}
 % Dominic
 \section{Globale Testfälle und Szenarien}
+% Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
 \newglossaryentry{route}{
   name={Route},
