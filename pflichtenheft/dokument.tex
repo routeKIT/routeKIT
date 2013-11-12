@@ -70,6 +70,14 @@
 % usage: \oitem{F40} -> item /F40/ with label F40
 \newcommand{\oitem}[1]{\item[\namedlabel{#1}{/#1/}]}
 
+\newcommand{\testfall}[3]{
+  \begin{description}
+    \item[Vorbedingungen] #1
+    \item[Ablauf] #2
+    \item[Erwartetes Ergebnis] #3
+  \end{description}
+}
+
 % Betreuer: Rand reduzieren.
 % Betreuer: Wichtig, viel Kriterien, GUI, Testfälle
 % Betreuer: Präzise!!!
@@ -303,6 +311,11 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
   description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs}
 }
 \begin{description}
+TODO
+\item\testfall
+    {Programm ist gestartet, Karte ist sichtbar}
+    {Rechtsklick auf Karte}
+    {Kontextmenü erscheint}
 \oitem{TF10}
 Start auswählen, Ziel auswählen, Route berechnen
 \oitem{TF20}
