@@ -68,7 +68,19 @@
 % End: Glossar
 
 % usage: \oitem{F40} -> item /F40/ with label F40
+% DO NOT USE - to be replaced by \counteditem
 \newcommand{\oitem}[1]{\item[\namedlabel{#1}{/#1/}]}
+
+% usage: \counteditem{prefix}{refName} -> item /prefixXX/ with label refName (where XX is counted in increments of 10)
+% will be renamed to \oitem soon
+\makeatletter
+\newcommand{\counteditem}[2]{
+  % define the counter
+  \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
+  \addtocounter{oitem#1}{10}
+  \item[\namedlabel{#2}{/#1\arabic{oitem#1}/}]
+}
+\makeatother
 
 \newcommand{\testfall}[3]{
   \begin{description}
