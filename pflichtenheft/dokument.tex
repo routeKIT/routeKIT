@@ -67,13 +67,13 @@
 %
 % End: Glossar
 
-% usage: \counteditem{prefix}{refName} -> item /prefixXX/ with label refName (where XX is counted in increments of 10)
+% usage: \counteditem{prefix}{refName} -> item '/prefixXX/' with label 'prefix:refName' (where XX is counted in increments of 10)
 \makeatletter
 \newcommand{\oitem}[2]{
   % define the counter
   \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
   \addtocounter{oitem#1}{10}
-  \item[\namedlabel{#2}{/#1\arabic{oitem#1}/}]
+  \item[\namedlabel{#1:#2}{/#1\arabic{oitem#1}/}]
 }
 \makeatother
 
@@ -200,56 +200,56 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 % Felix
 \subsection{Kernfunktionen}
 \begin{description}
-\oitem{F}{F:berechneNächstenKnoten}
+\oitem{F}{berechneNächstenKnoten}
 Berechnen des nächsten Knotens zu Geokoordinaten auf der Karte.\\
 Für das Auflösen eines geklickten Punkts in einen Knoten, wird Programmcode benötigt, der einen Punkt in Geokoordinaten auf den nächstliegenden Weg projeziert.
-\oitem{F}{F:berechneRoute}
+\oitem{F}{berechneRoute}
 Berechnen einer Route zwischen zwei Knoten des Straßengraphs.\\
 Für die Nutzung der Programms wird ein optimierter Routenplanungsalogrithmus benötigt, der die Kernfunktionalität darstellt.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
-\oitem{F}{F:berechneKachel}
+\oitem{F}{berechneKachel}
 Berechnen einer Bildkachel aus lokalen Kartendaten.\\
 Darstellung der lokalen Kartendaten in verschiedenen Zoom- und Genauigkeitsstufen. Dazu wird zunächst \ref{F:bestimmeKnotenInAusschnitt} benötigt.
-\oitem{F}{F:bestimmeKnotenInAusschnitt}
+\oitem{F}{bestimmeKnotenInAusschnitt}
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt.\\
 Mit einer angepassten Datenstruktur sollen solche Anfragen effizient abgearbeitet werden.
-\oitem{F}{F:fetcheOnlineKachel}
+\oitem{F}{fetcheOnlineKachel}
 Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.\\
 Online-Kacheln sollen in Echtzeit von einem gegebenen HTTP-Server heruntergeladen werden.
-\oitem{F}{F:zeichneKachel}
+\oitem{F}{zeichneKachel}
 Darstellen von Kartenkacheln\\
 Die Kacheln der entsprechenden Zoomstufe sollen an der richtigen Stelle im GUI angezeigt werden.
-\oitem{F}{F:bestimmeKoordinatenAusPunkt}
+\oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einer gegebenen Position auf der angezeigten Karte.\\
 Mithilfe der aktuellen Zoomstufe und der Kartenpostiton soll aus dem geklickten Pixel die entprechender Geokoordinaten berechnet werden.
-\oitem{F}{F:eingabeZuAusschnitt}
+\oitem{F}{eingabeZuAusschnitt}
 Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.\\
 Benutzeraktionen wie Drag Events oder Mausrad Events sollen auf die aktuelle Kartenposition/Zoomstufe angewendet werden. (Benötigt evtl. \ref{F:bestimmeKoordinatenAusPunkt})
-\oitem{F}{F:zeigeRoute}
+\oitem{F}{zeigeRoute}
 Anzeigen einer berechneter Route auf den dargestellten Kacheln.\\
 Zusätzlich zu \ref{F:zeichneKachel} soll auf der selben Fläche die berechnete Route visuell dargestellt werden (Beispiel in  Abbildung \ref{fig:mockupscreenshot}).
 \end{description}
 \subsection{Wegbeschreibung}
 \begin{description}
-\oitem{F}{F:bestimmeAbbiegeAusRoute}
+\oitem{F}{bestimmeAbbiegeAusRoute}
 Bestimmen aller Abbiegevorgänge einer Route.\\
 Die entsprechenden Abbiegevorgänge müssen dabei klassifiziert werden (Richtung, Kreisverkehr oder nicht).
-\oitem{F}{F:bestimmeAnweisungAusAbbiege}
+\oitem{F}{bestimmeAnweisungAusAbbiege}
 Bestimmen der Anweisung aus einem Abbiegevorgang.\\
 Aus definierten extern gespeicherten Textvorlagen soll die richtige Beschreibung generiert werden.
-\oitem{F}{F:beschreibungZuHtml}
+\oitem{F}{beschreibungZuHtml}
 Erzeugen einer HTML-Datei aus einer Wegbeschreibung\\
 Die Wegbeschreibung soll nachher aus dem Programm in eine HTML-Datei exportiert werden.
-\oitem{F}{F:routeZuNavi}
+\oitem{F}{routeZuNavi}
 Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräten.
 \end{description}
 \subsection{Profilverwaltung}
 \begin{description}
-\oitem{F}{F:neuesProfil} Neues Profil anlegen
-\oitem{F}{F:löscheProfil} Vorhandenes Profil löschen
-\oitem{F}{F:ändereProfil} Vorhandenes Profil ändern
+\oitem{F}{neuesProfil} Neues Profil anlegen
+\oitem{F}{löscheProfil} Vorhandenes Profil löschen
+\oitem{F}{ändereProfil} Vorhandenes Profil ändern
 \end{description}
 
 \section{Produktdaten}
@@ -257,34 +257,34 @@ Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräte
 %Anastasia
 \subsection{Profildaten}
 \begin{description}
-\oitem{D}{D:fahrzeugTyp}
+\oitem{D}{fahrzeugTyp}
 Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.
-\oitem{D}{D:pkwDaten}
+\oitem{D}{pkwDaten}
 Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.
-\oitem{D}{D:lkwDaten}
+\oitem{D}{lkwDaten}
 Für ein Fahrzeug vom Typ  LKW werden folgende Daten gespeichert:\\
 Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit.
-\oitem{D}{D:busDaten}
+\oitem{D}{busDaten}
 Für ein Fahrzeug vom Typ Bus werden folgende Daten gespeichert:\\
 Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit.
 \end{description}
 
 \subsection{Kartendaten}
 \begin{description}
-\oitem{D}{D:osmDatei}
+\oitem{D}{osmDatei}
 Es wird eine OSM-Datei gespeichert.
-\oitem{D}{D:graph}
+\oitem{D}{graph}
 Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
-\oitem{D}{D:graphDaten} % Betreuer: aufsplitten
+\oitem{D}{graphDaten} % Betreuer: aufsplitten
 Für einen Graphen wie in \ref{D:graph} werden folgende Daten gespeichert:\\
 Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
-\oitem{D}{D:knoten}
+\oitem{D}{knoten}
 Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine unikale Identifikationsnummer.
 \end{description}
 
 \subsection{Historydaten}
 \begin{description}
-\oitem{D}{D:history}
+\oitem{D}{history}
 Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
 \end{description}
 \section{Systemmodell} % Betreuer: Paketdiagramm
@@ -293,9 +293,9 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \section{Nichtfunktionale Anforderungen}
 
 \begin{description}
-\oitem{NF}{NF:routeFünfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
-\oitem{NF}{NF:knotenHalbeSek} \ref{F:berechneNächstenKnoten} benötigt höchstens 500 ms.
-\oitem{NF}{NF:knotenWaysAnzahl} Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
+\oitem{NF}{routeFünfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
+\oitem{NF}{knotenHalbeSek} \ref{F:berechneNächstenKnoten} benötigt höchstens 500 ms.
+\oitem{NF}{knotenWaysAnzahl} Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
 \end{description}
 % Dominic
 \section{Benutzeroberfläche}
@@ -327,19 +327,19 @@ TODO
     {Programm ist gestartet, Karte ist sichtbar}
     {Rechtsklick auf Karte}
     {Kontextmenü erscheint}
-\oitem{TF}{TF:startZielRechne}
+\oitem{TF}{startZielRechne}
 Start auswählen, Ziel auswählen, Route berechnen
-\oitem{TF}{TF:bewegeZoom}
+\oitem{TF}{bewegeZoom}
 Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
-\oitem{TF}{TF:profilErstellen}
+\oitem{TF}{profilErstellen}
 Profilerstellung, Vorberechnung, Route berechnen, Profil löschen
-\oitem{TF}{TF:profilWechseln}
+\oitem{TF}{profilWechseln}
 Route berechnen, \gls{profil} wechseln, Route berechnen
-\oitem{TF}{TF:ladenBerechnen}
+\oitem{TF}{ladenBerechnen}
 Neue Kartendaten laden, Vorberechnung, Route berechnen
-\oitem{TF}{TF:kartenWechsel}
+\oitem{TF}{kartenWechsel}
 Route berechnen, Karte wechseln, Route berechnen
-\oitem{TF}{TF:routeLaden}
+\oitem{TF}{routeLaden}
 Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
 \end{description}
 \subsection{Datenkonsistenzen}
@@ -357,13 +357,13 @@ Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verä
 }
 
 \begin{description}
-\oitem{TD}{TD:datenProfilVorberechnung}
+\oitem{TD}{datenProfilVorberechnung}
 Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein Profil ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
-\oitem{TD}{TD:gültigOsm}
+\oitem{TD}{gültigOsm}
 \gls{kartendaten} müssen als gültige osm-Datei vorliegen.
-\oitem{TD}{TD:karteProfilGelöscht}
+\oitem{TD}{karteProfilGelöscht}
 Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete \gls{profil} nicht mehr vorhanden sind.
-\oitem{TD}{TD:löscheNichtStandard}
+\oitem{TD}{löscheNichtStandard}
 Das \gls{standardprofil} kann nicht gelöscht werden.
 \end{description}
 % Fabian
