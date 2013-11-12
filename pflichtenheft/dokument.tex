@@ -111,7 +111,7 @@ Die Kartendaten stammen aus dem OpenStreetMap-Projekt. Aufgrund der schieren Men
 \item Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
 Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung.
 
-\item Wegbeschreibung anzeigen. (Kreisverkehre, Zählen)
+\item Wegbeschreibung anzeigen. (Bei Kreisverkehren: Ausfahrten zählen)
 \item Berechnungsanfragen speichern. History/Favoriten
 \item Export der Route.
 
@@ -155,7 +155,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \subsection{Software}
 
 \begin{itemize}
-\item Betriebssystem: Linux
+\item Betriebssystem: Linux, Windows, andere mit Java $\geq$ 6
 \item Java-Laufzeitumgebung: Version 6 oder neuer
 \end{itemize}
 
@@ -207,7 +207,7 @@ Zusätzlich zu \ref{F60} soll auf der selben Fläche die berechnete Route visuel
 \begin{description}
 \oitem{F100}
 Bestimmen aller Abbiegevorgänge einer Route.\\
-Die entsprechenden Abbiegevorgänge müssen dabei klassifiziert werden (Richtung, ist Kreisverkehr).
+Die entsprechenden Abbiegevorgänge müssen dabei klassifiziert werden (Richtung, Kreisverkehr oder nicht).
 \oitem{F110}
 Bestimmen der Anweisung aus einem Abbiegevorgang.\\
 Aus definierten extern gespeicherten Textvorlagen soll die richtige Beschreibung generiert werden.
@@ -215,7 +215,7 @@ Aus definierten extern gespeicherten Textvorlagen soll die richtige Beschreibung
 Erzeugen einer HTML-Datei aus einer Wegbeschreibung\\
 Die Wegbeschreibung soll nachher aus dem Programm in eine HTML-Datei exportiert werden.
 \oitem{F130}
-Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navis.
+Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräten.
 \end{description}
 \subsection{Profilverwaltung}
 \begin{description}
@@ -281,7 +281,6 @@ Für eine bestimmte OSM-Datei wie in \ref{D50} und ein bestimmten Typ des Fahrze
 % Dominic
 \section{Globale Testfälle und Szenarien}
 \subsection{Funktionssequenzen}
-\subsection{Datenkonsistenzen}
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird}
