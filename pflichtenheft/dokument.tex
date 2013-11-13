@@ -67,6 +67,12 @@
 %
 % End: Glossar
 
+\newglossaryentry{profil}{
+  name={Profil},
+  description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs},
+  plural={Profile}
+}
+
 % usage: \counteditem{prefix}{refName} -> item '/prefixXX/' with label 'prefix:refName' (where XX is counted in increments of 10)
 \makeatletter
 \newcommand{\oitem}[2]{
@@ -85,6 +91,8 @@
   \end{description}
 }
 
+\hyphenation{Ab-bie-ge-be-schrän-kung Ab-bie-ge-be-schrän-kun-gen Fahr-zeug Fahr-zeugs Kar-ten-aus-schnitt Kar-ten-da-ten}
+
 % Betreuer: Rand reduzieren.
 % Betreuer: Wichtig, viel Kriterien, GUI, Testfälle
 % Betreuer: Präzise!!!
@@ -99,6 +107,8 @@
 \renewcommand{\ref}[1]{\refsymbol\oldref{#1}}
 \let\oldgls\gls
 \renewcommand{\gls}[1]{\refsymbol\oldgls{#1}}
+\let\oldglslink\glslink
+\renewcommand{\glslink}[2]{\refsymbol\oldglslink{#1}{#2}}
 
 \maketitle
 \newpage
@@ -111,8 +121,8 @@
   name={Route},
   description={Ein Weg zwischen zwei Punkten}
 }
-Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die zeit effizienteste \gls{route} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
-Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs, ...) bei der Berechnung der Route berücksichtigt.
+Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die effizienteste \gls{route} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
+Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt.
 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
 %Lucas
@@ -122,17 +132,16 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 %Lucas
 
 \subsection{Musskriterien}
-% Betreuer: Automatisch Nummerieren
 % Betreuer: Ausführlicher.
 \begin{itemize}
 \oitem{MK}{karteAnzeigen} Karte anzeigen
 \oitem{MK}{karteVerschieben} Karte verschieben
 \oitem{MK}{karteZoomen} Karte zoomen
-\oitem{MK}{startZielWählen} Start- und Zielpunkt können ausgewählt werden. % Rechtsklick
+\oitem{MK}{startZielWählen} Start- und Zielpunkt auswählen % Rechtsklick
 \oitem{MK}{startZielZeigen} Start- und Zielpunkt auf der Karte anzeigen
 \oitem{MK}{routeAnfragen} Route zwischen Start- und Zielpunkt anfragen
-\oitem{MK}{routeBerechnen} Berechnen der zeit effizientesten Route zwischen Start- und Zielpunkt
-\oitem{MK}{routeAnzeigen} Anzeigen der zeit effizientesten Route  zwischen Start- und Zielpunkt auf der Karte
+\oitem{MK}{routeBerechnen} Effizienteste Route zwischen Start- und Zielpunkt berechnen % TODO Gruppentreffen: Kriterien für "effizient"?
+\oitem{MK}{routeAnzeigen} Effizienteste Route zwischen Start- und Zielpunkt auf der Karte anzeigen
 \end{itemize}
 \subsection{Wunschkriterien}
 \begin{itemize}
@@ -146,23 +155,23 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
  see=[siehe auch]{arc}
 }
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\oitem{WK}{beschränkungen} Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
-Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung. % Aufsplitten, ungenau.
-
-\oitem{WK}{beschreibung} Wegbeschreibung anzeigen. (Bei Kreisverkehren: Ausfahrten zählen)
+\oitem{WK}{beschränkungen} Möglichst viele Beschränkungen umsetzen (Staßentyp, Abbiegebeschränkung, 
+Maximalgewicht, Einbahnstraße)
+\oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
+\oitem{WK}{beschreibung} Wegbeschreibung anzeigen.
 \oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
-\oitem{WK}{export} Export der Route.
+\oitem{WK}{export} Route exportieren
 
-\oitem{WK}{osmKacheln} Optional OSM-Kacheln
+\oitem{WK}{osmKacheln} Optional OSM-Kacheln anstelle des eigenen Renderers verwenden
 % Betreuer: Profile
 
 \end{itemize}
 \subsection{Abgerenzungskriterien}
 
 \begin{itemize}
-\oitem{AK}{textSuche} Keine textuelle Suche möglich
-\oitem{AK}{fahrradFußBahn} Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer oder etc.
-\oitem{AK}{app} Keine Mobile App.
+\oitem{AK}{textSuche} Keine textuelle Suche
+\oitem{AK}{fahrradFussBahn} Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer, etc.
+\oitem{AK}{app} Keine mobile App
 \oitem{AK}{webapp} Keine Webanwendung
 \oitem{AK}{altRoute} Keine Alternativroute sofort anzeigen
 
@@ -215,9 +224,9 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
-Berechnen des nächsten Punkt auf einer Kante zu Geokoordinaten auf der Karte.
+Berechnen des nächsten Punkts auf einer Kante zu Geokoordinaten auf der Karte.
 \oitem{F}{berechneRoute}
-Berechnen einer Route zwischen zwei Punten auf je einer Straße des Straßengraphs.
+Berechnen einer Route zwischen zwei Punkten auf je einer Straße des Straßengraphs.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
@@ -228,13 +237,13 @@ Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt. (Benötigt für \re
 \oitem{F}{fetcheOnlineKachel}
 Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 \oitem{F}{zeichneKachel}
-Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im GUI angezeigt werden.
+Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im GUI.
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
 \oitem{F}{eingabeZuAusschnitt}
 Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
-Anzeigen einer berechneter Route auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
+Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
 Abbildung \ref{fig:mockupscreenshot}
 \end{description}
 \subsection{Wegbeschreibung}
@@ -318,10 +327,6 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
-\newglossaryentry{profil}{
-  name={Profil},
-  description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs}
-}
 \begin{description}
 \item\testfall
     {Programm ist gestartet, Karte ist sichtbar}
