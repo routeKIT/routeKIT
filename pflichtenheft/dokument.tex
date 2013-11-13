@@ -125,14 +125,14 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 % Betreuer: Automatisch Nummerieren
 % Betreuer: Ausführlicher.
 \begin{itemize}
-\item Karte anzeigen
-\item Karte verschieben
-\item Karte zoomen
-\item Start- und Zielpunkt können ausgewählt werden. % Rechtsklick
-\item Start- und Zielpunkt auf der Karte anzeigen
-\item Route zwischen Start- und Zielpunkt anfragen
-\item Berechnen der zeit effizientesten Route zwischen Start- und Zielpunkt
-\item Anzeigen der zeit effizientesten Route  zwischen Start- und Zielpunkt auf der Karte
+\oitem{MK}{karteAnzeigen} Karte anzeigen
+\oitem{MK}{karteVerschieben} Karte verschieben
+\oitem{MK}{karteZoomen} Karte zoomen
+\oitem{MK}{startZielWählen} Start- und Zielpunkt können ausgewählt werden. % Rechtsklick
+\oitem{MK}{startZielZeigen} Start- und Zielpunkt auf der Karte anzeigen
+\oitem{MK}{routeAnfragen} Route zwischen Start- und Zielpunkt anfragen
+\oitem{MK}{routeBerechnen} Berechnen der zeit effizientesten Route zwischen Start- und Zielpunkt
+\oitem{MK}{routeAnzeigen} Anzeigen der zeit effizientesten Route  zwischen Start- und Zielpunkt auf der Karte
 \end{itemize}
 \subsection{Wunschkriterien}
 \begin{itemize}
@@ -143,28 +143,28 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \newglossaryentry{beschleunigung}{
  name={Beschleunigung},
  description={Ermöglicht eine schnellere Berechnung der angefragten Route},
-see=[siehe auch]{arc}
+ see=[siehe auch]{arc}
 }
-\item \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\item Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
+\oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
+\oitem{WK}{beschränkungen} Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
 Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung. % Aufsplitten, ungenau.
 
-\item Wegbeschreibung anzeigen. (Bei Kreisverkehren: Ausfahrten zählen)
-\item Berechnungsanfragen speichern. History/Favoriten
-\item Export der Route.
+\oitem{WK}{beschreibung} Wegbeschreibung anzeigen. (Bei Kreisverkehren: Ausfahrten zählen)
+\oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
+\oitem{WK}{export} Export der Route.
 
-\item Optional OSM-Kacheln
+\oitem{WK}{osmKacheln} Optional OSM-Kacheln
 % Betreuer: Profile
 
 \end{itemize}
 \subsection{Abgerenzungskriterien}
 
 \begin{itemize}
-\item Keine textuelle Suche möglich
-\item Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer oder etc.
-\item Keine Mobile App.
-\item Keine Webanwendung
-\item Keine Alternativroute sofort anzeigen
+\oitem{AK}{textSuche} Keine textuelle Suche möglich
+\oitem{AK}{fahrradFußBahn} Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer oder etc.
+\oitem{AK}{app} Keine Mobile App.
+\oitem{AK}{webapp} Keine Webanwendung
+\oitem{AK}{altRoute} Keine Alternativroute sofort anzeigen
 
 \end{itemize}
 
