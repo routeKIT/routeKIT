@@ -107,7 +107,11 @@
 % Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten)
 % Betreuer: Profile exakt welcher Typ
 \section{Einleitung}
-Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die schnellste Route zwischen zwei Punkten berechnet und anzeigt.
+\newglossaryentry{route}{
+  name={Route},
+  description={Ein Weg zwischen zwei Punkten.}
+}
+Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die zeit effizienteste \gls{route} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
 Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs, ...) bei der Berechnung der Route berücksichtigt.
 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
@@ -121,18 +125,27 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 % Betreuer: Automatisch Nummerieren
 % Betreuer: Ausführlicher.
 \begin{itemize}
-\item "Ausreichend komfortables GUI"
-\begin{itemize}
-\item Rechtsklick auf die Karte, "hier Start", "hier Ziel" % Rechtsklick
 \item Karte anzeigen
-\item Karte ziehen/zoomen
-\item Weg anfragen
-\item Anzeigen der Route
-\end{itemize}
-\item Berechnen einer Route zwischen 2 Punkten auf der Karte.
+\item Karte verschieben
+\item Karte zoomen
+\item Start- und Zielpunkt können ausgewählt werden. % Rechtsklick
+\item Start- und Zielpunkt auf der Karte anzeigen
+\item Route zwischen Start- und Zielpunkt anfragen
+\item Berechnen der zeit effizientesten Route zwischen Start- und Zielpunkt
+\item Anzeigen der zeit effizientesten Route  zwischen Start- und Zielpunkt auf der Karte
 \end{itemize}
 \subsection{Wunschkriterien}
 \begin{itemize}
+\newglossaryentry{arc}{
+ name={Arc-Flags},
+ description={eine Technik, um Routenberechnung zu beschleunigen}
+}
+\newglossaryentry{Beschleunigung}{
+ name={beschleunigung},
+ description={Ermöglicht eine schnellere Berechnung der angefragten Route},
+see=[siehe auch]{arc}
+}
+\item Beschleunigung durch Arc-Flags bei der Berechnung der Route
 \item Umsetzen möglichst vieler Beschränkungen (Staßentyp, Abbiegebeschränkung, 
 Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberechnung. % Aufsplitten, ungenau.
 
@@ -147,6 +160,7 @@ Maximalgewicht, Einbahnstraße) trotz Beschleunigung. Profile für die Vorberech
 \subsection{Abgerenzungskriterien}
 
 \begin{itemize}
+\item Keine textuelle Suche möglich
 \item Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer oder etc.
 \item Keine Mobile App.
 \item Keine Webanwendung
@@ -304,10 +318,6 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
-\newglossaryentry{route}{
-  name={Route},
-  description={Ein Weg zwischen zwei Punkten, der auf der Karte angezeigt wird}
-}
 \newglossaryentry{profil}{
   name={Profil},
   description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs}
@@ -318,7 +328,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
     {Rechtsklick auf Karte}
     {Kontextmenü erscheint}
 \oitem{TF}{startZielRechne}
-Start auswählen, Ziel auswählen, Route berechnen
+Start auswählen, Ziel auswählen, Route berechnen, Route auf Karte anzeigen
 \oitem{TF}{bewegeZoom}
 Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
 \oitem{TF}{profilErstellen}
