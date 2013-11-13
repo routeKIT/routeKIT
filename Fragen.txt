@@ -10,3 +10,8 @@ Schreibt alles dazu, was ihr sonst noch für wichtig haltet, damit wir nichts ver
 7. Was wird genau in der History gespeichert?
 8. Gedanken über die Benutzeroberfläche machen.
 9. Gedanken über die Qualitätsziele machen.
+
+Formales:
+* Charset: ISO 8859-15 ("Latin-9"), UTF-8, was anderes?
+* Line Endings: \r\n oder \n?
+* Sprache: Commit Messages, Entwurf, Code: Deutsch oder Englisch?
