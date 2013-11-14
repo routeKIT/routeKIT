@@ -1,21 +1,29 @@
 Das Sind die Fragen, die wir am 14.11 besprechen sollten.
-Schreibt alles dazu, was ihr sonst noch f�r wichtig haltet, damit wir nichts vergessen.
+Schreibt alles dazu, was ihr sonst noch für wichtig haltet, damit wir nichts vergessen.
 
 1. Wunschkriterien noch mal genauer defenieren.
-   - Beschr�nkungen festlegen. 
+   – Beschränkungen festlegen. 
 2. Erlauben wir die Eingabe der Geokoordinaten?
-3. Abgrenzungskriterien �berlegen
+   – Ja, mit wenigen Typen
+3. Abgrenzungskriterien überlegen
 4. Betriebssystem ist nicht nur Linux?
-5. Farbbildschirm mit Aufl�sung von 1024x768?
+5. Farbbildschirm mit Auflösung von 1024x768?
 6. Organisation der Profile
-   - Die Felder zum ausf�llen festlegen.
+   - Die Felder zum ausfüllen festlegen.
 7. Was wird genau in der History gespeichert?
-8. Gedanken �ber die Benutzeroberfl�che machen.
-9. Gedanken �ber die Qualit�tsziele machen.
-10. Berechnung der k�rzesten Route nach Zeit oder nach Entfernung?
+   – Start, Ziel
+8. Gedanken über die Benutzeroberfläche machen.
+   – Menü
+     • Profilverwaltung
+9. Gedanken über die Qualitätsziele machen.
+10. Berechnung der kürzesten Route nach Zeit oder nach Entfernung?
+    – Zeit
 11. Wird es einen "Route berechnen" Knopf geben oder startet ie Berechnung sofort nach der Eingabe der Punkte?
+    – Sofort
 
 Formales:
-* Charset: ISO 8859-15 ("Latin-9"), UTF-8, was anderes?
-* Line Endings: \r\n oder \n?
+* Charset: ISO 8859-15 ("Latin-9"), UTF-8, was anderes? – UTF-8
+* Line Endings: \r\n oder \n? – \n
 * Sprache: Commit Messages, Entwurf, Code: Deutsch oder Englisch?
+  – Commit Messages: lassez-faire
+  – Rest später
