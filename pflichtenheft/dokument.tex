@@ -1,5 +1,6 @@
 % das Papierformat zuerst
 \documentclass[a4paper, 11pt]{article}
+\usepackage[margin=3cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
@@ -58,7 +59,7 @@
 %\newglossaryentry{arc}{
 %  name={Arc-Flags},
 %  description={eine Technik, um Routenberechnung zu beschleunigen},
-%  see=[siehe auch]{dijkstra}
+%  see={dijkstra}
 %}
 %
 % Und so kann er im Dokument verwendet werden:
@@ -131,7 +132,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher.
-\begin{itemize}
+\begin{description}
 \oitem{MK}{karteAnzeigen} Karte anzeigen
 \oitem{MK}{karteVerschieben} Karte verschieben
 \oitem{MK}{karteZoomen} Karte zoomen
@@ -140,9 +141,9 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{MK}{routeAnfragen} Route zwischen Start- und Zielpunkt anfragen
 \oitem{MK}{routeBerechnen} Effizienteste Route zwischen Start- und Zielpunkt berechnen % TODO Gruppentreffen: Kriterien für "effizient"?
 \oitem{MK}{routeAnzeigen} Effizienteste Route zwischen Start- und Zielpunkt auf der Karte anzeigen
-\end{itemize}
+\end{description}
 \subsection{Wunschkriterien}
-\begin{itemize}
+\begin{description}
 \newglossaryentry{arc}{
  name={Arc-Flags},
  description={eine Technik, um Routenberechnung zu beschleunigen}
@@ -150,7 +151,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \newglossaryentry{beschleunigung}{
  name={Beschleunigung},
  description={Ermöglicht eine schnellere Berechnung der angefragten Route},
- see=[siehe auch]{arc}
+ see={arc}
 }
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
 \oitem{WK}{beschränkungen} Möglichst viele Beschränkungen umsetzen (Staßentyp, Abbiegebeschränkung, 
@@ -163,17 +164,17 @@ Maximalgewicht, Einbahnstraße)
 \oitem{WK}{osmKacheln} Optional OSM-Kacheln anstelle des eigenen Renderers verwenden
 % Betreuer: Profile
 
-\end{itemize}
+\end{description}
 \subsection{Abgerenzungskriterien}
 
-\begin{itemize}
+\begin{description}
 \oitem{AK}{textSuche} Keine textuelle Suche
 \oitem{AK}{fahrradFussBahn} Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer, etc.
 \oitem{AK}{app} Keine mobile App
 \oitem{AK}{webapp} Keine Webanwendung
 \oitem{AK}{altRoute} Keine Alternativroute sofort anzeigen
 
-\end{itemize}
+\end{description}
 
 \section{Produkteinsatz}
 %Kevin
