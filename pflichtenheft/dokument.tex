@@ -120,7 +120,11 @@
   name={Route},
   description={Ein Weg zwischen zwei Punkten}
 }
-Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die effizienteste \gls{route} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
+\newglossaryentry{schnellroute}{
+  name={schnellste Route},
+  description={die \gls{route} mit der geschätzt kürzesten Fahrzeit}
+}
+Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
 Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt.
 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
@@ -138,9 +142,9 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{MK}{karteZoomen} Karte zoomen
 \oitem{MK}{startZielWählen} Start- und Zielpunkt auswählen % Rechtsklick
 \oitem{MK}{startZielZeigen} Start- und Zielpunkt auf der Karte anzeigen
-\oitem{MK}{routeAnfragen} Route zwischen Start- und Zielpunkt anfragen
-\oitem{MK}{routeBerechnen} Effizienteste Route zwischen Start- und Zielpunkt berechnen % TODO Gruppentreffen: Kriterien für "effizient"?
-\oitem{MK}{routeAnzeigen} Effizienteste Route zwischen Start- und Zielpunkt auf der Karte anzeigen
+\oitem{MK}{routeAnfragen}  \gls{schnellroute} zwischen Start- und Zielpunkt anfragen
+\oitem{MK}{routeBerechnen}  \gls{schnellroute} zwischen Start- und Zielpunkt berechnen
+\oitem{MK}{routeAnzeigen}  \gls{schnellroute} zwischen Start- und Zielpunkt auf der Karte anzeigen
 \end{description}
 \subsection{Wunschkriterien}
 \begin{description}
@@ -154,14 +158,20 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
  see={arc}
 }
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\oitem{WK}{beschränkungen} Möglichst viele Beschränkungen umsetzen (Staßentyp, Abbiegebeschränkung, 
-Maximalgewicht, Einbahnstraße)
-\oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
-\oitem{WK}{beschreibung} Wegbeschreibung anzeigen.
+\oitem{WK}{staßentyp} Fahrverbot durch bistimmten Staßentyp beachten % TODO Welchen Straßentyp
+\oitem{WK}{abbiegebeschraeung} Abbiegeverbot durch Abbiegebeschränkung beachten.
+\oitem{WK}{maximalgewicht} Fahrverbot durch Maximalgewicht beachten
+\oitem{WK}{einbahnstraße} Fahrverbot durch Einbahnstraße beachten
+\oitem{WK}{hoechstgeschwindigkeit} Höchstgeschwindigkeit beachten
+\oitem{WK}{beschreibung} Wegbeschreibung anzeigen
 \oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
 \oitem{WK}{export} Route exportieren
-
+\oitem{WK}{fahrzeit} Schätzung der Fahrzeit einer \gls{route} unter Beachtung von Wartezeiten an Ampeln, maximalen Geschwindigkeiten, Benutzer festgelegten Durchschnittsgeschwindigkeiten
 \oitem{WK}{osmKacheln} Optional OSM-Kacheln anstelle des eigenen Renderers verwenden
+\oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen
+\oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
+\oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
+\oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
 % Betreuer: Profile
 
 \end{description}
