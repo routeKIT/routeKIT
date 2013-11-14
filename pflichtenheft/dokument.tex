@@ -138,6 +138,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 % Betreuer: Ausführlicher.
 \begin{description}
 \oitem{MK}{karteAnzeigen} Karte anzeigen
+\oitem{MK}{karteRendern} Kartenkacheln rendern (Nur Straßen ohne Namen)
 \oitem{MK}{karteVerschieben} Karte verschieben
 \oitem{MK}{karteZoomen} Karte zoomen
 \oitem{MK}{startZielWählen} Start- und Zielpunkt auswählen % Rechtsklick
@@ -173,6 +174,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
 \oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
 \oitem{WK}{koordinaten} Geokoordinaten des Start- und Zielpunkts können als Dezimalzahlen eingegeben werden.
+\oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
+\oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
+\oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
+\oitem{WK}{karteRendernStrecken} Die Kartenkacheln werden gestreckt wenn sich der Zoom zwischen 2 Stufen befindet
 % Betreuer: Profile
 
 \end{description}
@@ -314,7 +319,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Systemmodell1}
 %Anastasia
-\section{Nichtfunktionale Anforderungen}
+\section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
 \begin{description}
 \oitem{NF}{routeFünfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
@@ -339,8 +344,8 @@ Es ist immer eine Kombination aus Profil und Karte ausgewählt egal ob diese Vor
 Wenn sie nicht vorberechnet ist (wird die Karte grau /deaktiviert/etc.), dann kann angeklickt werden (großer freundlicher Knopf), dass sie vorberechnet wird.
 Wenn sie vorberechnet ist, dann kann angeklickt werden, dass die Vorberechnung gelöscht wird.
 
-\section{Qualitätsziele}
-% Dominic
+Die Routenberechnung startet, wenn Start oder Ziel geändert werden und danach beide vorhanden sind.
+
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
