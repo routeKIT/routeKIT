@@ -1,4 +1,4 @@
-﻿Zusätzliche Einschränkungen mit lokalem Dijkstra? Beides. -> Weglassen
+Zusätzliche Einschränkungen mit lokalem Dijkstra? Beides. -> Weglassen
 
 Nutzen von Beschleunigungstechniken? JA
 

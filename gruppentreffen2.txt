@@ -1,4 +1,4 @@
-﻿MapRender:
+MapRender:
   In-RAM-Tree,
 
 Beschränkungen:
