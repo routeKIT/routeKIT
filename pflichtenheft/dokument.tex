@@ -158,10 +158,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
  see={arc}
 }
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\oitem{WK}{staßentyp} Fahrverbot durch bistimmten Staßentyp beachten % TODO Welchen Straßentyp
+\oitem{WK}{stassentyp} Fahrverbot durch bistimmten Staßentyp beachten % TODO Welchen Straßentyp
 \oitem{WK}{abbiegebeschraeung} Abbiegeverbot durch Abbiegebeschränkung beachten.
 \oitem{WK}{maximalgewicht} Fahrverbot durch Maximalgewicht beachten
-\oitem{WK}{einbahnstraße} Fahrverbot durch Einbahnstraße beachten
+\oitem{WK}{einbahnstrasse} Fahrverbot durch Einbahnstraße beachten
 \oitem{WK}{hoechstgeschwindigkeit} Höchstgeschwindigkeit beachten
 \oitem{WK}{beschreibung} Wegbeschreibung anzeigen
 \oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
@@ -172,6 +172,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
 \oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
+\oitem{WK}{koordinaten} Geokoordinaten des Start- und Zielpunkts können als Dezimalzahlen eingegeben werden.
 % Betreuer: Profile
 
 \end{description}
@@ -179,10 +180,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \begin{description}
 \oitem{AK}{textSuche} Keine textuelle Suche
-\oitem{AK}{fahrradFussBahn} Kein Routenplaner für Fahrrad, Fußgänger, Bahnfahrer, etc.
+\oitem{AK}{fahrradFussBahn} Kein Routenplaner für Fahrrad, Fußgänger, öffentliche Verkehrsmittel etc.
 \oitem{AK}{app} Keine mobile App
 \oitem{AK}{webapp} Keine Webanwendung
-\oitem{AK}{altRoute} Keine Alternativroute sofort anzeigen
+\oitem{AK}{altRoute} Keine Alternativrouten berechnen
 
 \end{description}
 
@@ -214,8 +215,8 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \subsection{Software}
 
 \begin{itemize}
-\item Betriebssystem: Linux, Windows, andere mit Java $\geq$ 6
-\item Java-Laufzeitumgebung: Version 6 oder neuer
+\item Betriebssystem: Linux, Windows, andere Betriebssystem mit Java $\geq$ 7
+\item Java-Laufzeitumgebung: Version 7 oder neuer
 \end{itemize}
 
 \subsection{Hardware}
@@ -331,6 +332,13 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \label{fig:mockupscreenshot}
 \end{figure}
 % Fabian
+
+Wir haben mehrere Profile und mehrere Karten.\\
+Es ist immer eine Kombination aus Profil und Karte ausgewählt egal ob diese Vorberechnet ist oder nicht..
+
+Wenn sie nicht vorberechnet ist (wird die Karte grau /deaktiviert/etc.), dann kann angeklickt werden (großer freundlicher Knopf), dass sie vorberechnet wird.
+Wenn sie vorberechnet ist, dann kann angeklickt werden, dass die Vorberechnung gelöscht wird.
+
 \section{Qualitätsziele}
 % Dominic
 \section{Globale Testfälle und Szenarien}
