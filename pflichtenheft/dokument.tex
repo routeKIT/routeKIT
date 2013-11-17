@@ -114,10 +114,11 @@
 % Betreuer: Profile exakt welcher Typ
 
 % alle Glossareintraege
-\newacronym{pkw}{PKW}{Personenkraftwagen}
-\newacronym{lkw}{LKW}{Lastkraftwagen}
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
 \newacronym{osm}{OSM}{OpenStreetMap}
 \newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym[longplural={Points of interest}]{poi}{POI}{Point of interest}
 
 \newglossaryentry{profil}{
   name={Profil},
@@ -150,7 +151,7 @@
 }
 \newglossaryentry{standardprofil}{
   name={Standardprofil},
-  description={Ein vorinstalliertes Profil für gängige \gls{pkw}}
+  description={Ein vorinstalliertes Profil für gängige \glspl{pkw}}
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
@@ -212,10 +213,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Abgrenzungskriterien}
 \begin{description}
-\oitem{AK}{textSuche} Eine textuelle Suche nach Adressen oder POIs ist nicht möglich.
+\oitem{AK}{textSuche} Eine textuelle Suche nach Adressen oder \glspl{poi} ist nicht möglich.
 \oitem{AK}{zwischenziele} Die Angabe von Zwischenzielen ist nicht möglich.
 \oitem{AK}{standort} Eine Erkennung des aktuellen Standorts des Benutzers findet nicht statt.
-\oitem{AK}{poi} Die Positionen von POIs sowie Gebäude werden nicht auf der Karte angezeigt.
+\oitem{AK}{poi} Die Positionen von \glspl{poi} sowie Gebäude werden nicht auf der Karte angezeigt.
 \oitem{AK}{verkehrszeichen} Ampeln und Verkehrszeichen werden nicht auf der Karte visualisiert.
 \oitem{AK}{baustelle} Baustellen werden (über die in den Kartendaten enthaltenen Informationen hinaus) nicht berücksichtigt.
 \oitem{AK}{stau} TMC-Verkehrsmeldungen zu Staus werden nicht berücksichtigt.
