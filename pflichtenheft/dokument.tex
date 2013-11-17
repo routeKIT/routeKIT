@@ -102,6 +102,9 @@
 \renewcommand{\gls}[1]{\refsymbol\oldgls{#1}}
 \let\oldglslink\glslink
 \renewcommand{\glslink}[2]{\refsymbol\oldglslink{#1}{#2}}
+\let\oldhyperref\hyperref
+\renewcommand{\hyperref}[2][notActuallyOptional]{\refsymbol\oldhyperref[#1]{#2}}
+
 
 \maketitle
 \newpage
@@ -155,7 +158,7 @@
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
-  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden}
+  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden}
 }
 
 
@@ -178,7 +181,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{MK}{karteRendern} Kartenkacheln rendern (Nur Straßen ohne Namen)
 \oitem{MK}{karteVerschieben} Karte verschieben
 \oitem{MK}{karteZoomen} Karte zoomen
-\oitem{MK}{startZielWählen} Start- und Zielpunkt auswählen % Rechtsklick
+\oitem{MK}{startZielWaehlen} Start- und Zielpunkt auswählen % Rechtsklick
 \oitem{MK}{startZielZeigen} Start- und Zielpunkt auf der Karte anzeigen
 \oitem{MK}{routeAnfragen}  \gls{schnellroute} zwischen Start- und Zielpunkt anfragen
 \oitem{MK}{routeBerechnen}  \gls{schnellroute} zwischen Start- und Zielpunkt berechnen
@@ -188,8 +191,8 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \begin{description}
 
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\oitem{WK}{fahrzeugtyp} Fahrverbot für einen Fahrzeugtyp durch eine Staße beachten
-%\oitem{WK}{stassentyp}                                                                                                                   % TODO Welchen Straßentyp
+\oitem{WK}{fahrzeugtyp} Fahrverbot für einen Fahrzeugtyp durch eine Straße beachten
+%\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
 \oitem{WK}{abbiegebeschraeung} Abbiegeverbot durch Abbiegebeschränkung beachten.
 \oitem{WK}{maximalgewicht} Fahrverbot durch Maximalgewicht beachten
 \oitem{WK}{einbahnstrasse} Fahrverbot durch Einbahnstraße beachten
@@ -211,13 +214,13 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 % Betreuer: Profile(gemacht)
 
 \end{description}
-\subsection{Abgerenzungskriterien}
+\subsection{Abgrenzungskriterien}
 
 \begin{description}
 \oitem{AK}{textSuche} Keine textuelle Suche
 \oitem{AK}{zwischenziele} Keine Angabe von Zwischenzielen möglich
 \oitem{AK}{standort} Keine Erkennung des aktuellen Standorts des Benutzers
-\oitem{AK}{poi} Keine Informationen  über Positionen von POI`s, Hotels, Tankstellen, Geschäften etc.
+\oitem{AK}{poi} Keine Informationen  über Positionen von POI’s, Hotels, Tankstellen, Geschäften etc.
 \oitem{AK}{baustelle} Keine Berücksichtigung von Baustellen
 \oitem{AK}{Stau} Keine Berücksichtigung von Staus
 \oitem{AK}{verkehrszeichen} Keine Visualisierung von Ampeln und Verkehrszeichen auf der Karte
@@ -247,13 +250,13 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 
 \subsection{Betriebsbedingungen}
 \begin{itemize}
-\item Zuhause oder in Büroumgebungen
+\item Zu Hause oder in Büroumgebungen
 \end{itemize}
 
 \section{Produktumgebung}
 %Kevin
 
-\subsection{Software}
+\subsection{Software}\label{subsec:Software}
 
 \begin{itemize}
 \item Betriebssystem: Linux, Windows, andere Betriebssystem mit Java $\geq$ 7
@@ -266,7 +269,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \item Ein Standard-PC mit angeschlossener Maus und Tastatur
 \item Dieser sollte über einen Farbbildschirm mit der Auflösung von mindestens 1920$\times$1080 Pixeln verfügen
 \item Es muss genügend Arbeitsspeicher (mindestens 4 Gigabyte) und Festplattenkapazität (mindestens 20 Gigabyte freier Speicher) vorhanden sein
-\item Es muss die oben genannte Software auf dem Computer lauffähig sein und bereits installiert und konfiguriert sein
+\item Es muss die \hyperref[subsec:Software]{oben} genannte Software auf dem Computer lauffähig sein und bereits installiert und konfiguriert sein
 \end{itemize}
 
 \section{Funktionale Anforderungen}
@@ -277,7 +280,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \oitem{F}{berechneNächstenPunktAufKante}
 Berechnen des nächsten Punkts auf einer Kante zu Geokoordinaten auf der Karte.
 \oitem{F}{berechneRoute}
-Berechnen einer Route zwischen zwei Punkten auf je einer Straße des Straßengraphs.
+Berechnen einer Route zwischen zwei Punkten auf je einer Kante des Straßengraphs.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
@@ -302,7 +305,7 @@ Abbildung \ref{fig:mockupscreenshot}
 \oitem{F}{bestimmeAbbiegeAusRoute}
 Bestimmen aller Abbiegevorgänge einer Route.
 \oitem{F}{klassifiziereAbbiege}
-Klassifiziere die Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten) und Abbiegevorqänge im Kreisverkehr (Ausfahrten zählen).
+Klassifiziere die Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten) und Abbiegevorgänge im Kreisverkehr (Ausfahrten zählen).
 \oitem{F}{bestimmeAnweisungAusAbbiege}
 Bestimmen der Anweisung aus einem Abbiegevorgang.
 \oitem{F}{beschreibungZuHtml}
@@ -313,8 +316,8 @@ Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräte
 \subsection{Profilverwaltung}
 \begin{description}
 \oitem{F}{neuesProfil} Neues Profil anlegen
-\oitem{F}{löscheProfil} Vorhandenes Profil löschen
-\oitem{F}{ändereProfil} Vorhandenes Profil ändern
+\oitem{F}{loescheProfil} Vorhandenes Profil löschen
+\oitem{F}{aendereProfil} Vorhandenes Profil ändern
 \end{description}
 
 \section{Produktdaten}
@@ -331,7 +334,7 @@ Höhe des Fahrzeugs,
 Gewicht des Fahrzeugs,
 \oitem{D}{geschwindigkeitautobahn}
 Durchschnittsgeschwindigkeit auf Autobahn (Schnellstraße),
-\oitem{D}{geschwindigkeitlandstraße}
+\oitem{D}{geschwindigkeitlandstrasse}
 Durchschnittsgeschwindigkeit auf Landstraße,
 \oitem{D}{maxgeschwindigkeit}
 für diesen Fahrzeugtyp auf der Autobahn zugelassene Geschwindigkeit. 
@@ -348,7 +351,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 Für einen Graphen wie in \ref{D:graph} werden folgende Daten gespeichert:\\
 Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
 \oitem{D}{knoten}
-Für jeden Knoten werden geographischen Koordinaten (Länge und Breite) und eine unikale Identifikationsnummer.
+Für jeden Knoten werden geographische Koordinaten (Länge und Breite) und eine eindeutige Identifikationsnummer gespeichert.
 \end{description}
 
 \subsection{Historydaten}
@@ -362,7 +365,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
 \begin{description}
-\oitem{NF}{routeFünfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
+\oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNächstenPunktAufKante} benötigt höchstens 500 ms.
 \oitem{NF}{knotenWaysAnzahl} Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
 \end{description}
@@ -379,7 +382,7 @@ Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des
 % Fabian
 
 Wir haben mehrere Profile und mehrere Karten.\\
-Es ist immer eine Kombination aus Profil und Karte ausgewählt egal ob diese Vorberechnet ist oder nicht..
+Es ist immer eine Kombination aus Profil und Karte ausgewählt egal ob diese vorberechnet ist oder nicht.
 
 Wenn sie nicht vorberechnet ist (wird die Karte grau /deaktiviert/etc.), dann kann angeklickt werden (großer freundlicher Knopf), dass sie vorberechnet wird.
 Wenn sie vorberechnet ist, dann kann angeklickt werden, dass die Vorberechnung gelöscht wird.
@@ -472,11 +475,11 @@ Es ist eine Karte ausgewählt.
 % Fabian
 \section{Entwicklungsumgebung}
 \begin{description}
-\item[Teamkommunikation] E-Mail-Verteiler
+\item[Teamkommunikation] E-Mail-Verteiler, Skype
 \item[Dokumentation] \LaTeX{}
-  \item[UML-Planungswerkzeug] UMLet
-  \item[IDE] Eclipse
-  \item[Qualitätssicherung] JUnit, CodeCover
+\item[UML-Planungswerkzeug] UMLet
+\item[IDE] Eclipse
+\item[Qualitätssicherung] JUnit, CodeCover
 \item[Versionskontrolle] Git
 \end{description}
 % Kevin
