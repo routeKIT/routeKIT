@@ -1,7 +1,7 @@
 LATEX = pdflatex -interaction nonstopmode
 RM = rm -f
 
-dokument.pdf: Systemmodell1.pdf dokument.tex
+dokument.pdf: Paketdiagramm.pdf dokument.tex
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
 	-$(LATEX) dokument.tex # include glossary in document
@@ -10,7 +10,7 @@ dokument.pdf: Systemmodell1.pdf dokument.tex
 
 clean:
 	-$(RM) dokument.aux dokument.glg dokument.glo dokument.gls dokument.ist dokument.log dokument.out dokument.pdf dokument.toc
-	-$(RM) Systemmodell1.pdf
+	-$(RM) Paketdiagramm.pdf
 
-Systemmodell1.pdf: Systemmodell1.uxf
-	java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Systemmodell1.uxf -output=Systemmodell1
+Paketdiagramm.pdf: Paketdiagramm.uxf
+	java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Paketdiagramm.uxf -output=Paketdiagramm
