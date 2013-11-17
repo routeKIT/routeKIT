@@ -86,7 +86,7 @@
   \end{description}
 }
 
-% Betreuer: Rand reduzieren.
+% Betreuer: Rand reduzieren. (gemacht)
 % Betreuer: Wichtig, viel Kriterien, GUI, Testfälle
 % Betreuer: Präzise!!!
 % hier beginnt das Dokument
@@ -107,7 +107,7 @@
 \newpage
 \tableofcontents
 \newpage
-% Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten)
+% Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten) (gemackt)
 % Betreuer: Profile exakt welcher Typ
 
 % alle Glossareintraege
@@ -119,7 +119,7 @@
 
 \newglossaryentry{route}{
   name={Route},
-  description={Ein Weg zwischen zwei Punkten}
+  description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
 }
 \newglossaryentry{schnellroute}{
   name={schnellste Route},
@@ -158,7 +158,7 @@ Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
 %Lucas
 
-% Betreuer: Abbiegungbeschränkung, "Route berechnen", 
+% Betreuer: Abbiegungbeschränkung, "Route berechnen", (gemacht)
 \section{Zielbestimmung}
 %Lucas
 
@@ -199,7 +199,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
 \oitem{WK}{karteRendernStrecken} Die Kartenkacheln werden gestreckt wenn sich der Zoom zwischen 2 Stufen befindet
-% Betreuer: Profile
+% Betreuer: Profile(gemacht)
 
 \end{description}
 \subsection{Abgerenzungskriterien}
@@ -261,7 +261,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \end{itemize}
 
 \section{Funktionale Anforderungen}
-% Betreuer: Weniger Text
+% Betreuer: Weniger Text(gemacht)
 % Felix
 \subsection{Kernfunktionen}
 \begin{description}
@@ -378,23 +378,54 @@ Die Routenberechnung startet, wenn Start oder Ziel geändert werden und danach b
 \subsection{Funktionssequenzen}
 \begin{description}
 \item\testfall
-    {Programm ist gestartet, Karte ist sichtbar}
-    {Rechtsklick auf Karte}
-    {Kontextmenü erscheint}
-\oitem{TF}{startZielRechne}
-Start auswählen, Ziel auswählen, Route berechnen, Route auf Karte anzeigen
-\oitem{TF}{bewegeZoom}
-Karte bewegen, heranzoomen, Karte bewegen, herauszoomen
-\oitem{TF}{profilErstellen}
-Profilerstellung, Vorberechnung, Route berechnen, Profil löschen
-\oitem{TF}{profilWechseln}
-Route berechnen, \gls{profil} wechseln, Route berechnen
-\oitem{TF}{ladenBerechnen}
-Neue Kartendaten laden, Vorberechnung, Route berechnen
-\oitem{TF}{kartenWechsel}
-Route berechnen, Karte wechseln, Route berechnen
-\oitem{TF}{routeLaden}
-Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
+    {Auswählen des Start- bzw. Zielpunkts}
+    {Start- bzw. Zielpunkt ist ausgewählt}
+\item\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- bzw. Zielpunkt ist ausgewählt}
+    {Auswählen des  Ziel- bzw. Startpunkts}
+    {Route ist berechnet und wird angezeigt}
+\item\testfall
+    {Karte ist sichtbar}
+    {Ziehen der Karte}
+    {Die Kartenposititon hat sich entsprechend verändert}
+\item\testfall
+    {Karte ist sichtbar}
+    {Zoomen}
+    {Die Karte ist jetzt größer}
+\item\testfall
+    {Programm ist gestartet, aktuelles Profil ist nicht vorberechnet(für die aktuelle Karte)}
+    {Vorberechnung auswählen, lange Warten}
+    {aktuelles Profil ist vorberechnet(für die aktuelle Karte)}
+\item\testfall
+    {Programm ist gestartet}
+    {neues Profil anlegen}
+    {das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet(für die aktuelle Karte)}
+\item\testfall
+    {Programm ist gestartet}
+    {ein Profil wird ausgewählt}
+    {das Profil ist ausgewählt}
+\item\testfall
+    {Programm ist gestartet}
+    {ein Profil wird gelöscht}
+    {das Profil ist nicht mehr vorhanden}
+\item\testfall
+    {Programm ist gestartet}
+    {eine neue Karte wird importiert}
+    {die neue Karte ist aktuell, kein Profil ist für die aktuelle Karte vorberechnet}
+\item\testfall
+    {Programm ist gestartet, eine Karte ist ausgewählt}
+    {eine andere Karte wird ausgewählt}
+    {die andere Karte ist ausgewählt}
+\item\testfall
+    {Programm ist gestartet, eine Route ist berechnet}
+    {die Route wird gespeichert}
+    {die Route ist abgespeichert}
+\item\testfall
+    {Programm ist gestartet, eine Route ist abgespeichert}
+    {die abgespeicherte Route wird geladen}
+    {die abgespeicherte Route wird wieder angezeigt}
+
 \end{description}
 \subsection{Datenkonsistenzen}
 
@@ -407,6 +438,10 @@ Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein Prof
 Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete \gls{profil} nicht mehr vorhanden sind.
 \oitem{TD}{löscheNichtStandard}
 Das \gls{standardprofil} kann nicht gelöscht werden.
+\oitem{TD}{profil}
+Es ist ein \gls{profil} ausgewählt.
+\oitem{TD}{karte}
+Es ist eine Karte ausgewählt.
 \end{description}
 % Fabian
 \section{Entwicklungsumgebung}
