@@ -388,69 +388,69 @@ Die Routenberechnung startet, wenn Start oder Ziel geändert werden und danach b
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
 Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
-\begin{enumerate}
-\item\testfall
+\begin{description}
+\oitem{TF}{waehleErstenPunkt}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Auswählen des Start- bzw. Zielpunkts}
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
-\item\testfall
+\oitem{TF}{waehleZweitenPunkt}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
     {Route für die Angaben ist berechnet und wird angezeigt}
-\item\testfall
+\oitem{TF}{waehlePunktErneut}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
-\item\testfall
+\oitem{TF}{zieheKarte}\testfall
     {Karte ist sichtbar}
     {Ziehen der Karte}
     {Die Kartenposititon hat sich entsprechend verändert}
-\item\testfall
+\oitem{TF}{zoomeRein}\testfall
     {Karte ist sichtbar}
     {Reinzoomen}
     {Ein Auschnitt der Karte wird größer und genauer dargestellt}
-\item\testfall
+\oitem{TF}{zoomeRaus}\testfall
     {Karte ist sichtbar}
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
-\item\testfall
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet(für die aktuelle Karte)}
+\oitem{TF}{verbieteWaehlePunkt}\testfall
+    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
     {Kein Start- oder Zielpunkt ist ausgewählt}
-\item\testfall
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet(für die aktuelle Karte)}
+\oitem{TF}{starteVorberechnung}\testfall
+    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Vorberechnung auswählen, lange Warten}
-    {Aktuelles Profil ist vorberechnet(für die aktuelle Karte)}
-\item\testfall
+    {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
+\oitem{TF}{profilAnlegen}\testfall
     {Das erforderliche Profil ist noch nicht vorhanden}
     {Neues Profil anlegen}
     {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet(für die aktuelle Karte)}
-\item\testfall
+\oitem{TF}{waehleProfil}\testfall
     {Das erforderliche Profil ist vorhanden, aber nicht ausgewählt}
     {Ein Profil wird ausgewählt}
     {Das Profil ist ausgewählt}
-\item\testfall
+\oitem{TF}{loescheProfil}\testfall
     {Ein unbrauchbares Profil ist vorhanden}
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
-\item\testfall
+\oitem{TF}{importKarte}\testfall
     {Die erforderliche Karte ist veraltet oder exestiert nicht}
     {Eine neue Karte wird importiert}
     {Die neue Karte ist aktuell, kein Profil ist für die aktuelle Karte vorberechnet}
-\item\testfall
+\oitem{TF}{waehleKarte}\testfall
     {Eine Karte ist ausgewählt}
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt}
-\item\testfall
+\oitem{TF}{speichereRoute}\testfall
     {Eine Route ist berechnet}
     {Die Route wird gespeichert}
     {Die Route ist abgespeichert}
-\item\testfall
+\oitem{TF}{ladeRoute}\testfall
     {Eine Route ist abgespeichert}
     {Die abgespeicherte Route wird geladen}
     {Die abgespeicherte Route wird wieder angezeigt}
 
-\end{enumerate}
+\end{description}
 \subsection{Datenkonsistenzen}
 
 \begin{description}
