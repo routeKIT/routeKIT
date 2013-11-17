@@ -334,23 +334,19 @@ Durchschnittsgeschwindigkeit auf Landstraße.
 \end{description}
 
 \subsection{Kartendaten}
-Für die Kartendarstellung wird gespeichert:
+Für die Routenberechnung wird gespeichert:
 \begin{description}
 \oitem{D}{osmDatei}
 \gls{osm}-Dateien,
-\oitem{D}{graph}
-Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
-\oitem{D}{graphDaten} % Betreuer: aufsplitten
-Für einen Graphen wie in \ref{D:graph} werden folgende Daten gespeichert:\\
-Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von \gls{arc}.
-\oitem{D}{knoten}
-Für jeden Knoten werden geographische Koordinaten (Länge und Breite) und eine eindeutige Identifikationsnummer gespeichert.
+\oitem{D}{vorberechnung}
+Datei mit den Ergebnissen der \gls{vorberechnung}.
 \end{description}
 
 \subsection{Historydaten}
+Für die History wird gespeichert:
 \begin{description}
 \oitem{D}{history}
-Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
+die vorherigen Anfragen des Benutzers.  
 \end{description}
 \section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Systemmodell1}
