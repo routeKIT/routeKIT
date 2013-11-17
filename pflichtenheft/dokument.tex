@@ -114,21 +114,17 @@
 % Betreuer: Profile exakt welcher Typ
 
 % alle Glossareintraege
+\newacronym{pkw}{PKW}{Personenkraftwagen}
+\newacronym{lkw}{LKW}{Lastkraftwagen}
+\newacronym{osm}{OSM}{OpenStreetMap}
+\newacronym{gui}{GUI}{Graphical User Interface}
+
 \newglossaryentry{profil}{
   name={Profil},
   description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs},
   plural={Profile}
 }
 
-\newglossaryentry{pkw}{
-  name={PKW},
-  description={Abkürzung von Personenkraftwagen}
-}
-
-\newglossaryentry{lkw}{
-  name={LKW},
-  description={Abkürzung von Lastkraftwagen}
-}
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
@@ -154,20 +150,19 @@
 }
 \newglossaryentry{standardprofil}{
   name={Standardprofil},
-  description={Ein vorinstalliertes Profil für gängige PKWs}
+  description={Ein vorinstalliertes Profil für gängige \gls{pkw}}
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
   description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden}
 }
 
-
 \section{Einleitung}
 
 Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
 Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt. Unterstützt werden folgende Fahrzeugtypen: \gls{pkw}, \gls{lkw}, Bus, Motorrad.
 
-Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
+Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
 % Betreuer: Abbiegungbeschränkung, "Route berechnen", (gemacht)
@@ -201,7 +196,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
 \oitem{WK}{export} Route exportieren
 \oitem{WK}{fahrzeit} Schätzung der Fahrzeit einer \gls{route} unter Beachtung von Wartezeiten an Ampeln, maximalen Geschwindigkeiten, vom Benutzer festgelegten Durchschnittsgeschwindigkeiten
-\oitem{WK}{osmKacheln} Optional OSM-Kacheln anstelle des eigenen Renderers verwenden
+\oitem{WK}{osmKacheln} Optional \gls{osm}-Kacheln anstelle des eigenen Renderers verwenden
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
@@ -291,7 +286,7 @@ Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt. (Benötigt für \re
 \oitem{F}{fetcheOnlineKachel}
 Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 \oitem{F}{zeichneKachel}
-Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im GUI.
+Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
 \oitem{F}{eingabeZuAusschnitt}
@@ -344,12 +339,12 @@ für diesen Fahrzeugtyp auf der Autobahn zugelassene Geschwindigkeit.
 Für die Kartendarstellung wird gespeichert:
 \begin{description}
 \oitem{D}{osmDatei}
-OSM-Dateien,
+\gls{osm}-Dateien,
 \oitem{D}{graph}
-Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
+Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
 \oitem{D}{graphDaten} % Betreuer: aufsplitten
 Für einen Graphen wie in \ref{D:graph} werden folgende Daten gespeichert:\\
-Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von Arc-Flags.
+Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von \gls{arc}.
 \oitem{D}{knoten}
 Für jeden Knoten werden geographische Koordinaten (Länge und Breite) und eine eindeutige Identifikationsnummer gespeichert.
 \end{description}
@@ -357,7 +352,7 @@ Für jeden Knoten werden geographische Koordinaten (Länge und Breite) und eine 
 \subsection{Historydaten}
 \begin{description}
 \oitem{D}{history}
-Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
+Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
 \end{description}
 \section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Systemmodell1}
@@ -460,9 +455,9 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
 
 \begin{description}
 \oitem{TD}{datenProfilVorberechnung}
-Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein Profil ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
+Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein \gls{profil} ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
 \oitem{TD}{gültigOsm}
-\gls{kartendaten} müssen als gültige osm-Datei vorliegen.
+\gls{kartendaten} müssen als gültige \gls{osm}-Datei vorliegen.
 \oitem{TD}{karteProfilGelöscht}
 Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete \gls{profil} nicht mehr vorhanden sind.
 \oitem{TD}{löscheNichtStandard}
