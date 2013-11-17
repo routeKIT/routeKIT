@@ -133,7 +133,10 @@
   name={schnellste Route},
   description={die \gls{route} mit der geschätzt kürzesten Fahrzeit}
 }
-
+\newglossaryentry{wegbeschreibung}{
+  name={Wegbeschreibung},
+  description={Beschreibung einer \gls{route} durch eine Liste von Abbiegeanweisungen}
+}
 \newglossaryentry{arc}{
  name={Arc-Flags},
  description={eine Technik, um Routenberechnung zu beschleunigen}
@@ -159,8 +162,9 @@
 
 \section{Einleitung}
 
-Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
-Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt. Unterstützt werden folgende Fahrzeugtypen: \gls{pkw}, \gls{lkw}, Bus, Motorrad.
+Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei angegebenen Punkten berechnet und anzeigt.
+
+Dabei wird besonders darauf Wert gelegt, dass die berechnete Route mit dem benutzten Fahrzeug auch tatsächlich gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegeeinschränkungen, Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) bei der Routenberechnung berücksichtigt. Für die Berechnung der Route soll eine Beschleunigungstechnik eingesetzt werden.
 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
@@ -172,31 +176,29 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher.
 \begin{description}
-\oitem{MK}{karteAnzeigen} Karte anzeigen
-\oitem{MK}{karteRendern} Kartenkacheln rendern (Nur Straßen ohne Namen)
-\oitem{MK}{karteVerschieben} Karte verschieben
-\oitem{MK}{karteZoomen} Karte zoomen
-\oitem{MK}{startZielWaehlen} Start- und Zielpunkt auswählen % Rechtsklick
-\oitem{MK}{startZielZeigen} Start- und Zielpunkt auf der Karte anzeigen
-\oitem{MK}{routeAnfragen}  \gls{schnellroute} zwischen Start- und Zielpunkt anfragen
-\oitem{MK}{routeBerechnen}  \gls{schnellroute} zwischen Start- und Zielpunkt berechnen
-\oitem{MK}{routeAnzeigen}  \gls{schnellroute} zwischen Start- und Zielpunkt auf der Karte anzeigen
+\oitem{MK}{karteAnzeigen} Die Software soll die Karte auf dem Bildschirm anzeigen.
+\oitem{MK}{karteRendern} Kartenkacheln rendern (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
+\oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
+\oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
+\oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
+\oitem{MK}{startZielZeigen} Der ausgewählte Start- und Zielpunkt wird auf der Karte angezeigt.
+\oitem{MK}{routeBerechnen} Die Software soll die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt berechnen.
+\oitem{MK}{routeAnzeigen}  Die berechnete \gls{route} zwischen Start- und Zielpunkt wird auf der Karte angezeigt.
 \end{description}
+
 \subsection{Wunschkriterien}
 \begin{description}
-
-\oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
-\oitem{WK}{fahrzeugtyp} Fahrverbot für einen Fahrzeugtyp durch eine Straße beachten
+\oitem{WK}{beschlArc} Die Routenberechnung soll durch \gls{arc} beschleunigt werden.
+\oitem{WK}{abbiegebeschraeung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
+\oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
+\oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrtsverbote für bestimmte Fahrzeugtypen beachtet.
+\oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe des Fahrzeugs beachtet.
 %\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
-\oitem{WK}{abbiegebeschraeung} Abbiegeverbot durch Abbiegebeschränkung beachten.
-\oitem{WK}{maximalgewicht} Fahrverbot durch Maximalgewicht beachten
-\oitem{WK}{einbahnstrasse} Fahrverbot durch Einbahnstraße beachten
-\oitem{WK}{hoechstgeschwindigkeit} Höchstgeschwindigkeit beachten
-\oitem{WK}{beschreibung} Wegbeschreibung anzeigen
-\oitem{WK}{history} Berechnungsanfragen speichern. History/Favoriten
-\oitem{WK}{export} Route exportieren
-\oitem{WK}{fahrzeit} Schätzung der Fahrzeit einer \gls{route} unter Beachtung von Wartezeiten an Ampeln, maximalen Geschwindigkeiten, vom Benutzer festgelegten Durchschnittsgeschwindigkeiten
-\oitem{WK}{osmKacheln} Optional \gls{osm}-Kacheln anstelle des eigenen Renderers verwenden
+\oitem{WK}{beschreibung} Für die berechnete \gls{route} soll eine \gls{wegbeschreibung} generiert werden.
+\oitem{WK}{history} Der Benutzer Berechnungsanfragen in einer Favoritenliste speichern.
+\oitem{WK}{export} Die berechnete \gls{route} kann als GPX-Datei exportiert werden.
+\oitem{WK}{fahrzeit} Abschätzung der Fahrzeit einer \gls{route} unter Berücksichtung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
+\oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
