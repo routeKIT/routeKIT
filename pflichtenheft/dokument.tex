@@ -68,12 +68,6 @@
 %
 % End: Glossar
 
-\newglossaryentry{profil}{
-  name={Profil},
-  description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs},
-  plural={Profile}
-}
-
 % usage: \counteditem{prefix}{refName} -> item '/prefixXX/' with label 'prefix:refName' (where XX is counted in increments of 10)
 \makeatletter
 \newcommand{\oitem}[2]{
@@ -115,7 +109,14 @@
 \newpage
 % Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten)
 % Betreuer: Profile exakt welcher Typ
-\section{Einleitung}
+
+% alle Glossareintraege
+\newglossaryentry{profil}{
+  name={Profil},
+  description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs},
+  plural={Profile}
+}
+
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten}
@@ -124,6 +125,33 @@
   name={schnellste Route},
   description={die \gls{route} mit der geschätzt kürzesten Fahrzeit}
 }
+
+\newglossaryentry{arc}{
+ name={Arc-Flags},
+ description={eine Technik, um Routenberechnung zu beschleunigen}
+}
+\newglossaryentry{beschleunigung}{
+ name={Beschleunigung},
+ description={Ermöglicht eine schnellere Berechnung der angefragten Route},
+ see={arc}
+}
+
+\newglossaryentry{kartendaten}{
+  name={Kartendaten},
+  description={Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
+}
+\newglossaryentry{standardprofil}{
+  name={Standardprofil},
+  description={Ein vorinstalliertes Profil für gängige PKWs}
+}
+\newglossaryentry{vorberechnung}{
+  name={Vorberechnung},
+  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden}
+}
+
+
+\section{Einleitung}
+
 Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
 Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt.
 
@@ -149,15 +177,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \end{description}
 \subsection{Wunschkriterien}
 \begin{description}
-\newglossaryentry{arc}{
- name={Arc-Flags},
- description={eine Technik, um Routenberechnung zu beschleunigen}
-}
-\newglossaryentry{beschleunigung}{
- name={Beschleunigung},
- description={Ermöglicht eine schnellere Berechnung der angefragten Route},
- see={arc}
-}
+
 \oitem{WK}{beschlArc} \gls{beschleunigung} durch \gls{arc} bei der Berechnung der Route
 \oitem{WK}{stassentyp} Fahrverbot durch bistimmten Staßentyp beachten % TODO Welchen Straßentyp
 \oitem{WK}{abbiegebeschraeung} Abbiegeverbot durch Abbiegebeschränkung beachten.
@@ -370,18 +390,6 @@ Route berechnen, Karte wechseln, Route berechnen
 Route berechnen, Route speichern, andere Route berechnen, Kartenausschnitt verändern, gespeicherte Route laden
 \end{description}
 \subsection{Datenkonsistenzen}
-\newglossaryentry{kartendaten}{
-  name={Kartendaten},
-  description={Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
-}
-\newglossaryentry{standardprofil}{
-  name={Standardprofil},
-  description={Ein vorinstalliertes Profil für gängige PKWs}
-}
-\newglossaryentry{vorberechnung}{
-  name={Vorberechnung},
-  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue Karte/Profil-Kombination einmal ausgeführt werden}
-}
 
 \begin{description}
 \oitem{TD}{datenProfilVorberechnung}
