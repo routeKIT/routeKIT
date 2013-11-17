@@ -2,9 +2,10 @@ LATEX = pdflatex -interaction nonstopmode
 RM = rm -f
 
 dokument.pdf: Systemmodell1.pdf dokument.tex
-	-$(LATEX) dokument.tex # initial
-	makeglossaries dokument
-	-$(LATEX) dokument.tex # make glossary
+	-$(LATEX) dokument.tex # initial build
+	makeglossaries dokument # initial glossary
+	-$(LATEX) dokument.tex # include glossary in document
+	makeglossaries dokument # include glossary cross-refs in glossary
 	-$(LATEX) dokument.tex # add glossary to TOC
 
 clean:
