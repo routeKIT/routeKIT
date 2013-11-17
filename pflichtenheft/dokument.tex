@@ -114,10 +114,11 @@
 % Betreuer: Profile exakt welcher Typ
 
 % alle Glossareintraege
-\newacronym{pkw}{PKW}{Personenkraftwagen}
-\newacronym{lkw}{LKW}{Lastkraftwagen}
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
 \newacronym{osm}{OSM}{OpenStreetMap}
 \newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym[longplural={Points of interest}]{poi}{POI}{Point of interest}
 
 \newglossaryentry{profil}{
   name={Profil},
@@ -149,11 +150,11 @@
 
 \newglossaryentry{kartendaten}{
   name={Kartendaten},
-  description={Eine Datei im osm-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
+  description={Eine Datei im \gls{osm}-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
 }
 \newglossaryentry{standardprofil}{
   name={Standardprofil},
-  description={Ein vorinstalliertes Profil für gängige \gls{pkw}}
+  description={Ein vorinstalliertes Profil für gängige \glspl{pkw}}
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
@@ -214,10 +215,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Abgrenzungskriterien}
 \begin{description}
-\oitem{AK}{textSuche} Eine textuelle Suche nach Adressen oder POIs ist nicht möglich.
+\oitem{AK}{textSuche} Eine textuelle Suche nach Adressen oder \glspl{poi} ist nicht möglich.
 \oitem{AK}{zwischenziele} Die Angabe von Zwischenzielen ist nicht möglich.
 \oitem{AK}{standort} Eine Erkennung des aktuellen Standorts des Benutzers findet nicht statt.
-\oitem{AK}{poi} Die Positionen von POIs sowie Gebäude werden nicht auf der Karte angezeigt.
+\oitem{AK}{poi} Die Positionen von \glspl{poi} sowie Gebäude werden nicht auf der Karte angezeigt.
 \oitem{AK}{verkehrszeichen} Ampeln und Verkehrszeichen werden nicht auf der Karte visualisiert.
 \oitem{AK}{baustelle} Baustellen werden (über die in den Kartendaten enthaltenen Informationen hinaus) nicht berücksichtigt.
 \oitem{AK}{stau} TMC-Verkehrsmeldungen zu Staus werden nicht berücksichtigt.
@@ -335,23 +336,19 @@ Durchschnittsgeschwindigkeit auf Landstraße.
 \end{description}
 
 \subsection{Kartendaten}
-Für die Kartendarstellung wird gespeichert:
+Für die Routenberechnung wird gespeichert:
 \begin{description}
 \oitem{D}{osmDatei}
 \gls{osm}-Dateien,
-\oitem{D}{graph}
-Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
-\oitem{D}{graphDaten} % Betreuer: aufsplitten
-Für einen Graphen wie in \ref{D:graph} werden folgende Daten gespeichert:\\
-Knoten und Kanten des Graphen, Gewichte der Kanten, zusätzliche Information über die Angehörigkeit einer Kante zum kürzesten Pfad in Form von \gls{arc}.
-\oitem{D}{knoten}
-Für jeden Knoten werden geographische Koordinaten (Länge und Breite) und eine eindeutige Identifikationsnummer gespeichert.
+\oitem{D}{vorberechnung}
+Datei mit den Ergebnissen der \gls{vorberechnung}.
 \end{description}
 
 \subsection{Historydaten}
+Für die History wird gespeichert:
 \begin{description}
 \oitem{D}{history}
-Für eine bestimmte \gls{osm}-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird eine bestimmte Anzahl von Ergebnissen der vorherigen Anfragen des Benutzers gespeichert, was als History bezeichnet wird.  
+die vorherigen Anfragen des Benutzers.  
 \end{description}
 \section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Systemmodell1}
