@@ -117,6 +117,15 @@
   plural={Profile}
 }
 
+\newglossaryentry{pkw}{
+  name={PKW},
+  description={Abkürzung von Personenkraftwagen}
+}
+
+\newglossaryentry{lkw}{
+  name={LKW},
+  description={Abkürzung von Lastkraftwagen}
+}
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
@@ -153,7 +162,7 @@
 \section{Einleitung}
 
 Das Produkt ist an Autofahrer und/oder deren Mitfahrer gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei eingegebenen Punkten berechnet und anzeigt.
-Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt.
+Dabei wird besonders darauf Wert gelegt, dass die gewählte Route auch gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegebeschränkungen, Beschränkungen aufgrund der Größe oder des Gewichts des Fahrzeugs,~...) bei der Berechnung der Route berücksichtigt. Unterstützt werden folgende Fahrzeugtypen: \gls{pkw}, \gls{lkw}, Bus, Motorrad.
 
 Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem OpenStreetMap-Projekt.
 %Lucas
@@ -312,23 +321,27 @@ Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräte
 % Betreuer: Darstellung und Berechnung nur aus eigenen Daten. Steht noch nicht da.
 %Anastasia
 \subsection{Profildaten}
+Gespeichert wird:
 \begin{description}
 \oitem{D}{fahrzeugTyp}
-Es wird der Typ des Fahrzeugs (PKW, LKW, Bus) gespechert.
-\oitem{D}{pkwDaten}
-Für ein Fahrzeug vom Typ  PKW wird die vom Fahrer angegebene Durchschnittsgeschwindigkeit gespeichert.
-\oitem{D}{lkwDaten}
-Für ein Fahrzeug vom Typ  LKW werden folgende Daten gespeichert:\\
-Länge, Breite, Höhe und Gewicht des Autos, maximale auf einer Autobahn erlaubte Geschwindigkeit.
-\oitem{D}{busDaten}
-Für ein Fahrzeug vom Typ Bus werden folgende Daten gespeichert:\\
-Höhe und maximale auf einer Autobahn erlaubte Geschwindigkeit.
+Typ des Fahrzeugs (\gls{pkw}, \gls{lkw}, Bus, Motorrad),
+\oitem{D}{höhe}
+Höhe des Fahrzeugs,
+\oitem{D}{gewicht}
+Gewicht des Fahrzeugs,
+\oitem{D}{geschwindigkeitautobahn}
+Durchschnittsgeschwindigkeit auf Autobahn (Schnellstraße),
+\oitem{D}{geschwindigkeitlandstraße}
+Durchschnittsgeschwindigkeit auf Landstraße,
+\oitem{D}{maxgeschwindigkeit}
+für diesen Fahrzeugtyp auf der Autobahn zugelassene Geschwindigkeit. 
 \end{description}
 
 \subsection{Kartendaten}
+Für die Kartendarstellung wird gespeichert:
 \begin{description}
 \oitem{D}{osmDatei}
-Es wird eine OSM-Datei gespeichert.
+OSM-Dateien,
 \oitem{D}{graph}
 Für eine bestimmte OSM-Datei wie in \ref{D:osmDatei} und ein bestimmten Typ des Fahrzeugs wie in \ref{D:fahrzeugTyp} wird ein Graph gespeichert.
 \oitem{D}{graphDaten} % Betreuer: aufsplitten
