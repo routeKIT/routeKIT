@@ -66,7 +66,7 @@ bg=green</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>--
-Precalculator
+PreCalculator
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
@@ -92,7 +92,7 @@ bg=green</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>--
-Routecalculater
+RouteCalculator
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
