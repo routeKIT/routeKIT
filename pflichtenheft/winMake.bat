@@ -1,4 +1,4 @@
-java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Systemmodell1.uxf -output=Systemmodell1
+java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Paketdiagramm.uxf -output=Paketdiagramm
 pdflatex -interaction nonstopmode dokument.tex
 makeglossaries dokument
 pdflatex -interaction nonstopmode dokument.tex
