@@ -211,11 +211,12 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{abbiegebeschraeung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
 \oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
 \oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrtsverbote für bestimmte Fahrzeugtypen beachtet.
-\oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe des Fahrzeugs beachtet.
+\oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs beachtet.
 %\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
 \oitem{WK}{beschreibung} Für die berechnete \gls{route} soll eine \gls{wegbeschreibung} generiert werden.
+\oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
 \oitem{WK}{history} Der Benutzer kann Berechnungsanfragen in einer Favoritenliste speichern.
-\oitem{WK}{export} Die berechnete \gls{route} kann als GPX-Datei exportiert werden.
+\oitem{WK}{routeExport} Die berechnete \gls{route} kann als GPX-Datei zur Benutzung in GPS-Geräten exportiert werden.
 \oitem{WK}{fahrzeit} Abschätzung der Fahrzeit einer \gls{route} unter Berücksichtung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
 \oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen
@@ -295,15 +296,17 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
-Berechnen des nächsten Punkts auf einer Kante zu Geokoordinaten auf der Karte.
+Bestimmung des nächsten Punkts auf einer Kante zu gegebenen Geokoordinaten
 \oitem{F}{berechneRoute}
-Berechnen einer Route zwischen zwei Punkten auf je einer Kante des Straßengraphs.
+Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu einem Zielpunkt auf dem Straßengraph
 \oitem{F}{mercator}
-Berechnung der Mercatorprojektion zu Geokoordinaten und andersrum
+Berechnung der Mercator-Projektion zu Geokoordinaten und umgekehrt
 \oitem{F}{berechneAbstand}
 Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
 \oitem{F}{zeitSchaetzen}
-Schätzen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
+Schätzen der benötigten Zeit für ein Wegstück unter Berücksichtigung des {profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
+\oitem{F}{gpxAusRoute}
+Erzeugung einer GPX-Datei aus einer \gls{route}.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
@@ -323,24 +326,24 @@ Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
 Abbildung \ref{fig:mockupscreenshotmain}
 \end{description}
+
 \subsection{Wegbeschreibung}
 \begin{description}
 \oitem{F}{bestimmeAbbiegeAusRoute}
-Bestimmen aller Abbiegevorgänge einer Route.
+Bestimmung aller Abbiegevorgänge einer \gls{route}
 \oitem{F}{klassifiziereAbbiege}
-Klassifiziere die Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten) und Abbiegevorgänge im Kreisverkehr (Ausfahrten zählen).
+Klassifizierung der Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten, Nummer der Ausfahrt im Kreisverkehr)
 \oitem{F}{bestimmeAnweisungAusAbbiege}
-Bestimmen der Anweisung aus einem Abbiegevorgang.
-\oitem{F}{beschreibungZuHtml}
-Erzeugen einer HTML-Datei aus einer Wegbeschreibung.
-\oitem{F}{routeZuNavi}
-Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräten.
+Bestimmung einer textuellen Abbiegeanweisung aus einem Abbiegevorgang
+\oitem{F}{htmlAusBeschreibung}
+Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \end{description}
+
 \subsection{Profilverwaltung}
 \begin{description}
-\oitem{F}{neuesProfil} Neues Profil anlegen
-\oitem{F}{loescheProfil} Vorhandenes Profil löschen
-\oitem{F}{aendereProfil} Vorhandenes Profil ändern
+\oitem{F}{neuesProfil} Anlegen eines neuen Profils
+\oitem{F}{loescheProfil} Löschen eines vorhandenen Profils
+\oitem{F}{aendereProfil} Ändern eines vorhandenen Profils
 \end{description}
 
 \section{Produktdaten}
