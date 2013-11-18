@@ -78,11 +78,15 @@
 }
 \makeatother
 
-\newcommand{\testfall}[3]{
+% usage: \testfall{szenario}{ablauf}{ergebnis} oder \testfall[\ref{F:getesteteFunktion}]{szenario}{ablauf}{ergebnis}
+\newcommand{\testfall}[4][]{
   \begin{description}
-    \item[Vorbedingungen] #1
-    \item[Ablauf] #2
-    \item[Erwartetes Ergebnis] #3
+    \ifthenelse{\equal{#1}{}}
+               {} % optional argument #1 is empty: skip
+               {\item[Testet] #1}
+    \item[Vorbedingungen] #2
+    \item[Ablauf] #3
+    \item[Erwartetes Ergebnis] #4
   \end{description}
 }
 
@@ -415,22 +419,27 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Auswählen des Start- bzw. Zielpunkts}
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
 \oitem{TF}{waehleZweitenPunkt}\testfall
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt}
+    [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
+    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
     {Route für die Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{waehlePunktErneut}\testfall
+    [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
     {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte}\testfall
+    [\ref{F:zeichneKachel}, \ref{F:eingabeZuAusschnitt}]
     {Karte ist sichtbar}
     {Ziehen der Karte}
     {Die Kartenposititon hat sich entsprechend verändert}
 \oitem{TF}{zoomeRein}\testfall
+    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
     {Karte ist sichtbar}
     {Reinzoomen}
     {Ein Auschnitt der Karte wird größer und genauer dargestellt}
 \oitem{TF}{zoomeRaus}\testfall
+    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
     {Karte ist sichtbar}
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
@@ -443,6 +452,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Vorberechnung auswählen, lange Warten}
     {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
 \oitem{TF}{profilAnlegen}\testfall
+    [\ref{F:neuesProfil}]
     {Das erforderliche Profil ist noch nicht vorhanden}
     {Neues Profil anlegen}
     {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet(für die aktuelle Karte)}
@@ -451,11 +461,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Ein Profil wird ausgewählt}
     {Das Profil ist ausgewählt}
 \oitem{TF}{loescheProfil}\testfall
+    [\ref{F:loescheProfil}]
     {Ein unbrauchbares Profil ist vorhanden}
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{importKarte}\testfall
-    {Die erforderliche Karte ist veraltet oder exestiert nicht}
+    {Die erforderliche Karte ist veraltet oder existiert nicht}
     {Eine neue Karte wird importiert}
     {Die neue Karte ist aktuell, kein Profil ist für die aktuelle Karte vorberechnet}
 \oitem{TF}{waehleKarte}\testfall
@@ -463,10 +474,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt}
 \oitem{TF}{speichereRoute}\testfall
+    [\ref{WK:history}]
     {Eine Route ist berechnet}
     {Die Route wird gespeichert}
     {Die Route ist abgespeichert}
 \oitem{TF}{ladeRoute}\testfall
+    [\ref{WK:history}]
     {Eine Route ist abgespeichert}
     {Die abgespeicherte Route wird geladen}
     {Die abgespeicherte Route wird wieder angezeigt}
