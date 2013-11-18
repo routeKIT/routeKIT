@@ -1,6 +1,8 @@
 LATEX = pdflatex -interaction nonstopmode
 RM = rm -f
 
+all: dokument.pdf
+
 dokument.pdf: Paketdiagramm.pdf dokument.tex
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
