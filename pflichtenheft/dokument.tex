@@ -214,7 +214,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe des Fahrzeugs beachtet.
 %\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
 \oitem{WK}{beschreibung} Für die berechnete \gls{route} soll eine \gls{wegbeschreibung} generiert werden.
-\oitem{WK}{history} Der Benutzer Berechnungsanfragen in einer Favoritenliste speichern.
+\oitem{WK}{history} Der Benutzer kann Berechnungsanfragen in einer Favoritenliste speichern.
 \oitem{WK}{export} Die berechnete \gls{route} kann als GPX-Datei exportiert werden.
 \oitem{WK}{fahrzeit} Abschätzung der Fahrzeit einer \gls{route} unter Berücksichtung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
 \oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
@@ -298,6 +298,12 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 Berechnen des nächsten Punkts auf einer Kante zu Geokoordinaten auf der Karte.
 \oitem{F}{berechneRoute}
 Berechnen einer Route zwischen zwei Punkten auf je einer Kante des Straßengraphs.
+\oitem{F}{mercator}
+Berechnung der Mercatorprojektion zu Geokoordinaten und andersrum
+\oitem{F}{berechneAbstand}
+Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
+\oitem{F}{zeitSchaetzen}
+Schätzen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
 \end{description}
 \subsection{Benutzerschnittstelle}
 \begin{description}
@@ -311,7 +317,7 @@ Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
-\oitem{F}{eingabeZuAusschnitt}1
+\oitem{F}{eingabeZuAusschnitt}
 Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
