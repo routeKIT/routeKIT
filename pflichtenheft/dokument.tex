@@ -154,7 +154,8 @@
 }
 \newglossaryentry{standardprofil}{
   name={Standardprofil},
-  description={Ein vorinstalliertes Profil für gängige \glspl{pkw}}
+  description={Ein vorinstalliertes Profil für gängige \glspl{pkw} oder \glspl{lkw}},
+  see={profil}  
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
@@ -204,6 +205,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
 \oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
+\oitem{WK}{standardprofil} Es gibt ein \gls{standardprofil} für \glspl{pkw} und eins für \glspl{lkw} 
 \oitem{WK}{koordinaten} Geokoordinaten des Start- und Zielpunkts können als Dezimalzahlen eingegeben werden.
 \oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
@@ -342,7 +344,6 @@ Es werden gespeichert:
 \gls{osm}-Dateien,
 \oitem{D}{vorberechnung}
 Datei mit den Ergebnissen der \gls{vorberechnung}.
-\oitem{D}{}
 \end{description}
 
 \subsection{Historydaten}
@@ -396,15 +397,6 @@ Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers.
 \item \gls{vorberechnung}-Button
 \end{enumerate}
 % Fabian
-
-%Der Absatz kann weg, oder?
-Wir haben mehrere Profile und mehrere Karten.\\
-Es ist immer eine Kombination aus Profil und Karte ausgewählt egal ob diese vorberechnet ist oder nicht.
-
-Wenn sie nicht vorberechnet ist (wird die Karte grau /deaktiviert/etc.), dann kann angeklickt werden (großer freundlicher Knopf), dass sie vorberechnet wird.
-Wenn sie vorberechnet ist, dann kann angeklickt werden, dass die Vorberechnung gelöscht wird.
-
-Die Routenberechnung startet, wenn Start oder Ziel geändert werden und danach beide vorhanden sind.
 
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
@@ -471,6 +463,14 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Eine Route ist abgespeichert}
     {Die abgespeicherte Route wird geladen}
     {Die abgespeicherte Route wird wieder angezeigt}
+\oitem{TF}{standardProfil}\testfall
+    {Ein \gls{standardprofil} exestiert}
+    {Versuchen das \gls{standardprofil} zu löschen}
+    {Das \gls{standardprofil} ist nicht gelöscht}
+\oitem{TF}{einbahnstraße}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Einbahnstraße}
+    {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
+    {Ein Weg, der nicht diese Einbahnstraße beinhaltet, wird gefunden}
 
 \end{description}
 \subsection{Datenkonsistenzen}
