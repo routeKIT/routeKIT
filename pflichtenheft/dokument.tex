@@ -116,7 +116,7 @@
 \tableofcontents
 \newpage
 % Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten) (gemackt)
-% Betreuer: Profile exakt welcher Typ
+% Betreuer: Profile exakt welcher Typ (gemacht)
 
 % alle Glossareintraege
 \newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
@@ -134,6 +134,10 @@
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
+}
+\newglossaryentry{rendern}{
+  name={rendern},
+  description={Berechnung eines Bilds aus den zu rendernden Daten}
 }
 \newglossaryentry{schnellroute}{
   name={schnellste Route},
@@ -187,10 +191,10 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 %Lucas
 
 \subsection{Musskriterien}
-% Betreuer: Ausführlicher.
+% Betreuer: Ausführlicher. (gemacht)
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Software soll die Karte auf dem Bildschirm anzeigen.
-\oitem{MK}{karteRendern} Kartenkacheln rendern (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
+\oitem{MK}{karteRendern} Kartenkacheln \gls{rendern} (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
 \oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
@@ -305,7 +309,7 @@ Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
-\oitem{F}{eingabeZuAusschnitt}
+\oitem{F}{eingabeZuAusschnitt}1
 Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
@@ -338,34 +342,56 @@ Erzeugen einer Datei mit Geokoordinaten für die Benutzung in Navigationsgeräte
 In einem \gls{profil} werden gespeichert:
 \begin{description}
 \oitem{D}{fahrzeugTyp}
-Fahrzeugtyp (\gls{pkw}, \gls{lkw}, Bus, Motorrad),
+Fahrzeugtyp (\gls{pkw}, \gls{lkw}, Bus, Motorrad)
 \oitem{D}{hoehe}
-Höhe des Fahrzeugs,
+Höhe des Fahrzeugs
 \oitem{D}{gewicht}
-Gewicht des Fahrzeugs,
+Gewicht des Fahrzeugs
 \oitem{D}{geschwindigkeitAutobahn}
-Durchschnittsgeschwindigkeit auf Autobahn/Schnellstraße,
+Durchschnittsgeschwindigkeit auf Autobahn/Schnellstraße
 \oitem{D}{geschwindigkeitLandstrasse}
-Durchschnittsgeschwindigkeit auf Landstraße.
+Durchschnittsgeschwindigkeit auf Landstraße
 \end{description}
 
 \subsection{Kartendaten}
 Es werden gespeichert:
 \begin{description}
 \oitem{D}{osmDatei}
-\gls{osm}-Dateien,
+\gls{osm}-Dateien
 \oitem{D}{vorberechnung}
-Datei mit den Ergebnissen der \gls{vorberechnung}.
+Datei mit den Ergebnissen der \gls{vorberechnung}
+\oitem{D}{renderingData}
+Alle Daten die fürs \Gls{rendern} benötigt werden (siehe \ref{WK:karteRendernStrassen}, \ref{WK:karteRendernOrtsnamen}, \ref{WK:karteRendernDeko} und \ref{MK:karteRendern})
+
 \end{description}
 
 \subsection{Historydaten}
 Für die History wird gespeichert:
 \begin{description}
 \oitem{D}{history}
-Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers.  
+Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
 \end{description}
 \section{Systemmodell} % Betreuer: Paketdiagramm
 \includegraphics[width=\linewidth]{Paketdiagramm}
+\begin{description}
+\oitem{PK}{program} Programm\\
+Die Hauptsteuerklasse des Programms. Initialinsiert die Anwendung.
+\oitem{PK}{gui} GUI\\
+Beinhaltet alle Komponenten des GUI außer \ref{PK:mapView}. Realisiert u.a \ref{MK:startZielWaehlen}.
+\oitem{PK}{mapView} MapViewer\\
+Das GUI Element, dass Kartenkacheln dynamisch renderen lässt, cachet und dann skaliert an der richtigen
+Position im Fenster an. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
+\oitem{PK}{precalc} PreCalculator\\
+Verarbeitet OSM Dateien in ein eigenes Format. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der OSM.
+\oitem{PK}{renderer} Renderer\\
+Berechnet die Kacheln aus den vorbereiteten Daten. Realisiert \ref{MK:karteRendern}
+\oitem{PK}{routeCalculator} RouteCalculator\\
+Berechnet die Route aus den vorbereiteten Daten. Realisiert \ref{MK:routeBerechnen}
+\oitem{PK}{fileIO} FileIO\\
+Schreibt und lädt eigene Dateien in den zur Routenberechnung optimierten Dateiformaten.
+\oitem{PK}{osmParser} OSMParser\\
+Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnung benutzten Form im Hauptspeicher, um.
+\end{description}
 %Anastasia
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
