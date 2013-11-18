@@ -83,7 +83,7 @@
   \begin{description}
     \ifthenelse{\equal{#1}{}}
                {} % optional argument #1 is empty: skip
-               {\item[Getestete Funktionen] #1}
+               {\item[Testet] #1}
     \item[Vorbedingungen] #2
     \item[Ablauf] #3
     \item[Erwartetes Ergebnis] #4
@@ -399,7 +399,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
 \oitem{TF}{waehleZweitenPunkt}\testfall
     [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt}
+    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
     {Route für die Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{waehlePunktErneut}\testfall
@@ -408,14 +408,17 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte}\testfall
+    [\ref{F:zeichneKachel}, \ref{F:eingabeZuAusschnitt}]
     {Karte ist sichtbar}
     {Ziehen der Karte}
     {Die Kartenposititon hat sich entsprechend verändert}
 \oitem{TF}{zoomeRein}\testfall
+    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
     {Karte ist sichtbar}
     {Reinzoomen}
     {Ein Auschnitt der Karte wird größer und genauer dargestellt}
 \oitem{TF}{zoomeRaus}\testfall
+    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
     {Karte ist sichtbar}
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
@@ -442,7 +445,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{importKarte}\testfall
-    {Die erforderliche Karte ist veraltet oder exestiert nicht}
+    {Die erforderliche Karte ist veraltet oder existiert nicht}
     {Eine neue Karte wird importiert}
     {Die neue Karte ist aktuell, kein Profil ist für die aktuelle Karte vorberechnet}
 \oitem{TF}{waehleKarte}\testfall
@@ -450,10 +453,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt}
 \oitem{TF}{speichereRoute}\testfall
+    [\ref{WK:history}]
     {Eine Route ist berechnet}
     {Die Route wird gespeichert}
     {Die Route ist abgespeichert}
 \oitem{TF}{ladeRoute}\testfall
+    [\ref{WK:history}]
     {Eine Route ist abgespeichert}
     {Die abgespeicherte Route wird geladen}
     {Die abgespeicherte Route wird wieder angezeigt}
