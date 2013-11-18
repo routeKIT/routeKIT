@@ -1,11 +1,12 @@
 LATEX = pdflatex -interaction nonstopmode
 RM = rm -f
+SVG2PDF = cairosvg -f pdf -o
 
 all: dokument.pdf clean-dokument-build
 
-clean: clean-dokument clean-Paketdiagramm
+clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung
 
-dokument.pdf: Paketdiagramm.pdf dokument.tex
+dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf dokument.tex
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
 	-$(LATEX) dokument.tex # include glossary in document
@@ -23,3 +24,9 @@ Paketdiagramm.pdf: Paketdiagramm.uxf
 
 clean-Paketdiagramm:
 	-$(RM) Paketdiagramm.pdf
+
+Profilverwaltung.pdf: Profilverwaltung.svg
+	$(SVG2PDF) Profilverwaltung.pdf Profilverwaltung.svg
+
+clean-Profilverwaltung:
+	-$(RM) Profilverwaltung.pdf
