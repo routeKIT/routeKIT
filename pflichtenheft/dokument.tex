@@ -161,6 +161,12 @@
   name={Vorberechnung},
   description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden}
 }
+\newglossaryentry{dezimalkoordinaten}{
+  name={Dezimalkoordinaten},
+  description={Ein Format für Geokoordinaten, nämlich:\\
+  	"Breitengrad, Längengrad"\\
+  	die jeweils der Form "$[+-] [\text{0-9}]^+.[\text{0-9}]^\ast$" sind}
+}
 
 \section{Einleitung}
 
@@ -211,6 +217,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
 \oitem{WK}{karteRendernStrecken} Die Kartenkacheln werden gestreckt wenn sich der Zoom zwischen 2 Stufen befindet
+\oitem{WK}{geocoords} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -467,10 +474,14 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Ein \gls{standardprofil} exestiert}
     {Versuchen das \gls{standardprofil} zu löschen}
     {Das \gls{standardprofil} ist nicht gelöscht}
-\oitem{TF}{einbahnstraße}\testfall
+\oitem{TF}{einbahnstrasse}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße beinhaltet, wird gefunden}
+\oitem{TF}{geocoords}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
+    {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
+    {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert}
 
 \end{description}
 \subsection{Datenkonsistenzen}
