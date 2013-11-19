@@ -1,6 +1,7 @@
 LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 SVG2PDF = cairosvg -f pdf -o
+BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 all: dokument.pdf clean-dokument-build
 
@@ -40,10 +41,10 @@ Kartenauswahl.pdf: Kartenauswahl.svg ui.css
 clean-Kartenauswahl:
 	-$(RM) Kartenauswahl.pdf
 
-artefakte: Profilverwaltung.pdf
-	git checkout -B artefakte
-	git add -f Profilverwaltung.pdf
+artefakte: Profilverwaltung.pdf Kartenauswahl.pdf
+	git checkout -B artefakte-$(BRANCH)
+	git add -f Profilverwaltung.pdf Kartenauswahl.pdf
 	git commit -m "Artefakte"
-	git push --set-upstream --force origin artefakte
-	git checkout master
-	git branch -d artefakte
+	git push --set-upstream --force origin artefakte-$(BRANCH)
+	git checkout $(BRANCH)
+	git branch -d artefakte-$(BRANCH)
