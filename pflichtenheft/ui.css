@@ -1,3 +1,7 @@
+text {
+    font-family: sans;
+}
+
 text.centered {
     text-anchor: middle;
 }

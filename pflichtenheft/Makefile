@@ -1,6 +1,6 @@
 LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
-SVG2PDF = cairosvg -f pdf -o
+SVG2PDF = rsvg-convert -f pdf -o
 ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenauswahl.pdf
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
