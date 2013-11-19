@@ -30,3 +30,11 @@ Profilverwaltung.pdf: Profilverwaltung.svg ui.css
 
 clean-Profilverwaltung:
 	-$(RM) Profilverwaltung.pdf
+
+artefakte: Profilverwaltung.pdf
+	git checkout -B artefakte
+	git add -f Profilverwaltung.pdf
+	git commit -m "Artefakte"
+	git push --set-upstream --force origin artefakte
+	git checkout master
+	git branch -d artefakte
