@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="ui.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
+  "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<svg width="535" height="315">
+  <rect id="window" x="0" y="0" width="535" height="315" fill="white"/>
+  <rect id="titleBar" x="0" y="0" width="535" height="20" fill="lightgrey"/>
+  <g id="closeButton" transform="translate(515,0)">
+    <rect x="0" y="0" width="20" height="20" class="closebutton"/>
+    <text x="10" y="15" class="closebutton centered">x</text>
+  </g>
+  <text id="titleLabel" x="5" y="16">Kartenauswahl</text>
+  <rect x="1" y="1" width="533" height="313" fill="none" stroke="black" stroke-width="2"/>
+  
+  <g id="okButton" transform="translate(340,285)">
+    <rect x="0" y="0" width="90" height="20" class="enabled"/>
+    <text x="45" y="15" class="enabled centered">OK</text>
+    <text x="50" y="25" class="labelnumber">10</text>
+  </g>
+
+  <g id="cancelButton" transform="translate(435,285)">
+    <rect x="0" y="0" width="90" height="20" class="enabled"/>
+    <text x="45" y="15" class="enabled centered">Abbrechen</text>
+    <text x="50" y="25" class="labelnumber">11</text>
+  </g>
+</svg>

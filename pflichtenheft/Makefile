@@ -4,11 +4,11 @@ SVG2PDF = cairosvg -f pdf -o
 
 all: dokument.pdf clean-dokument-build
 
-.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung artefakte
+.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung clean-Kartenauswahl artefakte
 
-clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung
+clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenauswahl
 
-dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf dokument.tex
+dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf Kartenauswahl.pdf dokument.tex
 	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
@@ -33,6 +33,12 @@ Profilverwaltung.pdf: Profilverwaltung.svg ui.css
 
 clean-Profilverwaltung:
 	-$(RM) Profilverwaltung.pdf
+
+Kartenauswahl.pdf: Kartenauswahl.svg ui.css
+	$(SVG2PDF) Kartenauswahl.pdf Kartenauswahl.svg
+
+clean-Kartenauswahl:
+	-$(RM) Kartenauswahl.pdf
 
 artefakte: Profilverwaltung.pdf
 	git checkout -B artefakte
