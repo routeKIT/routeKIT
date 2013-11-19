@@ -166,6 +166,7 @@
 \newglossaryentry{standardprofil}{
   name={Standardprofil},
   description={Ein vorinstalliertes Profil für gängige \glspl{pkw} oder \glspl{lkw}},
+  plural={Standardprofile},
   see={profil}  
 }
 \newglossaryentry{vorberechnung}{
@@ -204,7 +205,7 @@ Dem Produkt wird eine vorberechnete Karte für Karlsruhe mit einem \gls{standard
 %Sollten wir nicht "die Software" rausnehmen?
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Karte wird auf dem Bildschirm angezeigt.
-\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{karteAnzeigen}) werden eigene Kartenkacheln mit aus den Straßendaten \glslink{rendern}{gerendert}.
+\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{MK:karteAnzeigen}) werden eigene Kartenkacheln mit aus den Straßendaten \glslink{rendern}{gerendert}.
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
 \oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
@@ -231,7 +232,7 @@ Dem Produkt wird eine vorberechnete Karte für Karlsruhe mit einem \gls{standard
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen.
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern.
 \oitem{WK}{profile} Der Benutzer kann zwischen mehreren \glslink{profil}{Profilen} wählen.
-\oitem{WK}{standardprofile} Es gibt zwei \gls{standardprofil}e für \glspl{pkw} und \glspl{lkw}.
+\oitem{WK}{standardprofile} Es gibt zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}.
 \oitem{WK}{koordinaten} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
 \oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in  die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
@@ -389,10 +390,10 @@ Start und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 Bestimmen aller Kacheln um einen gegebenen Kartenausschnitt
 \oitem{WF}{bestimmeKachelnVorAusschnitt}
 Bestimmen aller Kacheln um einen gegebenen Kartenausschnitt in den nächstgrößeren/kleineren Zoomstufen
-% TODO leicht holprip
+% TODO leicht holprig
 % TODO besser?
 \oitem{WF}{cacheKacheln}
-Zwischspeichern der zuletzt gerenderten Kacheln
+Zwischenspeichern der zuletzt gerenderten Kacheln
 % TODO ?
 %TODO besser? Wir brauchen keine Begründung...
 \end{description}
@@ -414,11 +415,11 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 
 \subsection{Profilverwaltung}
 \begin{description}
-\oitem{WF}{neuesProfil} Anlegen eines neuen \gls{profil}s
-\oitem{WF}{loescheProfil} Löschen eines vorhandenen \gls{profil}s
-\oitem{WF}{aendereProfil} Ändern eines vorhandenen \gls{profil}s
-\oitem{WF}{waehleProfil} Auswahl eines \gls{profil}s für die Routenberechnung
-\oitem{WF}{wechsleProfil} Wechseln des ausgewählten \gls{profil}s zwischen Routenberechnungen
+\oitem{WF}{neuesProfil} Anlegen eines neuen \glslink{profil}{Profils}
+\oitem{WF}{loescheProfil} Löschen eines vorhandenen \glslink{profil}{Profils}
+\oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils}
+\oitem{WF}{waehleProfil} Auswahl eines \glslink{profil}{Profils} für die Routenberechnung
+\oitem{WF}{wechsleProfil} Wechseln des ausgewählten \glslink{profil}{Profils} zwischen Routenberechnungen
 % Betreuer2: Answählen (gemacht)
 \end{description}
 
@@ -429,7 +430,7 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \oitem{WF}{aktualisiereKarte} Aktualisieren einer vorhandenen Karte
 \oitem{WF}{waehleKarte} Auswählen einer Karte für die Routenberechnung
 \oitem{WF}{wechsleKarte} Wechseln der ausgewählten Karte zwischen Routenberechnungen
-\oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für alle \gls{profil}e auf einer Karte
+\oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für alle \glspl{profil} auf einer Karte
 %FIXME Wirklich für "alle Profile"? Das klingt irgendwie wie gleichzeitig/hintereinander. Lieber "das aktuelle Profil"?
 % Betreuer2: Answählen (gemacht)
 \end{description}
@@ -636,7 +637,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{importKarte}\testfall
-    {}% Betreuer2: ganz weg (gemacht)
+    {–}% Betreuer2: ganz weg (gemacht)
     {Eine neue Karte wird importiert}
     {Die neue Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet}
 \oitem{TF}{waehleKarte}\testfall
