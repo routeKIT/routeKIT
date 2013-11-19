@@ -10,8 +10,9 @@
 \usepackage{float}
 
 \makeglossary
-
- 
+% Betreuer2: Produktname
+% Betreuer2: Gls, s. seite
+% Betreuer2: History bleibt erhalten
 \title{Pflichtenheft}
 \author{Kevin Birke \\ Felix Dörre \\ Fabian Hafner \\ Lucas Werkmeister \\ Dominic Ziegler \\ Anastasia Zinkina}
 %\date{}
@@ -184,7 +185,7 @@
 }
 
 \section{Einleitung}
-
+% Betreuer2: Vorberechnung dauert lange. "Experterfeature"
 Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei angegebenen Punkten berechnet und anzeigt.
 
 Dabei wird besonders darauf Wert gelegt, dass die berechnete Route mit dem benutzten Fahrzeug auch tatsächlich gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegeeinschränkungen, Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) bei der Routenberechnung berücksichtigt. Für die Berechnung der Route soll eine Beschleunigungstechnik eingesetzt werden.
@@ -198,6 +199,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher. (gemacht)
+% Betreuer2: Thesen, was ist.
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Software soll die Karte auf dem Bildschirm anzeigen.
 \oitem{MK}{karteRendern} Kartenkacheln \gls{rendern} (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
@@ -232,7 +234,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
-\oitem{WK}{karteRendernStrecken} Die Kartenkacheln werden gestreckt wenn sich der Zoom zwischen 2 Stufen befindet
+\oitem{WK}{karteRendernDeko} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -297,6 +299,13 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \section{Funktionale Anforderungen}
 % Betreuer: Weniger Text(gemacht)
 % Felix
+% Betreuer2: Profil wählen.
+% Betreuer2: Ausfteilen Wusch/Muss.
+% Betreuer2: Mehr punke
+% Betreuer2: Maker anzeigen.
+% Betreuer2: Vorberechnung Überschrift
+% Betreuer2: Mit kriterien synchron
+
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
@@ -307,6 +316,7 @@ Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu ein
 Berechnung der Mercator-Projektion zu Geokoordinaten und umgekehrt
 \oitem{F}{berechneAbstand}
 Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
+% Betreuer2: Bestimmen, Berechnen, nicht Stätzen
 \oitem{F}{zeitSchaetzen}
 Schätzen der benötigten Zeit für ein Wegstück unter Berücksichtigung des {profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
 \oitem{F}{gpxAusRoute}
@@ -318,10 +328,12 @@ Erzeugung einer GPX-Datei aus einer \gls{route}.
 Berechnen einer Bildkachel aus lokalen Kartendaten zu gegebener Detailstufe und gegebenem Ausschnitt.
 \oitem{F}{bestimmeKnotenInAusschnitt}
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt. (Benötigt für \ref{F:berechneKachel})
+% Betreuer2: 'Aufbauen'
 \oitem{F}{fetcheOnlineKachel}
 Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 \oitem{F}{zeichneKachel}
 Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
+% Betreuer2: Aufteilen, Genauer
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
 \oitem{F}{eingabeZuAusschnitt}
@@ -348,6 +360,7 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \oitem{F}{neuesProfil} Anlegen eines neuen Profils
 \oitem{F}{loescheProfil} Löschen eines vorhandenen Profils
 \oitem{F}{aendereProfil} Ändern eines vorhandenen Profils
+% Betreuer2: Answählen
 \end{description}
 
 \section{Produktdaten}
@@ -388,7 +401,8 @@ Für die History wird gespeichert:
 \oitem{D}{history}
 Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
 \end{description}
-\section{Systemmodell} % Betreuer: Paketdiagramm
+\section{Systemmodell}
+% Betreuer2: Hierarchisch, Gesamt-App-Paket
 \includegraphics[width=\linewidth]{Paketdiagramm}
 \begin{description}
 \oitem{PK}{program} Programm\\
@@ -416,12 +430,17 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNächstenPunktAufKante} benötigt höchstens 500 ms.
 \oitem{NF}{knotenWaysAnzahl} Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
+% Betreuer2: Noch mehr, rendern einer Kachel, Mausklicks
 \end{description}
 % Dominic
 
 \section{Benutzeroberfläche}
 % Betreuer: weniger Klicks? Startknopf.
 % Betreuer: Elemente durchnummerieren. Einzeln erklären.
+% Betreuer2: Favs, 
+% Betreuer2: Links ziehen
+% Betreuer2: Klicks wie belegen?
+% Betreuer2: Reihenfolge Karte, Profil
 \subsection{Hauptfenster}
 \begin{figure}[H]
 \centering
@@ -464,6 +483,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \caption{Profilverwaltung}
 \label{fig:mockupprofilverwaltung}
 \end{figure}
+% Betreuer2: Slider für die Zahl? Spinner?
 \begin{enumerate}
 \item Profil-Auswahl: Combobox (Dropdownmenü) zur Auswahl eines Profils
 \item Löschen-Button: Löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{F:loescheProfil})
@@ -519,7 +539,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
 \oitem{TF}{verbieteWaehlePunkt}\testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
-    {Kein Start- oder Zielpunkt ist ausgewählt}
+    {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar
 \oitem{TF}{starteVorberechnung}\testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Vorberechnung auswählen, lange Warten}
@@ -535,11 +555,11 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Das Profil ist ausgewählt}
 \oitem{TF}{loescheProfil}\testfall
     [\ref{F:loescheProfil}]
-    {Ein unbrauchbares Profil ist vorhanden}
+    {Ein Profil ist vorhanden}
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{importKarte}\testfall
-    {Die erforderliche Karte ist veraltet oder existiert nicht}
+    {Die Karte vorhanden}% Betreuer2: ganz weg
     {Eine neue Karte wird importiert}
     {Die neue Karte ist aktuell, kein Profil ist für die aktuelle Karte vorberechnet}
 \oitem{TF}{waehleKarte}\testfall
@@ -557,7 +577,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Die abgespeicherte Route wird geladen}
     {Die abgespeicherte Route wird wieder angezeigt}
 \oitem{TF}{standardProfil}\testfall
-    {Ein \gls{standardprofil} exestiert}
+    {Ein \gls{standardprofil} existiert}
     {Versuchen das \gls{standardprofil} zu löschen}
     {Das \gls{standardprofil} ist nicht gelöscht}
 \oitem{TF}{einbahnstrasse}\testfall
@@ -568,7 +588,20 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
     {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert}
+% Betreuer2: Wegbeschreibung export testen
+% Betreuer2: Keine Interpretation
+% Betreuer2: Systemstart
+% Betreuer2: Gruppieren
+% Betreuer2: Route anzeigen und Profil ändern
+% Betreuer2: Mehr Beschränkungstests
+% Betreuer2: kein beinhalten
+% Betreuer2: Beenden und neu starten.
 
+% Betreuer2: Karten/Kartendaten/Profil Begriff, Karte ^= Anschauen
+% Betreuer2: Renderer ändern im GUI
+
+
+% Betreuer2: Testszenarien
 \end{description}
 \subsection{Datenkonsistenzen}
 
