@@ -178,6 +178,10 @@
   	"Breitengrad, Längengrad"\\
   	die jeweils der Form "$[+-] [\text{0-9}]^+.[\text{0-9}]^\ast$" sind}
 }
+\newglossaryentry{history}{
+  name={History}
+  description={Speicherung von Anfragen für spätere Wiederverwendung}
+}
 
 \section{Einleitung}
 
@@ -215,21 +219,20 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 %\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
 \oitem{WK}{beschreibung} Für die berechnete \gls{route} soll eine \gls{wegbeschreibung} generiert werden.
 \oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
-\oitem{WK}{history} Der Benutzer kann Berechnungsanfragen in einer Favoritenliste speichern.
+\oitem{WK}{history} Der Benutzer kann Berechnungsanfragen aus einer \gls{history} auswählen.
 \oitem{WK}{routeExport} Die berechnete \gls{route} kann als GPX-Datei zur Benutzung in GPS-Geräten exportiert werden.
 \oitem{WK}{fahrzeit} Abschätzung der Fahrzeit einer \gls{route} unter Berücksichtung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
 \oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
-\oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} für die Vorberechnung wählen
+\oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} wählen
 \oitem{WK}{standardprofil} Es gibt ein \gls{standardprofil} für \glspl{pkw} und eins für \glspl{lkw} 
-\oitem{WK}{koordinaten} Geokoordinaten des Start- und Zielpunkts können als Dezimalzahlen eingegeben werden.
+\oitem{WK}{koordinaten} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
 \oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
 \oitem{WK}{karteRendernStrecken} Die Kartenkacheln werden gestreckt wenn sich der Zoom zwischen 2 Stufen befindet
-\oitem{WK}{geocoords} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
 % Betreuer: Profile(gemacht)
 
 \end{description}
