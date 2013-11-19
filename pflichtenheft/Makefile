@@ -1,6 +1,7 @@
 LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 SVG2PDF = cairosvg -f pdf -o
+ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenauswahl.pdf
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 all: dokument.pdf clean-dokument-build
@@ -9,7 +10,7 @@ all: dokument.pdf clean-dokument-build
 
 clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenauswahl
 
-dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf Kartenauswahl.pdf dokument.tex
+dokument.pdf: $(ARTEFAKTE) dokument.tex
 	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
@@ -41,9 +42,9 @@ Kartenauswahl.pdf: Kartenauswahl.svg ui.css
 clean-Kartenauswahl:
 	-$(RM) Kartenauswahl.pdf
 
-artefakte: Profilverwaltung.pdf Kartenauswahl.pdf
+artefakte: $(ARTEFAKTE)
 	git checkout -B artefakte-$(BRANCH)
-	git add -f Profilverwaltung.pdf Kartenauswahl.pdf
+	git add -f $(ARTEFAKTE)
 	git commit -m "Artefakte"
 	git push --set-upstream --force origin artefakte-$(BRANCH)
 	git checkout $(BRANCH)
