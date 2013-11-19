@@ -564,6 +564,20 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
   Bevor diese Aktionen durchgeführt werden, wird dem Benutzer in einem Dialog eine Liste der geplanten Aktionen gezeigt; dabei wird er \emph{eindrücklich} darauf hingewiesen, dass neue Vorberechnungen sehr lange dauern (mit konkretem Zeitraum) und dass gelöschte Vorberechnungen ebenso viel Berechnungsarbeit vernichten.
 \item Abbrechen-Button: Schließt den Dialog.
 \end{enumerate}
+
+In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kann Karten hinzufügen und entfernen, er kann im Profilverwaltung-Dialog (der erscheint, wenn er den Hinzufügen-Button klickt) Profile hinzufügen und entfernen, und er kann Profil-Karten-Kombinationen hinzufügen und entfernen. Wenn der Benutzer genau die Kombinationen festgelegt hat, die er verwenden möchte, drückt er den OK-Button. Daraufhin wird ihm ein Dialog mit einem Text wie dem folgenden angezeigt:
+\begin{quote}
+  Sie haben die folgenden Operationen ausgewählt:
+  \begin{itemize}
+  \item Hinzufügen der Karte ``Baden-Württemberg''
+  \item Hinzufügen des Profils ``LKW [default]'' zur Karte ``Baden-Württemberg''
+  \item Entfernen des Profils ``PKW [default]'' von der Karte ``Karlsruhe''
+  \end{itemize}
+  Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
+  
+  Wenn Sie sicher sind, dass Sie diese Operationen durchführen wollen, geben Sie ein: ``Ja, ich weiß, was ich tue.''
+\end{quote}
+Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt.
 % TODO labeln
 % Fabian
 
