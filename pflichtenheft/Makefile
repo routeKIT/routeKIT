@@ -1,4 +1,4 @@
-LATEX = pdflatex -interaction nonstopmode
+LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 SVG2PDF = cairosvg -f pdf -o
 
