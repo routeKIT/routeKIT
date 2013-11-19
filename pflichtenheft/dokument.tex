@@ -184,13 +184,13 @@
 }
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Einleitung}
-% Betreuer2: Vorberechnung dauert lange. "Expertenfeature"
-% TODO history erwähnen
-Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei angegebenen Punkten berechnet und anzeigt.
+% Betreuer2: Vorberechnung dauert lange. "Expertenfeature" (erledigt)
+% TODO history erwähnen (auch erledigt)
+Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einer History gespeichert.
 
-Dabei wird besonders darauf Wert gelegt, dass die berechnete Route mit dem benutzten Fahrzeug auch tatsächlich gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegeeinschränkungen, Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) bei der Routenberechnung berücksichtigt. Für die Berechnung der Route soll eine Beschleunigungstechnik eingesetzt werden.
+Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung sogenannter \gls{arc} beschleunigt. Als besonderes Expertenfeature lässt sich durch den Benutzer dabei ein individuelles Fahrzeugprofil einstellen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden.
 
-Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrheit der Zielgruppe besitzt, lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
+Dem Produkt wird eine vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \gls{pkw} mitgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
 % Betreuer: Abbiegungbeschränkung, "Route berechnen", (gemacht)
@@ -199,27 +199,27 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher. (gemacht)
-% Betreuer2: Thesen, was ist. "." Einheitlich. "Satzanfang" einheitlich.
+% Betreuer2: Thesen, was ist. "." Einheitlich. "Satzanfang" einheitlich. (erledigt)
 \begin{description}
-\oitem{MK}{karteAnzeigen} Die Software soll die Karte auf dem Bildschirm anzeigen.
-\oitem{MK}{karteRendern} Kartenkacheln \gls{rendern} (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
+\oitem{MK}{karteAnzeigen} Die Karte wird auf dem Bildschirm angezeigt.
+\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{karteAnzeigen}) werden eigene Kartenkacheln mit aus den Straßendaten \glslink{rendern}{gerendert}.
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
 \oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
-\oitem{MK}{startZielZeigen} Der ausgewählte Start- und Zielpunkt wird auf der Karte angezeigt.
-\oitem{MK}{routeBerechnen} Die Software soll die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt berechnen.
-\oitem{MK}{routeAnzeigen}  Die berechnete \gls{route} zwischen Start- und Zielpunkt wird auf der Karte angezeigt.
+\oitem{MK}{startZielZeigen} Der ausgewählte Start- und Zielpunkt wird als Marker auf der Karte angezeigt.
+\oitem{MK}{routeBerechnen} Es wird die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt berechnet.
+\oitem{MK}{routeAnzeigen} Die berechnete \gls{route} zwischen Start- und Zielpunkt wird auf der Karte angezeigt.
 \end{description}
 
 \subsection{Wunschkriterien}
 \begin{description}
-\oitem{WK}{beschlArc} Die Routenberechnung soll durch \gls{arc} beschleunigt werden.
-\oitem{WK}{abbiegebeschraeung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
+\oitem{WK}{beschlArc} Die Routenberechnung wird durch \gls{arc} beschleunigt.
+\oitem{WK}{abbiegebeschraenkung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
 \oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
 \oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrtsverbote für bestimmte Fahrzeugtypen beachtet.
 \oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs beachtet.
 %\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
-\oitem{WK}{beschreibung} Für die berechnete \gls{route} soll eine \gls{wegbeschreibung} generiert werden.
+\oitem{WK}{beschreibung} Für die berechnete \gls{route} wird eine \gls{wegbeschreibung} generiert.
 \oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
 \oitem{WK}{history} Der Benutzer kann Berechnungsanfragen aus einer \gls{history} auswählen.
 \oitem{WK}{routeExport} Die berechnete \gls{route} kann als GPX-Datei zur Benutzung in GPS-Geräten exportiert werden.
@@ -229,11 +229,11 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern
 \oitem{WK}{profile} Zwischen mehreren \glslink{profil}{Profilen} wählen
-\oitem{WK}{standardprofil} Es gibt ein \gls{standardprofil} für \glspl{pkw} und eins für \glspl{lkw} 
+\oitem{WK}{standardprofil} Es gibt ein \gls{standardprofil} für \glspl{pkw} sowie eines für \glspl{lkw}.
 \oitem{WK}{koordinaten} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
-\oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
-\oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
-\oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
+\oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in  die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
+\oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
+\oitem{WK}{karteRendernDeko} In der gerenderten Kartendarstellung (\ref{MK:karteRendern}) werden Einbahnstraßen visualisiert.
 \oitem{WK}{karteRendernDeko2} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
 \oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
 \oitem{WK}{karteAuswaehlen} zwischen mehreren Karten auswählen
