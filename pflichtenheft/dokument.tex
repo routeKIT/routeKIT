@@ -127,13 +127,13 @@
 \newacronym{osm}{OSM}{OpenStreetMap}
 \newacronym{gui}{GUI}{Graphical User Interface}
 \newacronym[longplural={Points of interest}]{poi}{POI}{Point of interest}
+\newacronym{gpx}{GPX}{GPS Exchange Format}
 
 \newglossaryentry{profil}{
   name={Profil},
   description={Enthält für die Routenplanung relevante Informationen, z.B. die Höhe und das Gewicht des Fahrzeugs},
   plural={Profile}
 }
-
 \newglossaryentry{route}{
   name={Route},
   description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
@@ -159,7 +159,6 @@
  description={Ermöglicht eine schnellere Berechnung der angefragten Route},
  see={arc}
 }
-
 \newglossaryentry{kartendaten}{
   name={Kartendaten},
   description={Eine Datei im \gls{osm}-Format, die eine Karte in Form von Knoten, Kanten und Relationen mit weiteren Informationen enthält}
@@ -176,11 +175,11 @@
 \newglossaryentry{dezimalkoordinaten}{
   name={Dezimalkoordinaten},
   description={Ein Format für Geokoordinaten, nämlich:\\
-  	"Breitengrad, Längengrad"\\
-  	die jeweils der Form "$[+-] [\text{0-9}]^+.[\text{0-9}]^\ast$" sind}
+  	``Breitengrad, Längengrad''\\
+  	die jeweils der Form ``\texttt{[+-]?[0-9]+.[0-9]*}'' sind}
 }
 \newglossaryentry{history}{
-  name={History}
+  name={History},
   description={Speicherung von Anfragen für spätere Wiederverwendung}
 }
 
@@ -236,7 +235,6 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
 \oitem{WK}{karteRendernDeko2} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
 \oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
-
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -426,7 +424,7 @@ Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
 \includegraphics[width=\linewidth]{Paketdiagramm}
 \begin{description}
 \oitem{PK}{program} Programm\\
-Die Hauptsteuerklasse des Programms. Initialinsiert die Anwendung.
+Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
 \oitem{PK}{gui} GUI\\
 Beinhaltet alle Komponenten des GUI außer \ref{PK:mapView}. Realisiert u.a \ref{MK:startZielWaehlen}.
 \oitem{PK}{mapView} MapViewer\\
@@ -506,8 +504,8 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 % Betreuer2: Slider für die Zahl? Spinner?
 \begin{enumerate}
 \item Profil-Auswahl: Combobox (Dropdownmenü) zur Auswahl eines Profils
-\item Löschen-Button: Löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{F:loescheProfil})
-\item Neu-Button: Erstellt eine Kopie des aktuellen Profils; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{F:neuesProfil})
+\item Löschen-Button: Löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{WF:loescheProfil})
+\item Neu-Button: Erstellt eine Kopie des aktuellen Profils; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{WF:neuesProfil})
 \item Fahrzeugtyp-Auswahl: Setzt den Fahrzeugtyp des aktuellen Profils (\ref{D:fahrzeugTyp})
 \item Höhen-Eingabe: Setzt die Höhe des aktuellen Profils (\ref{D:hoehe})
 \item Breiten-Eingabe: Setzt die Breite des aktuellen Profils (\ref{D:breite})
@@ -515,7 +513,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \item Autobahn-Geschwindigkeits-Eingabe: Setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Autobahn (\ref{D:geschwindigkeitAutobahn})
 \item Landstraßen-Geschwindigkeits-Eingabe: Setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Landstraße (\ref{D:geschwindigkeitLandstrasse})
 \item OK-Button: Speichert Änderungen am ausgewählten Profil, setzt es als das aktuelle Profil und schließt den Dialog
-\item Abbrechen-Butten: Verwirft Änderungen am ausgewählten Profil und schließt den Dialog
+\item Abbrechen-Button: Verwirft Änderungen am ausgewählten Profil und schließt den Dialog
 \end{enumerate}
 
 \subsection{Dialog: Kartenauswahl}
@@ -565,7 +563,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Vorberechnung auswählen, lange Warten}
     {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
 \oitem{TF}{profilAnlegen}\testfall
-    [\ref{F:neuesProfil}]
+    [\ref{WF:neuesProfil}]
     {Das erforderliche Profil ist noch nicht vorhanden}
     {Neues Profil anlegen}
     {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet(für die aktuelle Karte)}
@@ -574,7 +572,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Ein Profil wird ausgewählt}
     {Das Profil ist ausgewählt}
 \oitem{TF}{loescheProfil}\testfall
-    [\ref{F:loescheProfil}]
+    [\ref{WF:loescheProfil}]
     {Ein Profil ist vorhanden}
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}

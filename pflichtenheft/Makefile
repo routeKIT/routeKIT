@@ -9,6 +9,7 @@ all: dokument.pdf clean-dokument-build
 clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung
 
 dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf dokument.tex
+	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
 	-$(LATEX) dokument.tex # include glossary in document
