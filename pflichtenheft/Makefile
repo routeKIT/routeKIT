@@ -4,6 +4,8 @@ SVG2PDF = cairosvg -f pdf -o
 
 all: dokument.pdf clean-dokument-build
 
+.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung artefakte
+
 clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung
 
 dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf dokument.tex
