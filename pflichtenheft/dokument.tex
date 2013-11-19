@@ -295,7 +295,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 
 \begin{itemize}
 \item Ein Standard-PC mit angeschlossener Maus und Tastatur
-\item Dieser sollte über einen Farbbildschirm mit der Auflösung von mindestens 1920$\times$1080 Pixeln verfügen
+\item Dieser sollte über einen Farbbildschirm verfügen
 \item Es muss genügend Arbeitsspeicher (mindestens 4 Gigabyte) und Festplattenkapazität (mindestens 20 Gigabyte freier Speicher) vorhanden sein
 \item Es muss die \hyperref[subsec:Software]{oben} genannte Software auf dem Computer lauffähig sein und bereits installiert und konfiguriert sein
 \end{itemize}
@@ -641,14 +641,33 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
     {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert}
-% Betreuer2: Wegbeschreibung export testen
-% Betreuer2: Keine Interpretation
+% Betreuer2: Wegbeschreibung export testen (gemacht)
+\oitem{TF}{wegbeschreibungsexport}\testfall
+    {Eine Route mit der Wegbeschreibung ist berechnet}
+    {Die Wegbeschreibung wird exportiert}
+    {Es liegt eine Datei mit der Wegbeschreibung vor}
 % Betreuer2: Systemstart
+\oitem{TF}{systemstart}\testfall
+    {Die Software wird gestartet}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (wenn keine Karte bzw. Profil ausgewählt wurden wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für ein Auto geladen). Die Karte wird ohne eine berechnete Route darauf angezeigt.}
+% Betreuer2: Beenden und neu starten.
+\oitem{TF}{exitstart}\testfall
+    {Das Programm wurde beendet}
+    {Das Programm wird gestartet}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil, sowie die History geladen. Die Karte wird ohne eine berechnete Route darauf angezeigt.}
+\oitem{TF}{guideleteprofile}\testfall
+    {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
+    {Ein mitgeliefertes Standard-Profil wird zum löschen ausgewählt.}
+    {Der Knopf zum Löschen des Profils wird deaktiviert.}
+\oitem{TF}{guideletemap}\testfall
+    {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
+    {Eine mitgelieferte Standard-Karte wird zum löschen ausgewählt.}
+    {Der Knopf zum Löschen der Karte wird deaktiviert.}
+% Betreuer2: Keine Interpretation
 % Betreuer2: Gruppieren
 % Betreuer2: Route anzeigen und Profil ändern
 % Betreuer2: Mehr Beschränkungstests
 % Betreuer2: kein beinhalten
-% Betreuer2: Beenden und neu starten.
 
 % Betreuer2: Karten/Kartendaten/Profil Begriff, Karte ^= Anschauen
 % Betreuer2: Renderer ändern im GUI
