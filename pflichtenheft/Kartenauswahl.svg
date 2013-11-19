@@ -2,25 +2,80 @@
 <?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
-<svg width="535" height="315">
-  <rect id="window" x="0" y="0" width="535" height="315" fill="white"/>
-  <rect id="titleBar" x="0" y="0" width="535" height="20" fill="lightgrey"/>
-  <g id="closeButton" transform="translate(515,0)">
+<svg width="430" height="315">
+  <rect id="window" x="0" y="0" width="430" height="315" fill="white"/>
+  <rect id="titleBar" x="0" y="0" width="430" height="20" fill="lightgrey"/>
+  <g id="closeButton" transform="translate(410,0)">
     <rect x="0" y="0" width="20" height="20" class="closebutton"/>
     <text x="10" y="15" class="closebutton centered">x</text>
   </g>
   <text id="titleLabel" x="5" y="16">Kartenauswahl</text>
-  <rect x="1" y="1" width="533" height="313" fill="none" stroke="black" stroke-width="2"/>
+  <rect x="1" y="1" width="428" height="313" fill="none" stroke="black" stroke-width="2"/>
   
-  <g id="okButton" transform="translate(340,285)">
-    <rect x="0" y="0" width="90" height="20" class="enabled"/>
-    <text x="45" y="15" class="enabled centered">OK</text>
-    <text x="50" y="25" class="labelnumber">10</text>
+  <g id="map" transform="translate(10,35)">
+    <text id="mapLabel" x="0" y="15">Karte auswählen: </text>
+    <g id="mapComboBox" transform="translate(150,0)">
+      <rect x="0" y="0" width="200" height="20" class="enabled"/>
+      <text x="5" y="15">Karlsruhe</text>
+      <rect x="180" y="0" width="20" height="20" fill="none" stroke="black"/>
+      <text x="190" y="15" class="centered">v</text>
+      <text x="125" y="25" class="labelnumber">1</text>
+    </g>
   </g>
 
-  <g id="cancelButton" transform="translate(435,285)">
+  <g id="mapImportButton" transform="translate(10,75)">
+    <rect x="0" y="0" width="75" height="20" class="enabled"/>
+    <text x="37.5" y="15" class="enabled centered">Import</text>
+    <text x="45" y="25" class="labelnumber">2</text>
+  </g>
+  
+  <g id="mapUpdateButton" transform="translate(95,75)">
+    <rect x="0" y="0" width="110" height="20" class="enabled"/>
+    <text x="55" y="15" class="enabled centered">Aktualisieren</text>
+    <text x="60" y="25" class="labelnumber">3</text>
+  </g>
+  
+  <g id="mapDeleteButton" transform="translate(215,75)">
+    <rect x="0" y="0" width="75" height="20" class="enabled"/>
+    <text x="37.5" y="15" class="enabled centered">Löschen</text>
+    <text x="45" y="25" class="labelnumber">4</text>
+  </g>
+
+  <g id="mapProfilesList" transform="translate(10,110)">
+    <text x="0" y="15" class="enabled">Profile für diese Karte:</text>
+    <g id="mapProfilesListBox" transform="translate(0,25)">
+      <rect x="0" y="0" width="300" height="125" class="enabled"/>
+      <g id="mapProfilePkwItem" transform="translate(0,0)">
+        <rect x="0" y="0" width="300" height="20" class="enabled selected"/>
+        <text x="0" y="15" class="enabled selected">PKW [default]</text>
+      </g>
+      <g id="mapProfileLkwItem" transform="translate(0,20)">
+        <rect x="0" y="0" width="300" height="20" class="enabled"/>
+        <text x="0" y="15" class="enabled">LKW [default]</text>
+      </g>
+      <text x="35" y="75" class="labelnumber">5</text>
+    </g>
+    <g id="mapProfilesAddButton" transform="translate(310,25)">
+      <rect x="0" y="0" width="100" height="20" class="enabled"/>
+      <text x="50" y="15" class="enabled centered">Hinzufügen</text>
+      <text x="60" y="25" class="labelnumber">6</text>
+    </g>
+    <g id="mapProfilesDeleteButton" transform="translate(310,55)">
+      <rect x="0" y="0" width="100" height="20" class="enabled"/>
+      <text x="50" y="15" class="enabled centered">Entfernen</text>
+      <text x="60" y="25" class="labelnumber">7</text>
+    </g>
+  </g>
+  
+  <g id="okButton" transform="translate(230,285)">
+    <rect x="0" y="0" width="90" height="20" class="enabled"/>
+    <text x="45" y="15" class="enabled centered">OK</text>
+    <text x="50" y="25" class="labelnumber">8</text>
+  </g>
+
+  <g id="cancelButton" transform="translate(330,285)">
     <rect x="0" y="0" width="90" height="20" class="enabled"/>
     <text x="45" y="15" class="enabled centered">Abbrechen</text>
-    <text x="50" y="25" class="labelnumber">11</text>
+    <text x="50" y="25" class="labelnumber">9</text>
   </g>
 </svg>
