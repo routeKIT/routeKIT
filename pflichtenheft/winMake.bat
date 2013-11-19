@@ -2,4 +2,5 @@ java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Paketdiagramm.ux
 pdflatex -interaction nonstopmode dokument.tex
 makeglossaries dokument
 pdflatex -interaction nonstopmode dokument.tex
+makeglossaries dokument
 pdflatex -interaction nonstopmode dokument.tex
