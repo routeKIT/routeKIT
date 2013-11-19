@@ -25,7 +25,7 @@ Paketdiagramm.pdf: Paketdiagramm.uxf
 clean-Paketdiagramm:
 	-$(RM) Paketdiagramm.pdf
 
-Profilverwaltung.pdf: Profilverwaltung.svg
+Profilverwaltung.pdf: Profilverwaltung.svg ui.css
 	$(SVG2PDF) Profilverwaltung.pdf Profilverwaltung.svg
 
 clean-Profilverwaltung:

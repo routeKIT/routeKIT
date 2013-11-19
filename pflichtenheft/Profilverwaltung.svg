@@ -1,12 +1,13 @@
 <?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
 <svg width="535" height="315">
   <rect id="window" x="0" y="0" width="535" height="315" fill="white"/>
   <rect id="titleBar" x="0" y="0" width="535" height="20" fill="lightgrey"/>
   <g id="closeButton" transform="translate(515,0)">
-    <rect x="0" y="0" width="20" height="20" fill="red"/>
-    <text x="10" y="15" style="text-anchor: middle;">x</text>
+    <rect x="0" y="0" width="20" height="20" class="closebutton"/>
+    <text x="10" y="15" class="closebutton centered">x</text>
   </g>
   <text id="titleLabel" x="5" y="16">Profilverwaltung</text>
   <rect x="1" y="1" width="533" height="313" fill="none" stroke="black" stroke-width="2"/>
@@ -14,20 +15,20 @@
   <g id="profile" transform="translate(10,35)">
     <text id="profileLabel" x="0" y="15">Profil auswählen: </text>
     <g id="profileComboBox" transform="translate(150,0)">
-      <rect x="0" y="0" width="200" height="20" fill="lightgrey" stroke="black"/>
+      <rect x="0" y="0" width="200" height="20" class="enabled"/>
       <text x="5" y="15">Default PKW</text>
       <rect x="180" y="0" width="20" height="20" fill="none" stroke="black"/>
-      <text x="190" y="15" style="text-anchor: middle;">v</text>
+      <text x="190" y="15" class="centered">v</text>
       <text x="125" y="25" class="labelnumber">1</text>
     </g>
     <g id="profileDeleteButton" transform="translate(360,0)">
-      <rect x="0" y="0" width="75" height="20" fill="lightgrey" stroke="darkgrey"/>
-      <text x="37.5" y="15" style="text-anchor: middle;" fill="slategrey">Löschen</text>
+      <rect x="0" y="0" width="75" height="20" class="disabled"/>
+      <text x="37.5" y="15" class="disabled centered">Löschen</text>
       <text x="45" y="25" class="labelnumber">2</text>
     </g>
     <g id="profileAddButton" transform="translate(440,0)">
-      <rect x="0" y="0" width="75" height="20" fill="lightgrey" stroke="black"/>
-      <text x="37.5" y="15" style="text-anchor: middle;" fill="black">Neu</text>
+      <rect x="0" y="0" width="75" height="20" class="enabled"/>
+      <text x="37.5" y="15" class="enabled centered">Neu</text>
       <text x="45" y="25" class="labelnumber">3</text>
     </g>
   </g>
@@ -57,64 +58,64 @@
   </g>
 
   <g id="vehicleHeight" transform="translate(10,115)">
-    <text id="vehicleHeightLabel" x="0" y="15">Höhe des Fahrzeugs: </text>
+    <text id="vehicleHeightLabel" x="0" y="15" class="enabled">Höhe des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">5</text>
     <g id="vehicleHeightTextField" transform="translate(200,0)">
-      <rect x="0" y="0" width="50" height="20" fill="lightgrey" stroke="black"/>
-      <text x="45" y="15" style="text-anchor: end;">1,6</text>
+      <rect x="0" y="0" width="50" height="20" class="enabled"/>
+      <text x="45" y="15" class="enabled rightaligned">1,6</text>
     </g>
-    <text id="vehicleHeightUnitLabel" x="255" y="15">m</text>
+    <text id="vehicleHeightUnitLabel" x="255" y="15" class="enabled">m</text>
   </g>
 
   <g id="vehicleWidth" transform="translate(10,145)">
-    <text id="vehicleWidthLabel" x="0" y="15">Breite des Fahrzeugs: </text>
+    <text id="vehicleWidthLabel" x="0" y="15" class="enabled">Breite des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">6</text>
     <g id="vehicleWidthTextField" transform="translate(200,0)">
-      <rect x="0" y="0" width="50" height="20" fill="lightgrey" stroke="black"/>
-      <text x="45" y="15" style="text-anchor: end;">1,6</text>
+      <rect x="0" y="0" width="50" height="20" class="enabled"/>
+      <text x="45" y="15" class="enabled rightaligned">1,6</text>
     </g>
-    <text id="vehicleWidthUnitLabel" x="255" y="15">m</text>
+    <text id="vehicleWidthUnitLabel" x="255" y="15" class="enabled">m</text>
   </g>
 
   <g id="vehicleWeight" transform="translate(10,175)">
-    <text id="vehicleWeightLabel" x="0" y="15">Gewicht des Fahrzeugs: </text>
+    <text id="vehicleWeightLabel" x="0" y="15" class="enabled">Gewicht des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">7</text>
     <g id="vehicleWeightTextField" transform="translate(200,0)">
-      <rect x="0" y="0" width="50" height="20" fill="lightgrey" stroke="black"/>
-      <text x="45" y="15" style="text-anchor: end;">1,4</text>
+      <rect x="0" y="0" width="50" height="20" class="enabled"/>
+      <text x="45" y="15" class="enabled rightaligned">1,4</text>
     </g>
-    <text id="vehicleWeightUnitLabel" x="255" y="15">t</text>
+    <text id="vehicleWeightUnitLabel" x="255" y="15" class="enabled">t</text>
   </g>
 
   <g id="avgSpeedHighway" transform="translate(10,215)">
-    <text id="avgSpeedHighwayLabel" x="0" y="15">Durchschnittsgeschindigkeit auf der Autobahn: </text>
+    <text id="avgSpeedHighwayLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Autobahn: </text>
     <text x="65" y="25" class="labelnumber">8</text>
     <g id="avgSpeedHighwayTextField" transform="translate(400,0)">
-      <rect x="0" y="0" width="50" height="20" fill="lightgrey" stroke="black"/>
-      <text x="45" y="15" style="text-anchor: end;">120</text>
+      <rect x="0" y="0" width="50" height="20" class="enabled"/>
+      <text x="45" y="15" class="enabled rightaligned">120</text>
     </g>
-    <text id="avgSpeedHighwayUnitLabel" x="455" y="15">km/h</text>
+    <text id="avgSpeedHighwayUnitLabel" x="455" y="15" class="enabled">km/h</text>
   </g>
 
   <g id="avgSpeedCountryRoad" transform="translate(10,245)">
-    <text id="avgSpeedCountryRoadLabel" x="0" y="15">Durchschnittsgeschindigkeit auf der Landstraße: </text>
+    <text id="avgSpeedCountryRoadLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Landstraße: </text>
     <text x="65" y="25" class="labelnumber">9</text>
     <g id="avgSpeedCountryRoadTextField" transform="translate(400,0)">
-      <rect x="0" y="0" width="50" height="20" fill="lightgrey" stroke="black"/>
-      <text x="45" y="15" style="text-anchor: end;">75</text>
+      <rect x="0" y="0" width="50" height="20" class="enabled"/>
+      <text x="45" y="15" class="enabled rightaligned">75</text>
     </g>
-    <text id="avgSpeedCountryRoadUnitLabel" x="455" y="15">km/h</text>
+    <text id="avgSpeedCountryRoadUnitLabel" x="455" y="15" class="enabled">km/h</text>
   </g>
 
   <g id="okButton" transform="translate(370,285)">
-    <rect x="0" y="0" width="75" height="20" fill="lightgrey" stroke="black"/>
-    <text x="37.5" y="15" style="text-anchor: middle;" fill="black">OK</text>
+    <rect x="0" y="0" width="75" height="20" class="enabled"/>
+    <text x="37.5" y="15" class="enabled centered">OK</text>
     <text x="45" y="25" class="labelnumber">10</text>
   </g>
 
   <g id="cancelButton" transform="translate(450,285)">
-    <rect x="0" y="0" width="75" height="20" fill="lightgrey" stroke="black"/>
-    <text x="37.5" y="15" style="text-anchor: middle;" fill="black">Cancel</text>
+    <rect x="0" y="0" width="75" height="20" class="enabled"/>
+    <text x="37.5" y="15" class="enabled centered">Cancel</text>
     <text x="45" y="25" class="labelnumber">11</text>
   </g>
 </svg>
