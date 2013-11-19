@@ -234,7 +234,9 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernStrassen} Straßennamen und Bezeichnungen in \ref{MK:karteRendern} einbeziehen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen in \ref{MK:karteRendern} einbeziehen
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
-\oitem{WK}{karteRendernDeko} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
+\oitem{WK}{karteRendernDeko2} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
+\oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
+
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -324,10 +326,14 @@ Erzeugung einer GPX-Datei aus einer \gls{route}.
 
 \subsection{Benutzerschnittstelle}
 \begin{description}
+\oitem{F}{startZielEingeben}
+Start und Zielpunkt durch Mausklicks festlegen
 \oitem{F}{berechneKachel}
 Berechnen einer Bildkachel aus lokalen Kartendaten zu gegebener Detailstufe und gegebenem Ausschnitt.
 \oitem{F}{bestimmeKnotenInAusschnitt}
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt. (Benötigt für \ref{F:berechneKachel})
+\oitem{F}{bestimmeKachelnInAusschnitt}
+Bestimmen aller in einem Kartenausschnitt benötigten Kacheln.
 \oitem{F}{zeichneKachel}
 Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
 \oitem{F}{bestimmeKoordinatenAusPunkt}
@@ -342,9 +348,18 @@ Anwenden von einer Verkleinerung der Karte auf den aktuellen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
 Abbildung \ref{fig:mockupscreenshotmain}
+
 % Betreuer2: 'Aufbauen' (gemacht)
 \oitem{WF}{fetcheOnlineKachel}
 Anfordern von bereits gerenderten Kacheln aus dem Internet.
+\oitem{WF}{startZielGeo}
+Start und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
+\oitem{WF}{bestimmeKachelnUmAusschnitt}
+Bestimmen aller Kacheln um einen gegebenen Kartenausschnitt.
+\oitem{WF}{bestimmeKachelnVorAusschnitt}
+Bestimmen aller Kacheln in den naheliegenden Zoomstufen an den angezeigen Geokoordinaten. % TODO leicht holprig
+\oitem{WF}{cacheKacheln}
+Zwischspeichern berechneter Kacheln um neuberechnung zu vermeiden. % TODO ?
 \end{description}
 
 \subsection{Wegbeschreibung}
