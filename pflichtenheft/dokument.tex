@@ -199,7 +199,7 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher. (gemacht)
-% Betreuer2: Thesen, was ist.
+% Betreuer2: Thesen, was ist. "." Einheitlich. "Satzanfang" einheitlich.
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Software soll die Karte auf dem Bildschirm anzeigen.
 \oitem{MK}{karteRendern} Kartenkacheln \gls{rendern} (Nur Straßen ohne Namen) % nach fkt. Anforderungen verschieben?
@@ -236,6 +236,9 @@ Das Produkt soll auf jedem handelsüblichen Desktop-Computer, wie ihn die Mehrhe
 \oitem{WK}{karteRendernDeko} Einbahnstraßen in \ref{MK:karteRendern} visualisieren
 \oitem{WK}{karteRendernDeko2} Damit der Benutzer sieht dass das Programm nicht hängt  .... %TODO
 \oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
+\oitem{WK}{karteAuswaehlen} zwischen mehreren Karten auswählen
+\oitem{WK}{karteImportiere} eine neue Karte importieren
+\oitem{WK}{karteLöschen} eine vorhandene Karte (die nicht die Standardkarte ist) löschen.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -305,7 +308,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 % Betreuer2: Mehr punkeA
 % Betreuer2: Maker anzeigen. (gemacht)
 % Betreuer2: Vorberechnung Überschrift (gemacht)
-% Betreuer2: Mit kriterien synchron
+% Betreuer2: Mit kriterien synchron 
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
@@ -399,8 +402,18 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \oitem{WF}{neuesProfil} Anlegen eines neuen Profils
 \oitem{WF}{loescheProfil} Löschen eines vorhandenen Profils
 \oitem{WF}{aendereProfil} Ändern eines vorhandenen Profils
-\oitem{WF}{waehleProfil} Auswahl eines aktuellen Profils
-% Betreuer2: Answählen
+\oitem{WF}{waehleProfil} Auswahl eines aktuellen Profils für die Routenberechnung
+% Betreuer2: Answählen (gemacht)
+\end{description}
+
+\subsection{Kartenverwaltung}
+\begin{description}
+\oitem{WF}{neueKarte} importieren einer neuen Karte
+\oitem{WF}{loescheKarte} löschen einer vorhandenen Karte
+\oitem{WF}{aendereKarte} aktualisieren einer vorhandenen Karte
+\oitem{WF}{waehleKarte} auswahl einer aktuellen Karte für die Routenberechnung
+\oitem{WF}{berechneKarte} ausführen der Berechnungen für alle Profile auf einer Karte
+% Betreuer2: Answählen (gemacht)
 \end{description}
 
 \section{Produktdaten}
