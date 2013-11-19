@@ -558,7 +558,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
-Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
+Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Außer es ist explizit gefordert, dass es gestoppt ist).
 \begin{description}
 \oitem{TF}{waehleErstenPunkt}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
@@ -648,6 +648,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Es liegt eine Datei mit der Wegbeschreibung vor}
 % Betreuer2: Systemstart
 \oitem{TF}{systemstart}\testfall
+	{Die Programm ist nicht gestartet}
     {Die Software wird gestartet}
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (wenn keine Karte bzw. Profil ausgewählt wurden wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für ein Auto geladen). Die Karte wird ohne eine berechnete Route darauf angezeigt.}
 % Betreuer2: Beenden und neu starten.
