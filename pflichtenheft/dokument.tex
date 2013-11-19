@@ -182,9 +182,10 @@
   name={History},
   description={Speicherung von Anfragen für spätere Wiederverwendung}
 }
-
+% -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Einleitung}
-% Betreuer2: Vorberechnung dauert lange. "Experterfeature"
+% Betreuer2: Vorberechnung dauert lange. "Expertenfeature"
+% TODO history erwähnen
 Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Reise erleichtern, indem es ihnen die \gls{schnellroute} zwischen zwei angegebenen Punkten berechnet und anzeigt.
 
 Dabei wird besonders darauf Wert gelegt, dass die berechnete Route mit dem benutzten Fahrzeug auch tatsächlich gefahren werden kann. Dazu werden verschiedene Beschränkungen (Abbiegeeinschränkungen, Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) bei der Routenberechnung berücksichtigt. Für die Berechnung der Route soll eine Beschleunigungstechnik eingesetzt werden.
@@ -299,11 +300,11 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \section{Funktionale Anforderungen}
 % Betreuer: Weniger Text(gemacht)
 % Felix
-% Betreuer2: Profil wählen.
-% Betreuer2: Ausfteilen Wusch/Muss.
+% Betreuer2: Profil wählen. (gemacht)
+% Betreuer2: Ausfteilen Wusch/Muss. (gemacht)
 % Betreuer2: Mehr punkeA
-% Betreuer2: Maker anzeigen.
-% Betreuer2: Vorberechnung Überschrift
+% Betreuer2: Maker anzeigen. (gemacht)
+% Betreuer2: Vorberechnung Überschrift (gemacht)
 % Betreuer2: Mit kriterien synchron
 \subsection{Kernfunktionen}
 \begin{description}
@@ -313,13 +314,31 @@ Bestimmung des nächsten Punkts auf einer Kante zu gegebenen Geokoordinaten
 Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu einem Zielpunkt auf dem Straßengraph
 \oitem{F}{mercator}
 Berechnung der Mercator-Projektion zu Geokoordinaten und umgekehrt
+\oitem{F}{routeBeschleunigen}
+Die \gls{arc} zur Routenberechnung benutzen (siehe \ref{F:berechneRoute}).
+\oitem{WF}{gpxAusRoute}
+Erzeugung einer GPX-Datei aus einer \gls{route}.
+\oitem{WF}{saveHist}
+Hinzufügen der letzen berechneten Route zur History.
+\oitem{WF}{getHist}
+Auswählen von Start- und Zielpunkt aus der History.
+\end{description}
+
+\subsection{Vorberechnung}
+\begin{description}
+\oitem{F}{routeBeschleunigenRechnen}
+Berechnung der \gls{arc} für \ref{F:routeBeschleunigen}
+\oitem{F}{routeBeschleunigenSpeichern}
+Abspeichern der Ergebnisse aus \gls{vorberechnung} in eine Datei.
 \oitem{F}{berechneAbstand}
 Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
 % Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
-Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des {profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
-\oitem{WF}{gpxAusRoute}
-Erzeugung einer GPX-Datei aus einer \gls{route}.
+Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
+\oitem{F}{bestimmenFahrErlaubnis}
+Bestimmen, ob ein Fahrzeug des aktuellen Profils einen Straßenabschnitt benutzen darf.
+\oitem{WF}{routeBeschleunigenSpeichern}
+Berechnung der \gls{arc} für \ref{F:routeBeschleunigen}
 \end{description}
 
 \subsection{Benutzerschnittstelle}
@@ -345,6 +364,9 @@ Anwenden von einer Vergrößerung der Karte auf den aktuellen Kartenausschnitt.
 Anwenden von einer Verkleinerung der Karte auf den aktuellen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
+Abbildung \ref{fig:mockupscreenshotmain}
+\oitem{F}{zeigeStartZiel}
+Anzeigen des aktuellen Start- und Zielpunkts. Beispiel in
 Abbildung \ref{fig:mockupscreenshotmain}
 
 % Betreuer2: 'Aufbauen' (gemacht)
