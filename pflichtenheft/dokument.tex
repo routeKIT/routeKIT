@@ -301,11 +301,10 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 % Felix
 % Betreuer2: Profil wählen.
 % Betreuer2: Ausfteilen Wusch/Muss.
-% Betreuer2: Mehr punke
+% Betreuer2: Mehr punkeA
 % Betreuer2: Maker anzeigen.
 % Betreuer2: Vorberechnung Überschrift
 % Betreuer2: Mit kriterien synchron
-
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
@@ -316,50 +315,56 @@ Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu ein
 Berechnung der Mercator-Projektion zu Geokoordinaten und umgekehrt
 \oitem{F}{berechneAbstand}
 Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
-% Betreuer2: Bestimmen, Berechnen, nicht Stätzen
+% Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
-Schätzen der benötigten Zeit für ein Wegstück unter Berücksichtigung des {profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
-\oitem{F}{gpxAusRoute}
+Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des {profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
+\oitem{WF}{gpxAusRoute}
 Erzeugung einer GPX-Datei aus einer \gls{route}.
 \end{description}
+
 \subsection{Benutzerschnittstelle}
 \begin{description}
 \oitem{F}{berechneKachel}
 Berechnen einer Bildkachel aus lokalen Kartendaten zu gegebener Detailstufe und gegebenem Ausschnitt.
 \oitem{F}{bestimmeKnotenInAusschnitt}
 Bestimmen aller Knoten aus einem gegebenen Kartenausschnitt. (Benötigt für \ref{F:berechneKachel})
-% Betreuer2: 'Aufbauen'
-\oitem{F}{fetcheOnlineKachel}
-Aufbauen einer HTTP-Verbindung und anfordern von Online-Kacheln.
 \oitem{F}{zeichneKachel}
 Darstellen von Kartenkacheln der entsprechenden Zoomstufe an der richtigen Stelle im \gls{gui}.
-% Betreuer2: Aufteilen, Genauer
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
-\oitem{F}{eingabeZuAusschnitt}
-Umrechnung von Benutzereingaben auf der Karte in neuen Kartenausschnitt.
+% Betreuer2: Aufteilen, Genauer TODO: sichherer Formulieren
+\oitem{F}{ziehenZuAusschnitt}
+Anwenden von einer Verschiebung der Karte auf den aktuellen Kartenausschnitt.
+\oitem{F}{zoomenInZuAusschnitt}
+Anwenden von einer Vergrößerung der Karte auf den aktuellen Kartenausschnitt.
+\oitem{F}{zoomenOutZuAusschnitt}
+Anwenden von einer Verkleinerung der Karte auf den aktuellen Kartenausschnitt.
 \oitem{F}{zeigeRoute}
 Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
 Abbildung \ref{fig:mockupscreenshotmain}
+% Betreuer2: 'Aufbauen' (gemacht)
+\oitem{WF}{fetcheOnlineKachel}
+Anfordern von bereits gerenderten Kacheln aus dem Internet.
 \end{description}
 
 \subsection{Wegbeschreibung}
 \begin{description}
-\oitem{F}{bestimmeAbbiegeAusRoute}
+\oitem{WF}{bestimmeAbbiegeAusRoute}
 Bestimmung aller Abbiegevorgänge einer \gls{route}
-\oitem{F}{klassifiziereAbbiege}
+\oitem{WF}{klassifiziereAbbiege}
 Klassifizierung der Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten, Nummer der Ausfahrt im Kreisverkehr)
-\oitem{F}{bestimmeAnweisungAusAbbiege}
+\oitem{WF}{bestimmeAnweisungAusAbbiege}
 Bestimmung einer textuellen Abbiegeanweisung aus einem Abbiegevorgang
-\oitem{F}{htmlAusBeschreibung}
+\oitem{WF}{htmlAusBeschreibung}
 Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \end{description}
 
 \subsection{Profilverwaltung}
 \begin{description}
-\oitem{F}{neuesProfil} Anlegen eines neuen Profils
-\oitem{F}{loescheProfil} Löschen eines vorhandenen Profils
-\oitem{F}{aendereProfil} Ändern eines vorhandenen Profils
+\oitem{WF}{neuesProfil} Anlegen eines neuen Profils
+\oitem{WF}{loescheProfil} Löschen eines vorhandenen Profils
+\oitem{WF}{aendereProfil} Ändern eines vorhandenen Profils
+\oitem{WF}{waehleProfil} Auswahl eines aktuellen Profils
 % Betreuer2: Answählen
 \end{description}
 
@@ -522,7 +527,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist.
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte}\testfall
-    [\ref{F:zeichneKachel}, \ref{F:eingabeZuAusschnitt}]
+    [\ref{F:zeichneKachel}, \ref{F:ziehenZuAusschnitt}]
     {Karte ist sichtbar}
     {Ziehen der Karte}
     {Die Kartenposititon hat sich entsprechend verändert}
