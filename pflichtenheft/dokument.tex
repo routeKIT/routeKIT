@@ -521,9 +521,13 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
 \begin{description}
-\oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als fünf Sekunden.
+\oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als 5 s.
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNächstenPunktAufKante} benötigt höchstens 500 ms.
-\oitem{NF}{knotenWaysAnzahl} Die Software muss Daten mit mindestens x Knoten und y Ways verarbeiten können.
+\oitem{NF}{knotenWaysAnzahl} Die Software muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
+\oitem{NF}{mausklicks} Wenn der Kartenausschnitt richtig gewählt ist, braucht die Auswahl vom Start- bzw. Zielpunkt mindestens 2 Mausklicks.
+\oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500 ms. 
+\oitem{NF}{benutzbarkeit} Die öfter verwendeten Funktionen sind leichter erreichbar, als die selten verwendete.
+
 % Betreuer2: Noch mehr, rendern einer Kachel, Mausklicks
 \end{description}
 % Dominic
