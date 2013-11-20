@@ -242,8 +242,7 @@ Dem Produkt wird eine vorberechnete Karte für Karlsruhe mit einem \gls{standard
 \oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in  die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernDeko} In der gerenderten Kartendarstellung (\ref{MK:karteRendern}) werden Einbahnstraßen visualisiert.
-\oitem{WK}{karteRendernDeko2} Ist eine Kachel noch nicht gerendert, wird ein Placeholder angezeigt.
-%FIXME Bessere Formulierung, besseres Wort für Placeholder
+\oitem{WK}{kartePlaceholder} Ist eine Kachel noch nicht gerendert, wird solange eine graue Ersatzkachel angezeigt.
 \oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
 \oitem{WK}{karteAuswaehlen} zwischen mehreren Karten auswählen
 \oitem{WK}{karteImportiere} eine neue Karte importieren
@@ -727,6 +726,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Die Karte wird mit selbst gerenderten Kacheln angezeigt,
     es ist keine Internetverbinung mehr nötig (um die Karte zu verschieben, oder zu zoomen)}
 \oitem{TF}{placeholder}\testfall
+	[\ref{WK:kartePlaceholder}]
     {Karte ist sichtbar}
     {Die Karte wird schnell bewegen}
     {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt}
