@@ -633,6 +633,7 @@ Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass
 \subsection{Funktionssequenzen}
 Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Außer es ist explizit gefordert, dass es gestoppt ist).
 %TODO Namen der Testfälle/refs überall einfügen, wo es fehlt
+\subsubsection{GUI Tests}
 \begin{description}
 \oitem{TF}{waehleErstenPunkt}\testfall
 	[\ref{F:startZielEingeben}]
@@ -670,10 +671,40 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
     {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar
     %FIXME Brauchen wir überhaupt eine Meldung, wenn auf der grauen Karte nichts passiert?
+\oitem{TF}{geocoords}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
+    {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
+    {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt}
+\oitem{TF}{guideleteprofile}\testfall
+    {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
+    {Ein mitgeliefertes Standard-Profil wird zum löschen ausgewählt.}
+    {Der Knopf zum Löschen des Profils wird deaktiviert.}
+\oitem{TF}{guideletemap}\testfall
+    {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
+    {Eine mitgelieferte Standard-Karte wird zum löschen ausgewählt.}
+    {Der Knopf zum Löschen der Karte wird deaktiviert.}
+\subsubsection{Kernfunktionen}
 \oitem{TF}{starteVorberechnung}\testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet für die aktuelle Karte}
     {Vorberechnung auswählen, lange Warten}
     {Aktuelles Profil ist vorberechnet für die aktuelle Karte}
+% Betreuer2: Wegbeschreibung export testen (gemacht)
+\oitem{TF}{wegbeschreibungsexport}\testfall
+    {Eine Route mit der Wegbeschreibung ist berechnet}
+    {Die Wegbeschreibung wird exportiert}
+    {Es liegt eine Datei mit der Wegbeschreibung vor}
+% Betreuer2: Systemstart
+\oitem{TF}{systemstart}\testfall
+	[\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
+	{Die Programm ist nicht gestartet}
+    {Die Software wird gestartet}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (wenn keine Karte bzw. Profil ausgewählt wurden wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
+% Betreuer2: Beenden und neu starten.
+\oitem{TF}{exitstart}\testfall
+    {Das Programm wurde beendet}
+    {Das Programm wird gestartet}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil, sowie die History geladen. Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
+\subsubsection{Profilverwaltung}
 \oitem{TF}{profilAnlegen}\testfall
     [\ref{WF:neuesProfil}]
     {Das erforderliche Profil ist noch nicht vorhanden}
@@ -688,6 +719,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Ein Profil ist vorhanden}
     {Ein Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
+\subsubsection{Kartenverwaltung}
 \oitem{TF}{importKarte}\testfall
     {–}% Betreuer2: ganz weg (gemacht)
     {Eine neue Karte wird importiert}
@@ -711,6 +743,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Versuchen das \gls{standardprofil} zu löschen}
     {Das \gls{standardprofil} ist nicht gelöscht, Meldung "Standardprofil kann nicht gelöscht werden"}
     %TODO Wo ist die Meldung? Pop up? Statusleiste?
+\subsubsection{Beschränkungen}
 \oitem{TF}{einbahnstrasse}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
@@ -727,34 +760,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein kleinerer Wert dafür angegeben}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als Route gefunden}
-\oitem{TF}{geocoords}\testfall
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
-    {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
-    {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt}
-% Betreuer2: Wegbeschreibung export testen (gemacht)
-\oitem{TF}{wegbeschreibungsexport}\testfall
-    {Eine Route mit der Wegbeschreibung ist berechnet}
-    {Die Wegbeschreibung wird exportiert}
-    {Es liegt eine Datei mit der Wegbeschreibung vor}
-% Betreuer2: Systemstart
-\oitem{TF}{systemstart}\testfall
-	[\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
-	{Die Programm ist nicht gestartet}
-    {Die Software wird gestartet}
-    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (wenn keine Karte bzw. Profil ausgewählt wurden wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
-% Betreuer2: Beenden und neu starten.
-\oitem{TF}{exitstart}\testfall
-    {Das Programm wurde beendet}
-    {Das Programm wird gestartet}
-    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil, sowie die History geladen. Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
-\oitem{TF}{guideleteprofile}\testfall
-    {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
-    {Ein mitgeliefertes Standard-Profil wird zum löschen ausgewählt.}
-    {Der Knopf zum Löschen des Profils wird deaktiviert.}
-\oitem{TF}{guideletemap}\testfall
-    {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
-    {Eine mitgelieferte Standard-Karte wird zum löschen ausgewählt.}
-    {Der Knopf zum Löschen der Karte wird deaktiviert.}
+
 % Betreuer2: Keine Interpretation
 % Betreuer2: Gruppieren
 % Betreuer2: Route anzeigen und Profil ändern
