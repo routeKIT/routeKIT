@@ -9,6 +9,7 @@
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 
+\hyphenation{Stan-dard-pro-fil}
 \makeglossary
 %TODO Betreuer name, des Programms, institut, etc
 % Betreuer2: Produktname
@@ -367,43 +368,42 @@ Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \subsection{Benutzerschnittstelle}
 \begin{description}
 \oitem{F}{startZielEingeben}
-Start und Zielpunkt durch Mausklicks festlegen
+Start- und Zielpunkt durch Mausklick festlegen
 \oitem{F}{berechneKachel}
-Berechnen einer Bildkachel aus lokalen Kartendaten zu gegebener Detailstufe und gegebenem Ausschnitt.
+Berechnung einer Bildkachel aus lokalen Kartendaten zu gegebener Zoomstufe und gegebenem Ausschnitt
 \oitem{F}{bestimmeKantenInAusschnitt}
-Bestimmen aller Kanten aus einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe. (Benötigt für \ref{F:berechneKachel})
+Bestimmung aller Kanten aus einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe (Benötigt für \ref{F:berechneKachel})
 \oitem{F}{bestimmeKachelnInAusschnitt}
-Bestimmen aller in einem Kartenausschnitt benötigten Kacheln.
+Bestimmung aller in einem Kartenausschnitt benötigten Kacheln
 \oitem{F}{zeichneKachel}
-Darstellen von Kartenkacheln an der richtigen Stelle im \gls{gui}.
+Darstellung von Kartenkacheln an der richtigen Stelle im \gls{gui}
 \oitem{F}{zoomKachel}
-Anzeige von Kartenkacheln der gewünschten Zoomstufe 
+Anzeige von Kartenkacheln in der gewünschten Zoomstufe 
 \oitem{F}{bestimmeKoordinatenAusPunkt}
-Bestimmen der Geokoordinaten zu einem gegebenem Pixel auf der angezeigten Karte.
+Bestimmung der Geokoordinaten zu einem gegebenem Pixel im dargestellten Kartenausschnitt
 % Betreuer2: Aufteilen, Genauer TODO: sichherer Formulieren
 %Klingt immer noch nicht richtig, aber besser als diese Schachtelsätze...
 \oitem{F}{ziehenZuAusschnitt}
-Verschieben des sichtbaren Kartenauschnitts
+Verschieben des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenInZuAusschnitt}
 Vergrößern des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenOutZuAusschnitt}
 Verkleinern des sichtbaren Kartenausschnitts
 \oitem{F}{zeigeRoute}
-Anzeigen einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (\ref{F:zeichneKachel}). Beispiel in
-Abbildung \ref{fig:mockupscreenshotmain}
+Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
+Abbildung \ref{fig:mockupscreenshotmain})
 \oitem{F}{zeigeStartZiel}
-Anzeigen des aktuellen Start- und Zielpunkts. Beispiel in
-Abbildung \ref{fig:mockupscreenshotmain}
-
+Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
+Abbildung \ref{fig:mockupscreenshotmain})
 % Betreuer2: 'Aufbauen' (gemacht)
-\oitem{WF}{fetcheOnlineKachel}
-Anfordern von bereits gerenderten Kacheln aus dem Internet.
+\oitem{WF}{holeOnlineKachel}
+Anfordern bereits gerenderter Kacheln aus dem Internet
 \oitem{WF}{startZielGeo}
-Start und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
+Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 \oitem{WF}{bestimmeKachelnUmAusschnitt}
-Bestimmen aller Kacheln um einen gegebenen Kartenausschnitt
+Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt
 \oitem{WF}{bestimmeKachelnVorAusschnitt}
-Bestimmen aller Kacheln um einen gegebenen Kartenausschnitt in den nächstgrößeren/kleineren Zoomstufen
+Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt in den nächst\-grö\-ße\-ren/\allowbreak{}-klei\-ne\-ren Zoomstufen
 % TODO leicht holprig
 % TODO besser?
 \oitem{WF}{cacheKacheln}
@@ -430,21 +430,21 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \subsection{Profilverwaltung}
 \begin{description}
 \oitem{WF}{neuesProfil} Anlegen eines neuen \glslink{profil}{Profils}
-\oitem{WF}{loescheProfil} Löschen eines vorhandenen \glslink{profil}{Profils}
-\oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils}
+\oitem{WF}{loescheProfil} Löschen eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme des \glslink{standardprofil}{Standardprofils})
+\oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme des \glslink{standardprofil}{Standardprofils})
 \oitem{WF}{wechsleProfil} Wechseln des ausgewählten \glslink{profil}{Profils} zwischen Routenberechnungen
-% Betreuer2: Answählen (gemacht)
+% Betreuer2: Auswählen (gemacht)
 \end{description}
 
 \subsection{Kartenverwaltung}
 \begin{description}
-\oitem{WF}{neueKarte} Importieren einer neuen Karte
-\oitem{WF}{loescheKarte} Löschen einer vorhandenen Karte
+\oitem{WF}{neueKarte} Importieren einer neuen Karte aus einer OSM-Datei
+\oitem{WF}{loescheKarte} Löschen einer vorhandenen Karte (mit Ausnahme der Standardkarte)
 \oitem{WF}{aktualisiereKarte} Aktualisieren einer vorhandenen Karte
 \oitem{WF}{wechsleKarte} Wechseln der ausgewählten Karte zwischen Routenberechnungen
 \oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für alle \glspl{profil} auf einer Karte
 %FIXME Wirklich für "alle Profile"? Das klingt irgendwie wie gleichzeitig/hintereinander. Lieber "das aktuelle Profil"?
-% Betreuer2: Answählen (gemacht)
+% Betreuer2: Auswählen (gemacht)
 \end{description}
 
 \section{Produktdaten}
