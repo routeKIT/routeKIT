@@ -60,9 +60,17 @@
   <g id="vehicleHeight" transform="translate(10,115)">
     <text id="vehicleHeightLabel" x="0" y="15" class="enabled">Höhe des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">5</text>
-    <g id="vehicleHeightTextField" transform="translate(200,0)">
+    <g id="vehicleHeightSpinner" transform="translate(200,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
-      <text x="45" y="15" class="enabled rightaligned">1,6</text>
+      <text x="35" y="15" class="enabled rightaligned">1,6</text>
+      <g id="vehicleHeightSpinnerUp" transform="translate(40,0)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+      </g>
+      <g id="vehicleHeightSpinnerUp" transform="translate(40,10)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+      </g>
     </g>
     <text id="vehicleHeightUnitLabel" x="255" y="15" class="enabled">m</text>
   </g>
@@ -70,9 +78,17 @@
   <g id="vehicleWidth" transform="translate(10,145)">
     <text id="vehicleWidthLabel" x="0" y="15" class="enabled">Breite des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">6</text>
-    <g id="vehicleWidthTextField" transform="translate(200,0)">
+    <g id="vehicleWidthSpinner" transform="translate(200,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
-      <text x="45" y="15" class="enabled rightaligned">1,6</text>
+      <text x="35" y="15" class="enabled rightaligned">1,6</text>
+      <g id="vehicleWidthSpinnerUp" transform="translate(40,0)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+      </g>
+      <g id="vehicleWidthSpinnerUp" transform="translate(40,10)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+      </g>
     </g>
     <text id="vehicleWidthUnitLabel" x="255" y="15" class="enabled">m</text>
   </g>
@@ -80,9 +96,17 @@
   <g id="vehicleWeight" transform="translate(10,175)">
     <text id="vehicleWeightLabel" x="0" y="15" class="enabled">Gewicht des Fahrzeugs: </text>
     <text x="65" y="25" class="labelnumber">7</text>
-    <g id="vehicleWeightTextField" transform="translate(200,0)">
+    <g id="vehicleWeightSpinner" transform="translate(200,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
-      <text x="45" y="15" class="enabled rightaligned">1,4</text>
+      <text x="35" y="15" class="enabled rightaligned">1,4</text>
+      <g id="vehicleWeightSpinnerUp" transform="translate(40,0)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+      </g>
+      <g id="vehicleWeightSpinnerUp" transform="translate(40,10)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+      </g>
     </g>
     <text id="vehicleWeightUnitLabel" x="255" y="15" class="enabled">t</text>
   </g>
@@ -90,9 +114,17 @@
   <g id="avgSpeedHighway" transform="translate(10,215)">
     <text id="avgSpeedHighwayLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Autobahn: </text>
     <text x="65" y="25" class="labelnumber">8</text>
-    <g id="avgSpeedHighwayTextField" transform="translate(400,0)">
+    <g id="avgSpeedHighwaySpinner" transform="translate(400,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
-      <text x="45" y="15" class="enabled rightaligned">120</text>
+      <text x="35" y="15" class="enabled rightaligned">120</text>
+      <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,0)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+      </g>
+      <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,10)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+      </g>
     </g>
     <text id="avgSpeedHighwayUnitLabel" x="455" y="15" class="enabled">km/h</text>
   </g>
@@ -100,9 +132,17 @@
   <g id="avgSpeedCountryRoad" transform="translate(10,245)">
     <text id="avgSpeedCountryRoadLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Landstraße: </text>
     <text x="65" y="25" class="labelnumber">9</text>
-    <g id="avgSpeedCountryRoadTextField" transform="translate(400,0)">
+    <g id="avgSpeedCountryRoadSpinner" transform="translate(400,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
-      <text x="45" y="15" class="enabled rightaligned">75</text>
+      <text x="35" y="15" class="enabled rightaligned">75</text>
+      <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,0)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+      </g>
+      <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,10)">
+        <rect x="0" y="0" width="10" height="10" class="enabled"/>
+        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+      </g>
     </g>
     <text id="avgSpeedCountryRoadUnitLabel" x="455" y="15" class="enabled">km/h</text>
   </g>
