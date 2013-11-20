@@ -659,6 +659,11 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer wählt Start- und Zielpunkt aus. Das Programm wird beendet. Das Programm wird gestartet.}
     {In der History befindet sich ein Eintrag für die vorher berechnete Route}
+\oitem{TF}{ladeRoute}\testfall
+    [\ref{WK:history}]
+    {Eine Route ist abgespeichert, die Route wird nicht angezeigt}
+    {Die abgespeicherte Route wird geladen}
+    {Die abgespeicherte Route wird angezeigt}
 \oitem{TF}{exitstartBerechnung}\testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Der Benutzer berechnet eine Profil:Karten-Kombination, wartet, beendet das Programm, startet das Programm}
@@ -730,7 +735,6 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Karte ist sichtbar}
     {Die Karte wird schnell bewegen}
     {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt}
-
 \subsubsection{Profilverwaltung}
 \oitem{TF}{profilAnlegen}\testfall
     [\ref{WF:neuesProfil}]
@@ -743,19 +747,22 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Das Profil ist ausgewählt}
 \oitem{TF}{loescheProfil}\testfall
     [\ref{WF:loescheProfil}]
-    {Ein Profil ist vorhanden}
+    {Ein Profil, das nicht das Standartprofil ist, ist vorhanden}
     {Das Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{aendereProfil}\testfall
     [\ref{WF:aendereProfil}]
     {Ein Profil ist vorhanden}
     {Das Profil wird geändert, die Profilverwaltung geschlossen und wieder geöffnet}
-    {Das Profil hat nun g}
-\oitem{TF}{profilPerstsenz}\testfall
-    [\ref{WF:aendereProfil}]
+    {Das Profil die neuen Daten}
+\oitem{TF}{profilPersistenz}\testfall
     {Ein Profil ist vorhanden}
     {Das Profil wird geändert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die Änderungen sind immer noch vorhanden}
+\oitem{TF}{standardProfil}\testfall
+    {Ein \gls{standardprofil} existiert}
+    {Versuchen das \gls{standardprofil} zu löschen}
+    {Das \gls{standardprofil} ist nicht gelöscht}
 \subsubsection{Kartenverwaltung}
 \oitem{TF}{importKarte}\testfall
     {–}% Betreuer2: ganz weg (gemacht)
@@ -765,21 +772,14 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Eine Karte ist ausgewählt}
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt}
-\oitem{TF}{speichereRoute}\testfall
-    [\ref{WK:history}]
-    {Eine Route ist berechnet}
-    {Die Route wird gespeichert}
-    {Die Route ist abgespeichert}
-\oitem{TF}{ladeRoute}\testfall
-    [\ref{WK:history}]
-    {Eine Route ist abgespeichert, die Route wird nicht angezeigt}
-    {Die abgespeicherte Route wird geladen}
-    {Die abgespeicherte Route wird angezeigt}
-\oitem{TF}{standardProfil}\testfall
-    {Ein \gls{standardprofil} existiert}
-    {Versuchen das \gls{standardprofil} zu löschen}
-    {Das \gls{standardprofil} ist nicht gelöscht, Meldung "Standardprofil kann nicht gelöscht werden"}
-    %TODO Wo ist die Meldung? Pop up? Statusleiste?
+\oitem{TF}{loescheKarte}\testfall
+    {Eine andere Karte als die Standartkarte ist vorhanden}
+    {Die Karte wird gelöscht}
+    {Die Karte ist nicht mehr vorhanden}
+\oitem{TF}{kartenPersistenz}\testfall
+    {-}
+    {Eine Karte wird importiert, das Programm wird geschlossen, das Programm wird geöffnet}
+    {Die neue Karte ist immer noch vorhanden}
 \subsubsection{Beschränkungen}
 \oitem{TF}{einbahnstrasse}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
