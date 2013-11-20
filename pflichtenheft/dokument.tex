@@ -495,7 +495,7 @@ Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
 \oitem{PK}{program} Programm\\
 Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
 \oitem{PK}{gui} GUI\\
-Beinhaltet alle Komponenten des GUI außer \ref{PK:mapView}. Realisiert u.a \ref{MK:startZielWaehlen}.
+Enthält alle Komponenten des GUI außer \ref{PK:mapView}. Realisiert u.a \ref{MK:startZielWaehlen}.
 \oitem{PK}{mapView} MapViewer\\
 Das GUI Element, das Kartenkacheln dynamisch renderen lässt, cachet und skaliert an der richtigen
 Position im Fenster anzeigt. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
@@ -714,7 +714,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
 \oitem{TF}{einbahnstrasse}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
-    {Ein Weg, der nicht diese Einbahnstraße beinhaltet, wird gefunden}
+    {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
 \oitem{TF}{geocoords}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
