@@ -540,6 +540,8 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 % Betreuer2: Links ziehen (gemacht)
 % Betreuer2: Klicks wie belegen? (gemacht)
 % Betreuer2: Reihenfolge Karte, Profil (gemacht)
+%TODO Konsistenz! Ganze Sätze? Punkte?
+%TODO Mockups etwas größer anzeigen lassen?
 \subsection{Hauptfenster}
 \begin{figure}[H]
 \centering
@@ -590,7 +592,6 @@ Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. 
 \item Menüpunkt "Programm"
 \item Unterpunkt "History...": Erlaubt Zugriff auf die \gls{history}
 \item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \ref{fig:mockupabout} % TODO der mockup fehlt noch!
-%TODO About-Dialog
 \item Unterpunkt "Beenden": Beendet das Programm
 \item Menüpunkt "Export"
 \item Unterpunkt "Route (GPX)...": Erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
@@ -624,7 +625,7 @@ Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. 
 \item Abbrechen-Button: Verwirft Änderungen am ausgewählten Profil und schließt den Dialog
 \end{enumerate}
 
-In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er dann im Kartenverwaltung-Dialog (siehe unten, Abbildung \ref{fig:mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
+In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, Abbildung \ref{fig:mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
 
 \subsection{Dialog: Kartenverwaltung}
 \begin{figure}[H]
@@ -667,6 +668,19 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
 \end{quote}
 Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
 % Fabian
+
+\subsection{Dialog: Über}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{mockup_screenshot_about}
+\caption{Über}
+\label{fig:mockupabout}
+\end{figure}
+\begin{enumerate}
+\item Informationen über das Programm
+%TODO Genauen Inhalt
+\item OK-Knopf: Schließt das Fenster
+\end{enumerate}
 
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
