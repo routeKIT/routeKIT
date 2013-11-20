@@ -1,14 +1,14 @@
 LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 SVG2PDF = rsvg-convert -f pdf -o
-ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenverwaltung.pdf
+ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenverwaltung.pdf History.pdf
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 all: dokument.pdf clean-dokument-build
 
-.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung clean-Kartenverwaltung artefakte
+.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung clean-Kartenverwaltung clean-History artefakte
 
-clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenverwaltung
+clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenverwaltung clean-History
 
 dokument.pdf: $(ARTEFAKTE) dokument.tex
 	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
@@ -41,6 +41,12 @@ Kartenverwaltung.pdf: Kartenverwaltung.svg ui.css
 
 clean-Kartenverwaltung:
 	-$(RM) Kartenverwaltung.pdf
+
+History.pdf: History.svg ui.css
+	$(SVG2PDF) History.pdf History.svg
+
+clean-History:
+	-$(RM) History.pdf
 
 artefakte: $(ARTEFAKTE)
 	git checkout -B artefakte-$(BRANCH)
