@@ -6,7 +6,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{hyperref} % clickable refs
 \usepackage{graphicx}
-\usepackage[toc, numberedsection, style=altlist]{glossaries}
+\usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 
 \makeglossary
@@ -848,6 +848,16 @@ Es ist eine Karte ausgewählt.
 % Kevin
 
 \glsaddallunused
-\printglossary[type=main, title={Glossar}, toctitle={Glossar}]
+\makeatletter
+\newglossarystyle{myAltlist}{
+  \glossarystyle{altlist} % base this style on altlist
+  \renewcommand*{\glossaryentryfield}[5]{
+  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
+    \mbox{}\par\nobreak\@afterheading
+    ##3\glspostdescription\space Auf Seite ##5.
+  }
+}
+\makeatother
+\printglossary[type=main, title={Glossar}, toctitle={Glossar}, style=myAltlist]
 
 \end{document}
