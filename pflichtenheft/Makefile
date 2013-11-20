@@ -51,4 +51,5 @@ artefakte: $(ARTEFAKTE)
 	git branch -d artefakte-$(BRANCH)
 
 get-artefakte:
-	git checkout origin/artefakte-$(BRANCH) $(ARTEFAKTE)
+	git checkout origin/artefakte-$(BRANCH) $(ARTEFAKTE) # get the artifacts...
+	git reset --mixed $(ARTEFAKTE) # ...and remove them from the index
