@@ -203,7 +203,7 @@
 % TODO history erwähnen (auch erledigt)
 Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einer History gespeichert.
 
-Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei ein individuelles Fahrzeugprofil festlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein Expertenfeature anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
+Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei mehrere Fahrzeugprofile anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
 Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
@@ -350,7 +350,7 @@ Start- und Zielpunkt aus der History auswählen
 \subsection{Vorberechnung}
 \begin{description}
 \oitem{F}{berechneAbstand}
-Berechnung des realen Strecke zwischen zwei Punkten einer Kante
+Berechnung des realen Entfernung zwischen zwei Punkten einer Kante
 % Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
 Bestimmung der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps
@@ -549,17 +549,17 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \end{figure}
 \begin{enumerate}
 \item Menüleiste: siehe Abbildung \ref{fig:mockupscreenshotmenu}
-\item \glspl{profil}-Button: Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung} ; daneben wird das aktuell ausgewäjlte Profil angezeigt
+\item Profile-Button: Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung}; daneben wird das aktuell ausgewählte \gls{profil} angezeigt
 \item Karten-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
-\item ausgewählter Startpunkt, ausgewähltes Ziel; Mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
-\item \gls{history}-Button: erlaubt Zugriff auf die \gls{history}
+\item ausgewählter Startpunkt, ausgewähltes Ziel; mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
+\item History-Button: erlaubt Zugriff auf die \gls{history}
 \item \gls{wegbeschreibung}; falls sie nicht auf den Bildschirm passt, erscheint ein Scrollbalken
 \item Karte (\ref{MK:karteAnzeigen})
-\item Zoom-Buttons: ‘+’ zum Hereinzoomen, ‘-’ zum Herauszoomen
+\item Zoom-Buttons: \texttt{+} zum Hereinzoomen, \texttt{-} zum Herauszoomen
 \item Der ausgewählte Startpunkt
 \item Der ausgewählte Zielpunkt
 \item Die berechnete \gls{route}
-\item Rechtsklick-Kontextmenü: ‘Start hier‘ setzt den Startpunkt, ‘Ziel hier’ den Zielpunkt
+\item Rechtsklick-Kontextmenü: „Start hier“ setzt den Startpunkt, „Ziel hier“ den Zielpunkt
 \end{enumerate}
 
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
@@ -589,10 +589,10 @@ Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. 
 \begin{enumerate}
 \item Menüpunkt "Programm"
 \item Unterpunkt "History...": Erlaubt Zugriff auf die \gls{history}
-\item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \ref{mockupabout}
+\item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \ref{fig:mockupabout} % TODO der mockup fehlt noch!
 %TODO About-Dialog
 \item Unterpunkt "Beenden": Beendet das Programm
-\item Menüßunkt "Export"
+\item Menüpunkt "Export"
 \item Unterpunkt "Route (GPX)...": Erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
 \item Unterpunkt "Beschreibung (HTML)...": Erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
 \item Menüpunkt "Verwaltung"
@@ -671,7 +671,7 @@ Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung
 \subsection{Funktionssequenzen}
-Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Außer es ist explizit gefordert, dass es gestoppt ist).
+Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
 %TODO Namen der Testfälle/refs überall einfügen, wo es fehlt
 \begin{description}
 \itemsep 1em
