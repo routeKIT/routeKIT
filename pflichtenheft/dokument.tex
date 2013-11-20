@@ -497,16 +497,15 @@ Für die History wird gespeichert:
 Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
 \end{description}
 \section{Systemmodell}
-% Betreuer2: Hierarchisch, Gesamt-App-Paket
+% Betreuer2: Hierarchisch, Gesamt-App-Paket.... naja...
 \includegraphics[width=\linewidth]{Paketdiagramm}
 \begin{description}
 \oitem{PK}{program} Programm\\
 Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
-\oitem{PK}{gui} GUI\\
-Enthält alle Komponenten des GUI außer \ref{PK:mapView}. Realisiert u.a \ref{MK:startZielWaehlen}.
+\oitem{PK}{gui} User Interface\\
+Enthält alle Controller und Views außer \ref{PK:mapView}. Steuert das gesamte Verhalten der Benutzeroberfläche. Realisiert u.~a. \ref{MK:startZielWaehlen}.
 \oitem{PK}{mapView} MapViewer\\
-Das GUI Element, das Kartenkacheln dynamisch renderen lässt, cachet und skaliert an der richtigen
-Position im Fenster anzeigt. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
+Das GUI Element, das Kartenkacheln dynamisch renderen lässt, cachet und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
 \oitem{PK}{precalc} PreCalculator\\
 Verarbeitet OSM Dateien in ein eigenes Format. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der OSM.
 \oitem{PK}{renderer} Renderer\\
