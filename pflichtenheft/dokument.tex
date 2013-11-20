@@ -571,7 +571,46 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \end{enumerate}
 
 \subsection{Dialog: Kartenauswahl}
-% TODO
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{Kartenauswahl}
+\caption{Kartenauswahl}
+\label{fig:mockupkartenauswahl}
+\end{figure}
+\begin{enumerate}
+\item Karten-Auswahl: Combobox (Dropdownmenü) zur Auswahl einer Karte
+\item Import-Button: Fragt den Benutzer nach einer \gls{osm}-Datei und einem Namen und fügt sie in die Karten-Auswahl ein.
+\item Aktualisieren-Button: Fragt den Benutzer nach einer \gls{osm}-Datei und ersetzt die ausgewählte Karte mit dieser.
+\item Löschen-Button: Löscht die ausgewählte Karte aus der Liste.
+\item Profil-Liste: Zeigt am Anfang alle Profile, für die eine \gls{vorberechnung} der ausgewählten Karte existiert.
+\item Hinzufügen-Button: Fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu. Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (Abbildung \ref{fig:mockupprofilverwaltung}); sein OK-Button setzt es dann nicht als das aktuelle Profil, sondern fügt es stattdessen zur Profil-Liste hinzu.
+\item Entfernen-Button: Entfernt ein Profil aus der Profil-Liste.
+\item OK-Button: Übernimmt Änderungen, setzt die ausgewählte Karte als die aktuelle Karte und schließt den Dialog.
+  \begin{itemize}
+  \item Für hinzugefügte Karten wird die \gls{vorberechnung} zum Rendern durchgeführt.
+  \item Für aktualisierte Karten werden alle Vorberechnungen (Profile, Rendern) neu durchgeführt.
+  \item Für entfernte Karten werden alle Vorberechnungen (Profile, Rendern) gelöscht.
+  \item Für zu einer Karte hinzugefügte Profile wird die Vorberechnung durchgeführt.
+  \item Für von einer Karte entfernte Profile wird die Vorberechnung gelöscht.
+  \end{itemize}
+  Bevor diese Aktionen durchgeführt werden, wird dem Benutzer in einem Dialog eine Liste der geplanten Aktionen gezeigt; dabei wird er \emph{eindrücklich} darauf hingewiesen, dass neue Vorberechnungen sehr lange dauern (mit konkretem Zeitraum) und dass gelöschte Vorberechnungen ebenso viel Berechnungsarbeit vernichten.
+\item Abbrechen-Button: Schließt den Dialog.
+\end{enumerate}
+
+In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kann Karten hinzufügen und entfernen, er kann im Profilverwaltung-Dialog (der erscheint, wenn er den Hinzufügen-Button klickt) Profile hinzufügen und entfernen, und er kann Profil-Karten-Kombinationen hinzufügen und entfernen. Wenn der Benutzer genau die Kombinationen festgelegt hat, die er verwenden möchte, drückt er den OK-Button. Daraufhin wird ihm ein Dialog mit einem Text wie dem folgenden angezeigt:
+\begin{quote}
+  Sie haben die folgenden Operationen ausgewählt:
+  \begin{itemize}
+  \item Hinzufügen der Karte ``Baden-Württemberg''
+  \item Hinzufügen des Profils ``LKW [default]'' zur Karte ``Baden-Württemberg''
+  \item Entfernen des Profils ``PKW [default]'' von der Karte ``Karlsruhe''
+  \end{itemize}
+  Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
+  
+  Wenn Sie sicher sind, dass Sie diese Operationen durchführen wollen, geben Sie ein: ``Ja, ich weiß, was ich tue.''
+\end{quote}
+Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt.
+% TODO labeln
 % Fabian
 
 \section{Globale Testfälle und Szenarien}

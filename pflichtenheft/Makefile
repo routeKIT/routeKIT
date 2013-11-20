@@ -1,14 +1,16 @@
 LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
-SVG2PDF = cairosvg -f pdf -o
+SVG2PDF = rsvg-convert -f pdf -o
+ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenauswahl.pdf
+BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 all: dokument.pdf clean-dokument-build
 
-.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung artefakte
+.PHONY: all clean clean-dokument clean-dokument-build clean-Paketdiagramm clean-Profilverwaltung clean-Kartenauswahl artefakte
 
-clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung
+clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenauswahl
 
-dokument.pdf: Paketdiagramm.pdf Profilverwaltung.pdf dokument.tex
+dokument.pdf: $(ARTEFAKTE) dokument.tex
 	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
@@ -34,10 +36,16 @@ Profilverwaltung.pdf: Profilverwaltung.svg ui.css
 clean-Profilverwaltung:
 	-$(RM) Profilverwaltung.pdf
 
-artefakte: Profilverwaltung.pdf
-	git checkout -B artefakte
-	git add -f Profilverwaltung.pdf
-	git commit -m "Artefakte"
-	git push --set-upstream --force origin artefakte
-	git checkout master
-	git branch -d artefakte
+Kartenauswahl.pdf: Kartenauswahl.svg ui.css
+	$(SVG2PDF) Kartenauswahl.pdf Kartenauswahl.svg
+
+clean-Kartenauswahl:
+	-$(RM) Kartenauswahl.pdf
+
+artefakte: $(ARTEFAKTE)
+	git checkout -B artefakte-$(BRANCH)
+	git add -f $(ARTEFAKTE)
+	git commit -m "Artefakte" --author="$(MAKE) $(MAKECMDGOALS) <make@example.com>"
+	git push --set-upstream --force origin artefakte-$(BRANCH)
+	git checkout $(BRANCH)
+	git branch -d artefakte-$(BRANCH)
