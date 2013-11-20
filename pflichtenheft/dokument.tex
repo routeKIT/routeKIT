@@ -203,7 +203,7 @@
 % TODO history erwähnen (auch erledigt)
 Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einer History gespeichert.
 
-Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann weitere Profile festlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein ``Experten-Feature'' anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
+Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei ein individuelles Fahrzeugprofil festlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein Expertenfeature anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
 Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
@@ -230,7 +230,7 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 
 \subsection{Wunschkriterien}
 \begin{description}
-\oitem{WK}{beschlArc} Die Routenberechnung wird durch \gls{arc} \glslink{beschleunigung}{beschleunigt}.
+\oitem{WK}{beschlArc} Die Routenberechnung wird durch eine Vorberechnung von \gls{arc} \glslink{beschleunigung}{beschleunigt}.
 \oitem{WK}{abbiegebeschraenkung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
 \oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
 \oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrtsverbote für bestimmte Fahrzeugtypen beachtet.
@@ -245,18 +245,18 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen.
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern.
 \oitem{WK}{profile} Der Benutzer kann zwischen mehreren \glslink{profil}{Profilen} wählen.
-\oitem{WK}{standardprofile} Es gibt zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}.
+\oitem{WK}{standardprofile} Es gibt zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}, die nicht gelöscht werden können.
 \oitem{WK}{koordinaten} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
-\oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in  die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
+\oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernDeko} In der gerenderten Kartendarstellung (\ref{MK:karteRendern}) werden Einbahnstraßen visualisiert.
-\oitem{WK}{kartePlaceholder} Ist eine Kachel noch nicht gerendert, wird solange eine graue Ersatzkachel angezeigt.
-\oitem{WK}{kartenKachelnPrefetch} Kacheln in der Umgebung des angezeigten Ausschnitts im Vorraus berechnen bzw. anfragen, obwohl sie nicht direkt sichtbar sind
-\oitem{WK}{karteAuswaehlen} zwischen mehreren Karten auswählen
-\oitem{WK}{karteImportiere} eine neue Karte importieren
-\oitem{WK}{karteLöschen} eine vorhandene Karte (die nicht die Standardkarte ist) löschen.
+\oitem{WK}{kartePlaceholder} Ist eine Kartenkachel noch nicht gerendert bzw. (im Fall von \ref{WK:osmKacheln}) geladen, wird solange eine graue Ersatzkachel angezeigt.
+\oitem{WK}{kartenKachelnPrefetch} Kartenkacheln in der Umgebung des angezeigten Ausschnitts werden im Voraus berechnet bzw. (im Fall von \ref{WK:osmKacheln}) geladen.
+\oitem{WK}{karteAuswaehlen} Der Benutzer kann zwischen mehreren vorhandenen Karten auswählen.
+\oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer OSM-Datei importieren.
+\oitem{WK}{karteLöschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
 \oitem{WK}{letzteKarte} Beim Programmstart ist die zuletzt verwendete Karte immer noch ausgewählt.
-\oitem{WK}{letztesProfil} Beim Programmstart wird das zuletzt verwendete Profil immer noch ausgewählt.
+\oitem{WK}{letztesProfil} Beim Programmstart wird das zuletzt verwendete \gls{profil} immer noch ausgewählt.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -338,30 +338,30 @@ Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu ein
 \oitem{F}{mercator}
 Berechnung der \gls{mercator} zu Geokoordinaten und umgekehrt
 \oitem{WF}{routeBeschleunigen}
-Die \gls{arc} zur Routenberechnung benutzen (siehe \ref{F:berechneRoute}).
+Nutzung der \gls{arc} zur Routenberechnung (siehe \ref{F:berechneRoute})
 \oitem{WF}{gpxAusRoute}
-Erzeugung einer GPX-Datei aus einer \gls{route}.
+Erzeugung einer GPX-Datei aus einer \gls{route}
 \oitem{WF}{saveHist}
-Hinzufügen der letzen berechneten Route zur History.
+Hinzufügen einer Routenanfrage zur History
 \oitem{WF}{getHist}
-Auswählen von Start- und Zielpunkt aus der History.
+Start- und Zielpunkt aus der History auswählen
 \end{description}
 
 \subsection{Vorberechnung}
 \begin{description}
 \oitem{F}{berechneAbstand}
-Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
+Berechnung des realen Strecke zwischen zwei Punkten einer Kante
 % Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
-Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
+Bestimmung der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps
 \oitem{WF}{bestimmenFahrErlaubnis}
-Bestimmen, ob ein Fahrzeug des aktuellen Profils einen Straßenabschnitt benutzen darf.
+Bestimmung, ob ein Fahrzeug eines bestimmten Profils einen Straßenabschnitt benutzen darf
 \oitem{WF}{routeBeschleunigenRechnen}
 Berechnung der \gls{arc} für \ref{WF:routeBeschleunigen}
 \oitem{WF}{letzteKarte}
-Die zuletzt benutzte Karte wird beim Programmstart geladen.
+Laden der zuletzt benutzten Karte beim Programmstart
 \oitem{WF}{letztesProfil}
-Das zuletzt benutzte \gls{profil} wird beim Programmstart geladen.
+Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \end{description}
 
 \subsection{Benutzerschnittstelle}
