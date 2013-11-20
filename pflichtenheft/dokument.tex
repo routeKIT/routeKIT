@@ -10,6 +10,7 @@
 \usepackage{float}
 
 \makeglossary
+%TODO Betreuer name, des Programms, institut, etc
 % Betreuer2: Produktname
 % Betreuer2: Gls, s. seite (gemacht)
 % Betreuer2: History bleibt erhalten (gemacht)
@@ -234,7 +235,6 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
 \oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrtsverbote für bestimmte Fahrzeugtypen beachtet.
 \oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs beachtet.
-%\oitem{WK}{strassentyp}                                                                                                                   % TODO Welchen Straßentyp
 \oitem{WK}{beschreibung} Für die berechnete \gls{route} wird eine \gls{wegbeschreibung} generiert.
 \oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
 \oitem{WK}{history} Der Benutzer kann frühere Berechnungsanfragen aus einer \gls{history} auswählen.
@@ -535,9 +535,10 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \section{Benutzeroberfläche}
 % Betreuer: weniger Klicks? Startknopf.
 % Betreuer: Elemente durchnummerieren. Einzeln erklären. (gemacht)
-% Betreuer2: Favs, 
+% Betreuer2: History,
+%TODO  Menu, Profil/Kartenknopf ins Label integrieren
 % Betreuer2: Links ziehen (gemacht)
-% Betreuer2: Klicks wie belegen?
+% Betreuer2: Klicks wie belegen? (gemacht)
 % Betreuer2: Reihenfolge Karte, Profil (gemacht)
 \subsection{Hauptfenster}
 \begin{figure}[H]
@@ -564,6 +565,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
 
 \subsection{Hauptfenster: Keine Vorberechnung}
+%TODO "Expertenfeature", "dauert ca. 10Stunden". auf den Knopf drauf
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{mockup_screenshot_nicht_berechnet}
@@ -685,14 +687,14 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Eine Route mit der Wegbeschreibung ist berechnet}
     {Die Wegbeschreibung wird exportiert}
     {Es liegt eine HTML-Datei mit der Wegbeschreibung vor}
-% Betreuer2: Systemstart
+% Betreuer2: Systemstart (gemacht)
 \oitem{TF}{systemstart} Programm starten
 \testfall
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
     {Die Programm ist nicht gestartet}
     {Die Software wird gestartet}
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (beim ersten Programmstart wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
-% Betreuer2: Beenden und neu starten.
+% Betreuer2: Beenden und neu starten. (gemacht)
 \oitem{TF}{exitstartHistory} History nach Neustart
 \testfall
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
@@ -756,8 +758,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
 \testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
-    {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar
-    %FIXME Brauchen wir überhaupt eine Meldung, wenn auf der grauen Karte nichts passiert?
+    {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar (gemacht: Keine Meldung großer Knopf.)
 \oitem{TF}{geocoords} \gls{dezimalkoordinaten} eingeben
 \testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
