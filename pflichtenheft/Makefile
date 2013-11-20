@@ -49,3 +49,6 @@ artefakte: $(ARTEFAKTE)
 	git push --set-upstream --force origin artefakte-$(BRANCH)
 	git checkout $(BRANCH)
 	git branch -d artefakte-$(BRANCH)
+
+get-artefakte:
+	git checkout artefakte-$(BRANCH) $(ARTEFAKTE)
