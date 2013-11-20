@@ -11,8 +11,8 @@
 
 \makeglossary
 % Betreuer2: Produktname
-% Betreuer2: Gls, s. seite
-% Betreuer2: History bleibt erhalten
+% Betreuer2: Gls, s. seite (gemacht)
+% Betreuer2: History bleibt erhalten (gemacht)
 \title{Pflichtenheft}
 \author{Kevin Birke \\ Felix Dörre \\ Fabian Hafner \\ Lucas Werkmeister \\ Dominic Ziegler \\ Anastasia Zinkina}
 %\date{}
@@ -333,7 +333,7 @@ Bestimmung des nächsten Punkts auf einer Kante zu gegebenen Geokoordinaten
 Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu einem Zielpunkt auf dem Straßengraph
 \oitem{F}{mercator}
 Berechnung der \gls{mercator} zu Geokoordinaten und umgekehrt
-\oitem{F}{routeBeschleunigen}
+\oitem{WF}{routeBeschleunigen}
 Die \gls{arc} zur Routenberechnung benutzen (siehe \ref{F:berechneRoute}).
 \oitem{WF}{gpxAusRoute}
 Erzeugung einer GPX-Datei aus einer \gls{route}.
@@ -345,23 +345,19 @@ Auswählen von Start- und Zielpunkt aus der History.
 
 \subsection{Vorberechnung}
 \begin{description}
-\oitem{F}{routeBeschleunigenRechnen}
-Berechnung der \gls{arc} für \ref{F:routeBeschleunigen}
-\oitem{F}{routeBeschleunigenSpeichern}
-Abspeichern der Ergebnisse aus \gls{vorberechnung} in eine Datei.
 \oitem{F}{berechneAbstand}
 Berechnen des realen Abstands (in km) zwischen 2 Geokoordinaten.
 % Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
 Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps.
-\oitem{F}{bestimmenFahrErlaubnis}
+\oitem{WF}{bestimmenFahrErlaubnis}
 Bestimmen, ob ein Fahrzeug des aktuellen Profils einen Straßenabschnitt benutzen darf.
-\oitem{WF}{routeBeschleunigenSpeichern}
-Berechnung der \gls{arc} für \ref{F:routeBeschleunigen}
+\oitem{WF}{routeBeschleunigenRechnen}
+Berechnung der \gls{arc} für \ref{WF:routeBeschleunigen}
 \oitem{WF}{letzteKarte}
-Die zuletzt benutzte Karte wird über mehrere Programmstarte behalten.
+Die zuletzt benutzte Karte wird beim Programmstart geladen.
 \oitem{WF}{letztesProfil}
-Das zuletzt benutzte \gls{profil} wird über mehrere Programmstarte behalten.
+Das zuletzt benutzte \gls{profil} wird beim Programmstart geladen.
 \end{description}
 
 \subsection{Benutzerschnittstelle}
@@ -819,10 +815,10 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Die beschränkte Straße wird als Route gefunden}
 
 % Betreuer2: Keine Interpretation
-% Betreuer2: Gruppieren
+% Betreuer2: Gruppieren (gemacht)
 % Betreuer2: Route anzeigen und Profil ändern
-% Betreuer2: Mehr Beschränkungstests
-% Betreuer2: kein beinhalten
+% Betreuer2: Mehr Beschränkungstests (gemacht)
+% Betreuer2: kein beinhalten (gemacht)
 
 % Betreuer2: Karten/Kartendaten/Profil Begriff, Karte ^= Anschauen
 % Betreuer2: Renderer ändern im GUI
