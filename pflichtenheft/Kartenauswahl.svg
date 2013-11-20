@@ -1,4 +1,4 @@
-<?xml version="1.0" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
@@ -24,18 +24,18 @@
   </g>
 
   <g id="mapImportButton" transform="translate(10,75)">
-    <rect x="0" y="0" width="75" height="20" class="enabled"/>
-    <text x="37.5" y="15" class="enabled centered">Import</text>
-    <text x="45" y="25" class="labelnumber">2</text>
+    <rect x="0" y="0" width="100" height="20" class="enabled"/>
+    <text x="50" y="15" class="enabled centered">Importieren</text>
+    <text x="60" y="25" class="labelnumber">2</text>
   </g>
   
-  <g id="mapUpdateButton" transform="translate(95,75)">
-    <rect x="0" y="0" width="110" height="20" class="enabled"/>
-    <text x="55" y="15" class="enabled centered">Aktualisieren</text>
+  <g id="mapUpdateButton" transform="translate(120,75)">
+    <rect x="0" y="0" width="100" height="20" class="enabled"/>
+    <text x="50" y="15" class="enabled centered">Aktualisieren</text>
     <text x="60" y="25" class="labelnumber">3</text>
   </g>
   
-  <g id="mapDeleteButton" transform="translate(215,75)">
+  <g id="mapDeleteButton" transform="translate(230,75)">
     <rect x="0" y="0" width="75" height="20" class="enabled"/>
     <text x="37.5" y="15" class="enabled centered">Löschen</text>
     <text x="45" y="25" class="labelnumber">4</text>
@@ -47,11 +47,11 @@
       <rect x="0" y="0" width="300" height="125" class="enabled"/>
       <g id="mapProfilePkwItem" transform="translate(0,0)">
         <rect x="0" y="0" width="300" height="20" class="enabled selected"/>
-        <text x="0" y="15" class="enabled selected">PKW [default]</text>
+        <text x="5" y="15" class="enabled selected">PKW [default]</text>
       </g>
       <g id="mapProfileLkwItem" transform="translate(0,20)">
         <rect x="0" y="0" width="300" height="20" class="enabled"/>
-        <text x="0" y="15" class="enabled">LKW [default]</text>
+        <text x="5" y="15" class="enabled">LKW [default]</text>
       </g>
       <text x="35" y="75" class="labelnumber">5</text>
     </g>
