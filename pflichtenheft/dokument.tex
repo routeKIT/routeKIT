@@ -669,13 +669,13 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {In der History befindet sich ein Eintrag für die vorher berechnete Route}
 \oitem{TF}{ladeRoute}\testfall
     [\ref{WK:history}]
-    {Eine Route ist abgespeichert, die Route wird nicht angezeigt}
-    {Die abgespeicherte Route wird geladen}
+    {Eine Route wurde bereits berechnet, die Route wird nicht angezeigt}
+    {Die Route wird aus der History geladen}
     {Die abgespeicherte Route wird angezeigt}
 \oitem{TF}{exitstartBerechnung}\testfall
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
-    {Der Benutzer berechnet eine Profil:Karten-Kombination, wartet, beendet das Programm, startet das Programm}
-    {Das zuvor berechnete Profil ist immer noch berechnet}
+    {Der Benutzer berechnet eine Profil-Karten-Kombination, wartet, beendet das Programm, startet das Programm}
+    {Das zuvor berechnete Profil ist immer noch berechnet (für die aktuelle Karte)}
 \oitem{TF}{exportGPX}\testfall
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte), Eine Route wird angezeigt}
     {Der GPX Exportvorgang wird durchgeführt.}
@@ -793,6 +793,10 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
+\oitem{TF}{einbahnstrasseHard}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
+    {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Start weiter in Einbahnstraßenrichtung als Ziel.}
+    {Ein Weg, der die Einbahnstraße nicht entgegen der Fahrtrichtung benutzt, wird gefunden}
 \oitem{TF}{abbiegebeschraenkung}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
     {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen. }
@@ -800,10 +804,18 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
 \oitem{TF}{einschraenkungNeg}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein größerer Wert dafür angegeben}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
-    {Ein Weg, der nicht diese Straße enthält, wird gefunden}
+    {Ein Weg, der diese Straße nicht enthält, wird gefunden}
 \oitem{TF}{einschraenkungPos}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein kleinerer Wert dafür angegeben}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
+    {Die beschränkte Straße wird als Route gefunden}
+\oitem{TF}{typEinschraenkungNeg}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist dieser Typ angegeben}
+    {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
+    {Ein Weg, der diese Straße nicht enthält, wird gefunden}
+\oitem{TF}{typEinschraenkungPos}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist ein anderer Fahrzeugtyp angegeben}
+    {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als Route gefunden}
 
 % Betreuer2: Keine Interpretation
