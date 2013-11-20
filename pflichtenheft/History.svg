@@ -1,0 +1,77 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="ui.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
+  "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
+<svg width="320" height="310">
+  <rect id="window" x="0" y="0" width="320" height="310" fill="white"/>
+  <rect id="titleBar" x="0" y="0" width="320" height="20" fill="lightgrey"/>
+  <g id="closeButton" transform="translate(300,0)">
+    <rect x="0" y="0" width="20" height="20" class="closebutton"/>
+    <text x="10" y="15" class="closebutton centered">x</text>
+  </g>
+  <text id="titleLabel" x="5" y="16">History</text>
+  <rect x="1" y="1" width="318" height="308" fill="none" stroke="black" stroke-width="2"/>
+  
+  <g id="historyList" transform="translate(10,30)">
+    <rect x="0" y="0" width="300" height="230" class="enabled"/>
+    <g id="historyEntry1" transform="translate(0,0)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">49,014 8,420 → 49,467 11,000: 3h 15min</text>
+    </g>
+    <g id="historyEntry2" transform="translate(0,30)">
+      <rect x="0" y="0" width="300" height="30" class="enabled selected"/>
+      <text x="5" y="20" class="enabled selected">49,014 8,420 → 48,949 8,996: 1h 10min</text>
+    </g>
+    <g id="historyEntry3" transform="translate(0,60)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">50,738 7,110 → 52,516 13,380: 6h</text>
+    </g>
+    <g id="historyEntry4" transform="translate(0,90)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">49,009 8,418 → 48,965 8,546: 20min</text>
+    </g>
+    <g id="historyEntry5" transform="translate(0,120)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">39,949 -3,650 → 43,128 131,904: 35h</text>
+    </g>
+    <g id="historyEntry6" transform="translate(0,150)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">48,858 2,295 → 14,681 -17,441: 480h</text>
+    </g>
+    <g id="historyEntry7" transform="translate(0,180)">
+      <rect x="0" y="0" width="300" height="30" class="enabled"/>
+      <text x="5" y="20" class="enabled">49,014 8,421 → 49,009 8,410: 10min</text>
+    </g>
+    <g id="historyEntry8" transform="translate(0,210)">
+      <rect x="0" y="0" width="300" height="20" class="enabled"/>
+      <text x="5" y="20" class="enabled">40,7656 -73,986 → 34,066 -118,214: 30h</text>
+      <rect x="0" y="20" width="300" height="10" fill="white"/> <!-- cutoff -->
+    </g>
+    <text x="220" y="85" class="labelnumber">1</text>
+    <g id="scrollbar" transform="translate(280,0)">
+      <rect x="0" y="0" width="20" height="230" class="disabled"/>
+      <g id="scrollbarUpButton" transform="translate(0,0)">
+        <rect x="0" y="0" width="20" height="20" class="disabled"/>
+        <text x="10" y="12" font-size="12" class="centered disabled">ʌ</text>
+      </g>
+      <rect x="0" y="20" width="20" height="90" class="enabled"/>
+      <g id="scrollbarDownButton" transform="translate(0,210)">
+        <rect x="0" y="0" width="20" height="20" class="enabled"/>
+        <text x="10" y="14" font-size="12" class="centered">v</text>
+      </g>
+      <text x="9" y="140" class="labelnumber">2</text>
+    </g>
+  </g>
+  
+  <g id="okButton" transform="translate(120,280)">
+    <rect x="0" y="0" width="90" height="20" class="enabled"/>
+    <text x="45" y="15" class="enabled centered">OK</text>
+    <text x="50" y="25" class="labelnumber">3</text>
+  </g>
+
+  <g id="cancelButton" transform="translate(220,280)">
+    <rect x="0" y="0" width="90" height="20" class="enabled"/>
+    <text x="45" y="15" class="enabled centered">Abbrechen</text>
+    <text x="50" y="25" class="labelnumber">4</text>
+  </g>
+</svg>

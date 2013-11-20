@@ -555,7 +555,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \item Karten-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
 \item ausgewählter Startpunkt, ausgewähltes Ziel; mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
 \item Start/Ziel-tauschen-Button: Vertauscht Start- und Zielpunkt
-\item History-Button: Erlaubt Zugriff auf die \gls{history}
+\item History-Button: erlaubt Zugriff auf die \gls{history}, siehe Abbildung \ref{fig:mockuphistory}
 \item \gls{wegbeschreibung}; falls sie nicht auf den Bildschirm passt, erscheint ein Scrollbalken
 \item Karte (\ref{MK:karteAnzeigen})
 \item Zoom-Buttons: \texttt{+} zum Hereinzoomen, \texttt{-} zum Herauszoomen
@@ -670,6 +670,22 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
   Sind Sie sicher, dass sie diese Operationen durchführen wollen?
 \end{quote}
 Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
+
+\subsection{Dialog: History}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{History}
+\caption{History}
+\label{fig:mockuphistory}
+\end{figure}
+\begin{enumerate}
+\item History-Liste: Eine Liste aller \gls{history}-Einträge, mit dem neuesten ganz oben.
+\item Scrollbalken: Um durch die History-Liste zu scrollen.
+\item OK-Button: Setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten History-Eintrag und schließt den Dialog.
+\item Abbrechen-Button: Schließt den Dialog.
+\end{enumerate}
+
+Im History-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
 % Fabian
 
 \subsection{Dialog: Über}
