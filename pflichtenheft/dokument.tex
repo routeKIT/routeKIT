@@ -712,9 +712,21 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Das \gls{standardprofil} ist nicht gelöscht, Meldung "Standardprofil kann nicht gelöscht werden"}
     %TODO Wo ist die Meldung? Pop up? Statusleiste?
 \oitem{TF}{einbahnstrasse}\testfall
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Einbahnstraße}
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
+\oitem{TF}{abbiegebeschraenkung}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
+    {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen. }
+    {Ein Weg, der diesen Abbiegevorgang nicht enthält, wird gefunden}
+\oitem{TF}{einschraenkungNeg}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein größerer Wert dafür angegeben}
+    {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
+    {Ein Weg, der nicht diese Straße enthält, wird gefunden}
+\oitem{TF}{einschraenkungPos}\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein kleinerer Wert dafür angegeben}
+    {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
+    {Die beschränkte Straße wird als Route gefunden}
 \oitem{TF}{geocoords}\testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
