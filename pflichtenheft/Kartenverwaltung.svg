@@ -9,7 +9,7 @@
     <rect x="0" y="0" width="20" height="20" class="closebutton"/>
     <text x="10" y="15" class="closebutton centered">x</text>
   </g>
-  <text id="titleLabel" x="5" y="16">Kartenauswahl</text>
+  <text id="titleLabel" x="5" y="16">Kartenverwaltung</text>
   <rect x="1" y="1" width="428" height="313" fill="none" stroke="black" stroke-width="2"/>
   
   <g id="map" transform="translate(10,35)">
