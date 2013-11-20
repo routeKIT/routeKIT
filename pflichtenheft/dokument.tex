@@ -547,22 +547,23 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \label{fig:mockupscreenshotmain}
 \end{figure}
 \begin{enumerate}
-\item \glspl{profil}-Button: Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung}
-\item Karten-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}
-\item ausgewähltes \gls{profil}, ausgewählte Karte
-\item ausgewählter Startpunkt, ausgewähltes Ziel. Mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
+\item Menüleiste: siehe Abbildung \ref{fig:mockupscreenshotmenu}
+\item \glspl{profil}-Button: Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung} ; daneben wird das aktuell ausgewäjlte Profil angezeigt
+\item Karten-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
+\item ausgewählter Startpunkt, ausgewähltes Ziel; Mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
+\item \gls{history}-Button: erlaubt Zugriff auf die \gls{history}
 \item \gls{wegbeschreibung}; falls sie nicht auf den Bildschirm passt, erscheint ein Scrollbalken
 \item Karte (\ref{MK:karteAnzeigen})
 \item Zoom-Buttons: ‘+’ zum Hereinzoomen, ‘-’ zum Herauszoomen
-\item Rechtsklick-Kontextmenü: ‘Start hier‘ setzt den Startpunkt, ‘Ziel hier’ den Zielpunkt
 \item Der ausgewählte Startpunkt
 \item Der ausgewählte Zielpunkt
 \item Die berechnete \gls{route}
+\item Rechtsklick-Kontextmenü: ‘Start hier‘ setzt den Startpunkt, ‘Ziel hier’ den Zielpunkt
 \end{enumerate}
 
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
 
-\subsection{Dialog: Keine Vorberechnung}
+\subsection{Hauptfenster: Keine Vorberechnung}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{mockup_screenshot_nicht_berechnet}
@@ -572,7 +573,30 @@ Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. 
 \begin{enumerate}
 \item Warnmeldung
 \item ausgegraute Karte
-\item \gls{vorberechnung}-Button
+%TODO Welche Art von Interaktion ist noch möglich? Kann die Karte trotzdem noch verschoben/gezoomt werden? Oder steht das schon irgendwo?
+\item \gls{vorberechnung}-Button: Startet die \gls{vorberechnung} für die aktuelle Karte-Profil-Kombination
+\end{enumerate}
+
+\subsection{Hauptfenster: Menüleiste}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{mockup_screenshot_menu}
+\caption{Menüleiste}
+\label{fig:mockupscreenshotmenu}
+\end{figure}
+\begin{enumerate}
+\item Menüpunkt "Programm"
+\item Unterpunkt "History...": Erlaubt Zugriff auf die \gls{history}
+\item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \ref{mockupabout}
+%TODO About-Dialog
+\item Unterpunkt "Beenden": Beendet das Programm
+\item Menüßunkt "Export"
+\item Unterpunkt "Route (GPX)...": Erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
+\item Unterpunkt "Beschreibung (HTML)...": Erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
+\item Menüpunkt "Verwaltung"
+\item Unterpunkt "Profile...": Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung}
+\item Unterpunkt "Karten...": Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}
+\item Checkbox "OSM-Renderer verwenden": Legt fest, ob Kartenkacheln selbst ggerendert werden (deaktiviert) oder ob \gls{osm}-Kacheln aus dem Internet geladen werden sollen (aktiviert)
 \end{enumerate}
 
 \subsection{Dialog: Profilverwaltung}
