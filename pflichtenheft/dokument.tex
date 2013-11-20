@@ -642,12 +642,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
 \oitem{TF}{waehleZweitenPunkt}\testfall
     [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
     {Route für die Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{waehlePunktErneut}\testfall
     [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte}\testfall
@@ -667,7 +667,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
 \oitem{TF}{verbieteWaehlePunkt}\testfall
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet für die aktuelle Karte}
+    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
     {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar
     %FIXME Brauchen wir überhaupt eine Meldung, wenn auf der grauen Karte nichts passiert?
@@ -685,9 +685,9 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \subsubsection{Kernfunktionen}
 \oitem{TF}{starteVorberechnung}\testfall
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet für die aktuelle Karte}
+    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Vorberechnung auswählen, lange Warten}
-    {Aktuelles Profil ist vorberechnet für die aktuelle Karte}
+    {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
 % Betreuer2: Wegbeschreibung export testen (gemacht)
 \oitem{TF}{wegbeschreibungsexport}\testfall
     {Eine Route mit der Wegbeschreibung ist berechnet}
@@ -709,7 +709,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     [\ref{WF:neuesProfil}]
     {Das erforderliche Profil ist noch nicht vorhanden}
     {Neues Profil anlegen}
-    {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet für die aktuelle Karte}
+    {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet (für die aktuelle Karte)}
 \oitem{TF}{waehleProfil}\testfall
     {Das erforderliche Profil ist vorhanden und nicht ausgewählt}
     {Das Profil wird ausgewählt}
@@ -749,7 +749,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
 \oitem{TF}{abbiegebeschraenkung}\testfall
-    {Karte ist sichtbar, Profil ist vorberechnet(für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
     {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen. }
     {Ein Weg, der diesen Abbiegevorgang nicht enthält, wird gefunden}
 \oitem{TF}{einschraenkungNeg}\testfall
