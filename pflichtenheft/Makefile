@@ -51,4 +51,4 @@ artefakte: $(ARTEFAKTE)
 	git branch -d artefakte-$(BRANCH)
 
 get-artefakte:
-	git checkout artefakte-$(BRANCH) $(ARTEFAKTE)
+	git checkout origin/artefakte-$(BRANCH) $(ARTEFAKTE)
