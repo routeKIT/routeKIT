@@ -30,6 +30,7 @@ text.disabled {
 
 text.labelnumber {
     font-size: 11;
+    fill: red;
 }
 
 rect.closebutton {
