@@ -220,7 +220,7 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 %Sollten wir nicht "die Software" rausnehmen?
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Karte wird auf dem Bildschirm angezeigt.
-\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{MK:karteAnzeigen}) werden eigene Kartenkacheln mit aus den Straßendaten \glslink{rendern}{gerendert}.
+\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{MK:karteAnzeigen}) werden eigene Kartenkacheln mit den Straßendaten \glslink{rendern}{gerendert}.
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
 \oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
@@ -329,7 +329,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 % Betreuer2: Mehr punkeA
 % Betreuer2: Maker anzeigen. (gemacht)
 % Betreuer2: Vorberechnung Überschrift (gemacht)
-% Betreuer2: Mit kriterien synchron 
+% Betreuer2: Mit kriterien synchron (gemacht) (glaube ich...)
 \subsection{Kernfunktionen}
 \begin{description}
 \oitem{F}{berechneNächstenPunktAufKante}
@@ -341,11 +341,11 @@ Berechnung der \gls{mercator} zu Geokoordinaten und umgekehrt
 \oitem{WF}{routeBeschleunigen}
 Nutzung der \gls{arc} zur Routenberechnung (siehe \ref{F:berechneRoute})
 \oitem{WF}{gpxAusRoute}
-Erzeugung einer GPX-Datei aus einer \gls{route}
+Erzeugung einer \glossary{gpx}-Datei aus einer \gls{route}
 \oitem{WF}{saveHist}
-Hinzufügen einer Routenanfrage zur History
+Hinzufügen einer Routenanfrage zur \gls{history}
 \oitem{WF}{getHist}
-Start- und Zielpunkt aus der History auswählen
+Start- und Zielpunkt aus der \gls{history} auswählen
 \end{description}
 
 \subsection{Vorberechnung}
@@ -359,10 +359,6 @@ Bestimmung der benötigten Zeit für ein Wegstück unter Berücksichtigung des \
 Bestimmung, ob ein Fahrzeug eines bestimmten Profils einen Straßenabschnitt benutzen darf
 \oitem{WF}{routeBeschleunigenRechnen}
 Berechnung der \gls{arc} für \ref{WF:routeBeschleunigen}
-\oitem{WF}{letzteKarte}
-Laden der zuletzt benutzten Karte beim Programmstart
-\oitem{WF}{letztesProfil}
-Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \end{description}
 
 \subsection{Benutzerschnittstelle}
@@ -420,9 +416,10 @@ Bestimmung aller Abbiegevorgänge einer \gls{route}
 Klassifizierung der Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten, Nummer der Ausfahrt im Kreisverkehr)
 \oitem{WF}{bestimmeAnweisungAusAbbiege}
 Erzeugung einer textuellen Abbiegeanweisung aus einem Abbiegevorgang
-%TODO Unterpunkt für Dinge wie "In 500 Metern..." oder "Folgen Sie dem Straßenverlauf für 10 Kilometer." Sind ja keine Abbiegeanweisungen...
+\oitem{WF}{bestimmeAnweisungAusRoutenstück}
+Erzeugung einer textuellen Weganweisung ("dem Sraßenverlauf folgen", "in 2km ...", etc.) aus einem Routenstück
 \oitem{WF}{beschreibungAusAnweisungen}
-Erzeugung einer \gls{wegbeschreibung} aus mehreren Abbiegeanweisungen
+Erzeugung einer \gls{wegbeschreibung} aus mehreren Abbiege- und Weganweisungen
 \oitem{WF}{htmlAusBeschreibung}
 Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \end{description}
@@ -434,6 +431,8 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme des \glslink{standardprofil}{Standardprofils})
 \oitem{WF}{wechsleProfil} Wechseln des ausgewählten \glslink{profil}{Profils} zwischen Routenberechnungen
 % Betreuer2: Auswählen (gemacht)
+\oitem{WF}{letztesProfil}
+Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \end{description}
 
 \subsection{Kartenverwaltung}
@@ -442,9 +441,10 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \oitem{WF}{loescheKarte} Löschen einer vorhandenen Karte (mit Ausnahme der Standardkarte)
 \oitem{WF}{aktualisiereKarte} Aktualisieren einer vorhandenen Karte
 \oitem{WF}{wechsleKarte} Wechseln der ausgewählten Karte zwischen Routenberechnungen
-\oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für alle \glspl{profil} auf einer Karte
-%FIXME Wirklich für "alle Profile"? Das klingt irgendwie wie gleichzeitig/hintereinander. Lieber "das aktuelle Profil"?
+\oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für ausgewählte \glspl{profil} auf einer Karte
 % Betreuer2: Auswählen (gemacht)
+\oitem{WF}{letzteKarte}
+Laden der zuletzt benutzten Karte beim Programmstart
 \end{description}
 
 \section{Produktdaten}
@@ -490,11 +490,11 @@ Fürs \Gls{rendern} benötigte Daten (siehe \ref{WK:karteRendernStrassen}, \ref{
 \end{description}
 
 \subsection{Historydaten}
-%FIXME Lieber "Verlauf" anstatt "History"?
+%TODO %FIXME Lieber "Verlauf" anstatt "History"?
 Für die History wird gespeichert:
 \begin{description}
 \oitem{D}{history}
-Start- und Zielpunkt aus den vorherigen Anfragen des Benutzers
+Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
 \end{description}
 \section{Systemmodell}
 % Betreuer2: Hierarchisch, Gesamt-App-Paket.... naja...
