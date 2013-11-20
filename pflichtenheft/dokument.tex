@@ -531,11 +531,11 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 
 \section{Benutzeroberfläche}
 % Betreuer: weniger Klicks? Startknopf.
-% Betreuer: Elemente durchnummerieren. Einzeln erklären.
+% Betreuer: Elemente durchnummerieren. Einzeln erklären. (gemacht)
 % Betreuer2: Favs, 
-% Betreuer2: Links ziehen
+% Betreuer2: Links ziehen (gemacht)
 % Betreuer2: Klicks wie belegen?
-% Betreuer2: Reihenfolge Karte, Profil
+% Betreuer2: Reihenfolge Karte, Profil (gemacht)
 \subsection{Hauptfenster}
 \begin{figure}[H]
 \centering
@@ -556,6 +556,8 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \item Der ausgewählte Zielpunkt
 \item Die berechnete \gls{route}
 \end{enumerate}
+
+Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
 
 \subsection{Dialog: Keine Vorberechnung}
 \begin{figure}[H]
@@ -592,6 +594,8 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \item OK-Button: Speichert Änderungen am ausgewählten Profil, setzt es als das aktuelle Profil und schließt den Dialog
 \item Abbrechen-Button: Verwirft Änderungen am ausgewählten Profil und schließt den Dialog
 \end{enumerate}
+
+In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er dann im Kartenauswahl-Dialog (siehe unten, Abbildung \ref{fig:mockupkartenauswahl}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
 
 \subsection{Dialog: Kartenauswahl}
 \begin{figure}[H]
@@ -630,9 +634,9 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
   \end{itemize}
   Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
   
-  Wenn Sie sicher sind, dass Sie diese Operationen durchführen wollen, geben Sie ein: ``Ja, ich weiß, was ich tue.''
+  Sind Sie sicher, dass sie diese Operationen durchführen wollen?
 \end{quote}
-Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt.
+Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
 % TODO labeln
 % Fabian
 
