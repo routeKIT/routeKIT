@@ -243,6 +243,8 @@ Dem Produkt wird eine vorberechnete Karte für Karlsruhe mit einem \gls{standard
 \oitem{WK}{karteAuswaehlen} zwischen mehreren Karten auswählen
 \oitem{WK}{karteImportiere} eine neue Karte importieren
 \oitem{WK}{karteLöschen} eine vorhandene Karte (die nicht die Standardkarte ist) löschen.
+\oitem{WK}{letzteKarte} Beim Programmstart ist die zuletzt verwendete Karte immer noch ausgewählt.
+\oitem{WK}{letztesProfil} Beim Programmstart wird das zuletzt verwendete Profil immer noch ausgewählt.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -348,6 +350,10 @@ Bestimmen der benötigten Zeit für ein Wegstück unter Berücksichtigung des \g
 Bestimmen, ob ein Fahrzeug des aktuellen Profils einen Straßenabschnitt benutzen darf.
 \oitem{WF}{routeBeschleunigenSpeichern}
 Berechnung der \gls{arc} für \ref{F:routeBeschleunigen}
+\oitem{WF}{letzteKarte}
+Die zuletzt benutzte Karte wird über mehrere Programmstarte behalten.
+\oitem{WF}{letztesProfil}
+Das zuletzt benutzte \gls{profil} wird über mehrere Programmstarte behalten.
 \end{description}
 
 \subsection{Benutzerschnittstelle}
@@ -437,6 +443,15 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 % Betreuer: Darstellung und Berechnung nur aus eigenen Daten. Steht noch nicht da.
 %TODO
 %Anastasia
+\subsection{Konfiguration}
+\begin{description}
+\oitem{D}{letzteKarte}
+die zuletzt verwendete Karte
+\oitem{D}{letztesProfil}
+das zuletzt verwendete Profil
+\end{description}
+
+
 \subsection{Profildaten}
 In einem \gls{profil} werden gespeichert:
 \begin{description}
@@ -711,6 +726,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (Au
     {Es liegt eine Datei mit der Wegbeschreibung vor}
 % Betreuer2: Systemstart
 \oitem{TF}{systemstart}\testfall
+	[\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
 	{Die Programm ist nicht gestartet}
     {Die Software wird gestartet}
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (wenn keine Karte bzw. Profil ausgewählt wurden wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
