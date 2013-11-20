@@ -14,7 +14,7 @@
 %TODO Betreuer name, des Programms, institut, etc
 % Betreuer2: Produktname
 % Betreuer2: Gls, s. seite (gemacht)
-% Betreuer2: History bleibt erhalten (gemacht)
+% Betreuer2: Verlauf bleibt erhalten (gemacht)
 \title{Pflichtenheft}
 \author{Kevin Birke \\ Felix Dörre \\ Fabian Hafner \\ Lucas Werkmeister \\ Dominic Ziegler \\ Anastasia Zinkina}
 %\date{}
@@ -190,8 +190,8 @@
   	``Breitengrad, Längengrad''\\
   	die jeweils der Form ``\texttt{[+-]?[0-9]+.[0-9]*}'' sind}
 }
-\newglossaryentry{history}{
-  name={History},
+\newglossaryentry{verlauf}{
+  name={Verlauf},
   description={Speicherung von Anfragen für spätere Wiederverwendung}
 }
 \newglossaryentry{mercator}{
@@ -201,8 +201,8 @@
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Einleitung}
 % Betreuer2: Vorberechnung dauert lange. "Expertenfeature" (erledigt)
-% TODO history erwähnen (auch erledigt)
-Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einer History gespeichert.
+% TODO verlauf erwähnen (auch erledigt)
+Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem Verlauf gespeichert.
 
 Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei mehrere Fahrzeugprofile anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
@@ -238,7 +238,7 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs beachtet.
 \oitem{WK}{beschreibung} Für die berechnete \gls{route} wird eine \gls{wegbeschreibung} generiert.
 \oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
-\oitem{WK}{history} Der Benutzer kann frühere Berechnungsanfragen aus einer \gls{history} auswählen.
+\oitem{WK}{verlauf} Der Benutzer kann frühere Berechnungsanfragen aus einem \gls{verlauf} auswählen.
 \oitem{WK}{routeExport} Die berechnete \gls{route} kann als \gls{gpx}-Datei zur Benutzung in GPS-Geräten exportiert werden.
 \oitem{WK}{fahrzeit} Bestimmung der Fahrzeit einer \gls{route} unter Berücksichtung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
 \oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
@@ -343,9 +343,9 @@ Nutzung der \gls{arc} zur Routenberechnung (siehe \ref{F:berechneRoute})
 \oitem{WF}{gpxAusRoute}
 Erzeugung einer \glossary{gpx}-Datei aus einer \gls{route}
 \oitem{WF}{saveHist}
-Hinzufügen einer Routenanfrage zur \gls{history}
+Hinzufügen einer Routenanfrage zum \gls{verlauf}
 \oitem{WF}{getHist}
-Start- und Zielpunkt aus der \gls{history} auswählen
+Start- und Zielpunkt aus dem \gls{verlauf} auswählen
 \end{description}
 
 \subsection{Vorberechnung}
@@ -489,11 +489,11 @@ Fürs \Gls{rendern} benötigte Daten (siehe \ref{WK:karteRendernStrassen}, \ref{
 
 \end{description}
 
-\subsection{Historydaten}
-%TODO %FIXME Lieber "Verlauf" anstatt "History"?
-Für die History wird gespeichert:
+\subsection{Verlaufdaten}
+%TODO %FIXME Lieber "Verlauf" anstatt "History"? (gemacht)
+Für den Verlauf wird gespeichert:
 \begin{description}
-\oitem{D}{history}
+\oitem{D}{verlauf}
 Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
 \end{description}
 \section{Systemmodell}
@@ -535,7 +535,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \section{Benutzeroberfläche}
 % Betreuer: weniger Klicks? Startknopf.
 % Betreuer: Elemente durchnummerieren. Einzeln erklären. (gemacht)
-% Betreuer2: History,
+% Betreuer2: Verlauf,
 %TODO  Menu, Profil/Kartenknopf ins Label integrieren (gamacht)
 % Betreuer2: Links ziehen (gemacht)
 % Betreuer2: Klicks wie belegen? (gemacht)
@@ -555,7 +555,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \item Karten-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
 \item ausgewählter Startpunkt, ausgewähltes Ziel; mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
 \item Start/Ziel-tauschen-Button: Vertauscht Start- und Zielpunkt
-\item History-Button: erlaubt Zugriff auf die \gls{history}, siehe Abbildung \ref{fig:mockuphistory}
+\item Verlauf-Button: erlaubt Zugriff auf den \gls{verlauf}, siehe Abbildung \ref{fig:mockupverlauf}
 \item \gls{wegbeschreibung}; falls sie nicht auf den Bildschirm passt, erscheint ein Scrollbalken
 \item Karte (\ref{MK:karteAnzeigen})
 \item Zoom-Buttons: \texttt{+} zum Hereinzoomen, \texttt{-} zum Herauszoomen
@@ -593,7 +593,7 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \end{figure}
 \begin{enumerate}
 \item Menüpunkt "Programm"
-\item Unterpunkt "History...": Erlaubt Zugriff auf die \gls{history}
+\item Unterpunkt "Verlauf...": Erlaubt Zugriff auf den \gls{verlauf}
 \item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \ref{fig:mockupabout} % TODO der mockup fehlt noch! (gemacht)
 \item Unterpunkt "Beenden": Beendet das Programm
 \item Menüpunkt "Export"
@@ -671,21 +671,21 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
 \end{quote}
 Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
 
-\subsection{Dialog: History}
+\subsection{Dialog: Verlauf}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{History}
-\caption{History}
-\label{fig:mockuphistory}
+\includegraphics[width=0.7\linewidth]{Verlauf}
+\caption{Verlauf}
+\label{fig:mockupverlauf}
 \end{figure}
 \begin{enumerate}
-\item History-Liste: Eine Liste aller \gls{history}-Einträge, mit dem neuesten ganz oben.
-\item Scrollbalken: Um durch die History-Liste zu scrollen.
-\item OK-Button: Setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten History-Eintrag und schließt den Dialog.
+\item Verlauf-Liste: Eine Liste aller \gls{verlauf}-Einträge, mit dem neuesten ganz oben.
+\item Scrollbalken: Um durch die Verlauf-Liste zu scrollen.
+\item OK-Button: Setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten Verlauf-Eintrag und schließt den Dialog.
 \item Abbrechen-Button: Schließt den Dialog.
 \end{enumerate}
 
-Im History-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
+Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
 % Fabian
 
 \subsection{Dialog: Über}
@@ -728,16 +728,16 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Die Software wird gestartet}
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (beim ersten Programmstart wird die mitgelieferte Standard-Karte bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
-\oitem{TF}{exitstartHistory} History nach Neustart
+\oitem{TF}{exitstartVerlauf} Verlauf nach Neustart
 \testfall
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer wählt Start- und Zielpunkt aus. Das Programm wird beendet. Das Programm wird gestartet.}
-    {In der History befindet sich ein Eintrag für die vorher berechnete Route}
-\oitem{TF}{ladeRoute} Route aus History laden
+    {Im Verlauf befindet sich ein Eintrag für die vorher berechnete Route}
+\oitem{TF}{ladeRoute} Route aus Verlauf laden
 \testfall
-    [\ref{WK:history}]
+    [\ref{WK:verlauf}]
     {Eine Route wurde bereits berechnet, die Route wird nicht angezeigt}
-    {Die Route wird aus der History geladen}
+    {Die Route wird aus dem Verlauf geladen}
     {Die abgespeicherte Route wird angezeigt}
 \oitem{TF}{exitstartBerechnung} Vorberechnung nach Neustart
 \testfall
