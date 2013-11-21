@@ -606,21 +606,27 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung
 \end{figure}
 \begin{enumerate}
 \item Menüleiste:\\
-bietet Zugriff zum Menü (siehe \abbildung{mockupscreenshotmenu})
+bietet Zugriff aufs Menü (siehe \abbildung{mockupscreenshotmenu})
 \item Profil-Button:\\
-starte Profilverwaltung (siehe \abbildung{mockupprofilverwaltung}); daneben wird das aktuell ausgewählte \gls{profil} angezeigt
+startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung}); daneben wird das aktuell ausgewählte \gls{profil} angezeigt
 \item Karte-Button:\\
-Wähle eine Karte (siehe \abbildung{mockupkartenverwaltung}); daneben wird die aktuell ausgewählte Karte angezeigt
-\item ausgewählter Start- und Zielkoordinaten: mit \ref{WK:koordinaten} ist hier auch Eingabe möglich; sonst nur Anzeige
-\item Start/Ziel-tauschen-Button: vertauscht Start- und Zielpunkt
-\item Verlauf-Button: erlaubt Zugriff auf den \gls{verlauf}; (siehe \abbildung{mockupverlauf})
+startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung}); daneben wird die aktuell ausgewählte Karte angezeigt
+\item ausgewählte Start- und Zielkoordinaten:\\
+mit \ref{WK:koordinaten} ist hier auch Eingabe möglich; sonst nur Anzeige
+\item Start/Ziel-tauschen-Button:\\
+vertauscht Start- und Zielpunkt
+\item Verlauf-Button:\\
+erlaubt Zugriff auf den \gls{verlauf}; (siehe \abbildung{mockupverlauf})
 \item \gls{wegbeschreibung}
-\item Kartenansicht: die aktuelle Karte aus selbstgerenderten oder \glspl{osmkachel}
-\item Zoom-Buttons: \texttt{+} zum Hineinzoomen; \texttt{-} zum Herauszoomen
-\item ausgewählter Startpunkt
-\item ausgewählter Zielpunkt
-\item berechnete \gls{route}
-\item Kontextmenü: „Start hier“ setzt den Startpunkt; „Ziel hier“ den Zielpunkt
+\item Kartenansicht:\\
+die aktuelle Karte aus selbstgerenderten oder \glspl{osmkachel}
+\item Zoom-Buttons:\\
+\texttt{+} zum Hineinzoomen; \texttt{-} zum Herauszoomen
+\item ausgewählter Startpunkt (falls vorhanden)
+\item ausgewählter Zielpunkt (falls vorhanden)
+\item berechnete \gls{route} (falls vorhanden)
+\item Rechtsklick-Kontextmenü:\\
+„Start hier“ setzt den Startpunkt; „Ziel hier“ den Zielpunkt
 \end{enumerate}
 
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
@@ -640,9 +646,10 @@ Ist für die aktuelle Kombination aus Karte und Profil noch keine Vorberechnung 
 \item ausgegraute Karte
 %TODO Welche Art von Interaktion ist noch möglich? Kann die Karte trotzdem noch verschoben/gezoomt werden? Oder steht das schon irgendwo? (gemacht)
 % Keine Interaktion möglich.
-\item \gls{vorberechnung}-Button: startet die \gls{vorberechnung} für die aktuelle Karte-Profil-Kombination\\
-Um der Benutzer vor der langen, aufwändigen Vorberechnung zu warnen erscheint vorher ein warnender Dialog mit:\\
-Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca. 10 Stunden.
+\item \gls{vorberechnung}-Button:\\
+startet die \gls{vorberechnung} für die aktuelle Karte-Profil-Kombination\\
+Um den Benutzer vor der langen, aufwändigen Vorberechnung zu warnen, erscheint vorher ein warnender Dialog wie z.B.\\
+„Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca. 10 Stunden.“
 \end{enumerate}
 
 \subsection{Hauptfenster: Menüleiste}
@@ -654,16 +661,23 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \end{figure}
 \begin{enumerate}
 \item Menüpunkt „routeKIT“
-\item Unterpunkt „Verlauf\ldots“: erlaubt Zugriff auf den \gls{verlauf}
-\item Unterpunkt „Über\ldots“: zeigt Informationsfenster (siehe \abbildung{mockupabout})
-\item Unterpunkt „Beenden“: beendet das Programm
+\item Unterpunkt „Verlauf...“:\\erlaubt Zugriff auf den \gls{verlauf}
+\item Unterpunkt „Über...“:\\
+zeigt Informationsfenster (siehe \abbildung{mockupabout})
+\item Unterpunkt „Beenden“:\\
+beendet das Programm
 \item Menüpunkt „Export“
-\item Unterpunkt „Route (GPX)\ldots“: erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
-\item Unterpunkt „Beschreibung (HTML)\ldots“: erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
+\item Unterpunkt „Route (GPX)...“:\\
+erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
+\item Unterpunkt „Beschreibung (HTML)...“:\\
+erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
 \item Menüpunkt „Verwaltung“
-\item Unterpunkt „Profile\ldots“: startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
-\item Unterpunkt „Karten\ldots“: startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung})
-\item Checkbox „OSM-Renderer verwenden“: legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
+\item Unterpunkt „Profile...“:\\
+startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
+\item Unterpunkt „Karten...“:\\
+startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung})
+\item Checkbox „OSM-Renderer verwenden“:\\
+legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
 \end{enumerate}
 
 \subsection{Dialog: Profilverwaltung}
@@ -676,17 +690,28 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \end{figure}
 % Betreuer2: Slider für die Zahl? Spinner? (gemacht)
 \begin{enumerate}
-\item Profil-Auswahl (Combobox, Dropdownmenü): legt ein Profil fest
-\item Löschen-Button: löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{WF:loescheProfil}); zeigt vorher ein Popup an, das den Nutzer davor warnt, dass er viel Berechnungsarbeit zerstört. 
-\item Neu-Button: erstellt eine Kopie des aktuellen Profils; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{WF:neuesProfil})
-\item Fahrzeugtyp-Auswahl: setzt den Fahrzeugtyp des aktuellen Profils (\ref{D:fahrzeugTyp})
-\item Höhen-Eingabe: setzt die Höhe des aktuellen Profils (\ref{D:hoehe})
-\item Breiten-Eingabe: setzt die Breite des aktuellen Profils (\ref{D:breite})
-\item Gewicht-Eingabe: setzt das Gewicht des aktuellen Profils (\ref{D:gewicht})
-\item Autobahn-Geschwindigkeits-Eingabe: setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Autobahn (\ref{D:geschwindigkeitAutobahn})
-\item Landstraßen-Geschwindigkeits-Eingabe: setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Landstraße (\ref{D:geschwindigkeitLandstrasse})
-\item OK-Button: speichert Änderungen am ausgewählten Profil; setzt es als das aktuelle Profil; schließt den Dialog
-\item Abbrechen-Button: verwirft Änderungen am ausgewählten Profil; schließt den Dialog
+\item Profil-Auswahl (Combobox, Dropdownmenü):\\
+legt ein Profil fest
+\item Löschen-Button:\\
+löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{WF:loescheProfil}); zeigt vorher ein Popup an, das den Nutzer davor warnt, dass er viel Berechnungsarbeit zerstört. 
+\item Neu-Button:\\
+erstellt eine Kopie des aktuellen Profils; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{WF:neuesProfil})
+\item Fahrzeugtyp-Auswahl:\\
+setzt den Fahrzeugtyp des aktuellen Profils (\ref{D:fahrzeugTyp})
+\item Höhen-Eingabe:\\
+setzt die Höhe des aktuellen Profils (\ref{D:hoehe})
+\item Breiten-Eingabe:\\
+setzt die Breite des aktuellen Profils (\ref{D:breite})
+\item Gewicht-Eingabe:\\
+setzt das Gewicht des aktuellen Profils (\ref{D:gewicht})
+\item Autobahn-Geschwindigkeits-Eingabe:\\
+setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Autobahn (\ref{D:geschwindigkeitAutobahn})
+\item Landstraßen-Geschwindigkeits-Eingabe:\\
+setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Landstraße (\ref{D:geschwindigkeitLandstrasse})
+\item OK-Button:\\
+speichert Änderungen am ausgewählten Profil; setzt es als das aktuelle Profil; schließt den Dialog
+\item Abbrechen-Button:\\
+verwirft Änderungen am ausgewählten Profil; schließt den Dialog
 \end{enumerate}
 
 In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, \abbildung{mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
@@ -699,15 +724,23 @@ In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten
 \label{fig:mockupkartenverwaltung}
 \end{figure}
 \begin{enumerate}
-\item Karten-Auswahl(Combobox, Dropdownmenü): wählt eine Karte aus.
-\item Import-Button: fragt den Benutzer nach einer \gls{osm}-Datei und einem Namen; fügt sie in die Karten-Auswahl ein
-\item Aktualisieren-Button: fragt den Benutzer nach einer \gls{osm}-Datei; ersetzt die ausgewählte Karte mit dieser
-\item Löschen-Button: löscht die ausgewählte Karte aus der Liste
-\item Profil-Liste: zeigt am Anfang alle Profile, für die eine \gls{vorberechnung} der ausgewählten Karte existiert
-\item Hinzufügen-Button: fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu\\
+\item Karten-Auswahl(Combobox, Dropdownmenü):\\
+wählt eine Karte aus.
+\item Import-Button:\\
+fragt den Benutzer nach einer \gls{osm}-Datei und einem Namen; fügt sie in die Karten-Auswahl ein
+\item Aktualisieren-Button:\\
+fragt den Benutzer nach einer \gls{osm}-Datei; ersetzt die ausgewählte Karte mit dieser
+\item Löschen-Button:\\
+löscht die ausgewählte Karte aus der Liste
+\item Profil-Liste:\\
+zeigt am Anfang alle Profile, für die eine \gls{vorberechnung} der ausgewählten Karte existiert
+\item Hinzufügen-Button:\\\\
+fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu\\
 Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (\abbildung{mockupprofilverwaltung}). Sein OK-Button setzt es nicht als das aktuelle Profil, sondern fügt es stattdessen zur Profil-Liste hinzu.
-\item Entfernen-Button: entfernt ein Profil aus der Profil-Liste.
-\item OK-Button: übernimmt Änderungen, setzt die ausgewählte Karte als die aktuelle Karte und schließt den Dialog
+\item Entfernen-Button:\\
+entfernt ein Profil aus der Profil-Liste.
+\item OK-Button:\\
+übernimmt Änderungen, setzt die ausgewählte Karte als die aktuelle Karte und schließt den Dialog
   \begin{itemize}
   \item Für hinzugefügte Karten wird die \gls{vorberechnung} zum Rendern durchgeführt.
   \item Für aktualisierte Karten werden alle Vorberechnungen (Profile, Rendern) neu durchgeführt.
@@ -716,12 +749,13 @@ Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (\abbildung{mockup
   \item Für von einer Karte entfernte Profile wird die Vorberechnung gelöscht.
   \end{itemize}
   Bevor diese Aktionen durchgeführt werden, wird dem Benutzer in einem Dialog eine Liste der geplanten Aktionen gezeigt; dabei wird er \emph{eindrücklich} darauf hingewiesen, dass neue Vorberechnungen sehr lange dauern (mit konkretem Zeitraum) und dass gelöschte Vorberechnungen ebenso viel Berechnungsarbeit vernichten.
-\item Abbrechen-Button: schließt den Dialog.\\
+\item Abbrechen-Button:\\
+schließt den Dialog.\\
 \end{enumerate}
 
 In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kann Karten hinzufügen und entfernen, er kann im Profilverwaltung-Dialog (der erscheint, wenn er den Hinzufügen-Button klickt) Profile hinzufügen und entfernen, und er kann Profil-Karten-Kombinationen hinzufügen und entfernen. Wenn der Benutzer genau die Kombinationen festgelegt hat, die er verwenden möchte, drückt er den OK-Button. Daraufhin wird ihm ein Dialog mit einem Text wie dem folgenden angezeigt:
 \begin{quote}
-  Sie haben die folgenden Operationen ausgewählt:
+  „Sie haben die folgenden Operationen ausgewählt:
   \begin{itemize}
   \item Hinzufügen der Karte „Baden-Württemberg“
   \item Hinzufügen des Profils „LKW [default]“ zur Karte „Baden-Württemberg“
@@ -729,7 +763,7 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
   \end{itemize}
   Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
   
-  Sind Sie sicher, dass sie diese Operationen durchführen wollen?
+  Sind Sie sicher, dass sie diese Operationen durchführen wollen?“
 \end{quote}
 Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
 
@@ -741,9 +775,12 @@ Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass
 \label{fig:mockupverlauf}
 \end{figure}
 \begin{enumerate}
-\item Verlauf-Liste: zeigt eine Liste aller \gls{verlauf}-Einträge; der Neueste ganz oben
-\item OK-Button: setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten Verlauf-Eintrag; schließt den Dialog
-\item Abbrechen-Button: schließt den Dialog
+\item Verlauf-Liste:\\
+zeigt eine Liste aller \gls{verlauf}-Einträge; der Neueste ganz oben
+\item OK-Button:\\
+setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten Verlauf-Eintrag; schließt den Dialog
+\item Abbrechen-Button:\\
+schließt den Dialog
 \end{enumerate}
 
 Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
@@ -757,9 +794,10 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 \label{fig:mockupabout}
 \end{figure}
 \begin{enumerate}
-\item Informationen über „routeKIT“
+\item Informationstext über „routeKIT“
 %TODO Genauen Inhalt (gemacht)
-\item OK-Knopf: schließt das Fenster
+\item OK-Knopf:\\
+schließt das Fenster
 \end{enumerate}
 
 \section{Globale Testfälle und Szenarien}
