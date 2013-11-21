@@ -292,7 +292,7 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \oitem{WK}{kartenKachelnPrefetch} Kartenkacheln in der Umgebung des angezeigten Ausschnitts werden im Voraus berechnet bzw. (im Fall von \ref{WK:osmKacheln}) geladen.
 \oitem{WK}{karteAuswaehlen} Der Benutzer kann zwischen mehreren vorhandenen Karten auswählen.
 \oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer OSM-Datei importieren.
-\oitem{WK}{karteLöschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
+\oitem{WK}{karteLoeschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
 \oitem{WK}{letzteKarte} Die zuletzt verwendete Karte ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{letztesProfil} Das zuletzt verwendete \gls{profil} ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{routeLoeschenKarte} Eine bereits berechnete \gls{route} wird bei einer Änderung der Karte verworfen.
@@ -416,8 +416,7 @@ Darstellung von Kartenkacheln an der richtigen Stelle im \gls{gui}
 Anzeige von Kartenkacheln in der gewünschten Zoomstufe 
 \oitem{F}{bestimmeKoordinatenAusPunkt}
 Bestimmung der Geokoordinaten zu einem gegebenem Pixel im dargestellten Kartenausschnitt
-% Betreuer2: Aufteilen, Genauer TODO: sichherer Formulieren
-%Klingt immer noch nicht richtig, aber besser als diese Schachtelsätze...
+% Betreuer2: Aufteilen, Genauer TODO: sichherer Formulieren (gemacht)
 \oitem{F}{ziehenZuAusschnitt}
 Verschieben des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenInZuAusschnitt}
@@ -438,9 +437,8 @@ Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 \oitem{WF}{bestimmeKachelnUmAusschnitt}
 Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt
 \oitem{WF}{bestimmeKachelnVorAusschnitt}
-Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt in den nächst\-grö\-ße\-ren/\allowbreak{}-klei\-ne\-ren Zoomstufen
-% TODO leicht holprig
-% TODO besser?
+Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt in den nächstgrößeren und -kleineren Zoomstufen.
+% TODO leicht holprig (gemacht)
 \oitem{WF}{cacheKacheln}
 Zwischenspeichern der zuletzt gerenderten Kacheln
 %TODO besser? Wir brauchen keine Begründung... (gemacht)
@@ -488,8 +486,7 @@ Laden der zuletzt benutzten Karte beim Programmstart
 \end{description}
 
 \section{Produktdaten}
-% Betreuer: Darstellung und Berechnung nur aus eigenen Daten. Steht noch nicht da.
-%TODO
+% Betreuer: Darstellung und Berechnung nur aus eigenen Daten. Steht noch nicht da. (gemacht)
 %Anastasia
 \subsection{Konfiguration}
 \begin{description}
@@ -573,9 +570,9 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 % Dominic
 
 \section{Benutzeroberfläche}
-% Betreuer: weniger Klicks? Startknopf.
+% Betreuer: weniger Klicks? Startknopf. (gemacht)
 % Betreuer: Elemente durchnummerieren. Einzeln erklären. (gemacht)
-% Betreuer2: Verlauf,
+% Betreuer2: Verlauf, (gemacht)
 %TODO  Menu, Profil/Kartenknopf ins Label integrieren (gemacht)
 % Betreuer2: Links ziehen (gemacht)
 % Betreuer2: Klicks wie belegen? (gemacht)
@@ -737,7 +734,7 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 \end{figure}
 \begin{enumerate}
 \item Informationen über das Programm
-%TODO Genauen Inhalt
+%TODO Genauen Inhalt (gemacht)
 \item OK-Knopf: Schließt das Fenster
 \end{enumerate}
 
@@ -745,18 +742,18 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung (gemacht)
 \subsection{Funktionssequenzen}
 Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
-%TODO Namen der Testfälle/refs überall einfügen, wo es fehlt
+%TODO Namen der Testfälle/refs überall einfügen, wo es fehlt (gemacht)
 \begin{description}
 \itemsep 1em
 \subsubsection{Kernfunktionen}
 \oitem{TF}{starteVorberechnung} Vorberechnung starten
-\testfall
+\testfall[\ref{WK:beschlArc}]
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Vorberechnung auswählen, lange Warten}
     {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
 % Betreuer2: Wegbeschreibung export testen (gemacht)
 \oitem{TF}{wegbeschreibungsexport} Wegbeschreibung exportieren
-\testfall
+\testfall[\ref{WK:beschreibung}, \ref{WK:beschreibungExport}]
     {Eine Route mit der Wegbeschreibung ist berechnet}
     {Die Wegbeschreibung wird exportiert}
     {Es liegt eine HTML-Datei mit der Wegbeschreibung vor}
@@ -769,7 +766,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (beim ersten Programmstart wird die mitgelieferte Stan\-dard-Kar\-te bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
 \oitem{TF}{exitstartVerlauf} Verlauf nach Neustart
-\testfall
+\testfall[\ref{WK:verlauf}]
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer wählt Start- und Zielpunkt aus. Das Programm wird beendet. Das Programm wird gestartet.}
     {Im Verlauf befindet sich ein Eintrag für die vorher berechnete Route}
@@ -780,50 +777,50 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Die Route wird aus dem Verlauf geladen}
     {Die abgespeicherte Route wird angezeigt}
 \oitem{TF}{exitstartBerechnung} Vorberechnung nach Neustart
-\testfall
+\testfall[\ref{D:vorberechnung}]
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
     {Der Benutzer berechnet eine Profil-Karten-Kombination, wartet, beendet das Programm, startet das Programm}
     {Das zuvor berechnete Profil ist immer noch berechnet (für die aktuelle Karte)}
 \oitem{TF}{exportGPX} GPX-Export
-\testfall
+\testfall[\ref{WK:routeExport}]
     {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte), Eine Route wird angezeigt}
     {Der GPX Exportvorgang wird durchgeführt.}
     {Es ist eine valide GPX-Datei mit der berechneten Route vorhanden.}
 \subsubsection{GUI Tests}
 \oitem{TF}{waehleErstenPunkt} Ersten Punkt wählen
 \testfall
-	[\ref{F:startZielEingeben}]
+	[\ref{MK:startZielWaehlen}, \ref{MK:startZielZeigen}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Auswählen des Start- bzw. Zielpunkts}
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
 \oitem{TF}{waehleZweitenPunkt} Zweiten Punkt wählen
 \testfall
-    [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
+    [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
     {Route für die Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{waehlePunktErneut} Punkt erneut wählen
 \testfall
-    [\ref{F:berechneRoute}, \ref{F:zeigeRoute}]
+    [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
     {Route für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte} Karte ziehen
 \testfall
-    [\ref{F:zeichneKachel}, \ref{F:ziehenZuAusschnitt}]
+    [\ref{MK:karteVerschieben}]
     {Karte ist sichtbar}
     {Ziehen der Karte}
     {Die Kartenposition hat sich entsprechend verändert}
     %FIXME Klingt irgendwie seltsam...
 \oitem{TF}{zoomeRein} Reinzoomen
 \testfall
-    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
+    [\ref{MK:karteZoomen}]
     {Karte ist sichtbar}
     {Reinzoomen}
     {Ein Ausschnitt der Karte wird größer und genauer dargestellt}
 \oitem{TF}{zoomeRaus} Rauszoomen
 \testfall
-    [\ref{MK:karteZoomen}, \ref{F:zeichneKachel}]
+    [\ref{MK:karteZoomen}]
     {Karte ist sichtbar}
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
@@ -833,12 +830,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
     {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar (gemacht: Keine Meldung großer Knopf.)
 \oitem{TF}{geocoords} \gls{dezimalkoordinaten} eingeben
-\testfall
+\testfall[\ref{WK:koordinaten}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
     {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt}
 \oitem{TF}{guideleteprofile} \gls{standardprofil} löschen
-\testfall
+\testfall[\ref{WK:standardprofile}]
     {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
     {Ein mitgeliefertes Standard-Profil wird zum löschen ausgewählt.}
     {Der Knopf zum Löschen des Profils wird deaktiviert.}
@@ -848,43 +845,42 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Eine mitgelieferte Standard-Karte wird zum löschen ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \oitem{TF}{osmKacheln} \glspl{osmkachel} verwenden
-\testfall
+\testfall[\ref{WK:osmKacheln}]
     {Karte ist sichtbar, Internetverbindung ist hergestellt}
     {Wechseln der Darstellungs-Art auf \glspl{osmkachel}}
     {Die Karte wird mit \glspl{osmkachel} angezeigt}
 \oitem{TF}{eigeneKacheln} Eigene Kacheln verwenden
-\testfall
+\testfall[\ref{MK:karteAnzeigen}, \ref{MK:karteRendern}]
     {Karte ist sichtbar, OSM-Render-Modus ist aktiviert}
     {Wechseln der Darstellungs-Art auf "eigene Kacheln"}
     {Die Karte wird mit selbst gerenderten Kacheln angezeigt,
     es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben, oder zu zoomen)}
 \oitem{TF}{placeholder} Placeholder-Kacheln
-\testfall
-    [\ref{WK:kartePlaceholder}]
+\testfall[\ref{WK:kartePlaceholder}]
     {Karte ist sichtbar}
     {Die Karte wird schnell bewegen}
     {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt}
 \subsubsection{Profilverwaltung}
 \oitem{TF}{profilAnlegen} Profil anlegen
 \testfall
-    [\ref{WF:neuesProfil}]
+    [\ref{WK:profilerstellen}]
     {Das erforderliche Profil ist noch nicht vorhanden}
     {Neues Profil anlegen}
     {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet (für die aktuelle Karte)}
 \oitem{TF}{waehleProfil} Profil auswählen
-\testfall
+\testfall[\ref{WK:profile}]
     {Ein Profil ist vorhanden und nicht ausgewählt}
     {Das Profil wird ausgewählt}
     {Das Profil ist ausgewählt}
 \oitem{TF}{loescheProfil} Profil löschen
 \testfall
-    [\ref{WF:loescheProfil}]
+    [\ref{WK:profilloeschen}]
     {Ein Profil, das nicht das Standardprofil ist, ist vorhanden}
     {Das Profil wird gelöscht}
     {Das Profil ist nicht mehr vorhanden}
 \oitem{TF}{aendereProfil} Profil ändern
 \testfall
-    [\ref{WF:aendereProfil}]
+    [\ref{WK:profilaendern}]
     {Ein Profil ist vorhanden}
     {Das Profil wird geändert, die Profilverwaltung geschlossen und wieder geöffnet}
     {Das Profil hat immer noch die neuen Daten}
@@ -893,29 +889,24 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Ein Profil ist vorhanden}
     {Das Profil wird geändert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die Änderungen sind immer noch vorhanden}
-\oitem{TF}{standardProfil} \gls{standardprofil} löschen
-\testfall
-    {Ein \gls{standardprofil} existiert}
-    {Versuchen das \gls{standardprofil} zu löschen}
-    {Das \gls{standardprofil} ist nicht gelöscht}
 \oitem{TF}{routeNeuBerechnenProfil} Neuberechnen der Route bei Profiländerung
-\testfall
+\testfall[\ref{WK:routeNeuBerechnenProfil}]
     {Karte ist sichtbar, eine Route wurde berechnet}
     {Das Profil wird geändert}
     {Die berechnete Route wird mit den neuen Daten aus dem ausgewähltem Profil neu berechnet}
 \subsubsection{Kartenverwaltung}
 \oitem{TF}{importKarte} Karte importieren
-\testfall
+\testfall[\ref{WK:karteImportiere}]
     {–}% Betreuer2: ganz weg (gemacht)
     {Eine neue Karte wird importiert}
     {Die neue Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet}
 \oitem{TF}{wechsleKarte} Karte auswählen
-\testfall
+\testfall[\ref{WK:karteAuswaehlen}]
     {Eine Karte ist ausgewählt}
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt}
 \oitem{TF}{loescheKarte} Karte löschen
-\testfall
+\testfall[\ref{WK:karteLoeschen}]
     {Eine andere Karte als die Standardkarte ist vorhanden}
     {Die Karte wird gelöscht}
     {Die Karte ist nicht mehr vorhanden}
@@ -925,23 +916,23 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Eine Karte wird importiert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die neue Karte ist immer noch vorhanden}
 \oitem{TF}{routeLoeschenKarte} Löschen der Route bei Kartenänderung
-\testfall
+\testfall[\ref{WK:routeLoeschenKarte}]
     {Karte ist sichtbar, eine Route wurde berechnet}
     {Die Karte wird geändert}
     {Die berechnete Route wird verworfen}
 \subsubsection{Beschränkungen}
 \oitem{TF}{einbahnstrasse} Einbahnstraße – Ende-zu-Ende
-\testfall
+\testfall[\ref{WK:einbahnstrasse}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
 \oitem{TF}{einbahnstrasseHard} Einbahnstraße – innerhalb (Randfall für \gls{dijkstra})
-\testfall
+\testfall[\ref{WK:einbahnstrasse}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Start weiter in Einbahnstraßenrichtung als Ziel.}
     {Ein Weg, der die Einbahnstraße nicht entgegen der Fahrtrichtung benutzt, wird gefunden}
 \oitem{TF}{abbiegebeschraenkung} Abbiegebeschränkung
-\testfall
+\testfall[\ref{WK:abbiegebeschraenkung}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
     {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen. }
     {Ein Weg, der diesen Abbiegevorgang nicht enthält, wird gefunden}
@@ -956,12 +947,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als Route gefunden}
 \oitem{TF}{typEinschraenkungNeg} Typ-Einschränkung trifft zu
-\testfall
+\testfall[\ref{WK:fahrzeugtyp}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist dieser Typ angegeben}
     {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
     {Ein Weg, der diese Straße nicht enthält, wird gefunden}
 \oitem{TF}{typEinschraenkungPos} Typ-Einschränkung trifft nicht zu
-\testfall
+\testfall[\ref{WK:fahrzeugtyp}]
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist ein anderer Fahrzeugtyp angegeben}
     {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als Route gefunden}
