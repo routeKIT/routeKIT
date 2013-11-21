@@ -67,7 +67,7 @@
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
-      <g id="vehicleHeightSpinnerUp" transform="translate(40,10)">
+      <g id="vehicleHeightSpinnerDown" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
@@ -85,7 +85,7 @@
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
-      <g id="vehicleWidthSpinnerUp" transform="translate(40,10)">
+      <g id="vehicleWidthSpinnerDown" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
@@ -103,7 +103,7 @@
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
-      <g id="vehicleWeightSpinnerUp" transform="translate(40,10)">
+      <g id="vehicleWeightSpinnerDown" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
@@ -121,7 +121,7 @@
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
-      <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,10)">
+      <g id="avgSpeedHighwaySpinnerDown" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
@@ -139,7 +139,7 @@
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
-      <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,10)">
+      <g id="avgSpeedCountryRoadSpinnerDown" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
         <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
