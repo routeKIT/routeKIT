@@ -2,7 +2,7 @@
 <?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
-<svg width="320" height="310">
+<svg width="320" height="310" xmlns="http://www.w3.org/2000/svg">
   <rect id="window" x="0" y="0" width="320" height="310" fill="white"/>
   <rect id="titleBar" x="0" y="0" width="320" height="20" fill="lightgrey"/>
   <g id="closeButton" transform="translate(300,0)">
@@ -52,12 +52,12 @@
       <rect x="0" y="0" width="20" height="230" class="disabled"/>
       <g id="scrollbarUpButton" transform="translate(0,0)">
         <rect x="0" y="0" width="20" height="20" class="disabled"/>
-        <text x="10" y="12" font-size="12" class="centered disabled">ʌ</text>
+        <text x="10" y="12" class="centered disabled normalarrow">ʌ</text>
       </g>
       <rect x="0" y="20" width="20" height="90" class="enabled"/>
       <g id="scrollbarDownButton" transform="translate(0,210)">
         <rect x="0" y="0" width="20" height="20" class="enabled"/>
-        <text x="10" y="14" font-size="12" class="centered">v</text>
+        <text x="10" y="14" class="centered enabled normalarrow">v</text>
       </g>
     </g>
   </g>

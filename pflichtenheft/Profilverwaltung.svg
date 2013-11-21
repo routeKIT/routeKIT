@@ -2,7 +2,7 @@
 <?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
-<svg width="495" height="315">
+<svg width="495" height="315" xmlns="http://www.w3.org/2000/svg">
   <rect id="window" x="0" y="0" width="495" height="315" fill="white"/>
   <rect id="titleBar" x="0" y="0" width="495" height="20" fill="lightgrey"/>
   <g id="closeButton" transform="translate(475,0)">
@@ -18,7 +18,7 @@
       <rect x="0" y="0" width="200" height="20" class="enabled"/>
       <text x="5" y="15">PKW [default]</text>
       <rect x="180" y="0" width="20" height="20" fill="none" stroke="black"/>
-      <text x="190" y="15" class="centered">v</text>
+      <text x="190" y="15" class="centered normalarrow">v</text>
       <text x="125" y="25" class="labelnumber">1</text>
     </g>
     <g id="profileDeleteButton" transform="translate(320,0)">
@@ -65,11 +65,11 @@
       <text x="35" y="15" class="enabled rightaligned">1,6</text>
       <g id="vehicleHeightSpinnerUp" transform="translate(40,0)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
       <g id="vehicleHeightSpinnerUp" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
     </g>
     <text id="vehicleHeightUnitLabel" x="205" y="15" class="enabled">m</text>
@@ -83,11 +83,11 @@
       <text x="35" y="15" class="enabled rightaligned">1,6</text>
       <g id="vehicleWidthSpinnerUp" transform="translate(40,0)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
       <g id="vehicleWidthSpinnerUp" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
     </g>
     <text id="vehicleWidthUnitLabel" x="205" y="15" class="enabled">m</text>
@@ -101,11 +101,11 @@
       <text x="35" y="15" class="enabled rightaligned">1,4</text>
       <g id="vehicleWeightSpinnerUp" transform="translate(40,0)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
       <g id="vehicleWeightSpinnerUp" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
     </g>
     <text id="vehicleWeightUnitLabel" x="205" y="15" class="enabled">t</text>
@@ -119,11 +119,11 @@
       <text x="35" y="15" class="enabled rightaligned">120</text>
       <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,0)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
       <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
     </g>
     <text id="avgSpeedHighwayUnitLabel" x="355" y="15" class="enabled">km/h</text>
@@ -137,11 +137,11 @@
       <text x="35" y="15" class="enabled rightaligned">75</text>
       <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,0)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">ʌ</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
       </g>
       <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,10)">
         <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" font-size="10" class="enabled centered">v</text>
+        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
       </g>
     </g>
     <text id="avgSpeedCountryRoadUnitLabel" x="355" y="15" class="enabled">km/h</text>

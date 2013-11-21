@@ -1,5 +1,6 @@
 text {
     font-family: sans;
+    font-size: 12px;
 }
 
 text.centered {
@@ -29,7 +30,7 @@ text.disabled {
 }
 
 text.labelnumber {
-    font-size: 11;
+    font-size: 11px;
     fill: red;
 }
 
@@ -49,4 +50,12 @@ rect.selected {
 
 text.selected {
     font-weight: bold;
+}
+
+text.normalarrow {
+    font-size: 12px;
+}
+
+text.smallarrow {
+    font-size: 10px;
 }
