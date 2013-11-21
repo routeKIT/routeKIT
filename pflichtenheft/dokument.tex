@@ -66,7 +66,7 @@
 %
 % End: Glossar
 
-% usage: \counteditem{prefix}{refName} -> item '/prefixXX/' with label 'prefix:refName' (where XX is counted in increments of 10)
+% usage: \counteditem{prefix}{refName} -> item `/prefixXX/` with label `prefix:refName` (where XX is counted in increments of 10)
 \makeatletter
 \newcommand{\oitem}[2]{
   % define the counter
@@ -181,8 +181,8 @@
 \newglossaryentry{dezimalkoordinaten}{
   name={Dezimalkoordinaten},
   description={Ein Format für Geokoordinaten, nämlich:\\
-  	``Breitengrad, Längengrad''\\
-  	die jeweils der Form ``\texttt{[+-]?[0-9]+.[0-9]*}'' sind}
+  	„Breitengrad\textvisiblespace Längengrad“\\
+  	die jeweils der Form „\texttt{[+-]?[0-9]+.[0-9]*}“ sind}
 }
 \newglossaryentry{verlauf}{
   name={Verlauf},
@@ -236,7 +236,7 @@ Prof.~Dr.~rer.~nat.~Peter~Sanders\\}
 
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Einleitung}
-% Betreuer2: Vorberechnung dauert lange. "Expertenfeature" (erledigt)
+% Betreuer2: Vorberechnung dauert lange. „Expertenfeature“ (erledigt)
 % TODO verlauf erwähnen (auch erledigt)
 Das Produkt ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem Verlauf gespeichert.
 
@@ -245,15 +245,15 @@ Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleu
 Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
-% Betreuer: Abbiegungbeschränkung, "Route berechnen", (gemacht)
+% Betreuer: Abbiegungbeschränkung, „Route berechnen“, (gemacht)
 \section{Zielbestimmung}
 %Lucas
 
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher. (gemacht)
-% Betreuer2: Thesen, was ist. "." Einheitlich. "Satzanfang" einheitlich. (erledigt)
-%TODO "Einheitlich" Standard festlegen! Sätze? Stichpunkte? (gemacht) da:
-% Passiv (Subjekt vorne) oder "der Benutzer kann":
+% Betreuer2: Thesen, was ist. „.“ Einheitlich. „Satzanfang“ einheitlich. (erledigt)
+%TODO „Einheitlich“ Standard festlegen! Sätze? Stichpunkte? (gemacht) da:
+% Passiv (Subjekt vorne) oder „der Benutzer kann“:
 % Der Benutzer kann BLA tun.
 % BLA wird getan.
 \begin{description}
@@ -430,7 +430,7 @@ Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Ka
 \oitem{F}{zeigeStartZiel}
 Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
 \abbildung{mockupscreenshotmain})
-% Betreuer2: 'Aufbauen' (gemacht)
+% Betreuer2: ‚Aufbauen‘ (gemacht)
 \oitem{WF}{holeOnlineKachel}
 Anfordern bereits gerenderter Kacheln aus dem Internet
 \oitem{WF}{startZielGeo}
@@ -456,7 +456,7 @@ Klassifizierung der Abbiegevorgänge (rechts, links, scharf rechts, scharf links
 \oitem{WF}{bestimmeAnweisungAusAbbiege}
 Erzeugung einer textuellen Abbiegeanweisung aus einem Abbiegevorgang
 \oitem{WF}{bestimmeAnweisungAusRoutenstück}
-Erzeugung einer textuellen Weganweisung ("dem Straßenverlauf folgen", "in 2km ...", etc.) aus einem Routenstück
+Erzeugung einer textuellen Weganweisung („dem Straßenverlauf folgen“, „in 2km ...“, etc.) aus einem Routenstück
 \oitem{WF}{beschreibungAusAnweisungen}
 Erzeugung einer \gls{wegbeschreibung} aus mehreren Abbiege- und Weganweisungen
 \oitem{WF}{htmlAusBeschreibung}
@@ -528,7 +528,7 @@ Fürs \Gls{rendern} benötigte Daten (siehe \ref{WK:karteRendernStrassen}, \ref{
 \end{description}
 
 \subsection{Verlaufdaten}
-%TODO %FIXME Lieber "Verlauf" anstatt "History"? (gemacht)
+%TODO %FIXME Lieber „Verlauf“ anstatt „History“? (gemacht)
 Für den Verlauf wird gespeichert:
 \begin{description}
 \oitem{D}{verlauf}
@@ -613,7 +613,7 @@ Wähle eine Karte (siehe \abbildung{mockupkartenverwaltung}); daneben wird die a
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
 
 \subsection{Hauptfenster: Keine Vorberechnung}
-%TODO "Expertenfeature", "dauert ca. 10Stunden". auf den Knopf drauf (gemacht)
+%TODO „Expertenfeature“, „dauert ca. 10Stunden“. auf den Knopf drauf (gemacht)
 
 Ist für die aktuelle Kombination aus Karte und Profil noch keine Vorberechnung gemacht, sieht der Bildschirm so aus:
 \begin{figure}[H]
@@ -640,17 +640,17 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \label{fig:mockupscreenshotmenu}
 \end{figure}
 \begin{enumerate}
-\item Menüpunkt "routeKIT"
-\item Unterpunkt "Verlauf...": erlaubt Zugriff auf den \gls{verlauf}
-\item Unterpunkt "Über...": zeigt Informationsfenster (siehe \abbildung{mockupabout})
-\item Unterpunkt "Beenden": beendet das Programm
-\item Menüpunkt "Export"
-\item Unterpunkt "Route (GPX)...": erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
-\item Unterpunkt "Beschreibung (HTML)...": erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
-\item Menüpunkt "Verwaltung"
-\item Unterpunkt "Profile...": startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
-\item Unterpunkt "Karten...": startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung})
-\item Checkbox "OSM-Renderer verwenden": legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
+\item Menüpunkt „routeKIT“
+\item Unterpunkt „Verlauf...“: erlaubt Zugriff auf den \gls{verlauf}
+\item Unterpunkt „Über...“: zeigt Informationsfenster (siehe \abbildung{mockupabout})
+\item Unterpunkt „Beenden“: beendet das Programm
+\item Menüpunkt „Export“
+\item Unterpunkt „Route (GPX)...“: erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
+\item Unterpunkt „Beschreibung (HTML)...“: erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
+\item Menüpunkt „Verwaltung“
+\item Unterpunkt „Profile...“: startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
+\item Unterpunkt „Karten...“: startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung})
+\item Checkbox „OSM-Renderer verwenden“: legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
 \end{enumerate}
 
 \subsection{Dialog: Profilverwaltung}
@@ -710,9 +710,9 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
 \begin{quote}
   Sie haben die folgenden Operationen ausgewählt:
   \begin{itemize}
-  \item Hinzufügen der Karte ``Baden-Württemberg''
-  \item Hinzufügen des Profils ``LKW [default]'' zur Karte ``Baden-Württemberg''
-  \item Entfernen des Profils ``PKW [default]'' von der Karte ``Karlsruhe''
+  \item Hinzufügen der Karte „Baden-Württemberg“
+  \item Hinzufügen des Profils „LKW [default]“ zur Karte „Baden-Württemberg“
+  \item Entfernen des Profils „PKW [default]“ von der Karte „Karlsruhe“
   \end{itemize}
   Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
   
@@ -864,7 +864,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
 \oitem{TF}{eigeneKacheln} Eigene Kacheln verwenden
 \testfall[\ref{MK:karteAnzeigen}, \ref{MK:karteRendern}]
     {Karte ist sichtbar, OSM-Render-Modus ist aktiviert}
-    {Wechseln der Darstellungs-Art auf "eigene Kacheln"}
+    {Wechseln der Darstellungs-Art auf „eigene Kacheln“}
     {Die Karte wird mit selbst gerenderten Kacheln angezeigt,
     es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben, oder zu zoomen)}
 \oitem{TF}{placeholder} Placeholder-Kacheln
@@ -993,7 +993,7 @@ Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste Route zwischen 
 
 
 \oitem{TS}{programmnutzung} Programmnutzung\\
-Alice' Computer hat eine Internetverbindung. Alice startet das Programm routeKIT.  Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „ Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der Verlauf wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile...“, „Karten...“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den  Menüpunkt „routeKIT“ und den Unterpunkt „Über...“ aus. Sie drückt auf „OK“. Alice wählt den  Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
+Alice’ Computer hat eine Internetverbindung. Alice startet das Programm routeKIT.  Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „ Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der Verlauf wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile...“, „Karten...“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den  Menüpunkt „routeKIT“ und den Unterpunkt „Über...“ aus. Sie drückt auf „OK“. Alice wählt den  Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
 
 \oitem{TS}{verwaltung} Verwaltung\\
 Der Administrator einer Firma möchte routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
