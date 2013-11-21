@@ -9,7 +9,6 @@
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 
-\hyphenation{Stan-dard-pro-fil}
 \makeglossary
 
 %Hack for referencing labels
@@ -189,7 +188,7 @@
   description={Speicherung von Anfragen für spätere Wiederverwendung}
 }
 \newglossaryentry{mercator}{
-  name={Mercator Projektion},
+  name={Merkator-Projektion},
   description={Die Zylinderprojektion der Weltkugel.}
 }
 
@@ -372,79 +371,91 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 % Betreuer2: Mit kriterien synchron (gemacht) (glaube ich...)
 \subsection{Kernfunktionen}
 \begin{description}
-\oitem{F}{berechneNächstenPunktAufKante}
+\oitem{F}{berechneNaechstenPunktAufKante}
 Bestimmung des nächsten Punkts auf einer Kante zu gegebenen Geokoordinaten
-\oitem{F}{berechneRoute}
-Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu einem Zielpunkt auf dem Straßengraph
 \oitem{F}{mercator}
-Berechnung der \gls{mercator} zu Geokoordinaten und umgekehrt
+Umrechnung der \gls{mercator} zu Geokoordinaten und umgekehrt
+\oitem{F}{berechneRoute}
+Berechnung der \glslink{schnellroute}{schnellsten Route} von einem Start- zu einem Zielpunkt auf dem Straßengraph (ggf. unter Berücksichtigung von \ref{WF:bestimmenEinbahn} und \ref{WF:bestimmenAbbiegen})
+\oitem{WF}{bestimmenEinbahn}
+Bestimmung der erlaubten Fahrtrichtung(en) eines Straßenabschnitts
+\oitem{WF}{bestimmenAbbiegen}
+Bestimmung der erlaubten Abbiegevorgänge von einer Straße auf eine andere
 \oitem{WF}{routeBeschleunigen}
-Nutzung der \gls{arc} zur Routenberechnung (siehe \ref{F:berechneRoute})
+Nutzung der \gls{arc} zur Routenberechnung (\ref{F:berechneRoute})
 \oitem{WF}{gpxAusRoute}
 Erzeugung einer \glossary{gpx}-Datei aus einer \gls{route}
-\oitem{WF}{saveHist}
-Hinzufügen einer Routenanfrage zum \gls{verlauf}
-\oitem{WF}{getHist}
-Start- und Zielpunkt aus dem \gls{verlauf} auswählen
 \end{description}
 
 \subsection{Vorberechnung}
 \begin{description}
 \oitem{F}{berechneAbstand}
-Berechnung des realen Entfernung zwischen zwei Punkten einer Kante
+Berechnung der realen Entfernung zwischen zwei Punkten auf einer Kante
 % Betreuer2: Bestimmen, Berechnen, nicht Stätzen (gemacht)
 \oitem{F}{zeitSchaetzen}
-Bestimmung der benötigten Zeit für ein Wegstück unter Berücksichtigung des \glslink{profil}{Profils}, der Ampeln, der Abbiegezeiten und des Straßentyps
+Bestimmung der benötigten Fahrzeit für ein Wegstück unter Berücksichtigung der im \gls{profil} festgelegten Geschwindigkeiten, der zulässigen Höchstgeschwindigkeit, des Straßentyps, der Wartezeit an Ampeln und der Abbiegezeiten
 \oitem{WF}{bestimmenFahrErlaubnis}
-Bestimmung, ob ein Fahrzeug eines bestimmten Profils einen Straßenabschnitt benutzen darf
+Bestimmung, ob ein Fahrzeug des gewählten \glslink{profil}{Profils} einen Straßenabschnitt benutzen darf
 \oitem{WF}{routeBeschleunigenRechnen}
-Berechnung der \gls{arc} für \ref{WF:routeBeschleunigen}
+Berechnung der \gls{arc} für \ref{WF:routeBeschleunigen} unter Berücksichtigung von \ref{WF:bestimmenFahrErlaubnis}
 \end{description}
 
 \subsection{Benutzerschnittstelle}
 \begin{description}
-\oitem{F}{startZielEingeben}
-Start- und Zielpunkt durch Mausklick festlegen
-\oitem{F}{berechneKachel}
-Berechnung einer Bildkachel aus lokalen Kartendaten zu gegebener Zoomstufe und gegebenem Ausschnitt
-\oitem{F}{bestimmeKantenInAusschnitt}
-Bestimmung aller Kanten aus einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe (Benötigt für \ref{F:berechneKachel})
 \oitem{F}{bestimmeKachelnInAusschnitt}
-Bestimmung aller in einem Kartenausschnitt benötigten Kacheln
+Bestimmung aller in einem Kartenausschnitt benötigten Bildkacheln
+\oitem{F}{bestimmeKantenInAusschnitt}
+Bestimmung aller Kanten in einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe (benötigt für \ref{F:berechneKachel})
+\oitem{F}{berechneKachel}
+Rendern einer Bildkachel aus lokalen Kartendaten (nur Straßen) zu gegebener Zoomstufe und gegebenem Ausschnitt
+\oitem{WF}{einbahnstrassenKachel}
+Kennzeichnung von Einbahnstraßen beim Rendern der Kacheln (\ref{F:berechneKachel})
+\oitem{WF}{strassennamenKachel}
+Darstellung von Straßennamen und -bezeichnungen beim Rendern der Kacheln (\ref{F:berechneKachel})
+\oitem{WF}{ortsnamenKachel}
+Darstellung von Ortsnamen beim Rendern der Kacheln (\ref{F:berechneKachel})
 \oitem{F}{zeichneKachel}
-Darstellung von Kartenkacheln an der richtigen Stelle im \gls{gui}
-\oitem{F}{zoomKachel}
-Anzeige von Kartenkacheln in der gewünschten Zoomstufe 
-\oitem{F}{bestimmeKoordinatenAusPunkt}
-Bestimmung der Geokoordinaten zu einem gegebenem Pixel im dargestellten Kartenausschnitt
-% Betreuer2: Aufteilen, Genauer TODO: sichherer Formulieren (gemacht)
+Anzeige der Kartenkacheln in der gewünschten Zoomstufe an der richtigen Stelle im \gls{gui}
+% Betreuer2: Aufteilen, Genauer TODO: sicherer Formulieren (erledigt)
+\oitem{WF}{ersatzkachel}
+Anzeige einer grauen Ersatzkachel während des Renderns bzw. Ladens der Kachel
 \oitem{F}{ziehenZuAusschnitt}
 Verschieben des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenInZuAusschnitt}
 Vergrößern des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenOutZuAusschnitt}
 Verkleinern des sichtbaren Kartenausschnitts
-\oitem{F}{zeigeRoute}
-Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
-\abbildung{mockupscreenshotmain})
+\oitem{F}{bestimmeKoordinatenAusPunkt}
+Bestimmung der Geokoordinaten zu einem gegebenen Pixel im dargestellten Kartenausschnitt
+\oitem{F}{startZielEingeben}
+Start- und Zielpunkt durch Mausklick des Benutzers (mittels \ref{F:bestimmeKoordinatenAusPunkt} und \ref{F:berechneNaechstenPunktAufKante}) festlegen
+\oitem{WF}{startZielGeo}
+Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 \oitem{F}{zeigeStartZiel}
 Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
+\abbildung{mockupscreenshotmain})
+\oitem{F}{zeigeRoute}
+Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
 \abbildung{mockupscreenshotmain})
 % Betreuer2: ‚Aufbauen‘ (gemacht)
 \oitem{WF}{holeOnlineKachel}
 Anfordern bereits gerenderter Kacheln aus dem Internet
-\oitem{WF}{startZielGeo}
-Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 \oitem{WF}{bestimmeKachelnUmAusschnitt}
 Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt
 \oitem{WF}{bestimmeKachelnVorAusschnitt}
-Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt in den nächstgrößeren und -kleineren Zoomstufen.
+Bestimmung aller Kacheln um einen gegebenen Kartenausschnitt in den nächstgrößeren und -kleineren Zoomstufen
 % TODO leicht holprig (gemacht)
+\oitem{WF}{vorausberechnungKacheln}
+Vorausberechnung noch nicht angezeigter Kacheln (\ref{WF:bestimmeKachelnUmAusschnitt} und \ref{WF:bestimmeKachelnVorAusschnitt})
 \oitem{WF}{cacheKacheln}
-Zwischenspeichern der zuletzt gerenderten Kacheln
+Zwischenspeicherung der zuletzt gerenderten bzw. geladenen Kacheln
 %TODO besser? Wir brauchen keine Begründung... (gemacht)
 \oitem{WF}{tauschStartZiel}
 Tauschen von Start- und Zielpunkt
+\oitem{WF}{saveHist}
+Hinzufügen einer Routenanfrage zum \gls{verlauf}
+\oitem{WF}{getHist}
+Start- und Zielpunkt aus dem \gls{verlauf} auswählen
 \end{description}
 
 \subsection{Wegbeschreibung}
@@ -455,8 +466,8 @@ Bestimmung aller Abbiegevorgänge einer \gls{route}
 Klassifizierung der Abbiegevorgänge (rechts, links, scharf rechts, scharf links, geradeaus, halblinks, halbrechts, halblinks, rechts halten, links halten, Nummer der Ausfahrt im Kreisverkehr)
 \oitem{WF}{bestimmeAnweisungAusAbbiege}
 Erzeugung einer textuellen Abbiegeanweisung aus einem Abbiegevorgang
-\oitem{WF}{bestimmeAnweisungAusRoutenstück}
-Erzeugung einer textuellen Weganweisung („dem Straßenverlauf folgen“, „in 2km ...“, etc.) aus einem Routenstück
+\oitem{WF}{bestimmeAnweisungEntfernung}
+Ergänzung der Abbiegeanweisung aus \ref{WF:bestimmeAnweisungAusAbbiege} um eine Angabe zur Entfernung seit dem letzten Abbiegevorgang
 \oitem{WF}{beschreibungAusAnweisungen}
 Erzeugung einer \gls{wegbeschreibung} aus mehreren Abbiege- und Weganweisungen
 \oitem{WF}{htmlAusBeschreibung}
@@ -466,8 +477,8 @@ Erzeugung einer HTML-Datei aus einer \gls{wegbeschreibung}
 \subsection{Profilverwaltung}
 \begin{description}
 \oitem{WF}{neuesProfil} Anlegen eines neuen \glslink{profil}{Profils}
-\oitem{WF}{loescheProfil} Löschen eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme des \glslink{standardprofil}{Standardprofils})
-\oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme des \glslink{standardprofil}{Standardprofils})
+\oitem{WF}{loescheProfil} Löschen eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme der \glspl{standardprofil})
+\oitem{WF}{aendereProfil} Ändern eines vorhandenen \glslink{profil}{Profils} (mit Ausnahme der \glspl{standardprofil})
 \oitem{WF}{wechsleProfil} Wechseln des ausgewählten \glslink{profil}{Profils} zwischen Routenberechnungen
 % Betreuer2: Auswählen (gemacht)
 \oitem{WF}{letztesProfil}
@@ -483,7 +494,7 @@ Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \oitem{WF}{berechneKarte} Ausführen der \gls{vorberechnung} für ausgewählte \glspl{profil} auf einer Karte
 % Betreuer2: Auswählen (gemacht)
 \oitem{WF}{letzteKarte}
-Laden der zuletzt benutzten Karte beim Programmstart
+Laden der zuletzt benutzten Karte bzw. der Standardkarte beim Programmstart
 \end{description}
 
 \section{Produktdaten}
