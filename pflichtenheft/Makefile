@@ -2,6 +2,7 @@ LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 SVG2PDF = rsvg-convert -f pdf -o
 ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenverwaltung.pdf Verlauf.pdf
+PNGS = mockup_screenshot_about.png mockup_screenshot_main.png mockup_screenshot_menu.png mockup_screenshot_nicht_berechnet.png
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 
 all: dokument.pdf clean-dokument-build
@@ -10,7 +11,7 @@ all: dokument.pdf clean-dokument-build
 
 clean: clean-dokument clean-Paketdiagramm clean-Profilverwaltung clean-Kartenverwaltung clean-Verlauf
 
-dokument.pdf: $(ARTEFAKTE) dokument.tex
+dokument.pdf: $(ARTEFAKTE) $(PNGS) dokument.tex
 	$(MAKE) clean-dokument # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) dokument.tex # initial build
 	makeglossaries dokument # initial glossary
