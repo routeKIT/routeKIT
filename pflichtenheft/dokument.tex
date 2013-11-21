@@ -11,13 +11,6 @@
 
 \hyphenation{Stan-dard-pro-fil}
 \makeglossary
-%TODO Betreuer name, des Programms, institut, etc
-% Betreuer2: Produktname
-% Betreuer2: Gls, s. seite (gemacht)
-% Betreuer2: Verlauf bleibt erhalten (gemacht)
-\title{Pflichtenheft}
-\author{Kevin Birke \\ Felix Dörre \\ Fabian Hafner \\ Lucas Werkmeister \\ Dominic Ziegler \\ Anastasia Zinkina}
-%\date{}
 
 %Hack for referencing labels
 \makeatletter
@@ -120,10 +113,6 @@
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
 
-\maketitle
-\newpage
-\tableofcontents
-\newpage
 % Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten) (gemacht)
 % Betreuer: Profile exakt welcher Typ (gemacht)
 
@@ -202,6 +191,48 @@
   name={Mercator Projektion},
   description={Die Zylinderprojektion der Weltkugel.}
 }
+
+%TODO Betreuer name, des Programms, institut, etc (gemacht)
+% Betreuer2: Produktname (gemacht)
+% Betreuer2: Gls, s. seite (gemacht)
+% Betreuer2: Verlauf bleibt erhalten (gemacht)
+\begin{titlepage}
+\makeatletter
+\begin{center}
+~\\[5em]
+{\Huge routeKIT}\\[3em]
+{\LARGE Pflichtenheft}\\[1em]
+{\large\today}\\[2.5em]
+{\LARGE
+Kevin Birke\\
+Felix Dörre\\
+Fabian Hafner\\
+Lucas Werkmeister\\
+Dominic Ziegler\\
+Anastasia Zinkina\\[3em]}
+betreut durch\\[2em]
+{\Large
+Dipl.-Inf.~Julian~Arz\\
+Dipl.-Inf.~G.~Veit~Batz\\
+Dr.~rer.~nat.~Dennis~Luxen\\
+Dipl.~Phys.,~Dipl.~Inf.~Dennis~Schieferdecker\\[1em]}
+am\\[1em]
+{\Large
+Karlsruher Institut für~Technologie\\
+Institut für Theoretische~Informatik\\
+Algorithmik~II\\
+\normalsize
+unter\\
+\Large
+Prof.~Dr.~rer.~nat.~Peter~Sanders\\}
+
+\end{center}
+\makeatother
+\end{titlepage}
+\newpage
+\tableofcontents
+\newpage
+
 % -------------------------------------------------------------- HIER BEGINNT DAS DOKUMENT WIRKLICH ---------------------------------
 \section{Einleitung}
 % Betreuer2: Vorberechnung dauert lange. "Expertenfeature" (erledigt)
