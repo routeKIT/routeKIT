@@ -2,7 +2,23 @@
 <?xml-stylesheet href="ui.css" type="text/css"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20001102//EN"
   "http://www.w3.org/TR/2000/CR-SVG-20001102/DTD/svg-20001102.dtd">
-<svg width="495" height="315" xmlns="http://www.w3.org/2000/svg">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="495"
+    height="315">
+  
+  <defs>
+    <g id="spinnerDown">
+      <rect x="0" y="0" width="10" height="10" class="enabled"/>
+      <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
+    </g>
+    <g id="spinnerButtons">
+      <use xlink:href="#spinnerDown" transform="rotate(180,5,5)"/>
+      <use xlink:href="#spinnerDown" transform="translate(0,10)"/>
+    </g>
+  </defs>
+  
   <rect id="window" x="0" y="0" width="495" height="315" fill="white"/>
   <rect id="titleBar" x="0" y="0" width="495" height="20" fill="lightgrey"/>
   <g id="closeButton" transform="translate(475,0)">
@@ -63,14 +79,7 @@
     <g id="vehicleHeightSpinner" transform="translate(150,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
       <text x="35" y="15" class="enabled rightaligned">1,6</text>
-      <g id="vehicleHeightSpinnerUp" transform="translate(40,0)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
-      </g>
-      <g id="vehicleHeightSpinnerDown" transform="translate(40,10)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
-      </g>
+      <use xlink:href="#spinnerButtons" transform="translate(40,0)"/>
     </g>
     <text id="vehicleHeightUnitLabel" x="205" y="15" class="enabled">m</text>
   </g>
@@ -81,14 +90,7 @@
     <g id="vehicleWidthSpinner" transform="translate(150,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
       <text x="35" y="15" class="enabled rightaligned">1,6</text>
-      <g id="vehicleWidthSpinnerUp" transform="translate(40,0)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
-      </g>
-      <g id="vehicleWidthSpinnerDown" transform="translate(40,10)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
-      </g>
+      <use xlink:href="#spinnerButtons" transform="translate(40,0)"/>
     </g>
     <text id="vehicleWidthUnitLabel" x="205" y="15" class="enabled">m</text>
   </g>
@@ -99,14 +101,7 @@
     <g id="vehicleWeightSpinner" transform="translate(150,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
       <text x="35" y="15" class="enabled rightaligned">1,4</text>
-      <g id="vehicleWeightSpinnerUp" transform="translate(40,0)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
-      </g>
-      <g id="vehicleWeightSpinnerDown" transform="translate(40,10)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
-      </g>
+      <use xlink:href="#spinnerButtons" transform="translate(40,0)"/>
     </g>
     <text id="vehicleWeightUnitLabel" x="205" y="15" class="enabled">t</text>
   </g>
@@ -117,14 +112,7 @@
     <g id="avgSpeedHighwaySpinner" transform="translate(300,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
       <text x="35" y="15" class="enabled rightaligned">120</text>
-      <g id="avgSpeedHighwaySpinnerUp" transform="translate(40,0)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
-      </g>
-      <g id="avgSpeedHighwaySpinnerDown" transform="translate(40,10)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
-      </g>
+      <use xlink:href="#spinnerButtons" transform="translate(40,0)"/>
     </g>
     <text id="avgSpeedHighwayUnitLabel" x="355" y="15" class="enabled">km/h</text>
   </g>
@@ -135,14 +123,7 @@
     <g id="avgSpeedCountryRoadSpinner" transform="translate(300,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
       <text x="35" y="15" class="enabled rightaligned">75</text>
-      <g id="avgSpeedCountryRoadSpinnerUp" transform="translate(40,0)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">ʌ</text>
-      </g>
-      <g id="avgSpeedCountryRoadSpinnerDown" transform="translate(40,10)">
-        <rect x="0" y="0" width="10" height="10" class="enabled"/>
-        <text x="5" y="7.5" class="enabled centered smallarrow">v</text>
-      </g>
+      <use xlink:href="#spinnerButtons" transform="translate(40,0)"/>
     </g>
     <text id="avgSpeedCountryRoadUnitLabel" x="355" y="15" class="enabled">km/h</text>
   </g>
