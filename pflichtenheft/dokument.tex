@@ -538,7 +538,7 @@ Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
 % Betreuer2: Hierarchisch, Gesamt-App-Paket.... naja... (machen wir nicht)
 \includegraphics[width=\linewidth]{Paketdiagramm}
 \begin{description}
-\oitem{PK}{program} Programm\\
+\oitem{PK}{program} routeKIT\\
 Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
 \oitem{PK}{gui} User Interface\\
 Enthält alle Controller und Views außer \ref{PK:mapView}. Steuert das gesamte Verhalten der Benutzeroberfläche. Realisiert u.~a. \ref{MK:startZielWaehlen}.
@@ -561,7 +561,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \begin{description}
 \oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als 5 s.
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNächstenPunktAufKante} benötigt höchstens 500 ms.
-\oitem{NF}{knotenWaysAnzahl} Die Software muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
+\oitem{NF}{knotenWaysAnzahl} routeKIT muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
 \oitem{NF}{mausklicks} Wenn der Kartenausschnitt richtig gewählt ist, braucht die Auswahl vom Start- bzw. Zielpunkt höchstens 2 Mausklicks.
 \oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500 ms. 
 \oitem{NF}{benutzbarkeit} Die öfter verwendeten Funktionen sind mit weniger Eingaben erreichbar als die selten verwendeten.
@@ -745,7 +745,7 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 \label{fig:mockupabout}
 \end{figure}
 \begin{enumerate}
-\item Informationen über das Programm
+\item Informationen über „routeKIT“
 %TODO Genauen Inhalt (gemacht)
 \item OK-Knopf: schließt das Fenster
 \end{enumerate}
@@ -753,7 +753,7 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung (gemacht)
 \subsection{Funktionssequenzen}
-Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
+Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
 %TODO Namen der Testfälle/refs überall einfügen, wo es fehlt (gemacht)
 \begin{description}
 \itemsep 1em
@@ -770,11 +770,11 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
     {Die Wegbeschreibung wird exportiert}
     {Es liegt eine HTML-Datei mit der Wegbeschreibung vor}
 % Betreuer2: Systemstart (gemacht)
-\oitem{TF}{systemstart} Programm starten
+\oitem{TF}{systemstart} routeKIT starten
 \testfall
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
-    {Die Programm ist nicht gestartet}
-    {Die Software wird gestartet}
+    {Das Programm ist nicht gestartet}
+    {Das Programm wird gestartet}
     {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (beim ersten Programmstart wird die mitgelieferte Stan\-dard-Kar\-te bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
 \oitem{TF}{exitstartVerlauf} Verlauf nach Neustart
