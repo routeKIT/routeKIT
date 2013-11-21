@@ -543,9 +543,9 @@ Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
 \oitem{PK}{gui} User Interface\\
 Enthält alle Controller und Views außer \ref{PK:mapView}. Steuert das gesamte Verhalten der Benutzeroberfläche. Realisiert u.~a. \ref{MK:startZielWaehlen}.
 \oitem{PK}{mapView} MapViewer\\
-Das GUI Element, das Kartenkacheln dynamisch rendern lässt, cachet und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
+Das GUI Element, das Kartenkacheln dynamisch rendern lässt, cacht und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
 \oitem{PK}{precalc} PreCalculator\\
-Verarbeitet OSM Dateien in ein eigenes Format. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der OSM.
+Verarbeitet OSM Dateien und wandelt sie in ein eigenes Format um. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der OSM.
 \oitem{PK}{renderer} Renderer\\
 Berechnet die Kacheln aus den vorbereiteten Daten. Realisiert \ref{MK:karteRendern}
 \oitem{PK}{routeCalculator} RouteCalculator\\
@@ -553,7 +553,7 @@ Berechnet die Route aus den vorbereiteten Daten. Realisiert \ref{MK:routeBerechn
 \oitem{PK}{fileIO} FileIO\\
 Schreibt und lädt eigene Dateien in den zur Routenberechnung optimierten Dateiformaten.
 \oitem{PK}{osmParser} OSMParser\\
-Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnung benutzten Form im Hauptspeicher, um.
+Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung optimierte Form im Hauptspeicher um.
 \end{description}
 %Anastasia
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
@@ -761,7 +761,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
 \oitem{TF}{starteVorberechnung} Vorberechnung starten
 \testfall[\ref{WK:beschlArc}]
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
-    {Vorberechnung auswählen, lange Warten}
+    {Vorberechnung auswählen, Warnmeldung bestätigen, lange Warten}
     {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
 % Betreuer2: Wegbeschreibung export testen (gemacht)
 \oitem{TF}{wegbeschreibungsexport} Wegbeschreibung exportieren
@@ -791,7 +791,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
 \oitem{TF}{exitstartBerechnung} Vorberechnung nach Neustart
 \testfall[\ref{D:vorberechnung}]
     {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
-    {Der Benutzer berechnet eine Profil-Karten-Kombination, wartet, beendet das Programm, startet das Programm}
+    {Der Benutzer führt die Vorberechnung aus, beendet das Programm, startet das Programm}
     {Das zuvor berechnete Profil ist immer noch berechnet (für die aktuelle Karte)}
 \oitem{TF}{exportGPX} GPX-Export
 \testfall[\ref{WK:routeExport}]
@@ -822,7 +822,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
     [\ref{MK:karteVerschieben}]
     {Karte ist sichtbar}
     {Ziehen der Karte}
-    {Die Kartenposition hat sich entsprechend verändert}
+    {Der angezeigte Kartenausschnitt hat sich entsprechend verändert}
     %FIXME Klingt irgendwie seltsam... ne, (gemacht)
 \oitem{TF}{zoomeRein} Reinzoomen
 \testfall
@@ -849,12 +849,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
 \oitem{TF}{guideleteprofile} \gls{standardprofil} löschen
 \testfall[\ref{WK:standardprofile}]
     {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
-    {Ein mitgeliefertes Standard-Profil wird zum löschen ausgewählt.}
+    {Ein mitgeliefertes Standard-Profil wird ausgewählt.}
     {Der Knopf zum Löschen des Profils wird deaktiviert.}
 \oitem{TF}{guideletemap} Standard-Karte löschen
 \testfall
     {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
-    {Eine mitgelieferte Standard-Karte wird zum löschen ausgewählt.}
+    {Eine mitgelieferte Standard-Karte wird ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \oitem{TF}{osmKacheln} \glspl{osmkachel} verwenden
 \testfall[\ref{WK:osmKacheln}]
@@ -866,17 +866,17 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
     {Karte ist sichtbar, OSM-Render-Modus ist aktiviert}
     {Wechseln der Darstellungs-Art auf „eigene Kacheln“}
     {Die Karte wird mit selbst gerenderten Kacheln angezeigt,
-    es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben, oder zu zoomen)}
+    es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben oder zu zoomen)}
 \oitem{TF}{placeholder} Placeholder-Kacheln
 \testfall[\ref{WK:kartePlaceholder}]
     {Karte ist sichtbar}
-    {Die Karte wird schnell bewegen}
-    {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt}
+    {Die Karte schnell bewegen oder zoomen}
+    {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt, die nach kurzer Zeit durch die richtigen KAcheln ersetzt werden}
 \subsubsection{Profilverwaltung}
 \oitem{TF}{profilAnlegen} Profil anlegen
 \testfall
     [\ref{WK:profilerstellen}]
-    {Das erforderliche Profil ist noch nicht vorhanden}
+    {–}
     {Neues Profil anlegen}
     {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet (für die aktuelle Karte)}
 \oitem{TF}{waehleProfil} Profil auswählen
@@ -951,12 +951,12 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
 \oitem{TF}{einschraenkungNeg} Beschränkung trifft zu
 \testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein größerer Wert dafür angegeben}
-    {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
+    {Als Startpunkt wird der Anfang und als Ziel das Ende der Straße mit Beschränkung ausgewählt}
     {Ein Weg, der diese Straße nicht enthält, wird gefunden}
 \oitem{TF}{einschraenkungPos} Beschränkung trifft nicht zu
 \testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein kleinerer Wert dafür angegeben}
-    {Als Startpunkt wird das Ende und als Ziel der Anfang der Straße mit Beschränkung ausgewählt}
+    {Als Startpunkt wird der Anfang und als Ziel das Ende der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als Route gefunden}
 \oitem{TF}{typEinschraenkungNeg} Typ-Einschränkung trifft zu
 \testfall[\ref{WK:fahrzeugtyp}]
