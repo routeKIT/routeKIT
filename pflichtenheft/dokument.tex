@@ -115,6 +115,10 @@
 \renewcommand{\glslink}[2]{\refsymbol\oldglslink{#1}{#2}}
 \let\oldhyperref\hyperref
 \renewcommand{\hyperref}[2][notActuallyOptional]{\refsymbol\oldhyperref[#1]{#2}}
+\let\oldautoref\autoref
+\renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
+
+\newcommand{\abbildung}[1]{\autoref{fig:#1}}
 
 \maketitle
 \newpage
@@ -389,10 +393,10 @@ Vergrößern des sichtbaren Kartenausschnitts
 Verkleinern des sichtbaren Kartenausschnitts
 \oitem{F}{zeigeRoute}
 Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
-Abbildung \ref{fig:mockupscreenshotmain})
+\abbildung{mockupscreenshotmain})
 \oitem{F}{zeigeStartZiel}
 Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
-Abbildung \ref{fig:mockupscreenshotmain})
+\abbildung{mockupscreenshotmain})
 % Betreuer2: 'Aufbauen' (gemacht)
 \oitem{WF}{holeOnlineKachel}
 Anfordern bereits gerenderter Kacheln aus dem Internet
@@ -552,12 +556,12 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine, zur Vorberechnun
 \label{fig:mockupscreenshotmain}
 \end{figure}
 \begin{enumerate}
-\item Menüleiste: siehe Abbildung \ref{fig:mockupscreenshotmenu}
-\item Profil-Button: Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung}; daneben wird das aktuell ausgewählte \gls{profil} angezeigt
-\item Karte-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
+\item Menüleiste: siehe \abbildung{mockupscreenshotmenu}
+\item Profil-Button: Starte Profilverwaltung, siehe \abbildung{mockupprofilverwaltung}; daneben wird das aktuell ausgewählte \gls{profil} angezeigt
+\item Karte-Button: Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe \abbildung{mockupscreenshotkeinevorberechnung}; daneben wird die aktuell ausgewählte Karte angezeigt
 \item ausgewählter Startpunkt, ausgewähltes Ziel; mit \ref{WK:koordinaten} ist hier auch Eingabe möglich, sonst nur Anzeige
 \item Start/Ziel-tauschen-Button: Vertauscht Start- und Zielpunkt
-\item Verlauf-Button: erlaubt Zugriff auf den \gls{verlauf}, siehe Abbildung \ref{fig:mockupverlauf}
+\item Verlauf-Button: erlaubt Zugriff auf den \gls{verlauf}, siehe \abbildung{mockupverlauf}
 \item \gls{wegbeschreibung}; falls sie nicht auf den Bildschirm passt, erscheint ein Scrollbalken
 \item Karte (\ref{MK:karteAnzeigen})
 \item Zoom-Buttons: \texttt{+} zum Hereinzoomen, \texttt{-} zum Herauszoomen
@@ -596,14 +600,14 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \begin{enumerate}
 \item Menüpunkt "routeKIT"
 \item Unterpunkt "Verlauf...": Erlaubt Zugriff auf den \gls{verlauf}
-\item Unterpunkt "Über...": Zeigt Informationsfenster, siehe Abbildung \ref{fig:mockupabout}
+\item Unterpunkt "Über...": Zeigt Informationsfenster, siehe \abbildung{mockupabout}
 \item Unterpunkt "Beenden": Beendet das Programm
 \item Menüpunkt "Export"
 \item Unterpunkt "Route (GPX)...": Erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
 \item Unterpunkt "Beschreibung (HTML)...": Erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
 \item Menüpunkt "Verwaltung"
-\item Unterpunkt "Profile...": Starte Profilverwaltung, siehe Abbildung \ref{fig:mockupprofilverwaltung}
-\item Unterpunkt "Karten...": Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe Abbildung \ref{fig:mockupscreenshotkeinevorberechnung}
+\item Unterpunkt "Profile...": Starte Profilverwaltung, siehe \abbildung{mockupprofilverwaltung}
+\item Unterpunkt "Karten...": Wähle eine Karte; falls für diese Karte-Profil-Kombination keine Vorberechnung vorhanden ist, siehe \abbildung{mockupscreenshotkeinevorberechnung}
 \item Checkbox "OSM-Renderer verwenden": Legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
 \end{enumerate}
 
@@ -630,7 +634,7 @@ Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca.
 \item Abbrechen-Button: Verwirft Änderungen am ausgewählten Profil und schließt den Dialog
 \end{enumerate}
 
-In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, Abbildung \ref{fig:mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
+In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, \abbildung{mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
 
 \subsection{Dialog: Kartenverwaltung}
 \begin{figure}[H]
@@ -645,7 +649,7 @@ In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten
 \item Aktualisieren-Button: Fragt den Benutzer nach einer \gls{osm}-Datei und ersetzt die ausgewählte Karte mit dieser.
 \item Löschen-Button: Löscht die ausgewählte Karte aus der Liste (\ref{WK:karteLöschen}).
 \item Profil-Liste: Zeigt am Anfang alle Profile, für die eine \gls{vorberechnung} der ausgewählten Karte existiert.
-\item Hinzufügen-Button: Fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu. Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (Abbildung \ref{fig:mockupprofilverwaltung}); sein OK-Button setzt es dann nicht als das aktuelle Profil, sondern fügt es stattdessen zur Profil-Liste hinzu.
+\item Hinzufügen-Button: Fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu. Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (\abbildung{mockupprofilverwaltung}); sein OK-Button setzt es dann nicht als das aktuelle Profil, sondern fügt es stattdessen zur Profil-Liste hinzu.
 \item Entfernen-Button: Entfernt ein Profil aus der Profil-Liste.
 \item OK-Button: Übernimmt Änderungen, setzt die ausgewählte Karte als die aktuelle Karte und schließt den Dialog.
   \begin{itemize}
@@ -944,15 +948,15 @@ Bei allen Testfällen gilt als Vorbedingung, dass das Programm gestartet ist (au
 \subsection{Testszenarien}
 \begin{description}
 \oitem{TS}{ersterStart} Erster Start\\
-Alice startet das Programm routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (Abbildung \ref{fig:mockupscreenshotmain}). Alice kann zwischen zwei Standardprofilen wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
+Alice startet das Programm routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei Standardprofilen wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
 Sie wählt das Profil „PKW [default]“. Sie verschiebt die Karte, indem sie die linke Maustaste gedrückt hält und zoomt die Karte mit den Zoom-Buttons, bis sie die Hebelstraße findet. 
 Mit einem Rechtsklick öffnet sie das Kontextmenu und wählt diesen Punkt als Startpunkt. Die Koordinaten des Startpunkts werden im in dem dafür vorgesehen Feld angezeigt. Um den Zielpunkt auszuwählen tippt Alice in das Feld Ziel die Koordinaten \texttt{49,01386 8,38106} ein. 
-Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste Route zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)...“ und  „Beschreibung (HTML)...“ (Abbildung \ref{fig:mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)...“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
+Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste Route zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)...“ und  „Beschreibung (HTML)...“ (\abbildung{mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)...“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
 
 \oitem{TS}{verwaltung} Verwaltung\\
 Der Administrator einer Firma möchte routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
 
-Der Administrator startet zunächst routeKIT und öffnet den Kartenverwaltungs-Dialog (Abbildung \ref{fig:mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bielefeld-Karte. Dann entfernt er die Standardprofile von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (Abbildung \ref{fig:mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
+Der Administrator startet zunächst routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bielefeld-Karte. Dann entfernt er die Standardprofile von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
 \begin{itemize}
 \item Firmenauto: Ein \gls{pkw}, der etwas leichter und langsamer ist als das Standardprofil
 \item Boss-Auto: Der Boss fährt einen schnellen Mercedes
