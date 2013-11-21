@@ -96,8 +96,8 @@
 }
 
 % Betreuer: Rand reduzieren. (gemacht)
-% Betreuer: Wichtig, viel Kriterien, GUI, Testfälle
-% Betreuer: Präzise!!!
+% Betreuer: Wichtig, viel Kriterien, GUI, Testfälle (gemacht)
+% Betreuer: Präzise!!! (gemacht)
 % hier beginnt das Dokument
 \begin{document}
 \shorthandoff{"}
@@ -220,50 +220,52 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \subsection{Musskriterien}
 % Betreuer: Ausführlicher. (gemacht)
 % Betreuer2: Thesen, was ist. "." Einheitlich. "Satzanfang" einheitlich. (erledigt)
-%TODO "Einheitlich" Standard festlegen! Sätze? Stichpunkte?
-%Sollten wir nicht "die Software" rausnehmen?
+%TODO "Einheitlich" Standard festlegen! Sätze? Stichpunkte? (gemacht) da:
+% Passiv (Subjekt vorne) oder "der Benutzer kann":
+% Der Benutzer kann BLA tun.
+% BLA wird getan.
 \begin{description}
 \oitem{MK}{karteAnzeigen} Die Karte wird auf dem Bildschirm angezeigt.
-\oitem{MK}{karteRendern} Für die Kartenansicht (\ref{MK:karteAnzeigen}) werden eigene Kartenkacheln mit den Straßendaten \glslink{rendern}{gerendert}.
+\oitem{MK}{karteRendern} Eigene Kartenkacheln mit den Straßendaten werden für die Kartenansicht (\ref{MK:karteAnzeigen}) \glslink{rendern}{gerendert}.
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
 \oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
 \oitem{MK}{startZielZeigen} Der ausgewählte Start- und Zielpunkt wird als Marker auf der Karte angezeigt.
-\oitem{MK}{routeBerechnen} Es wird die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt berechnet.
+\oitem{MK}{routeBerechnen} Die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt wird berechnet.
 \oitem{MK}{routeAnzeigen} Die berechnete \gls{route} zwischen Start- und Zielpunkt wird auf der Karte angezeigt.
 \end{description}
 
 \subsection{Wunschkriterien}
 \begin{description}
 \oitem{WK}{beschlArc} Die Routenberechnung wird durch eine Vorberechnung von \gls{arc} \glslink{beschleunigung}{beschleunigt}.
-\oitem{WK}{abbiegebeschraenkung} Bei der Routenberechnung werden Abbiegeverbote aufgrund von Abbiegeeinschränkungen beachtet.
-\oitem{WK}{einbahnstrasse} Bei der Routenberechnung werden Einbahnstraßen beachtet.
-\oitem{WK}{fahrzeugtyp} Bei der Routenberechnung werden Durchfahrverbote für bestimmte Fahrzeugtypen beachtet.
-\oitem{WK}{maximalgewicht} Bei der Routenberechnung werden Durchfahrverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs beachtet.
-\oitem{WK}{beschreibung} Für die berechnete \gls{route} wird eine \gls{wegbeschreibung} generiert.
-\oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} kann als HTML-Datei exportiert werden.
+\oitem{WK}{abbiegebeschraenkung} Abbiegeverbote aufgrund von Abbiegeeinschränkungen werden bei der Routenberechnung beachtet.
+\oitem{WK}{einbahnstrasse} Einbahnstraßen werden bei der Routenberechnung beachtet.
+\oitem{WK}{fahrzeugtyp} Durchfahrtsverbote für bestimmte Fahrzeugtypen werden bei der Routenberechnung beachtet.
+\oitem{WK}{maximalgewicht} Durchfahrtsverbote aufgrund des zulässigen Maximalgewichts und der Maximalhöhe/-breite des Fahrzeugs werden bei der Routenberechnung werden beachtet.
+\oitem{WK}{beschreibung} Eine \gls{wegbeschreibung} wird für die berechnete \gls{route} generiert.
+\oitem{WK}{beschreibungExport} Die generierte \gls{wegbeschreibung} wird als HTML-Datei exportiert.
 \oitem{WK}{verlauf} Der Benutzer kann frühere Berechnungsanfragen aus einem \gls{verlauf} auswählen.
-\oitem{WK}{routeExport} Die berechnete \gls{route} kann als \gls{gpx}-Datei zur Benutzung in GPS-Geräten exportiert werden.
-\oitem{WK}{fahrzeit} Bestimmung der Fahrzeit einer \gls{route} unter Berücksichtigung vom Benutzer festgelegter Durchschnittsgeschwindigkeiten und der zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte sowie von Wartezeiten an Ampeln.
-\oitem{WK}{osmKacheln} Der Benutzer kann sich optional \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
+\oitem{WK}{routeExport} Die berechnete \gls{route} wird als \gls{gpx}-Datei zur Benutzung in GPS-Geräten exportiert werden.
+\oitem{WK}{fahrzeit} Die Fahrzeit einer \gls{route} wird unter Berücksichtigung von den zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte, vom Benutzer festgelegten Durchschnittsgeschwindigkeiten und Wartezeiten an Ampeln bestimmt.
+\oitem{WK}{osmKacheln} Der Benutzer kann sich \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen.
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen.
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern.
 \oitem{WK}{profile} Der Benutzer kann zwischen mehreren \glslink{profil}{Profilen} wählen.
-\oitem{WK}{standardprofile} Es gibt zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}, die nicht gelöscht werden können.
-\oitem{WK}{koordinaten} Start- und Zielkoordinaten können auch als \gls{dezimalkoordinaten} angegeben werden.
+\oitem{WK}{standardprofile} Zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}, die nicht gelöscht werden können, werden mitgeliefert.
+\oitem{WK}{koordinaten} Der Benutzer kann Start- und Zielkoordinaten als \gls{dezimalkoordinaten} angegeben.
 \oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
-\oitem{WK}{karteRendernDeko} In der gerenderten Kartendarstellung (\ref{MK:karteRendern}) werden Einbahnstraßen visualisiert.
-\oitem{WK}{kartePlaceholder} Ist eine Kartenkachel noch nicht gerendert bzw. (im Fall von \ref{WK:osmKacheln}) geladen, wird solange eine graue Ersatzkachel angezeigt.
+\oitem{WK}{karteRendernDeko} Einbahnstraßen werden in der gerenderten Kartendarstellung (\ref{MK:karteRendern}) visualisiert.
+\oitem{WK}{kartePlaceholder}  Eine graue Ersatzkachel wird angezeigt, solange eine Kartenkachel noch nicht gerendert bzw. (im Fall von \ref{WK:osmKacheln}) geladen ist.
 \oitem{WK}{kartenKachelnPrefetch} Kartenkacheln in der Umgebung des angezeigten Ausschnitts werden im Voraus berechnet bzw. (im Fall von \ref{WK:osmKacheln}) geladen.
 \oitem{WK}{karteAuswaehlen} Der Benutzer kann zwischen mehreren vorhandenen Karten auswählen.
 \oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer OSM-Datei importieren.
 \oitem{WK}{karteLöschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
-\oitem{WK}{letzteKarte} Beim Programmstart ist die zuletzt verwendete Karte immer noch ausgewählt.
-\oitem{WK}{letztesProfil} Beim Programmstart wird das zuletzt verwendete \gls{profil} immer noch ausgewählt.
-\oitem{WK}{routeLoeschenKarte} Bei einer Änderung der Karte wird (soweit vorhanden) eine bereits berechnete \gls{route} verworfen.
-\oitem{WK}{routeNeuBerechnenProfil} Bei einer Änderung des \glslink{profil}{Profils} wird (soweit vorhanden) eine bereits berechnete \gls{route} neu berechnet.
+\oitem{WK}{letzteKarte} Die zuletzt verwendete Karte ist bei einem erneuten Programmstart ausgewählt.
+\oitem{WK}{letztesProfil} Das zuletzt verwendete \gls{profil} ist bei einem erneuten Programmstart ausgewählt.
+\oitem{WK}{routeLoeschenKarte} Eine bereits berechnete \gls{route} wird bei einer Änderung der Karte verworfen.
+\oitem{WK}{routeNeuBerechnenProfil} Eine bereits berechnete \gls{route} wird bei einer Änderung des \glslink{profil}{Profils} neu berechnet.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -282,7 +284,7 @@ Das Produkt wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{sta
 \oitem{AK}{app} Die Software ist keine mobile Anwendung (App).
 \oitem{AK}{webapp} Die Software ist keine Webanwendung.
 \oitem{AK}{online} Die Software setzt keine permanente Internetverbindung voraus.
-%FIXME Gehört das hier hin? Sollte eigentlich irgendwo stehen...
+%FIXME Gehört das hier hin? Sollte eigentlich irgendwo stehen... (gemacht)
 \end{description}
 
 \section{Produkteinsatz}
