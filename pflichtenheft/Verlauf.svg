@@ -59,19 +59,18 @@
         <rect x="0" y="0" width="20" height="20" class="enabled"/>
         <text x="10" y="14" font-size="12" class="centered">v</text>
       </g>
-      <text x="9" y="140" class="labelnumber">2</text>
     </g>
   </g>
   
   <g id="okButton" transform="translate(120,280)">
     <rect x="0" y="0" width="90" height="20" class="enabled"/>
     <text x="45" y="15" class="enabled centered">OK</text>
-    <text x="50" y="25" class="labelnumber">3</text>
+    <text x="50" y="25" class="labelnumber">2</text>
   </g>
 
   <g id="cancelButton" transform="translate(220,280)">
     <rect x="0" y="0" width="90" height="20" class="enabled"/>
     <text x="45" y="15" class="enabled centered">Abbrechen</text>
-    <text x="50" y="25" class="labelnumber">4</text>
+    <text x="50" y="25" class="labelnumber">3</text>
   </g>
 </svg>
