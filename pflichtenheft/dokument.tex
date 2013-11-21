@@ -570,11 +570,11 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
 
 \begin{description}
-\oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als 5 s.
-\oitem{NF}{knotenHalbeSek} \ref{F:berechneNaechstenPunktAufKante} benötigt höchstens 500 ms.
+\oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als 5\,s.
+\oitem{NF}{knotenHalbeSek} \ref{F:berechneNaechstenPunktAufKante} benötigt höchstens 500\,ms.
 \oitem{NF}{knotenWaysAnzahl} routeKIT muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
-\oitem{NF}{mausklicks}  Die Auswahl vom Start- bzw. Zielpunkt braucht bei einem richtig gewählten Kartenausschnitt höchstens 2 Mausklicks.
-\oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500 ms. 
+\oitem{NF}{mausklicks} Die Auswahl vom Start- bzw. Zielpunkt braucht bei einem richtig gewählten Kartenausschnitt höchstens zwei Mausklicks.
+\oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500\,ms. 
 \oitem{NF}{benutzbarkeit} Die öfter verwendeten Funktionen sind mit weniger Eingaben erreichbar als die selten verwendeten.
 \oitem{NF}{schnellsteRoute} routeKIT zeigt immer die \gls{schnellroute} an (wenn eine \gls{route} existiert).
 
@@ -661,20 +661,20 @@ Um den Benutzer vor der langen, aufwändigen Vorberechnung zu warnen, erscheint 
 \end{figure}
 \begin{enumerate}
 \item Menüpunkt „routeKIT“
-\item Unterpunkt „Verlauf...“:\\erlaubt Zugriff auf den \gls{verlauf}
-\item Unterpunkt „Über...“:\\
+\item Unterpunkt „Verlauf\ldots“:\\erlaubt Zugriff auf den \gls{verlauf}
+\item Unterpunkt „Über\ldots“:\\
 zeigt Informationsfenster (siehe \abbildung{mockupabout})
 \item Unterpunkt „Beenden“:\\
 beendet das Programm
 \item Menüpunkt „Export“
-\item Unterpunkt „Route (GPX)...“:\\
+\item Unterpunkt „Route (GPX)\ldots“:\\
 erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
-\item Unterpunkt „Beschreibung (HTML)...“:\\
+\item Unterpunkt „Beschreibung (HTML)\ldots“:\\
 erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
 \item Menüpunkt „Verwaltung“
-\item Unterpunkt „Profile...“:\\
+\item Unterpunkt „Profile\ldots“:\\
 startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
-\item Unterpunkt „Karten...“:\\
+\item Unterpunkt „Karten\ldots“:\\
 startet Kartenverwaltung (siehe \abbildung{mockupkartenverwaltung})
 \item Checkbox „OSM-Renderer verwenden“:\\
 legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl{osmkachel} aus dem Internet geladen werden sollen (aktiviert)
