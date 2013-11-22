@@ -32,7 +32,7 @@
     <text id="profileLabel" x="0" y="15">Profil auswählen: </text>
     <g id="profileComboBox" transform="translate(110,0)">
       <rect x="0" y="0" width="200" height="20" class="enabled"/>
-      <text x="5" y="15">PKW [default]</text>
+      <text x="5" y="15">Mein Auto</text>
       <rect x="180" y="0" width="20" height="20" fill="none" stroke="black"/>
       <text x="190" y="15" class="centered normalarrow">v</text>
       <text x="125" y="25" class="labelnumber">1</text>

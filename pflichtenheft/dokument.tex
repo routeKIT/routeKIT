@@ -287,8 +287,8 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \oitem{WK}{fahrzeit} Die Fahrzeit einer \gls{route} wird unter Berücksichtigung von den zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte, vom Benutzer festgelegten Durchschnittsgeschwindigkeiten und Wartezeiten an Ampeln bestimmt.
 \oitem{WK}{osmKacheln} Der Benutzer kann sich \glspl{osmkachel} anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen.
-\oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen.
-\oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern.
+\oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen (mit Ausnahme der \glspl{standardprofil}).
+\oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern (mit Ausnahme der \glspl{standardprofil}).
 \oitem{WK}{profile} Der Benutzer kann zwischen mehreren \glslink{profil}{Profilen} wählen.
 \oitem{WK}{standardprofile} Zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}, die nicht gelöscht werden können, werden mitgeliefert.
 \oitem{WK}{koordinaten} Der Benutzer kann Start- und Zielkoordinaten als \gls{dezimalkoordinaten} angegeben.
@@ -736,6 +736,8 @@ verwirft Änderungen am ausgewählten \gls{profil}; schließt den Dialog
 
 In diesem Dialog kann der Benutzer \glspl{profil} hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, \abbildung{mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
 
+Das Bearbeiten der Standardprofile ist nicht möglich; wenn ein Standardprofil ausgewählt ist, sind die Eingabeelemente (Typ, Höhe, Breite, Gewicht, Geschwindigkeiten) deaktiviert.
+
 \subsection{Dialog: Kartenverwaltung}
 \begin{figure}[H]
 \centering
@@ -963,18 +965,18 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{loescheProfil} \gls{profil} löschen
 \testfall
     [\ref{WK:profilloeschen}]
-    {Ein \gls{profil}, das nicht das \gls{standardprofil} ist, ist vorhanden}
+    {Ein \gls{profil}, das nicht das \gls{standardprofil} ist, ist vorhanden und ausgewählt}
     {Das \gls{profil} wird gelöscht}
     {Das \gls{profil} ist nicht mehr vorhanden}
 \oitem{TF}{aendereProfil} \gls{profil} ändern
 \testfall
     [\ref{WK:profilaendern}]
-    {Ein \gls{profil} ist vorhanden}
+    {Ein \gls{profil}, das kein \gls{standardprofil} ist, ist vorhanden und ausgewählt}
     {Das \gls{profil} wird geändert, die Profilverwaltung geschlossen und wieder geöffnet}
     {Das \gls{profil} hat immer noch die neuen Daten}
 \oitem{TF}{profilPersistenz} \gls{profil} ändern und Neustart
 \testfall
-    {Ein \gls{profil} ist vorhanden}
+    {Ein \gls{profil}, das kein \gls{standardprofil} ist, ist vorhanden und ausgewählt}
     {Das \gls{profil} wird geändert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die Änderungen sind immer noch vorhanden}
 \oitem{TF}{routeNeuBerechnenProfil} Neuberechnen der \gls{route} bei Profiländerung
