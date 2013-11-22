@@ -16,38 +16,38 @@
     <rect x="0" y="0" width="300" height="230" class="enabled"/>
     <g id="historyEntry1" transform="translate(0,0)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">49,014 8,420 → 49,467 11,000: 3h 15min</text>
+      <text x="5" y="20" class="enabled">49,014 8,420 → 49,467 11,000: 11.10.2013 13:14</text>
     </g>
     <g id="historyEntry2" transform="translate(0,30)">
       <rect x="0" y="0" width="300" height="30" class="enabled selected"/>
-      <text x="5" y="20" class="enabled selected">49,014 8,420 → 48,949 8,996: 1h 10min</text>
+      <text x="5" y="20" class="enabled selected">49,014 8,420 → 48,949 8,996: 11.10.2013 12:50</text>
     </g>
     <g id="historyEntry3" transform="translate(0,60)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">50,738 7,110 → 52,516 13,380: 6h</text>
+      <text x="5" y="20" class="enabled">50,738 7,110 → 52,516 13,380: 11.10.2013 12:37</text>
     </g>
     <g id="historyEntry4" transform="translate(0,90)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">49,009 8,418 → 48,965 8,546: 20min</text>
+      <text x="5" y="20" class="enabled">49,009 8,418 → 48,965 8,546: 08.10.2013 18:46</text>
     </g>
     <g id="historyEntry5" transform="translate(0,120)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">39,949 -3,650 → 43,128 131,904: 35h</text>
+      <text x="5" y="20" class="enabled">39,949 -3,650 → 43,128 131,904: 08.10.2013 18:33</text>
     </g>
     <g id="historyEntry6" transform="translate(0,150)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">48,858 2,295 → 14,681 -17,441: 480h</text>
+      <text x="5" y="20" class="enabled">48,858 2,295 → 14,681 -17,441: 08.10.2013 18:17</text>
     </g>
     <g id="historyEntry7" transform="translate(0,180)">
       <rect x="0" y="0" width="300" height="30" class="enabled"/>
-      <text x="5" y="20" class="enabled">49,014 8,421 → 49,009 8,410: 10min</text>
+      <text x="5" y="20" class="enabled">49,014 8,421 → 49,009 8,410: 08.10.2013 17:53</text>
     </g>
     <g id="historyEntry8" transform="translate(0,210)">
       <rect x="0" y="0" width="300" height="20" class="enabled"/>
-      <text x="5" y="20" class="enabled">40,7656 -73,986 → 34,066 -118,214: 30h</text>
+      <text x="5" y="20" class="enabled">40,7656 -73,986 → 34,066 -118,214: 08.10.2013 17:53</text>
       <rect x="0" y="20" width="300" height="10" fill="white"/> <!-- cutoff -->
     </g>
-    <text x="220" y="85" class="labelnumber">1</text>
+    <text x="260" y="85" class="labelnumber">1</text>
     <g id="scrollbar" transform="translate(280,0)">
       <rect x="0" y="0" width="20" height="230" class="disabled"/>
       <g id="scrollbarUpButton" transform="translate(0,0)">
