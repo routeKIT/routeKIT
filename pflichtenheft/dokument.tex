@@ -1052,7 +1052,26 @@ Vor der Durchführung der Testszenarien muss \routeKIT installiert sein.
 
 
 \oitem{TS}{programmnutzung} Programmnutzung\\
-Alice’ Computer hat eine Internetverbindung. Alice startet das Programm \routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der \gls{verlauf} wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
+Vorbedingung: Computer hat eine Internetverbindung. Es werden keine  \glspl{osmkachel} verwendet.
+\begin{itemize}
+\item Das Programm \routeKIT wird gestartet. Die zuletzt verwendete Karte wird angezeigt. Das zulezt verwendete \gls{profil} ist ausgewählt. 
+\item Der „Profil-Button“ wird gedrückt. Das Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint.
+\item Es wird zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ gewählt und der „Löschen-Button“ gedrückt. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“.
+\item Der Button „Ja“ wird gedrückt. Das Profil ist gelöscht.
+\item Es wird das Profil „MeinLKW“ gewählt und auf „OK“ gedrückt. Das Profil „MeinLKW“ ist ausgewählt. 
+\item Es wird der „Karten-Button“ gedrückt. Das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) wird angezeigt.
+\item Die Karte „Hamburg“ wird ausgewählt und der „Löschen-Button“ wird gedrückt.
+\item Der Button „OK“ wird gedrückt. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben.
+\item Der Button „OK“ wird gedrückt. Die Karte ist gelöscht.
+\item Die Karte „Karlsruhe“ wird ausgewählt  und der Button „OK“ wird gedrückt. Die Karte „Karlsruhe“ ist ausgewählt.
+\item Der „Verlauf-Button“ wird gedrückt. Der \gls{verlauf} wird angezeigt.
+\item Der oberste Eintrag wird ausgewählt und der Button „OK“ wird gedrückt. Es sind die Start- und Zielpunkte ausgewählt. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route.
+\item Der Menüpunkt „Export“ und darin „Route GPX\ldots“ wird ausgewählt (\abbildung{mockupscreenshotmenu}). Die Route wird als GPX-Datei exportiert.
+\item Der Menüpunkt „Verwaltung“ und darin die Checkbox „OSM-Renderer verwenden“ werden angeklickt (\abbildung{mockupscreenshotmenu}). Es werden die \glspl{osmkachel} angefordert. Die Darstellung der Karte verändert sich.
+\item Der „Start/Ziel-tauschen-Button“ wird gedrückt. Die \gls{route} wird neu berechnet und angezeigt.
+\item Der Menüpunkt „routeKIT“ und darin „Über\ldots“ wird ausgewählt. Ein Fenster mit Informtionen über das Programm wird angezeigt. 
+\item Der Button „OK“ wird gedrückt. Das Fenster wird geschlossen.
+\item Der Menüpunkt „routeKIT“ und darin „Beenden“ wird ausgewählt. Das Programm ist beendet.
 
 \oitem{TS}{verwaltung} Verwaltung\\
 \begin{itemize}
