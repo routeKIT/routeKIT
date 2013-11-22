@@ -112,6 +112,7 @@
 \renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
+\newcommand{\routeKIT}[0]{\textit{routeKIT} }
 
 % Betreuer: Berechnung von Punkt auf Kante zu Punkt auf Kante.  (KdBaum über Kanten) (gemacht)
 % Betreuer: Profile exakt welcher Typ (gemacht)
@@ -237,11 +238,11 @@ Prof.~Dr.~rer.~nat.~Peter~Sanders\\}
 \section{Einleitung}
 % Betreuer2: Vorberechnung dauert lange. „Expertenfeature“ (erledigt)
 % TODO verlauf erwähnen (auch erledigt)
-Das Produkt routKIT ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem Verlauf gespeichert.
+Das Produkt \routeKIT ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem Verlauf gespeichert.
 
 Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei mehrere Fahrzeugprofile anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
-Das Produkt routKIT wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
+Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
 % Betreuer: Abbiegungbeschränkung, „Route berechnen“, (gemacht)
@@ -572,11 +573,11 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung
 \begin{description}
 \oitem{NF}{routeFuenfSek} \ref{F:berechneRoute} (Berechnung der Route) ist schneller als 5\,s.
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNaechstenPunktAufKante} benötigt höchstens 500\,ms.
-\oitem{NF}{knotenWaysAnzahl} routeKIT muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
+\oitem{NF}{knotenWaysAnzahl} \routeKIT muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
 \oitem{NF}{mausklicks} Die Auswahl vom Start- bzw. Zielpunkt braucht bei einem richtig gewählten Kartenausschnitt höchstens zwei Mausklicks.
 \oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500\,ms. 
 \oitem{NF}{benutzbarkeit} Die öfter verwendeten Funktionen sind mit weniger Eingaben erreichbar als die selten verwendeten.
-\oitem{NF}{schnellsteRoute} routeKIT zeigt immer die \gls{schnellroute} an (wenn eine \gls{route} existiert).
+\oitem{NF}{schnellsteRoute} \routeKIT zeigt immer die \gls{schnellroute} an (wenn eine \gls{route} existiert).
 
 
 % Betreuer2: Noch mehr, rendern einer Kachel, Mausklicks (gemacht)
@@ -794,7 +795,7 @@ Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwend
 \label{fig:mockupabout}
 \end{figure}
 \begin{enumerate}
-\item Informationstext über „routeKIT“
+\item Informationstext über \routeKIT
 %TODO Genauen Inhalt (gemacht)
 \item OK-Knopf:\\
 schließt das Fenster
@@ -803,7 +804,7 @@ schließt das Fenster
 \section{Globale Testfälle und Szenarien}
 % Betreuer: Vorbedinung, Aktionen, Nachbedingung (gemacht)
 \subsection{Funktionssequenzen}
-Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
+Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (außer es ist explizit gefordert, dass es gestoppt ist).
 %TODO Namen der Testfälle/refs überall einfügen, wo es fehlt (gemacht)
 \begin{description}
 \itemsep 1em
@@ -820,7 +821,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
     {Die Wegbeschreibung wird exportiert}
     {Es liegt eine HTML-Datei mit der Wegbeschreibung vor}
 % Betreuer2: Systemstart (gemacht)
-\oitem{TF}{systemstart} routeKIT starten
+\oitem{TF}{systemstart} \routeKIT starten
 \testfall
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
     {Das Programm ist nicht gestartet}
@@ -1036,19 +1037,19 @@ Bei allen Testfällen gilt als Vorbedingung, dass routeKIT gestartet ist (außer
 %TODO Verify
 \begin{description}
 \oitem{TS}{ersterStart} Erster Start\\
-Alice startet das Programm routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei Standardprofilen wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
+Alice startet das Programm \routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei Standardprofilen wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
 Sie wählt das Profil „PKW [default]“. Sie verschiebt die Karte, indem sie die linke Maustaste gedrückt hält, und zoomt die Karte mit den Zoom-Buttons, bis sie die Hebelstraße findet. 
 Mit einem Rechtsklick öffnet sie das Kontextmenü und wählt diesen Punkt als Startpunkt. Die Koordinaten des Startpunkts werden in dem dafür vorgesehen Feld angezeigt. Um den Zielpunkt auszuwählen, tippt Alice in das Feld „Ziel“ die \gls{dezimalkoordinaten} \texttt{49,01386 8,38106} ein. 
 Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste Route zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)\ldots“ und  „Beschreibung (HTML)\ldots“ (\abbildung{mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)\ldots“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
 
 
 \oitem{TS}{programmnutzung} Programmnutzung\\
-Alice’ Computer hat eine Internetverbindung. Alice startet das Programm routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der Verlauf wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
+Alice’ Computer hat eine Internetverbindung. Alice startet das Programm \routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der Verlauf wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
 
 \oitem{TS}{verwaltung} Verwaltung\\
-Der Administrator einer Firma möchte routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
+Der Administrator einer Firma möchte \routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
 
-Der Administrator startet zunächst routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bie\-le\-feld-Kar\-te. Dann entfernt er die Standardprofile von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
+Der Administrator startet zunächst \routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bie\-le\-feld-Kar\-te. Dann entfernt er die Standardprofile von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
 \begin{itemize}
 \item Firmenauto: Ein \gls{pkw}, der etwas leichter und langsamer ist als das Standardprofil
 \item Boss-Auto: Der Boss fährt einen schnellen Mercedes
