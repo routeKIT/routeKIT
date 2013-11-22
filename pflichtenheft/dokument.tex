@@ -414,17 +414,8 @@ Bestimmung aller in einem Kartenausschnitt benötigten Bildkacheln
 Bestimmung aller Kanten in einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe (benötigt für \ref{F:berechneKachel})
 \oitem{F}{berechneKachel}
 \glslink{rendern}{Rendern} einer Bildkachel aus lokalen  \gls{kartendaten} (nur Straßen) zu gegebener Zoomstufe und gegebenem Ausschnitt
-\oitem{WF}{einbahnstrassenKachel}
-Kennzeichnung von Einbahnstraßen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
-\oitem{WF}{strassennamenKachel}
-Darstellung von Straßennamen und -bezeichnungen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
-\oitem{WF}{ortsnamenKachel}
-Darstellung von Ortsnamen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
 \oitem{F}{zeichneKachel}
 Anzeige der Kartenkacheln in der gewünschten Zoomstufe an der richtigen Stelle im \gls{gui}
-% Betreuer2: Aufteilen, Genauer TODO: sicherer Formulieren (erledigt)
-\oitem{WF}{ersatzkachel}
-Anzeige einer grauen Ersatzkachel während des Renderns bzw. Ladens der Kachel
 \oitem{F}{ziehenZuAusschnitt}
 Verschieben des sichtbaren Kartenausschnitts
 \oitem{F}{zoomenInZuAusschnitt}
@@ -435,14 +426,23 @@ Verkleinern des sichtbaren Kartenausschnitts
 Bestimmung der Geokoordinaten zu einem gegebenen Pixel im dargestellten Kartenausschnitt
 \oitem{F}{startZielEingeben}
 Start- und Zielpunkt durch Mausklick des Benutzers (mittels \ref{F:bestimmeKoordinatenAusPunkt} und \ref{F:berechneNaechstenPunktAufKante}) festlegen
-\oitem{WF}{startZielGeo}
-Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 \oitem{F}{zeigeStartZiel}
 Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
 \abbildung{mockupscreenshotmain})
 \oitem{F}{zeigeRoute}
 Anzeige einer berechneten \gls{route} (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
 \abbildung{mockupscreenshotmain})
+\oitem{WF}{einbahnstrassenKachel}
+Kennzeichnung von Einbahnstraßen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
+\oitem{WF}{strassennamenKachel}
+Darstellung von Straßennamen und -bezeichnungen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
+\oitem{WF}{ortsnamenKachel}
+Darstellung von Ortsnamen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
+% Betreuer2: Aufteilen, Genauer TODO: sicherer Formulieren (erledigt)
+\oitem{WF}{ersatzkachel}
+Anzeige einer grauen Ersatzkachel während des Renderns bzw. Ladens der Kachel
+\oitem{WF}{startZielGeo}
+Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 % Betreuer2: ‚Aufbauen‘ (gemacht)
 \oitem{WF}{holeOnlineKachel}
 Anfordern bereits gerenderter Kacheln aus dem Internet
