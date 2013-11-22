@@ -179,6 +179,13 @@
   plural={Standardprofile},
   see={profil}  
 }
+}
+\newglossaryentry{standardkarte}{
+  name={Standardkarte},
+  description={Eine vorinstallierte und für die Standardprofile bereits vorberechnete Karte von Karlsruhe},
+  plural={Standardkarten},
+  see={standardprofil}  
+}
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
   description={verbindet die \gls{kartendaten} mit dem auf einem \gls{profil} basierenden Informationen und ermöglicht, unter anderem mittels \gls{arc}, später eine \gls{beschleunigung} der Berechnung einer \gls{route}; muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden},
@@ -247,7 +254,7 @@ Prof.~Dr.~Peter~Sanders\\}
 
 Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnung} beschleunigt. Der Benutzer kann dabei mehrere \glslink{profil}{Fahrzeugprofile} anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes \gls{profil} die \gls{vorberechnung} erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
-\routeKIT wird mit einer \glslink{vorberechnung}{vorberechneten} Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die \gls{kartendaten} stammen aus dem \gls{osm}-Projekt.
+\routeKIT wird mit einer \glslink{vorberechnung}{vorberechneten} \gls{standardkarte} für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die \gls{kartendaten} stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
 % Betreuer: Abbiegungbeschränkung, „Route berechnen“, (gemacht)
@@ -299,12 +306,13 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \oitem{WK}{kartenKachelnPrefetch} Kartenkacheln in der Umgebung des angezeigten Ausschnitts werden im Voraus berechnet bzw. (im Fall von \ref{WK:osmKacheln}) geladen.
 \oitem{WK}{karteAuswaehlen} Der Benutzer kann zwischen mehreren vorhandenen Karten auswählen.
 \oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer \gls{osm}-Datei importieren.
-\oitem{WK}{karteLoeschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
+\oitem{WK}{karteLoeschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der \gls{standardkarte}) löschen.
 \oitem{WK}{letzteKarte} Die zuletzt verwendete Karte ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{letztesProfil} Das zuletzt verwendete \gls{profil} ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{routeLoeschenKarte} Eine bereits berechnete \gls{route} wird bei einer Änderung der Karte verworfen.
 \oitem{WK}{routeNeuBerechnenProfil} Eine bereits berechnete \gls{route} wird bei einer Änderung des \glslink{profil}{Profils} neu berechnet.
 \oitem{WK}{ungueltigeEingabe} Ungültige oder fehlerhafte Eingaben des Benutzers werden abgefangen und führen nicht zu einem Absturz des Programms.
+
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -317,7 +325,7 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \oitem{AK}{poi} Die Positionen von \glspl{poi} sowie Gebäude werden nicht auf der Karte angezeigt.
 \oitem{AK}{verkehrszeichen} Ampeln und Verkehrszeichen werden nicht auf der Karte visualisiert.
 \oitem{AK}{baustelle} Baustellen werden (über die in den  \gls{kartendaten} enthaltenen Informationen hinaus) nicht berücksichtigt.
-\oitem{AK}{stau} TMC-Verkehrsmeldungen zu Staus werden nicht berücksichtigt.
+\oitem{AK}{stau} Verkehrsmeldungen zu Staus und Unfällen werden nicht berücksichtigt.
 \oitem{AK}{fahrradFussBahn} Die Software ist kein Routenplaner für Fahrradfahrer, Fußgänger oder öffentliche Verkehrsmittel.
 \oitem{AK}{altRoute} Alternativrouten können nicht berechnet werden.
 \oitem{AK}{app} Die Software ist keine mobile Anwendung (App).
@@ -504,7 +512,7 @@ Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 \oitem{WF}{neueKarte}
 Importieren einer neuen Karte aus einer \gls{osm}-Datei
 \oitem{WF}{loescheKarte}
-Löschen einer vorhandenen Karte (mit Ausnahme der Standardkarte)
+Löschen einer vorhandenen Karte (mit Ausnahme der \gls{standardkarte})
 \oitem{WF}{aktualisiereKarte}
 Aktualisieren einer vorhandenen Karte
 \oitem{WF}{wechsleKarte}
@@ -513,7 +521,7 @@ Wechseln der ausgewählten Karte zwischen Routenberechnungen
 Ausführen der \gls{vorberechnung} für ausgewählte \glspl{profil} auf einer Karte
 % Betreuer2: Auswählen (gemacht)
 \oitem{WF}{letzteKarte}
-Laden der zuletzt benutzten Karte bzw. der Standardkarte beim Programmstart
+Laden der zuletzt benutzten Karte bzw. der \gls{standardkarte} beim Programmstart
 \end{description}
 
 \section{Produktdaten}
@@ -925,10 +933,10 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
     {Ein mitgeliefertes \gls{standardprofil} wird ausgewählt.}
     {Der Knopf zum Löschen des \glslink{profil}{Profils} wird deaktiviert.}
-\oitem{TF}{guideletemap} Standardkarte löschen
+\oitem{TF}{guideletemap} \gls{standardkarte} löschen
 \testfall
     {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
-    {Eine mitgelieferte Standardkarte wird ausgewählt.}
+    {Eine mitgelieferte \gls{standardkarte} wird ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \oitem{TF}{falschePunkte} Punkte außerhalb der Karte 
 \testfall[\ref{WK:ungueltigeEingabe}]
@@ -998,7 +1006,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Die andere Karte ist ausgewählt und wird angezeigt.}
 \oitem{TF}{loescheKarte} Karte löschen
 \testfall[\ref{WK:karteLoeschen}]
-    {Eine andere Karte als die Standardkarte ist vorhanden.}
+    {Eine andere Karte als die \gls{standardkarte} ist vorhanden.}
     {Die Karte wird gelöscht.}
     {Die Karte ist nicht mehr vorhanden.}
 \oitem{TF}{kartenPersistenz} Karte importieren und Neustart
@@ -1102,7 +1110,7 @@ Vorbedingung: Computer hat eine Internetverbindung. Es werden keine  \glspl{osmk
 \end{itemize}
 
 \oitem{TS}{verwaltung} Verwaltung\\
-Vorbedingung: \routeKIT ist frisch installiert worden und hat noch keine Profile und Karten außer den \glslink{standardprofil}{Standardprofilen} und der Standardkarte.
+Vorbedingung: \routeKIT ist frisch installiert worden und hat noch keine Profile und Karten außer den \glslink{standardprofil}{Standardprofilen} und der \gls{standardkarte}.
 \begin{itemize}
 \item Das Programm \routeKIT wird gestartet.
 \item Der Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) wird geöffnet.
