@@ -304,6 +304,7 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \oitem{WK}{letztesProfil} Das zuletzt verwendete \gls{profil} ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{routeLoeschenKarte} Eine bereits berechnete \gls{route} wird bei einer Änderung der Karte verworfen.
 \oitem{WK}{routeNeuBerechnenProfil} Eine bereits berechnete \gls{route} wird bei einer Änderung des \glslink{profil}{Profils} neu berechnet.
+\oitem{WK}{ungueltigeEingabe} Ungültige oder fehlerhafte Eingaben des Benutzers werden abgefangen und führen nicht zu einem Absturz des Programms.
 % Betreuer: Profile(gemacht)
 
 \end{description}
@@ -930,7 +931,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Eine mitgelieferte Standardkarte wird ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \oitem{TF}{falschePunkte} Punkte außerhalb der Karte 
-\testfall
+\testfall[\ref{WK:ungueltigeEingabe}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
     {Start- oder Zielpunkt wird außerhalb der Karte angegeben}
     {Es erscheint eine Fehlermeldung}
