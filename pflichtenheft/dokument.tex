@@ -973,7 +973,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Die neue Karte ist ausgewählt, die Karte ist für das aktuelle \gls{profil} nicht \glslink{vorberechnung}{vorberechnet}}
 \oitem{TF}{wechsleKarte} Karte auswählen
 \testfall[\ref{WK:karteAuswaehlen}]
-    {Eine Karte ist ausgewählt}
+    {Eine Karte ist ausgewählt, eine andere Karte existiert}
     {Eine andere Karte wird ausgewählt}
     {Die andere Karte ist ausgewählt und wird angezeigt}
 \oitem{TF}{loescheKarte} Karte löschen
@@ -1122,11 +1122,11 @@ Eine \gls{route} kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ei
 \gls{kartendaten} müssen als gültige \gls{osm}-Datei vorliegen.
 \gls{profil} nicht mehr vorhanden sind.
 \oitem{TD}{löscheNichtStandard}
-Das \gls{standardprofil} kann nicht gelöscht werden.
+\glspl{standardprofil} können nicht gelöscht werden.
 \oitem{TD}{profil}
-Es ist ein \gls{profil} ausgewählt.
+Es ist immer ein \gls{profil} ausgewählt.
 \oitem{TD}{karte}
-Es ist eine Karte ausgewählt.
+Es ist immer eine Karte ausgewählt.
 \end{description}
 % Fabian
 \section{Entwicklungsumgebung}
