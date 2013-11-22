@@ -632,7 +632,7 @@ liest die \gls{osm}-Karte (\ref{D:osmDatei}) und wandelt sie in eine zur \gls{vo
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{mockup_screenshot_main}
-\caption{Erster Entwurf}
+\caption{Hauptfenster}
 \label{fig:mockupscreenshotmain}
 \end{figure}
 \begin{enumerate}
@@ -657,7 +657,7 @@ die aktuelle Karte aus selbst gerenderten oder \glspl{osmkachel}
 \item ausgewählter Zielpunkt (falls vorhanden)
 \item berechnete \gls{route} (falls vorhanden)
 \item Kontextmenü:\\
-„Start hier“ setzt den Startpunkt; „Ziel hier“ den Zielpunkt
+„Start hier“ setzt den Startpunkt; „Ziel hier“ setzt den Zielpunkt
 \end{enumerate}
 
 Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. Ein Rechtsklick öffnet ein Kontextmenü, wo der Benutzer auswählen kann, ob er an dieser Stelle den Start- oder Zielpunkt setzen will. Durch einen Linksklick außerhalb des Kontextmenüs wird das Kontextmenü geschlossen.
@@ -830,7 +830,7 @@ Im \gls{verlauf}-Dialog kann der Benutzer frühere Anfragen einsehen und wiederv
 \begin{enumerate}
 \item Informationstext über \routeKIT
 %TODO Genauen Inhalt (gemacht)
-\item OK-Knopf:\\
+\item OK-Button:\\
 schließt das Fenster
 \end{enumerate}
 
@@ -845,27 +845,27 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{starteVorberechnung} \gls{vorberechnung} starten
 \testfall[\ref{WK:beschlArc}]
     {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {\gls{vorberechnung} auswählen, Warnmeldung bestätigen, lange Warten}
+    {Die \gls{vorberechnung} wird ausgewählt, Warnmeldung wird bestätigt, es wird lange gewartet.}
     {Das aktuelle \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte).}
 % Betreuer2: Wegbeschreibung export testen (gemacht)
 \oitem{TF}{wegbeschreibungsexport} \gls{wegbeschreibung} exportieren
 \testfall[\ref{WK:beschreibung}, \ref{WK:beschreibungExport}]
     {Eine \gls{route} mit der \gls{wegbeschreibung} ist berechnet.}
     {Die \gls{wegbeschreibung} wird exportiert.}
-    {Es liegt eine HTML-Datei mit der \gls{wegbeschreibung} vor.}
+    {Eine HTML-Datei mit der \gls{wegbeschreibung} liegt vor.}
 % Betreuer2: Systemstart (gemacht)
 \oitem{TF}{systemstart} \routeKIT starten
 \testfall
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
     {Das Programm ist nicht gestartet.}
     {Das Programm wird gestartet.}
-    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte \gls{profil} geladen (beim ersten Programmstart wird die mitgelieferte \gls{standardkarte} bzw. das mitgelieferte \gls{standardprofil} für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete \gls{route} angezeigt.}
+    {Die zuletzt ausgewählte Karte und das zuletzt ausgewählte \gls{profil} werden geladen (beim ersten Programmstart wird die mitgelieferte \gls{standardkarte} bzw. das mitgelieferte \gls{standardprofil} für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete \gls{route} angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
 \oitem{TF}{exitstartVerlauf} \gls{verlauf} nach Neustart
 \testfall[\ref{WK:verlauf}]
     {Karte ist sichtbar, aktuelles \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Der Benutzer wählt Start- und Zielpunkt aus. Das Programm wird beendet. Das Programm wird gestartet.}
-    {Im \gls{verlauf} befindet sich ein Eintrag für die vorher berechnete \gls{route}.}
+    {Start- und Zielpunkt werden ausgewählt, das Programm wird beendet, das Programm wird gestartet.}
+    {Ein Eintrag für die vorher berechnete \gls{route} befindet sich im \gls{verlauf}.}
 \oitem{TF}{ladeRoute} \gls{route} aus \gls{verlauf} laden
 \testfall
     [\ref{WK:verlauf}]
@@ -875,61 +875,61 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{exitstartBerechnung} \gls{vorberechnung} nach Neustart
 \testfall[\ref{D:vorberechnung}]
     {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Der Benutzer führt die \gls{vorberechnung} aus, beendet das Programm, startet das Programm.}
+    {Die \gls{vorberechnung} wird ausgeführt, das Programm wird beendet, das Programm wird gestartet.}
     {Das zuvor berechnete \gls{profil} ist immer noch \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte).}
 \oitem{TF}{exportGPX} GPX-Export
 \testfall[\ref{WK:routeExport}]
     {Karte ist sichtbar, aktuelles \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), eine \gls{route} wird angezeigt}
     {Der GPX-Exportvorgang wird durchgeführt.}
-    {Es ist eine valide GPX-Datei mit der berechneten \gls{route} vorhanden.}
+    {Eine valide GPX-Datei mit der berechneten \gls{route} ist vorhanden.}
 \subsubsection{GUI Tests}
 \oitem{TF}{waehleErstenPunkt} Ersten Punkt wählen
 \testfall
 	[\ref{MK:startZielWaehlen}, \ref{MK:startZielZeigen}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Auswählen des Start- bzw. Zielpunkts}
-    {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt.}
+    {Der Start- bzw. Zielpunkt wird ausgewählt.}
+    {Der Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt.}
 \oitem{TF}{waehleZweitenPunkt} Zweiten Punkt wählen
 \testfall
     [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
-    {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
+    {Der andere Punkt (Ziel- bzw. Startpunkt) wird ausgewählt.}
     {Die \gls{route} für die Angaben ist berechnet und wird angezeigt.}
 \oitem{TF}{waehlePunktErneut} Punkt erneut wählen
 \testfall
     [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
-    {Erneutes Auswählen des  Ziel- oder Startpunkts}
+    {Der Ziel- oder Startpunkt wird erneut ausgewählt.}
     {Die \gls{route} für die neuen Angaben ist berechnet und wird angezeigt.}
 \oitem{TF}{zieheKarte} Karte ziehen
 \testfall
     [\ref{MK:karteVerschieben}]
     {Karte ist sichtbar}
-    {Ziehen der Karte}
+    {Die Karte wird gezogen.}
     {Der angezeigte Kartenausschnitt hat sich entsprechend verändert.}
     %FIXME Klingt irgendwie seltsam... ne, (gemacht)
 \oitem{TF}{zoomeRein} Hineinzoomen
 \testfall
     [\ref{MK:karteZoomen}]
     {Karte ist sichtbar}
-    {Hineinzoomen}
+    {Es wird in die Karte hineingezoomt.}
     {Ein Ausschnitt der Karte wird größer und genauer dargestellt.}
 \oitem{TF}{zoomeRaus} Herauszoomen
 \testfall
     [\ref{MK:karteZoomen}]
     {Karte ist sichtbar}
-    {Herauszoomen}
+    {Es wird aus der Karte herausgezoomt.}
     {Ein größerer Bereich der Karte wird angezeigt.}
 \oitem{TF}{verbieteWaehlePunkt} Punkt wählen ohne \gls{vorberechnung}
 \testfall
     {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Versuch, Start- bzw. Zielpunkt auszuwählen}
+    {Es wird versucht den Start- bzw. Zielpunkt auszuwählen.}
     {Kein Start- oder Zielpunkt ist ausgewählt.} % Betreuer2: Meldung, Popup nicht gut?, StatusBar (gemacht: Keine Meldung großer Knopf.)
 \oitem{TF}{geocoords} \gls{dezimalkoordinaten} eingeben
 \testfall[\ref{WK:koordinaten}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein.}
-    {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt.}
+    {Start- oder Zielkoordinaten werden als \gls{dezimalkoordinaten} eingegeben.}
+    {Die Start- oder Zielkoordinaten sind auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt.}
 \oitem{TF}{guideleteprofile} \gls{standardprofil} löschen
 \testfall[\ref{WK:standardprofile}]
     {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
@@ -943,30 +943,30 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{falschePunkte} Punkte außerhalb der Karte 
 \testfall[\ref{WK:ungueltigeEingabe}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
-    {Ein Start- oder Zielpunkt außerhalb der Karte angegeben.}
-    {Es erscheint eine Fehlermeldung.}
+    {Ein Start- oder Zielpunkt außerhalb der Karte wird angegeben.}
+    {Eine Fehlermeldung erscheint.}
 \oitem{TF}{osmKacheln} \glspl{osmkachel} verwenden
 \testfall[\ref{WK:osmKacheln}]
     {Karte ist sichtbar, Internetverbindung ist hergestellt}
-    {Wechseln der Darstellungsart auf \glspl{osmkachel}}
+    {Die Darstellungsart wird auf \glspl{osmkachel} geändert.}
     {Die Karte wird mit \glspl{osmkachel} angezeigt.}
 \oitem{TF}{eigeneKacheln} Eigene Kacheln verwenden
 \testfall[\ref{MK:karteAnzeigen}, \ref{MK:karteRendern}]
     {Karte ist sichtbar, \gls{osm}-Render-Modus ist aktiviert}
-    {Wechseln der Darstellungsart auf „eigene Kacheln“}
+    {Die Darstellungsart wird auf „eigene Kacheln“ geändert.}
     {Die Karte wird mit den selbst gerenderten Kacheln angezeigt;
     es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben oder zu zoomen).}
 \oitem{TF}{placeholder} Placeholder-Kacheln
 \testfall[\ref{WK:kartePlaceholder}]
     {Karte ist sichtbar}
-    {Die Karte schnell bewegen oder zoomen.}
-    {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt, die nach kurzer Zeit durch die richtigen Kacheln ersetzt werden.}
+    {Die Karte wird schnell bewegt oder gezoomt.}
+    {Das Programm hängt nicht. Es werden graue Kacheln angezeigt, die nach kurzer Zeit durch die richtigen Kacheln ersetzt werden.}
 \subsubsection{Profilverwaltung}
 \oitem{TF}{profilAnlegen} \gls{profil} anlegen
 \testfall
     [\ref{WK:profilerstellen}]
     {–}
-    {Neues \gls{profil} anlegen}
+    {Neues \gls{profil} wird angelegt.}
     {Das neue \gls{profil} ist ausgewählt, das neue \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte).}
 \oitem{TF}{waehleProfil} \gls{profil} auswählen
 \testfall[\ref{WK:profile}]
@@ -1035,7 +1035,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{abbiegebeschraenkung} Abbiegebeschränkung
 \testfall[\ref{WK:abbiegebeschraenkung}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
-    {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen.}
+    {Startpunkt wird auf die Straße, von der nicht abgebogen werden darf, gesetzt. Zielpunkt wird auf die Straße, in die nicht abgebogen werden darf, gesetzt.}
     {Eine \gls{route}, die diesen Abbiegevorgang nicht enthält, wird gefunden.}
 \oitem{TF}{einschraenkungNeg} Beschränkung trifft zu
 \testfall
