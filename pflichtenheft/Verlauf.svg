@@ -47,7 +47,7 @@
       <text x="5" y="20" class="enabled">40,7656 -73,986 → 34,066 -118,214: 08.10.2013 17:53</text>
       <rect x="0" y="20" width="450" height="10" fill="white"/> <!-- cutoff -->
     </g>
-    <text x="260" y="85" class="labelnumber">1</text>
+    <text x="330" y="85" class="labelnumber">1</text>
     <g id="scrollbar" transform="translate(430,0)">
       <rect x="0" y="0" width="20" height="230" class="disabled"/>
       <g id="scrollbarUpButton" transform="translate(0,0)">
