@@ -1036,12 +1036,19 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 % Betreuer2: Testszenarien (gemacht)
 % ersterStart, programmnutzung: verified by Lucas
 %TODO Verify
+Vor der Durchführung der Testszenarien muss \routeKIT installiert sein.
 \begin{description}
 \oitem{TS}{ersterStart} Erster Start\\
-Alice startet das Programm \routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei \glslink{standardprofil}{Standardprofilen} wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
-Sie wählt das \gls{profil} „PKW [default]“. Sie verschiebt die Karte, indem sie die linke Maustaste gedrückt hält, und zoomt die Karte mit den Zoom-Buttons, bis sie die Hebelstraße findet. 
-Mit einem Rechtsklick öffnet sie das Kontextmenü und wählt diesen Punkt als Startpunkt. Die Koordinaten des Startpunkts werden in dem dafür vorgesehen Feld angezeigt. Um den Zielpunkt auszuwählen, tippt Alice in das Feld „Ziel“ die \gls{dezimalkoordinaten} \texttt{49,01386 8,38106} ein. 
-Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste \gls{route} zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)\ldots“ und  „Beschreibung (HTML)\ldots“ (\abbildung{mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)\ldots“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
+\begin{itemize}
+\item Das Programm \routeKIT wird gestartet. Eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}) wird angezeigt.
+\item Das \gls{profil} „PKW [default]“ wird gewählt.
+\item Die Karte wird verschoben und gezoomt, indem der Benutzer die linke Maustaste gedrückt hält und die Zoomknöpfe benutzt. Die Kartenansicht ändert sich entsprechend.
+\item Mit einem Rechtsklick wird das Kontextmenü geöffnet und dieser Punkt als Startpunkt gewählt. Ein Symbol markiert, wo der Startpunkt gesetzt wurde. Die Koordinaten stehen im entsprechenden Textfeld.
+\item Der Zielpunkt wird ausgewählt, indem in das Feld „Ziel“ die \gls{dezimalkoordinaten} \texttt{49,01386 8,38106} eingetippt werden. Die Zielmarkierung wird nun auf der Karte angezeigt. Außerdem wird nun die \gls{schnellroute} auf der Karte angezeigt und im dafür vorgesehenen Feld erscheint eine Wegbeschreibung der Route.
+\item Der  Menüpunkt „Export“ und darin „Beschreibung (HTML)\ldots“ wird gewählt.
+\item Es wird ein Speicherpfad angegeben. Die Wegbeschreibung steht nun am angegebenen Pfad in einer HTML Datei.
+\item Das Programm wird geschlossen.
+\end{itemize}
 
 
 \oitem{TS}{programmnutzung} Programmnutzung\\
