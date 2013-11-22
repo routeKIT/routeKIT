@@ -137,7 +137,8 @@
 }
 \newglossaryentry{route}{
   name={Route},
-  description={Ein Weg zwischen zwei Punkten auf je einem Wegstück}
+  description={Ein Weg zwischen zwei Punkten auf je einem Wegstück},
+  plural={Routen}
 }
 \newglossaryentry{rendern}{
   name={rendern},
@@ -161,7 +162,7 @@
 }
 \newglossaryentry{beschleunigung}{
  name={Beschleunigung},
- description={Ermöglicht eine schnellere Berechnung der angefragten Route},
+ description={Ermöglicht eine schnellere Berechnung der angefragten \gls{route}},
  see={arc}
 }
 \newglossaryentry{kartendaten}{
@@ -176,7 +177,8 @@
 }
 \newglossaryentry{vorberechnung}{
   name={Vorberechnung},
-  description={Wandelt die Kartendaten in ein effizienteres Format um und fügt auf dem Profil basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden}
+  description={Wandelt die \gls{kartendaten} in ein effizienteres Format um und fügt auf dem \gls{profil} basierende Informationen hinzu, die eine schnelle Routenberechnung ermöglichen. Muss für jede neue \gls{kartendaten}/\gls{profil}-Kombination einmal ausgeführt werden},
+  plural={Vorberechnungen}
 }
 \newglossaryentry{dezimalkoordinaten}{
   name={Dezimalkoordinaten},
@@ -238,11 +240,11 @@ Prof.~Dr.~rer.~nat.~Peter~Sanders\\}
 \section{Einleitung}
 % Betreuer2: Vorberechnung dauert lange. „Expertenfeature“ (erledigt)
 % TODO verlauf erwähnen (auch erledigt)
-Das Produkt \routeKIT ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem Verlauf gespeichert.
+Das Produkt \routeKIT ist an Fahrer von Kraftfahrzeugen gerichtet; es soll ihnen die Planung einer Fahrt erleichtern, indem es ihnen die \gls{schnellroute} zwischen einem angegebenen Start- und Zielpunkt berechnet und sowohl graphisch auf der Karte als auch in Form einer \gls{wegbeschreibung} anzeigt. Die gewählten Punkte werden automatisch in einem \gls{verlauf} gespeichert.
 
-Die Berechnung einer Route wird durch eine zeitaufwendige Vorberechnung beschleunigt. Der Benutzer kann dabei mehrere Fahrzeugprofile anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes Profil die Vorberechnung erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
+Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnung} beschleunigt. Der Benutzer kann dabei mehrere \glslink{profil}{Fahreugprofile} anlegen, damit verschiedene Beschränkungen (Tonnage- und Höhenbeschränkungen, Verbot für bestimmte Fahrzeugtypen) und Fahrgeschwindigkeiten bei der Routenberechnung berücksichtigt werden; da aber für jedes \gls{profil} die \gls{vorberechnung} erneut durchgeführt werden muss, ist dies eher als ein „Experten-Feature“ anzusehen, das etwa bei der Installation des Produkts durch den Administrator stattfindet.
 
-Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die Kartendaten stammen aus dem \gls{osm}-Projekt.
+Das Produkt \routeKIT wird mit einer \glslink{vorberechnung}{vorberechnete} Karte für Karlsruhe mit einem \gls{standardprofil} für \glspl{pkw} und einem für \glspl{lkw} ausgeliefert. Es soll auf jedem handelsüblichen modernen Desktop-Computer lauffähig sein. Die \gls{kartendaten} stammen aus dem \gls{osm}-Projekt.
 %Lucas
 
 % Betreuer: Abbiegungbeschränkung, „Route berechnen“, (gemacht)
@@ -261,7 +263,7 @@ Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit eine
 \oitem{MK}{karteRendern} Eigene Kartenkacheln mit den Straßendaten werden für die Kartenansicht (\ref{MK:karteAnzeigen}) \glslink{rendern}{gerendert}.
 \oitem{MK}{karteVerschieben} Der Benutzer kann die Kartenansicht verschieben.
 \oitem{MK}{karteZoomen} Der Benutzer kann die Kartenansicht zoomen.
-\oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer Route durch Mausklick auf der Karte auswählen.
+\oitem{MK}{startZielWaehlen} Der Benutzer kann Start- und Zielpunkt einer \gls{route} durch Mausklick auf der Karte auswählen.
 \oitem{MK}{startZielZeigen} Der ausgewählte Start- und Zielpunkt wird als Marker auf der Karte angezeigt.
 \oitem{MK}{routeBerechnen} Die \gls{schnellroute} zwischen dem ausgewählten Start- und Zielpunkt wird berechnet.
 \oitem{MK}{routeAnzeigen} Die berechnete \gls{route} zwischen Start- und Zielpunkt wird auf der Karte angezeigt.
@@ -269,7 +271,7 @@ Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit eine
 
 \subsection{Wunschkriterien}
 \begin{description}
-\oitem{WK}{beschlArc} Die Routenberechnung wird durch eine Vorberechnung von \gls{arc} \glslink{beschleunigung}{beschleunigt}.
+\oitem{WK}{beschlArc} Die Routenberechnung wird durch eine \gls{vorberechnung} von \gls{arc} \glslink{beschleunigung}{beschleunigt}.
 \oitem{WK}{abbiegebeschraenkung} Abbiegeverbote aufgrund von Abbiegeeinschränkungen werden bei der Routenberechnung beachtet.
 \oitem{WK}{einbahnstrasse} Einbahnstraßen werden bei der Routenberechnung beachtet.
 \oitem{WK}{fahrzeugtyp} Durchfahrtsverbote für bestimmte Fahrzeugtypen werden bei der Routenberechnung beachtet.
@@ -279,7 +281,7 @@ Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit eine
 \oitem{WK}{verlauf} Der Benutzer kann frühere Berechnungsanfragen aus einem \gls{verlauf} auswählen.
 \oitem{WK}{routeExport} Die berechnete \gls{route} wird als \gls{gpx}-Datei zur Benutzung in GPS-Geräten exportiert werden.
 \oitem{WK}{fahrzeit} Die Fahrzeit einer \gls{route} wird unter Berücksichtigung von den zulässigen Höchstgeschwindigkeiten der befahrenen Straßenabschnitte, vom Benutzer festgelegten Durchschnittsgeschwindigkeiten und Wartezeiten an Ampeln bestimmt.
-\oitem{WK}{osmKacheln} Der Benutzer kann sich \gls{osm}-Kacheln anstelle der eigenen gerenderten Kacheln anzeigen lassen.
+\oitem{WK}{osmKacheln} Der Benutzer kann sich \glspl{osmkachel} anstelle der eigenen gerenderten Kacheln anzeigen lassen.
 \oitem{WK}{profilerstellen} Der Benutzer kann ein \gls{profil} erstellen.
 \oitem{WK}{profilloeschen} Der Benutzer kann ein \gls{profil} löschen.
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern.
@@ -292,7 +294,7 @@ Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit eine
 \oitem{WK}{kartePlaceholder}  Eine graue Ersatzkachel wird angezeigt, solange eine Kartenkachel noch nicht gerendert bzw. (im Fall von \ref{WK:osmKacheln}) geladen ist.
 \oitem{WK}{kartenKachelnPrefetch} Kartenkacheln in der Umgebung des angezeigten Ausschnitts werden im Voraus berechnet bzw. (im Fall von \ref{WK:osmKacheln}) geladen.
 \oitem{WK}{karteAuswaehlen} Der Benutzer kann zwischen mehreren vorhandenen Karten auswählen.
-\oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer OSM-Datei importieren.
+\oitem{WK}{karteImportiere} Der Benutzer kann eine neue Karte aus einer \gls{osm}-Datei importieren.
 \oitem{WK}{karteLoeschen} Der Benutzer kann eine vorhandene Karte (mit Ausnahme der Standardkarte) löschen.
 \oitem{WK}{letzteKarte} Die zuletzt verwendete Karte ist bei einem erneuten Programmstart ausgewählt.
 \oitem{WK}{letztesProfil} Das zuletzt verwendete \gls{profil} ist bei einem erneuten Programmstart ausgewählt.
@@ -309,7 +311,7 @@ Das Produkt \routeKIT wird mit einer vorberechnete Karte für Karlsruhe mit eine
 \oitem{AK}{standort} Eine Erkennung des aktuellen Standorts des Benutzers findet nicht statt.
 \oitem{AK}{poi} Die Positionen von \glspl{poi} sowie Gebäude werden nicht auf der Karte angezeigt.
 \oitem{AK}{verkehrszeichen} Ampeln und Verkehrszeichen werden nicht auf der Karte visualisiert.
-\oitem{AK}{baustelle} Baustellen werden (über die in den Kartendaten enthaltenen Informationen hinaus) nicht berücksichtigt.
+\oitem{AK}{baustelle} Baustellen werden (über die in den  \gls{kartendaten} enthaltenen Informationen hinaus) nicht berücksichtigt.
 \oitem{AK}{stau} TMC-Verkehrsmeldungen zu Staus werden nicht berücksichtigt.
 \oitem{AK}{fahrradFussBahn} Die Software ist kein Routenplaner für Fahrradfahrer, Fußgänger oder öffentliche Verkehrsmittel.
 \oitem{AK}{altRoute} Alternativrouten können nicht berechnet werden.
@@ -333,7 +335,7 @@ Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
 \begin{itemize}
 \item Autofahrer
 \item Beifahrer
-\item Personen, welche Routen für diese zuteilen bzw. erstellen
+\item Personen, welche \glspl{route} für diese zuteilen bzw. erstellen
 \end{itemize}
 
 \subsection{Betriebsbedingungen}
@@ -408,13 +410,13 @@ Bestimmung aller in einem Kartenausschnitt benötigten Bildkacheln
 \oitem{F}{bestimmeKantenInAusschnitt}
 Bestimmung aller Kanten in einem gegebenen Kartenausschnitt unter Berücksichtigung der Zoomstufe (benötigt für \ref{F:berechneKachel})
 \oitem{F}{berechneKachel}
-Rendern einer Bildkachel aus lokalen Kartendaten (nur Straßen) zu gegebener Zoomstufe und gegebenem Ausschnitt
+\glslink{rendern}{Rendern} einer Bildkachel aus lokalen  \gls{kartendaten} (nur Straßen) zu gegebener Zoomstufe und gegebenem Ausschnitt
 \oitem{WF}{einbahnstrassenKachel}
-Kennzeichnung von Einbahnstraßen beim Rendern der Kacheln (\ref{F:berechneKachel})
+Kennzeichnung von Einbahnstraßen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
 \oitem{WF}{strassennamenKachel}
-Darstellung von Straßennamen und -bezeichnungen beim Rendern der Kacheln (\ref{F:berechneKachel})
+Darstellung von Straßennamen und -bezeichnungen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
 \oitem{WF}{ortsnamenKachel}
-Darstellung von Ortsnamen beim Rendern der Kacheln (\ref{F:berechneKachel})
+Darstellung von Ortsnamen beim \glslink{rendern}{Rendern} der Kacheln (\ref{F:berechneKachel})
 \oitem{F}{zeichneKachel}
 Anzeige der Kartenkacheln in der gewünschten Zoomstufe an der richtigen Stelle im \gls{gui}
 % Betreuer2: Aufteilen, Genauer TODO: sicherer Formulieren (erledigt)
@@ -436,7 +438,7 @@ Start- und Zielpunkt durch Eingabe von \gls{dezimalkoordinaten} festlegen
 Anzeige des aktuellen Start- und Zielpunkts als Marker auf der Karte (Beispiel in
 \abbildung{mockupscreenshotmain})
 \oitem{F}{zeigeRoute}
-Anzeige einer berechneten Route (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
+Anzeige einer berechneten \gls{route} (\ref{F:berechneRoute}) auf den dargestellten Kacheln (Beispiel in
 \abbildung{mockupscreenshotmain})
 % Betreuer2: ‚Aufbauen‘ (gemacht)
 \oitem{WF}{holeOnlineKachel}
@@ -488,7 +490,7 @@ Laden des zuletzt benutzten \glslink{profil}{Profils} beim Programmstart
 
 \subsection{Kartenverwaltung}
 \begin{description}
-\oitem{WF}{neueKarte} Importieren einer neuen Karte aus einer OSM-Datei
+\oitem{WF}{neueKarte} Importieren einer neuen Karte aus einer \gls{osm}-Datei
 \oitem{WF}{loescheKarte} Löschen einer vorhandenen Karte (mit Ausnahme der Standardkarte)
 \oitem{WF}{aktualisiereKarte} Aktualisieren einer vorhandenen Karte
 \oitem{WF}{wechsleKarte} Wechseln der ausgewählten Karte zwischen Routenberechnungen
@@ -506,7 +508,7 @@ Laden der zuletzt benutzten Karte bzw. der Standardkarte beim Programmstart
 \oitem{D}{letzteKarte}
 die zuletzt verwendete Karte
 \oitem{D}{letztesProfil}
-das zuletzt verwendete Profil
+das zuletzt verwendete \gls{profil}
 \end{description}
 
 
@@ -541,7 +543,7 @@ Fürs \Gls{rendern} benötigte Daten (siehe \ref{WK:karteRendernStrassen}, \ref{
 
 \subsection{Verlaufdaten}
 %TODO %FIXME Lieber „Verlauf“ anstatt „History“? (gemacht)
-Für den Verlauf wird gespeichert:
+Für den \gls{verlauf} wird gespeichert:
 \begin{description}
 \oitem{D}{verlauf}
 Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
@@ -555,17 +557,17 @@ Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
 \oitem{PK}{gui} User Interface\\
 Enthält alle Controller und Views außer \ref{PK:mapView}. Steuert das gesamte Verhalten der Benutzeroberfläche. Realisiert u.\,a. \ref{MK:startZielWaehlen}.
 \oitem{PK}{mapView} MapViewer\\
-Das GUI Element, das Kartenkacheln dynamisch rendern lässt, cacht und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.\,a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
+Das GUI Element, das Kartenkacheln dynamisch \gls{rendern} lässt, cacht und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.\,a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
 \oitem{PK}{precalc} PreCalculator\\
-Verarbeitet OSM Dateien und wandelt sie in ein eigenes Format um. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der OSM.
+Verarbeitet \gls{osm}-Dateien und wandelt sie in ein eigenes Format um. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der \gls{osm}.
 \oitem{PK}{renderer} Renderer\\
 Berechnet die Kacheln aus den vorbereiteten Daten. Realisiert \ref{MK:karteRendern}
 \oitem{PK}{routeCalculator} RouteCalculator\\
-Berechnet die Route aus den vorbereiteten Daten. Realisiert \ref{MK:routeBerechnen}
+Berechnet die \gls{route} aus den vorbereiteten Daten. Realisiert \ref{MK:routeBerechnen}
 \oitem{PK}{fileIO} FileIO\\
 Schreibt und lädt eigene Dateien in den zur Routenberechnung optimierten Dateiformaten.
-\oitem{PK}{osmParser} OSMParser\\
-Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung optimierte Form im Hauptspeicher um.
+\oitem{PK}{osmParser} \gls{osm}Parser\\
+Liest die \gls{osm}-Karte (\ref{D:osmDatei}) und wandelt sie in eine zur \gls{vorberechnung} optimierte Form im Hauptspeicher um.
 \end{description}
 %Anastasia
 \section{Nichtfunktionale Anforderungen und Qualitätsziele}
@@ -575,7 +577,7 @@ Liest die OSM Karte (\ref{D:osmDatei}) und wandelt sie in eine zur Vorberechnung
 \oitem{NF}{knotenHalbeSek} \ref{F:berechneNaechstenPunktAufKante} benötigt höchstens 500\,ms.
 \oitem{NF}{knotenWaysAnzahl} \routeKIT muss mindestens Daten mit 37000 Knoten und 41000 Kanten verarbeiten können.
 \oitem{NF}{mausklicks} Die Auswahl vom Start- bzw. Zielpunkt braucht bei einem richtig gewählten Kartenausschnitt höchstens zwei Mausklicks.
-\oitem{NF}{kachelnrendern} Das Rendern einer Kachel benötigt unter 500\,ms. 
+\oitem{NF}{kachelnrendern} Das \glslink{rendern}{Rendern} einer Kachel benötigt unter 500\,ms. 
 \oitem{NF}{benutzbarkeit} Die öfter verwendeten Funktionen sind mit weniger Eingaben erreichbar als die selten verwendeten.
 \oitem{NF}{schnellsteRoute} \routeKIT zeigt immer die \gls{schnellroute} an (wenn eine \gls{route} existiert).
 
@@ -635,7 +637,7 @@ Durch Bewegen der Maus bei gedrückter linker Maustaste wird die Karte gezogen. 
 \subsection{Hauptfenster: Keine Vorberechnung}
 %TODO „Expertenfeature“, „dauert ca. 10Stunden“. auf den Knopf drauf (gemacht)
 
-Ist für die aktuelle Kombination aus Karte und Profil noch keine Vorberechnung gemacht, sieht der Bildschirm so aus:
+Ist für die aktuelle Kombination aus Karte und \gls{profil} noch keine \gls{vorberechnung} gemacht, sieht der Bildschirm so aus:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{mockup_screenshot_nicht_berechnet}
@@ -649,8 +651,8 @@ Ist für die aktuelle Kombination aus Karte und Profil noch keine Vorberechnung 
 % Keine Interaktion möglich.
 \item \gls{vorberechnung}-Button:\\
 startet die \gls{vorberechnung} für die aktuelle Karte-Profil-Kombination\\
-Um den Benutzer vor der langen, aufwändigen Vorberechnung zu warnen, erscheint vorher ein warnender Dialog wie z.B.\\
-„Achtung! Nur für erfahrene Benutzer! Die Vorberechnung dauert normalerweise ca. 10 Stunden.“
+Um den Benutzer vor der langen, aufwändigen \gls{vorberechnung} zu warnen, erscheint vorher ein warnender Dialog wie z.B.\\
+„Achtung! Nur für erfahrene Benutzer! Die \gls{vorberechnung} dauert normalerweise ca. 10 Stunden.“
 \end{enumerate}
 
 \subsection{Hauptfenster: Menüleiste}
@@ -669,9 +671,9 @@ zeigt Informationsfenster (siehe \abbildung{mockupabout})
 beendet das Programm
 \item Menüpunkt „Export“
 \item Unterpunkt „Route (GPX)\ldots“:\\
-erlaubt den Export der berechneten Route als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
+erlaubt den Export der berechneten \gls{route} als \gls{gpx}-Datei zur Benutzung in GPS-Geräten
 \item Unterpunkt „Beschreibung (HTML)\ldots“:\\
-erlaubt den Export der aktuellen Wegbeschreibung als HTML-Datei
+erlaubt den Export der aktuellen \gls{wegbeschreibung} als HTML-Datei
 \item Menüpunkt „Verwaltung“
 \item Unterpunkt „Profile\ldots“:\\
 startet Profilverwaltung (siehe \abbildung{mockupprofilverwaltung})
@@ -692,30 +694,30 @@ legt fest, ob Kartenkacheln selbst gerendert werden (deaktiviert) oder ob \glspl
 % Betreuer2: Slider für die Zahl? Spinner? (gemacht)
 \begin{enumerate}
 \item Profil-Auswahl (Combobox, Dropdownmenü):\\
-legt ein Profil fest
+legt ein \gls{profil} fest
 \item Löschen-Button:\\
-löscht das aktuell ausgewählte Profil; bei Standardprofilen deaktiviert (\ref{WF:loescheProfil}); zeigt vorher ein Popup an, das den Nutzer davor warnt, dass er viel Berechnungsarbeit zerstört. 
+löscht das aktuell ausgewählte \gls{profil}; bei \glspl{standardprofil} deaktiviert (\ref{WF:loescheProfil}); zeigt vorher ein Popup an, das den Nutzer davor warnt, dass er viel Berechnungsarbeit zerstört. 
 \item Neu-Button:\\
-erstellt eine Kopie des aktuellen Profils; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{WF:neuesProfil})
+erstellt eine Kopie des aktuellen\glslink{profil}{Profils}; den Namen gibt der Benutzer in einem weiteren Dialog ein (\ref{WF:neuesProfil})
 \item Fahrzeugtyp-Auswahl:\\
-setzt den Fahrzeugtyp des aktuellen Profils (\ref{D:fahrzeugTyp})
+setzt den Fahrzeugtyp des aktuellen \glslink{profil}{Profils} (\ref{D:fahrzeugTyp})
 \item Höhen-Eingabe:\\
-setzt die Höhe des aktuellen Profils (\ref{D:hoehe})
+setzt die Höhe des aktuellen \glslink{profil}{Profils} (\ref{D:hoehe})
 \item Breiten-Eingabe:\\
-setzt die Breite des aktuellen Profils (\ref{D:breite})
+setzt die Breite des aktuellen \glslink{profil}{Profils} (\ref{D:breite})
 \item Gewicht-Eingabe:\\
-setzt das Gewicht des aktuellen Profils (\ref{D:gewicht})
+setzt das Gewicht des aktuellen \glslink{profil}{Profils} (\ref{D:gewicht})
 \item Autobahn-Geschwindigkeits-Eingabe:\\
-setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Autobahn (\ref{D:geschwindigkeitAutobahn})
+setzt die Durchschnittsgeschwindigkeit des aktuellen \glslink{profil}{Profils} auf der Autobahn (\ref{D:geschwindigkeitAutobahn})
 \item Landstraßen-Geschwindigkeits-Eingabe:\\
-setzt die Durchschnittsgeschwindigkeit des aktuellen Profils auf der Landstraße (\ref{D:geschwindigkeitLandstrasse})
+setzt die Durchschnittsgeschwindigkeit des aktuellen \glslink{profil}{Profils} auf der Landstraße (\ref{D:geschwindigkeitLandstrasse})
 \item OK-Button:\\
-speichert Änderungen am ausgewählten Profil; setzt es als das aktuelle Profil; schließt den Dialog
+speichert Änderungen am ausgewählten \gls{profil}; setzt es als das aktuelle\gls{profil}; schließt den Dialog
 \item Abbrechen-Button:\\
-verwirft Änderungen am ausgewählten Profil; schließt den Dialog
+verwirft Änderungen am ausgewählten \gls{profil}; schließt den Dialog
 \end{enumerate}
 
-In diesem Dialog kann der Benutzer Profile hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, \abbildung{mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
+In diesem Dialog kann der Benutzer \glspl{profil} hinzufügen, entfernen und bearbeiten, die er im Kartenverwaltung-Dialog (siehe unten, \abbildung{mockupkartenverwaltung}) verschiedenen Karten zuordnen kann. Das Löschen eines Profils mit dem Löschen-Button ist sofort effektiv, Änderungen an einem Profil werden übernommen, sobald der Dialog mit dem OK-Button geschlossen oder in der Profil-Auswahl ein anderes Profil ausgewählt wird.
 
 \subsection{Dialog: Kartenverwaltung}
 \begin{figure}[H]
@@ -734,33 +736,33 @@ fragt den Benutzer nach einer \gls{osm}-Datei; ersetzt die ausgewählte Karte mi
 \item Löschen-Button:\\
 löscht die ausgewählte Karte aus der Liste
 \item Profil-Liste:\\
-zeigt am Anfang alle Profile, für die eine \gls{vorberechnung} der ausgewählten Karte existiert
+zeigt am Anfang alle \glspl{profil}, für die eine \gls{vorberechnung} der ausgewählten Karte existiert
 \item Hinzufügen-Button:\\
-fügt ein Profil zur Profil-Liste der ausgewählten Karte hinzu\\
-Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (\abbildung{mockupprofilverwaltung}). Sein OK-Button setzt es nicht als das aktuelle Profil, sondern fügt es stattdessen zur Profil-Liste hinzu.
+fügt ein \gls{profil} zur Profil-Liste der ausgewählten Karte hinzu\\
+Zur Profil-Auswahl wird der Profilverwaltung-Dialog gestartet (\abbildung{mockupprofilverwaltung}). Sein OK-Button setzt es nicht als das aktuelle \gls{profil}, sondern fügt es stattdessen zur Profil-Liste hinzu.
 \item Entfernen-Button:\\
-entfernt ein Profil aus der Profil-Liste.
+entfernt ein \gls{profil} aus der Profil-Liste.
 \item OK-Button:\\
 übernimmt Änderungen, setzt die ausgewählte Karte als die aktuelle Karte und schließt den Dialog
   \begin{itemize}
-  \item Für hinzugefügte Karten wird die \gls{vorberechnung} zum Rendern durchgeführt.
-  \item Für aktualisierte Karten werden alle Vorberechnungen (Profile, Rendern) neu durchgeführt.
-  \item Für entfernte Karten werden alle Vorberechnungen (Profile, Rendern) gelöscht.
-  \item Für zu einer Karte hinzugefügte Profile wird die Vorberechnung durchgeführt.
-  \item Für von einer Karte entfernte Profile wird die Vorberechnung gelöscht.
+  \item Für hinzugefügte Karten wird die \gls{vorberechnung} zum \glslink{rendern}{Rendern} durchgeführt.
+  \item Für aktualisierte Karten werden alle \glspl{vorberechnung} (\glspl{profil}, \glslink{rendern}{Rendern}) neu durchgeführt.
+  \item Für entfernte Karten werden alle \glspl{vorberechnung} (\glspl{profil}, \glslink{rendern}{Rendern}) gelöscht.
+  \item Für zu einer Karte hinzugefügte \glspl{profil} wird die \gls{vorberechnung}  durchgeführt.
+  \item Für von einer Karte entfernte \glspl{profil} wird die \gls{vorberechnung} gelöscht.
   \end{itemize}
-  Bevor diese Aktionen durchgeführt werden, wird dem Benutzer in einem Dialog eine Liste der geplanten Aktionen gezeigt; dabei wird er \emph{eindrücklich} darauf hingewiesen, dass neue Vorberechnungen sehr lange dauern (mit konkretem Zeitraum) und dass gelöschte Vorberechnungen ebenso viel Berechnungsarbeit vernichten.
+  Bevor diese Aktionen durchgeführt werden, wird dem Benutzer in einem Dialog eine Liste der geplanten Aktionen gezeigt; dabei wird er \emph{eindrücklich} darauf hingewiesen, dass neue \glspl{vorberechnung} sehr lange dauern (mit konkretem Zeitraum) und dass gelöschte \glspl{vorberechnung} ebenso viel Berechnungsarbeit vernichten.
 \item Abbrechen-Button:\\
 schließt den Dialog.\\
 \end{enumerate}
 
-In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kann Karten hinzufügen und entfernen, er kann im Profilverwaltung-Dialog (der erscheint, wenn er den Hinzufügen-Button klickt) Profile hinzufügen und entfernen, und er kann Profil-Karten-Kombinationen hinzufügen und entfernen. Wenn der Benutzer genau die Kombinationen festgelegt hat, die er verwenden möchte, drückt er den OK-Button. Daraufhin wird ihm ein Dialog mit einem Text wie dem folgenden angezeigt:
+In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kann Karten hinzufügen und entfernen, er kann im Profilverwaltung-Dialog (der erscheint, wenn er den Hinzufügen-Button klickt) \glspl{profil} hinzufügen und entfernen, und er kann Profil-Karten-Kombinationen hinzufügen und entfernen. Wenn der Benutzer genau die Kombinationen festgelegt hat, die er verwenden möchte, drückt er den OK-Button. Daraufhin wird ihm ein Dialog mit einem Text wie dem folgenden angezeigt:
 \begin{quote}
   „Sie haben die folgenden Operationen ausgewählt:
   \begin{itemize}
   \item Hinzufügen der Karte „Baden-Württemberg“
-  \item Hinzufügen des Profils „LKW [default]“ zur Karte „Baden-Württemberg“
-  \item Entfernen des Profils „PKW [default]“ von der Karte „Karlsruhe“
+  \item Hinzufügen des \glslink{profil}{Profils} „LKW [default]“ zur Karte „Baden-Württemberg“
+  \item Entfernen des \glslink{profil}{Profils} „PKW [default]“ von der Karte „Karlsruhe“
   \end{itemize}
   Diese Operationen werden etwa \textbf{20 Stunden} benötigen; außerdem wird das Ergebnis von etwa \textbf{10 Stunden} früherer Rechenzeit gelöscht.
   
@@ -779,12 +781,12 @@ Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass
 \item Verlauf-Liste:\\
 zeigt eine Liste aller \gls{verlauf}-Einträge; der Neueste ganz oben
 \item OK-Button:\\
-setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten Verlauf-Eintrag; schließt den Dialog
+setzt den aktuellen Start- und Zielpunkt nach dem ausgewählten \gls{verlauf}-Eintrag; schließt den Dialog
 \item Abbrechen-Button:\\
 schließt den Dialog
 \end{enumerate}
 
-Im Verlauf-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
+Im \gls{verlauf}-Dialog kann der Benutzer frühere Anfragen einsehen und wiederverwenden. Ein einzelner Linksklick auf einen Eintrag wählt diesen Eintrag aus, ein doppelter Linksklick hat den gleichen Effekt wie ein einfacher Linksklick und ein Linksklick auf den OK-Button.
 % Fabian
 
 \subsection{Dialog: Über}
@@ -809,65 +811,65 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \begin{description}
 \itemsep 1em
 \subsubsection{Kernfunktionen}
-\oitem{TF}{starteVorberechnung} Vorberechnung starten
+\oitem{TF}{starteVorberechnung} \gls{vorberechnung} starten
 \testfall[\ref{WK:beschlArc}]
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
-    {Vorberechnung auswählen, Warnmeldung bestätigen, lange Warten}
-    {Aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
+    {\gls{vorberechnung} auswählen, Warnmeldung bestätigen, lange Warten}
+    {Aktuelles \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
 % Betreuer2: Wegbeschreibung export testen (gemacht)
-\oitem{TF}{wegbeschreibungsexport} Wegbeschreibung exportieren
+\oitem{TF}{wegbeschreibungsexport} \gls{wegbeschreibung} exportieren
 \testfall[\ref{WK:beschreibung}, \ref{WK:beschreibungExport}]
-    {Eine Route mit der Wegbeschreibung ist berechnet}
-    {Die Wegbeschreibung wird exportiert}
-    {Es liegt eine HTML-Datei mit der Wegbeschreibung vor}
+    {Eine \gls{route} mit der \gls{wegbeschreibung} ist berechnet}
+    {Die \gls{wegbeschreibung} wird exportiert}
+    {Es liegt eine HTML-Datei mit der \gls{wegbeschreibung} vor}
 % Betreuer2: Systemstart (gemacht)
 \oitem{TF}{systemstart} \routeKIT starten
 \testfall
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
     {Das Programm ist nicht gestartet}
     {Das Programm wird gestartet}
-    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte Profil geladen (beim ersten Programmstart wird die mitgelieferte Stan\-dard-Kar\-te bzw. das mitgelieferte Standard-Profil für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete Route angezeigt.}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte \gls{profil} geladen (beim ersten Programmstart wird die mitgelieferte Stan\-dard-Kar\-te bzw. das mitgelieferte \gls{standardprofil} für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete \gls{route} angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
-\oitem{TF}{exitstartVerlauf} Verlauf nach Neustart
+\oitem{TF}{exitstartVerlauf} \gls{verlauf} nach Neustart
 \testfall[\ref{WK:verlauf}]
-    {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, aktuelles \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
     {Der Benutzer wählt Start- und Zielpunkt aus. Das Programm wird beendet. Das Programm wird gestartet.}
-    {Im Verlauf befindet sich ein Eintrag für die vorher berechnete Route}
-\oitem{TF}{ladeRoute} Route aus Verlauf laden
+    {Im \gls{verlauf} befindet sich ein Eintrag für die vorher berechnete \gls{route}}
+\oitem{TF}{ladeRoute} \gls{route} aus \gls{verlauf} laden
 \testfall
     [\ref{WK:verlauf}]
-    {Eine Route wurde bereits berechnet, die Route wird nicht angezeigt}
-    {Die Route wird aus dem Verlauf geladen}
-    {Die abgespeicherte Route wird angezeigt}
-\oitem{TF}{exitstartBerechnung} Vorberechnung nach Neustart
+    {Eine \gls{route} wurde bereits berechnet, die Route wird nicht angezeigt}
+    {Die \gls{route} wird aus dem \gls{verlauf} geladen}
+    {Die abgespeicherte \gls{route} wird angezeigt}
+\oitem{TF}{exitstartBerechnung} \gls{vorberechnung} nach Neustart
 \testfall[\ref{D:vorberechnung}]
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
-    {Der Benutzer führt die Vorberechnung aus, beendet das Programm, startet das Programm}
-    {Das zuvor berechnete Profil ist immer noch berechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
+    {Der Benutzer führt die \gls{vorberechnung} aus, beendet das Programm, startet das Programm}
+    {Das zuvor berechnete \gls{profil} ist immer noch berechnet (für die aktuelle Karte)}
 \oitem{TF}{exportGPX} GPX-Export
 \testfall[\ref{WK:routeExport}]
-    {Karte ist sichtbar, aktuelles Profil ist vorberechnet (für die aktuelle Karte), Eine Route wird angezeigt}
+    {Karte ist sichtbar, aktuelles \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Eine \gls{route} wird angezeigt}
     {Der GPX Exportvorgang wird durchgeführt.}
-    {Es ist eine valide GPX-Datei mit der berechneten Route vorhanden.}
+    {Es ist eine valide GPX-Datei mit der berechneten \gls{route} vorhanden.}
 \subsubsection{GUI Tests}
 \oitem{TF}{waehleErstenPunkt} Ersten Punkt wählen
 \testfall
 	[\ref{MK:startZielWaehlen}, \ref{MK:startZielZeigen}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
     {Auswählen des Start- bzw. Zielpunkts}
     {Start- bzw. Zielpunkt ist ausgewählt und wird auf der Karte angezeigt}
 \oitem{TF}{waehleZweitenPunkt} Zweiten Punkt wählen
 \testfall
     [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte),  Start- oder Zielpunkt ist ausgewählt (\ref{TF:waehleErstenPunkt})}
     {Auswählen des anderen Punkts (Ziel- bzw. Startpunkts)}
-    {Route für die Angaben ist berechnet und wird angezeigt}
+    {\gls{route} für die Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{waehlePunktErneut} Punkt erneut wählen
 \testfall
     [\ref{MK:routeBerechnen}, \ref{MK:routeAnzeigen}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte),  Start- und Zielpunkt sind ausgewählt}
     {Erneutes Auswählen des  Ziel- oder Startpunkts}
-    {Route für die neuen Angaben ist berechnet und wird angezeigt}
+    {\gls{route} für die neuen Angaben ist berechnet und wird angezeigt}
 \oitem{TF}{zieheKarte} Karte ziehen
 \testfall
     [\ref{MK:karteVerschieben}]
@@ -887,25 +889,25 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Karte ist sichtbar}
     {Rauszoomen}
     {Ein größerer Bereich der Karte wird angezeigt}
-\oitem{TF}{verbieteWaehlePunkt} Punkt wählen ohne Vorberechnung
+\oitem{TF}{verbieteWaehlePunkt} Punkt wählen ohne \gls{vorberechnung}
 \testfall
-    {Karte ist sichtbar, aktuelles Profil ist nicht vorberechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
     {Versuchen Start- bzw. Zielpunkte auszuwählen}
     {Kein Start- oder Zielpunkt ist ausgewählt} % Betreuer2: Meldung, Popup nicht gut?, StatusBar (gemacht: Keine Meldung großer Knopf.)
 \oitem{TF}{geocoords} \gls{dezimalkoordinaten} eingeben
 \testfall[\ref{WK:koordinaten}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte)}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
     {Der Benutzer tippt Start- oder Zielkoordinaten als \gls{dezimalkoordinaten} ein}
     {Die Start- oder Zielkoordinaten sind nun auf die angegebenen abgeändert, Start- oder Zielpunkt wird angezeigt}
 \oitem{TF}{guideleteprofile} \gls{standardprofil} löschen
 \testfall[\ref{WK:standardprofile}]
     {Es wurde das Fenster zur Profil-Verwaltung geöffnet.}
-    {Ein mitgeliefertes Standard-Profil wird ausgewählt.}
-    {Der Knopf zum Löschen des Profils wird deaktiviert.}
-\oitem{TF}{guideletemap} Standard-Karte löschen
+    {Ein mitgeliefertes \gls{standardprofil} wird ausgewählt.}
+    {Der Knopf zum Löschen des \glslink{profil}{Profils} wird deaktiviert.}
+\oitem{TF}{guideletemap} Standardkarte löschen
 \testfall
     {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
-    {Eine mitgelieferte Standard-Karte wird ausgewählt.}
+    {Eine mitgelieferte Standardkarte wird ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
 \oitem{TF}{osmKacheln} \glspl{osmkachel} verwenden
 \testfall[\ref{WK:osmKacheln}]
@@ -914,7 +916,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Die Karte wird mit \glspl{osmkachel} angezeigt}
 \oitem{TF}{eigeneKacheln} Eigene Kacheln verwenden
 \testfall[\ref{MK:karteAnzeigen}, \ref{MK:karteRendern}]
-    {Karte ist sichtbar, OSM-Render-Modus ist aktiviert}
+    {Karte ist sichtbar, \gls{osm}-Render-Modus ist aktiviert}
     {Wechseln der Darstellungs-Art auf „eigene Kacheln“}
     {Die Karte wird mit selbst gerenderten Kacheln angezeigt,
     es ist keine Internetverbindung mehr nötig (um die Karte zu verschieben oder zu zoomen)}
@@ -924,45 +926,45 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Die Karte schnell bewegen oder zoomen}
     {Das Programm hängt nicht, stattdessen werden graue Kacheln angezeigt, die nach kurzer Zeit durch die richtigen Kacheln ersetzt werden}
 \subsubsection{Profilverwaltung}
-\oitem{TF}{profilAnlegen} Profil anlegen
+\oitem{TF}{profilAnlegen} \gls{profil} anlegen
 \testfall
     [\ref{WK:profilerstellen}]
     {–}
-    {Neues Profil anlegen}
-    {Das neue Profil ist ausgewählt, das neue Profil ist nicht vorberechnet (für die aktuelle Karte)}
-\oitem{TF}{waehleProfil} Profil auswählen
+    {Neues \gls{profil} anlegen}
+    {Das neue \gls{profil} ist ausgewählt, das neue \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
+\oitem{TF}{waehleProfil} \gls{profil} auswählen
 \testfall[\ref{WK:profile}]
-    {Ein Profil ist vorhanden und nicht ausgewählt}
-    {Das Profil wird ausgewählt}
-    {Das Profil ist ausgewählt}
-\oitem{TF}{loescheProfil} Profil löschen
+    {Ein \gls{profil} ist vorhanden und nicht ausgewählt}
+    {Das \gls{profil} wird ausgewählt}
+    {Das \gls{profil} ist ausgewählt}
+\oitem{TF}{loescheProfil} \gls{profil} löschen
 \testfall
     [\ref{WK:profilloeschen}]
-    {Ein Profil, das nicht das Standardprofil ist, ist vorhanden}
-    {Das Profil wird gelöscht}
-    {Das Profil ist nicht mehr vorhanden}
-\oitem{TF}{aendereProfil} Profil ändern
+    {Ein \gls{profil}, das nicht das \gls{standardprofil} ist, ist vorhanden}
+    {Das \gls{profil} wird gelöscht}
+    {Das \gls{profil} ist nicht mehr vorhanden}
+\oitem{TF}{aendereProfil} \gls{profil} ändern
 \testfall
     [\ref{WK:profilaendern}]
-    {Ein Profil ist vorhanden}
-    {Das Profil wird geändert, die Profilverwaltung geschlossen und wieder geöffnet}
-    {Das Profil hat immer noch die neuen Daten}
-\oitem{TF}{profilPersistenz} Profil ändern und Neustart
+    {Ein \gls{profil} ist vorhanden}
+    {Das \gls{profil} wird geändert, die Profilverwaltung geschlossen und wieder geöffnet}
+    {Das \gls{profil} hat immer noch die neuen Daten}
+\oitem{TF}{profilPersistenz} \gls{profil} ändern und Neustart
 \testfall
-    {Ein Profil ist vorhanden}
-    {Das Profil wird geändert, das Programm wird geschlossen, das Programm wird geöffnet}
+    {Ein \gls{profil} ist vorhanden}
+    {Das \gls{profil} wird geändert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die Änderungen sind immer noch vorhanden}
-\oitem{TF}{routeNeuBerechnenProfil} Neuberechnen der Route bei Profiländerung
+\oitem{TF}{routeNeuBerechnenProfil} Neuberechnen der \gls{route} bei Profiländerung
 \testfall[\ref{WK:routeNeuBerechnenProfil}]
-    {Karte ist sichtbar, eine Route wurde berechnet}
-    {Das Profil wird geändert}
-    {Die berechnete Route wird mit den neuen Daten aus dem ausgewähltem Profil neu berechnet}
+    {Karte ist sichtbar, eine \gls{route} wurde berechnet}
+    {Das \gls{profil} wird geändert}
+    {Die berechnete \gls{route} wird mit den neuen Daten aus dem ausgewähltem \gls{profil} neu berechnet}
 \subsubsection{Kartenverwaltung}
 \oitem{TF}{importKarte} Karte importieren
 \testfall[\ref{WK:karteImportiere}]
     {–}% Betreuer2: ganz weg (gemacht)
     {Eine neue Karte wird importiert}
-    {Die neue Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet}
+    {Die neue Karte ist ausgewählt, die Karte ist für das aktuelle \gls{profil} nicht \glslink{vorberechnung}{vorberechnet}}
 \oitem{TF}{wechsleKarte} Karte auswählen
 \testfall[\ref{WK:karteAuswaehlen}]
     {Eine Karte ist ausgewählt}
@@ -978,51 +980,51 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {-}
     {Eine Karte wird importiert, das Programm wird geschlossen, das Programm wird geöffnet}
     {Die neue Karte ist immer noch vorhanden}
-\oitem{TF}{routeLoeschenKarte} Löschen der Route bei Kartenänderung
+\oitem{TF}{routeLoeschenKarte} Löschen der \gls{route} bei Kartenänderung
 \testfall[\ref{WK:routeLoeschenKarte}]
-    {Karte ist sichtbar, eine Route wurde berechnet}
+    {Karte ist sichtbar, eine \gls{route} wurde berechnet}
     {Die Karte wird geändert}
-    {Die berechnete Route wird verworfen}
+    {Die berechnete \gls{route} wird verworfen}
 \subsubsection{Beschränkungen}
 \oitem{TF}{einbahnstrasse} Einbahnstraße – Ende-zu-Ende
 \testfall[\ref{WK:einbahnstrasse}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Startpunkt wird das Ende und als Ziel der Anfang der Einbahnstraße ausgewählt}
     {Ein Weg, der nicht diese Einbahnstraße enthält, wird gefunden}
 \oitem{TF}{einbahnstrasseHard} Einbahnstraße – innerhalb (Randfall für \gls{dijkstra})
 \testfall[\ref{WK:einbahnstrasse}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Einbahnstraße}
     {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Start weiter in Einbahnstraßenrichtung als Ziel.}
     {Ein Weg, der die Einbahnstraße nicht entgegen der Fahrtrichtung benutzt, wird gefunden}
 \oitem{TF}{abbiegebeschraenkung} Abbiegebeschränkung
 \testfall[\ref{WK:abbiegebeschraenkung}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Abbiegebeschränkung}
     {Startpunkt auf die Straße, von der nicht abgebogen werden darf, setzen. Zielpunkt auf die Straße, in die nicht abgebogen werden darf, setzen. }
     {Ein Weg, der diesen Abbiegevorgang nicht enthält, wird gefunden}
 \oitem{TF}{einschraenkungNeg} Beschränkung trifft zu
 \testfall
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein größerer Wert dafür angegeben}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen \gls{profil} ist ein größerer Wert dafür angegeben}
     {Als Startpunkt wird der Anfang und als Ziel das Ende der Straße mit Beschränkung ausgewählt}
     {Ein Weg, der diese Straße nicht enthält, wird gefunden}
 \oitem{TF}{einschraenkungPos} Beschränkung trifft nicht zu
 \testfall
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen Profil ist ein kleinerer Wert dafür angegeben}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Höhen-, Breiten- oder Gewichtsbeschränkung, im aktuellen \gls{profil} ist ein kleinerer Wert dafür angegeben}
     {Als Startpunkt wird der Anfang und als Ziel das Ende der Straße mit Beschränkung ausgewählt}
-    {Die beschränkte Straße wird als Route gefunden}
+    {Die beschränkte Straße wird als \gls{route} gefunden}
 \oitem{TF}{typEinschraenkungNeg} Typ-Einschränkung trifft zu
 \testfall[\ref{WK:fahrzeugtyp}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist dieser Typ angegeben}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen \gls{profil} ist dieser Typ angegeben}
     {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
     {Ein Weg, der diese Straße nicht enthält, wird gefunden}
 \oitem{TF}{typEinschraenkungPos} Typ-Einschränkung trifft nicht zu
 \testfall[\ref{WK:fahrzeugtyp}]
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen Profil ist ein anderer Fahrzeugtyp angegeben}
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen \gls{profil} ist ein anderer Fahrzeugtyp angegeben}
     {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
-    {Die beschränkte Straße wird als Route gefunden}
+    {Die beschränkte Straße wird als \gls{route} gefunden}
 
 % Betreuer2: Keine Interpretation (gemacht)
 % Betreuer2: Gruppieren (gemacht)
-% Betreuer2: Route anzeigen und Profil ändern (gemacht)
+% Betreuer2: Route anzeigen und \gls{profil} ändern (gemacht)
 % Betreuer2: Mehr Beschränkungstests (gemacht)
 % Betreuer2: kein beinhalten (gemacht)
 
@@ -1037,23 +1039,23 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 %TODO Verify
 \begin{description}
 \oitem{TS}{ersterStart} Erster Start\\
-Alice startet das Programm \routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei Standardprofilen wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
-Sie wählt das Profil „PKW [default]“. Sie verschiebt die Karte, indem sie die linke Maustaste gedrückt hält, und zoomt die Karte mit den Zoom-Buttons, bis sie die Hebelstraße findet. 
+Alice startet das Programm \routeKIT zum ersten Mal. Nach einem Ladevorgang sieht sie eine eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}). Alice kann zwischen zwei \glslink{standardprofil}{Standardprofilen} wählen, wobei eines für \glspl{pkw} und das andere für \glspl{lkw} ist.
+Sie wählt das \gls{profil} „PKW [default]“. Sie verschiebt die Karte, indem sie die linke Maustaste gedrückt hält, und zoomt die Karte mit den Zoom-Buttons, bis sie die Hebelstraße findet. 
 Mit einem Rechtsklick öffnet sie das Kontextmenü und wählt diesen Punkt als Startpunkt. Die Koordinaten des Startpunkts werden in dem dafür vorgesehen Feld angezeigt. Um den Zielpunkt auszuwählen, tippt Alice in das Feld „Ziel“ die \gls{dezimalkoordinaten} \texttt{49,01386 8,38106} ein. 
-Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste Route zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)\ldots“ und  „Beschreibung (HTML)\ldots“ (\abbildung{mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)\ldots“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
+Auf der Karte wird ein Punkt als Ziel markiert und die kürzeste \gls{route} zwischen dem Start- und dem Zielpunkt wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice wählt den Menüpunkt „Export“ und es erscheinen die Unterpunkte „Route (GPX)\ldots“ und  „Beschreibung (HTML)\ldots“ (\abbildung{mockupscreenshotmenu}). Alice drückt auf  „Beschreibung (HTML)\ldots“ und es wird eine Datei mit der Beschreibung erstellt. Alice schließt das Programm.
 
 
 \oitem{TS}{programmnutzung} Programmnutzung\\
-Alice’ Computer hat eine Internetverbindung. Alice startet das Programm \routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der Verlauf wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
+Alice’ Computer hat eine Internetverbindung. Alice startet das Programm \routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der \gls{verlauf} wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
 
 \oitem{TS}{verwaltung} Verwaltung\\
 Der Administrator einer Firma möchte \routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
 
-Der Administrator startet zunächst \routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bie\-le\-feld-Kar\-te. Dann entfernt er die Standardprofile von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
+Der Administrator startet zunächst \routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bie\-le\-feld-Kar\-te. Dann entfernt er die \glspl{standardprofil} von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
 \begin{itemize}
-\item Firmenauto: Ein \gls{pkw}, der etwas leichter und langsamer ist als das Standardprofil
+\item Firmenauto: Ein \gls{pkw}, der etwas leichter und langsamer ist als das \gls{standardprofil}
 \item Boss-Auto: Der Boss fährt einen schnellen Mercedes
-\item Firmenlaster: Ein \gls{lkw}, der auf der Autobahn noch langsamer ist als das Standardprofil
+\item Firmenlaster: Ein \gls{lkw}, der auf der Autobahn noch langsamer ist als das \gls{standardprofil}
 \item Mannis Laster: Ein getuneter \gls{lkw}, der schwerer beladen wird als normale \gls{lkw}
 \end{itemize}
 Dann schließt der Administrator den Profilverwaltungs-Dialog und ordnet diese Profile den Karten zu:
@@ -1070,11 +1072,11 @@ Wenn der Administrator mit den Änderungen zufrieden ist, drückt er den OK-Butt
 
 \begin{description}
 \oitem{TD}{datenProfilVorberechnung}
-Eine Route kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein \gls{profil} ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
+Eine \gls{route} kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein \gls{profil} ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
 \oitem{TD}{gültigOsm}
 \gls{kartendaten} müssen als gültige \gls{osm}-Datei vorliegen.
 \oitem{TD}{karteProfilGelöscht}
-Eine gespeicherte Route kann nicht angezeigt werden, wenn die zugehörigen Kartendaten und das verwendete \gls{profil} nicht mehr vorhanden sind.
+Eine gespeicherte \gls{route} kann nicht angezeigt werden, wenn die zugehörigen  \gls{kartendaten} und das verwendete \gls{profil} nicht mehr vorhanden sind.
 \oitem{TD}{löscheNichtStandard}
 Das \gls{standardprofil} kann nicht gelöscht werden.
 \oitem{TD}{profil}
