@@ -549,8 +549,9 @@ Fürs \Gls{rendern} benötigte Daten (siehe \ref{WK:karteRendernStrassen}, \ref{
 Für den \gls{verlauf} wird gespeichert:
 \begin{description}
 \oitem{D}{verlauf}
-Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
+Start-, Zielpunkt und Zeitpunkt der Anfrage.
 \end{description}
+Der Verlauf ist eine Liste, global für die gesamte Anwendung.
 \section{Systemmodell}
 % Betreuer2: Hierarchisch, Gesamt-App-Paket.... naja... (machen wir nicht)
 \includegraphics[width=\linewidth]{Paketdiagramm}
@@ -775,6 +776,7 @@ In diesem Dialog kann der Benutzer Profil-Karten-Kombinationen verwalten. Er kan
 Dabei wird der Dialog bewusst sehr aufdringlich gestaltet, um zu vermeiden, dass der Benutzer aus Versehen die Operationen durchführt; der Bestätigen-Button wird erst nach 5 Sekunden aktiviert.
 
 \subsection{Dialog: Verlauf}
+%TODO Zeiten ändern (Zeitpunkt der Berechnung)
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{Verlauf}
@@ -1113,8 +1115,7 @@ Vorbedingung: \routeKIT ist frisch installiert worden und hat noch keine Profile
 Eine \gls{route} kann nur berechnet werden, wenn \gls{kartendaten} vorliegen, ein \gls{profil} ausgewählt wurde und die \gls{vorberechnung} für dieses \gls{profil} für diese Karte abgeschlossen ist.
 \oitem{TD}{gültigOsm}
 \gls{kartendaten} müssen als gültige \gls{osm}-Datei vorliegen.
-\oitem{TD}{karteProfilGelöscht}
-Eine gespeicherte \gls{route} kann nicht angezeigt werden, wenn die zugehörigen  \gls{kartendaten} und das verwendete \gls{profil} nicht mehr vorhanden sind.
+\gls{profil} nicht mehr vorhanden sind.
 \oitem{TD}{löscheNichtStandard}
 Das \gls{standardprofil} kann nicht gelöscht werden.
 \oitem{TD}{profil}
