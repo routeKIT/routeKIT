@@ -200,7 +200,7 @@
 }
 \newglossaryentry{verlauf}{
   name={Verlauf},
-  description={speichert Routenanfragen für spätere Wiederverwendung}
+  description={speichert Routenanfragen für spätere Wiederverwendung. Es existiert nur ein Verlauf für die gesamte Anwendung.}
 }
 \newglossaryentry{mercator}{
   name={Mercator-Projektion},
@@ -339,8 +339,6 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \section{Produkteinsatz}
 %Kevin
 
-Das Produkt soll Autofahrern bei der Planung einer optimalen Fahrstrecke helfen.
-
 \subsection{Anwendungsbereiche}
 \begin{itemize}
 \item Routenplanung
@@ -403,8 +401,6 @@ Bestimmen der erlaubten Fahrtrichtung(en) eines Straßenabschnitts
 Bestimmen der erlaubten Abbiegevorgänge von einer Straße auf eine andere
 \oitem{WF}{routeBeschleunigen}
 Nutzen der \gls{arc} zur Routenberechnung (\ref{F:berechneRoute})
-\oitem{WF}{gpxAusRoute}
-Erzeugen einer \gls{gpx}-Datei aus einer \gls{route}
 \end{description}
 
 \subsection{Vorberechnung}
@@ -492,6 +488,8 @@ Ergänzen der Abbiegeanweisung aus \ref{WF:bestimmeAnweisungAusAbbiege} um eine 
 Erzeugen einer \gls{wegbeschreibung} aus mehreren Abbiege- und Weganweisungen
 \oitem{WF}{htmlAusBeschreibung}
 Erzeugen einer HTML-Datei aus einer \gls{wegbeschreibung}
+\oitem{WF}{gpxAusRoute}
+Erzeugen einer \gls{gpx}-Datei aus einer \gls{route}
 \end{description}
 
 \subsection{Profilverwaltung}
@@ -589,7 +587,7 @@ verarbeitet alle Benutzereingaben
 \oitem{PK}{mapView} MapViewer\\
 lässt Kartenkacheln dynamisch \gls{rendern}; cacht die Kartenkacheln; zeigt die Kartenkacheln an der richtigen Position im Fenster an; zeigt die aktuelle Route an; realisiert u.\,a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
 \oitem{PK}{precalc} PreCalculator\\
-verarbeitet \gls{osm}-Dateien und wandelt sie in ein eigenes Format um; berechnet \gls{arc}; erstellt eine platzoptimierte Darstellung des Graphen; filtert nicht benutzte Daten aus der \gls{osm}
+verarbeitet \gls{osm}-Dateien und wandelt sie in ein eigenes Format um; berechnet \gls{arc}; erstellt eine platzoptimierte Darstellung des Graphen; filtert nicht benutzte Daten aus den \gls{osm}-\gls{kartendaten}
 \oitem{PK}{renderer} Renderer\\
 berechnet die Kacheln aus den \glslink{vorberechnung}{vorberechneten} Daten; realisiert \ref{MK:karteRendern}
 \oitem{PK}{routeCalculator} RouteCalculator\\
@@ -650,7 +648,7 @@ vertauscht Start- und Zielpunkt
 erlaubt Zugriff auf den \gls{verlauf}; (siehe \abbildung{mockupverlauf})
 \item \gls{wegbeschreibung}
 \item Kartenansicht:\\
-die aktuelle Karte aus selbst gerenderten oder \glspl{osmkachel}
+die aktuelle Karte aus selbst gerenderten Kacheln oder \glspl{osmkachel}
 \item Zoom-Buttons:\\
 \texttt{+} zum Hineinzoomen; \texttt{-} zum Herauszoomen
 \item ausgewählter Startpunkt (falls vorhanden)
