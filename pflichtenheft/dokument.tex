@@ -179,10 +179,10 @@
   plural={Standardprofile},
   see={profil}  
 }
-}
+
 \newglossaryentry{standardkarte}{
   name={Standardkarte},
-  description={Eine vorinstallierte und für die Standardprofile bereits vorberechnete Karte von Karlsruhe},
+  description={Eine vorinstallierte und für die \glspl{standardprofil} bereits \glslink{vorberechnung}{vorberechneten} Karte von Karlsruhe},
   plural={Standardkarten},
   see={standardprofil}  
 }
@@ -298,7 +298,7 @@ Die Berechnung einer \gls{route} wird durch eine zeitaufwendige \gls{vorberechnu
 \oitem{WK}{profilaendern} Der Benutzer kann ein \gls{profil} ändern (mit Ausnahme der \glspl{standardprofil}).
 \oitem{WK}{profile} Der Benutzer kann zwischen mehreren \glslink{profil}{Profilen} wählen.
 \oitem{WK}{standardprofile} Zwei \glspl{standardprofil} für \glspl{pkw} und \glspl{lkw}, die nicht gelöscht werden können, werden mitgeliefert.
-\oitem{WK}{standardkarte} Eine Standardkarte von Karlsruhe, die  nicht gelöscht werden kann, wird mitgeliefert.
+\oitem{WK}{standardkarte} Eine \gls{standardkarte} von Karlsruhe, die  nicht gelöscht werden kann, wird mitgeliefert.
 \oitem{WK}{koordinaten} Der Benutzer kann Start- und Zielkoordinaten als \gls{dezimalkoordinaten} angegeben.
 \oitem{WK}{karteRendernStrassen} Straßennamen und -bezeichnungen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
 \oitem{WK}{karteRendernOrtsnamen} Ortsnamen werden in die gerenderte Kartendarstellung (\ref{MK:karteRendern}) einbezogen.
@@ -591,9 +591,9 @@ lässt Kartenkacheln dynamisch \gls{rendern}; cacht die Kartenkacheln; zeigt die
 \oitem{PK}{precalc} PreCalculator\\
 verarbeitet \gls{osm}-Dateien und wandelt sie in ein eigenes Format um; berechnet \gls{arc}; erstellt eine platzoptimierte Darstellung des Graphen; filtert nicht benutzte Daten aus der \gls{osm}
 \oitem{PK}{renderer} Renderer\\
-berechnet die Kacheln aus den vorbereiteten Daten; realisiert \ref{MK:karteRendern}
+berechnet die Kacheln aus den \glslink{vorberechnung}{vorberechneten} Daten; realisiert \ref{MK:karteRendern}
 \oitem{PK}{routeCalculator} RouteCalculator\\
-berechnet die \gls{route} aus den vorbereiteten Daten; realisiert \ref{MK:routeBerechnen}
+berechnet die \gls{route} aus den \glslink{vorberechnung}{vorberechneten} Daten; realisiert \ref{MK:routeBerechnen}
 \oitem{PK}{osmParser} \gls{osm}Parser\\
 liest die \gls{osm}-Karte (\ref{D:osmDatei}) und wandelt sie in eine zur \gls{vorberechnung} optimierte Form im Hauptspeicher um
 \end{description}
@@ -859,7 +859,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     [\ref{MK:karteAnzeigen}, \ref{WK:letztesProfil}, \ref{WK:letzteKarte}]
     {Das Programm ist nicht gestartet.}
     {Das Programm wird gestartet.}
-    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte \gls{profil} geladen (beim ersten Programmstart wird die mitgelieferte Standardkarte bzw. das mitgelieferte \gls{standardprofil} für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete \gls{route} angezeigt.}
+    {Es wird die zuletzt ausgewählte Karte und das zuletzt ausgewählte \gls{profil} geladen (beim ersten Programmstart wird die mitgelieferte \gls{standardkarte} bzw. das mitgelieferte \gls{standardprofil} für PKWs geladen). Die Karte wird ohne Start- und Zielpunkte und eine berechnete \gls{route} angezeigt.}
 % Betreuer2: Beenden und neu starten. (gemacht)
 \oitem{TF}{exitstartVerlauf} \gls{verlauf} nach Neustart
 \testfall[\ref{WK:verlauf}]
@@ -1133,9 +1133,9 @@ Vorbedingung: \routeKIT ist frisch installiert worden und hat noch keine Profile
   \item In Bielefeld wird nur das Firmenauto verwendet
   \item Die Laster sind deutschlandweit unterwegs
   \end{itemize}
-\item Der OK-Button wird gedrückt; es erscheint eine Zusammenfassung der Änderungen: Zwei Vorberechnungen werden gelöscht, sechs werden hinzugefügt.
+\item Der OK-Button wird gedrückt; es erscheint eine Zusammenfassung der Änderungen: Zwei \glspl{vorberechnung} werden gelöscht, sechs werden hinzugefügt.
 \item Der OK-Button wird gedrückt; die \gls{vorberechnung} startet.
-\item Nachdem die Vorberechnung abgeschlossen ist, wird \routeKIT beendet. Mit den neuen Profilen und Karten ist \routeKIT bereit zum Einsatz in der Firma.
+\item Nachdem die \gls{vorberechnung} abgeschlossen ist, wird \routeKIT beendet. Mit den neuen Profilen und Karten ist \routeKIT bereit zum Einsatz in der Firma.
 \end{itemize}
 \end{description}
 
