@@ -1055,23 +1055,30 @@ Vor der Durchführung der Testszenarien muss \routeKIT installiert sein.
 Alice’ Computer hat eine Internetverbindung. Alice startet das Programm \routeKIT. Nach einem Ladevorgang sieht sie die zuletzt verwendete Karte. Das zulezt verwendete \gls{profil} ist ausgewählt. Alice drückt auf den „Profil-Button“ und ein Fenster „Profilverwaltung“  (\abbildung{mockupprofilverwaltung}) erscheint. Sie wählt zwischen den erstellten Profilen das \gls{profil} „Mein PKW“ und drückt den „Löschen-Button“. Es erscheint ein Popup mit der Frage „Wollen sie das Profil wirklich löschen?“. Alice drückt auf „Ja“. Dann wählt sie das Profil „MeinLKW“ und drückt auf „OK“. Sie drückt den „Karten-Button“ und es wird das Fenster „Kartenverwaltung“ (\abbildung{mockupkartenverwaltung}) angezeigt. Alice wählt die Karte „Hamburg“ aus und drückt den „Löschen-Button“. Sie drückt „OK“. Es erscheint eine Warnung, dass durch den Löschvorgang wichtige Daten gelöscht werden, die mehrere Stunden Berechnung benötigt haben. Alice drückt „OK“ und die Karte ist gelöscht. Jetzt wählt Alice die Karte „Karlsruhe“ aus und drückt „OK“. Sie drückt den „Verlauf-Button“ und der \gls{verlauf} wird angezeigt. Alice wählt den obersten Eintrag aus und drückt auf „OK“. Die \gls{route} wird auf der Karte angezeigt. Im Feld der Textbeschreibung erscheinen textuelle Anweisungen für die angezeigte Route. Alice exportiert die Route als GPX-Datei (\abbildung{mockupscreenshotmenu}). Alice wählt den Menüpunkt „Verwaltung“ und es erscheinen die Unterpunkte „Profile\ldots“, „Karten\ldots“ und  eine Checkbox „OSM-Renderer verwenden“. Alice fordert die \glspl{osmkachel} an. Die Darstellung der Karte verändert sich. Alice verwendet den „Start/Ziel-tauschen-Button“. Die \gls{route} wird neu berechnet und angezeigt. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Über\ldots“ aus. Sie drückt auf „OK“. Alice wählt den Menüpunkt „routeKIT“ und den Unterpunkt „Beenden“ aus.
 
 \oitem{TS}{verwaltung} Verwaltung\\
-Der Administrator einer Firma möchte \routeKIT auf allen Rechnern der Firma installieren. Allerdings sind die \glspl{standardprofil} und die mitgelieferte Karte nicht für alle Benutzer geeignet; deshalb möchte der Administrator eigene Profile und Karten erstellen.
-
-Der Administrator startet zunächst \routeKIT und öffnet den Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) und importiert eine Deutschlandkarte, da die Firma deutschlandweit operiert; für eine Außenstelle in Bielefeld importiert er außerdem eine Bie\-le\-feld-Kar\-te. Dann entfernt er die \glspl{standardprofil} von allen Karten und fügt stattdessen eigene Profile hinzu. Beim Klicken auf den Hinzufügen-Button öffnet sich der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}); hier erstellt er zunächst die Profile, die die Firma benötigt:
 \begin{itemize}
-\item Firmenauto: Ein \gls{pkw}, der etwas leichter und langsamer ist als das \gls{standardprofil}
-\item Boss-Auto: Der Boss fährt einen schnellen Mercedes
-\item Firmenlaster: Ein \gls{lkw}, der auf der Autobahn noch langsamer ist als das \gls{standardprofil}
-\item Mannis Laster: Ein getuneter \gls{lkw}, der schwerer beladen wird als normale \gls{lkw}
+\item Das Programm \routeKIT wird gestartet.
+\item Der Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) wird geöffnet.
+\item Eine Deutschlandkarte und eine Bie\-le\-feld-Karte werden importiert.
+\item Die \glspl{standardprofil} werden von allen Karten entfernt, indem jede Karte ausgewählt wird und für jede Karte die \glspl{standardprofil} ausgewählt und mit dem „Entfernen“-Button entfernt werden.
+\item Durch Klicken auf den „Hinzufügen“-Button wird der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}) geöffnet.
+\item Im Profilverwaltungs-Dialog werden die folgenden Profile neu angelegt:
+  \begin{itemize}
+  \item „Firmenauto“: Ein \gls{pkw}, der etwas leichter und langsamer ist als das \gls{standardprofil}
+  \item „Boss-Auto“: Der Boss fährt einen schnellen Mercedes
+  \item „Firmenlaster“: Ein \gls{lkw}, der auf der Autobahn noch langsamer ist als das \gls{standardprofil}
+  \item „Mannis Laster“: Ein getuneter \gls{lkw}, der schwerer beladen wird als normale \gls{lkw}
+  \end{itemize}
+\item Der Profilverwaltungs-Dialog wird geschlossen.
+\item Über den „Hinzufügen“-Button werden die Profile den Karten hinzugefügt:
+  \begin{itemize}
+  \item In Karlsruhe werden das Firmenauto und das Boss-Auto verwendet
+  \item In Bielefeld wird nur das Firmenauto verwendet
+  \item Die Laster sind deutschlandweit unterwegs
+  \end{itemize}
+\item Der OK-Button wird gedrückt; es erscheint eine Zusammenfassung der Änderungen.
+\item Der OK-Button wird gedrückt; die \gls{vorberechnung} startet.
+\item Nachdem die Vorberechnung abgeschlossen ist, wird \routeKIT beendet.
 \end{itemize}
-Dann schließt der Administrator den Profilverwaltungs-Dialog und ordnet diese Profile den Karten zu:
-\begin{itemize}
-\item In Karlsruhe werden das Firmenauto und das Boss-Auto verwendet
-\item In Bielefeld wird nur das Firmenauto verwendet
-\item Die Laster sind deutschlandweit unterwegs
-\end{itemize}
-Wenn der Administrator mit den Änderungen zufrieden ist, drückt er den OK-Button. In einem Dialog wird er nochmal über die Änderungen informiert. Hier sieht er, dass er versehentlich das Boss-Auto zur Bielefelder Außenstelle hinzugefügt hat; er drückt „Abbrechen“ und entfernt das Boss-Auto aus der Bielefeld-Karte und klickt erneut OK. Diesmal ist er mit den Änderungen zufrieden; er schickt seinem Vorgesetzten eine Nachricht mit der geschätzten Berechnungszeit und startet dann die Berechnung, indem er den OK-Button drückt. Eine Woche später installiert er das Programm mit den eingerichteten Karten und Profilen auf den Rechnern aller Mitarbeiter.
-
 \end{description}
 
 \subsection{Datenkonsistenzen}
