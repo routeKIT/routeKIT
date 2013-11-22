@@ -193,7 +193,7 @@
 }
 \newglossaryentry{verlauf}{
   name={Verlauf},
-  description={Speicherung von Anfragen für spätere Wiederverwendung}
+  description={Speicherung von Anfragen für spätere Wiederverwendung. Es exestiert nur ein Verlauf für die gesamte Anwendung.}
 }
 \newglossaryentry{mercator}{
   name={Mercator-Projektion},
@@ -1027,6 +1027,11 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte), Karte enthält eine Beschränkung für einen Fahrzeugtyp, im aktuellen \gls{profil} ist ein anderer Fahrzeugtyp angegeben}
     {Als Startpunkt wird der Anfang und als Ziel des Ende der Straße mit Beschränkung ausgewählt}
     {Die beschränkte Straße wird als \gls{route} gefunden}
+\oitem{TF}{falschePunkte} Punkte außerhalb der Karte 
+\testfall
+    {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
+    {Start- oder Zielpunkt wird außerhalb der Karte angegeben}
+    {Es erscheint eine Fehlermeldung}
 
 % Betreuer2: Keine Interpretation (gemacht)
 % Betreuer2: Gruppieren (gemacht)
