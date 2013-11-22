@@ -842,9 +842,9 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \oitem{TF}{ladeRoute} \gls{route} aus \gls{verlauf} laden
 \testfall
     [\ref{WK:verlauf}]
-    {Eine \gls{route} wurde bereits berechnet, die Route wird nicht angezeigt}
-    {Die \gls{route} wird aus dem \gls{verlauf} geladen}
-    {Die abgespeicherte \gls{route} wird angezeigt}
+    {Eine \gls{route} wurde bereits berechnet, die Route wird nicht mehr angezeigt}
+    {Eine Anfrage aus dem Verlauf wird ausgewählt}
+    {Die Route wird angezeigt}
 \oitem{TF}{exitstartBerechnung} \gls{vorberechnung} nach Neustart
 \testfall[\ref{D:vorberechnung}]
     {Karte ist sichtbar, aktuelles \gls{profil} ist nicht \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
@@ -973,7 +973,7 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
 \testfall[\ref{WK:karteAuswaehlen}]
     {Eine Karte ist ausgewählt}
     {Eine andere Karte wird ausgewählt}
-    {Die andere Karte ist ausgewählt}
+    {Die andere Karte ist ausgewählt und wird angezeigt}
 \oitem{TF}{loescheKarte} Karte löschen
 \testfall[\ref{WK:karteLoeschen}]
     {Eine andere Karte als die Standardkarte ist vorhanden}
