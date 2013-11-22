@@ -107,7 +107,7 @@
   </g>
 
   <g id="avgSpeedHighway" transform="translate(10,215)">
-    <text id="avgSpeedHighwayLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Autobahn: </text>
+    <text id="avgSpeedHighwayLabel" x="0" y="15" class="enabled">Durchschnittsgeschwindigkeit auf der Autobahn: </text>
     <text x="65" y="25" class="labelnumber">8</text>
     <g id="avgSpeedHighwaySpinner" transform="translate(300,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
@@ -118,7 +118,7 @@
   </g>
 
   <g id="avgSpeedCountryRoad" transform="translate(10,245)">
-    <text id="avgSpeedCountryRoadLabel" x="0" y="15" class="enabled">Durchschnittsgeschindigkeit auf der Landstraße: </text>
+    <text id="avgSpeedCountryRoadLabel" x="0" y="15" class="enabled">Durchschnittsgeschwindigkeit auf der Landstraße: </text>
     <text x="65" y="25" class="labelnumber">9</text>
     <g id="avgSpeedCountryRoadSpinner" transform="translate(300,0)">
       <rect x="0" y="0" width="50" height="20" class="enabled"/>
