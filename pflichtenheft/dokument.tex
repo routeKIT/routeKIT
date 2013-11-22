@@ -1075,11 +1075,12 @@ Vorbedingung: Computer hat eine Internetverbindung. Es werden keine  \glspl{osmk
 \end{itemize}
 
 \oitem{TS}{verwaltung} Verwaltung\\
+Vorbedingung: \routeKIT ist frisch installiert worden und hat noch keine Profile und Karten außer den \glslink{standardprofil}{Standardprofilen} und der Standardkarte.
 \begin{itemize}
 \item Das Programm \routeKIT wird gestartet.
 \item Der Kartenverwaltungs-Dialog (\abbildung{mockupkartenverwaltung}) wird geöffnet.
-\item Eine Deutschlandkarte und eine Bie\-le\-feld-Karte werden importiert.
-\item Die \glspl{standardprofil} werden von allen Karten entfernt, indem jede Karte ausgewählt wird und für jede Karte die \glspl{standardprofil} ausgewählt und mit dem „Entfernen“-Button entfernt werden.
+\item Eine Deutschlandkarte und eine Bie\-le\-feld-Karte werden importiert. Die beiden Karten stehen nun in der Auswahl-Combobox zur Verfügung.
+\item Die \glspl{standardprofil} werden von allen Karten entfernt, indem jede Karte ausgewählt wird und für jede Karte die \glspl{standardprofil} ausgewählt und mit dem „Entfernen“-Button entfernt werden. Die Profillisten aller Karten sind nun leer.
 \item Durch Klicken auf den „Hinzufügen“-Button wird der Profilverwaltungs-Dialog (\abbildung{mockupprofilverwaltung}) geöffnet.
 \item Im Profilverwaltungs-Dialog werden die folgenden Profile neu angelegt:
   \begin{itemize}
@@ -1088,16 +1089,16 @@ Vorbedingung: Computer hat eine Internetverbindung. Es werden keine  \glspl{osmk
   \item „Firmenlaster“: Ein \gls{lkw}, der auf der Autobahn noch langsamer ist als das \gls{standardprofil}
   \item „Mannis Laster“: Ein getuneter \gls{lkw}, der schwerer beladen wird als normale \gls{lkw}
   \end{itemize}
-\item Der Profilverwaltungs-Dialog wird geschlossen.
+\item Der Profilverwaltungs-Dialog wird geschlossen. Die Profile sind nun vorhanden.
 \item Über den „Hinzufügen“-Button werden die Profile den Karten hinzugefügt:
   \begin{itemize}
   \item In Karlsruhe werden das Firmenauto und das Boss-Auto verwendet
   \item In Bielefeld wird nur das Firmenauto verwendet
   \item Die Laster sind deutschlandweit unterwegs
   \end{itemize}
-\item Der OK-Button wird gedrückt; es erscheint eine Zusammenfassung der Änderungen.
+\item Der OK-Button wird gedrückt; es erscheint eine Zusammenfassung der Änderungen: Zwei Vorberechnungen werden gelöscht, sechs werden hinzugefügt.
 \item Der OK-Button wird gedrückt; die \gls{vorberechnung} startet.
-\item Nachdem die Vorberechnung abgeschlossen ist, wird \routeKIT beendet.
+\item Nachdem die Vorberechnung abgeschlossen ist, wird \routeKIT beendet. Mit den neuen Profilen und Karten ist \routeKIT bereit zum Einsatz in der Firma.
 \end{itemize}
 \end{description}
 
