@@ -556,19 +556,20 @@ Start-, Zielpunkt und berechnete Fahrzeit der vorherigen Anfragen des Benutzers
 \includegraphics[width=\linewidth]{Paketdiagramm}
 \begin{description}
 \oitem{PK}{program} routeKIT\\
-Die Hauptsteuerklasse des Programms. Initialisiert die Anwendung.
-\oitem{PK}{gui} User Interface\\
-Enthält alle Controller und Views außer \ref{PK:mapView}. Steuert das gesamte Verhalten der Benutzeroberfläche. Realisiert u.\,a. \ref{MK:startZielWaehlen}.
+ist die Hauptsteuerklasse des Programms, initialisiert die Anwendung
+\oitem{PK}{allgui} GUI\\
+enthält alle Controller und Views der Benutzeroberfläche. Steuert das gesamte Verhalten der Benutzeroberfläche.
+\oitem{PK}{gui} ViewComponents\\
+enthält alle Views außer \ref{PK:mapView}. Stellt alle Anwendungsfenster und Dialoge bereit \oitem{PK}{controller} Controller\\
+verarbeitet alle Benutzereingaben
 \oitem{PK}{mapView} MapViewer\\
-Das GUI Element, das Kartenkacheln dynamisch \gls{rendern} lässt, cacht und skaliert an der richtigen Position im Fenster anzeigt. Realisiert u.\,a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
+Das GUI Element, das Kartenkacheln dynamisch \gls{rendern} lässt, cacht und an der richtigen Position im Fenster anzeigt. Realisiert u.\,a \ref{MK:karteAnzeigen}, \ref{MK:karteVerschieben}, \ref{MK:karteZoomen}, \ref{MK:startZielZeigen}, \ref{MK:routeAnzeigen}
 \oitem{PK}{precalc} PreCalculator\\
 Verarbeitet \gls{osm}-Dateien und wandelt sie in ein eigenes Format um. Berechnet \gls{arc}. Erstellt eine platzoptimierte Darstellung des Graphen. Filtert nicht benutzte Daten aus der \gls{osm}.
 \oitem{PK}{renderer} Renderer\\
 Berechnet die Kacheln aus den vorbereiteten Daten. Realisiert \ref{MK:karteRendern}
 \oitem{PK}{routeCalculator} RouteCalculator\\
 Berechnet die \gls{route} aus den vorbereiteten Daten. Realisiert \ref{MK:routeBerechnen}
-\oitem{PK}{fileIO} FileIO\\
-Schreibt und lädt eigene Dateien in den zur Routenberechnung optimierten Dateiformaten.
 \oitem{PK}{osmParser} \gls{osm}Parser\\
 Liest die \gls{osm}-Karte (\ref{D:osmDatei}) und wandelt sie in eine zur \gls{vorberechnung} optimierte Form im Hauptspeicher um.
 \end{description}
@@ -1046,7 +1047,7 @@ Vor der Durchführung der Testszenarien muss \routeKIT installiert sein.
 \begin{itemize}
 \item Das Programm \routeKIT wird gestartet. Eine Karte von Karlsruhe (\abbildung{mockupscreenshotmain}) wird angezeigt.
 \item Das \gls{profil} „PKW [default]“ wird gewählt.
-\item Die Karte wird verschoben und gezoomt, indem der Benutzer die linke Maustaste gedrückt hält und die Zoomknöpfe benutzt. Die Kartenansicht ändert sich entsprechend.
+\item Die Karte wird verschoben und gezoomt, indem der Benutzer die linke Maustaste zieht und die Zoomknöpfe benutzt. Die Kartenansicht ändert sich entsprechend.
 \item Mit einem Rechtsklick wird das Kontextmenü geöffnet und dieser Punkt als Startpunkt gewählt. Ein Symbol markiert, wo der Startpunkt gesetzt wurde. Die Koordinaten stehen im entsprechenden Textfeld.
 \item Der Zielpunkt wird ausgewählt, indem in das Feld „Ziel“ die \gls{dezimalkoordinaten} \texttt{49,01386 8,38106} eingetippt werden. Die Zielmarkierung wird nun auf der Karte angezeigt. Außerdem wird nun die \gls{schnellroute} auf der Karte angezeigt und im dafür vorgesehenen Feld erscheint eine Wegbeschreibung der Route.
 \item Der  Menüpunkt „Export“ und darin „Beschreibung (HTML)\ldots“ wird gewählt.
