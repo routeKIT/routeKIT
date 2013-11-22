@@ -939,10 +939,15 @@ Bei allen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist (auße
     {Ein mitgeliefertes \gls{standardprofil} wird ausgewählt.}
     {Alle Felder um Daten zu ändern sind deaktiviert.}
 \oitem{TF}{guideletemap} \gls{standardkarte} löschen
-\testfall
+\testfall[\ref{WK:karteLoeschen}]
     {Es wurde das Fenster zur Karten-Verwaltung geöffnet.}
     {Eine mitgelieferte \gls{standardkarte} wird ausgewählt.}
     {Der Knopf zum Löschen der Karte wird deaktiviert.}
+\oitem{TF}{guieditmap} \gls{standardkarte} ändern
+\testfall[\ref{WK:karteLoeschen}]
+    {Die Kartenverwaltung ist geöffnet.}
+    {Die Karte wird gewählt.}
+    {Der Knopf zum Ändern ist deaktiviert.}
 \oitem{TF}{falschePunkte} Punkte außerhalb der Karte 
 \testfall[\ref{WK:ungueltigeEingabe}]
     {Karte ist sichtbar, \gls{profil} ist \glslink{vorberechnung}{vorberechnet} (für die aktuelle Karte)}
