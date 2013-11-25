@@ -1,15 +1,15 @@
 OSM:
 
 - Karte importieren
- -> Linked-in-RAM Graph (mit befahrbaren Straﬂen) (aber allen Nodes)
+ -> Linked-in-RAM Graph (mit befahrbaren Stra√üen) (aber allen Nodes)
  -> id HashMap leeren -> nodes werden GC.
  
  -> neue ids frisch nummerieren
 
 
  --> node Lists mit geocoords (1)
- --> Adjazenzfeld mit allen  befahrbaren Straﬂen (2)
- --> ways(node ids) mit namen, typ, beschr‰nkung, l‰nge(?) (3)
+ --> Adjazenzfeld mit allen  befahrbaren Stra√üen (2)
+ --> ways(node ids) mit namen, typ, beschr√§nkung, l√§nge(?) (3)
 
 "Vorberechnung" (1, 2, 3, profil)
 -- partitionierung
