@@ -1,0 +1,17 @@
+OSM:
+
+- Karte importieren
+ -> Linked-in-RAM Graph (mit befahrbaren Straßen) (aber allen Nodes)
+ -> id HashMap leeren -> nodes werden GC.
+ 
+ -> neue ids frisch nummerieren
+
+
+ --> node Lists mit geocoords (1)
+ --> Adjazenzfeld mit allen  befahrbaren Straßen (2)
+ --> ways(node ids) mit namen, typ, beschränkung, länge(?) (3)
+
+"Vorberechnung" (1, 2, 3, profil)
+-- partitionierung
+
+ --> arc[edgeCount]
