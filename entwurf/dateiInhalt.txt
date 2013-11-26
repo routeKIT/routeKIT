@@ -1,17 +1,18 @@
-OSM:
+Karte importieren:
+  * Input: OSM-Datei
+  * Verfahren:
+    1. Lesen in linked in-RAM Graph der befahrbaren Straßen (Ways)
+    2. Node-ID-Hashmap löschen => unerreichbare Nodes werden Garbage Collected
+    3. Alle noch erreichbaren Nodes werden neu durchnummeriert (neue IDs)
+  * Output-Dateien:
+    (1) Node-Liste mit Geokoordinaten
+    (2) Adjazenzfeld mit allen befahrbaren Straßen
+    (3) Ways mit Name, Typ, Beschränkungen, Länge(?)
 
-- Karte importieren
- -> Linked-in-RAM Graph (mit befahrbaren Straßen) (aber allen Nodes)
- -> id HashMap leeren -> nodes werden GC.
- 
- -> neue ids frisch nummerieren
-
-
- --> node Lists mit geocoords (1)
- --> Adjazenzfeld mit allen  befahrbaren Straßen (2)
- --> ways(node ids) mit namen, typ, beschränkung, länge(?) (3)
-
-"Vorberechnung" (1, 2, 3, profil)
--- partitionierung
-
- --> arc[edgeCount]
+Vorberechnung:
+  * Input: (1), (2), (3), Profil-Datei
+  * Verfahren:
+    1. Partitionierung
+    2. Arc-Flags
+  * Output-Datei:
+    (4) Arc-Flags pro Kante (aus (2))
