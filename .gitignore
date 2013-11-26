@@ -16,5 +16,10 @@
 # Windows
 Thumbs.db
 
+# Backup files
+*~
+\#*\#
+
 # UMLet
 pflichtenheft/Umlet
+entwurf/Umlet
