@@ -1,0 +1,15 @@
+In UMLet, each element’s position is saved relative to the upper left corner of the screen.
+This means that simply moving the diagram around updates the position of every element in the diagram.
+
+In order to avoid cluttering the history with many meaningless changes, we impose the following rule:
+**In every commit, the diagram shall be positioned such that the “Origin” element is in the upper left corner of the screen (has position 0;0).**
+
+This rule becomes effective beginning with the commit that adds this document.
+
+The following paragraphs are informative.
+
+Note: Originally, it was intended that one of the “real” elements be declared the origin of tho document (specifically, the “View” element).
+However, this proved impossible since UMLet does not allow negative coordinates, and thus each addition of elements to the left of the origin moves the diagram,
+regardless of the actually visible area in UMLet.
+
+Obviously, the “Origin” element must not be moved relative to the rest of the diagram, since this will have the same effect as moving the entire diagram.
