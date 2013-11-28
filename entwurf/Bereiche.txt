@@ -1,0 +1,25 @@
+Bereiche
+* Routenberechnung – Kevin
+* Beschreibung – Dominic
+* OSM Parser – Dominic
+* Vorberechnung – Fabian
+  * Graphpartitionierung
+  * Kantengewichte
+  * Arc Flags
+* Profilverwaltung – Lucas
+* Kartenverwaltung – Lucas
+* History – Lucas
+* GUI – Anastasia
+  * MapView
+* Renderer – Anastasia
+* Modell – Felix
+  * Kartendaten
+  * Baum
+  * Knoten
+* Util-Klasse – Alle
+  * Geokoords -> Straße
+* FileIO
+  * HTML – Dominic
+  * GPX – Dominic
+  * Profile – Lucas
+  * Karten – Lucas
