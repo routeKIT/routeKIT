@@ -4,6 +4,7 @@ SVG2PDF = rsvg-convert -f pdf -o
 ARTEFAKTE = Paketdiagramm.pdf Profilverwaltung.pdf Kartenverwaltung.pdf Verlauf.pdf
 PNGS = mockup_screenshot_about.png mockup_screenshot_main.png mockup_screenshot_menu.png mockup_screenshot_nicht_berechnet.png
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
+UMLET = java -jar ../Umlet/umlet.jar
 
 all: dokument.pdf clean-dokument-build
 
@@ -26,7 +27,7 @@ clean-dokument-build:
 	-$(RM) dokument.aux dokument.glg dokument.glo dokument.gls dokument.ist dokument.log dokument.out dokument.toc
 
 Paketdiagramm.pdf: Paketdiagramm.uxf
-	java -jar Umlet/umlet.jar -action=convert -format=pdf -filename=Paketdiagramm.uxf -output=Paketdiagramm
+	$(UMLET) -action=convert -format=pdf -filename=Paketdiagramm.uxf -output=Paketdiagramm
 
 clean-Paketdiagramm:
 	-$(RM) Paketdiagramm.pdf
