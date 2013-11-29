@@ -52,9 +52,10 @@ calculate(start, destination, routeModel)</panel_attributes>
       <x>1240</x>
       <y>790</y>
       <w>380</w>
-      <h>50</h>
+      <h>80</h>
     </coordinates>
-    <panel_attributes>RouteCalculator
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+RouteCalculator
 --
 --
 calculateRoute(start, destination, mapData): Route</panel_attributes>
@@ -92,7 +93,7 @@ setRoute(route)</panel_attributes>
     <coordinates>
       <x>450</x>
       <y>500</y>
-      <w>110</w>
+      <w>112</w>
       <h>530</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -126,7 +127,7 @@ listens to</panel_attributes>
     <coordinates>
       <x>530</x>
       <y>500</y>
-      <w>110</w>
+      <w>112</w>
       <h>720</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -177,14 +178,14 @@ getTile(): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>380</x>
+      <x>390</x>
       <y>1160</y>
-      <w>210</w>
+      <w>200</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 tileSource</panel_attributes>
-    <additional_attributes>190;50;70;50;70;300</additional_attributes>
+    <additional_attributes>180;50;60;50;60;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -245,6 +246,88 @@ getTile(): BufferedImage</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>Origin</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>30</x>
+      <y>480</y>
+      <w>310</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Util
+--
+--
+edgeToCoordinates(coordinates): coordinates</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>410</x>
+      <y>2050</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>I need this, 
+but I don´t know 
+whose field it is.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>430</x>
+      <y>1940</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>1800</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Waydescription
+--
+--
+getDescription(): Description</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1400</x>
+      <y>1780</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>History
+--
+--
+getHistory(): History</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>340</x>
+      <y>1810</y>
+      <w>230</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>distribute
+--
+--
+profileStart()
+MapStart()
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
