@@ -330,4 +330,191 @@ MapStart()
 </panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1230</x>
+      <y>1270</y>
+      <w>460</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+GraphPartitioner
+--
+--
+&lt;&lt;abstract&gt;&gt;partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1240</x>
+      <y>1430</y>
+      <w>400</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>externalPartitionerAdapter
+--
+--
+partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1410</x>
+      <y>1310</y>
+      <w>40</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;120</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1410</x>
+      <y>1470</y>
+      <w>40</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;110;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>1660</x>
+      <y>1480</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>calls the external
+program</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1590</x>
+      <y>1440</y>
+      <w>80</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>30;30;70;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Node</type>
+    <coordinates>
+      <x>1360</x>
+      <y>1580</y>
+      <w>180</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>external graph partitioner</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1740</x>
+      <y>1270</y>
+      <w>310</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>EdgeWeighter
+--
+--
+weightEdges(graph, profile): map(edge,weight)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2090</x>
+      <y>1270</y>
+      <w>530</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ArcFlagCalculator
+--
+--
+calculateArcFlags(graph, graphPartitions[], map(edge,weight)): map(edge, arcFlag)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1750</x>
+      <y>1060</y>
+      <w>280</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>PreCalculator
+--
+--
+doPrecalculation(graph, profile): mapData</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1430</x>
+      <y>1100</y>
+      <w>340</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+</panel_attributes>
+    <additional_attributes>30;170;320;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1860</x>
+      <y>1100</y>
+      <w>40</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;170;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2000</x>
+      <y>1100</y>
+      <w>360</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>350;170;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>2180</x>
+      <y>1070</y>
+      <w>370</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>- calls the EdgeWeighter to assign weights to the graph
+- calls a GraphPartitioner to partition the graph
+- calls the ArcFlagCalculator to calculate arc flags
+- returns everything in a mapData object
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1990</x>
+      <y>1070</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>30;30;190;40</additional_attributes>
+  </element>
 </diagram>
