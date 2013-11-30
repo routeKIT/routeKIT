@@ -49,30 +49,31 @@ calculate(start, destination, routeModel)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>390</x>
-      <y>1010</y>
-      <w>150</w>
-      <h>80</h>
+      <x>730</x>
+      <y>830</y>
+      <w>170</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>RouteModel
 --
+-currentRoute: Route
 --
-addRouteListener()
-getRoute(): Route
-setRoute(route)</panel_attributes>
++addRouteListener():
++getRoute(): Route
++setRoute(route:Route):</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>450</x>
-      <y>500</y>
-      <w>110</w>
-      <h>530</h>
+      <x>570</x>
+      <y>460</y>
+      <w>232</w>
+      <h>390</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 listens to</panel_attributes>
-    <additional_attributes>60;510;60;30</additional_attributes>
+    <additional_attributes>180;370;180;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -88,20 +89,20 @@ listens to</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>390</x>
+      <x>750</x>
       <y>540</y>
-      <w>450</w>
-      <h>490</h>
+      <w>90</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;470;30;30;430;30</additional_attributes>
+    <additional_attributes>30;290;30;30;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>530</x>
       <y>500</y>
-      <w>110</w>
+      <w>112</w>
       <h>720</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -349,8 +350,8 @@ partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
     <coordinates>
       <x>1410</x>
       <y>1470</y>
-      <w>40</w>
-      <h>120</h>
+      <w>50</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;110;30;30</additional_attributes>
@@ -372,8 +373,8 @@ program</panel_attributes>
     <coordinates>
       <x>1590</x>
       <y>1440</y>
-      <w>80</w>
-      <h>50</h>
+      <w>90</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;70;40</additional_attributes>
@@ -644,23 +645,7 @@ calculateRoute(start:coordinates, destination:coordinates, mapData:mapData): Rou
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1780</x>
-      <y>220</y>
-      <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>RouteModel
---
--currentRoute: Route
---
-+getRoute(): Route
-+fireRouteChanged():</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>1410</x>
+      <x>1480</x>
       <y>40</y>
       <w>270</w>
       <h>110</h>
@@ -691,13 +676,13 @@ Route
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1650</x>
-      <y>30</y>
-      <w>260</w>
-      <h>210</h>
+      <x>870</x>
+      <y>120</y>
+      <w>870</w>
+      <h>790</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;240;30;240;190</additional_attributes>
+    <additional_attributes>850;30;850;770;30;770</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
