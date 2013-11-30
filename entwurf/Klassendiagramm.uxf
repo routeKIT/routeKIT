@@ -67,7 +67,7 @@ setRoute(route)</panel_attributes>
     <coordinates>
       <x>450</x>
       <y>500</y>
-      <w>112</w>
+      <w>110</w>
       <h>530</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -101,7 +101,7 @@ listens to</panel_attributes>
     <coordinates>
       <x>530</x>
       <y>500</y>
-      <w>112</w>
+      <w>110</w>
       <h>720</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
