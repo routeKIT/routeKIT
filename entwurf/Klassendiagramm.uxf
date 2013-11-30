@@ -517,4 +517,128 @@ doPrecalculation(graph, profile): mapData</panel_attributes>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;190;40</additional_attributes>
   </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1840</x>
+      <y>750</y>
+      <w>200</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>_defaultCar_
+--
+name = "PKW (Standard)"
+vehicleType = Car
+height = 160
+width = 160
+weight = 1400
+speedHighway = 120
+speedRoad = 80</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2270</x>
+      <y>540</y>
+      <w>110</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+VehicleType
+--
+Car
+Truck
+Bus
+Motorcycle</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2090</x>
+      <y>530</y>
+      <w>200</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+vehicleType</panel_attributes>
+    <additional_attributes>180;50;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2450</x>
+      <y>540</y>
+      <w>260</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Map
+--
+name: String
+renderingData: MapRenderingData
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1970</x>
+      <y>540</y>
+      <w>150</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Profile
+--
+name: String
+height: int
+width: int
+weight: int
+speedHighway: int
+speedRoad: int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1890</x>
+      <y>640</y>
+      <w>178</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>130;30;50;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2050</x>
+      <y>750</y>
+      <w>200</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>_defaultTruck_
+--
+name = "LKW (Standard)"
+vehicleType = Truck
+height = 350
+width = 240
+weight = 20000
+speedHighway = 80
+speedRoad = 80</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2020</x>
+      <y>640</y>
+      <w>178</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>50;30;130;110</additional_attributes>
+  </element>
 </diagram>
