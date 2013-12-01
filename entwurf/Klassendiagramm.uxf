@@ -38,12 +38,15 @@ export()</panel_attributes>
       <x>1240</x>
       <y>540</y>
       <w>300</w>
-      <h>50</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>MapData
 --
 --
-calculate(start, destination, routeModel)</panel_attributes>
+calculate(start, destination, routeModel)
+getEdgesIn(fromX, fromY, toX, toY, zoomlevel): Set&lt;Edge&gt;
+getNeighbours(target): List&lt;Node&gt;
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -705,5 +708,46 @@ Route
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>30;100;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1780</x>
+      <y>210</y>
+      <w>220</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>MapNode
+--
+--
+getLat():float
+getLon():float
+getNeighbours(): List&lt;MapNode&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>1810</x>
+      <y>90</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Node for itermediate
+graph representation
+(in OSMParser/etc)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1850</x>
+      <y>130</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
 </diagram>
