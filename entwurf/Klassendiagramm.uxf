@@ -36,7 +36,7 @@ export()</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>1240</x>
-      <y>540</y>
+      <y>710</y>
       <w>300</w>
       <h>90</h>
     </coordinates>
@@ -82,7 +82,7 @@ listens to</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1000</x>
-      <y>530</y>
+      <y>490</y>
       <w>260</w>
       <h>50</h>
     </coordinates>
@@ -432,7 +432,7 @@ calculateArcFlags(graph, graphPartitions[], map(edge,weight)): map(edge, arcFlag
     <panel_attributes>PreCalculator
 --
 --
-doPrecalculation(graph, profile): mapData</panel_attributes>
+doPrecalculation(:ProfileAndMap): MapData</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -579,14 +579,14 @@ speedRoad: int</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1900</x>
+      <x>1890</x>
       <y>640</y>
-      <w>158</w>
+      <w>162</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>120;30;40;110</additional_attributes>
+    <additional_attributes>130;30;50;110</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -610,14 +610,14 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2030</x>
+      <x>2020</x>
       <y>640</y>
-      <w>158</w>
+      <w>162</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>40;30;120;110</additional_attributes>
+    <additional_attributes>50;30;130;110</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -640,10 +640,10 @@ calculateRoute(start:coordinates, destination:coordinates, mapData:mapData): Rou
       <x>1380</x>
       <y>380</y>
       <w>50</w>
-      <h>180</h>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;160</additional_attributes>
+    <additional_attributes>30;30;30;330</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -749,5 +749,51 @@ graph representation
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>30;80;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1240</x>
+      <y>500</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>ProfileAndMap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1310</x>
+      <y>480</y>
+      <w>1220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+r1=map</panel_attributes>
+    <additional_attributes>30;30;1200;30;1200;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1310</x>
+      <y>490</y>
+      <w>720</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+r1=profile</panel_attributes>
+    <additional_attributes>30;30;700;30;700;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1230</x>
+      <y>500</y>
+      <w>50</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;210</additional_attributes>
   </element>
 </diagram>
