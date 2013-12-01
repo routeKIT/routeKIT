@@ -21,6 +21,31 @@
 \makeatother
 % End: Hack for referencing labels
 
+\newcommand{\keine}[0]{
+  % see http://tex.stackexchange.com/questions/61155/linespacing-without-packages
+  \setlength\lineskiplimit{-1000pt} % allow overflowing of lines
+  \linespread{0}\selectfont % don’t advance line after empty item
+  \item[]
+}
+% Argumente:
+% 1. Klassenname
+% 2. Beschreibung
+% 3. Attribute (ein \item[name] pro Attribut, oder \keine)
+% 4. Methoden (ein \item[name] pro Methode, oder \keine)
+\newcommand{\klasse}[4]{
+  \item[\namedlabel{K:#1}{#1}] #2
+    \begin{description}
+      \item[Attribute] \hfill % \hfill forces the following description into the next line
+        \begin{description}
+          #3
+        \end{description}
+      \item[Methoden] \hfill % \hfill forces the following description into the next line
+        \begin{description}
+          #4
+        \end{description}
+    \end{description}
+}
+
 % Glossar: alle Einträge, aber ohne extra Referenzen
 % http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
 \newcommand*{\glsgobblenumber}[1]{}
@@ -127,6 +152,15 @@ Prof.~Dr.~Peter~Sanders}
 \tableofcontents
 \newpage
 
+\section{Klassen}
+\begin{description}
+
+\klasse{MapData}
+       {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
+       {\keine}
+       {\keine} % TODO
+
+\end{description}
 
 \glsaddallunused
 \makeatletter
