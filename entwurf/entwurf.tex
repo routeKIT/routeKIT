@@ -155,8 +155,27 @@ Prof.~Dr.~Peter~Sanders}
 \section{Klassen}
 \begin{description}
 
+\klasse{Profile}
+       {Ein Fahrzeugprofil.}
+       {
+       \item[name] Der Name des Profils.
+       \item[vehicleType] Der Fahrzeugtyp.
+       \item[height] Die Höhe des Fahrzeugs, in Zentimetern.
+       \item[width] Die Breite des Fahrzeugs, in Zentimetern.
+       \item[weight] Das Gewicht des Fahrzeugs, in Kilogramm.
+       \item[speedHighway] Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde.
+       \item[speedRoad] Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.
+       }
+       {\keine}
+\klasse{Map}
+       {Eine Karte.}
+       {
+       \item[name] Der Name der Karte.
+       \item[renderingData] Die Daten, die zum Rendern der Karte benötigt werden.
+       }
+       {\keine}
 \klasse{ProfileAndMap}
-       {Eine Kombination aus einem Profil und einer Karte. Siehe auch \ref{K:MapData}.}
+       {Eine Kombination aus einem \hyperref[K:Profile]{Profil} und einer \hyperref[K:Map]{Karte}. Siehe auch \ref{K:MapData}.}
        {
        \item[profile] Das Profil
        \item[map] Die Karte
