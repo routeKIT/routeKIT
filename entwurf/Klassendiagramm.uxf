@@ -1046,4 +1046,15 @@ m1=0..n</panel_attributes>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>130;30;30;30</additional_attributes>
   </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1020</x>
+      <y>680</y>
+      <w>290</w>
+      <h>1170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>270;1150;30;1150;30;30</additional_attributes>
+  </element>
 </diagram>
