@@ -226,12 +226,17 @@ getTile(): BufferedImage</panel_attributes>
       <x>30</x>
       <y>480</y>
       <w>310</w>
-      <h>80</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>Util
 --
 --
-edgeToCoordinates(coordinates): coordinates</panel_attributes>
+edgeToCoordinates(coordinates): coordinates
+mercatorLon(lon: float, zoom:int): float
+mercatorLat(lat: float, zoom:int): float
+unmercatorX(x: float, zoom:int): float
+unmercatorY(y: float, zoom:int): float
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -916,7 +921,7 @@ addTileFinishedListener(:TileFinishedListener)
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
-r1=Role</panel_attributes>
+</panel_attributes>
     <additional_attributes>30;110;30;30</additional_attributes>
   </element>
   <element>
