@@ -944,20 +944,6 @@ tileFinished(x:int, y:int, zoom:int, tile:BufferedImage)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2470</x>
-      <y>770</y>
-      <w>190</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=0..n
-m2=0..1
-teaches to&gt;</panel_attributes>
-    <additional_attributes>30;50;170;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
       <x>430</x>
       <y>1050</y>
       <w>160</w>
