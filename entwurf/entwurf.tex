@@ -186,6 +186,24 @@ Prof.~Dr.~Peter~Sanders}
        {\keine}
        {\keine} % TODO
 
+\klasse{History}
+       {Kapselt den Verlauf.}
+       {\keine}
+       {
+       \item[addEntry] Fügt einen Eintrag zum Verlauf hinzu. Als \texttt{date} des neuen Eintrags wird die aktuelle Zeit verwendet.
+       \item[getEntries] Gibt alle Einträge des Verlaufs zurück.
+       \item[save] Speichert den Verlauf in die angegebene Datei.
+       \item[load] Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.
+       }
+\klasse{HistoryEntry}
+       {Ein Eintrag im Verlauf.}
+       {
+       \item[start] Der Startpunkt der Anfrage.
+       \item[destination] Der Zielpunkt der Anfrage.
+       \item[date] Der Zeitpunkt der Anfrage.
+       }
+       {\keine}
+
 \end{description}
 
 \glsaddallunused

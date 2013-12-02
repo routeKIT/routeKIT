@@ -256,15 +256,18 @@ getDescription(): Description</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1400</x>
+      <x>1290</x>
       <y>1780</y>
-      <w>210</w>
+      <w>340</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>History
 --
 --
-getHistory(): History</panel_attributes>
+addEntry(start:Coordinates, destination:Coordinates)
+getEntries():List&lt;HistoryEntry&gt;
+save(:File)
+_load(:File):History_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1004,5 +1007,32 @@ implements</panel_attributes>
 m1=0..n
 </panel_attributes>
     <additional_attributes>30;30;30;90;130;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1740</x>
+      <y>1780</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>HistoryEntry
+--
+start: Coordinates
+destination: Coordinates
+date: Date</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1600</x>
+      <y>1780</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>140;30;30;30</additional_attributes>
   </element>
 </diagram>
