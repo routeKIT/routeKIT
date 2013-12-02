@@ -781,8 +781,7 @@ removeProfile(p :Profile)
       <w>50</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=-
-m1=0..1
+    <panel_attributes>lt=-&gt;
 m2=0..n
 </panel_attributes>
     <additional_attributes>30;30;30;160</additional_attributes>
