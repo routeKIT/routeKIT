@@ -242,8 +242,8 @@ unmercatorY(y: float, zoom:int): float
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>800</x>
-      <y>1800</y>
+      <x>1850</x>
+      <y>40</y>
       <w>210</w>
       <h>120</h>
     </coordinates>
@@ -545,7 +545,7 @@ save()</panel_attributes>
     <coordinates>
       <x>1900</x>
       <y>660</y>
-      <w>150</w>
+      <w>158</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -576,7 +576,7 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>2030</x>
       <y>660</y>
-      <w>150</w>
+      <w>158</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -1034,5 +1034,16 @@ date: Date</panel_attributes>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
     <additional_attributes>140;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1720</x>
+      <y>60</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>130;30;30;30</additional_attributes>
   </element>
 </diagram>
