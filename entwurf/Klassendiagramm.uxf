@@ -75,18 +75,6 @@ getNeighbours(target): List&lt;Node&gt;
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>570</x>
-      <y>460</y>
-      <w>232</w>
-      <h>390</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-listens to</panel_attributes>
-    <additional_attributes>180;370;180;50;30;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
       <x>1070</x>
       <y>490</y>
       <w>190</w>
@@ -109,14 +97,14 @@ listens to</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>530</x>
+      <x>330</x>
       <y>500</y>
-      <w>112</w>
-      <h>720</h>
+      <w>220</w>
+      <h>570</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
-listens to</panel_attributes>
-    <additional_attributes>60;700;60;30</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;
+implements</panel_attributes>
+    <additional_attributes>30;550;30;110;200;110;200;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -549,7 +537,7 @@ save()</panel_attributes>
     <coordinates>
       <x>1900</x>
       <y>660</y>
-      <w>158</w>
+      <w>150</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -580,7 +568,7 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>2030</x>
       <y>660</y>
-      <w>158</w>
+      <w>150</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -874,5 +862,143 @@ getFlags(node: int)
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1750</x>
+      <y>950</y>
+      <w>280</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>PreCalculationScheduler
+--
+--
+scheduleCalculation(:ProfileAndMap)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1850</x>
+      <y>980</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=    1
+</panel_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>570</x>
+      <y>1050</y>
+      <w>320</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>TileScheduler
+--
+--
+requestTile(x:int, y:int, zoom:int): BufferedImage
+addTileFinishedListener(:TileFinishedListener)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>700</x>
+      <y>1090</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=Role</panel_attributes>
+    <additional_attributes>30;110;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>120</x>
+      <y>1050</y>
+      <w>340</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+TileFinishedListener
+--
+--
+tileFinished(x:int, y:int, zoom:int, tile:BufferedImage)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2470</x>
+      <y>770</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+teaches to&gt;</panel_attributes>
+    <additional_attributes>30;50;170;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>430</x>
+      <y>1050</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+</panel_attributes>
+    <additional_attributes>30;30;140;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>560</x>
+      <y>720</y>
+      <w>170</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+RouteFinishedListener
+--
+--
+routeFinished(:Route)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>500</y>
+      <w>130</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;
+implements</panel_attributes>
+    <additional_attributes>70;220;70;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>770</y>
+      <w>150</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+</panel_attributes>
+    <additional_attributes>30;30;30;90;130;90</additional_attributes>
   </element>
 </diagram>
