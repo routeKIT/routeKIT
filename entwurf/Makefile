@@ -3,7 +3,7 @@ RM = rm -f
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 UMLET = java -jar ../Umlet/umlet.jar
 
-all: entwurf.pdf clean-entwurf-build
+all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf
 
 .PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm
 
