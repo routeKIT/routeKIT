@@ -5,9 +5,9 @@ UMLET = java -jar ../Umlet/umlet.jar
 
 all: entwurf.pdf clean-entwurf-build
 
-.PHONY: all clean clean-entwurf clean-entwurf-build
+.PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm
 
-clean: clean-entwurf
+clean: clean-entwurf clean-Klassendiagramm
 
 entwurf.pdf: $(ARTEFAKTE) $(PNGS) entwurf.tex
 	$(MAKE) clean-entwurf # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
@@ -22,3 +22,11 @@ clean-entwurf: clean-entwurf-build
 
 clean-entwurf-build:
 	-$(RM) entwurf.aux entwurf.glg entwurf.glo entwurf.gls entwurf.ist entwurf.log entwurf.out entwurf.toc
+
+Klassendiagramm.pdf: Klassendiagramm.uxf
+	sed '4,14d' Klassendiagramm.uxf > Klassendiagramm.uxf.tmp # strip lines 4-14 – the “Origin” element
+	$(UMLET) -action=convert -format=pdf -filename=Klassendiagramm.uxf.tmp -output=Klassendiagramm
+	-$(RM) Klassendiagramm.uxf.tmp
+
+clean-Klassendiagramm:
+	-$(RM) Klassendiagramm.pdf

@@ -2,6 +2,17 @@
 <diagram program="umlet" version="12.2">
   <zoom_level>10</zoom_level>
   <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Origin</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>500</x>
@@ -208,17 +219,6 @@ getTile(): BufferedImage</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;220</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Note</type>
-    <coordinates>
-      <x>0</x>
-      <y>0</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Origin</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
