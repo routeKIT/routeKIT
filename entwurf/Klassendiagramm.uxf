@@ -19,17 +19,23 @@
     <coordinates>
       <x>820</x>
       <y>500</y>
-      <w>210</w>
-      <h>120</h>
+      <w>280</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>Controller
 --
 --
-onClick()
 onStart()
 onDestination()
 calculate()
-export()</panel_attributes>
+exportGPX(target: File)
+exportHTML(target: File)
+changeProfile()
+deleteProfile()
+importMap()
+deleteMap()
+schedulePrecalculate(:ProfileAndMap)
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -81,13 +87,13 @@ listens to</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1000</x>
+      <x>1070</x>
       <y>490</y>
-      <w>260</w>
+      <w>190</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>30;30;240;30</additional_attributes>
+    <additional_attributes>30;30;170;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -579,14 +585,14 @@ speedRoad: int</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1890</x>
+      <x>1900</x>
       <y>640</y>
-      <w>162</w>
+      <w>158</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>130;30;50;110</additional_attributes>
+    <additional_attributes>120;30;40;110</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
