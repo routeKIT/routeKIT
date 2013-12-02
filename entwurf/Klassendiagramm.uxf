@@ -54,7 +54,7 @@ schedulePrecalculate(:ProfileAndMap)
     <coordinates>
       <x>1240</x>
       <y>710</y>
-      <w>300</w>
+      <w>390</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>MapData
@@ -138,7 +138,7 @@ TileSource
       <x>410</x>
       <y>1460</y>
       <w>190</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>TileCache
 --
@@ -176,7 +176,7 @@ tileSource</panel_attributes>
       <x>610</x>
       <y>1460</y>
       <w>190</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>TileRenderer
 --
@@ -190,7 +190,7 @@ getTile(): BufferedImage</panel_attributes>
       <x>810</x>
       <y>1460</y>
       <w>190</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>OSMRenderer
 --
@@ -273,7 +273,7 @@ _load(:File):History_</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1230</x>
+      <x>1200</x>
       <y>1270</y>
       <w>460</w>
       <h>70</h>
@@ -288,7 +288,7 @@ GraphPartitioner
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1240</x>
+      <x>1230</x>
       <y>1430</y>
       <w>400</w>
       <h>70</h>
@@ -302,7 +302,7 @@ partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1410</x>
+      <x>1400</x>
       <y>1310</y>
       <w>50</w>
       <h>140</h>
@@ -313,7 +313,7 @@ partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1410</x>
+      <x>1400</x>
       <y>1470</y>
       <w>50</w>
       <h>130</h>
@@ -347,7 +347,7 @@ program</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Node</type>
     <coordinates>
-      <x>1360</x>
+      <x>1350</x>
       <y>1580</y>
       <w>180</w>
       <h>50</h>
@@ -358,9 +358,9 @@ program</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1740</x>
+      <x>1710</x>
       <y>1270</y>
-      <w>310</w>
+      <w>360</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>EdgeWeighter
@@ -372,7 +372,7 @@ weightEdges(:RawMapData, profile): map(edge,weight)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2090</x>
+      <x>2120</x>
       <y>1270</y>
       <w>530</w>
       <h>70</h>
@@ -400,14 +400,14 @@ doPrecalculation(:ProfileAndMap): MapData</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1430</x>
+      <x>1400</x>
       <y>1100</y>
-      <w>340</w>
+      <w>370</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
-    <additional_attributes>30;170;320;30</additional_attributes>
+    <additional_attributes>30;170;350;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -425,11 +425,11 @@ doPrecalculation(:ProfileAndMap): MapData</panel_attributes>
     <coordinates>
       <x>2000</x>
       <y>1100</y>
-      <w>370</w>
+      <w>400</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>350;170;30;30</additional_attributes>
+    <additional_attributes>380;170;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Note</type>
@@ -543,14 +543,14 @@ save()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1900</x>
+      <x>1890</x>
       <y>660</y>
-      <w>158</w>
+      <w>162</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>120;30;40;90</additional_attributes>
+    <additional_attributes>130;30;50;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -574,14 +574,14 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2030</x>
+      <x>2020</x>
       <y>660</y>
-      <w>158</w>
+      <w>162</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>40;30;120;90</additional_attributes>
+    <additional_attributes>50;30;130;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -974,7 +974,7 @@ routeFinished(:Route)</panel_attributes>
     <coordinates>
       <x>510</x>
       <y>500</y>
-      <w>130</w>
+      <w>128</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -1000,7 +1000,7 @@ m1=0..n
       <x>1740</x>
       <y>1780</y>
       <w>160</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>HistoryEntry
 --
