@@ -538,7 +538,8 @@ weight: int
 speedHighway: int
 speedRoad: int
 --
-save()</panel_attributes>
+save(file:File)
+_load(file:File): Profile_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
