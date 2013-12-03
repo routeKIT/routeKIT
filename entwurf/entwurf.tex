@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
+\usepackage{xparse} % powerful commands
 
 \makeglossary
 
@@ -22,28 +23,85 @@
 % End: Hack for referencing labels
 
 \newcommand{\keine}[0]{
-  % see http://tex.stackexchange.com/questions/61155/linespacing-without-packages
-  \setlength\lineskiplimit{-1000pt} % allow overflowing of lines
-  \linespread{0}\selectfont % don’t advance line after empty item
-  \item[]
+%  % see http://tex.stackexchange.com/questions/61155/linespacing-without-packages
+%  \setlength\lineskiplimit{-1000pt} % allow overflowing of lines
+%  \linespread{0}\selectfont % don’t advance line after empty item
+  \item[] keine.
 }
 % Argumente:
 % 1. Klassenname
 % 2. Beschreibung
-% 3. Attribute (ein \item[name] pro Attribut, oder \keine)
-% 4. Methoden (ein \item[name] pro Methode, oder \keine)
-\newcommand{\klasse}[4]{
+% 3. Attribute (ein oder mehrere \attr, oder \keine)
+% 4. Methoden (ein oder mehrere \method, oder \keine)
+\newcommand{\class}[4]{
   \item[\namedlabel{K:#1}{#1}] #2
     \begin{description}
-      \item[Attribute] \hfill % \hfill forces the following description into the next line
-        \begin{description}
-          #3
-        \end{description}
-      \item[Methoden] \hfill % \hfill forces the following description into the next line
-        \begin{description}
-          #4
-        \end{description}
+    \newcommand{\currentclass}[0]{#1}
+    \item[Attribute] \hfill % \hfill forces the following description into the next line
+      \begin{description}
+        #3
+      \end{description}
+    \item[Methoden] \hfill % \hfill forces the following description into the next line
+      \begin{description}
+        #4
+      \end{description}
     \end{description}
+}
+% Argumente:
+% 1. Name
+% 2. Typ
+% 3. kurze Beschreibung, ohne Punkt am Ende
+\newcommand{\attr}[3]{
+  \item[\namedlabel{A:\currentclass.#1}{#1}] (\texttt{#2}) #3.
+}
+% Argumente:
+% 1. Name
+% 2. Typ
+% 3. Parameter (ein oder mehrere \param, oder \keine)
+% 4. Beschreibung
+\newcommand{\method}[4]{
+  \item[\namedlabel{M:\currentclass.#1}{#1}] (\texttt{#2}) #4\\
+    Parameter:
+    \begin{description}
+      \newcommand{\currentmethod}[0]{#1}
+      #3
+    \end{description}
+}
+% Argumente:
+% 1. Name
+% 2. Typ
+% 3. kurze Beschreibung, ohne Punkt am Ende
+\newcommand{\param}[3]{
+  \item[\namedlabel{P:\currentclass.\currentmethod.#1}{#1}] (\texttt{#2}) #3.
+}
+
+% Argumente:
+% 1. Klasse
+% 2. (optional) Text – default: Klasse
+\NewDocumentCommand{\refclass}{mO{#1}}{
+  \hyperref[K:#1]{\texttt{#2}}
+}
+% Argumente:
+% 1. Klasse
+% 2. Attribut
+% 3. (optional) Text – default: Klasse.Attribut
+\NewDocumentCommand{\refattr}{mmO{#1.#2}}{
+  \hyperref[A:#1.#2]{\texttt{#3}}
+}
+% Argumennte:
+% 1. Klasse
+% 2. Methode
+% 3. (optional) Text – default: Klasse.Methode
+\NewDocumentCommand{\refmethod}{mmO{#1.#2}}{
+  \hyperref[M:#1.#2]{\texttt{#3}}
+}
+% Argumente:
+% 1. Klasse
+% 2. Methode
+% 3. Parameter
+% 4. (optional) Text – default: Klasse.Methode.Parameter
+\NewDocumentCommand{\refparam}{mmmO{#1.#2.#3}}{
+  \hyperref[P:#1.#2.#3]{\texttt{#4}}
 }
 
 % Glossar: alle Einträge, aber ohne extra Referenzen
@@ -155,52 +213,67 @@ Prof.~Dr.~Peter~Sanders}
 \section{Klassen}
 \begin{description}
 
-\klasse{Profile}
+\class{Profile}
        {Ein Fahrzeugprofil.}
        {
-       \item[name] Der Name des Profils.
-       \item[vehicleType] Der Fahrzeugtyp.
-       \item[height] Die Höhe des Fahrzeugs, in Zentimetern.
-       \item[width] Die Breite des Fahrzeugs, in Zentimetern.
-       \item[weight] Das Gewicht des Fahrzeugs, in Kilogramm.
-       \item[speedHighway] Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde.
-       \item[speedRoad] Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.
+         \attr{name}{String}{Der Name des Profils}
+         \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp}
+         \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern}
+         \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern}
+         \attr{weight}{int}{Das Gewicht des Fahrzeugs, in Kilogramm}
+         \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde}
+         \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde}
        }
        {\keine}
-\klasse{Map}
+\class{Map}
        {Eine Karte.}
        {
-       \item[name] Der Name der Karte.
-       \item[renderingData] Die Daten, die zum Rendern der Karte benötigt werden.
+         \attr{name}{String}{Der Name der Karte}
+         \attr{renderingData}{RenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
        }
        {\keine}
-\klasse{ProfileAndMap}
-       {Eine Kombination aus einem \hyperref[K:Profile]{Profil} und einer \hyperref[K:Map]{Karte}. Siehe auch \ref{K:MapData}.}
+\class{ProfileAndMap}
+       {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{MapData}.}
        {
-       \item[profile] Das Profil
-       \item[map] Die Karte
+         \attr{profile}{\refclass{Profile}}{Das Profil}
+         \attr{map}{\refclass{Map}}{Die Karte}
        }
        {\keine}
-\klasse{MapData}
+\class{MapData}
        {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
        {\keine}
        {\keine} % TODO
 
-\klasse{History}
+\class{History}
        {Kapselt den Verlauf.}
        {\keine}
        {
-       \item[addEntry] Fügt einen Eintrag zum Verlauf hinzu. Als \texttt{date} des neuen Eintrags wird die aktuelle Zeit verwendet.
-       \item[getEntries] Gibt alle Einträge des Verlaufs zurück.
-       \item[save] Speichert den Verlauf in die angegebene Datei.
-       \item[load] Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.
+         \method{addEntry}{void}
+                {
+                  \param{start}{Coordinates}{Der Startpunkt}
+                  \param{destination}{Coordinates}{Der Zielpunkt}
+                }
+                {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
+         \method{getEntries}{List<\refclass{HistoryEntry}>}
+                {\keine}
+                {Gibt alle Einträge des Verlaufs zurück.}
+         \method{save}{void}
+                {
+                  \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird}
+                }
+                {Speichert den Verlauf in die angegebene Datei.}
+         \method{load}{Verlauf}
+                {
+                  \param{file}{File}{Die Datei, aus der der Verlauf geladen wird}
+                }
+                {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
        }
-\klasse{HistoryEntry}
+\class{HistoryEntry}
        {Ein Eintrag im Verlauf.}
        {
-       \item[start] Der Startpunkt der Anfrage.
-       \item[destination] Der Zielpunkt der Anfrage.
-       \item[date] Der Zeitpunkt der Anfrage.
+         \attr{start}{Coordinates}{Der Startpunkt der Anfrage}
+         \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage}
+         \attr{date}{Date}{Der Zeitpunkt der Anfrage}
        }
        {\keine}
 
