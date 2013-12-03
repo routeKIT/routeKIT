@@ -11,10 +11,10 @@ clean: clean-entwurf clean-Klassendiagramm
 
 entwurf.pdf: entwurf.tex $(ARTEFAKTE) $(PNGS)
 	$(MAKE) clean-$(@:.pdf=) # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
-	-$(LATEX) $< # initial build
-	makeglossaries $(@:.pdf=) # initial glossary
-	-$(LATEX) $< # include glossary in document
-	makeglossaries $(@:.pdf=) # include glossary cross-refs in glossary
+	-$(LATEX) $< 2>&1 > /dev/null # initial build
+	-makeglossaries $(@:.pdf=) # initial glossary
+	-$(LATEX) $< 2>&1 > /dev/null # include glossary in document
+	-makeglossaries $(@:.pdf=) # include glossary cross-refs in glossary
 	-$(LATEX) $< # add glossary to TOC
 
 clean-entwurf: clean-entwurf-build
