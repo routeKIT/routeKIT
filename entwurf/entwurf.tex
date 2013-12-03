@@ -224,22 +224,33 @@ Prof.~Dr.~Peter~Sanders}
          \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde}
          \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde}
        }
-       {\keine}
+       {
+         \method{save}{void}
+                {
+                  \param{file}{File}{Die Datei, in die das Profil gespeichert wird}
+                }
+                {Speichert das Profil in die angegebene Datei.}
+         \method{load}{\refclass{Profile}}
+                {
+                  \param{file}{File}{Die Datei, aus der das Profil geladen wird}
+                } 
+                {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
+       }
 \class{Map}
        {Eine Karte.}
        {
          \attr{name}{String}{Der Name der Karte}
-         \attr{renderingData}{RenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
+         \attr{renderingData}{MapRenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
        }
        {\keine}
-\class{ProfileAndMap}
-       {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{MapData}.}
+\class{ProfileMapCombination}
+       {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
        {
          \attr{profile}{\refclass{Profile}}{Das Profil}
          \attr{map}{\refclass{Map}}{Die Karte}
        }
        {\keine}
-\class{MapData}
+\class{GraphPreCalculation}
        {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
        {\keine}
        {\keine} % TODO
