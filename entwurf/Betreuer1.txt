@@ -1,0 +1,42 @@
+Wichtigkeit sortieren.
+Methodennamen nicht genau genug.
+
+"Paketkasten" Controller / Precalc
+"Controller aufspalten"
+""
+ExporterKlassen
+
+Controller
+- init
+
+- Konstruktoren
+
+- repaintKacheln ? 
+- Controller vors Modell
+- View nicht beim Modell registrieren.
+
+- Cache Aktiv löschen
+- Scheduler (Queue, Konstruktor mit Source?), cancel,, 
+
+ProfileAndMap (Name?)
+- isCalculated
+- getProfile/Map
+
+MapData:
+- getEdgesInRect
+
+RawMapData: (Name) an Map dran
+
+Partitionieren beim Kartenimport.
+array statt map
+
+WayDescGenerator.
+
+Util.getDist Haversine
+
+Projektion, Kdtree Klasse. Konstruktor(Map), size, etc?
+
+
+
+
+
