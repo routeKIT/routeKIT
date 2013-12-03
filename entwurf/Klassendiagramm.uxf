@@ -88,11 +88,11 @@ getNeighbours(target): List&lt;Node&gt;
     <coordinates>
       <x>1070</x>
       <y>490</y>
-      <w>140</w>
+      <w>130</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>30;30;120;30</additional_attributes>
+    <additional_attributes>30;30;110;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -138,13 +138,14 @@ TileSource
       <x>410</x>
       <y>1460</y>
       <w>190</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>TileCache
 --
 cache
 --
-getTile(): BufferedImage</panel_attributes>
+getTile(): BufferedImage
+deleteTiles(zoom:int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -717,12 +718,15 @@ graph representation
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1190</x>
-      <y>500</y>
-      <w>150</w>
-      <h>30</h>
+      <x>1180</x>
+      <y>480</y>
+      <w>160</w>
+      <h>50</h>
     </coordinates>
-    <panel_attributes>ProfileMapCombination</panel_attributes>
+    <panel_attributes>ProfileMapCombination
+--
+--
+isCalculated(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -903,12 +907,13 @@ m1=    1
       <x>570</x>
       <y>1050</y>
       <w>320</w>
-      <h>70</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>TileQueue
 --
 requestTile(x:int, y:int, zoom:int): BufferedImage
 addTileFinishedListener(:TileFinishedListener)
+deleteTiles(x:int, y:int, zoom:int)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -916,14 +921,14 @@ addTileFinishedListener(:TileFinishedListener)
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>700</x>
-      <y>1090</y>
+      <y>1110</y>
       <w>50</w>
-      <h>130</h>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=  1
 </panel_attributes>
-    <additional_attributes>30;110;30;30</additional_attributes>
+    <additional_attributes>30;90;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
