@@ -910,26 +910,26 @@ m1=    1
       <w>320</w>
       <h>90</h>
     </coordinates>
-    <panel_attributes>TileQueue
+    <panel_attributes>TileDequeue
+--
 --
 requestTile(x:int, y:int, zoom:int): BufferedImage
 addTileFinishedListener(:TileFinishedListener)
-deleteTiles(x:int, y:int, zoom:int)
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>700</x>
+      <x>230</x>
       <y>1110</y>
-      <w>50</w>
-      <h>110</h>
+      <w>520</w>
+      <h>420</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=  1
 </panel_attributes>
-    <additional_attributes>30;90;30;30</additional_attributes>
+    <additional_attributes>180;400;30;400;30;70;500;70;500;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
