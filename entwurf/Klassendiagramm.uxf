@@ -80,7 +80,7 @@ getNeighbours(target): List&lt;Node&gt;
 --
 +addRouteListener():
 +getRoute(): Route
-+setRoute(route:Route):</panel_attributes>
++setRoute(route: Route):</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -146,7 +146,7 @@ cache
 --
 TileCache(target: TileSource)
 getTile(): BufferedImage
-deleteTiles(zoom:int)</panel_attributes>
+deleteTiles(zoom: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -267,10 +267,10 @@ getDescription(): Description</panel_attributes>
     <panel_attributes>History
 --
 --
-addEntry(start:Coordinates, destination:Coordinates)
-getEntries():List&lt;HistoryEntry&gt;
+addEntry(start: Coordinates, destination: Coordinates)
+getEntries(): List&lt;HistoryEntry&gt;
 save(:File)
-_load(:File):History_</panel_attributes>
+_load(:File): History_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -539,21 +539,21 @@ weight: int
 speedHighway: int
 speedRoad: int
 --
-save(file:File)
-_load(file:File): Profile_</panel_attributes>
+save(file: File)
+_load(file: File): Profile_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1900</x>
+      <x>1890</x>
       <y>660</y>
-      <w>158</w>
+      <w>162</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>120;30;40;90</additional_attributes>
+    <additional_attributes>130;30;50;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -577,14 +577,14 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2030</x>
+      <x>2020</x>
       <y>660</y>
-      <w>158</w>
+      <w>162</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>40;30;120;90</additional_attributes>
+    <additional_attributes>50;30;130;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -623,7 +623,7 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Route
 --
--Waydescription : Waydescription 
+-Waydescription: Waydescription 
 --
 /+getWayDescription()/</panel_attributes>
     <additional_attributes/>
@@ -687,8 +687,8 @@ Route
     <panel_attributes>MapNode
 --
 --
-getLat():float
-getLon():float
+getLat(): float
+getLon(): float
 getNeighbours(): List&lt;MapNode&gt;
 </panel_attributes>
     <additional_attributes/>
@@ -777,8 +777,8 @@ r1=profile</panel_attributes>
     <panel_attributes>ProfileManager
 --
 --
-addProfile(p :Profile)
-removeProfile(p :Profile)
+addProfile(p: Profile)
+removeProfile(p: Profile)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -914,7 +914,7 @@ m1=    1
     <panel_attributes>TileDequeue
 --
 --
-requestTile(x:int, y:int, zoom:int): BufferedImage
+requestTile(x: int, y: int, zoom: int): BufferedImage
 addTileFinishedListener(:TileFinishedListener)
 </panel_attributes>
     <additional_attributes/>
@@ -937,28 +937,28 @@ m1=  1
     <coordinates>
       <x>120</x>
       <y>1050</y>
-      <w>340</w>
+      <w>350</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 TileFinishedListener
 --
 --
-tileFinished(x:int, y:int, zoom:int, tile:BufferedImage)</panel_attributes>
+tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>430</x>
+      <x>440</x>
       <y>1050</y>
-      <w>160</w>
+      <w>150</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
 </panel_attributes>
-    <additional_attributes>30;30;140;30</additional_attributes>
+    <additional_attributes>30;30;130;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -980,7 +980,7 @@ routeFinished(:Route)</panel_attributes>
     <coordinates>
       <x>510</x>
       <y>500</y>
-      <w>130</w>
+      <w>128</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -1012,7 +1012,8 @@ m1=0..n
 --
 start: Coordinates
 destination: Coordinates
-date: Date</panel_attributes>
+date: Date
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
