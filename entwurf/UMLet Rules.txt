@@ -1,3 +1,6 @@
+The “Origin” element
+====================
+
 In UMLet, each element’s position is saved relative to the upper left corner of the screen.
 This means that simply moving the diagram around updates the position of every element in the diagram.
 
@@ -13,3 +16,12 @@ However, this proved impossible since UMLet does not allow negative coordinates,
 regardless of the actually visible area in UMLet.
 
 Obviously, the “Origin” element must not be moved relative to the rest of the diagram, since this will have the same effect as moving the entire diagram.
+
+Colons and spaces
+=================
+
+The colon (‘:’) separates an element and its type. In these cases, it shall always be followed by a single space, except where the element is anonymous:
+
+    method(param: Type, :Type): Type
+    method(:Type): Type
+    parameter: Type
