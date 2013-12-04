@@ -30,7 +30,7 @@
     <coordinates>
       <x>820</x>
       <y>500</y>
-      <w>280</w>
+      <w>310</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>Controller
@@ -44,7 +44,7 @@ changeProfile()
 deleteProfile()
 importMap()
 deleteMap()
-schedulePrecalculate(:ProfileAndMap)
+schedulePrecalculate(:ProfileMapCombination)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -85,13 +85,13 @@ getNeighbours(target): List&lt;Node&gt;
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1070</x>
+      <x>1100</x>
       <y>490</y>
-      <w>130</w>
+      <w>100</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>30;30;110;30</additional_attributes>
+    <additional_attributes>30;30;80;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -283,7 +283,7 @@ _load(:File):History_</panel_attributes>
 GraphPartitioner
 --
 --
-&lt;&lt;abstract&gt;&gt;partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
+&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -297,7 +297,7 @@ GraphPartitioner
     <panel_attributes>externalPartitionerAdapter
 --
 --
-partitionGraph(graph, numberOfPartitions): graphPartitions[]</panel_attributes>
+partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -367,7 +367,7 @@ program</panel_attributes>
     <panel_attributes>EdgeWeighter
 --
 --
-weightEdges(:RawMapData, profile): map(edge,weight)</panel_attributes>
+weightEdges(:Graph, :Profile): float[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -381,7 +381,7 @@ weightEdges(:RawMapData, profile): map(edge,weight)</panel_attributes>
     <panel_attributes>ArcFlagsCalculator
 --
 --
-calculateArcFlags(:RawMapData, graphPartitions[], map(edge,weight)): Arcflags</panel_attributes>
+calculateArcFlags(:Graph, :int[], :float[]): Arcflags</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -395,7 +395,7 @@ calculateArcFlags(:RawMapData, graphPartitions[], map(edge,weight)): Arcflags</p
     <panel_attributes>PreCalculator
 --
 --
-doPrecalculation(:ProfileAndMap): MapData</panel_attributes>
+doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -512,12 +512,11 @@ vehicleType</panel_attributes>
       <x>2450</x>
       <y>540</y>
       <w>260</w>
-      <h>70</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes>Map
 --
 name: String
-renderingData: MapRenderingData
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -588,28 +587,28 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1120</x>
+      <x>1060</x>
       <y>220</y>
-      <w>560</w>
-      <h>190</h>
+      <w>640</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 RouteCalculator
 --
 --
-calculateRoute(start:coordinates, destination:coordinates, mapData:mapData): Route</panel_attributes>
+calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalculation): Route</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1380</x>
-      <y>380</y>
+      <y>370</y>
       <w>50</w>
-      <h>350</h>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;330</additional_attributes>
+    <additional_attributes>30;30;30;340</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -816,7 +815,7 @@ m2=0..n
     <panel_attributes>OSMParser
 --
 --
-parse(f: File): RawMapData
+parse(f: File): Graph
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -857,12 +856,12 @@ getFlags(node: int)
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2540</x>
-      <y>580</y>
+      <y>560</y>
       <w>50</w>
-      <h>140</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;120</additional_attributes>
+    <additional_attributes>30;30;30;140</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -880,13 +879,13 @@ getFlags(node: int)
     <coordinates>
       <x>1750</x>
       <y>950</y>
-      <w>280</w>
+      <w>300</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>PreCalculationScheduler
 --
 --
-scheduleCalculation(:ProfileAndMap)</panel_attributes>
+scheduleCalculation(:ProfileMapCombination)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
