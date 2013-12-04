@@ -16,13 +16,14 @@
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>500</x>
-      <y>500</y>
-      <w>100</w>
-      <h>30</h>
+      <y>460</y>
+      <w>130</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>View
 --
---</panel_attributes>
+--
+paint(:Graphics)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -225,7 +226,7 @@ getTile(): BufferedImage</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>20</x>
-      <y>480</y>
+      <y>460</y>
       <w>320</w>
       <h>130</h>
     </coordinates>
@@ -233,10 +234,11 @@ getTile(): BufferedImage</panel_attributes>
 --
 --
 projectToEdge(lon: float, lat: float): PointOnEdge
-mercatorLon(lon: float, zoom:int): float
-mercatorLat(lat: float, zoom:int): float
-unmercatorX(x: float, zoom:int): float
-unmercatorY(y: float, zoom:int): float
+mercatorLon(lon: float, zoom: int): float
+mercatorLat(lat: float, zoom: int): float
+unmercatorX(x: float, zoom: int): float
+unmercatorY(y: float, zoom: int): float
+distance(a: Coordinate, b: Coordinate): float
 </panel_attributes>
     <additional_attributes/>
   </element>
