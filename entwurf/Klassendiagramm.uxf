@@ -826,16 +826,17 @@ parse(f: File): Graph
     <coordinates>
       <x>2450</x>
       <y>700</y>
-      <w>250</w>
+      <w>340</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>Graph
 --
+constraints: Map&lt;int, NodeConstraint&gt;
 --
 getNeighbours(node: int)
 getLat(node: int): float
 getLon(node: int): float
-getConstraints(node: int): Constraints
+getConstraints(node: int): Set&lt;NodeConstraint&gt;
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1065,6 +1066,22 @@ pointPosition: float
 --
 
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2450</x>
+      <y>870</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+NodeConstraint
+--
+-node: int
+--
+allowsRoute(from: int, to: int, :Profile): boolean</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

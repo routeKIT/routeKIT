@@ -291,6 +291,25 @@ Prof.~Dr.~Peter~Sanders}
        }
        {\keine}
 
+\class{NodeConstraint}
+      {Eine Beschränkung auf einem Knoten, die bestimmt, ob eine bestimmte Route über diesen Knoten gültig ist oder nicht.}
+      {
+        \attr{node}{int}{Die ID des Knotens, auf den sich diese Beschränkung bezieht}
+      }
+      {
+        \method{allowsRoute}{boolean}
+               {
+                 \param{from}{int}{Die ID der Kante, über die der Knoten betreten wird}
+                 \param{to}{int}{Die ID der Kante, über die der Knoten verlassen wird}
+                 \param{profile}{\refclass{Profile}}{Das Profil, für die die Gültigkeit der Route bestimmt werden soll}
+               }
+               {
+                 Bestimmt, ob eine Route, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
+
+                 Wenn der Knoten nicht Endknoten von \refparam{NodeConstraint}{allowsRoute}{from}[from] und Startknoten von \refparam{NodeConstraint}{allowsRoute}{to}[to] ist, wird immer \code{false} zurückgegeben.
+               }
+      }
+
 \end{description}
 
 \glsaddallunused
