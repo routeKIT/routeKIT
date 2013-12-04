@@ -134,15 +134,16 @@ TileSource
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>410</x>
+      <x>400</x>
       <y>1460</y>
-      <w>190</w>
-      <h>80</h>
+      <w>200</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>TileCache
 --
 cache
 --
+TileCache(target: TileSource)
 getTile(): BufferedImage
 deleteTiles(zoom:int)</panel_attributes>
     <additional_attributes/>
@@ -928,7 +929,7 @@ addTileFinishedListener(:TileFinishedListener)
     <panel_attributes>lt=&lt;-
 m1=  1
 </panel_attributes>
-    <additional_attributes>180;400;30;400;30;70;500;70;500;30</additional_attributes>
+    <additional_attributes>170;400;30;400;30;70;500;70;500;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
