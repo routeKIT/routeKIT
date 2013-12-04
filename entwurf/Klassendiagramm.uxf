@@ -224,15 +224,15 @@ getTile(): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>30</x>
+      <x>20</x>
       <y>480</y>
-      <w>310</w>
+      <w>320</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>Util
 --
 --
-edgeToCoordinates(coordinates): coordinates
+projectToEdge(lon: float, lat: float): PointOnEdge
 mercatorLon(lon: float, zoom:int): float
 mercatorLat(lat: float, zoom:int): float
 unmercatorX(x: float, zoom:int): float
@@ -1047,5 +1047,22 @@ m1=0..n</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>270;1150;30;1150;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>350</y>
+      <w>290</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>PointOnEdge
+--
+edgeid: int
+pointPosition: float
+--
+
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
