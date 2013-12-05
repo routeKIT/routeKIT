@@ -499,13 +499,13 @@ Motorcycle</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>4870</x>
-      <y>2800</y>
-      <w>260</w>
-      <h>60</h>
+      <y>2790</y>
+      <w>270</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 vehicleType</panel_attributes>
-    <additional_attributes>250;40;30;40</additional_attributes>
+    <additional_attributes>250;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -545,14 +545,14 @@ _load(file: File): Profile_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4740</x>
+      <x>4720</x>
       <y>2940</y>
-      <w>110</w>
-      <h>220</h>
+      <w>158</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>60;30;60;210</additional_attributes>
+    <additional_attributes>80;30;80;210</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -578,8 +578,8 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>4820</x>
       <y>2940</y>
-      <w>240</w>
-      <h>220</h>
+      <w>250</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -735,8 +735,8 @@ isCalculated(): boolean</panel_attributes>
     <coordinates>
       <x>3330</x>
       <y>3370</y>
-      <w>1430</w>
-      <h>40</h>
+      <w>1440</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r1=map</panel_attributes>
@@ -822,7 +822,7 @@ parseOSM(f: File): Graph
 --
 constraints: Map&lt;int, NodeConstraint&gt;
 --
-Graph(nodes: int[], edges: int[], :map&lt;node,NodeProperties&gt;, lat: floet[], lon: floatl], :EdgeProparties[])
+Graph(nodes: int[], edges: int[], :map&lt;node,NodeProperties&gt;, lat: float[], lon: float[], :EdgeProperties[])
 getEdges(node: int): Set&lt;int&gt;
 getTargetNode(edge: int): int
 getLat(node: int): float
@@ -852,8 +852,8 @@ getFlags(node: int)
     <coordinates>
       <x>4840</x>
       <y>3400</y>
-      <w>40</w>
-      <h>150</h>
+      <w>50</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
