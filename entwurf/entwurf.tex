@@ -29,6 +29,15 @@
   \item[] keine.
 }
 % Argumente:
+% 1. Name
+% 2. Klassen (ein oder mehrere \class)
+\newcommand{\package}[2]{
+  \subsection{Paket #1}
+  \begin{description}
+    #2
+  \end{description}
+}
+% Argumente:
 % 1. Klassenname
 % 2. Beschreibung
 % 3. Attribute (ein oder mehrere \attr, oder \keine)
@@ -214,38 +223,61 @@ Prof.~Dr.~Peter~Sanders}
 \newpage
 
 \section{Klassen}
-\begin{description}
 
-\class{Profile}
-       {Ein Fahrzeugprofil.}
-       {
-         \attr{name}{String}{Der Name des Profils}
-         \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp}
-         \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern}
-         \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern}
-         \attr{weight}{int}{Das Gewicht des Fahrzeugs, in Kilogramm}
-         \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde}
-         \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde}
-       }
-       {
-         \method{save}{void}
-                {
-                  \param{file}{File}{Die Datei, in die das Profil gespeichert wird}
-                }
-                {Speichert das Profil in die angegebene Datei.}
-         \method{load}{\refclass{Profile}}
-                {
-                  \param{file}{File}{Die Datei, aus der das Profil geladen wird}
-                } 
-                {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
-       }
-\class{Map}
-       {Eine Karte.}
-       {
-         \attr{name}{String}{Der Name der Karte}
-         \attr{renderingData}{MapRenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
-       }
-       {\keine}
+\package{profiles}{
+  \class{Profile}
+        {Ein Fahrzeugprofil.}
+        {
+          \attr{name}{String}{Der Name des Profils}
+          \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp}
+          \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern}
+          \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern}
+          \attr{weight}{int}{Das Gewicht des Fahrzeugs, in Kilogramm}
+          \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde}
+          \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde}
+        }
+        {
+          \method{save}{void}
+                 {
+                   \param{file}{File}{Die Datei, in die das Profil gespeichert wird}
+                 }
+                 {Speichert das Profil in die angegebene Datei.}
+          \method{load}{\refclass{Profile}}
+                 {
+                   \param{file}{File}{Die Datei, aus der das Profil geladen wird}
+                 } 
+                 {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
+        }
+}
+
+\package{map}{
+  \class{Map}
+        {Eine Karte.}
+        {
+          \attr{name}{String}{Der Name der Karte}
+          \attr{renderingData}{MapRenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
+        }
+        {\keine}
+  \class{NodeConstraint}
+        {Eine Beschränkung auf einem Knoten, die bestimmt, ob eine bestimmte Route über diesen Knoten gültig ist oder nicht.}
+        {
+          \attr{node}{int}{Die ID des Knotens, auf den sich diese Beschränkung bezieht}
+        }
+        {
+          \method{allowsRoute}{boolean}
+                 {
+                   \param{from}{int}{Die ID der Kante, über die der Knoten betreten wird}
+                   \param{to}{int}{Die ID der Kante, über die der Knoten verlassen wird}
+                   \param{profile}{\refclass{Profile}}{Das Profil, für die die Gültigkeit der Route bestimmt werden soll}
+                 }
+                 {
+                   Bestimmt, ob eine Route, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
+                   
+                   Wenn der Knoten nicht Endknoten von \refparam{NodeConstraint}{allowsRoute}{from}[from] und Startknoten von \refparam{NodeConstraint}{allowsRoute}{to}[to] ist, wird immer \code{false} zurückgegeben.
+                 }
+        }
+}
+
 \class{ProfileMapCombination}
        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
        {
@@ -253,64 +285,49 @@ Prof.~Dr.~Peter~Sanders}
          \attr{map}{\refclass{Map}}{Die Karte}
        }
        {\keine}
-\class{GraphPreCalculation}
-       {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
-       {\keine}
-       {\keine} % TODO
 
-\class{History}
-       {Kapselt den Verlauf.}
-       {\keine}
-       {
-         \method{addEntry}{void}
-                {
-                  \param{start}{Coordinates}{Der Startpunkt}
-                  \param{destination}{Coordinates}{Der Zielpunkt}
-                }
-                {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
-         \method{getEntries}{List<\refclass{HistoryEntry}>}
-                {\keine}
-                {Gibt alle Einträge des Verlaufs zurück.}
-         \method{save}{void}
-                {
-                  \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird}
-                }
-                {Speichert den Verlauf in die angegebene Datei.}
-         \method{load}{Verlauf}
-                {
-                  \param{file}{File}{Die Datei, aus der der Verlauf geladen wird}
-                }
-                {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
-       }
-\class{HistoryEntry}
-       {Ein Eintrag im Verlauf.}
-       {
-         \attr{start}{Coordinates}{Der Startpunkt der Anfrage}
-         \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage}
-         \attr{date}{Date}{Der Zeitpunkt der Anfrage}
-       }
-       {\keine}
+\package{RouteCalculator}{
+  \class{GraphPreCalculation}
+        {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
+        {\keine}
+        {\keine} % TODO
+}
 
-\class{NodeConstraint}
-      {Eine Beschränkung auf einem Knoten, die bestimmt, ob eine bestimmte Route über diesen Knoten gültig ist oder nicht.}
-      {
-        \attr{node}{int}{Die ID des Knotens, auf den sich diese Beschränkung bezieht}
-      }
-      {
-        \method{allowsRoute}{boolean}
-               {
-                 \param{from}{int}{Die ID der Kante, über die der Knoten betreten wird}
-                 \param{to}{int}{Die ID der Kante, über die der Knoten verlassen wird}
-                 \param{profile}{\refclass{Profile}}{Das Profil, für die die Gültigkeit der Route bestimmt werden soll}
-               }
-               {
-                 Bestimmt, ob eine Route, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
+\package{history}{
+  \class{History}
+        {Kapselt den Verlauf.}
+        {\keine}
+        {
+          \method{addEntry}{void}
+                 {
+                   \param{start}{Coordinates}{Der Startpunkt}
+                   \param{destination}{Coordinates}{Der Zielpunkt}
+                 }
+                 {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
+          \method{getEntries}{List<\refclass{HistoryEntry}>}
+                 {\keine}
+                 {Gibt alle Einträge des Verlaufs zurück.}
+          \method{save}{void}
+                 {
+                   \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird}
+                 }
+                 {Speichert den Verlauf in die angegebene Datei.}
+          \method{load}{Verlauf}
+                 {
+                   \param{file}{File}{Die Datei, aus der der Verlauf geladen wird}
+                 }
+                 {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
+        }
+  \class{HistoryEntry}
+        {Ein Eintrag im Verlauf.}
+        {
+          \attr{start}{Coordinates}{Der Startpunkt der Anfrage}
+          \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage}
+          \attr{date}{Date}{Der Zeitpunkt der Anfrage}
+        }
+        {\keine}
+}
 
-                 Wenn der Knoten nicht Endknoten von \refparam{NodeConstraint}{allowsRoute}{from}[from] und Startknoten von \refparam{NodeConstraint}{allowsRoute}{to}[to] ist, wird immer \code{false} zurückgegeben.
-               }
-      }
-
-\end{description}
 
 \glsaddallunused
 \makeatletter
