@@ -78,9 +78,9 @@ getNeighbours(target): List&lt;Node&gt;
 --
 -currentRoute: Route
 --
-+addRouteListener():
++addRouteListener()
 +getRoute(): Route
-+setRoute(route: Route):</panel_attributes>
++setRoute(route: Route)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -253,7 +253,7 @@ distance(a: Coordinate, b: Coordinate): float
     <panel_attributes>RouteDescription
 --
 --
-getInstructions() : List&lt;TurnInstruction&gt;</panel_attributes>
+getInstructions(): List&lt;TurnInstruction&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -622,8 +622,8 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
     <panel_attributes>Route
 --
 --
-getRouteDescription() : RouteDescription
-getNodes() : Node[]
+getRouteDescription(): RouteDescription
+getNodes(): Node[]
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1091,7 +1091,7 @@ getMaxSpeed(:Profile): int
     <panel_attributes>GPXExporter
 --
 --
-exportRoute(file : File)</panel_attributes>
+exportRoute(file: File)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1129,7 +1129,7 @@ m2=0..n</panel_attributes>
     <panel_attributes>TurnInstruction
 --
 --
-toString() : String</panel_attributes>
+toString(): String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
