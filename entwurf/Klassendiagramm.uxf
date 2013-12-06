@@ -205,8 +205,8 @@ getTile(): BufferedImage</panel_attributes>
     <coordinates>
       <x>2450</x>
       <y>5300</y>
-      <w>150</w>
-      <h>230</h>
+      <w>160</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;140;220</additional_attributes>
@@ -246,7 +246,7 @@ distance(a: Coordinate, b: Coordinate): float
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>3610</x>
-      <y>1540</y>
+      <y>1550</y>
       <w>260</w>
       <h>70</h>
     </coordinates>
@@ -307,8 +307,8 @@ partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
     <coordinates>
       <x>3980</x>
       <y>5210</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;70</additional_attributes>
@@ -318,8 +318,8 @@ partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
     <coordinates>
       <x>3980</x>
       <y>5320</y>
-      <w>40</w>
-      <h>60</h>
+      <w>50</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;50;30;30</additional_attributes>
@@ -341,8 +341,8 @@ program</panel_attributes>
     <coordinates>
       <x>4180</x>
       <y>5270</y>
-      <w>120</w>
-      <h>40</h>
+      <w>130</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;110;30</additional_attributes>
@@ -405,8 +405,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4030</x>
       <y>4960</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -417,8 +417,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4500</x>
       <y>5040</y>
-      <w>40</w>
-      <h>180</h>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;170;30;30</additional_attributes>
@@ -428,8 +428,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4580</x>
       <y>5040</y>
-      <w>450</w>
-      <h>180</h>
+      <w>460</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>440;170;30;30</additional_attributes>
@@ -453,8 +453,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4630</x>
       <y>5010</y>
-      <w>200</w>
-      <h>50</h>
+      <w>210</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;190;40</additional_attributes>
@@ -504,8 +504,8 @@ Motorcycle</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-vehicleType</panel_attributes>
-    <additional_attributes>250;50;30;50</additional_attributes>
+m1=vehicleType</panel_attributes>
+    <additional_attributes>250;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -623,7 +623,7 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
 --
 --
 getRouteDescription(): RouteDescription
-getNodes(): Node[]
+getNodes(): int[]
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -710,8 +710,8 @@ graph representation
     <coordinates>
       <x>3740</x>
       <y>4960</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>30;70;30;30</additional_attributes>
@@ -793,7 +793,7 @@ deleteProfile()
     <panel_attributes>lt=-&gt;
 m2=0..n
 </panel_attributes>
-    <additional_attributes>30;290;460;290;460;30;1680;30</additional_attributes>
+    <additional_attributes>30;290;290;290;290;30;1680;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -813,16 +813,15 @@ parseOSM(f: File): Graph
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4750</x>
+      <x>4500</x>
       <y>3540</y>
-      <w>340</w>
-      <h>180</h>
+      <w>650</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Graph
 --
-constraints: Map&lt;int, NodeConstraint&gt;
 --
-Graph(nodes: int[], edges: int[], :map&lt;node,NodeProperties&gt;, lat: float[], lon: float[], :EdgeProperties[])
+Graph(nodes: int[], edges: int[], :map&lt;int,NodeProperties&gt;, lat: float[], lon: float[], :EdgeProperties[])
 getEdges(node: int): Set&lt;int&gt;
 getTargetNode(edge: int): int
 getLat(node: int): float
@@ -888,8 +887,8 @@ scheduleCalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4490</x>
       <y>4920</y>
-      <w>40</w>
-      <h>90</h>
+      <w>50</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=    1
@@ -1014,8 +1013,8 @@ date: Date
     <coordinates>
       <x>2990</x>
       <y>4160</y>
-      <w>90</w>
-      <h>40</h>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -1065,18 +1064,20 @@ pointPosition: float
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5200</x>
-      <y>3430</y>
-      <w>340</w>
-      <h>90</h>
+      <x>5220</x>
+      <y>3410</y>
+      <w>360</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 EdgeProperties
 --
 --
-getDisplayName(): String
+getName(): String
+getRoadRef(): String
 allowsRoute(:Profile): boolean
 getMaxSpeed(:Profile): int
+isRoundabout(): boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1110,13 +1111,13 @@ r1=route</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3720</x>
-      <y>1580</y>
+      <y>1590</y>
       <w>50</w>
-      <h>190</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0..n</panel_attributes>
-    <additional_attributes>30;30;30;170</additional_attributes>
+    <additional_attributes>30;30;30;160</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1163,8 +1164,8 @@ umport(:File): Graph</panel_attributes>
     <coordinates>
       <x>4030</x>
       <y>5070</y>
-      <w>40</w>
-      <h>110</h>
+      <w>50</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -1173,17 +1174,22 @@ umport(:File): Graph</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5200</x>
+      <x>5220</x>
       <y>3580</y>
-      <w>340</w>
-      <h>90</h>
+      <w>360</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 NodeProperties
 --
 --
-allowsRoute(from: int, to: int, :Profile): boolean
-</panel_attributes>
+allowsTurn(fromEdge: int, toEdge: int, :Profile): boolean
+isMiniRoundabout(): boolean
+isHighwayJunction(): boolean
+getJunctionName(): String
+getJunctionRef(): String
+//traffic lights?
+//traffic calming?</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1262,7 +1268,7 @@ deleteMap()
     <coordinates>
       <x>4450</x>
       <y>3340</y>
-      <w>1140</w>
+      <w>1170</w>
       <h>460</h>
     </coordinates>
     <panel_attributes>Map</panel_attributes>
@@ -1386,5 +1392,29 @@ _+main(args: String[])_</panel_attributes>
     </coordinates>
     <panel_attributes>View</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>5120</x>
+      <y>3590</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=0..n</panel_attributes>
+    <additional_attributes>30;30;100;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>5120</x>
+      <y>3440</y>
+      <w>120</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=0..n</panel_attributes>
+    <additional_attributes>30;160;80;160;80;30;100;30</additional_attributes>
   </element>
 </diagram>
