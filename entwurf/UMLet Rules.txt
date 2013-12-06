@@ -25,3 +25,10 @@ The colon (‘:’) separates an element and its type. In these cases, it shall 
     method(param: Type, :Type): Type
     method(:Type): Type
     parameter: Type
+
+Commas and spaces
+==================
+
+After a comma in a list (e. g. a parameter list), there shall be a space:
+
+    method(param1: Type, param2: Type)
