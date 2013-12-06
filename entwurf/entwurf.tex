@@ -255,36 +255,110 @@ Prof.~Dr.~Peter~Sanders}
         {Eine Karte.}
         {
           \attr{name}{String}{Der Name der Karte}
-          \attr{renderingData}{MapRenderingData}{Die Daten, die zum Rendern der Karte benötigt werden}
+          \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.~h. das Straßennetz}
         }
         {\keine}
-  \class{NodeConstraint}
-        {Eine Beschränkung auf einem Knoten, die bestimmt, ob eine bestimmte Route über diesen Knoten gültig ist oder nicht.}
+  \class{Graph}
         {
-          \attr{node}{int}{Die ID des Knotens, auf den sich diese Beschränkung bezieht}
+          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
+          Siehe auch \refclass{GraphPreCalculation}.
         }
+        {\keine}
         {
-          \method{allowsRoute}{boolean}
+          \method{Graph}{Konstruktor}
                  {
-                   \param{from}{int}{Die ID der Kante, über die der Knoten betreten wird}
-                   \param{to}{int}{Die ID der Kante, über die der Knoten verlassen wird}
-                   \param{profile}{\refclass{Profile}}{Das Profil, für die die Gültigkeit der Route bestimmt werden soll}
+                   \param{nodes}{int[]}{Der Knoten-Bestandteil des Adjazenzfeldes}
+                   \param{edges}{int[]}{Der Kanten-Bestandteil des Adjazenzfeldes}
+                   \param{nodeProps}{Map<int, \refclass{NodeProperties}>}
+                         {
+                           Die \code{NodeProperties} der Knoten des Graphen. Es wird eine \code{Map} anstelle eines Arrays verwendet, da die meisten Knoten keine besonderen Eigenschaften haben und daher das Array zum großen Teil leer wäre
+                         }
+                   \param{edgeProps}{\refclass{EdgeProperties}{}[]} % use \refclass{EdgeProperties}{}[] instead of \refclass{EdgeProperties}[]: in the latter form, LaTeX thinks we’re passing an optional argument to \refclass
+                         {
+                           Die \code{EdgeProperties} der Kanten des Graphen. Hier wird ein Array verwendet, da jede Kante einen Namen und damit ein \code{EdgeProperties}-Objekt hat
+                         }
+                   \param{lat}{float[]}{Die geographischen Breiten der Knoten des Graphen}
+                   \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen}
+                 }
+                 {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
+          \method{getEdges}{Set<int>}
+                 {\param{node}{int}{Der Knoten, dessen Kanten gesucht werden}}
+                 {Gibt alle \emph{ausgehenden} Kanten des angegebenen Knotens zurück.}
+          \method{getTargetNode}{int}
+                 {\param{edge}{int}{Die Kante, dessen Zielknoten gesucht wird}}
+                 {Gibt den Zielknoten der angegebenen Kante zurück.}
+          \method{getLat}{float}
+                 {\param{node}{int}{Der Knoten, dessen geographische Breite gesucht wird}}
+                 {Gibt die geographische Breite des angegebenen Knotens zurück.}
+          \method{getLon}{float}
+                 {\param{node}{int}{Der Knoten, dessen geographische Länge gesucht wird}}
+                 {Gibt die geographische Länge des angegebenen Knotens zurück.}
+          \method{getNodeProperties}{\refclass{NodeProperties}}
+                 {\param{node}{int}{Der Knoten, dessen \refclass{NodeProperties} gesucht werden}}
+                 {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
+          \method{getEdgeProperties}{\refclass{EdgeProperties}}
+                 {\param{edge}{int}{Die Kante, deren \refclass{EdgeProperties} gesucht werden}}
+                 {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
+        }
+  \class{NodeProperties}
+        {Kapselt die Eigenschaften eines Knotens.}
+        {\keine}
+        {
+          \method{allowsTurn}{boolean}
+                 {
+                   \param{fromEdge}{int}{Die Kante, über die der Knoten betreten wird}
+                   \param{toEdge}{int}{Die Kante, über die der Knoten verlassen wird}
+                   \param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll}
                  }
                  {
                    Bestimmt, ob eine Route, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
                    
-                   Wenn der Knoten nicht Endknoten von \refparam{NodeConstraint}{allowsRoute}{from}[from] und Startknoten von \refparam{NodeConstraint}{allowsRoute}{to}[to] ist, wird immer \code{false} zurückgegeben.
+                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] und Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird immer \code{false} zurückgegeben.
                  }
+          \method{isMiniRoundabout}{boolean}
+                 {\keine}
+                 {Bestimmt, ob der Knoten ein kleiner Kreisverkehr ist oder nicht.}
+          \method{isHighwayJunction}{boolean}
+                 {\keine}
+                 {Bestimmt, ob der Knoten ein Autobahnkreuz ist oder nicht.} % TODO
+          \method{getJunctionName}{String}
+                 {\keine}
+                 {Gibt den Namen der Kreuzung zurück.}
+          \method{getJunctionRef}{String}
+                 {\keine}
+                 {Gibt die Referenz der Kreuzung zurück.} % TODO what is this
+        }
+  \class{EdgeProperties}
+        {Kapselt die Eigenschaften einer Kante.}
+        {\keine}
+        {
+          \method{getName}{String}
+                 {\keine}
+                 {Gibt den Namen der Kante zurück.}
+          \method{getRoadRef}{String}
+                 {\keine}
+                 {Gibt die Referenz der Straße zurück.} % TODO what is this
+          \method{allowsRoute}{boolean}
+                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll}}
+                 {Bestimmt, ob eine Route, die über diese Kante führt, gültig ist.}
+          \method{getMaxSpeed}{int}
+                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll}}
+                 {Bestimmt die zulässige Höchstgeschwindigkeit auf dieser Kante für das angegebene Profil.}
+          \method{isRoundabout}{boolean}
+                 {\keine}
+                 {Bestimmt, ob die Kante Teil eines Kreisverkehrs ist oder nicht.} % TODO stimmt das?
         }
 }
 
-\class{ProfileMapCombination}
-       {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
-       {
-         \attr{profile}{\refclass{Profile}}{Das Profil}
-         \attr{map}{\refclass{Map}}{Die Karte}
-       }
-       {\keine}
+\package{TODO}{ % TODO: holds classes that still need a package
+  \class{ProfileMapCombination}
+        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
+        {
+          \attr{profile}{\refclass{Profile}}{Das Profil}
+          \attr{map}{\refclass{Map}}{Die Karte}
+        }
+        {\keine}
+}
 
 \package{RouteCalculator}{
   \class{GraphPreCalculation}

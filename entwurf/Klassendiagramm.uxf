@@ -238,7 +238,7 @@ mercatorLon(lon: float, zoom: int): float
 mercatorLat(lat: float, zoom: int): float
 unmercatorX(x: float, zoom: int): float
 unmercatorY(y: float, zoom: int): float
-distance(a: Coordinate, b: Coordinate): float
+distance(a: Coordinates, b: Coordinates): float
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -821,7 +821,7 @@ parseOSM(f: File): Graph
     <panel_attributes>Graph
 --
 --
-Graph(nodes: int[], edges: int[], :map&lt;int,NodeProperties&gt;, lat: float[], lon: float[], :EdgeProperties[])
+Graph(nodes: int[], edges: int[], :Map&lt;int,NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
 getEdges(node: int): Set&lt;int&gt;
 getTargetNode(edge: int): int
 getLat(node: int): float
