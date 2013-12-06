@@ -52,17 +52,17 @@ schedulePrecalculate(:ProfileMapCombination)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2750</x>
+      <x>2610</x>
       <y>2030</y>
-      <w>390</w>
+      <w>530</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>GraphPreCalculation
 --
 --
-calculate(start, destination, routeModel)
-getEdgesIn(fromX, fromY, toX, toY, zoomlevel): Set&lt;Edge&gt;
-getNeighbours(target): List&lt;Node&gt;
+calculate(start: PointOnEdge, destination: PointOnEdge, routeModel: RouteModel)
+getEdgesIn(fromX: int, fromY: int, toX: int, toY: int, zoomlevel: int): Set&lt;Edge&gt;
+getNeighbours(target: int): List&lt;Node&gt;
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -88,8 +88,8 @@ getNeighbours(target): List&lt;Node&gt;
     <coordinates>
       <x>3080</x>
       <y>3360</y>
-      <w>140</w>
-      <h>50</h>
+      <w>130</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>30;30;120;30</additional_attributes>
@@ -99,8 +99,8 @@ getNeighbours(target): List&lt;Node&gt;
     <coordinates>
       <x>2730</x>
       <y>2890</y>
-      <w>90</w>
-      <h>460</h>
+      <w>80</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;440;70;440</additional_attributes>
@@ -108,14 +108,14 @@ getNeighbours(target): List&lt;Node&gt;
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2000</x>
+      <x>1980</x>
       <y>2990</y>
-      <w>90</w>
+      <w>120</w>
       <h>2130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>50;2120;50;30</additional_attributes>
+    <additional_attributes>70;2120;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -163,14 +163,14 @@ deleteTiles(zoom: int)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2090</x>
-      <y>5230</y>
-      <w>180</w>
-      <h>300</h>
+      <x>2080</x>
+      <y>5220</y>
+      <w>190</w>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 tileSource</panel_attributes>
-    <additional_attributes>170;40;50;40;50;290</additional_attributes>
+    <additional_attributes>180;50;60;50;60;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -500,7 +500,7 @@ Motorcycle</panel_attributes>
     <coordinates>
       <x>4870</x>
       <y>2790</y>
-      <w>270</w>
+      <w>260</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -547,8 +547,8 @@ _load(file: File): Profile_</panel_attributes>
     <coordinates>
       <x>4720</x>
       <y>2940</y>
-      <w>158</w>
-      <h>230</h>
+      <w>140</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -578,8 +578,8 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>4820</x>
       <y>2940</y>
-      <w>250</w>
-      <h>230</h>
+      <w>240</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -735,8 +735,8 @@ isCalculated(): boolean</panel_attributes>
     <coordinates>
       <x>3330</x>
       <y>3370</y>
-      <w>1440</w>
-      <h>50</h>
+      <w>1430</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r1=map</panel_attributes>
@@ -747,8 +747,8 @@ r1=map</panel_attributes>
     <coordinates>
       <x>3330</x>
       <y>2900</y>
-      <w>1440</w>
-      <h>480</h>
+      <w>1430</w>
+      <h>470</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r1=profile</panel_attributes>
@@ -787,8 +787,8 @@ deleteProfile()
     <coordinates>
       <x>3070</x>
       <y>2850</y>
-      <w>1700</w>
-      <h>310</h>
+      <w>1690</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
@@ -852,8 +852,8 @@ getFlags(node: int)
     <coordinates>
       <x>4840</x>
       <y>3400</y>
-      <w>50</w>
-      <h>160</h>
+      <w>40</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
@@ -971,22 +971,22 @@ routeFinished(:Route)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2050</x>
+      <x>2030</x>
       <y>2990</y>
-      <w>90</w>
+      <w>120</w>
       <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>50;430;50;30</additional_attributes>
+    <additional_attributes>70;430;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2160</x>
       <y>2800</y>
-      <w>560</w>
-      <h>640</h>
+      <w>550</w>
+      <h>630</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -1039,8 +1039,8 @@ r2=route</panel_attributes>
     <coordinates>
       <x>2800</x>
       <y>3430</y>
-      <w>50</w>
-      <h>750</h>
+      <w>40</w>
+      <h>740</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;730;30;30</additional_attributes>
@@ -1137,8 +1137,8 @@ toString(): String</panel_attributes>
     <coordinates>
       <x>2820</x>
       <y>2980</y>
-      <w>450</w>
-      <h>300</h>
+      <w>440</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>430;30;430;240;30;240;30;280</additional_attributes>
@@ -1273,8 +1273,8 @@ deleteMap()
     <coordinates>
       <x>3080</x>
       <y>3380</y>
-      <w>1690</w>
-      <h>180</h>
+      <w>1680</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
