@@ -188,6 +188,56 @@
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
 \newcommand{\routeKIT}[0]{\textit{routeKIT} }
 
+
+% alle Glossareinträge
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
+\newacronym{osm}{OSM}{OpenStreetMap}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{gpx}{GPX}{GPS Exchange Format}
+
+\newglossaryentry{profil}{
+  name={Profil},
+  description={enthält für die Routenplanung relevante Informationen, z.\,B. die Höhe und das Gewicht des Fahrzeugs},
+  plural={Profile}
+}
+\newglossaryentry{osmkachel}{
+  name={OSM-Kachel},
+  description={die öffentlichen gerenderten \gls{osm}-Kacheln z.\,B. auf \mbox{\url{http://a.tile.openstreetmap.org/}}},
+  plural={OSM-Kacheln}
+}
+\newglossaryentry{route}{
+  name={Route},
+  description={ein Weg von einem Start- zu einem Zielpunkt},
+  plural={Routen}
+}
+\newglossaryentry{rendern}{
+  name={rendern},
+  description={Berechnung einer Bildkachel aus den zu rendernden Daten}
+}
+\newglossaryentry{wegbeschreibung}{
+  name={Wegbeschreibung},
+  description={Beschreibung einer \gls{route} durch eine Liste von Abbiegeanweisungen}
+}
+\newglossaryentry{dijkstra}{
+  name={Dijkstra’s Algorithmus},
+  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+}
+\newglossaryentry{arc}{
+ name={Arc-Flags},
+ description={eine Technik, um eine Routenberechnung zu beschleunigen}
+}
+\newglossaryentry{verlauf}{
+  name={Verlauf},
+  description={speichert Routenanfragen für spätere Wiederverwendung. Es existiert nur ein Verlauf für die gesamte Anwendung.}
+}
+\newglossaryentry{mercator}{
+  name={Mercator-Projektion},
+  description={die Zylinderprojektion der Weltkugel}
+}
+
+
+
 \begin{titlepage}
 \makeatletter
 \begin{center}
@@ -225,7 +275,7 @@ Prof.~Dr.~Peter~Sanders}
 
 \package{Profiles}{
   \class{Profile}
-        {Ein Fahrzeugprofil.}
+        {Ein \glslink{profil}{Fahrzeugprofil}.}
         {
           \attr{name}{String}{Der Name des Profils.}
           \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp.}
@@ -307,10 +357,10 @@ Prof.~Dr.~Peter~Sanders}
                  {
                    \param{fromEdge}{int}{Die Kante, über die der Knoten betreten wird.}
                    \param{toEdge}{int}{Die Kante, über die der Knoten verlassen wird.}
-                   \param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll.}
+                   \param{profile}{\refclass{Profile}}{Das \gls{profil}, für das die Gültigkeit der Route bestimmt werden soll.}
                  }
                  {
-                   Bestimmt, ob eine Route, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
+                   Bestimmt, ob eine \gls{route}, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
                    
                    Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] und Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird immer \code{false} zurückgegeben.
                  }
@@ -339,7 +389,7 @@ Prof.~Dr.~Peter~Sanders}
                  {Gibt die Referenz der Straße zurück.} % TODO what is this
           \method{allowsRoute}{boolean}
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll.}}
-                 {Bestimmt, ob eine Route, die über diese Kante führt, gültig ist.}
+                 {Bestimmt, ob eine \gls{route}, die über diese Kante führt, gültig ist.}
           \method{getMaxSpeed}{int}
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit auf dieser Kante für das angegebene Profil.}
@@ -353,8 +403,8 @@ Prof.~Dr.~Peter~Sanders}
   \class{ProfileMapCombination}
         {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
         {
-          \attr{profile}{\refclass{Profile}}{Das Profil}
-          \attr{map}{\refclass{Map}}{Die Karte}
+          \attr{profile}{\refclass{Profile}}{Das \gls{profil}.}
+          \attr{map}{\refclass{Map}}{Die Karte.}
         }
         {\keine}
 }
@@ -368,7 +418,7 @@ Prof.~Dr.~Peter~Sanders}
 
 \package{History}{
   \class{History}
-        {Kapselt den Verlauf.}
+        {Kapselt den \gls{verlauf}.}
         {\keine}
         {
           \method{addEntry}{void}
@@ -392,7 +442,7 @@ Prof.~Dr.~Peter~Sanders}
                  {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
         }
   \class{HistoryEntry}
-        {Ein Eintrag im Verlauf.}
+        {Ein Eintrag im \gls{verlauf}.}
         {
           \attr{start}{Coordinates}{Der Startpunkt der Anfrage.}
           \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage.}
@@ -440,11 +490,11 @@ Prof.~Dr.~Peter~Sanders}
                  }
                  {
                    Wird vom \refclass{TileDequeue} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
-                   Die übliche Aktion ist, ein \code{repaint} der Kartenansicht auszulösen.
+                   Die übliche Aktion ist, ein \code{repaint} der Kartenansicht im \gls{gui} auszulösen.
                  }
         }
   \class{TileSource}
-        {Abstrakte Klasse, die ein Interface für die (synchrone) Berechnung von Kartenkacheln definiert.}
+        {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
         {\keine}
         {
           \method{getTile}{BufferedImage}
@@ -489,7 +539,7 @@ Prof.~Dr.~Peter~Sanders}
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
   \class{OSMRenderer}
-        {Eine \refclass{TileSource}, die die Kacheln vom OpenStreetMap-Server herunterlädt.}
+        {Eine \refclass{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
         {\keine}
         {
           \method{getTile}{BufferedImage}
