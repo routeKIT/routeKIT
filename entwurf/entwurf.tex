@@ -402,6 +402,107 @@ Prof.~Dr.~Peter~Sanders}
         {\keine}
 }
 
+\package{MapDisplay}{
+  \class{TileDequeue}
+        {
+          Verwaltet die Berechnung von Kartenkacheln.
+          Karten können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.
+          Über das \code{Future}-Interface können Berechnungen auch abgebrochen werden.
+        }
+        {\keine}
+        {
+          \method{requestTile}{Future<BufferedImage>}
+                 {
+                   \param{x}{int}{Die x-Koordinate der angeforderten Kachel.} % TODO skaliert mit dem Zoom? relativ zu was?
+                   \param{y}{int}{Die y-Koordinate der angeforderten Kachel.}
+                   \param{zoom}{int}{Die Zoomstufe der angeforderten Kachel, zwischen 0 (eine Kachel für die ganze Welt) und 19 (Maßstab 1:1000).}
+                 }
+                 {
+                   Beantragt die asynchrone Berechnung der angegebenen Kachel.
+                   Über das zurückgegeben \code{Future}-Object kann die Berechnung abgebrochen werden; zu beachten ist aber, dass die \code{get}-Methode des Objekts niemals \code{null} zurückgeben wird, sondern für noch nicht berechnete Kacheln stattdessen eine „Platzhalter-Kachel“.
+                 }
+          \method{addTileFinishedListener}{void}
+                 {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
+                 {
+                   Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
+                   Die Kachel ist Teil der Nachricht, kann aber auch jederzeit über das von \refmethod{TileDequeue}{requestTile}[requestTile] zurückgegebene \code{Future}-Object abgefragt werden.
+                 }
+        }
+  \class{TileFinishedListener} % TODO \class? \interface?
+        {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
+        {\keine}
+        {
+          \method{tileFinished}{void}
+                 {
+                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{tile}{BufferedImage}{Die berechnete Kachel.}
+                 }
+                 {
+                   Wird vom \refclass{TileDequeue} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
+                   Die übliche Aktion ist, ein \code{repaint} der Kartenansicht auszulösen.
+                 }
+        }
+  \class{TileSource}
+        {Abstrakte Klasse, die ein Interface für die (synchrone) Berechnung von Kartenkacheln definiert.}
+        {\keine}
+        {
+          \method{getTile}{BufferedImage}
+                 {
+                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                 }
+                 {Berechnet die angegebene Kachel und gibt sie zurück.}
+        }
+  \class{TileCache}
+        {Ein Zwischenspeicher für Kacheln, um zu verhindern, dass sie ständig von neuem berechnet werden.}
+        {\keine}
+        {
+          \method{TileCache}{Konstruktor}
+                 {\param{target}{\refclass{TileSource}}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
+                 {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
+          \method{getTile}{BufferedImage}
+                 {
+                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                 }
+                 {
+                   Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
+                   andernfalls wird sie von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben.
+                 }
+          \method{deleteTiles}{void}
+                 {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileDequeue}{requestTile}{zoom}.}}
+                 {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden, etwa, um Speicher zu sparen.}
+        }
+  \class{TileRenderer}
+        {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
+        {\keine}
+        {
+          \method{getTile}{BufferedImage}
+                 {
+                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                 }
+                 {Berechnet die angegebene Kachel und gibt sie zurück.}
+        }
+  \class{OSMRenderer}
+        {Eine \refclass{TileSource}, die die Kacheln vom OpenStreetMap-Server herunterlädt.}
+        {\keine}
+        {
+          \method{getTile}{BufferedImage}
+                 {
+                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                 }
+                 {Lädt die angegebene Kachel herunter und gibt sie zurück.}
+        }
+}
+
 
 \glsaddallunused
 \makeatletter

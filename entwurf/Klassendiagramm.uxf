@@ -110,8 +110,8 @@ getNeighbours(target: int): List&lt;Node&gt;
     <coordinates>
       <x>1980</x>
       <y>2990</y>
-      <w>120</w>
-      <h>2130</h>
+      <w>130</w>
+      <h>2140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
@@ -120,24 +120,24 @@ implements</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2260</x>
+      <x>2200</x>
       <y>5260</y>
-      <w>260</w>
+      <w>380</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 TileSource
 --
 --
-&lt;&lt;abstract&gt;&gt;getTile(): BufferedImage</panel_attributes>
+&lt;&lt;abstract&gt;&gt;getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2090</x>
+      <x>2050</x>
       <y>5520</y>
-      <w>200</w>
+      <w>220</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>TileCache
@@ -145,59 +145,59 @@ TileSource
 cache
 --
 TileCache(target: TileSource)
-getTile(): BufferedImage
+getTile(x, y, zoom): BufferedImage
 deleteTiles(zoom: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2170</x>
+      <x>2150</x>
       <y>5300</y>
-      <w>130</w>
-      <h>230</h>
+      <w>160</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>120;30;30;220</additional_attributes>
+    <additional_attributes>140;30;30;220</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2080</x>
+      <x>2060</x>
       <y>5220</y>
-      <w>190</w>
-      <h>310</h>
+      <w>160</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 tileSource</panel_attributes>
-    <additional_attributes>180;50;60;50;60;300</additional_attributes>
+    <additional_attributes>140;50;60;50;60;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2300</x>
+      <x>2280</x>
       <y>5520</y>
-      <w>190</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>TileRenderer
 --
 --
-getTile(): BufferedImage</panel_attributes>
+getTile(x, y, zoom): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2500</x>
+      <x>2520</x>
       <y>5520</y>
-      <w>180</w>
+      <w>220</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>OSMRenderer
 --
 --
-getTile(): BufferedImage</panel_attributes>
+getTile(x, y, zoom): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -205,19 +205,19 @@ getTile(): BufferedImage</panel_attributes>
     <coordinates>
       <x>2450</x>
       <y>5300</y>
-      <w>160</w>
+      <w>180</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;140;220</additional_attributes>
+    <additional_attributes>30;30;160;220</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2360</x>
       <y>5300</y>
-      <w>40</w>
-      <h>230</h>
+      <w>50</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;220</additional_attributes>
@@ -500,8 +500,8 @@ Motorcycle</panel_attributes>
     <coordinates>
       <x>4870</x>
       <y>2790</y>
-      <w>260</w>
-      <h>70</h>
+      <w>270</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=vehicleType</panel_attributes>
@@ -547,7 +547,7 @@ _load(file: File): Profile_</panel_attributes>
     <coordinates>
       <x>4720</x>
       <y>2940</y>
-      <w>140</w>
+      <w>150</w>
       <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -578,8 +578,8 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>4820</x>
       <y>2940</y>
-      <w>240</w>
-      <h>220</h>
+      <w>250</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -605,8 +605,8 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
     <coordinates>
       <x>2890</x>
       <y>1910</y>
-      <w>50</w>
-      <h>140</h>
+      <w>40</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;120</additional_attributes>
@@ -647,8 +647,8 @@ getNodes(): int[]
     <coordinates>
       <x>2840</x>
       <y>1620</y>
-      <w>420</w>
-      <h>1260</h>
+      <w>410</w>
+      <h>1250</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>390;30;400;1240;30;1240</additional_attributes>
@@ -658,8 +658,8 @@ getNodes(): int[]
     <coordinates>
       <x>3030</x>
       <y>1620</y>
-      <w>50</w>
-      <h>160</h>
+      <w>40</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
@@ -669,8 +669,8 @@ getNodes(): int[]
     <coordinates>
       <x>2690</x>
       <y>1630</y>
-      <w>50</w>
-      <h>150</h>
+      <w>40</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;</panel_attributes>
     <additional_attributes>30;130;30;30</additional_attributes>
@@ -735,8 +735,8 @@ isCalculated(): boolean</panel_attributes>
     <coordinates>
       <x>3330</x>
       <y>3370</y>
-      <w>1430</w>
-      <h>40</h>
+      <w>1440</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r1=map</panel_attributes>
@@ -759,8 +759,8 @@ r1=profile</panel_attributes>
     <coordinates>
       <x>3110</x>
       <y>2050</y>
-      <w>240</w>
-      <h>1320</h>
+      <w>230</w>
+      <h>1310</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>220;1300;210;30;30;30</additional_attributes>
@@ -851,8 +851,8 @@ getFlags(node: int)
     <coordinates>
       <x>4840</x>
       <y>3400</y>
-      <w>40</w>
-      <h>150</h>
+      <w>50</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
@@ -862,8 +862,8 @@ getFlags(node: int)
     <coordinates>
       <x>2950</x>
       <y>2090</y>
-      <w>50</w>
-      <h>130</h>
+      <w>40</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;110</additional_attributes>
@@ -900,13 +900,13 @@ m1=    1
     <coordinates>
       <x>2260</x>
       <y>5110</y>
-      <w>320</w>
+      <w>390</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>TileDequeue
 --
 --
-requestTile(x: int, y: int, zoom: int): BufferedImage
+requestTile(x: int, y: int, zoom: int): Future&lt;BufferedImage&gt;
 addTileFinishedListener(:TileFinishedListener)
 </panel_attributes>
     <additional_attributes/>
@@ -916,13 +916,13 @@ addTileFinishedListener(:TileFinishedListener)
     <coordinates>
       <x>1920</x>
       <y>5170</y>
-      <w>510</w>
-      <h>410</h>
+      <w>520</w>
+      <h>420</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=  1
 </panel_attributes>
-    <additional_attributes>170;400;30;400;30;70;500;70;500;30</additional_attributes>
+    <additional_attributes>130;400;30;400;30;70;500;70;500;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -944,8 +944,8 @@ tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
     <coordinates>
       <x>2130</x>
       <y>5110</y>
-      <w>140</w>
-      <h>40</h>
+      <w>150</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -1013,8 +1013,8 @@ date: Date
     <coordinates>
       <x>2990</x>
       <y>4160</y>
-      <w>100</w>
-      <h>50</h>
+      <w>90</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -1025,8 +1025,8 @@ m1=0..n</panel_attributes>
     <coordinates>
       <x>3230</x>
       <y>1560</y>
-      <w>400</w>
-      <h>50</h>
+      <w>390</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 r1=description
@@ -1100,8 +1100,8 @@ exportRoute(file: File)</panel_attributes>
     <coordinates>
       <x>3210</x>
       <y>1620</y>
-      <w>60</w>
-      <h>1350</h>
+      <w>50</w>
+      <h>1340</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=route</panel_attributes>
@@ -1112,8 +1112,8 @@ r1=route</panel_attributes>
     <coordinates>
       <x>3720</x>
       <y>1590</y>
-      <w>50</w>
-      <h>180</h>
+      <w>40</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0..n</panel_attributes>
@@ -1235,7 +1235,7 @@ deleteMap()
     <coordinates>
       <x>1780</x>
       <y>4970</y>
-      <w>970</w>
+      <w>990</w>
       <h>680</h>
     </coordinates>
     <panel_attributes>MapDisplay</panel_attributes>
