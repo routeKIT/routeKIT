@@ -285,7 +285,7 @@ _load(:File): History_</panel_attributes>
 GraphPartitioner
 --
 --
-&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
+&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions: int): int[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -296,10 +296,10 @@ GraphPartitioner
       <w>400</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>externalPartitionerAdapter
+    <panel_attributes>ExternalPartitionerAdapter
 --
 --
-partitionGraph(:Graph, numberOfPartitions): int[]</panel_attributes>
+partitionGraph(:Graph, numberOfPartitions: int): int[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
