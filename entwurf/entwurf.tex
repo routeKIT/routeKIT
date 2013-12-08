@@ -421,6 +421,52 @@ Prof.~Dr.~Peter~Sanders}
                  }
                  {Exportiert die Wegpunkte der \refattr{GPXExporter}{route} im GPX-Format in die angegebene Datei.}
         }
+   \class{Util}
+        {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}
+        {\keine}
+        {
+          \method{projectToEdge} [\refclass{PointOnEdge}]
+                 {
+                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
+                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
+                 }
+                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
+
+           \method{unmercatorX}[float]
+                 {
+                   \param{x}{float}{Koordinate der Mercator-Projektion}
+                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                 }
+                 {Berechnet die geographische Breite.}
+
+          \method{unmercatorY}[float]
+                 {
+                   \param{y}{float}{Koordinate der Mercator-Projektion}
+                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                 }
+                 {Berechnet die geographische Länge.}
+
+          \method{distance}[float]
+                 {
+                   \param{a}{Coordinates}{Koordinaten des ersten Punktes}
+                   \param{b}{Coordinates}{Koordinaten des zweiten Punktes}
+                 }
+                 {Berechnet die Länge der Luftlinie zwischen zwei Punkten.}
+
+          \method{mercatorLat}[float]
+                 {
+                   \param{lat}{float}{die geographische Breite}
+                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                 }
+                 {Berechnet eine Koordinate der Mercator-Projektion.}
+
+          \method{mercatorLon}[float]
+                 {
+                   \param{lon}{float}{die geographische Länge}
+                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                 }
+                 {Berechnet eine Koordinate der Mercator-Projektion.}
+         }
 }
 
 \package{RouteCalculator}{
@@ -823,7 +869,7 @@ Prof.~Dr.~Peter~Sanders}
 
                 \method{exportHTML}
                 {\keine }
-                {todo}
+                {\keine}
 
                 \method{selectProfile}
                 {
