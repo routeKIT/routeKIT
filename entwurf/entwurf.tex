@@ -427,7 +427,41 @@ Prof.~Dr.~Peter~Sanders}
   \class{GraphPreCalculation}
         {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
         {\keine}
-        {\keine} % TODO
+        {
+			\method{culateRoute}
+				{
+					\param{start}{\refclass{PointOnEdge}}{Der Startpunkt für die Routenberechnung.}
+					\param{destination}{\refclass{PointOnEdge}}{Der Zielpunkt für die Routenberechnung.}
+					\param{routeModel}{\refclass{RouteModel}}{Zur Verwaltung der aktuellen Route.}
+				}
+				{Ruft die Routenberechnung auf und speichert die erhaltene Route im gegebenen \refclass{RouteModel}.}
+			\method{getEdgesIn}[Set<\refclass{Edge}>]
+				{
+					\param{fromX}{int}{Bereich beginnt bei der gegebenen X-Koordinate.}
+					\param{fromY}{int}{Bereich beginnt bei der gegebenen Y-Koordinate.}
+					\param{toX}{int}{Bereich endet bei der gegebenen X-Koordinate.}
+					\param{toY}{int}{Bereich endet bei der gegebenen Y-Koordinate.}
+					\param{zoomlevel}{int}{Die Zoom-Stufe.}
+				}
+				{Gibt alle Kanten im angegebenen Bereich abhängig von der Zoom-Stufe zurück.}
+			\method{getNeighbours}[List<\refclass{Node}>]
+				{
+					\param{target}{int}{Die Nummer eines Knotens.}
+				}
+				{Gibt alle Nachbar-Knoten für einen gewählten Knoten zurück.}
+        }
+  \class{RouteCalculator}
+          {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
+          {\keine}
+          {
+            \method{culateRoute}[\refclass{Route}]
+	            {
+					\param{start}{\refclass{PointOnEdge}}{Der Startpunkt für die Routenberechnung.}
+					\param{destination}{\refclass{PointOnEdge}}{Der Zielpunkt für die Routenberechnung.}
+					\param{data}{\refclass{GraphPreCalculation}}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
+				}
+				{Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
+          }
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
         {\keine} % ?
@@ -449,6 +483,16 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \gls{wegbeschreibung} aufgebaut ist.}
         {\keine} % ?
         {\keine} % TODO
+  \class{Arcflags}
+        {Enthält die Arcflags für den vorberechneten Graphen.}
+        {\keine} % ?
+        {
+          \method{getFlags}[int]
+                 {
+					\param{node}{int}{Die Nummer eines Knotens.}
+                 }
+                 {Gibt die zum Knoten gehörende Arc-Falg zurück zurück.}
+        }
 }
 
 \package{History}{
