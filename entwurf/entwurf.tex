@@ -638,7 +638,7 @@ Prof.~Dr.~Peter~Sanders}
         {
             \method{paint}
                 {
-                  \param{}{Graphics}{ein Objekt vom}
+                  \param{graphics}{Graphics}{ein Objekt vom}
                 }
                {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
          }
@@ -745,7 +745,7 @@ Prof.~Dr.~Peter~Sanders}
                 {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
          }
  \class{Controller}
-        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.}
+        {Steuert die Programmabläufe zur Routenberechnung.}
         {\keine}
         {
                 \method{Controller}
@@ -754,35 +754,35 @@ Prof.~Dr.~Peter~Sanders}
          
                  \method{onStartChanged}
                 {\keine }
-                {}
+                {todo}
 
                  \method{onDestinationChanged}
                 {\keine }
-                {}
+                {todo}
 
                 \method{exportGPX}
                 {\keine }
-                {}
+                {todo}
 
                 \method{exportHTML}
                 {\keine }
-                {}
+                {todo}
 
                 \method{selectProfile}
                 {
-	            \param{}{Profile}{Das aktuelle Profil.} 
+	            \param{profile}{Profile}{Das aktuelle Profil.} 
 	      }
                 {Wählt das aktuelle Profil aus.}
 
                 \method{selectMap}
                 {
-	            \param{}{Map}{Die aktuelle Karte.} 
+	            \param{map}{Map}{Die aktuelle Karte.} 
 	      }
                 {Wählt die aktuelle Karte aus.}
 
                 \method{schedulePrecalculate}
                 {
-                     \param{}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
+                     \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
                 }
                 {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
          }
