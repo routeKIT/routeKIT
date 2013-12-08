@@ -624,7 +624,52 @@ Prof.~Dr.~Peter~Sanders}
         {\keine}
         {\keine}
 }
-
+\package{Precalculation}{
+  \class{PreCalculator}
+        {Führt die Berechnung der Arcflags durch.}
+        {\keine}
+        {
+          \method{doPrecalculation}
+                 {
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus Profil und \refclass{Map}[Karte], für die Arcflags vorberechnet werden sollen}
+                 }
+                 {Berechnet Arcflags für die gegebene Kombination.}
+        }
+  \class{MapImporter}
+        {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
+        {\keine}
+        {
+          \method{import}[Graph]
+                 {
+                   \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
+                 }
+                 {Importiert und säubert den Straßengraph.}
+        }
+  \class{OSMParser}
+        {Importiert eine neue Karte.}
+        {\keine}
+        {
+          \method{parseOSM}[Graph]
+                 {
+                   \param{f}{File}{}
+                 }
+                 {Importiert eine OSM-Karte in eine verlinkte Datenstruktur \refclass{MapNode}}
+        }
+  \class{MapNode}
+        {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
+        {\keine}
+        {
+          \method{getLon}[float]
+                 {\keine}
+                 {Gibt den Längengrad dieses Knotens aus.}
+          \method{getLat}[float]
+                 {\keine}
+                 {Gibt den Breitengrad dieses Knotens aus.}
+          \method{getNeighbours}[List<MapNode>]
+                 {\keine}
+                 {Gibt eine Liste mit allen Knoten, zu denen eine Kante von diesem Knoten existiert, zurück.}
+        }
+}
 
 \glsaddallunused
 \makeatletter
