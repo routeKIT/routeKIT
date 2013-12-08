@@ -68,7 +68,7 @@
 % 2. Typ
 % 3. Parameter (ein oder mehrere \param, oder \keine)
 % 4. Beschreibung
-\newcommand{\method}[4]{
+\NewDocumentCommand{\method}{m O{void} m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
   \item[\namedlabel{M:\currentclass.#1}{#1}] #4\\
     Parameter:
     \begin{description}
@@ -286,12 +286,12 @@ Prof.~Dr.~Peter~Sanders}
           \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.}
         }
         {
-          \method{save}{void}
+          \method{save}
                  {
                    \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
                  }
                  {Speichert das Profil in die angegebene Datei.}
-          \method{load}{\refclass{Profile}}
+          \method{load}[\refclass{Profile}]
                  {
                    \param{file}{File}{Die Datei, aus der das Profil geladen wird.}
                  } 
@@ -314,7 +314,7 @@ Prof.~Dr.~Peter~Sanders}
         }
         {\keine}
         {
-          \method{Graph}{Konstruktor}
+          \method{Graph}[Konstruktor]
                  {
                    \param{nodes}{int[]}{Der Knoten-Bestandteil des Adjazenzfeldes.}
                    \param{edges}{int[]}{Der Kanten-Bestandteil des Adjazenzfeldes.}
@@ -330,22 +330,22 @@ Prof.~Dr.~Peter~Sanders}
                    \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen.}
                  }
                  {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
-          \method{getEdges}{Set<int>}
+          \method{getEdges}[Set<int>]
                  {\param{node}{int}{Der Knoten, dessen Kanten gesucht werden.}}
                  {Gibt alle \emph{ausgehenden} Kanten des angegebenen Knotens zurück.}
-          \method{getTargetNode}{int}
+          \method{getTargetNode}[int]
                  {\param{edge}{int}{Die Kante, dessen Zielknoten gesucht wird.}}
                  {Gibt den Zielknoten der angegebenen Kante zurück.}
-          \method{getLat}{float}
+          \method{getLat}[float]
                  {\param{node}{int}{Der Knoten, dessen geographische Breite gesucht wird.}}
                  {Gibt die geographische Breite des angegebenen Knotens zurück.}
-          \method{getLon}{float}
+          \method{getLon}[float]
                  {\param{node}{int}{Der Knoten, dessen geographische Länge gesucht wird.}}
                  {Gibt die geographische Länge des angegebenen Knotens zurück.}
-          \method{getNodeProperties}{\refclass{NodeProperties}}
+          \method{getNodeProperties}[\refclass{NodeProperties}]
                  {\param{node}{int}{Der Knoten, dessen \refclass{NodeProperties} gesucht werden.}}
                  {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
-          \method{getEdgeProperties}{\refclass{EdgeProperties}}
+          \method{getEdgeProperties}[\refclass{EdgeProperties}]
                  {\param{edge}{int}{Die Kante, deren \refclass{EdgeProperties} gesucht werden.}}
                  {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
         }
@@ -353,7 +353,7 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt die Eigenschaften eines Knotens.}
         {\keine}
         {
-          \method{allowsTurn}{boolean}
+          \method{allowsTurn}[boolean]
                  {
                    \param{fromEdge}{int}{Die Kante, über die der Knoten betreten wird.}
                    \param{toEdge}{int}{Die Kante, über die der Knoten verlassen wird.}
@@ -361,19 +361,19 @@ Prof.~Dr.~Peter~Sanders}
                  }
                  {
                    Bestimmt, ob eine \gls{route}, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
-                   
+
                    Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] und Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird immer \code{false} zurückgegeben.
                  }
-          \method{isMiniRoundabout}{boolean}
+          \method{isMiniRoundabout}[boolean]
                  {\keine}
                  {Bestimmt, ob der Knoten ein kleiner Kreisverkehr ist oder nicht.}
-          \method{isHighwayJunction}{boolean}
+          \method{isHighwayJunction}[boolean]
                  {\keine}
                  {Bestimmt, ob der Knoten ein Autobahnkreuz ist oder nicht.} % TODO
-          \method{getJunctionName}{String}
+          \method{getJunctionName}[String]
                  {\keine}
                  {Gibt den Namen der Kreuzung zurück.}
-          \method{getJunctionRef}{String}
+          \method{getJunctionRef}[String]
                  {\keine}
                  {Gibt die Referenz der Kreuzung zurück.} % TODO what is this
         }
@@ -381,19 +381,19 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt die Eigenschaften einer Kante.}
         {\keine}
         {
-          \method{getName}{String}
+          \method{getName}[String]
                  {\keine}
                  {Gibt den Namen der Kante zurück.}
-          \method{getRoadRef}{String}
+          \method{getRoadRef}[String]
                  {\keine}
                  {Gibt die Referenz der Straße zurück.} % TODO what is this
-          \method{allowsRoute}{boolean}
+          \method{allowsRoute}[boolean]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll.}}
                  {Bestimmt, ob eine \gls{route}, die über diese Kante führt, gültig ist.}
-          \method{getMaxSpeed}{int}
+          \method{getMaxSpeed}[int]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit auf dieser Kante für das angegebene Profil.}
-          \method{isRoundabout}{boolean}
+          \method{isRoundabout}[boolean]
                  {\keine}
                  {Bestimmt, ob die Kante Teil eines Kreisverkehrs ist oder nicht.} % TODO stimmt das?
         }
@@ -421,21 +421,21 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt den \gls{verlauf}.}
         {\keine}
         {
-          \method{addEntry}{void}
+          \method{addEntry}
                  {
                    \param{start}{Coordinates}{Der Startpunkt.}
                    \param{destination}{Coordinates}{Der Zielpunkt.}
                  }
                  {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
-          \method{getEntries}{List<\refclass{HistoryEntry}>}
+          \method{getEntries}[List<\refclass{HistoryEntry}>]
                  {\keine}
                  {Gibt alle Einträge des Verlaufs zurück.}
-          \method{save}{void}
+          \method{save}
                  {
                    \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird.}
                  }
                  {Speichert den Verlauf in die angegebene Datei.}
-          \method{load}{History}
+          \method{load}[History]
                  {
                    \param{file}{File}{Die Datei, aus der der Verlauf geladen wird.}
                  }
@@ -460,7 +460,7 @@ Prof.~Dr.~Peter~Sanders}
         }
         {\keine}
         {
-          \method{requestTile}{Future<BufferedImage>}
+          \method{requestTile}[Future<BufferedImage>]
                  {
                    \param{x}{int}{Die x-Koordinate der angeforderten Kachel.} % TODO skaliert mit dem Zoom? relativ zu was?
                    \param{y}{int}{Die y-Koordinate der angeforderten Kachel.}
@@ -470,7 +470,7 @@ Prof.~Dr.~Peter~Sanders}
                    Beantragt die asynchrone Berechnung der angegebenen Kachel.
                    Über das zurückgegeben \code{Future}-Object kann die Berechnung abgebrochen werden; zu beachten ist aber, dass die \code{get}-Methode des Objekts niemals \code{null} zurückgeben wird, sondern für noch nicht berechnete Kacheln stattdessen eine „Platzhalter-Kachel“.
                  }
-          \method{addTileFinishedListener}{void}
+          \method{addTileFinishedListener}
                  {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
                  {
                    Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
@@ -481,7 +481,7 @@ Prof.~Dr.~Peter~Sanders}
         {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
         {\keine}
         {
-          \method{tileFinished}{void}
+          \method{tileFinished}
                  {
                    \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
                    \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
@@ -497,7 +497,7 @@ Prof.~Dr.~Peter~Sanders}
         {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
         {\keine}
         {
-          \method{getTile}{BufferedImage}
+          \method{getTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
                    \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
@@ -509,10 +509,10 @@ Prof.~Dr.~Peter~Sanders}
         {Ein Zwischenspeicher für Kacheln, um zu verhindern, dass sie ständig von neuem berechnet werden.}
         {\keine}
         {
-          \method{TileCache}{Konstruktor}
+          \method{TileCache}[Konstruktor]
                  {\param{target}{\refclass{TileSource}}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
                  {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
-          \method{getTile}{BufferedImage}
+          \method{getTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
                    \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
@@ -522,7 +522,7 @@ Prof.~Dr.~Peter~Sanders}
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
                    andernfalls wird sie von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben.
                  }
-          \method{deleteTiles}{void}
+          \method{deleteTiles}
                  {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileDequeue}{requestTile}{zoom}.}}
                  {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden, etwa, um Speicher zu sparen.}
         }
@@ -530,7 +530,7 @@ Prof.~Dr.~Peter~Sanders}
         {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
         {\keine}
         {
-          \method{getTile}{BufferedImage}
+          \method{getTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
                    \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
@@ -542,7 +542,7 @@ Prof.~Dr.~Peter~Sanders}
         {Eine \refclass{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
         {\keine}
         {
-          \method{getTile}{BufferedImage}
+          \method{getTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
                    \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
@@ -557,7 +557,7 @@ Prof.~Dr.~Peter~Sanders}
         {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
         {\keine}
         {
-            \method{paint}{void}
+            \method{paint}
                 {
                   \param{x}{Graphics}{ein Objekt vom Typ Graphics}
                 }
