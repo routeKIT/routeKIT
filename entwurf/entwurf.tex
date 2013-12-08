@@ -428,6 +428,27 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
         {\keine}
         {\keine} % TODO
+  \class{Route}
+        {Repräsentiert eine berechnete \gls{route}.}
+        {\keine} % ?
+        {
+          \method{getNodes}[int[]]
+                 {\keine}
+                 {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
+          \method{getRouteDescription}[\refclass{RouteDescription}]
+                 {\keine}
+                 {Gibt die zur Route gehörende \gls{wegbeschreibung} zurück.}
+        }
+  \class{RouteDescription}
+        {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
+        {\keine} % ?
+        {
+          \keine % TODO
+        }
+  \class{TurnInstruction}
+        {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \gls{wegbeschreibung} aufgebaut ist.}
+        {\keine} % ?
+        {\keine} % TODO
 }
 
 \package{History}{
