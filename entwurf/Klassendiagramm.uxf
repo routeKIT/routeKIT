@@ -653,7 +653,7 @@ getNodes(): int[]
       <h>1260</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>390;30;400;1240;30;1240</additional_attributes>
+    <additional_attributes>400;30;400;1240;30;1240</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -765,7 +765,7 @@ r1=profile</panel_attributes>
       <h>1320</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220;1300;210;30;30;30</additional_attributes>
+    <additional_attributes>220;1300;220;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1015,8 +1015,8 @@ date: Date
     <coordinates>
       <x>2990</x>
       <y>4160</y>
-      <w>90</w>
-      <h>40</h>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -1086,28 +1086,28 @@ isRoundabout(): boolean
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3150</x>
+      <x>3080</x>
       <y>2950</y>
-      <w>160</w>
+      <w>230</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>GPXExporter
 --
 --
-exportRoute(file: File)</panel_attributes>
+exportRoute(route: Route, file: File)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3210</x>
+      <x>3220</x>
       <y>1620</y>
-      <w>60</w>
+      <w>54</w>
       <h>1350</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=route</panel_attributes>
-    <additional_attributes>30;30;40;1330</additional_attributes>
+    <additional_attributes>30;30;30;1330</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1419,5 +1419,30 @@ m2=0..n</panel_attributes>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0..n</panel_attributes>
     <additional_attributes>30;160;80;160;80;30;100;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2860</x>
+      <y>2690</y>
+      <w>260</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>HTMLExporter
+--
+--
+exportRoute(route: Route, file: File)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2850</x>
+      <y>2720</y>
+      <w>50</w>
+      <h>560</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;540</additional_attributes>
   </element>
 </diagram>
