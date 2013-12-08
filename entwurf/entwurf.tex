@@ -638,7 +638,7 @@ Prof.~Dr.~Peter~Sanders}
         {
             \method{paint}
                 {
-                  \param{x}{Graphics}{ein Objekt vom Typ Graphics}
+                  \param{}{Graphics}{ein Objekt vom}
                 }
                {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
          }
@@ -713,6 +713,37 @@ Prof.~Dr.~Peter~Sanders}
                  {\keine}
                  {Gibt eine Liste mit allen Knoten, zu denen eine Kante von diesem Knoten existiert, zurück.}
         }
+}
+
+\package{Controllers}{
+    \class{ProfileManager}
+        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.}
+        {\keine}
+        {
+                \method{createProfile}
+                {\keine }
+                {Erstellt ein neues Profile-Objekt, nimmt es in die Liste auf und setzt es als aktuell ausgewähltes Profil.}
+         
+                 \method{saveProfile}
+                {\keine }
+                {Speichert das ausgewählte Profil in eine Datei.}
+
+                 \method{deleteProfile}
+                {\keine }
+                {Löscht das ausgewählte Profil aus der internen Liste und die Datei.}
+         }
+  \class{MapManager}
+        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.}
+        {\keine}
+        {
+                \method{importMap}
+                {\keine }
+                {Nach Angabe des korrekten Pfads wird \refmethod{MapImporter}{import}[import] aufgerufen.}
+         
+                 \method{deleteMap}
+                {\keine }
+                {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
+         }
 }
 
 \glsaddallunused
