@@ -744,6 +744,49 @@ Prof.~Dr.~Peter~Sanders}
                 {\keine }
                 {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
          }
+ \class{Controller}
+        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.}
+        {\keine}
+        {
+                \method{Controller}
+                {\keine }
+                {Ein Konstruktor, der ein Objekt der Klasse \refclass{Controller} erzeugt. }
+         
+                 \method{onStartChanged}
+                {\keine }
+                {}
+
+                 \method{onDestinationChanged}
+                {\keine }
+                {}
+
+                \method{exportGPX}
+                {\keine }
+                {}
+
+                \method{exportHTML}
+                {\keine }
+                {}
+
+                \method{selectProfile}
+                {
+	            \param{}{Profile}{Das aktuelle Profil.} 
+	      }
+                {Wählt das aktuelle Profil aus.}
+
+                \method{selectMap}
+                {
+	            \param{}{Map}{Die aktuelle Karte.} 
+	      }
+                {Wählt die aktuelle Karte aus.}
+
+                \method{schedulePrecalculate}
+                {
+                     \param{}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
+                }
+                {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
+         }
+
 }
 
 \glsaddallunused
