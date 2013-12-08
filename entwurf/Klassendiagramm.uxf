@@ -1159,7 +1159,7 @@ toString(): String
 --
 
 --
-umport(:File): Graph</panel_attributes>
+import(:File): Graph</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
