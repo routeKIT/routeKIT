@@ -306,7 +306,7 @@ Prof.~Dr.~Peter~Sanders}
         {Eine Karte.}
         {
           \attr{name}{String}{Der Name der Karte.}
-          \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.~h. das Straßennetz.}
+          \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.\,h. das Straßennetz.}
         }
         {\keine}
   \class{Graph}
@@ -352,32 +352,32 @@ Prof.~Dr.~Peter~Sanders}
                  {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
         }
   \class{NodeProperties}
-        {Kapselt die Eigenschaften eines Knotens.}
+        {Kapselt die Eigenschaften eines Knotens einschließlich der zugehörigen Abbiegebeschränkungen.}
         {\keine}
         {
           \method{allowsTurn}[boolean]
                  {
-                   \param{fromEdge}{int}{Die Kante, über die der Knoten betreten wird.}
-                   \param{toEdge}{int}{Die Kante, über die der Knoten verlassen wird.}
-                   \param{profile}{\refclass{Profile}}{Das \gls{profil}, für das die Gültigkeit der Route bestimmt werden soll.}
+                   \param{fromEdge}{int}{Die eingehende Kante, über die der Knoten betreten wird.}
+                   \param{toEdge}{int}{Die ausgehende Kante, über die der Knoten verlassen wird.}
+                   \param{profile}{\refclass{Profile}}{Das \gls{profil}, für das die Zulässigkeit des Abbiegevorgangs bestimmt werden soll.}
                  }
                  {
-                   Bestimmt, ob eine \gls{route}, die den Knoten über die angegebenen Kanten betritt und verlässt, gültig ist.
+                   Bestimmt, ob ein Abbiegevorgang über den Knoten von der angegebenen eingehenden Kante zur angegebenen ausgehenden Kante zulässig ist.
 
-                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] und Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird immer \code{false} zurückgegeben.
+                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] oder nicht Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird \code{false} zurückgegeben.
                  }
           \method{isMiniRoundabout}[boolean]
                  {\keine}
-                 {Bestimmt, ob der Knoten ein kleiner Kreisverkehr ist oder nicht.}
+                 {Bestimmt, ob der Knoten ein kleiner Kreisverkehr ist.}
           \method{isHighwayJunction}[boolean]
                  {\keine}
-                 {Bestimmt, ob der Knoten ein Autobahnkreuz ist oder nicht.} % TODO
+                 {Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
           \method{getJunctionName}[String]
                  {\keine}
-                 {Gibt den Namen der Kreuzung zurück.}
+                 {Gibt den Namen der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
           \method{getJunctionRef}[String]
                  {\keine}
-                 {Gibt die Referenz der Kreuzung zurück.} % TODO what is this
+                 {Gibt die Nummer der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
         }
   \class{EdgeProperties}
         {Kapselt die Eigenschaften einer Kante.}
@@ -385,19 +385,19 @@ Prof.~Dr.~Peter~Sanders}
         {
           \method{getName}[String]
                  {\keine}
-                 {Gibt den Namen der Kante zurück.}
+                 {Gibt den Namen der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{getRoadRef}[String]
                  {\keine}
-                 {Gibt die Referenz der Straße zurück.} % TODO what is this
+                 {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{allowsRoute}[boolean]
-                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Gültigkeit der Route bestimmt werden soll.}}
-                 {Bestimmt, ob eine \gls{route}, die über diese Kante führt, gültig ist.}
+                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Zulässigkeit der Benutzung bestimmt werden soll.}}
+                 {Bestimmt, ob die Benutzung der Kante in einer \gls{route} zulässig ist.}
           \method{getMaxSpeed}[int]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit auf dieser Kante für das angegebene Profil.}
           \method{isRoundabout}[boolean]
                  {\keine}
-                 {Bestimmt, ob die Kante Teil eines Kreisverkehrs ist oder nicht.} % TODO stimmt das?
+                 {Bestimmt, ob die Kante Teil eines Kreisverkehrs ist.}
         }
 }
 
@@ -409,6 +409,18 @@ Prof.~Dr.~Peter~Sanders}
           \attr{map}{\refclass{Map}}{Die Karte.}
         }
         {\keine}
+  \class{GPXExporter}
+        {Stellt die Funktionalität zum Export einer \gls{route} im GPX-Format bereit.}
+        {
+          \attr{route}{\refclass{Route}}{Die zu exportierende Route.}
+        }
+        {
+          \method{exportRoute}
+                 {
+                   \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
+                 }
+                 {Exportiert die Wegpunkte der \refattr{GPXExporter}{route} im GPX-Format in die angegebene Datei.}
+        }
 }
 
 \package{RouteCalculator}{
