@@ -384,7 +384,7 @@ weightEdges(:Graph, :Profile): float[]</panel_attributes>
     <panel_attributes>ArcFlagsCalculator
 --
 --
-calculateArcFlags(:Graph, :int[], :float[]): Arcflags</panel_attributes>
+calculateArcFlags(:Graph, :int[], :float[]): ArcFlags</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -548,8 +548,8 @@ _load(file: File): Profile_</panel_attributes>
     <coordinates>
       <x>4720</x>
       <y>2940</y>
-      <w>150</w>
-      <h>220</h>
+      <w>158</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
@@ -880,6 +880,7 @@ getFlags(node: int): int
     </coordinates>
     <panel_attributes>PreCalculationScheduler
 --
+calculationQueue: Queue
 --
 scheduleCalculation(:ProfileMapCombination)</panel_attributes>
     <additional_attributes/>
@@ -974,8 +975,8 @@ routeFinished(:Route)</panel_attributes>
     <coordinates>
       <x>2030</x>
       <y>2990</y>
-      <w>120</w>
-      <h>440</h>
+      <w>130</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>

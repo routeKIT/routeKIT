@@ -669,15 +669,25 @@ Prof.~Dr.~Peter~Sanders}
         {\keine}
 }
 \package{Precalculation}{
-  \class{PreCalculator}
-        {Führt die Berechnung der Arcflags durch.}
+  \class{PreCalculationScheduler}
+  		        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{Map}[Karte].}
+  		        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
+  		        {\method{scheduleCalculation}
+  		        	{
+  		        	\param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+  		        	}
+  		        	{Fügt die \refclass{ProfileMapCombination}[ProfileMapCombination] zur späteren Vorberechnung zur Queue hinzu.}
+  		        }
+  		        
+  	\class{PreCalculator}
+        {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte] durch.}
         {\keine}
         {
           \method{doPrecalculation}
                  {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus Profil und \refclass{Map}[Karte], für die Arcflags vorberechnet werden sollen}
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte], für die die Vorberechnung durchgeführt werden soll.}
                  }
-                 {Berechnet Arcflags für die gegebene Kombination.}
+                 {Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte] durch. Dabei werden ein \refclass{EdgeWeighter}[EdgeWeighter] und ein \refclass{ArcFlagsCalculator}[ArcFlagsCalculator] aufgerufen.}
         }
   \class{MapImporter}
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
@@ -712,6 +722,53 @@ Prof.~Dr.~Peter~Sanders}
           \method{getNeighbours}[List<MapNode>]
                  {\keine}
                  {Gibt eine Liste mit allen Knoten, zu denen eine Kante von diesem Knoten existiert, zurück.}
+        }
+        
+        \class{EdgeWeighter}
+        {Versieht die Kanten eines Graphen mit Kantengewichten.}
+        {\keine}
+        {\method{weightEdges}[float[]]
+        	{
+        	\param{graph}{Graph}{Der zu gewichtende Graph.}
+        	\param{profile}{Profile}{Das zu verwendende Profil.}
+        	}
+        	{Versieht die Kanten des gegebenen Graphen mit Kantengewichten basierend auf durch das Profil beeinflussten Beschränkungen.}
+        }
+        
+        \class{ArcFlagsCalculator}
+        {Berechnet Arcflags für einen partitionierten, gewichteten Graphen.}
+        {\keine}
+        {\method{calculateArcFlags}[ArcFlags]
+        	{
+        	\param{graph}{Graph}{Der Graph.}
+        	\param{partitions}{int[]}{Die Partitionen des Graphen.}
+        	\param{weights}{float[]}{Die Kantengewichte des Graphen.}
+        	}
+            {Berechnet Arcflags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
+		}
+		
+		  \class{GraphPartitioner}
+		        {Partitioniert einen gegebenen Graphen.}
+		        {\keine}
+		        {
+		          \method{partitionGraph}[int[]]
+		                 {
+		                   \param{graph}{Graph}{Der zu partitionierende Graph.}
+		                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
+		                 }
+		                 {Teilt den Graphen in die gewünschte Anzahl an Partitionen.}
+		        }
+
+  \class{ExternalPartitionerAdapter}
+        {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
+        {\keine}
+        {
+          \method{partitionGraph}[int[]]
+                 {
+                   \param{graph}{Graph}{Der zu partitionierende Graph.}
+                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
+                 }
+                 {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
         }
 }
 
