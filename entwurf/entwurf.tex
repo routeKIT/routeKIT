@@ -831,33 +831,58 @@ Prof.~Dr.~Peter~Sanders}
 
 \package{Controllers}{
   \class{ProfileManager}
-        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.}
+        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
         {\keine}
         {
-          \method{createProfile}
-                 {\keine }
-                 {Erstellt ein neues Profile-Objekt, nimmt es in die Liste auf und setzt es als aktuell ausgewähltes Profil.}
-                 
           \method{saveProfile}
-                 {\keine }
-                 {Speichert das ausgewählte Profil in eine Datei.}
-                 
+                 {
+                   \param{p}{\refclass{Profile}}{Das Profil, das gespeichert werden soll.}
+                 }
+                 {
+                   Speichert das ausgewählte Profil in der internen Liste und auf der Festplatte.
+                   
+                   (Der Speicherort wird vom Manager deckend verwaltet.) % „deckend“ = “opaque”
+                 }
           \method{deleteProfile}
-                 {\keine }
-                 {Löscht das ausgewählte Profil aus der internen Liste und die Datei.}
+                 {
+                   \param{p}{\refclass{Profile}}{Das Profil, das gelöscht werden soll.}
+                 }
+                 {
+                   Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
+                 }
+          \method{getProfiles}[Set<\refclass{Profile}>]
+                 {\keine}
+                 {
+                   Gibt alle Profile in der internen Liste zurück.
+                 }
         }
   \class{MapManager}
-        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.}
+        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.} % TODO siehe ProfileManager
         {\keine}
         {
-          \method{importMap}
-                 {\keine}
-                 {Nach Angabe des korrekten Pfads wird \refmethod{MapImporter}{import}[import] aufgerufen.}
-                 
+          \method{saveMap}
+                 {
+                   \param{m}{\refclass{StreetMap}}{Die Karte, die gespeichert werden soll.}
+                 }
+                 {
+                   Speichert die ausgewählte Karte in der internen Liste und auf der Festplatte.
+
+                   (Der Speicherort wird vom Manager deckend verwaltet.)
+                 }
           \method{deleteMap}
+                 {
+                   \param{m}{\refclass{StreetMap}}{Die Karte, die gelöscht werden soll.}
+                 }
+                 {
+                   Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
+                 }
+          \method{getMaps}[Set<\refclass{StreetMap}>]
                  {\keine}
-                 {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
+                 {
+                   Gibt alle Karten in der internen Liste zurück.
+                 }
         }
+
   \class{Controller}
         {Steuert die Programmabläufe zur Routenberechnung.}
         {\keine}
@@ -867,38 +892,195 @@ Prof.~Dr.~Peter~Sanders}
                  {Ein Konstruktor, der ein Objekt der Klasse \refclass{Controller} erzeugt.}
                  
           \method{onStartChanged}
-                 {\keine}
-                 {todo}
-                 
+                 {
+                   \param{start}{Coordinates}{Die Koordinaten des neuen Startpunkts.}
+                 }
+                 {
+                   Wird aufgerufen, wenn sich der Startpunkt ändert (z.\,B. durch eine Eingabe des Benutzers).
+                   Setzt den neuen Startpunkt in der \refclass{MapView}.
+                   Falls bereits ein Zielpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum Verlauf hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
+                 }
           \method{onDestinationChanged}
-                 {\keine}
-                 {todo}
+                 {
+                   \param{destination}{Coordinates}{Die Koordinaten des neuen Zielpunkts.}
+                 }
+                 {
+                   Wird aufgerufen, wenn sich der Zielpunkt ändert (z.\,B. durch eine Eingabe des Benutzers).
+                   Setzt den neuen Zielpunkt in der \refclass{MapView}.
+                   Falls bereits ein Startpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum Verlauf hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
+                 }
+          \method{onStartAndDestChanged}
+                 {
+                   \param{start}{Coordinates}{Die Koordinaten des neuen Startpunkts.}
+                   \param{destination}{Coordinates}{Die Koordinaten des neuen Zielpunkts.}
+                 }
+                 {
+                   Wird aufgerufen, wenn sich der Start- und Zielpunkt ändern (z.\,B. durch die Auswahl eines Eintrags aus dem \gls{verlauf}).
+                   Die gleichen Aktionen wie für \refmethod{Controller}{onStartChanged}[onStartChanged] und \refmethod{Controller}{onDestinationChanged}[onDestinationChanged] werden ausgeführt, nur nicht doppelt.
+                 }
                  
           \method{exportGPX}
-                 {\keine}
-                 {todo}
-                 
+                 {
+                   \param{target}{File}{Die Datei, in die die Route gespeichert werden soll.}
+                 }
+                 {
+                   Speichert die aktuelle Route im \gls{gpx}-Format in die angegebene Datei.
+                   Ist keine aktuelle Route verfügbar (z.\,B. da noch keine Vorberechnung vorliegt), so wird eine \code{IllegalStateException} geworfen.
+                 }
           \method{exportHTML}
-                 {\keine}
-                 {\keine}
+                 {
+                   \param{target}{File}{Die Datei, in die die Wegbeschreibung gespeichert werden soll.}
+                 }
+                 {
+                   Speichert die Wegbeschreibung der aktuellen Route im HTML-Format in die angegeben Datei.
+                   Ist keine aktuelle Route verfügbar (z.\,B. da noch keine Vorberechnung vorliegt), so wird eine \code{IllegalStateException} geworfen.
+                 }
                  
           \method{selectProfile}
                  {
                    \param{profile}{Profile}{Das aktuelle Profil.} 
                  }
-                 {Wählt das aktuelle Profil aus.}
-                 
+                 {
+                   Wählt das angegebe Profil aus.
+                 }
           \method{selectMap}
                  {
                    \param{map}{\refclass{StreetMap}}{Die aktuelle Karte.} 
                  }
-                 {Wählt die aktuelle Karte aus.}
+                 {
+                   Wählt die angegebe Karte aus.
+                 }
+
+          \method{getHistoryModel}[ListModel]
+                 {\keine}
+                 {
+                   Gibt ein \code{javax.swing.ListModel} zurück, das von einer \code{JList} verwendet werden kann, um den Verlauf anzuzeigen.
+                 }
                  
           \method{schedulePrecalculate}
                  {
                    \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
                  }
-                 {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
+                 {
+                   Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
+                 }
+
+          \method{setUseOnlineMaps}
+                 {
+                   \param{useOnlineMaps}{boolean}{\code{true}, um \glspl{osmkachel} zu verwenden, \code{false}, um selbst gerenderte Kacheln zu verwenden.}
+                 }
+                 {
+                   Legt fest, ob \glspl{osmkachel} oder selbst gerenderte Kacheln verwendet werden sollen.
+                   Für \glspl{osmkachel} wird der \refclass{OSMRenderer} verwendet, für die eigenen Kacheln der \refclass{TileRenderer}.
+                 }
+          \method{getTileSource}[\refclass{TileSource}]
+                 {\keine}
+                 {
+                   Gibt eine \refclass{TileSource} zurück, die zum Rendern der Karten verwendet werden soll.
+                 }
+        }
+
+  \class{ProfileManagementController}
+        {
+          Der Controller für die \refclass{ProfileManagerView}.
+        }
+        {\keine}
+        {
+          \method{ProfileManagementController}
+                 {\keine}
+                 {
+                   Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
+                 }
+          \method{swapProfile}
+                 {
+                   \param{p}{\refclass{Profile}}{Das neue Profil.}
+                 }
+                 {
+                   Wird aufgerufen, wenn in der \refclass{ProfileManagerView} ein anderes Profil ausgewählt wird.
+                   Speichert die Werte aller Eingabeelemente und setzt sie auf die Werte des neuen Profils (ggf. die bereits gespeicherten Werte, falls das Profil schon zuvor einmal ausgewählt war).
+                   Aktiviert/Deaktiviert den Löschen-Button und die Eingabeelemente, je nachdem, ob das neue Profil ein Standardprofil ist oder nicht.
+                 }
+          \method{deleteProfile}
+                 {\keine}
+                 {
+                   Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
+                   
+                   Beachte: Das Profil wird erst in \refmethod{ProfileManagementController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   
+                   Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
+                 }
+          \method{estimateDeletionAmount}[int]
+                 {\keine}
+                 {
+                   Schätzt, wie viel Rechenzeit durch die aktuell erfassten Änderungen verloren gehen würde (durch notwendige Löschung nun veralteter Vorberechnungen).
+                   Die geschätzte Dauer wird in Minuten zurückgegeben.
+                 }
+          \method{saveAllChanges}
+                 {\keine}
+                 {
+                   Führt alle vom Benutzer vorgenommenen Änderungen aus.
+                   Dazu gehören das Hinzufügen, Ändern und Löschen von Profilen.
+                   Für geänderte Profile werden alle Vorberechnungen gelöscht. 
+                 }
+        }
+  \class{MapManagementController}
+        {
+          Der Controller für die \refclass{MapManagerView}.
+        }
+        {\keine}
+        {
+          \method{MapManagementController}
+                 {\keine}
+                 {
+                   Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
+                 }
+          \method{switchMap}
+                 {
+                   \param{m}{\refclass{StreetMap}}{Die neue Karte.}
+                 }
+                 {
+                   Wird aufgerufen, wenn in der \refclass{MapManagerView} eine andere Karte ausgewählt wird.
+                   Speichert die Liste der Profile für diese Karte und setzt sie auf die Liste der neuen Karte (ggf. die bereits gespeicherte Liste, falls die Karte schon zuvor einmal ausgewählt war).
+                   Aktiviert/Deaktiviert den Löschen-Button, je nachdem, ob die neue Karte eine Standardkarte ist oder nicht.
+                 }
+          \method{addProfile}
+                 {
+                   \param{p}{\refclass{Profile}}{Das neue Profil.}
+                 }
+                 {
+                   Fügt das angegebene Profil zur ausgewählten Karte hinzu.
+                 }
+          \method{removeProfile}
+                 {
+                   \param{p}{\refclass{Profile}}{Das Profil, das entfernt werden soll.}
+                 }
+                 {
+                   Entfernt das angegebene Profil von der ausgewählten Karte.
+                 }
+          \method{importMap}
+                 {\keine}
+                 {
+                   Fügt eine neue Karte mit dem angegebenen Namen hinzu (oder ersetzt eine bestehende mit diesem Namen) und wählt sie aus.
+
+                   Beachte: Die GUI-Aktionen „Importieren“ und „Aktualisieren“ werden beide durch diese Methode implementiert;
+                   bei „Importieren“ stellt die GUI sicher, dass kein bereits existierender Name gewählt wird,
+                   bei „Aktualisieren“ verwendet sie den Namen der existierenden Karte.
+                 }
+          \method{deleteCurrentMap} % TODO inkonsistenter name: beim profil ohne „curren“
+                 {\keine}
+                 {
+                   Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
+                   
+                   Beachte: Die Karte wird erst in \refmethod{MapManagementController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   
+                   Handelt es sich bei der aktuell ausgewählten Karte um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
+                 }
+          \method{saveAllChanges}
+                 {\keine}
+                 {
+                   Führt alle vom Benutzer vorgenommenen Änderungen aus.
+                   Dazu gehören das Importieren und Löschen von Karten sowie das Hinzufügen oder Löschen von Profilen je Karte.
+                 }
         }
 }
 
