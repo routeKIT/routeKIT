@@ -536,8 +536,8 @@ Prof.~Dr.~Peter~Sanders}
         {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \gls{wegbeschreibung} aufgebaut ist.}
         {\keine} % ?
         {\keine} % TODO
-  \class{Arcflags}
-        {Enthält die Arcflags für den vorberechneten Graphen.}
+  \class{ArcFlags}
+        {Enthält die Arc-Flags für den vorberechneten Graphen.}
         {\keine} % ?
         {
           \method{getFlags}[int]
@@ -789,7 +789,7 @@ Prof.~Dr.~Peter~Sanders}
         }
         
         \class{ArcFlagsCalculator}
-        {Berechnet Arcflags für einen partitionierten, gewichteten Graphen.}
+        {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
         {\keine}
         {\method{calculateArcFlags}[ArcFlags]
         	{
@@ -797,7 +797,7 @@ Prof.~Dr.~Peter~Sanders}
         	\param{partitions}{int[]}{Die Partitionen des Graphen.}
         	\param{weights}{float[]}{Die Kantengewichte des Graphen.}
         	}
-            {Berechnet Arcflags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
+            {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
 		}
 		
 		  \class{GraphPartitioner}
