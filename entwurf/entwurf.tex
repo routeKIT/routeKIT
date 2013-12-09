@@ -1089,13 +1089,13 @@ Prof.~Dr.~Peter~Sanders}
          {Stellt ein Interface zum Exportieren einer Route dar.}
          {\keine}
          {
-                \method{exportRoute}
-		 {
-		    \param{route}{\refclass{Route}}{Eine zu exportierende Route zwischen angegebenen Start- und Zielpunkt.}
-		    \param{file}{File}{Die Datei, die geschrieben werden soll.}
-		}
-		{Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route}[route] in die angegebene Datei.}
-          }
+           \method{exportRoute}
+                  {
+                    \param{route}{\refclass{Route}}{Eine zu exportierende Route zwischen angegebenen Start- und Zielpunkt.}
+                    \param{file}{File}{Die Datei, die geschrieben werden soll.}
+                  }
+                  {Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route}[route] in die angegebene Datei.}
+         }
 
   \class{HTMLExporter}
         {Stellt die Funktionalität zum Export einer \gls{route} im HTML-Format bereit.}
@@ -1103,8 +1103,8 @@ Prof.~Dr.~Peter~Sanders}
         {
           \method{exportRoute}
                  {
-                   \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                    \param{route}{\refclass{Route}}{Die zu exportierende Route.}
+                   \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                  }
                  {Exportiert die berechnete \refparam{HTMLExporter}{exportRoute}{route}[route] als HTML-Beschreibung in die angegebene Datei.}
         }
@@ -1115,8 +1115,8 @@ Prof.~Dr.~Peter~Sanders}
         {
           \method{exportRoute}
                  {
+	           \param{route}{\refclass{Route}}{Die zu exportierende Route.}
                    \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
-	        \param{route}{\refclass{Route}}{Die zu exportierende Route.}
                  }
                  {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route}[route] im GPX-Format in die angegebene Datei.}
         }
