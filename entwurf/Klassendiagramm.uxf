@@ -139,9 +139,9 @@ TileSource
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2050</x>
+      <x>2040</x>
       <y>5520</y>
-      <w>220</w>
+      <w>230</w>
       <h>100</h>
     </coordinates>
     <panel_attributes>TileCache
@@ -187,6 +187,7 @@ tileSource</panel_attributes>
     <panel_attributes>TileRenderer
 --
 --
+TileRenderer(:Graph)
 getTile(x, y, zoom): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
@@ -195,7 +196,7 @@ getTile(x, y, zoom): BufferedImage</panel_attributes>
     <coordinates>
       <x>2520</x>
       <y>5520</y>
-      <w>220</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>OSMRenderer
@@ -237,7 +238,6 @@ getTile(x, y, zoom): BufferedImage</panel_attributes>
     <panel_attributes>Util
 --
 --
-projectToEdge(lon: float, lat: float): PointOnEdge
 mercatorLon(lon: float, zoom: int): float
 mercatorLat(lat: float, zoom: int): float
 unmercatorX(x: float, zoom: int): float
@@ -929,7 +929,7 @@ addTileFinishedListener(:TileFinishedListener)
     <panel_attributes>lt=&lt;-
 m1=  1
 </panel_attributes>
-    <additional_attributes>130;400;30;400;30;70;500;70;500;30</additional_attributes>
+    <additional_attributes>120;400;30;400;30;70;500;70;500;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1274,9 +1274,9 @@ getMaps(): Set&lt;Map&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>4450</x>
+      <x>4250</x>
       <y>3340</y>
-      <w>1170</w>
+      <w>1370</w>
       <h>460</h>
     </coordinates>
     <panel_attributes>Map</panel_attributes>
@@ -1741,5 +1741,34 @@ exportRoute(route: Route, file: File)</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>4300</x>
+      <y>3420</y>
+      <w>410</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>GraphIndex
+--
+--
+GraphIndex( :Graph)
+getEdgesIn(leftTop: Coordinates, rightBottom: Coordinates): int[]
+projectToEdge(lon: float, lat: float): PointOnEdge
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>4300</x>
+      <y>3480</y>
+      <w>220</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+index</panel_attributes>
+    <additional_attributes>50;30;50;160;200;160</additional_attributes>
   </element>
 </diagram>
