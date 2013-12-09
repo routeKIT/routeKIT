@@ -47,7 +47,7 @@ onStartAndDestChanged(:Coordinates, :Coordinates)
 exportGPX(target: File)
 exportHTML(target: File)
 selectProfile(:Profile)
-selectMap(:Map)
+selectMap(:StreetMap)
 getHistoryModel(): ListModel
 schedulePrecalculate(:ProfileMapCombination)
 setUseOnlineMaps(:boolean)
@@ -522,7 +522,7 @@ m1=vehicleType</panel_attributes>
       <w>260</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>Map
+    <panel_attributes>StreetMap
 --
 name: String
 </panel_attributes>
@@ -1213,9 +1213,9 @@ getJunctionRef(): String
     <panel_attributes>MapManager
 --
 --
-saveMap(m: Map)
-deleteMap(m: Map)
-getMaps(): Set&lt;Map&gt;</panel_attributes>
+saveMap(m: StreetMap)
+deleteMap(m: StreetMap)
+getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1483,7 +1483,7 @@ saveAllChanges()
 --
 --
 MapManagementController()
-switchMap(m: Map)
+switchMap(m: StreetMap)
 addProfile(p: Profile)
 removeProfile(p: Profile)
 importMap(name: String, f: File)

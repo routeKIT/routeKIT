@@ -302,7 +302,7 @@ Prof.~Dr.~Peter~Sanders}
 }
 
 \package{Map}{
-  \class{Map}
+  \class{StreetMap}
         {Eine Karte.}
         {
           \attr{name}{String}{Der Name der Karte.}
@@ -403,10 +403,10 @@ Prof.~Dr.~Peter~Sanders}
 
 \package{TODO}{ % TODO: holds classes that still need a package
   \class{ProfileMapCombination}
-        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{Map}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
+        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
         {
           \attr{profile}{\refclass{Profile}}{Das \gls{profil}.}
-          \attr{map}{\refclass{Map}}{Die Karte.}
+          \attr{map}{\refclass{StreetMap}}{Die Karte.}
         }
         {\keine}
   \class{GPXExporter}
@@ -727,24 +727,24 @@ Prof.~Dr.~Peter~Sanders}
 }
 \package{Precalculation}{
   \class{PreCalculationScheduler}
-  		        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{Map}[Karte].}
+  		        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
   		        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
   		        {\method{scheduleCalculation}
   		        	{
-  		        	\param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+  		        	\param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
   		        	}
   		        	{Fügt die \refclass{ProfileMapCombination}[ProfileMapCombination] zur späteren Vorberechnung zur Queue hinzu.}
   		        }
   		        
   	\class{PreCalculator}
-        {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte] durch.}
+        {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
         {\keine}
         {
           \method{doPrecalculation}
                  {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
                  }
-                 {Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{Map}[Karte] durch. Dabei werden ein \refclass{EdgeWeighter}[EdgeWeighter] und ein \refclass{ArcFlagsCalculator}[ArcFlagsCalculator] aufgerufen.}
+                 {Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch. Dabei werden ein \refclass{EdgeWeighter}[EdgeWeighter] und ein \refclass{ArcFlagsCalculator}[ArcFlagsCalculator] aufgerufen.}
         }
   \class{MapImporter}
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
@@ -890,7 +890,7 @@ Prof.~Dr.~Peter~Sanders}
 
                 \method{selectMap}
                 {
-	            \param{map}{Map}{Die aktuelle Karte.} 
+	            \param{map}{\refclass{StreetMap}}{Die aktuelle Karte.} 
 	      }
                 {Wählt die aktuelle Karte aus.}
 
