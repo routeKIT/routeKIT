@@ -778,9 +778,8 @@ r1=profile</panel_attributes>
     <panel_attributes>ProfileManager
 --
 --
-createProfile()
-saveProfile()
-deleteProfile()
+saveProfile(p: Profile)
+deleteProfile(p: Profile)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1207,8 +1206,8 @@ getJunctionRef(): String
     <panel_attributes>MapManager
 --
 --
-importMap()
-deleteMap()
+saveMap(m: Map)
+deleteMap(m: Map)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1445,5 +1444,217 @@ exportRoute(route: Route, file: File)</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;540</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2430</x>
+      <y>3090</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ProfileManagementContoller
+--
+--
+swapProfile(p: Profile)
+deleteProfile()
+saveAllChanges()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2430</x>
+      <y>3400</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>MapManagementController
+--
+--
+switchMap(m: Map)
+addProfile(p: Profile)
+importMap(f: File)
+deleteCurrentMap()
+saveAllChanges()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2210</x>
+      <y>3660</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+MapManagementCommand
+--
+--
+getEstimatedDeletionTime()
+gatEstimatedCalculationTime()
+execute()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2150</x>
+      <y>3830</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>DeleteMapCommand
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2330</x>
+      <y>3830</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>ImportMapCommand
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2510</x>
+      <y>3830</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>PrecalculateCommand
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2240</x>
+      <y>3730</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2330</x>
+      <y>3730</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2370</x>
+      <y>3730</y>
+      <w>250</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;70;230;70;230;100</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2610</x>
+      <y>3110</y>
+      <w>300</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>280;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2610</x>
+      <y>3130</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;100;30;100;170;190;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2610</x>
+      <y>3490</y>
+      <w>310</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>290;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2610</x>
+      <y>3410</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;190;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2370</x>
+      <y>3510</y>
+      <w>200</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1
+</panel_attributes>
+    <additional_attributes>30;150;30;110;180;110;180;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>2510</x>
+      <y>3720</y>
+      <w>210</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>DeletePrecalculationCommand
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2390</x>
+      <y>3710</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;120;30</additional_attributes>
   </element>
 </diagram>
