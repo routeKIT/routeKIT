@@ -762,7 +762,7 @@ Prof.~Dr.~Peter~Sanders}
                  {
                    \param{f}{File}{}
                  }
-                 {Importiert eine OSM-Karte in eine verlinkte Datenstruktur \refclass{MapNode}}
+                 {Wandelt eine OSM-Karte in eine verlinkte Datenstruktur \refclass{MapNode} um.}
         }
   \class{MapNode}
         {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
@@ -774,9 +774,9 @@ Prof.~Dr.~Peter~Sanders}
           \method{getLat}[float]
                  {\keine}
                  {Gibt den Breitengrad dieses Knotens aus.}
-          \method{getNeighbours}[List<MapNode>]
+          \method{getEdges}[Set<MapEdge>]
                  {\keine}
-                 {Gibt eine Liste mit allen Knoten, zu denen eine Kante von diesem Knoten existiert, zurück.}
+                 {Gibt eine Liste mit allen Kanten zu einem Knoten zurück.}
         }
         
   \class{EdgeWeighter}
