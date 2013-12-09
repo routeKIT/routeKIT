@@ -687,7 +687,7 @@ getNodes(): int[]
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>3670</x>
-      <y>5030</y>
+      <y>4950</y>
       <w>220</w>
       <h>90</h>
     </coordinates>
@@ -696,7 +696,8 @@ getNodes(): int[]
 --
 getLat(): float
 getLon(): float
-getNeighbours(): List&lt;MapNode&gt;
+getEdges(): Set&lt;MapEdge&gt;
+// --&gt;NodeProperties?
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -704,7 +705,7 @@ getNeighbours(): List&lt;MapNode&gt;
     <type>com.umlet.element.Note</type>
     <coordinates>
       <x>3700</x>
-      <y>4920</y>
+      <y>4860</y>
       <w>150</w>
       <h>70</h>
     </coordinates>
@@ -717,12 +718,12 @@ graph representation
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3740</x>
-      <y>4960</y>
-      <w>40</w>
-      <h>80</h>
+      <y>4900</y>
+      <w>50</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>30;70;30;30</additional_attributes>
+    <additional_attributes>30;50;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -805,7 +806,7 @@ m2=0..n
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3950</x>
+      <x>3960</x>
       <y>4940</y>
       <w>210</w>
       <h>50</h>
@@ -1107,14 +1108,14 @@ exportRoute(route: Route, file: File)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3120</x>
+      <x>3130</x>
       <y>1620</y>
-      <w>140</w>
-      <h>1090</h>
+      <w>144</w>
+      <h>940</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=route</panel_attributes>
-    <additional_attributes>130;30;130;1080;30;1080</additional_attributes>
+    <additional_attributes>120;30;120;920;30;920</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1772,5 +1773,33 @@ projectToEdge(lon: float, lat: float): PointOnEdge
     <panel_attributes>lt=&lt;-
 index</panel_attributes>
     <additional_attributes>40;30;40;160;190;160</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>3670</x>
+      <y>5070</y>
+      <w>220</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>MapEdge
+--
+--
+getTargetNode(): MapNode
+//--&gt; EdgeProperties
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3750</x>
+      <y>5010</y>
+      <w>50</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n</panel_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
 </diagram>
