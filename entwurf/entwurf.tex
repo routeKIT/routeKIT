@@ -409,18 +409,7 @@ Prof.~Dr.~Peter~Sanders}
           \attr{map}{\refclass{StreetMap}}{Die Karte.}
         }
         {\keine}
-  \class{GPXExporter}
-        {Stellt die Funktionalität zum Export einer \gls{route} im GPX-Format bereit.}
-        {
-          \attr{route}{\refclass{Route}}{Die zu exportierende Route.}
-        }
-        {
-          \method{exportRoute}
-                 {
-                   \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
-                 }
-                 {Exportiert die Wegpunkte der \refattr{GPXExporter}{route} im GPX-Format in die angegebene Datei.}
-        }
+
    \class{Util}
         {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}
         {\keine}
@@ -912,6 +901,45 @@ Prof.~Dr.~Peter~Sanders}
                  {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
         }
 }
+
+\package{Exporter} {
+  \class{Exporter}
+         {Stellt ein Interface zum Exportieren einer Route dar.}
+         {\keine}
+         {
+                \method{exportRoute}
+		 {
+		    \param{route}{\refclass{Route}}{Eine zu exportierende Route zwischen angegebenen Start- und Zielpunkt.}
+		    \param{file}{File}{Die Datei, die geschrieben werden soll.}
+		}
+		{Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route}[route] in die angegebene Datei.}
+          }
+
+  \class{HTMLExporter}
+        {Stellt die Funktionalität zum Export einer \gls{route} im HTML-Format bereit.}
+        {\keine}
+        {
+          \method{exportRoute}
+                 {
+                   \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
+                   \param{route}{\refclass{Route}}{Die zu exportierende Route.}
+                 }
+                 {Exportiert die berechnete \refparam{HTMLExporter}{exportRoute}{route}[route] als HTML-Beschreibung in die angegebene Datei.}
+        }
+
+  \class{GPXExporter}
+        {Stellt die Funktionalität zum Export einer \gls{route} im GPX-Format bereit.}
+        {\keine}
+        {
+          \method{exportRoute}
+                 {
+                   \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
+	        \param{route}{\refclass{Route}}{Die zu exportierende Route.}
+                 }
+                 {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route}[route] im GPX-Format in die angegebene Datei.}
+        }
+}
+
 
 \glsaddallunused
 \makeatletter
