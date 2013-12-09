@@ -693,17 +693,17 @@ Prof.~Dr.~Peter~Sanders}
         {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
         {\keine}
         {
-	\method{MapView}
-                {
-                  \param{s}{\refclass{TileSource}}{eine gerenderte Kachel}
-                }
-               {Ein Konstruktor, der ein Objekt der Klasse \refclass{MapView} erzeugt.}
-            \method{paint}
-                {
-                  \param{graphics}{Graphics}{ein Objekt vom}
-                }
-               {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
-         }
+          \method{MapView}
+                 {
+                   \param{s}{\refclass{TileSource}}{eine gerenderte Kachel}
+                 }
+                 {Ein Konstruktor, der ein Objekt der Klasse \refclass{MapView} erzeugt.}
+          \method{paint}
+                 {
+                   \param{graphics}{Graphics}{ein Objekt vom}
+                 }
+                 {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
+        }
 
    \class{MainView}
         {Zeigt das Hauptfenster auf dem Bildschirm an.}
@@ -732,16 +732,17 @@ Prof.~Dr.~Peter~Sanders}
 }
 \package{Precalculation}{
   \class{PreCalculationScheduler}
-  		        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
-  		        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
-  		        {\method{scheduleCalculation}
-  		        	{
-  		        	\param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
-  		        	}
-  		        	{Fügt die \refclass{ProfileMapCombination}[ProfileMapCombination] zur späteren Vorberechnung zur Queue hinzu.}
-  		        }
-  		        
-  	\class{PreCalculator}
+        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
+        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
+        {
+          \method{scheduleCalculation}
+                 {
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+                 }
+                 {Fügt die \refclass{ProfileMapCombination}[ProfileMapCombination] zur späteren Vorberechnung zur Queue hinzu.}
+        }
+                        
+  \class{PreCalculator}
         {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
         {\keine}
         {
@@ -749,7 +750,10 @@ Prof.~Dr.~Peter~Sanders}
                  {
                    \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
                  }
-                 {Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch. Dabei werden ein \refclass{EdgeWeighter}[EdgeWeighter] und ein \refclass{ArcFlagsCalculator}[ArcFlagsCalculator] aufgerufen.}
+                 {
+                   Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.
+                   Dabei werden ein \refclass{EdgeWeighter}[EdgeWeighter] und ein \refclass{ArcFlagsCalculator}[ArcFlagsCalculator] aufgerufen.
+                 }
         }
   \class{MapImporter}
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
@@ -786,41 +790,43 @@ Prof.~Dr.~Peter~Sanders}
                  {Gibt eine Liste mit allen Knoten, zu denen eine Kante von diesem Knoten existiert, zurück.}
         }
         
-        \class{EdgeWeighter}
+  \class{EdgeWeighter}
         {Versieht die Kanten eines Graphen mit Kantengewichten.}
         {\keine}
-        {\method{weightEdges}[float[]]
-        	{
-        	\param{graph}{Graph}{Der zu gewichtende Graph.}
-        	\param{profile}{Profile}{Das zu verwendende Profil.}
-        	}
-        	{Versieht die Kanten des gegebenen Graphen mit Kantengewichten basierend auf durch das Profil beeinflussten Beschränkungen.}
+        {
+          \method{weightEdges}[float[]]
+                 {
+                   \param{graph}{Graph}{Der zu gewichtende Graph.}
+                   \param{profile}{Profile}{Das zu verwendende Profil.}
+                 }
+                 {Versieht die Kanten des gegebenen Graphen mit Kantengewichten basierend auf durch das Profil beeinflussten Beschränkungen.}
         }
         
-        \class{ArcFlagsCalculator}
+  \class{ArcFlagsCalculator}
         {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
         {\keine}
-        {\method{calculateArcFlags}[ArcFlags]
-        	{
-        	\param{graph}{Graph}{Der Graph.}
-        	\param{partitions}{int[]}{Die Partitionen des Graphen.}
-        	\param{weights}{float[]}{Die Kantengewichte des Graphen.}
-        	}
-            {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
-		}
-		
-		  \class{GraphPartitioner}
-		        {Partitioniert einen gegebenen Graphen.}
-		        {\keine}
-		        {
-		          \method{partitionGraph}[int[]]
-		                 {
-		                   \param{graph}{Graph}{Der zu partitionierende Graph.}
-		                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
-		                 }
-		                 {Teilt den Graphen in die gewünschte Anzahl an Partitionen.}
-		        }
-
+        {
+          \method{calculateArcFlags}[ArcFlags]
+                 {
+                   \param{graph}{Graph}{Der Graph.}
+                   \param{partitions}{int[]}{Die Partitionen des Graphen.}
+                   \param{weights}{float[]}{Die Kantengewichte des Graphen.}
+                 }
+                 {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
+        }
+        
+  \class{GraphPartitioner}
+        {Partitioniert einen gegebenen Graphen.}
+        {\keine}
+        {
+          \method{partitionGraph}[int[]]
+                 {
+                   \param{graph}{Graph}{Der zu partitionierende Graph.}
+                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
+                 }
+                 {Teilt den Graphen in die gewünschte Anzahl an Partitionen.}
+        }
+        
   \class{ExternalPartitionerAdapter}
         {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
         {\keine}
@@ -835,77 +841,76 @@ Prof.~Dr.~Peter~Sanders}
 }
 
 \package{Controllers}{
-    \class{ProfileManager}
+  \class{ProfileManager}
         {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.}
         {\keine}
         {
-                \method{createProfile}
-                {\keine }
-                {Erstellt ein neues Profile-Objekt, nimmt es in die Liste auf und setzt es als aktuell ausgewähltes Profil.}
-         
-                 \method{saveProfile}
-                {\keine }
-                {Speichert das ausgewählte Profil in eine Datei.}
-
-                 \method{deleteProfile}
-                {\keine }
-                {Löscht das ausgewählte Profil aus der internen Liste und die Datei.}
-         }
+          \method{createProfile}
+                 {\keine }
+                 {Erstellt ein neues Profile-Objekt, nimmt es in die Liste auf und setzt es als aktuell ausgewähltes Profil.}
+                 
+          \method{saveProfile}
+                 {\keine }
+                 {Speichert das ausgewählte Profil in eine Datei.}
+                 
+          \method{deleteProfile}
+                 {\keine }
+                 {Löscht das ausgewählte Profil aus der internen Liste und die Datei.}
+        }
   \class{MapManager}
         {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.}
         {\keine}
         {
-                \method{importMap}
-                {\keine }
-                {Nach Angabe des korrekten Pfads wird \refmethod{MapImporter}{import}[import] aufgerufen.}
-         
-                 \method{deleteMap}
-                {\keine }
-                {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
-         }
- \class{Controller}
+          \method{importMap}
+                 {\keine}
+                 {Nach Angabe des korrekten Pfads wird \refmethod{MapImporter}{import}[import] aufgerufen.}
+                 
+          \method{deleteMap}
+                 {\keine}
+                 {Löscht die ausgewählten Karte aus der internen Liste. Löscht die OSM-Datei, den Graphen und alle vorhandenen Vorberechnungen der ausgewählten Karte.}
+        }
+  \class{Controller}
         {Steuert die Programmabläufe zur Routenberechnung.}
         {\keine}
         {
-                \method{Controller}
-                {\keine }
-                {Ein Konstruktor, der ein Objekt der Klasse \refclass{Controller} erzeugt.}
-         
-                 \method{onStartChanged}
-                {\keine }
-                {todo}
-
-                 \method{onDestinationChanged}
-                {\keine }
-                {todo}
-
-                \method{exportGPX}
-                {\keine }
-                {todo}
-
-                \method{exportHTML}
-                {\keine }
-                {\keine}
-
-                \method{selectProfile}
-                {
-	            \param{profile}{Profile}{Das aktuelle Profil.} 
-	      }
-                {Wählt das aktuelle Profil aus.}
-
-                \method{selectMap}
-                {
-	            \param{map}{\refclass{StreetMap}}{Die aktuelle Karte.} 
-	      }
-                {Wählt die aktuelle Karte aus.}
-
-                \method{schedulePrecalculate}
-                {
-                     \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
-                }
-                {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
-         }
-
+          \method{Controller}
+                 {\keine}
+                 {Ein Konstruktor, der ein Objekt der Klasse \refclass{Controller} erzeugt.}
+                 
+          \method{onStartChanged}
+                 {\keine}
+                 {todo}
+                 
+          \method{onDestinationChanged}
+                 {\keine}
+                 {todo}
+                 
+          \method{exportGPX}
+                 {\keine}
+                 {todo}
+                 
+          \method{exportHTML}
+                 {\keine}
+                 {\keine}
+                 
+          \method{selectProfile}
+                 {
+                   \param{profile}{Profile}{Das aktuelle Profil.} 
+                 }
+                 {Wählt das aktuelle Profil aus.}
+                 
+          \method{selectMap}
+                 {
+                   \param{map}{\refclass{StreetMap}}{Die aktuelle Karte.} 
+                 }
+                 {Wählt die aktuelle Karte aus.}
+                 
+          \method{schedulePrecalculate}
+                 {
+                   \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
+                 }
+                 {Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte exestiert.}
+        }
 }
 
 \glsaddallunused
