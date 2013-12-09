@@ -467,6 +467,13 @@ Prof.~Dr.~Peter~Sanders}
                  }
                  {Berechnet eine Koordinate der Mercator-Projektion.}
          }
+  \class{PointOnEdge}
+        {Beschreibt einen Punkt auf der Kante.}
+        {
+             \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
+             \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
+         }
+        {\keine}
 }
 
 \package{RouteCalculator}{
