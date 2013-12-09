@@ -1461,10 +1461,10 @@ exportRoute(route: Route, file: File)</panel_attributes>
       <w>210</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>ProfileManagementContoller
+    <panel_attributes>ProfileManagementController
 --
 --
-ProfileManagementContoller()
+ProfileManagementController()
 swapProfile(p: Profile)
 deleteProfile()
 estimateDeletionAmount(): int
