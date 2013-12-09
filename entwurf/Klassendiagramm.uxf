@@ -17,34 +17,38 @@
     <coordinates>
       <x>2020</x>
       <y>2950</y>
-      <w>130</w>
+      <w>150</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>MapView
 --
 --
+MapView(:TileSource)
 paint(:Graphics)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2800</x>
+      <x>2780</x>
       <y>3260</y>
-      <w>310</w>
-      <h>200</h>
+      <w>350</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>Controller
 --
+-start: Coordinates
+-destination: Coordinates
 --
 Controller()
-onStartChanged()
-onDestinationChanged()
+onStartChanged(:Coordinates)
+onDestinationChanged(:Coordinates)
+onStartAndDestChanged(:Coordinates, :Coordinates)
 exportGPX(target: File)
 exportHTML(target: File)
 selectProfile(:Profile)
 selectMap(:Map)
-
+getHistoryModel(): ListModel
 schedulePrecalculate(:ProfileMapCombination)
 </panel_attributes>
     <additional_attributes/>
@@ -86,24 +90,24 @@ getNeighbours(target: int): List&lt;Node&gt;
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3080</x>
+      <x>3100</x>
       <y>3360</y>
-      <w>140</w>
+      <w>120</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>30;30;120;30</additional_attributes>
+    <additional_attributes>30;30;100;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2730</x>
       <y>2890</y>
-      <w>90</w>
+      <w>70</w>
       <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;440;70;440</additional_attributes>
+    <additional_attributes>30;30;30;440;50;440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -780,7 +784,7 @@ r1=profile</panel_attributes>
 --
 saveProfile(p: Profile)
 deleteProfile(p: Profile)
-</panel_attributes>
+getProfiles(): Set&lt;Profile&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -855,7 +859,8 @@ getFlags(node: int): int
       <w>50</w>
       <h>160</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=-
+m2=0..1</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
   </element>
   <element>
@@ -1039,12 +1044,12 @@ r2=route</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2800</x>
-      <y>3430</y>
+      <y>3470</y>
       <w>50</w>
-      <h>750</h>
+      <h>710</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;730;30;30</additional_attributes>
+    <additional_attributes>30;690;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1199,7 +1204,7 @@ getJunctionRef(): String
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>2900</x>
-      <y>3500</y>
+      <y>3510</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -1208,7 +1213,7 @@ getJunctionRef(): String
 --
 saveMap(m: Map)
 deleteMap(m: Map)
-</panel_attributes>
+getMaps(): Set&lt;Map&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1320,7 +1325,7 @@ _+main(args: String[])_</panel_attributes>
     <coordinates>
       <x>2020</x>
       <y>2830</y>
-      <w>130</w>
+      <w>150</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>MainView
@@ -1390,7 +1395,7 @@ _+main(args: String[])_</panel_attributes>
     <coordinates>
       <x>1610</x>
       <y>2750</y>
-      <w>560</w>
+      <w>570</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>View</panel_attributes>
@@ -1451,13 +1456,15 @@ exportRoute(route: Route, file: File)</panel_attributes>
       <x>2430</x>
       <y>3090</y>
       <w>210</w>
-      <h>90</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>ProfileManagementContoller
 --
 --
+ProfileManagementContoller()
 swapProfile(p: Profile)
 deleteProfile()
+estimateDeletionAmount(): int
 saveAllChanges()
 </panel_attributes>
     <additional_attributes/>
@@ -1466,16 +1473,18 @@ saveAllChanges()
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>2430</x>
-      <y>3400</y>
+      <y>3370</y>
       <w>210</w>
-      <h>140</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>MapManagementController
 --
 --
+MapManagementController()
 switchMap(m: Map)
 addProfile(p: Profile)
-importMap(f: File)
+removeProfile(p: Profile)
+importMap(name: String, f: File)
 deleteCurrentMap()
 saveAllChanges()
 </panel_attributes>
@@ -1590,11 +1599,11 @@ execute()
     <coordinates>
       <x>2610</x>
       <y>3130</y>
-      <w>210</w>
+      <w>190</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;100;30;100;170;190;170</additional_attributes>
+    <additional_attributes>30;30;100;30;100;170;170;170</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1612,11 +1621,11 @@ execute()
     <coordinates>
       <x>2610</x>
       <y>3410</y>
-      <w>210</w>
+      <w>190</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;190;30</additional_attributes>
+    <additional_attributes>30;30;170;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1656,5 +1665,33 @@ m2=1
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;120;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1880</x>
+      <y>2990</y>
+      <w>570</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>30;30;30;150;550;150</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1770</x>
+      <y>2840</y>
+      <w>680</w>
+      <h>700</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>70;30;30;30;30;680;660;680</additional_attributes>
   </element>
 </diagram>
