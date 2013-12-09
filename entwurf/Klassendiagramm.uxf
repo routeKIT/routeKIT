@@ -525,6 +525,7 @@ m1=vehicleType</panel_attributes>
     <panel_attributes>StreetMap
 --
 name: String
+--
 </panel_attributes>
     <additional_attributes/>
   </element>
