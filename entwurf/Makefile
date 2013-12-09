@@ -3,11 +3,11 @@ RM = rm -f
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 UMLET = java -jar ../Umlet/umlet.jar
 
-all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf
+all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf
 
-.PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm
+.PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm clean-StartSequenz
 
-clean: clean-entwurf clean-Klassendiagramm
+clean: clean-entwurf clean-Klassendiagramm clean-StartSequenz
 
 entwurf.pdf: entwurf.tex $(ARTEFAKTE) $(PNGS)
 	$(MAKE) clean-$(@:.pdf=) # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
@@ -30,3 +30,11 @@ Klassendiagramm.pdf: Klassendiagramm.uxf
 
 clean-Klassendiagramm:
 	-$(RM) Klassendiagramm.pdf
+
+StartSequenz.pdf: StartSequenz.uxf
+	sed '4,14d' $^ > $^.tmp # strip lines 4-14 – the “Origin” element
+	$(UMLET) -action=convert -format=pdf -filename=$^.tmp -output=$(@:.pdf=)
+	-$(RM) $^.tmp
+
+clean-StartSequenz:
+	-$(RM) StartSequenz.pdf
