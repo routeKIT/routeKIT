@@ -1,0 +1,15 @@
+EdgeWeighter nimmt auch ProfileMapCombination?
+Arc-Flags: 64-bit? BitVector?
+GraphPreCalculation: zwei Proxy-Index-Methoden rausschmeißen
+PreCalculator: muss neues Object zurückgeben (neuer Typ GraphPreCalculation statt ProfileMapCombination)
+RouteDescription -> TurnInstruction: 0..r?
+Zum Routing Kantenzüge zusammenfassen?
+Wo genau läuft Asynchronität bei TileRendering?
+onXChanged vs setX? wenn’s nicht handler sind?
+estimatedCalculationTime auch im Controller (analog Command)
+    im MapManagementController fehlt’s ganz
+saveAllChanges macht auch Speichern-Hälfte von swap
+swap vs switch, delete vs remove
+RemoveProfileCommand, AddProfileCommand?
+onStartChanged: PointOnEdge?
+Rückgabetyp Konstruktor (Graph)

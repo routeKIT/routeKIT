@@ -3,11 +3,18 @@ Partitionen speichern, in den Graph
 ArcFlags.flags(edges: int)
 
 EdgeBasedGraph
+    man ist immer am Ende einer Kante
+    Abbiegebeschränkungen in den Kosten
 
 weights als int
 
 Graph.getOutgoingEdges();
+getAdjacentEdges? getIncomingEdges?
 GraphPreCalculation keinProxy()
+GraphPreCalculation name?
+
+getLat/-Lon in gleicher Datenstruktur für Routenberechnung?
+    Graph (Routing), Index (malen), Physik (Koordinaten, Namen) trennen
 
 GenerateDescription.getGraph()
 Route-> Graph
@@ -18,11 +25,29 @@ Dijkstra -> ArcFlagsDijkstra
 
 RouteModel -> Start and Dest
 
+GraphPreCalculation.calculateRoute rausschmeißen, direkt RouteCalculator verwenden
+
 ManagementController Names anstatt commands
 
 Gewichte speichern???
 
 SequenzProfile MapCombination init
 
-Doc einleitung. Bilder Sequenzd
+Vorberechnung bestimmt, in welche Richtung Abbiegung geht
 
+Dokument:
+* Einleitung
+* was ist in diesem Dokument
+* Architektur grob erklären
+* Sequenzdiagramme
+* Attributnamen in \texttt
+* Wenn nötig: Änderungen gegenüber Pflichtenheft
+
+RouteKit in StartSequenz aus PDF verschwunden?
+
+MainView sofort zeigen? Splashscreen?
+
+für Vorberechnung: Arcflags-Dijkstra zu normalem Dijkstra durch triviale FFFF-ArcFlags
+Bidirektionale Suche?
+
+Node, Edge, Coordinates als typedef in Ordnung
