@@ -43,7 +43,7 @@
 % 3. Attribute (ein oder mehrere \attr, oder \keine)
 % 4. Methoden (ein oder mehrere \method, oder \keine)
 \newcommand{\class}[4]{
-  \item[\namedlabel{K:#1}{#1}] #2
+  \item[\namedlabel{K:#1}{\code{#1}}] #2
     \begin{description}
     \newcommand{\currentclass}[0]{#1}
     \item[Attribute] \hfill % \hfill forces the following description into the next line
@@ -61,7 +61,7 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\attr}[3]{
-  \item[\namedlabel{A:\currentclass.#1}{#1}] #3 Typ:~\texttt{#2}
+  \item[\namedlabel{A:\currentclass.#1}{#1}] #3 Typ:~\code{#2}
 }
 % Argumente:
 % 1. Name
@@ -69,14 +69,14 @@
 % 3. Parameter (ein oder mehrere \param, oder \keine)
 % 4. Beschreibung
 \NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
-  \item[\namedlabel{M:\currentclass.#1}{#1}] #4\\
+  \item[\namedlabel{M:\currentclass.#1}{\code{#1}}] #4\\
     Parameter:
     \begin{description}
       \newcommand{\currentmethod}[0]{#1}
       #3
     \end{description}
     \IfValueTF{#2} % if the optional “type” argument is given...
-              {Rückgabetyp: \texttt{#2}} % then show the return type...
+              {Rückgabetyp: \code{#2}} % then show the return type...
               {} % else don’t.
 }
 % Argumente:
@@ -84,28 +84,28 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\param}[3]{
-  \item[\namedlabel{P:\currentclass.\currentmethod.#1}{#1}] #3 Typ:~\texttt{#2}
+  \item[\namedlabel{P:\currentclass.\currentmethod.#1}{\code{#1}}] #3 Typ:~\code{#2}
 }
 
 % Argumente:
 % 1. Klasse
 % 2. (optional) Text – default: Klasse
 \NewDocumentCommand{\refclass}{mO{#1}}{
-  \hyperref[K:#1]{\texttt{#2}}
+  \hyperref[K:#1]{\code{#2}}
 }
 % Argumente:
 % 1. Klasse
 % 2. Attribut
 % 3. (optional) Text – default: Klasse.Attribut
 \NewDocumentCommand{\refattr}{mmO{#1.#2}}{
-  \hyperref[A:#1.#2]{\texttt{#3}}
+  \hyperref[A:#1.#2]{\code{#3}}
 }
 % Argumennte:
 % 1. Klasse
 % 2. Methode
 % 3. (optional) Text – default: Klasse.Methode
 \NewDocumentCommand{\refmethod}{mmO{#1.#2}}{
-  \hyperref[M:#1.#2]{\texttt{#3}}
+  \hyperref[M:#1.#2]{\code{#3}}
 }
 % Argumente:
 % 1. Klasse
@@ -113,7 +113,7 @@
 % 3. Parameter
 % 4. (optional) Text – default: Klasse.Methode.Parameter
 \NewDocumentCommand{\refparam}{mmmO{#1.#2.#3}}{
-  \hyperref[P:#1.#2.#3]{\texttt{#4}}
+  \hyperref[P:#1.#2.#3]{\code{#4}}
 }
 
 \newcommand{\code}[1]{\texttt{#1}}
