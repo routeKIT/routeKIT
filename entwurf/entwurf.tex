@@ -203,6 +203,11 @@
   description={enthält für die Routenplanung relevante Informationen, z.\,B. die Höhe und das Gewicht des Fahrzeugs},
   plural={Profile}
 }
+\newglossaryentry{karte}{
+  name={Karte},
+  description={enthält die Daten aus \gls{osm} sowie einen Namen.},
+  plural={Karten}
+}
 \newglossaryentry{osmkachel}{
   name={OSM-Kachel},
   description={die öffentlichen gerenderten \gls{osm}-Kacheln z.\,B. auf \mbox{\url{http://a.tile.openstreetmap.org/}}},
@@ -212,6 +217,12 @@
   name={Route},
   description={ein Weg von einem Start- zu einem Zielpunkt},
   plural={Routen}
+}
+\newglossaryentry{vorberechnung}{
+  name={Vorberechnung},
+  description={verbindet die \gls{karte} mit den auf einem \gls{profil} basierenden Informationen und ermöglicht, unter anderem mittels \gls{arc}, später eine Beschleunigung der Berechnung einer \gls{route}; muss für jede neue \gls{karte}/\gls{profil}-Kombination einmal ausgeführt werden},
+  plural={Vorberechnungen},
+  see={arc}
 }
 \newglossaryentry{rendern}{
   name={rendern},
@@ -273,7 +284,22 @@ Prof.~Dr.~Peter~Sanders}
 \tableofcontents
 \newpage
 
-\section{Klassen}
+
+\section{Einleitung}
+
+Dieses Dokument dokumentiert den Entwurf der Anwendung \routeKIT. % TODO „dieses Dokument dokumentiert“
+Es beschreibt ausführlich die verwendeten Pakete, Klassen und Methoden und ihre Beziehungen untereinander (wobei die Beziehungen im Klassendiagramm deutlicher ersichtlich sind).
+
+\routeKIT ist eine Anwendung zur Routenplanung; durch Verwendung von \glslink{profil}{Profilen} kann sie dem Benutzer die optimalen Routen für sein spezielles Fahrzeug angeben.
+Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} eine zeitaufwändige \gls{vorberechnung} durchgeführt.
+
+
+\section{Übersicht}
+
+% TODO
+
+
+\section{Pakete und Klassen}
 
 \package{Profiles}{
   \class{Profile}
