@@ -1,0 +1,28 @@
+Partitionen speichern, in den Graph
+
+ArcFlags.flags(edges: int)
+
+EdgeBasedGraph
+
+weights als int
+
+Graph.getOutgoingEdges();
+GraphPreCalculation keinProxy()
+
+GenerateDescription.getGraph()
+Route-> Graph
+
+RouteDescriptionBuilder-Klasse
+
+Dijkstra -> ArcFlagsDijkstra
+
+RouteModel -> Start and Dest
+
+ManagementController Names anstatt commands
+
+Gewichte speichern???
+
+SequenzProfile MapCombination init
+
+Doc einleitung. Bilder Sequenzd
+
