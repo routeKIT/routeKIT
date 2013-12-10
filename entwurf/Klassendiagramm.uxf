@@ -613,8 +613,8 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
     <coordinates>
       <x>2890</x>
       <y>1910</y>
-      <w>40</w>
-      <h>130</h>
+      <w>50</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;120</additional_attributes>
@@ -644,7 +644,7 @@ getNodes(): int[]
       <w>210</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>Dijkstra
+    <panel_attributes>ArcFlagsDijkstra
 --
 
 --
@@ -656,8 +656,8 @@ getNodes(): int[]
     <coordinates>
       <x>2840</x>
       <y>1620</y>
-      <w>410</w>
-      <h>1250</h>
+      <w>420</w>
+      <h>1260</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>400;30;400;1240;30;1240</additional_attributes>
@@ -667,8 +667,8 @@ getNodes(): int[]
     <coordinates>
       <x>3030</x>
       <y>1620</y>
-      <w>40</w>
-      <h>150</h>
+      <w>50</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;140</additional_attributes>
@@ -678,8 +678,8 @@ getNodes(): int[]
     <coordinates>
       <x>2690</x>
       <y>1630</y>
-      <w>40</w>
-      <h>140</h>
+      <w>50</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;</panel_attributes>
     <additional_attributes>30;130;30;30</additional_attributes>
@@ -1036,8 +1036,8 @@ m1=0..n</panel_attributes>
     <coordinates>
       <x>3230</x>
       <y>1560</y>
-      <w>390</w>
-      <h>40</h>
+      <w>400</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 r1=description

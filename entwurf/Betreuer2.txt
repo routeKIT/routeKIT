@@ -21,7 +21,7 @@ Route-> Graph
 
 RouteDescriptionBuilder-Klasse
 
-Dijkstra -> ArcFlagsDijkstra
+Dijkstra -> ArcFlagsDijkstra (gemacht)
 
 RouteModel -> Start and Dest
 
