@@ -19,7 +19,7 @@ getLat/-Lon in gleicher Datenstruktur für Routenberechnung?
 GenerateDescription.getGraph()
 Route-> Graph
 
-RouteDescriptionBuilder-Klasse
+RouteDescriptionBuilder-Klasse (gemacht)
 
 Dijkstra -> ArcFlagsDijkstra (gemacht)
 
