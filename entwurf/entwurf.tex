@@ -9,6 +9,7 @@
 \usepackage[toc, numberedsection]{glossaries}
 \usepackage{float}
 \usepackage{xparse} % powerful commands
+\usepackage{xspace} % \xspace for use in commands: put a space only if no punctuation follows
 
 \makeglossary
 
@@ -188,7 +189,7 @@
 \renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
-\newcommand{\routeKIT}[0]{\textit{routeKIT} }
+\newcommand{\routeKIT}[0]{\textit{routeKIT}\xspace}
 
 
 % alle Glossareinträge
@@ -741,7 +742,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {\keine}
 
   \class{AboutView}
-        {Zeigt das Fenster mit den Informationen über routeKIT auf dem Bildschirm an.}
+        {Zeigt das Fenster mit den Informationen über \routeKIT auf dem Bildschirm an.}
         {\keine}
         {\keine}
 }
