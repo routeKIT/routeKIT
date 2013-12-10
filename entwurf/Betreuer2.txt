@@ -43,8 +43,6 @@ Dokument:
 * Attributnamen in \texttt
 * Wenn nötig: Änderungen gegenüber Pflichtenheft
 
-RouteKit in StartSequenz aus PDF verschwunden?
-
 MainView sofort zeigen? Splashscreen?
 
 für Vorberechnung: Arcflags-Dijkstra zu normalem Dijkstra durch triviale FFFF-ArcFlags

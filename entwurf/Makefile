@@ -32,9 +32,7 @@ clean-Klassendiagramm:
 	-$(RM) Klassendiagramm.pdf
 
 StartSequenz.pdf: StartSequenz.uxf
-	sed '4,14d' $^ > $^.tmp # strip lines 4-14 – the “Origin” element
-	$(UMLET) -action=convert -format=pdf -filename=$^.tmp -output=$(@:.pdf=)
-	-$(RM) $^.tmp
+	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
 
 clean-StartSequenz:
 	-$(RM) StartSequenz.pdf
