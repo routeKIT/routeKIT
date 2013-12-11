@@ -299,8 +299,8 @@ partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
     <coordinates>
       <x>3980</x>
       <y>5210</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;70</additional_attributes>
@@ -310,8 +310,8 @@ partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
     <coordinates>
       <x>3980</x>
       <y>5320</y>
-      <w>40</w>
-      <h>60</h>
+      <w>50</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;50;30;30</additional_attributes>
@@ -333,8 +333,8 @@ program</panel_attributes>
     <coordinates>
       <x>4180</x>
       <y>5270</y>
-      <w>120</w>
-      <h>40</h>
+      <w>130</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;110;30</additional_attributes>
@@ -397,8 +397,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4030</x>
       <y>4960</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -797,10 +797,10 @@ parseOSM(f: File): Graph
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4500</x>
+      <x>4480</x>
       <y>3540</y>
-      <w>650</w>
-      <h>160</h>
+      <w>670</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>Graph
 --
@@ -972,8 +972,8 @@ date: Date
     <coordinates>
       <x>2990</x>
       <y>4160</y>
-      <w>90</w>
-      <h>40</h>
+      <w>100</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -1124,8 +1124,8 @@ import(:File): Graph</panel_attributes>
     <coordinates>
       <x>4030</x>
       <y>5070</y>
-      <w>40</w>
-      <h>110</h>
+      <w>50</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -1136,7 +1136,7 @@ import(:File): Graph</panel_attributes>
     <coordinates>
       <x>5220</x>
       <y>3580</y>
-      <w>360</w>
+      <w>390</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
@@ -1565,9 +1565,9 @@ exportRoute(route: Route, file: File)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4300</x>
+      <x>4270</x>
       <y>3420</y>
-      <w>410</w>
+      <w>440</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>GraphIndex
@@ -1584,12 +1584,12 @@ projectToEdge(lon: float, lat: float): PointOnEdge
     <coordinates>
       <x>4300</x>
       <y>3480</y>
-      <w>220</w>
+      <w>200</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 index</panel_attributes>
-    <additional_attributes>50;30;50;160;200;160</additional_attributes>
+    <additional_attributes>50;30;50;160;180;160</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
