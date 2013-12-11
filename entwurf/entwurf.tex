@@ -618,20 +618,33 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getNodes}[Node[]]
                  {\keine}
                  {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
-          \method{getRouteDescription}[\refclass{RouteDescription}]
-                 {\keine}
-                 {Gibt die zur Route gehörende \gls{wegbeschreibung} zurück.}
         }
   \class{RouteDescription}
         {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
         {\keine} % ?
         {
-          \keine % TODO
+          \method{getInstructions}[List<\refclass{TurnInstruction}>]
+                 {\keine}
+                 {Liefert eine Liste der Abbiegeanweisungen.}
+        }
+  \class{RouteDescriptionGenerator}
+        {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
+        {\keine}
+        {
+          \method{generateRouteDescription}[\refclass{RouteDescription}]
+                 {
+                   \param{route}{\getclass{Route}}{Die Route, deren Beschreibung erzeugt werden soll.}
+                 }
+                 {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
         }
   \class{TurnInstruction}
-        {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \gls{wegbeschreibung} aufgebaut ist.}
+        {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \refclass{RouteDescription} aufgebaut ist.}
         {\keine} % ?
-        {\keine} % TODO
+        {
+          \method{toString}[String]
+                 {\keine}
+                 {Gibt den Text der Abbiegeanweisung zurück.}
+        }
   \class{ArcFlags}
         {Enthält die Arc-Flags für den vorberechneten Graphen.}
         {\keine} % ?
@@ -645,7 +658,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
    \class{ArcFlagsDijkstra}
        {Führt die Berechnung der schnellsten Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil durch unter der Beachtung von Arc-Flags.}
        {\keine}
-       {\keine} 
+       {\keine}
 }
 
 \package{History}{
@@ -1196,28 +1209,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   Dieses Paket enthält alle Klassen, die zum Exportieren der Route oder ihrer Beschreibung benötigt werden.
 }
 {
-  \class{Exporter}
-         {Stellt ein Interface zum Exportieren einer Route dar.}
-         {\keine}
-         {
-           \method{exportRoute}
-                  {
-                    \param{route}{\refclass{Route}}{Eine zu exportierende Route zwischen angegebenen Start- und Zielpunkt.}
-                    \param{file}{File}{Die Datei, die geschrieben werden soll.}
-                  }
-                  {Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route} in die angegebene Datei.}
-         }
-
   \class{HTMLExporter}
-        {Stellt die Funktionalität zum Export einer \gls{route} im HTML-Format bereit.}
+        {Stellt die Funktionalität zum Export der \gls{wegbeschreibung} einer \gls{route} im HTML-Format bereit.}
         {\keine}
         {
-          \method{exportRoute}
+          \method{exportRouteDescription}
                  {
-                   \param{route}{\refclass{Route}}{Die zu exportierende Route.}
+                   \param{routeDesc}{\refclass{RouteDescription}}{Die zu exportierende Wegbeschreibung.}
                    \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                  }
-                 {Exportiert die berechnete \refparam{HTMLExporter}{exportRoute}{route} als HTML-Beschreibung in die angegebene Datei.}
+                 {Exportiert die \refparam{HTMLExporter}{exportRouteDescription}{routeDesc} im HTML-Format in die angegebene Datei.}
         }
 
   \class{GPXExporter}
