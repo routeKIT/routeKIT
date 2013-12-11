@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>570</w>
+      <h>830</h>
+    </coordinates>
+    <panel_attributes>title:Rendering
+_mapView:MapView~view_|_cache:TileCache~cache_|_source:TileSource~source_
+view-&gt;&gt;cache:view,cache:getTile(x,y,zoom)
+iframe{:checkCache
+cache-&gt;cache:view,cache:hasTile(x,y,zoom)
+iframe{:then
+cache-&gt;cache:view,cache:cachedTile(x,y,zoom)
+cache-&gt;&gt;&gt;view:view,cache:tile
+view-&gt;view:view:drawImage(tile)
+iframe}
+iframe{:else
+cache-&gt;cache:view,cache:enqueueTile(x,y,zoom)
+cache./&gt;source:view,cache,source:async getTile(x,y,zoom)
+cache-&gt;&gt;&gt;view:view,cache,source:dummy
+view-&gt;view:view,source:drawImage(dummy)
+source-&gt;&gt;&gt;cache:cache,source:tile
+cache-&gt;view:view,cache:tileFinished(x,y,zoom)
+view-&gt;view:view:repaint()
+view.&gt;view:async paint()
+view-&gt;&gt;cache:view,cache:getTile(x,y,zoom)
+cache-&gt;cache:view,cache:hasTile(x,y,zoom)
+cache-&gt;cache:view,cache:cachedTile(x,y,zoom)
+cache-&gt;&gt;&gt;view:cache,view:tile
+view-&gt;view:view:drawImage(tile)
+iframe}
+iframe}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
