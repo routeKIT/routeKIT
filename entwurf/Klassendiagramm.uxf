@@ -37,8 +37,6 @@ paint(:Graphics)</panel_attributes>
     </coordinates>
     <panel_attributes>Controller
 --
--start: Coordinates
--destination: Coordinates
 --
 Controller()
 onStartChanged(:Coordinates)
@@ -61,11 +59,13 @@ getTileSource(): TileSource
       <x>2700</x>
       <y>2800</y>
       <w>170</w>
-      <h>120</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>RouteModel
 --
 -currentRoute: Route
+-start: Coordinates
+-destination: Coordinates
 --
 +addRouteListener()
 +getRoute(): Route
@@ -87,12 +87,12 @@ getTileSource(): TileSource
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2730</x>
-      <y>2890</y>
+      <y>2910</y>
       <w>70</w>
-      <h>460</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;440;50;440</additional_attributes>
+    <additional_attributes>30;30;30;420;50;420</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
