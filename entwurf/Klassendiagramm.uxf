@@ -589,7 +589,7 @@ speedRoad = 80</panel_attributes>
 RouteCalculator
 --
 --
-calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalculation): Route</panel_attributes>
+calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCombination): Route</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1573,7 +1573,7 @@ exportRoute(route: Route, file: File)</panel_attributes>
     <panel_attributes>GraphIndex
 --
 --
-GraphIndex( :Graph)
+GraphIndex(:Graph)
 getEdgesIn(leftTop: Coordinates, rightBottom: Coordinates): Edge[]
 projectToEdge(lon: float, lat: float): PointOnEdge
 </panel_attributes>
@@ -1631,7 +1631,7 @@ m1=0..n</panel_attributes>
 --
 
 --
-generateRouteDescription(route: Route, data: GraphPreCalculation)</panel_attributes>
+generateRouteDescription(route: Route, data: ProfileMapCombination)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
