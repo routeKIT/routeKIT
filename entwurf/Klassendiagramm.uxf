@@ -277,7 +277,7 @@ _load(:File): History_</panel_attributes>
 GraphPartitioner
 --
 --
-&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions: int): int[]</panel_attributes>
+&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -291,7 +291,7 @@ GraphPartitioner
     <panel_attributes>ExternalPartitionerAdapter
 --
 --
-partitionGraph(:Graph, numberOfPartitions: int): int[]</panel_attributes>
+partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -361,7 +361,7 @@ program</panel_attributes>
     <panel_attributes>EdgeWeighter
 --
 --
-weightEdges(:Graph, :Profile): float[]</panel_attributes>
+weightEdges(:Graph, :Profile): Weight[]</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -375,7 +375,7 @@ weightEdges(:Graph, :Profile): float[]</panel_attributes>
     <panel_attributes>ArcFlagsCalculator
 --
 --
-calculateArcFlags(:Graph, :int[], :float[]): ArcFlags</panel_attributes>
+calculateArcFlags(:Graph, :Partition[], :Weight[]): ArcFlags</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -617,7 +617,7 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
 --
 setRouteDescription(:RouteDescription)
 getRouteDescription(): RouteDescription
-getNodes(): int[]
+getNodes(): Node[]
 // Berechnung der Gesamtlänge der Route?
 </panel_attributes>
     <additional_attributes/>
@@ -805,13 +805,14 @@ parseOSM(f: File): Graph
     <panel_attributes>Graph
 --
 --
-Graph(nodes: int[], edges: int[], :Map&lt;int, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
-getEdges(node: int): Set&lt;int&gt;
-getTargetNode(edge: int): int
-getLat(node: int): float
-getLon(node: int): float
-getNodeProperties(node: int): NodeProperties
-getEdgeProperties(edge: int): EdgeProperties
+Graph(nodes: Node[], edges: Edge[], :Map&lt;int, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
+getOutgoingEdges(node: Node): Set&lt;Edge&gt;
+getIncomingEdges(node: Node): Set&lt;Edge&gt;
+getTargetNode(edge: Edge): Node
+getLat(node: Node): float
+getLon(node: Node): float
+getNodeProperties(node: Node): NodeProperties
+getEdgeProperties(edge: Edge): EdgeProperties
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -826,7 +827,7 @@ getEdgeProperties(edge: int): EdgeProperties
     <panel_attributes>ArcFlags
 --
 --
-getFlags(node: int): int
+getFlags(node: Node): int
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1142,7 +1143,7 @@ import(:File): Graph</panel_attributes>
 NodeProperties
 --
 --
-allowsTurn(fromEdge: int, toEdge: int, :Profile): boolean
+allowsTurn(fromEdge: Edge, toEdge: Edge, :Profile): boolean
 isMiniRoundabout(): boolean
 isHighwayJunction(): boolean
 getJunctionName(): String
@@ -1573,7 +1574,7 @@ exportRoute(route: Route, file: File)</panel_attributes>
 --
 --
 GraphIndex( :Graph)
-getEdgesIn(leftTop: Coordinates, rightBottom: Coordinates): int[]
+getEdgesIn(leftTop: Coordinates, rightBottom: Coordinates): Edge[]
 projectToEdge(lon: float, lat: float): PointOnEdge
 </panel_attributes>
     <additional_attributes/>
