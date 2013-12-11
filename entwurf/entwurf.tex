@@ -458,6 +458,24 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{map}{\refclass{StreetMap}}{Die Karte.}
         }
         {\keine}
+  \class{RouteModel}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \refclass{RouteListener}}
+        {\keine}
+        {
+          \method{addRouteListener}
+                 {
+                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
+                 }
+                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
+        }
+  \class{RouteModelListener}
+        {Wird bei Änderungen am \refclass{RouteModel} informiert.}
+        {\keine}
+        {
+          \method{routeModelChanged}
+                 {\keine}
+                 {Wird bei jeder Änderung aufgerufen}
+        }
 
    \class{Util}
         {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}

@@ -59,7 +59,7 @@ getTileSource(): TileSource
       <x>2700</x>
       <y>2800</y>
       <w>170</w>
-      <h>140</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>RouteModel
 --
@@ -67,9 +67,8 @@ getTileSource(): TileSource
 -start: Coordinates
 -destination: Coordinates
 --
-+addRouteListener()
-+getRoute(): Route
-+setRoute(route: Route)</panel_attributes>
++addRouteListener(:RouteModelListener)
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -87,12 +86,12 @@ getTileSource(): TileSource
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2730</x>
-      <y>2910</y>
+      <y>2870</y>
       <w>70</w>
-      <h>440</h>
+      <h>480</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;420;50;420</additional_attributes>
+    <additional_attributes>30;30;30;460;50;460</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -920,10 +919,11 @@ tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
       <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
-RouteFinishedListener
+RouteModelListener
 --
 --
-routeFinished(:Route)</panel_attributes>
+routeModelChanged()
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
