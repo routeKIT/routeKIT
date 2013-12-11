@@ -15,10 +15,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2020</x>
-      <y>2950</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1910</x>
+      <y>2920</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>MapView
 --
@@ -97,13 +97,13 @@ getTileSource(): TileSource
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1980</x>
-      <y>2990</y>
-      <w>130</w>
-      <h>2140</h>
+      <y>3030</y>
+      <w>128</w>
+      <h>2100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>70;2120;70;30</additional_attributes>
+    <additional_attributes>70;2080;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -910,13 +910,13 @@ routeModelChanged()
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2030</x>
-      <y>2990</y>
+      <y>3030</y>
       <w>130</w>
-      <h>450</h>
+      <h>410</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>70;430;70;30</additional_attributes>
+    <additional_attributes>70;390;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1254,10 +1254,10 @@ _+main(args: String[])_</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2020</x>
-      <y>2830</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1910</x>
+      <y>2770</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>MainView
 --
@@ -1268,10 +1268,10 @@ _+main(args: String[])_</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1640</x>
-      <y>2950</y>
-      <w>130</w>
-      <h>70</h>
+      <x>1330</x>
+      <y>2920</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>HistoryView
 --
@@ -1282,10 +1282,10 @@ _+main(args: String[])_</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1840</x>
-      <y>2950</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1620</x>
+      <y>2920</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>ProfileManagerView
 --
@@ -1298,10 +1298,10 @@ setAvailableProfiles(:List&lt;Profile&gt;)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1840</x>
-      <y>2830</y>
-      <w>150</w>
-      <h>70</h>
+      <x>1620</x>
+      <y>2770</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>MapManagerView
 --
@@ -1312,10 +1312,10 @@ setAvailableProfiles(:List&lt;Profile&gt;)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1640</x>
-      <y>2830</y>
-      <w>130</w>
-      <h>70</h>
+      <x>1330</x>
+      <y>2770</y>
+      <w>260</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>AboutView
 --
@@ -1326,10 +1326,10 @@ setAvailableProfiles(:List&lt;Profile&gt;)
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1610</x>
-      <y>2750</y>
-      <w>570</w>
-      <h>320</h>
+      <x>1320</x>
+      <y>2740</y>
+      <w>860</w>
+      <h>330</h>
     </coordinates>
     <panel_attributes>View</panel_attributes>
     <additional_attributes/>
@@ -1470,30 +1470,30 @@ saveAllChanges()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1880</x>
-      <y>2990</y>
-      <w>570</w>
-      <h>170</h>
+      <x>1660</x>
+      <y>3030</y>
+      <w>790</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 </panel_attributes>
-    <additional_attributes>30;30;30;150;550;150</additional_attributes>
+    <additional_attributes>30;30;30;110;770;110</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1770</x>
-      <y>2840</y>
-      <w>680</w>
-      <h>700</h>
+      <x>1860</x>
+      <y>2780</y>
+      <w>590</w>
+      <h>760</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 </panel_attributes>
-    <additional_attributes>70;30;30;30;30;680;660;680</additional_attributes>
+    <additional_attributes>50;30;30;30;30;740;570;740</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
