@@ -361,7 +361,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   \class{Graph}
         {
           Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
-          Siehe auch \refclass{GraphPreCalculation}.
         }
         {\keine}
         {
@@ -452,7 +451,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \package{TODO}{ % TODO: holds classes that still need a package
   \class{ProfileMapCombination}
-        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte]. Siehe auch \refclass{GraphPreCalculation}.}
+        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
         {
           \attr{profile}{\refclass{Profile}}{Das \gls{profil}.}
           \attr{map}{\refclass{StreetMap}}{Die Karte.}
@@ -526,32 +525,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{RouteCalculator}{
-  \class{GraphPreCalculation}
-        {Kapselt ein Profil, eine Karte, und die Ergebnisse einer Vorberechnung für diese Profil-Karte-Kombination.}
-        {\keine}
-        {
-          \method{calculateRoute}
-                 {
-                   \param{start}{\refclass{PointOnEdge}}{Der Startpunkt für die Routenberechnung.}
-                   \param{destination}{\refclass{PointOnEdge}}{Der Zielpunkt für die Routenberechnung.}
-                   \param{routeModel}{\refclass{RouteModel}}{Zur Verwaltung der aktuellen Route.}
-                 }
-                 {Ruft die Routenberechnung auf und speichert die erhaltene Route im gegebenen \refclass{RouteModel}.}
-           \method{getEdgesIn}[Set<\refclass{Edge}>]
-                  {
-                    \param{fromX}{int}{Bereich beginnt bei der gegebenen X-Koordinate.}
-                    \param{fromY}{int}{Bereich beginnt bei der gegebenen Y-Koordinate.}
-                    \param{toX}{int}{Bereich endet bei der gegebenen X-Koordinate.}
-                    \param{toY}{int}{Bereich endet bei der gegebenen Y-Koordinate.}
-                    \param{zoomlevel}{int}{Die Zoom-Stufe.}
-                  }
-                  {Gibt alle Kanten im angegebenen Bereich abhängig von der Zoom-Stufe zurück.}
-          \method{getNeighbours}[List<\refclass{Node}>]
-                 {
-                   \param{target}{int}{Die Nummer eines Knotens.}
-                 }
-                 {Gibt alle Nachbar-Knoten für einen gewählten Knoten zurück.}
-        }
   \class{RouteCalculator}
         {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
         {\keine}
@@ -560,7 +533,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{start}{\refclass{PointOnEdge}}{Der Startpunkt für die Routenberechnung.}
                    \param{destination}{\refclass{PointOnEdge}}{Der Zielpunkt für die Routenberechnung.}
-                   \param{data}{\refclass{GraphPreCalculation}}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
+                   \param{data}{\refclass{ProfileMapCombination}}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
                  }
                  {Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
         }
