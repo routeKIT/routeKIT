@@ -127,7 +127,7 @@ TileSource
       <x>1970</x>
       <y>5520</y>
       <w>300</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>TileCache
 --
@@ -135,7 +135,9 @@ cache
 --
 TileCache(target: TileSource)
 getTile(x: int, y: int, zoom: int): BufferedImage
-deleteTiles(zoom: int)</panel_attributes>
+deleteTiles(zoom: int)
+addTileFinishedListener(:TileFinishedListener)
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -143,8 +145,8 @@ deleteTiles(zoom: int)</panel_attributes>
     <coordinates>
       <x>2150</x>
       <y>5300</y>
-      <w>150</w>
-      <h>230</h>
+      <w>160</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>140;30;30;220</additional_attributes>
@@ -152,14 +154,14 @@ deleteTiles(zoom: int)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2070</x>
-      <y>5230</y>
-      <w>140</w>
-      <h>300</h>
+      <x>2060</x>
+      <y>5220</y>
+      <w>160</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 tileSource</panel_attributes>
-    <additional_attributes>130;40;50;40;50;290</additional_attributes>
+    <additional_attributes>140;50;60;50;60;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -195,8 +197,8 @@ getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <coordinates>
       <x>2450</x>
       <y>5300</y>
-      <w>230</w>
-      <h>230</h>
+      <w>240</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;220;220</additional_attributes>
@@ -206,8 +208,8 @@ getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <coordinates>
       <x>2360</x>
       <y>5300</y>
-      <w>40</w>
-      <h>230</h>
+      <w>50</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;220</additional_attributes>
@@ -881,33 +883,17 @@ m1=    1
     <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>2260</x>
-      <y>5110</y>
-      <w>390</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>TileDequeue
---
---
-requestTile(x: int, y: int, zoom: int): Future&lt;BufferedImage&gt;
-addTileFinishedListener(:TileFinishedListener)
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1920</x>
-      <y>5170</y>
-      <w>510</w>
-      <h>410</h>
+      <y>5160</y>
+      <w>70</w>
+      <h>430</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=  1
+    <panel_attributes>lt=-&gt;
+m2=0..n
 </panel_attributes>
-    <additional_attributes>50;400;30;400;30;70;500;70;500;30</additional_attributes>
+    <additional_attributes>50;410;30;410;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -923,19 +909,6 @@ TileFinishedListener
 --
 tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>2130</x>
-      <y>5110</y>
-      <w>140</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=0..n
-</panel_attributes>
-    <additional_attributes>30;30;130;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
