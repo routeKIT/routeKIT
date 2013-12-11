@@ -58,23 +58,6 @@ getTileSource(): TileSource
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2570</x>
-      <y>2030</y>
-      <w>570</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>GraphPreCalculation
---
---
-calculateRoute(start: PointOnEdge, destination: PointOnEdge, routeModel: RouteModel)
-getEdgesIn(fromX: int, fromY: int, toX: int, toY: int, zoomlevel: int): Set&lt;Edge&gt;
-getNeighbours(target: int): List&lt;Node&gt;
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
       <x>2700</x>
       <y>2800</y>
       <w>170</w>
@@ -611,13 +594,13 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: GraphPreCalcu
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2890</x>
-      <y>1910</y>
-      <w>50</w>
-      <h>140</h>
+      <x>3100</x>
+      <y>1880</y>
+      <w>210</w>
+      <h>1460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;120</additional_attributes>
+    <additional_attributes>110;30;190;30;190;1440;30;1440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -766,17 +749,6 @@ r1=profile</panel_attributes>
     <additional_attributes>30;460;70;460;70;30;1420;30</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>3110</x>
-      <y>2050</y>
-      <w>240</w>
-      <h>1320</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>220;1300;220;30;30;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>2890</x>
@@ -844,8 +816,8 @@ getEdgeProperties(edge: int): EdgeProperties
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2930</x>
-      <y>2200</y>
+      <x>3180</x>
+      <y>3470</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -871,13 +843,14 @@ m2=0..1</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2950</x>
-      <y>2090</y>
+      <x>3200</x>
+      <y>3390</y>
       <w>50</w>
-      <h>130</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;110</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=0...1</panel_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1257,7 +1230,7 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2260</x>
+      <x>2250</x>
       <y>1360</y>
       <w>2290</w>
       <h>1000</h>
