@@ -1118,7 +1118,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Entfernt das angegebene Profil von der ausgewählten Karte.
                  }
           \method{importMap}
-                 {\keine}
+                 {
+                   \param{name}{String}{Der Name der neuen Karte}
+                   \param{f}{File}{Die Datei aus der sie geladen werden soll}
+                 }
                  {
                    Fügt eine neue Karte mit dem angegebenen Namen hinzu (oder ersetzt eine bestehende mit diesem Namen) und wählt sie aus.
 
