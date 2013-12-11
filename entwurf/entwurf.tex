@@ -46,9 +46,9 @@
 % 3. Attribute (ein oder mehrere \attr, oder \keine)
 % 4. Methoden (ein oder mehrere \method, oder \keine)
 \newcommand{\class}[4]{
+  \newcommand{\currentclass}[0]{#1}
   \item[\namedlabel{K:#1}{\code{#1}}] #2
     \begin{description}
-    \newcommand{\currentclass}[0]{#1}
     \item[Attribute] \hfill % \hfill forces the following description into the next line
       \begin{description}
         #3
@@ -58,6 +58,7 @@
         #4
       \end{description}
     \end{description}
+  \let\currentclass=\undefined
 }
 % Argumente:
 % 1. Name
@@ -72,15 +73,16 @@
 % 3. Parameter (ein oder mehrere \param, oder \keine)
 % 4. Beschreibung
 \NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
+  \newcommand{\currentmethod}[0]{#1}
   \item[\namedlabel{M:\currentclass.#1}{\code{#1}}] #4\\
     Parameter:
     \begin{description}
-      \newcommand{\currentmethod}[0]{#1}
       #3
     \end{description}
     \IfValueTF{#2} % if the optional “type” argument is given...
               {Rückgabetyp: \code{#2}} % then show the return type...
               {} % else don’t.
+  \let\currentmethod=\undefined
 }
 % Argumente:
 % 1. Name
@@ -94,29 +96,58 @@
 % 1. Klasse
 % 2. (optional) Text – default: Klasse
 \NewDocumentCommand{\refclass}{mO{#1}}{
-  \hyperref[K:#1]{\code{#2}}
+  \hyperref[K:#1]{\code{#2}}\xspace%
 }
 % Argumente:
 % 1. Klasse
 % 2. Attribut
-% 3. (optional) Text – default: Klasse.Attribut
-\NewDocumentCommand{\refattr}{mmO{#1.#2}}{
-  \hyperref[A:#1.#2]{\code{#3}}
+% 3. (optional) Text – default: Attribut innerhalb der Klasse, sonst Klasse.Attribut
+\NewDocumentCommand{\refattr}{mmO{__DEFAULT__}}{%
+  \hyperref[A:#1.#2]{\code{%
+      \ifthenelse{\equal{#3}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          #2% we’re inside the same class, only use the attribute name
+        }{%
+          #1.#2%
+        }%
+      }{%
+        #3%
+  }}}\xspace%
 }
 % Argumennte:
 % 1. Klasse
 % 2. Methode
-% 3. (optional) Text – default: Klasse.Methode
-\NewDocumentCommand{\refmethod}{mmO{#1.#2}}{
-  \hyperref[M:#1.#2]{\code{#3}}
+% 3. (optional) Text – default: Methode innerhalb der Klasse, sonst Klasse.Methode
+\NewDocumentCommand{\refmethod}{mmO{__DEFAULT__}}{%
+  \hyperref[M:#1.#2]{\code{%
+      \ifthenelse{\equal{#3}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          #2% we’re inside the same class, only use the method name
+        }{%
+          #1.#2%
+        }%
+      }{%
+        #3%
+  }}}\xspace%
 }
 % Argumente:
 % 1. Klasse
 % 2. Methode
 % 3. Parameter
-% 4. (optional) Text – default: Klasse.Methode.Parameter
-\NewDocumentCommand{\refparam}{mmmO{#1.#2.#3}}{
-  \hyperref[P:#1.#2.#3]{\code{#4}}
+% 4. (optional) Text – default: Parameter innerhalb der Methode, sonst Methode.Parameter innerhalb der Klasse, sonst Klasse.Methode.Parameter
+\NewDocumentCommand{\refparam}{mmmO{__DEFAULT__}}{%
+  \hyperref[P:#1.#2.#3]{\code{%
+      \ifthenelse{\equal{#4}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          \ifthenelse{\equal{\currentmethod}{#2}}{%
+            #3% we’re inside the same method, only use the parameter name
+          }{%
+            #2.#3% we’re inside the same class, only use the method and parameter name
+        }}{%
+          #1.#2.#3%
+      }}{%
+        #4%
+  }}}\xspace%
 }
 
 \newcommand{\code}[1]{\texttt{#1}}
@@ -215,7 +246,7 @@
 }
 \newglossaryentry{osmkachel}{
   name={OSM-Kachel},
-  description={die öffentlichen gerenderten \gls{osm}-Kacheln z.\,B. auf \mbox{\url{http://a.tile.openstreetmap.org/}}},
+  description={die öffentlichen gerenderten \gls{osm}-Kacheln z.\,B. auf\\\mbox{\url{http://a.tile.openstreetmap.org/}}},
   plural={OSM-Kacheln}
 }
 \newglossaryentry{route}{
@@ -376,7 +407,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 		    \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
  		    \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
                       } 
-		    {Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist. Die Methode gibt ein Array von Kanten Id's zurück.}
+		    {
+                      Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
+                    }
 	\method{projectToEdge} [\refclass{PointOnEdge}]
                  {
                    \param{lon}{float}{Die geographische Länge von einem Punkt.}
@@ -441,7 +474,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    Bestimmt, ob ein Abbiegevorgang über den Knoten von der angegebenen eingehenden Kante zur angegebenen ausgehenden Kante zulässig ist.
 
-                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge}[fromEdge] oder nicht Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge}[toEdge] ist, wird \code{false} zurückgegeben.
+                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge} oder nicht Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge} ist, wird \code{false} zurückgegeben.
                  }
           \method{isMiniRoundabout}[boolean]
                  {\keine}
@@ -701,7 +734,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
-                   andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target}[target] angefordert und im Zwischenspeicher gespeichert.
+                   andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target} angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target} angefordert und im Zwischenspeicher gespeichert.
                  }
           \method{deleteTiles}
                  {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileCache}{getTile}{zoom}.}}
@@ -988,7 +1021,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {
                    Wird aufgerufen, wenn sich der Start- und Zielpunkt ändern (z.\,B. durch die Auswahl eines Eintrags aus dem \gls{verlauf}).
-                   Die gleichen Aktionen wie für \refmethod{Controller}{onStartChanged}[onStartChanged] und \refmethod{Controller}{onDestinationChanged}[onDestinationChanged] werden ausgeführt, nur nicht doppelt.
+                   Die gleichen Aktionen wie für \refmethod{Controller}{onStartChanged} und \refmethod{Controller}{onDestinationChanged} werden ausgeführt, nur nicht doppelt.
                  }
                  
           \method{exportGPX}
@@ -1034,7 +1067,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
                  }
                  {
-                   Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation}[scheduleCalculation] auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
+                   Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation} auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
                  }
 
           \method{setUseOnlineMaps}
@@ -1077,7 +1110,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
                    
-                   Beachte: Das Profil wird erst in \refmethod{ProfileManagerController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   Beachte: Das Profil wird erst in \refmethod{ProfileManagerController}{saveAllChanges} tatsächlich gelöscht.
                    
                    Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
                  }
@@ -1146,7 +1179,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
                    
-                   Beachte: Die Karte wird erst in \refmethod{MapManagerController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   Beachte: Die Karte wird erst in \refmethod{MapManagerController}{saveAllChanges} tatsächlich gelöscht.
                    
                    Handelt es sich bei der aktuell ausgewählten Karte um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
                  }
@@ -1172,7 +1205,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                     \param{route}{\refclass{Route}}{Eine zu exportierende Route zwischen angegebenen Start- und Zielpunkt.}
                     \param{file}{File}{Die Datei, die geschrieben werden soll.}
                   }
-                  {Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route}[route] in die angegebene Datei.}
+                  {Exportiert die Beschreibung der \refparam{Exporter}{exportRoute}{route} in die angegebene Datei.}
          }
 
   \class{HTMLExporter}
@@ -1184,7 +1217,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{route}{\refclass{Route}}{Die zu exportierende Route.}
                    \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                  }
-                 {Exportiert die berechnete \refparam{HTMLExporter}{exportRoute}{route}[route] als HTML-Beschreibung in die angegebene Datei.}
+                 {Exportiert die berechnete \refparam{HTMLExporter}{exportRoute}{route} als HTML-Beschreibung in die angegebene Datei.}
         }
 
   \class{GPXExporter}
@@ -1196,7 +1229,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{route}{\refclass{Route}}{Die zu exportierende Route.}
                    \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
                  }
-                 {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route}[route] im GPX-Format in die angegebene Datei.}
+                 {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route} im GPX-Format in die angegebene Datei.}
         }
 }
 
