@@ -636,13 +636,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{tileFinished}
                  {
-                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
                    \param{tile}{BufferedImage}{Die berechnete Kachel.}
                  }
                  {
-                   Wird vom \refclass{TileDequeue} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
+                   Wird vom \refclass{TileCache} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
                    Die übliche Aktion ist, ein \code{repaint} der Kartenansicht im \gls{gui} auszulösen.
                  }
         }
@@ -652,9 +652,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{getTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
                  }
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
@@ -668,16 +668,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
           \method{getTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{x}{int}{Die \gls{smt}-X-Komponente.}
+                   \param{y}{int}{Die \gls{smt}-Y-Komponente.}
+                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
                  }
                  {
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
                    andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target}[target] angefordert und im Zwischenspeicher gespeichert.
                  }
           \method{deleteTiles}
-                 {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileDequeue}{requestTile}{zoom}.}}
+                 {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileCache}{getTile}{zoom}.}}
                  {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden.}
 
  \method{addTileFinishedListener}
@@ -693,9 +693,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{getTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
                  }
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
@@ -705,9 +705,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{getTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileDequeue}{requestTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileDequeue}{requestTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileDequeue}{requestTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
                  }
                  {Lädt die angegebene Kachel herunter und gibt sie zurück.}
         }
