@@ -714,7 +714,7 @@ isCalculated(): boolean</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-r1=map</panel_attributes>
+r2=map</panel_attributes>
     <additional_attributes>30;30;1420;30</additional_attributes>
   </element>
   <element>
@@ -726,7 +726,7 @@ r1=map</panel_attributes>
       <h>490</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
-r1=profile</panel_attributes>
+r2=profile</panel_attributes>
     <additional_attributes>30;470;70;470;70;30;1420;30</additional_attributes>
   </element>
   <element>
