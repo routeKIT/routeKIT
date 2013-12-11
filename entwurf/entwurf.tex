@@ -198,6 +198,7 @@
 \newacronym{osm}{OSM}{OpenStreetMap}
 \newacronym{gui}{GUI}{Graphical User Interface}
 \newacronym{gpx}{GPX}{GPS Exchange Format}
+\newacronym{smt}{SMT}{Slippy Map Tile}
 
 \newglossaryentry{profil}{
   name={Profil},
@@ -495,44 +496,44 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{Util}{
-  \class{Util}
-        {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}
-        {\keine}
+  \class{Coordinates}
+        {Kapselt ein Paar von geographischen Koordinaten.}
         {
-          \method{unmercatorX}[float]
+          \attr{lat}{float}{Der Breitengrad der Koordinaten.}
+          \attr{lon}{float}{Der Längengrad der Koordinaten.}
+        }
+        {
+          \method{distanceTo}[float]
                  {
-                   \param{x}{float}{Koordinate der Mercator-Projektion}
-                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                   \param{other}{\refclass{Coordinates}}{Die anderen Koordinaten.}
                  }
-                 {Berechnet die geographische Breite.}
-
-          \method{unmercatorY}[float]
                  {
-                   \param{y}{float}{Koordinate der Mercator-Projektion}
-                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                   Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.
                  }
-                 {Berechnet die geographische Länge.}
-
-          \method{distance}[float]
+          \method{getSmtX}[float]
                  {
-                   \param{a}{Coordinates}{Koordinaten des ersten Punktes}
-                   \param{b}{Coordinates}{Koordinaten des zweiten Punktes}
+                   \param{zoom}{int}{Das Zoomlevel.}
                  }
-                 {Berechnet die Länge der Luftlinie zwischen zwei Punkten.}
-
-          \method{mercatorLat}[float]
                  {
-                   \param{lat}{float}{die geographische Breite}
-                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                   Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.
                  }
-                 {Berechnet eine Koordinate der Mercator-Projektion.}
-
-          \method{mercatorLon}[float]
+          \method{getSmtY}[float]
                  {
-                   \param{lon}{float}{die geographische Länge}
-                   \param{zoom}{int}{Die Zoomstufe der Karte}
+                   \param{zoom}{int}{Das Zoomlevel.}
                  }
-                 {Berechnet eine Koordinate der Mercator-Projektion.}
+                 {
+                   Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.
+                 }
+          \method{fromSmt}[Coordinates]
+                 {
+                   \param{x}{float}{Die \gls{smt}-X-Komponente.}
+                   \param{y}{float}{Die \gls{smt}-Y-Komponente.}
+                   \param{zoom}{float}{Die \gls{smt}-Zoom-Komponente.}
+                 }
+                 {
+                   Statische Methode.
+                   Rechnet \gls{smt}-Koordinaten in Koordinaten um.
+                 }
         }
   \class{PointOnEdge}
         {Beschreibt einen Punkt auf der Kante.}

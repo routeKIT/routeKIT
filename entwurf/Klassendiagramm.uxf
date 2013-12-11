@@ -216,25 +216,6 @@ getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4210</x>
-      <y>4030</y>
-      <w>320</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>Util
---
---
-mercatorLon(lon: float, zoom: int): float
-mercatorLat(lat: float, zoom: int): float
-unmercatorX(x: float, zoom: int): float
-unmercatorY(y: float, zoom: int): float
-distance(a: Coordinates, b: Coordinates): float
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
       <x>3610</x>
       <y>1550</y>
       <w>260</w>
@@ -1654,6 +1635,25 @@ generateRouteDescription(route: Route, data: ProfileMapCombination)</panel_attri
       <h>440</h>
     </coordinates>
     <panel_attributes>Util</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>4040</x>
+      <y>3940</y>
+      <w>350</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Coordinates
+--
+lat: float
+lon: float
+--
+distanceTo(:Coordinates): float
+getSmtX(zoom: int): float
+getSmtY(zoom: int): float
+_fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
