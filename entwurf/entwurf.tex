@@ -300,6 +300,20 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 % TODO
 
 
+\section{Anmerkungen}
+
+\begin{itemize}
+\item Für Attribute, die im Klassendiagramm durch Relationen oder explizit angegeben sind, sind implizite Getter und Setter gegeben.
+\item Die folgenden Typen aus dem Klassendiagramm sind „typedefs“, keine echten Klassen:
+  \begin{itemize}
+  \item \code{Node}: \code{int}, die ID des Knotens
+  \item \code{Edge}: \code{int}, die ID der Kante
+  \item \code{Weight}: \code{int}, das positive Gewicht der Kante (wobei leichtere Kanten bevorzugt werden)
+  \item \code{Partition}: \code{int}, die ID einer Partition
+  \end{itemize}
+\end{itemize}
+
+
 \section{Pakete und Klassen}
 
 \package{Profiles}{
