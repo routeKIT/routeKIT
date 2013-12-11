@@ -1022,13 +1022,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
         }
 
-  \class{ProfileManagementController}
+  \class{ProfileManagerController}
         {
           Der Controller für die \refclass{ProfileManagerView}.
         }
         {\keine}
         {
-          \method{ProfileManagementController}
+          \method{ProfileManagerController}
                  {\keine}
                  {
                    Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
@@ -1047,7 +1047,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
                    
-                   Beachte: Das Profil wird erst in \refmethod{ProfileManagementController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   Beachte: Das Profil wird erst in \refmethod{ProfileManagerController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
                    
                    Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
                  }
@@ -1065,13 +1065,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Für geänderte Profile werden alle Vorberechnungen gelöscht. 
                  }
         }
-  \class{MapManagementController}
+  \class{MapManagerController}
         {
           Der Controller für die \refclass{MapManagerView}.
         }
         {\keine}
         {
-          \method{MapManagementController}
+          \method{MapManagerController}
                  {\keine}
                  {
                    Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
@@ -1113,7 +1113,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
                    
-                   Beachte: Die Karte wird erst in \refmethod{MapManagementController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
+                   Beachte: Die Karte wird erst in \refmethod{MapManagerController}{saveAllChanges}[saveAllChanges] tatsächlich gelöscht.
                    
                    Handelt es sich bei der aktuell ausgewählten Karte um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
                  }

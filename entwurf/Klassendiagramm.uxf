@@ -1410,10 +1410,10 @@ exportRoute(route: Route, file: File)</panel_attributes>
       <w>210</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>ProfileManagementController
+    <panel_attributes>ProfileManagerController
 --
 --
-ProfileManagementController()
+ProfileManagerController()
 swapProfile(p: Profile)
 deleteProfile()
 estimateDeletionAmount(): int
@@ -1429,10 +1429,10 @@ saveAllChanges()
       <w>210</w>
       <h>170</h>
     </coordinates>
-    <panel_attributes>MapManagementController
+    <panel_attributes>MapManagerController
 --
 --
-MapManagementController()
+MapManagerController()
 switchMap(m: StreetMap)
 addProfile(p: Profile)
 removeProfile(p: Profile)
