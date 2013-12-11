@@ -1645,4 +1645,15 @@ generateRouteDescription(route: Route, data: ProfileMapCombination)</panel_attri
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>220;140;150;140;150;30;30;30</additional_attributes>
   </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>4010</x>
+      <y>3890</y>
+      <w>600</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>Util</panel_attributes>
+    <additional_attributes/>
+  </element>
 </diagram>

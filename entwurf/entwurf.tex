@@ -492,12 +492,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {\keine}
                  {Wird bei jeder Änderung aufgerufen}
         }
+}
 
-   \class{Util}
+\package{Util}{
+  \class{Util}
         {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}
         {\keine}
         {
-           \method{unmercatorX}[float]
+          \method{unmercatorX}[float]
                  {
                    \param{x}{float}{Koordinate der Mercator-Projektion}
                    \param{zoom}{int}{Die Zoomstufe der Karte}
@@ -531,13 +533,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{zoom}{int}{Die Zoomstufe der Karte}
                  }
                  {Berechnet eine Koordinate der Mercator-Projektion.}
-         }
+        }
   \class{PointOnEdge}
         {Beschreibt einen Punkt auf der Kante.}
         {
-             \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
-             \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
-         }
+          \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
+          \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
+        }
         {\keine}
 }
 
