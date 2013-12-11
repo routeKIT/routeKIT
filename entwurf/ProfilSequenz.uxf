@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>1120</w>
+      <h>1310</h>
+    </coordinates>
+    <panel_attributes>title:Profile Management
+_user~user_|_:ProfileManagerView~view_|_:ProfileManagerController~ctrl_|_:ProfileManager~manager_|_:MainView~main_
+
+user-&gt;main:user,main:“Manage Profiles”
+main.&gt;ctrl:main,ctrl:&lt;&lt;create&gt;&gt; (via Controller)
+ctrl-&gt;&gt;&gt;manager:ctrl,manager:getProfiles()
+manager.&gt;ctrl:ctrl,manager:profiles
+ctrl.&gt;view:ctrl:&lt;&lt;create&gt;&gt;
+ctrl-&gt;&gt;&gt;view:view,ctrl:setAvailableProfiles(profiles)
+ctrl-&gt;view:view,ctrl:show()
+user-&gt;user:wait
+
+user-&gt;view:user,view:“New”
+view-&gt;&gt;&gt;user:user,view:“Name of the new profile?”
+user.&gt;view:user,view:“Smart”
+view-&gt;&gt;&gt;view:view:writeValues()
+view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(newProfile)
+ctrl-&gt;&gt;&gt;ctrl:view,ctrl:storeCurrentProfile()
+ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(newProfile)
+view-&gt;&gt;&gt;view:view:readValues()
+user-&gt;user:wait
+
+user-&gt;view:user,view:“Decrease weight by 500kg”
+user-&gt;user:wait
+
+user-&gt;view:user,view:“Select profile ‘Mercedes’”
+view-&gt;&gt;&gt;view:view:writeValues()
+view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(selectedProfile)
+ctrl-&gt;&gt;&gt;ctrl:view,ctrl:storeCurrentProfile()
+ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(selectedProfile)
+view-&gt;&gt;&gt;view:view:readValues()
+user-&gt;user:*sigh*
+
+user-&gt;view:user,view:“Delete”
+view-&gt;&gt;&gt;ctrl:view,ctrl:deleteProfile()
+ctrl-&gt;view:view,ctrl:setAvailableProfiles(profiles)
+ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(previousProfile)
+view-&gt;&gt;&gt;view:view:readValues()
+user-&gt;user:wait
+
+user-&gt;view:user,view:“OK”
+view-&gt;&gt;&gt;ctrl:view,ctrl:estimateDeletionAmount()
+ctrl.&gt;view:view,ctrl:estimatedAmount
+view-&gt;&gt;&gt;user:user,view:“Are you sure? This will [...]”
+user.&gt;view:user,view:“OK”
+view-&gt;&gt;&gt;ctrl:view,ctrl:saveAllChanges()
+ctrl-&gt;manager:view,ctrl,manager:saveProfile(smart)
+ctrl-&gt;manager:view,ctrl,manager:deleteProfile(mercedes)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
