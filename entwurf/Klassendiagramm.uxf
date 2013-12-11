@@ -1414,7 +1414,7 @@ exportRoute(route: Route, file: File)</panel_attributes>
 --
 --
 ProfileManagerController()
-swapProfile(p: Profile)
+switchProfile(p: Profile)
 deleteProfile()
 estimateDeletionAmount(): int
 saveAllChanges()
