@@ -31,11 +31,13 @@
 }
 % Argumente:
 % 1. Name
-% 2. Klassen (ein oder mehrere \class)
-\newcommand{\package}[2]{
+% 2. Beschreibung
+% 3. Klassen (ein oder mehrere \class)
+\newcommand{\package}[3]{
   \subsection{Paket #1}
+  #2
   \begin{description}
-    #2
+    #3
   \end{description}
 }
 % Argumente:
@@ -199,6 +201,7 @@
 \newacronym{gui}{GUI}{Graphical User Interface}
 \newacronym{gpx}{GPX}{GPS Exchange Format}
 \newacronym{smt}{SMT}{Slippy Map Tile}
+\newacronym{mvc}{MVC}{Model View Controller}
 
 \newglossaryentry{profil}{
   name={Profil},
@@ -318,6 +321,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \section{Pakete und Klassen}
 
 \package{Profiles}{
+  Dieses Paket enthält alle Klassen zu \glslink{profil}{Profilen}.
+}
+{
   \class{Profile}
         {Ein \glslink{profil}{Fahrzeugprofil}.}
         {
@@ -344,6 +350,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{Map}{
+  Dieses Paket enthält alle Klassen zu Karten und Kartengraphen.
+
+  %TODO übersicht?
+}
+{
   \class{StreetMap}
         {Eine Karte.}
         {
@@ -467,7 +478,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
 }
 
-\package{TODO}{ % TODO: holds classes that still need a package
+\package{TODO}{
+  Dieses Paket enthält alle Klassen, die noch in keinem anderen Paket enthalten sind.
+  Vor der endgültigen Abgabe sollten alle diese Klassen einen Platz in einem anderen Paket finden.
+}
+{
   \class{ProfileMapCombination}
         {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
         {
@@ -496,6 +511,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{Util}{
+  Dieses Paket enthält verschiedene nützliche Klassen, die sonst nirgendwo hingehören.
+}
+{
   \class{Coordinates}
         {Kapselt ein Paar von geographischen Koordinaten.}
         {
@@ -545,6 +563,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{RouteCalculator}{
+  Dieses Paket enthält alle Klassen, die zur Routenberechnung benötigt werden.
+}
+{
   \class{RouteCalculator}
         {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
         {\keine}
@@ -595,6 +616,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{History}{
+  Dieses Paket enthält alle Klassen, die für den \gls{verlauf} benötigt werden.
+}
+{
   \class{History}
         {Kapselt den \gls{verlauf}.}
         {\keine}
@@ -630,6 +654,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{MapDisplay}{
+  Dieses Paket enthält alle Klassen, die an der Darstellung der Karte im \gls{gui} beteiligt sind.
+}
+{
   \class{TileFinishedListener} % TODO \class? \interface?
         {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
         {\keine}
@@ -714,6 +741,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{View}{
+  Dieses Paket enthält die Views nach der \gls{mvc}-Architektur.
+}
+{
   \class{MapView}
         {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
         {\keine}
@@ -756,6 +786,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {\keine}
 }
 \package{Precalculation}{
+  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
+}
+{
   \class{PreCalculationScheduler}
         {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
         {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
@@ -866,6 +899,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{Controllers}{
+  Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
+}
+{
   \class{ProfileManager}
         {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
         {\keine}
@@ -1123,7 +1159,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
 }
 
-\package{Exporter} {
+\package{Exporter}{
+  Dieses Paket enthält alle Klassen, die zum Exportieren der Route oder ihrer Beschreibung benötigt werden.
+}
+{
   \class{Exporter}
          {Stellt ein Interface zum Exportieren einer Route dar.}
          {\keine}
