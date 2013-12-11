@@ -819,7 +819,22 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
    \class{ProfileManagerView}
         {Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.}
         {\keine}
-        {\keine}
+        {
+          \method{setCurrentProfile}
+                 {
+                   \param{profile}{\refclass{Profile}}{Das neue Profile.}
+                 }
+                 {
+                   Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
+                 }
+          \method{setAvailableProfiles}
+                 {
+                   \param{profiles}{List<\refclass{Profile}>}{Die verfügbaren Profile.}
+                 }
+                 {
+                   Setzt die Profile, die aktuell ausgewählt werden können.
+                 }
+        }
 
   \class{HistoryView}
         {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}

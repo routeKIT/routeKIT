@@ -1290,6 +1290,8 @@ _+main(args: String[])_</panel_attributes>
     <panel_attributes>ProfileManagerView
 --
 --
+setCurrentProfile(:Profile)
+setAvailableProfiles(:List&lt;Profile&gt;)
 </panel_attributes>
     <additional_attributes/>
   </element>
