@@ -336,6 +336,28 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.\,h. das Straßennetz.}
         }
         {\keine}
+   \class{GraphIndex}
+        {Eine geometrische Datenstruktur.}
+        {\keine}
+        {
+	\method{GraphIndex}[Konstruktor]
+		{
+		    \param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
+ 		}
+		    {Erzeugt eine geometrische Datenstruktur für einen Graph aus einem Adjazenzfeld.}	
+	\method{getEdgesIn}[int[]]
+		{
+		    \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
+ 		    \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
+                      } 
+		    {Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist. Die Methode gibt ein Array von Kanten Id's zurück.}
+	\method{projectToEdge} [\refclass{PointOnEdge}]
+                 {
+                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
+                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
+                 }
+                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
+         }
   \class{Graph}
         {
           Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
@@ -441,13 +463,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Enthält oft verwendete Methoden, die von anderen Teilen des Programms unabhängig sind.}
         {\keine}
         {
-          \method{projectToEdge} [\refclass{PointOnEdge}]
-                 {
-                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
-                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
-                 }
-                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
-
            \method{unmercatorX}[float]
                  {
                    \param{x}{float}{Koordinate der Mercator-Projektion}
