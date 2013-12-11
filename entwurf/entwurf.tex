@@ -637,31 +637,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 \package{MapDisplay}{
-  \class{TileDequeue}
-        {
-          Verwaltet die Berechnung von Kartenkacheln.
-          Karten können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.
-          Über das \code{Future}-Interface können Berechnungen auch abgebrochen werden.
-        }
-        {\keine}
-        {
-          \method{requestTile}[Future<BufferedImage>]
-                 {
-                   \param{x}{int}{Die x-Koordinate der angeforderten Kachel.} % TODO skaliert mit dem Zoom? relativ zu was?
-                   \param{y}{int}{Die y-Koordinate der angeforderten Kachel.}
-                   \param{zoom}{int}{Die Zoomstufe der angeforderten Kachel, zwischen 0 (eine Kachel für die ganze Welt) und 19 (Maßstab 1:1000).}
-                 }
-                 {
-                   Beantragt die asynchrone Berechnung der angegebenen Kachel.
-                   Über das zurückgegeben \code{Future}-Object kann die Berechnung abgebrochen werden; zu beachten ist aber, dass die \code{get}-Methode des Objekts niemals \code{null} zurückgeben wird, sondern für noch nicht berechnete Kacheln stattdessen eine „Platzhalter-Kachel“.
-                 }
-          \method{addTileFinishedListener}
-                 {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
-                 {
-                   Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
-                   Die Kachel ist Teil der Nachricht, kann aber auch jederzeit über das von \refmethod{TileDequeue}{requestTile}[requestTile] zurückgegebene \code{Future}-Object abgefragt werden.
-                 }
-        }
   \class{TileFinishedListener} % TODO \class? \interface?
         {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
         {\keine}
@@ -691,7 +666,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
   \class{TileCache}
-        {Ein Zwischenspeicher für Kacheln, um zu verhindern, dass sie ständig von neuem berechnet werden.}
+        {Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
+          Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.}
         {\keine}
         {
           \method{TileCache}[Konstruktor]
@@ -705,12 +681,19 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
-                   andernfalls wird sie von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben.
+                   andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target}[target] angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target}[target] angefordert und im Zwischenspeicher gespeichert.
                  }
           \method{deleteTiles}
                  {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileDequeue}{requestTile}{zoom}.}}
-                 {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden, etwa, um Speicher zu sparen.}
-        }
+                 {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden.}
+
+ \method{addTileFinishedListener}
+                 {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
+                 {
+                   Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
+                   Die Kachel ist Teil der Nachricht.
+                 }
+}
   \class{TileRenderer}
         {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
         {\keine}
