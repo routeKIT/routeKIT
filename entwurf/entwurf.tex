@@ -380,9 +380,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen.}
                  }
                  {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
-          \method{getEdges}[Set<Edge>]
-                 {\param{node}{Node}{Der Knoten, dessen Kanten gesucht werden.}}
-                 {Gibt alle \emph{ausgehenden} Kanten des angegebenen Knotens zurück.}
+          \method{getOutgoingEdges}[Set<Edge>]
+                 {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
+                 {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
+	 \method{getIncomingEdges}[Set<Edge>]
+                 {\param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}}
+                 {Gibt alle in den Knoten eingehende Kanten zurück.}
           \method{getTargetNode}[Node]
                  {\param{edge}{Edge}{Die Kante, dessen Zielknoten gesucht wird.}}
                  {Gibt den Zielknoten der angegebenen Kante zurück.}
