@@ -579,7 +579,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{x}{float}{Die \gls{smt}-X-Komponente.}
                    \param{y}{float}{Die \gls{smt}-Y-Komponente.}
-                   \param{zoom}{float}{Die \gls{smt}-Zoom-Komponente.}
+                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
                  }
                  {
                    Statische Methode.
@@ -633,7 +633,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{generateRouteDescription}[\refclass{RouteDescription}]
                  {
-                   \param{route}{\getclass{Route}}{Die Route, deren Beschreibung erzeugt werden soll.}
+                   \param{route}{\refclass{Route}}{Die Route, deren Beschreibung erzeugt werden soll.}
                  }
                  {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
         }

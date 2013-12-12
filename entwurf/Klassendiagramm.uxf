@@ -56,16 +56,17 @@ getTileSource(): TileSource
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2700</x>
+      <x>2590</x>
       <y>2800</y>
-      <w>170</w>
-      <h>100</h>
+      <w>280</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>RouteModel
 --
 -currentRoute: Route
 -start: Coordinates
 -destination: Coordinates
+-desc: RouteDescription
 --
 +addRouteListener(:RouteModelListener)
 </panel_attributes>
@@ -86,19 +87,19 @@ getTileSource(): TileSource
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2730</x>
-      <y>2870</y>
+      <y>2890</y>
       <w>70</w>
-      <h>480</h>
+      <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;460;50;460</additional_attributes>
+    <additional_attributes>30;30;30;440;50;440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>1980</x>
       <y>3030</y>
-      <w>128</w>
+      <w>130</w>
       <h>2100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -923,13 +924,13 @@ implements</panel_attributes>
     <coordinates>
       <x>2160</x>
       <y>2800</y>
-      <w>560</w>
+      <w>450</w>
       <h>640</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
 </panel_attributes>
-    <additional_attributes>30;620;30;30;540;30</additional_attributes>
+    <additional_attributes>30;620;30;30;430;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
