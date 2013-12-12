@@ -1073,7 +1073,7 @@ toString(): String
 --
 
 --
-import(:File): Graph</panel_attributes>
+importMap(:File): Graph</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
