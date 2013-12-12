@@ -1,0 +1,23 @@
+Kantenbasierter Graph wird bei der Vorberechnung erstellt und zur Laufzeit nur geladen
+Ein Knoten pro gerichtete Kante
+EdgeWeighter erstellt kantenbasierten Graphen
+Arc-Flags auf kantenbasierten Graphen
+
+Importer erstellt kantenbasierten Graphen, noch ohne Gewichte
+Imporf: Partitionierer partitioniert kantenbasierten Graphen einmal
+dann: Vorberechnung klatscht pro Profil Gewichte dran.
+
+Knotenbasierter Graph: bidirektionale Adjazenzfelder, Koordinaten, Namen, maxSpeed, Straßentyp
+Kantenbasierter Graph: bidirektionale Adjazenzfelder, Gewichte (0..1)
+Gewichte: eigenes Objekt
+
+Ein GraphIndex pro Kartentyp, der rausgeschmissen wird (bei Zoomlevel 10 werden Xstraßen rausgeschmissen etc.)
+Graph.getIndex(zoomLevel)
+
+Enum StreetType
+
+ArcFlags(Turn), nicht (Node)
+
+Sequenzdiagramm für Import, für Vorberechnung
+
+Profil-Management: dummy-Element rechts vom Sequenzdiagramm, um Breite zu erzwingen?
