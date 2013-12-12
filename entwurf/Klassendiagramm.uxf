@@ -774,7 +774,7 @@ parseOSM(f: File): Graph
     <panel_attributes>Graph
 --
 --
-Graph(nodes: Node[], edges: Edge[], :Map&lt;int, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
+Graph(nodes: Node[], edges: Edge[], :Map&lt;Node, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
 getOutgoingEdges(node: Node): Set&lt;Edge&gt;
 getIncomingEdges(node: Node): Set&lt;Edge&gt;
 getTargetNode(edge: Edge): Node
