@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>0</x>
+      <y>10</y>
+      <w>2250</w>
+      <h>590</h>
+    </coordinates>
+    <panel_attributes>title:Route Calculation
+_user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_:RouteModel~model_|_:RouteCalculator~calc_|_:RouteDescriptionGenerator~gen_|_:Route~route_|_:RouteDescription~desc_
+
+user-&gt;view:user,view:"Sets start point"
+
+view-&gt;ctrl:view,ctrl:onStartChanged
+ctrl-&gt;model:ctrl,model:setStart
+
+//Leerzeile im Diagramm
+ctrl_&gt;view
+
+user-&gt;view:user,view:"Sets destination point"
+
+view-&gt;ctrl:view,ctrl:onDestinationChanged
+ctrl-&gt;model:ctrl,model:setDestination
+model-&gt;&gt;&gt;calc:model,calc:calculateRoute
+calc-&gt;&gt;&gt;route:calc,route:&lt;&lt;create&gt;&gt;
+calc.&gt;&gt;&gt;model:calc,model:Route
+
+model-&gt;&gt;&gt;gen:model,gen:generateRouteDescription
+gen-&gt;&gt;&gt;desc:gen,desc:&lt;&lt;create&gt;&gt;
+gen.&gt;&gt;&gt;model:gen,model:RouteDescription
+
+model-&gt;view:model,view:routeModelChanged
+view-&gt;&gt;&gt;view:view:paint()
+model-&gt;main:model,main:routeModelChanged
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
