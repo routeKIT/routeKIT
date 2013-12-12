@@ -575,17 +575,6 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>3100</x>
-      <y>1880</y>
-      <w>190</w>
-      <h>1450</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110;30;170;30;170;1430;30;1430</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>2990</x>
