@@ -343,7 +343,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   \begin{itemize}
   \item \code{Node}: \code{int}, die ID des Knotens
   \item \code{Edge}: \code{int}, die ID der Kante
-  \item \code{Weight}: \code{int}, das positive Gewicht der Kante (wobei leichtere Kanten bevorzugt werden)
   \item \code{Partition}: \code{int}, die ID einer Partition
   \end{itemize}
 \end{itemize}
@@ -913,7 +912,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Versieht die Kanten eines Graphen mit Kantengewichten.}
         {\keine}
         {
-          \method{weightEdges}[Weight[]]
+          \method{weightEdges}[Weight]
                  {
                    \param{graph}{Graph}{Der zu gewichtende Graph.}
                    \param{profile}{Profile}{Das zu verwendende Profil.}
@@ -929,7 +928,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{graph}{Graph}{Der Graph.}
                    \param{partitions}{Partition[]}{Die Partitionen des Graphen.}
-                   \param{weights}{Weight[]}{Die Kantengewichte des Graphen.}
+                   \param{weights}{Weight}{Die Kantengewichte des Graphen.}
                  }
                  {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
         }
