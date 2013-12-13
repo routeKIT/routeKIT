@@ -1686,10 +1686,22 @@ m2=0..1</panel_attributes>
     <additional_attributes>30;30;30;90</additional_attributes>
   </element>
   <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3330</x>
+      <y>3380</y>
+      <w>110</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>30;30;90;30;90;210</additional_attributes>
+  </element>
+  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5040</x>
-      <y>3380</y>
+      <x>3360</x>
+      <y>3590</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -1699,17 +1711,5 @@ m2=0..1</panel_attributes>
 getWeight(turn: Turn): int
 </panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>5060</x>
-      <y>3400</y>
-      <w>50</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-</panel_attributes>
-    <additional_attributes>30;90;30;30</additional_attributes>
   </element>
 </diagram>
