@@ -886,11 +886,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
         {\keine}
         {
-          \method{importMap}[Graph]
+          \method{importMap}[\refclass{StreetMap}]
                  {
                    \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
                  }
-                 {Importiert und säubert den Straßengraph.}
+                 {Importiert und säubert den Straßengraph. Erzeugt das Adjazenzfeld und den kantenbasierten Graphen aus \refclass{MapNode}.}
         }
   \class{OSMParser}
         {Importiert eine neue Karte.}
