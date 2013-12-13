@@ -515,6 +515,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   Vor der endgültigen Abgabe sollten alle diese Klassen einen Platz in einem anderen Paket finden.
 }
 {
+  \class{RouteKit}
+        {Startet die Anwendung.}
+        {\keine}
+        {
+	\method{main}
+         	    {
+		\param{args}{String[]}{String-Argumente}
+               }
+	    {Erzeugt einen \refclass{Controller}.}
+         }
+
   \class{ProfileMapCombination}
         {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
         {
