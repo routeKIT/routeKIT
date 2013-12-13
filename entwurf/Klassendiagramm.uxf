@@ -342,7 +342,7 @@ program</panel_attributes>
     <panel_attributes>EdgeWeighter
 --
 --
-weightEdges(:Graph, :Profile): Weight[]</panel_attributes>
+weightEdges(:Graph, :Profile): Weight</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -356,7 +356,7 @@ weightEdges(:Graph, :Profile): Weight[]</panel_attributes>
     <panel_attributes>ArcFlagsCalculator
 --
 --
-calculateArcFlags(:Graph, :Partition[], :Weight[]): ArcFlags</panel_attributes>
+calculateArcFlags(:Graph, :Partition[], :Weight): ArcFlags</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1684,5 +1684,32 @@ getPartition(turn: Turn): Partition
     <panel_attributes>lt=-
 m2=0..1</panel_attributes>
     <additional_attributes>30;30;30;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>5040</x>
+      <y>3380</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Weight
+--
+--
+getWeight(turn: Turn): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>5060</x>
+      <y>3400</y>
+      <w>50</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>30;90;30;30</additional_attributes>
   </element>
 </diagram>
