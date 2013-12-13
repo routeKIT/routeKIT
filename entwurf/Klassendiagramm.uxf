@@ -797,7 +797,7 @@ getEdgeProperties(edge: Edge): EdgeProperties
     <panel_attributes>ArcFlags
 --
 --
-getFlags(node: Node): int
+getFlags(turn: Turn): int
 </panel_attributes>
     <additional_attributes/>
   </element>
