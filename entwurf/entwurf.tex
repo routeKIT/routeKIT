@@ -767,6 +767,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
         {\keine}
         {
+          \method{TileRenderer}[Konstruktor]
+	   { 
+		\param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
+	    }
+	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
           \method{getTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
