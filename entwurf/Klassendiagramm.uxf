@@ -127,7 +127,7 @@ TileSource
       <x>1970</x>
       <y>5520</y>
       <w>300</w>
-      <h>120</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>TileCache
 --
@@ -135,7 +135,6 @@ cache
 --
 TileCache(target: TileSource)
 getTile(x: int, y: int, zoom: int): BufferedImage
-deleteTiles(zoom: int)
 addTileFinishedListener(:TileFinishedListener)
 </panel_attributes>
     <additional_attributes/>
