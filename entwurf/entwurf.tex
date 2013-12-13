@@ -521,7 +521,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{profile}{\refclass{Profile}}{Das \gls{profil}.}
           \attr{map}{\refclass{StreetMap}}{Die Karte.}
         }
-        {\keine}
+        {
+	\method{isCalculated}[boolean]
+         	    {\keine}
+	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
+         }
   \class{RouteModel}
         {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \refclass{RouteListener}}
         {\keine}
