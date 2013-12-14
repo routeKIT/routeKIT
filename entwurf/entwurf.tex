@@ -466,6 +466,53 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {\param{edge}{Edge}{Die Kante, deren \refclass{EdgeProperties} gesucht werden.}}
                  {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
         }
+  \class{EdgeBasedGraph}
+        {
+          Eine kantenbasierte Darstellung des Straßennetz-Graphens.
+          Eine \code{Edge} des \refclass{EdgeBasedGraph} entspricht einer Kante des regulären Graphen (\refclass{Graph}), also einem Knoten des kantenbasierten Graphen.
+          Ein \code{Turn} des \refclass{EdgeBasedGraph} entspricht einem Abbiegevorgang auf dem regulären Graphen, also einer Kante des kantenbasierten Graphen.
+          
+          Diese Datenstruktur ist profilunabhängig und wird, wie \refclass{Graph}, bei der Vorberechnung für eine Karte erstellt.
+          Erst in Kombination mit den Profil-spezifischen \refclass{Weight} kann sie zur Routenberechnung verwendet werden.
+        }
+        {\keine}
+        {
+          \method{getOutgoingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegevorgänge bestimmt werden sollen.}
+                 }
+                 {
+                   Bestimmt alle Abbiegevorgänge (\code{Turn}s), die mit der angegebenen \code{Edge} beginnen.
+                 }
+          \method{getIncomingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren eingehende Abbiegevorgänge bestimmt werden sollen.}
+                 }
+                 {
+                   Bestimmt alle Abbiegevorgänge (\code{Turn}s), die mit der angegebenen \code{Edge} enden.
+                 }
+          \method{getStartEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Startkante bestimmt werden soll.}
+                 }
+                 {
+                   Gibt die Kante zurück, mit der der angegebene Abbiegevorgang beginnt.
+                 }
+          \method{getTargetEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Endkante bestimmt werden soll.}
+                 }
+                 {
+                   Gibt die Kante zurück, mit der der angegebene Abbiegevorgang endet.
+                 }
+          \method{getPartition}[Partition]
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Partition bestimmt werden soll.}
+                 }
+                 {
+                   Gibt die Partition zurück, der der angegebene Abbiegevorgang angehört.
+                 }
+        }
   \class{NodeProperties}
         {Kapselt die Eigenschaften eines Knotens.}
         {\keine}
