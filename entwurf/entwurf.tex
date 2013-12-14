@@ -441,12 +441,15 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getOutgoingEdges}[Set<Edge>]
                  {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
                  {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
-	 \method{getIncomingEdges}[Set<Edge>]
+	      \method{getIncomingEdges}[Set<Edge>]
                  {\param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}}
                  {Gibt alle in den Knoten eingehende Kanten zurück.}
           \method{getTargetNode}[Node]
-                 {\param{edge}{Edge}{Die Kante, dessen Zielknoten gesucht wird.}}
-                 {Gibt den Zielknoten der angegebenen Kante zurück.}
+                 {\param{edge}{Edge}{Die Kante, dessen Endknoten gesucht wird.}}
+                 {Gibt den Endknoten der angegebenen Kante zurück.}
+          \method{getStartNode}[Node]
+                 {\param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}}
+                 {Gibt den Startknoten der angegebenen Kante zurück.}       
           \method{getLat}[float]
                  {\param{node}{Node}{Der Knoten, dessen geographische Breite gesucht wird.}}
                  {Gibt die geographische Breite des angegebenen Knotens zurück.}
@@ -461,24 +464,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
         }
   \class{NodeProperties}
-        {Kapselt die Eigenschaften eines Knotens einschließlich der zugehörigen Abbiegebeschränkungen.}
+        {Kapselt die Eigenschaften eines Knotens.}
         {\keine}
         {
-          \method{allowsTurn}[boolean]
-                 {
-                   \param{fromEdge}{Edge}{Die eingehende Kante, über die der Knoten betreten wird.}
-                   \param{toEdge}{Edge}{Die ausgehende Kante, über die der Knoten verlassen wird.}
-                   \param{profile}{\refclass{Profile}}{Das \gls{profil}, für das die Zulässigkeit des Abbiegevorgangs bestimmt werden soll.}
-                 }
-                 {
-                   Bestimmt, ob ein Abbiegevorgang über den Knoten von der angegebenen eingehenden Kante zur angegebenen ausgehenden Kante zulässig ist.
-
-                   Wenn der Knoten nicht Endknoten von \refparam{NodeProperties}{allowsTurn}{fromEdge} oder nicht Startknoten von \refparam{NodeProperties}{allowsTurn}{toEdge} ist, wird \code{false} zurückgegeben.
-                 }
-          \method{isMiniRoundabout}[boolean]
-                 {\keine}
-                 {Bestimmt, ob der Knoten ein kleiner Kreisverkehr ist.}
-          \method{isHighwayJunction}[boolean]
+          \method{isMotorwayJunction}[boolean]
                  {\keine}
                  {Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
           \method{getJunctionName}[String]
@@ -487,6 +476,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getJunctionRef}[String]
                  {\keine}
                  {Gibt die Nummer der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
+          \method{isTrafficLights}[boolean]
+                 {\keine}
+                 {Bestimmt, ob sich an dem Knoten eine Ampel befindet.}
         }
   \class{EdgeProperties}
         {Kapselt die Eigenschaften einer Kante.}
@@ -498,15 +490,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getRoadRef}[String]
                  {\keine}
                  {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
-          \method{allowsRoute}[boolean]
-                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Zulässigkeit der Benutzung bestimmt werden soll.}}
-                 {Bestimmt, ob die Benutzung der Kante in einer \gls{route} zulässig ist.}
           \method{getMaxSpeed}[int]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
-                 {Bestimmt die zulässige Höchstgeschwindigkeit auf dieser Kante für das angegebene Profil.}
-          \method{isRoundabout}[boolean]
-                 {\keine}
-                 {Bestimmt, ob die Kante Teil eines Kreisverkehrs ist.}
+                 {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
         }
 }
 
