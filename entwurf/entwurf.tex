@@ -343,6 +343,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   \begin{itemize}
   \item \code{Node}: \code{int}, die ID des Knotens
   \item \code{Edge}: \code{int}, die ID der Kante
+  \item \code{Turn}: \code{int}, die ID der Kante im kantenbasierten Graphen (\refclass{EdgeBasedGraph})
   \item \code{Partition}: \code{int}, die ID einer Partition
   \end{itemize}
 \end{itemize}
@@ -420,7 +421,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
         }
-        {\keine}
+        {
+          \attr{highwayType}{HighwayType}{Der Straßentyp.}
+        }
         {
           \method{Graph}[Konstruktor]
                  {
@@ -493,6 +496,47 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getMaxSpeed}[int]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
+        }
+  \class{EdgeBasedGraph}
+        {Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \refclass{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.}
+        {\keine}
+        {
+          \method{getOutgoingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht werden.}
+                 }
+                 {Gibt alle Abbiegemöglichkeiten \textit{von} der angegebenen Kante zurück.}
+          \method{getIncomingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren eingehende Abbiegemöglichkeiten gesucht werden.}
+                 }
+                 {Gibt alle Abbiegemöglichkeiten \textit{auf} die angegebene Kante zurück.}
+          \method{getTargetEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Endkante gesucht wird.}
+                 }
+                 {Gibt die Kante zurück, auf die die angegebene Abbiegemöglichkeit führt.}
+          \method{getStartEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Anfangskante gesucht wird.}
+                 }
+                 {Gibt die Kante zurück, von der die angegebene Abbiegemöglichkeit besteht.}
+          \method{getPartition}[Partition]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren Partition bestimmt werden soll.}
+                 }
+                 {Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten des kantenbasierten Graphen) befindet.}
+          \method{getTurnType}[TurnType]
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Art gesucht wird.}
+                 }
+                 {Gibt die Art des angegebenen Abbiegevorgangs zurück.}
+          \method{allowsTurn}[boolean]
+                 {
+                   \param{turn}{Turn}{Der zu betrachtende Abbiegevorgang.}
+                   \param{profile}{\refclass{Profile}}{Das verwendete Profil.}
+                 }
+                 {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
         }
 }
 

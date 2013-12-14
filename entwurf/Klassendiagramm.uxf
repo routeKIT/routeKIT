@@ -1662,7 +1662,7 @@ getOutgoingTurns(edge: Edge): Set&lt;Turn&gt;
 getIncomingTurns(edge: Edge): Set&lt;Turn&gt;
 getTargetEdge(turn: Turn): Edge
 getStartEdge(turn: Turn): Edge
-getPartition(turn: Turn): Partition
+getPartition(edge: Edge): Partition
 getTurnType(turn: Turn): TurnType
 allowsTurn(turn: Turn, p: Profile): boolean
 </panel_attributes>
