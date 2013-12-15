@@ -12,4 +12,4 @@ saveAllChanges macht auch Speichern-Hälfte von swap (gemacht) (sinnlos, hat kei
 swap vs switch, delete vs remove (gemacht)
 RemoveProfileCommand, AddProfileCommand? (gemacht) (obsolet)
 onStartChanged: PointOnEdge?
-Rückgabetyp Konstruktor (Graph)
+Rückgabetyp Konstruktor (Graph) (gemacht)
