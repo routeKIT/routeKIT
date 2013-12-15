@@ -1,17 +1,17 @@
-Partitionen speichern, in den Graph
+Partitionen speichern, in den Graph (gemacht)
 
-ArcFlags.flags(edges: int)
+ArcFlags.flags(edges: int) (gemacht)
 
-EdgeBasedGraph
-    man ist immer am Ende einer Kante
-    Abbiegebeschränkungen in den Kosten
+EdgeBasedGraph (gemacht)
+    man ist immer am Ende einer Kante (gemacht)
+    Abbiegebeschränkungen in den Kosten (gemacht)
 
-weights als int
+weights als int (gemacht)
 
-Graph.getOutgoingEdges();
-getAdjacentEdges? getIncomingEdges?
-GraphPreCalculation keinProxy()
-GraphPreCalculation name?
+Graph.getOutgoingEdges(); (gemacht)
+getAdjacentEdges? getIncomingEdges? (gemacht)
+GraphPreCalculation keinProxy() (gemacht)
+GraphPreCalculation name? (gemacht) (obsolet)
 
 getLat/-Lon in gleicher Datenstruktur für Routenberechnung?
     Graph (Routing), Index (malen), Physik (Koordinaten, Namen) trennen
@@ -23,24 +23,24 @@ RouteDescriptionBuilder-Klasse (gemacht)
 
 Dijkstra -> ArcFlagsDijkstra (gemacht)
 
-RouteModel -> Start and Dest
+RouteModel -> Start and Dest (gemacht)
 
-GraphPreCalculation.calculateRoute rausschmeißen, direkt RouteCalculator verwenden
+GraphPreCalculation.calculateRoute rausschmeißen, direkt RouteCalculator verwenden (gemacht)
 
-ManagementController Names anstatt commands
+ManagementController Names anstatt commands (gemacht)
 
-Gewichte speichern???
+Gewichte speichern??? (gemacht)
 
 SequenzProfile MapCombination init
 
-Vorberechnung bestimmt, in welche Richtung Abbiegung geht
+Vorberechnung bestimmt, in welche Richtung Abbiegung geht (gemacht)
 
 Dokument:
 * Einleitung
 * was ist in diesem Dokument
 * Architektur grob erklären
 * Sequenzdiagramme
-* Attributnamen in \texttt
+* Attributnamen in \texttt (gemacht)
 * Wenn nötig: Änderungen gegenüber Pflichtenheft
 
 MainView sofort zeigen? Splashscreen?
@@ -48,4 +48,4 @@ MainView sofort zeigen? Splashscreen?
 für Vorberechnung: Arcflags-Dijkstra zu normalem Dijkstra durch triviale FFFF-ArcFlags
 Bidirektionale Suche?
 
-Node, Edge, Coordinates als typedef in Ordnung
+Node, Edge, Coordinates als typedef in Ordnung (gemacht)
