@@ -48,16 +48,28 @@
 \newcommand{\class}[4]{
   \newcommand{\currentclass}[0]{#1}
   \item[\namedlabel{K:#1}{\code{#1}}] #2
-    \begin{description}
-    \item[Attribute] \hfill % \hfill forces the following description into the next line
+    \ifstrequal{#3#4}{\keine\keine}{
+      % \keine attributes and \keine methods, skip
+    }{
       \begin{description}
-        #3
+        \ifstrequal{#3}{\keine}{
+          % \keine attributes, skip
+        }{
+        \item[Attribute] \hfill % \hfill forces the following description into the next line
+          \begin{description}
+            #3
+          \end{description}
+        }
+        \ifstrequal{#4}{\keine}{
+          % \keine methods, skip
+        }{
+        \item[Methoden] \hfill % \hfill forces the following description into the next line
+          \begin{description}
+            #4
+          \end{description}
+        }
       \end{description}
-    \item[Methoden] \hfill % \hfill forces the following description into the next line
-      \begin{description}
-        #4
-      \end{description}
-    \end{description}
+    }
   \let\currentclass=\undefined
 }
 % Argumente:
@@ -75,10 +87,14 @@
 \NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
   \newcommand{\currentmethod}[0]{#1}
   \item[\namedlabel{M:\currentclass.#1}{\code{#1}}] #4\\
-    Parameter:
-    \begin{description}
-      #3
-    \end{description}
+    \ifstrequal{#3}{\keine}{
+      % \keine parameters, skip
+    }{
+      Parameter:
+      \begin{description}
+        #3
+      \end{description}
+    }
     \IfValueTF{#2} % if the optional “type” argument is given...
               {Rückgabetyp: \code{#2}} % then show the return type...
               {} % else don’t.
