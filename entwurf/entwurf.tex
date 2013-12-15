@@ -23,7 +23,7 @@
 \makeatother
 % End: Hack for referencing labels
 
-\newcommand{\keine}[0]{
+\newcommand{\none}[0]{
 %  % see http://tex.stackexchange.com/questions/61155/linespacing-without-packages
 %  \setlength\lineskiplimit{-1000pt} % allow overflowing of lines
 %  \linespread{0}\selectfont % don’t advance line after empty item
@@ -43,25 +43,25 @@
 % Argumente:
 % 1. Klassenname
 % 2. Beschreibung
-% 3. Attribute (ein oder mehrere \attr, oder \keine)
-% 4. Methoden (ein oder mehrere \method, oder \keine)
+% 3. Attribute (ein oder mehrere \attr, oder \none)
+% 4. Methoden (ein oder mehrere \method, oder \none)
 \newcommand{\class}[4]{
   \newcommand{\currentclass}[0]{#1}
   \item[\namedlabel{K:#1}{\code{#1}}] #2
-    \ifstrequal{#3#4}{\keine\keine}{
-      % \keine attributes and \keine methods, skip
+    \ifstrequal{#3#4}{\none\none}{
+      % \none attributes and \none methods, skip
     }{
       \begin{description}
-        \ifstrequal{#3}{\keine}{
-          % \keine attributes, skip
+        \ifstrequal{#3}{\none}{
+          % \none attributes, skip
         }{
         \item[Attribute] \hfill % \hfill forces the following description into the next line
           \begin{description}
             #3
           \end{description}
         }
-        \ifstrequal{#4}{\keine}{
-          % \keine methods, skip
+        \ifstrequal{#4}{\none}{
+          % \none methods, skip
         }{
         \item[Methoden] \hfill % \hfill forces the following description into the next line
           \begin{description}
@@ -82,13 +82,13 @@
 % Argumente:
 % 1. Name
 % 2. (optional) Typ – default: void (wird nicht angezeigt)
-% 3. Parameter (ein oder mehrere \param, oder \keine)
+% 3. Parameter (ein oder mehrere \param, oder \none)
 % 4. Beschreibung
 \NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
   \newcommand{\currentmethod}[0]{#1}
   \item[\namedlabel{M:\currentclass.#1}{\code{#1}}] #4\\
-    \ifstrequal{#3}{\keine}{
-      % \keine parameters, skip
+    \ifstrequal{#3}{\none}{
+      % \none parameters, skip
     }{
       Parameter:
       \begin{description}
@@ -408,10 +408,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{name}{String}{Der Name der Karte.}
           \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.\,h. das Straßennetz.}
         }
-        {\keine}
+        {\none}
    \class{GraphIndex}
         {Eine geometrische Datenstruktur.}
-        {\keine}
+        {\none}
         {
 	\method{GraphIndex}[Konstruktor]
 		{
@@ -491,7 +491,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           Diese Datenstruktur ist profilunabhängig und wird, wie \refclass{Graph}, bei der Vorberechnung für eine Karte erstellt.
           Erst in Kombination mit den Profil-spezifischen \refclass{Weight} kann sie zur Routenberechnung verwendet werden.
         }
-        {\keine}
+        {\none}
         {
           \method{getOutgoingTurns}[Set<Turn>]
                  {
@@ -531,30 +531,30 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{NodeProperties}
         {Kapselt die Eigenschaften eines Knotens.}
-        {\keine}
+        {\none}
         {
           \method{isMotorwayJunction}[boolean]
-                 {\keine}
+                 {\none}
                  {Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
           \method{getJunctionName}[String]
-                 {\keine}
+                 {\none}
                  {Gibt den Namen der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
           \method{getJunctionRef}[String]
-                 {\keine}
+                 {\none}
                  {Gibt die Nummer der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
           \method{isTrafficLights}[boolean]
-                 {\keine}
+                 {\none}
                  {Bestimmt, ob sich an dem Knoten eine Ampel befindet.}
         }
   \class{EdgeProperties}
         {Kapselt die Eigenschaften einer Kante.}
-        {\keine}
+        {\none}
         {
           \method{getName}[String]
-                 {\keine}
+                 {\none}
                  {Gibt den Namen der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{getRoadRef}[String]
-                 {\keine}
+                 {\none}
                  {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{getMaxSpeed}[int]
                  {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
@@ -562,7 +562,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{EdgeBasedGraph}
         {Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \refclass{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.}
-        {\keine}
+        {\none}
         {
           \method{getOutgoingTurns}[Set<Turn>]
                  {
@@ -610,7 +610,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{RouteKit}
         {Startet die Anwendung.}
-        {\keine}
+        {\none}
         {
 	\method{main}
          	    {
@@ -627,12 +627,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         {
 	\method{isCalculated}[boolean]
-         	    {\keine}
+         	    {\none}
 	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
          }
   \class{RouteModel}
         {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \refclass{RouteListener}}
-        {\keine}
+        {\none}
         {
           \method{addRouteListener}
                  {
@@ -642,10 +642,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{RouteModelListener}
         {Wird bei Änderungen am \refclass{RouteModel} informiert.}
-        {\keine}
+        {\none}
         {
           \method{routeModelChanged}
-                 {\keine}
+                 {\none}
                  {Wird bei jeder Änderung aufgerufen}
         }
 }
@@ -699,7 +699,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
           \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
         }
-        {\keine}
+        {\none}
 }
 
 \package{RouteCalculator}{
@@ -708,7 +708,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{RouteCalculator}
         {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
-        {\keine}
+        {\none}
         {
           \method{calculateRoute}[\refclass{Route}]
                  {
@@ -720,23 +720,23 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
-        {\keine} % ?
+        {\none} % ?
         {
           \method{getNodes}[Node[]]
-                 {\keine}
+                 {\none}
                  {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
         }
   \class{RouteDescription}
         {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
-        {\keine} % ?
+        {\none} % ?
         {
           \method{getInstructions}[List<\refclass{TurnInstruction}>]
-                 {\keine}
+                 {\none}
                  {Liefert eine Liste der Abbiegeanweisungen.}
         }
   \class{RouteDescriptionGenerator}
         {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
-        {\keine}
+        {\none}
         {
           \method{generateRouteDescription}[\refclass{RouteDescription}]
                  {
@@ -746,15 +746,15 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{TurnInstruction}
         {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \refclass{RouteDescription} aufgebaut ist.}
-        {\keine} % ?
+        {\none} % ?
         {
           \method{toString}[String]
-                 {\keine}
+                 {\none}
                  {Gibt den Text der Abbiegeanweisung zurück.}
         }
   \class{ArcFlags}
         {Enthält die Arc-Flags für den vorberechneten Graphen.}
-        {\keine} % ?
+        {\none} % ?
         {
           \method{getFlags}[int]
                  {
@@ -764,8 +764,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
    \class{ArcFlagsDijkstra}
        {Führt die Berechnung der schnellsten Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil durch unter der Beachtung von Arc-Flags.}
-       {\keine}
-       {\keine}
+       {\none}
+       {\none}
 }
 
 \package{History}{
@@ -774,7 +774,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{History}
         {Kapselt den \gls{verlauf}.}
-        {\keine}
+        {\none}
         {
           \method{addEntry}
                  {
@@ -783,7 +783,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
           \method{getEntries}[List<\refclass{HistoryEntry}>]
-                 {\keine}
+                 {\none}
                  {Gibt alle Einträge des Verlaufs zurück.}
           \method{save}
                  {
@@ -803,7 +803,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage.}
           \attr{date}{Date}{Der Zeitpunkt der Anfrage.}
         }
-        {\keine}
+        {\none}
 }
 
 \package{MapDisplay}{
@@ -812,7 +812,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{TileFinishedListener} % TODO \class? \interface?
         {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
-        {\keine}
+        {\none}
         {
           \method{tileFinished}
                  {
@@ -828,7 +828,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{TileSource}
         {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
-        {\keine}
+        {\none}
         {
           \method{getTile}[BufferedImage]
                  {
@@ -841,7 +841,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   \class{TileCache}
         {Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
           Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.}
-        {\keine}
+        {\none}
         {
           \method{TileCache}[Konstruktor]
                  {\param{target}{\refclass{TileSource}}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
@@ -869,7 +869,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
   \class{TileRenderer}
         {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
-        {\keine}
+        {\none}
         {
           \method{TileRenderer}[Konstruktor]
 	   { 
@@ -886,7 +886,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{OSMRenderer}
         {Eine \refclass{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
-        {\keine}
+        {\none}
         {
           \method{getTile}[BufferedImage]
                  {
@@ -904,7 +904,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{MapView}
         {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
-        {\keine}
+        {\none}
         {
           \method{MapView}
                  {
@@ -920,17 +920,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
    \class{MainView}
         {Zeigt das Hauptfenster auf dem Bildschirm an.}
-        {\keine}
-        {\keine}
+        {\none}
+        {\none}
 
    \class{MapManagerView}
         {Zeigt das Fenster der Kartenverwaltung auf dem Bildschirm an.}
-        {\keine}
-        {\keine}
+        {\none}
+        {\none}
 
    \class{ProfileManagerView}
         {Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.}
-        {\keine}
+        {\none}
         {
           \method{setCurrentProfile}
                  {
@@ -950,13 +950,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
   \class{HistoryView}
         {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}
-        {\keine}
-        {\keine}
+        {\none}
+        {\none}
 
   \class{AboutView}
         {Zeigt das Fenster mit den Informationen über \routeKIT auf dem Bildschirm an.}
-        {\keine}
-        {\keine}
+        {\none}
+        {\none}
 }
 \package{Precalculation}{
   Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
@@ -975,7 +975,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                         
   \class{PreCalculator}
         {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
-        {\keine}
+        {\none}
         {
           \method{doPrecalculation}
                  {
@@ -988,7 +988,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{MapImporter}
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
-        {\keine}
+        {\none}
         {
           \method{importMap}[\refclass{StreetMap}]
                  {
@@ -998,7 +998,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{OSMParser}
         {Importiert eine neue Karte.}
-        {\keine}
+        {\none}
         {
           \method{parseOSM}[Graph]
                  {
@@ -1008,22 +1008,22 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{MapNode}
         {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
-        {\keine}
+        {\none}
         {
           \method{getLon}[float]
-                 {\keine}
+                 {\none}
                  {Gibt den Längengrad dieses Knotens aus.}
           \method{getLat}[float]
-                 {\keine}
+                 {\none}
                  {Gibt den Breitengrad dieses Knotens aus.}
           \method{getEdges}[Set<MapEdge>]
-                 {\keine}
+                 {\none}
                  {Gibt eine Liste mit allen Kanten zu einem Knoten zurück.}
         }
         
   \class{EdgeWeighter}
         {Versieht die Kanten eines Graphen mit Kantengewichten.}
-        {\keine}
+        {\none}
         {
           \method{weightEdges}[Weight]
                  {
@@ -1035,7 +1035,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         
   \class{ArcFlagsCalculator}
         {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
-        {\keine}
+        {\none}
         {
           \method{calculateArcFlags}[ArcFlags]
                  {
@@ -1048,7 +1048,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         
   \class{GraphPartitioner}
         {Partitioniert einen gegebenen Graphen.}
-        {\keine}
+        {\none}
         {
           \method{partitionGraph}[Partition[]]
                  {
@@ -1060,7 +1060,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         
   \class{ExternalPartitionerAdapter}
         {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
-        {\keine}
+        {\none}
         {
           \method{partitionGraph}[Partition[]]
                  {
@@ -1077,7 +1077,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{ProfileManager}
         {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
-        {\keine}
+        {\none}
         {
           \method{saveProfile}
                  {
@@ -1096,14 +1096,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
                  }
           \method{getProfiles}[Set<\refclass{Profile}>]
-                 {\keine}
+                 {\none}
                  {
                    Gibt alle Profile in der internen Liste zurück.
                  }
         }
   \class{MapManager}
         {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.} % TODO siehe ProfileManager
-        {\keine}
+        {\none}
         {
           \method{saveMap}
                  {
@@ -1122,7 +1122,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
                  }
           \method{getMaps}[Set<\refclass{StreetMap}>]
-                 {\keine}
+                 {\none}
                  {
                    Gibt alle Karten in der internen Liste zurück.
                  }
@@ -1130,10 +1130,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
   \class{Controller}
         {Steuert die Programmabläufe zur Routenberechnung.}
-        {\keine}
+        {\none}
         {
           \method{Controller}
-                 {\keine}
+                 {\none}
                  {Ein Konstruktor, der ein Objekt der Klasse \refclass{Controller} erzeugt.}
                  
           \method{onStartChanged}
@@ -1197,7 +1197,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
 
           \method{getHistoryModel}[ListModel]
-                 {\keine}
+                 {\none}
                  {
                    Gibt ein \code{javax.swing.ListModel} zurück, das von einer \code{JList} verwendet werden kann, um den Verlauf anzuzeigen.
                  }
@@ -1219,7 +1219,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Für \glspl{osmkachel} wird der \refclass{OSMRenderer} verwendet, für die eigenen Kacheln der \refclass{TileRenderer}.
                  }
           \method{getTileSource}[\refclass{TileSource}]
-                 {\keine}
+                 {\none}
                  {
                    Gibt eine \refclass{TileSource} zurück, die zum Rendern der Karten verwendet werden soll.
                  }
@@ -1229,10 +1229,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           Der Controller für die \refclass{ProfileManagerView}.
         }
-        {\keine}
+        {\none}
         {
           \method{ProfileManagerController}
-                 {\keine}
+                 {\none}
                  {
                    Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
                  }
@@ -1246,7 +1246,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Aktiviert/Deaktiviert den Löschen-Button und die Eingabeelemente, je nachdem, ob das neue Profil ein Standardprofil ist oder nicht.
                  }
           \method{deleteProfile}
-                 {\keine}
+                 {\none}
                  {
                    Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
                    
@@ -1255,13 +1255,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
                  }
           \method{estimateDeletionAmount}[int]
-                 {\keine}
+                 {\none}
                  {
                    Schätzt, wie viel Rechenzeit durch die aktuell erfassten Änderungen verloren gehen würde (durch notwendige Löschung nun veralteter Vorberechnungen).
                    Die geschätzte Dauer wird in Minuten zurückgegeben.
                  }
           \method{saveAllChanges}
-                 {\keine}
+                 {\none}
                  {
                    Führt alle vom Benutzer vorgenommenen Änderungen aus.
                    Dazu gehören das Hinzufügen, Ändern und Löschen von Profilen.
@@ -1272,10 +1272,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           Der Controller für die \refclass{MapManagerView}.
         }
-        {\keine}
+        {\none}
         {
           \method{MapManagerController}
-                 {\keine}
+                 {\none}
                  {
                    Erstellt eine neue Instanz der Klasse. % TODO warum haben wir diesen Konstruktor ohne Argumente? - Lucas
                  }
@@ -1315,7 +1315,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    bei „Aktualisieren“ verwendet sie den Namen der existierenden Karte.
                  }
           \method{deleteCurrentMap} % TODO inkonsistenter name: beim profil ohne „curren“
-                 {\keine}
+                 {\none}
                  {
                    Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
                    
@@ -1324,7 +1324,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Handelt es sich bei der aktuell ausgewählten Karte um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
                  }
           \method{saveAllChanges}
-                 {\keine}
+                 {\none}
                  {
                    Führt alle vom Benutzer vorgenommenen Änderungen aus.
                    Dazu gehören das Importieren und Löschen von Karten sowie das Hinzufügen oder Löschen von Profilen je Karte.
@@ -1338,7 +1338,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 {
   \class{HTMLExporter}
         {Stellt die Funktionalität zum Export der \gls{wegbeschreibung} einer \gls{route} im HTML-Format bereit.}
-        {\keine}
+        {\none}
         {
           \method{exportRouteDescription}
                  {
@@ -1350,7 +1350,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
   \class{GPXExporter}
         {Stellt die Funktionalität zum Export einer \gls{route} im GPX-Format bereit.}
-        {\keine}
+        {\none}
         {
           \method{exportRoute}
                  {
