@@ -1639,13 +1639,13 @@ implements</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2630</x>
+      <x>2950</x>
       <y>1910</y>
-      <w>50</w>
-      <h>910</h>
+      <w>280</w>
+      <h>1420</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;890</additional_attributes>
+    <additional_attributes>30;30;30;80;260;80;260;1400;180;1400</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
