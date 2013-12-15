@@ -417,7 +417,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Eine geometrische Datenstruktur.}
         {\none}
         {
-	\method{GraphIndex}[Konstruktor]
+	\method{GraphIndex}
 		{
 		    \param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
  		}
@@ -445,7 +445,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{highwayType}{HighwayType}{Der Straßentyp.}
         }
         {
-          \method{Graph}[Konstruktor]
+          \method{Graph}
                  {
                    \param{nodes}{Node[]}{Der Knoten-Bestandteil des Adjazenzfeldes.}
                    \param{edges}{Edge[]}{Der Kanten-Bestandteil des Adjazenzfeldes.}
@@ -817,7 +817,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         {\none}
         {
-          \method{TileCache}[Konstruktor]
+          \method{TileCache}
                  {\param{target}{\refclass{TileSource}}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
                  {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
           \method{getTile}[BufferedImage]
@@ -845,7 +845,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
         {\none}
         {
-          \method{TileRenderer}[Konstruktor]
+          \method{TileRenderer}
 	   { 
 		\param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
 	    }
