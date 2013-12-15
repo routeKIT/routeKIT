@@ -398,8 +398,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \package{Map}{
   Dieses Paket enthält alle Klassen zu Karten und Kartengraphen.
-
-  %TODO übersicht?
+  
+  \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
+  \begin{description}
+  \item[\refclass{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Er wird zum \Gls{rendern} der Karte verwendet.
+  \item[\refclass{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
+  \end{description}
 }
 {
   \class{StreetMap}
@@ -766,6 +770,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \package{MapDisplay}{
   Dieses Paket enthält alle Klassen, die an der Darstellung der Karte im \gls{gui} beteiligt sind.
+  
+  Die zentrale Klasse dieses Pakets ist der \refclass{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
+  Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \refclass{TileSource}, welche die Kacheln synchron berechnet.
+  Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \refclass{TileFinishedListener} benachrichtigt.
+  
+  Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
+  
+  Kartenkacheln werden über \gls{smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
 }
 {
   \class{TileFinishedListener} % TODO \class? \interface?
@@ -797,8 +809,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
   \class{TileCache}
-        {Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
-          Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.}
+        {
+          Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
+          Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.
+          
+          Intern werden die gecacheten Kacheln so gehalten, dass der Garbage Collector sie bei Speicherknappheit verwerfen kann (etwa durch \code{SoftReference}s).
+        }
         {\none}
         {
           \method{TileCache}[Konstruktor]
@@ -918,6 +934,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 \package{Precalculation}{
   Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
+  
+  % TODO kurze erklärung, wie die vorberechnung läuft
 }
 {
   \class{PreCalculationScheduler}
@@ -1320,7 +1338,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 
 
-\glsaddallunused
+\glsaddallunused % TODO remove this before final submission. If we don’t use a glossary entry, we obviously don’t need it, and it causes funky line number lists.
 \makeatletter
 \newglossarystyle{myAltlist}{
   \glossarystyle{altlist} % base this style on altlist
