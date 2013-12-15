@@ -1540,14 +1540,14 @@ m1=0..n</panel_attributes>
     <coordinates>
       <x>3500</x>
       <y>1850</y>
-      <w>390</w>
+      <w>590</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>RouteDescriptionGenerator
 --
 
 --
-generateRouteDescription(route: Route): RouteDescription</panel_attributes>
+generateRouteDescription(route: Route, data: ProfileMapCombination): RouteDescription</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
