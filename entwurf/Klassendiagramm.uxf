@@ -1207,6 +1207,8 @@ _+main(args: String[])_</panel_attributes>
     <panel_attributes>MainView
 --
 --
+setCurrentMap(:StreetMap)
+setCurrentProfile(:Profile)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1221,15 +1223,15 @@ _+main(args: String[])_</panel_attributes>
     <panel_attributes>HistoryView
 --
 --
-</panel_attributes>
+HistoryView(:History)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1620</x>
+      <x>1610</x>
       <y>2920</y>
-      <w>260</w>
+      <w>270</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>ProfileManagerView
@@ -1243,15 +1245,16 @@ setAvailableProfiles(:List&lt;Profile&gt;)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1620</x>
+      <x>1610</x>
       <y>2770</y>
-      <w>260</w>
+      <w>270</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>MapManagerView
 --
 --
-</panel_attributes>
+setCurrentMap(:StreetMap, Set&lt;Prolile&gt;)
+setAvailableMaps(:Set&lt;StreetMap&gt;)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1334,13 +1337,13 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
     <coordinates>
       <x>2430</x>
       <y>3090</y>
-      <w>210</w>
+      <w>260</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>ProfileManagerController
 --
 --
-switchProfile(:Profile)
+switchProfile(from: Profile, to: String)
 deleteProfile()
 estimateDeletionAmount(): int
 saveAllChanges()
@@ -1370,24 +1373,24 @@ saveAllChanges()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2610</x>
+      <x>2660</x>
       <y>3110</y>
-      <w>320</w>
+      <w>270</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>300;30;30;30</additional_attributes>
+    <additional_attributes>250;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2610</x>
+      <x>2660</x>
       <y>3130</y>
-      <w>190</w>
+      <w>140</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;100;30;100;170;170;170</additional_attributes>
+    <additional_attributes>30;30;50;30;50;170;120;170</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
