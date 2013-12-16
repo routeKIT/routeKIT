@@ -1255,7 +1255,7 @@ setAvailableProfiles(:List&lt;Profile&gt;)
     <panel_attributes>MapManagerView
 --
 --
-setCurrentMap(:StreetMap, Set&lt;Prolile&gt;)
+setCurrentMap(:StreetMap, :Set&lt;Profile&gt;)
 setAvailableMaps(:Set&lt;StreetMap&gt;)</panel_attributes>
     <additional_attributes/>
   </element>
