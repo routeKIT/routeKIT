@@ -1347,7 +1347,7 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
 --
 --
 switchProfile(from: Profile, to: String)
-deleteProfile()
+deleteCurrentProfile()
 estimateDeletionAmount(): int
 saveAllChanges()
 </panel_attributes>

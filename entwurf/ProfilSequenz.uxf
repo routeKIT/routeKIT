@@ -43,7 +43,7 @@ view-&gt;&gt;&gt;view:view:readValues()
 user-&gt;user:*sigh*
 
 user-&gt;view:user,view:“Delete”
-view-&gt;&gt;&gt;ctrl:view,ctrl:deleteProfile()
+view-&gt;&gt;&gt;ctrl:view,ctrl:deleteCurrentProfile()
 ctrl-&gt;view:view,ctrl:setAvailableProfiles(profiles)
 ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(previousProfile)
 view-&gt;&gt;&gt;view:view:readValues()

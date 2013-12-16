@@ -563,7 +563,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Die Werte in \refparam{ProfileManagerController}{switchProfile}{from} werden gespeichert.
                    Anschließend wird das neue Profil gesucht oder neu erstellt und der View mitgeteilt (siehe \refmethod{ProfileManagerView}{setCurrentProfile}).
                  }
-          \method{deleteProfile}
+          \method{deleteCurrentProfile}
                  {\none}
                  {
                    Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
@@ -627,7 +627,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    bei „Importieren“ stellt die GUI sicher, dass kein bereits existierender Name gewählt wird,
                    bei „Aktualisieren“ verwendet sie den Namen der existierenden Karte.
                  }
-          \method{deleteCurrentMap} % TODO inkonsistenter name: beim profil ohne „curren“
+          \method{deleteCurrentMap}
                  {\none}
                  {
                    Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
