@@ -981,6 +981,61 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
 }
 
+\package{Models} {
+Dieses Paket enthält die Models aus der \gls{mvc}-Architektur. 
+}
+{  \class{ProfileMapCombination}
+        {Eine Kombination aus einem \reftype{Profile}[Profil] und einer \reftype{StreetMap}[Karte].}
+        {
+          \attr{profile}{Profile}{Das \gls{profil}.}
+          \attr{map}{StreetMap}{Die Karte.}
+        }
+        {
+	\method{isCalculated}[boolean]
+         	    {\none}
+	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags existiert.}
+         }
+  \class{ArcFlags}
+        {Enthält die Arc-Flags für den vorberechneten Graphen.}
+        {\none}
+        {
+          \method{getFlags}[int]
+                 {
+                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
+                 }
+                 {Gibt die zum Abbiegevorgang gehörenden Arc-Flags zurück.}
+        }
+\class{Weights}
+        {Enthält die Kantengewichte für den vorberechneten Graphen.}
+        {\none}
+        {
+          \method{getWeight}[int]
+                 {
+                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
+                 }
+                 {Gibt die zum Abbiegevorgang gehörendes Gewicht zurück.}
+        }
+
+  \class{RouteModel}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
+        {\none}
+        {
+          \method{addRouteListener}
+                 {
+                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
+                 }
+                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
+        }
+  \class{RouteModelListener}
+        {Wird bei Änderungen am \reftype{RouteModel} informiert.}
+        {\none}
+        {
+          \method{routeModelChanged}
+                 {\none}
+                 {Wird bei jeder Änderung aufgerufen}
+        }
+}
+
 \package{View}{
   Dieses Paket enthält die Views nach der \gls{mvc}-Architektur. Alle Views im Klassendiagramm sind Interfaces, die von genau einer Klasse realisiert werden. 
 }
@@ -1412,6 +1467,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   Dieses Paket enthält verschiedene nützliche Klassen, die sonst nirgendwo hingehören.
 }
 {
+  \class{RouteKit}
+        {Startet die Anwendung.}
+        {\none}
+        {
+	\method{main}
+         	    {
+		\param{args}{String[]}{String-Argumente}
+               }
+	    {Erzeugt einen \reftype{Controller}.}
+         }
   \class{Coordinates}
         {Kapselt ein Paar von geographischen Koordinaten.}
         {
@@ -1458,74 +1523,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
         }
         {\none}
-}
-
-\package{TODO}{
-  Dieses Paket enthält alle Klassen, die noch in keinem anderen Paket enthalten sind.
-  Vor der endgültigen Abgabe sollten alle diese Klassen einen Platz in einem anderen Paket finden.
-}
-{
-  \class{RouteKit}
-        {Startet die Anwendung.}
-        {\none}
-        {
-	\method{main}
-         	    {
-		\param{args}{String[]}{String-Argumente}
-               }
-	    {Erzeugt einen \reftype{Controller}.}
-         }
-
-  \class{ProfileMapCombination}
-        {Eine Kombination aus einem \reftype{Profile}[Profil] und einer \reftype{StreetMap}[Karte].}
-        {
-          \attr{profile}{Profile}{Das \gls{profil}.}
-          \attr{map}{StreetMap}{Die Karte.}
-        }
-        {
-	\method{isCalculated}[boolean]
-         	    {\none}
-	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags existiert.}
-         }
-  \class{ArcFlags}
-        {Enthält die Arc-Flags für den vorberechneten Graphen.}
-        {\none}
-        {
-          \method{getFlags}[int]
-                 {
-                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
-                 }
-                 {Gibt die zum Abbiegevorgang gehörenden Arc-Flags zurück.}
-        }
-\class{Weights}
-        {Enthält die Kantengewichte für den vorberechneten Graphen.}
-        {\none}
-        {
-          \method{getWeight}[int]
-                 {
-                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
-                 }
-                 {Gibt die zum Abbiegevorgang gehörendes Gewicht zurück.}
-        }
-
-  \class{RouteModel}
-        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
-        {\none}
-        {
-          \method{addRouteListener}
-                 {
-                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
-                 }
-                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
-        }
-  \class{RouteModelListener}
-        {Wird bei Änderungen am \reftype{RouteModel} informiert.}
-        {\none}
-        {
-          \method{routeModelChanged}
-                 {\none}
-                 {Wird bei jeder Änderung aufgerufen}
-        }
 }
 
 
