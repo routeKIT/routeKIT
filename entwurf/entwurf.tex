@@ -37,6 +37,13 @@
 \newcommand{\@methodlabel}[2]{M:#1.#2}
 \newcommand{\@paramlabel}[3]{P:#1.#2.#3}
 
+% evaluate #2 if the label #1 exists, else #3.
+\newcommand{\ifhaslabel}[3]{
+  \@ifundefined{r@#1}
+               {#3}
+               {#2}
+}
+
 % Argumente:
 % 1. Name
 % 2. Beschreibung
@@ -85,7 +92,7 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\attr}[3]{
-  \item[\namedlabel{\@attrlabel{\currentclass}{#1}}{\code{#1}}] #3 Typ:~\code{#2}
+  \item[\namedlabel{\@attrlabel{\currentclass}{#1}}{\code{#1}}] #3 Typ:~\refclass{#2}
 }
 % Argumente:
 % 1. Name
@@ -104,7 +111,7 @@
       \end{description}
     }
     \IfValueTF{#2} % if the optional “type” argument is given...
-              {Rückgabetyp: \code{#2}} % then show the return type...
+              {Rückgabetyp:~\refclass{#2}} % then show the return type...
               {} % else don’t.
   \let\currentmethod=\undefined
 }
@@ -113,14 +120,16 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\param}[3]{
-  \item[\namedlabel{\@paramlabel{\currentclass}{\currentmethod}{#1}}{\code{#1}}] #3 Typ:~\code{#2}
+  \item[\namedlabel{\@paramlabel{\currentclass}{\currentmethod}{#1}}{\code{#1}}] #3 Typ:~\refclass{#2}
 }
 
 % Argumente:
 % 1. Klasse
 % 2. (optional) Text – default: Klasse
-\NewDocumentCommand{\refclass}{mO{#1}}{
-  \hyperref[\@classlabel{#1}]{\code{#2}}\xspace%
+\NewDocumentCommand{\refclass}{mO{#1}}{%
+  \ifhaslabel{\@classlabel{#1}}{% if the label exists...
+    \hyperref[\@classlabel{#1}]{\code{#2}}}{% then reference it...
+    \code{#2}}\xspace% else just print the text.
 }
 % Argumente:
 % 1. Klasse
@@ -398,7 +407,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
                  }
                  {Speichert das Profil in die angegebene Datei.}
-          \method{load}[\refclass{Profile}]
+          \method{load}[Profile]
                  {
                    \param{file}{File}{Die Datei, aus der das Profil geladen wird.}
                  } 
@@ -420,7 +429,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Eine Karte.}
         {
           \attr{name}{String}{Der Name der Karte.}
-          \attr{graph}{\refclass{Graph}}{Der Graph der Karte, d.\,h. das Straßennetz.}
+          \attr{graph}{Graph}{Der Graph der Karte, d.\,h. das Straßennetz.}
         }
         {\none}
    \class{GraphIndex}
@@ -429,7 +438,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
 	\method{GraphIndex}
 		{
-		    \param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
+		    \param{graph}{Graph}{Ein Adjazenzfeld.}
  		}
 		    {Erzeugt eine geometrische Datenstruktur für einen Graph aus einem Adjazenzfeld.}	
 	\method{getEdgesIn}[Edge[]]
@@ -440,7 +449,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 		    {
                       Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
                     }
-	\method{projectToEdge} [\refclass{PointOnEdge}]
+	\method{projectToEdge} [PointOnEdge]
                  {
                    \param{lon}{float}{Die geographische Länge von einem Punkt.}
                    \param{lat}{float}{Die geographische Breite von einem Punkt.}
@@ -459,11 +468,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{nodes}{Node[]}{Der Knoten-Bestandteil des Adjazenzfeldes.}
                    \param{edges}{Edge[]}{Der Kanten-Bestandteil des Adjazenzfeldes.}
-                   \param{nodeProps}{Map<Node, \refclass{NodeProperties}>}
+                   \param{nodeProps}{Map<Node, NodeProperties>}
                          {
                            Die \code{NodeProperties} der Knoten des Graphen. Es wird eine \code{Map} anstelle eines Arrays verwendet, da die meisten Knoten keine besonderen Eigenschaften haben und daher das Array zum großen Teil leer wäre.
                          }
-                   \param{edgeProps}{\refclass{EdgeProperties}{}[]} % use \refclass{EdgeProperties}{}[] instead of \refclass{EdgeProperties}[]: in the latter form, LaTeX thinks we’re passing an optional argument to \refclass
+                   \param{edgeProps}{EdgeProperties[]}
                          {
                            Die \code{EdgeProperties} der Kanten des Graphen. Hier wird ein Array verwendet, da jede Kante einen Namen und damit ein \code{EdgeProperties}-Objekt hat.
                          }
@@ -489,10 +498,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{getLon}[float]
                  {\param{node}{Node}{Der Knoten, dessen geographische Länge gesucht wird.}}
                  {Gibt die geographische Länge des angegebenen Knotens zurück.}
-          \method{getNodeProperties}[\refclass{NodeProperties}]
+          \method{getNodeProperties}[NodeProperties]
                  {\param{node}{Node}{Der Knoten, dessen \refclass{NodeProperties} gesucht werden.}}
                  {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
-          \method{getEdgeProperties}[\refclass{EdgeProperties}]
+          \method{getEdgeProperties}[EdgeProperties]
                  {\param{edge}{Edge}{Die Kante, deren \refclass{EdgeProperties} gesucht werden.}}
                  {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
         }
@@ -524,7 +533,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {\none}
                  {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{getMaxSpeed}[int]
-                 {\param{profile}{\refclass{Profile}}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
+                 {\param{profile}{Profile}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
         }
   \class{EdgeBasedGraph}
@@ -580,7 +589,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{allowsTurn}[boolean]
                  {
                    \param{turn}{Turn}{Der zu betrachtende Abbiegevorgang.}
-                   \param{profile}{\refclass{Profile}}{Das verwendete Profil.}
+                   \param{profile}{Profile}{Das verwendete Profil.}
                  }
                  {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
         }
@@ -605,8 +614,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   \class{ProfileMapCombination}
         {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
         {
-          \attr{profile}{\refclass{Profile}}{Das \gls{profil}.}
-          \attr{map}{\refclass{StreetMap}}{Die Karte.}
+          \attr{profile}{Profile}{Das \gls{profil}.}
+          \attr{map}{StreetMap}{Die Karte.}
         }
         {
 	\method{isCalculated}[boolean]
@@ -646,7 +655,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{distanceTo}[float]
                  {
-                   \param{other}{\refclass{Coordinates}}{Die anderen Koordinaten.}
+                   \param{other}{Coordinates}{Die anderen Koordinaten.}
                  }
                  {
                    Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.
@@ -693,11 +702,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
         {\none}
         {
-          \method{calculateRoute}[\refclass{Route}]
+          \method{calculateRoute}[Route]
                  {
-                   \param{start}{\refclass{PointOnEdge}}{Der Startpunkt für die Routenberechnung.}
-                   \param{destination}{\refclass{PointOnEdge}}{Der Zielpunkt für die Routenberechnung.}
-                   \param{data}{\refclass{ProfileMapCombination}}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
+                   \param{start}{PointOnEdge}{Der Startpunkt für die Routenberechnung.}
+                   \param{destination}{PointOnEdge}{Der Zielpunkt für die Routenberechnung.}
+                   \param{data}{ProfileMapCombination}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
                  }
                  {Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
         }
@@ -713,7 +722,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
         {\none} % ?
         {
-          \method{getInstructions}[List<\refclass{TurnInstruction}>]
+          \method{getInstructions}[List<TurnInstruction>]
                  {\none}
                  {Liefert eine Liste der Abbiegeanweisungen.}
         }
@@ -721,10 +730,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
         {\none}
         {
-          \method{generateRouteDescription}[\refclass{RouteDescription}]
+          \method{generateRouteDescription}[RouteDescription]
                  {
-                   \param{route}{\refclass{Route}}{Die Route, deren Beschreibung erzeugt werden soll.}
-                   \param{data}{\refclass{ProfileMapCombination}}{Der Graph der zur Generierung der Beschreibung verwendet wird.}
+                   \param{route}{Route}{Die Route, deren Beschreibung erzeugt werden soll.}
+                   \param{data}{ProfileMapCombination}{Der Graph der zur Generierung der Beschreibung verwendet wird.}
                  }
                  {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
         }
@@ -766,7 +775,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{destination}{Coordinates}{Der Zielpunkt.}
                  }
                  {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
-          \method{getEntries}[List<\refclass{HistoryEntry}>]
+          \method{getEntries}[List<HistoryEntry>]
                  {\none}
                  {Gibt alle Einträge des Verlaufs zurück.}
           \method{save}
@@ -840,7 +849,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {\none}
         {
           \method{TileCache}
-                 {\param{target}{\refclass{TileSource}}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
+                 {\param{target}{TileSource}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
                  {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
           \method{getTile}[BufferedImage]
                  {
@@ -854,7 +863,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
 
  \method{addTileFinishedListener}
-                 {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
+                 {\param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}}
                  {
                    Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
                    Die Kachel ist Teil der Nachricht.
@@ -866,7 +875,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{TileRenderer}
 	   { 
-		\param{graph}{\refclass{Graph}}{Ein Adjazenzfeld.}
+		\param{graph}{Graph}{Ein Adjazenzfeld.}
 	    }
 	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
           \method{getTile}[BufferedImage]
@@ -901,7 +910,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{MapView}
                  {
-                   \param{s}{\refclass{TileSource}}{eine gerenderte Kachel}
+                   \param{s}{TileSource}{eine gerenderte Kachel}
                  }
                  {Ein Konstruktor, der ein Objekt der Klasse \refclass{MapView} erzeugt.}
           \method{paint}
@@ -927,14 +936,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{setCurrentProfile}
                  {
-                   \param{profile}{\refclass{Profile}}{Das neue Profile.}
+                   \param{profile}{Profile}{Das neue Profile.}
                  }
                  {
                    Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
                  }
           \method{setAvailableProfiles}
                  {
-                   \param{profiles}{List<\refclass{Profile}>}{Die verfügbaren Profile.}
+                   \param{profiles}{List<Profile>}{Die verfügbaren Profile.}
                  }
                  {
                    Setzt die Profile, die aktuell ausgewählt werden können.
@@ -985,7 +994,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
         {\none}
         {
-          \method{importMap}[\refclass{StreetMap}]
+          \method{importMap}[StreetMap]
                  {
                    \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
                  }
@@ -1040,7 +1049,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{calculateArcFlags}
                  {
-                   \param{combination}{\refclass{ProfileMapCombination}}{Die Kombination aus Profil und Karte.}
+                   \param{combination}{ProfileMapCombination}{Die Kombination aus Profil und Karte.}
                  }
                  {
                    Berechnet die Arc-Flags für die angegebene Kombination und setzt die \refclass{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
@@ -1053,7 +1062,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{partitionGraph}
                  {
-                   \param{graph}{\refclass{EdgeBasedGraph}}{Der zu partitionierende Graph.}
+                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
                    \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
                  }
                  {
@@ -1069,7 +1078,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{partitionGraph}
                  {
-                   \param{graph}{\refclass{EdgeBasedGraph}}{Der zu partitionierende Graph.}
+                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
                    \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
                  }
                  {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
@@ -1086,7 +1095,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{saveProfile}
                  {
-                   \param{p}{\refclass{Profile}}{Das Profil, das gespeichert werden soll.}
+                   \param{p}{Profile}{Das Profil, das gespeichert werden soll.}
                  }
                  {
                    Speichert das ausgewählte Profil in der internen Liste und auf der Festplatte.
@@ -1095,12 +1104,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
           \method{deleteProfile}
                  {
-                   \param{p}{\refclass{Profile}}{Das Profil, das gelöscht werden soll.}
+                   \param{p}{Profile}{Das Profil, das gelöscht werden soll.}
                  }
                  {
                    Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
                  }
-          \method{getProfiles}[Set<\refclass{Profile}>]
+          \method{getProfiles}[Set<Profile>]
                  {\none}
                  {
                    Gibt alle Profile in der internen Liste zurück.
@@ -1112,7 +1121,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{saveMap}
                  {
-                   \param{m}{\refclass{StreetMap}}{Die Karte, die gespeichert werden soll.}
+                   \param{m}{StreetMap}{Die Karte, die gespeichert werden soll.}
                  }
                  {
                    Speichert die ausgewählte Karte in der internen Liste und auf der Festplatte.
@@ -1121,12 +1130,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
           \method{deleteMap}
                  {
-                   \param{m}{\refclass{StreetMap}}{Die Karte, die gelöscht werden soll.}
+                   \param{m}{StreetMap}{Die Karte, die gelöscht werden soll.}
                  }
                  {
                    Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
                  }
-          \method{getMaps}[Set<\refclass{StreetMap}>]
+          \method{getMaps}[Set<StreetMap>]
                  {\none}
                  {
                    Gibt alle Karten in der internen Liste zurück.
@@ -1195,7 +1204,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
           \method{selectMap}
                  {
-                   \param{map}{\refclass{StreetMap}}{Die aktuelle Karte.} 
+                   \param{map}{StreetMap}{Die aktuelle Karte.} 
                  }
                  {
                    Wählt die angegebe Karte aus.
@@ -1223,7 +1232,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Legt fest, ob \glspl{osmkachel} oder selbst gerenderte Kacheln verwendet werden sollen.
                    Für \glspl{osmkachel} wird der \refclass{OSMRenderer} verwendet, für die eigenen Kacheln der \refclass{TileRenderer}.
                  }
-          \method{getTileSource}[\refclass{TileSource}]
+          \method{getTileSource}[TileSource]
                  {\none}
                  {
                    Gibt eine \refclass{TileSource} zurück, die zum Rendern der Karten verwendet werden soll.
@@ -1238,7 +1247,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{switchProfile}
                  {
-                   \param{p}{\refclass{Profile}}{Das neue Profil.}
+                   \param{p}{Profile}{Das neue Profil.}
                  }
                  {
                    Wird aufgerufen, wenn in der \refclass{ProfileManagerView} ein anderes Profil ausgewählt wird.
@@ -1276,7 +1285,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{switchMap}
                  {
-                   \param{m}{\refclass{StreetMap}}{Die neue Karte.}
+                   \param{m}{StreetMap}{Die neue Karte.}
                  }
                  {
                    Wird aufgerufen, wenn in der \refclass{MapManagerView} eine andere Karte ausgewählt wird.
@@ -1285,14 +1294,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
           \method{addProfile}
                  {
-                   \param{p}{\refclass{Profile}}{Das neue Profil.}
+                   \param{p}{Profile}{Das neue Profil.}
                  }
                  {
                    Fügt das angegebene Profil zur ausgewählten Karte hinzu.
                  }
           \method{removeProfile}
                  {
-                   \param{p}{\refclass{Profile}}{Das Profil, das entfernt werden soll.}
+                   \param{p}{Profile}{Das Profil, das entfernt werden soll.}
                  }
                  {
                    Entfernt das angegebene Profil von der ausgewählten Karte.
@@ -1337,7 +1346,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{exportRouteDescription}
                  {
-                   \param{routeDesc}{\refclass{RouteDescription}}{Die zu exportierende Wegbeschreibung.}
+                   \param{routeDesc}{RouteDescription}{Die zu exportierende Wegbeschreibung.}
                    \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                  }
                  {Exportiert die \refparam{HTMLExporter}{exportRouteDescription}{routeDesc} im HTML-Format in die angegebene Datei.}
@@ -1349,7 +1358,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{exportRoute}
                  {
-                   \param{route}{\refclass{Route}}{Die zu exportierende Route.}
+                   \param{route}{Route}{Die zu exportierende Route.}
                    \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
                  }
                  {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route} im GPX-Format in die angegebene Datei.}
