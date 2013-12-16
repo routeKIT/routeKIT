@@ -522,7 +522,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \refclass{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
           
           Diese Datenstruktur ist profilunabhängig und wird, wie \refclass{Graph}, bei der Vorberechnung für eine Karte erstellt.
-          Erst in Kombination mit den Profil-spezifischen \refclass{Weight} kann sie zur Routenberechnung verwendet werden.
+          Erst in Kombination mit den Profil-spezifischen \refclass{Weights} kann sie zur Routenberechnung verwendet werden.
         }
         {\none}
         {
@@ -1012,7 +1012,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus Profil und Karte.}
                  }
                  {
-                   Berechnet die Kantengewichte für die angegebene Kombination und setzt die \refclass{Weight} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
+                   Berechnet die Kantengewichte für die angegebene Kombination und setzt die \refclass{Weights} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
                  }
         }
         
@@ -1024,7 +1024,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{graph}{Graph}{Der Graph.}
                    \param{partitions}{Partition[]}{Die Partitionen des Graphen.}
-                   \param{weights}{Weight}{Die Kantengewichte des Graphen.}
+                   \param{weights}{Weights}{Die Kantengewichte des Graphen.}
                  }
                  {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
         }
