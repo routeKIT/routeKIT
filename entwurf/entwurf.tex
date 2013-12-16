@@ -1485,6 +1485,46 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
 }
 
+
+\section{Sequenzdiagramme}
+
+\subsection{Programmstart}
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, width=0.9\textwidth]{StartSequenz}
+\caption{Start des Programms}
+\label{fig:sequenz_start}
+\end{figure}
+Beteiligte Klassen: \reftype{RouteKit}, \reftype{Controller}, \reftype{MapManager}, \reftype{ProfileManager}, \reftype{ProfileMapCombination}, \reftype{RouteModel}, \reftype{MainView}, \reftype{TileCache}, \reftype{MapView}
+
+\subsection{Rendern}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{RenderSequenz}
+\caption{Rendern der Karte}
+\label{fig:sequenz_rendern}
+\end{figure}
+Beteiligte Klassen: \reftype{MapView}, \reftype{TileCache}, \reftype{TileSource}
+
+\subsection{Routenberechnung}
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, height=\textheight]{RouteCalculationSequenz}
+\caption{Berechnen der Route}
+\label{fig:sequenz_routeCalculation}
+\end{figure}
+Beteiligte Klassen: \reftype{MainView}, \reftype{MapView}, \reftype{Controller}, \reftype{RouteModel}, \reftype{RouteCalculator}, \reftype{RouteDescription}, \reftype{Route}, \reftype{RouteDescription}
+
+\subsection{Profilverwaltung}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{ProfilSequenz}
+\caption{Hinzufügen und Entfernen von Profilen}
+\label{fig:sequenz_profilVerwaltung}
+\end{figure}
+Beteiligte Klassen: \reftype{ProfileManagerView}, \reftype{ProfileManagerController}, \reftype{ProfileManager}, \reftype{MainView}
+
+
 \glsaddallunused % TODO remove this before final submission. If we don’t use a glossary entry, we obviously don’t need it, and it causes funky line number lists.
 \makeatletter
 \newglossarystyle{myAltlist}{

@@ -2,6 +2,7 @@ LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 UMLET = java -jar ../Umlet/umlet.jar
+ARTEFAKTE = StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf
 
 all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf
 
@@ -9,7 +10,7 @@ all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf Render
 
 clean: clean-entwurf clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz
 
-entwurf.pdf: entwurf.tex $(ARTEFAKTE) $(PNGS)
+entwurf.pdf: entwurf.tex $(ARTEFAKTE)
 	$(MAKE) clean-$(@:.pdf=) # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
 	-$(LATEX) $< 2>&1 > /dev/null # initial build
 	-makeglossaries $(@:.pdf=) # initial glossary
