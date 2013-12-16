@@ -53,12 +53,13 @@ clean-ProfilSequenz:
 	-$(RM) ProfilSequenz.pdf
 
 RouteCalculationSequenz.pdf: RouteCalculationSequenz.uxf
-	sed 's.<w>2250</w>.<w>2450</w>.' $^ > $^.tmp # work around UMLet bug that cuts off part of the diagram
+	sed 's.<w>1690</w>.<w>1890</w>.' $^ > $^.tmp # work around UMLet bug that cuts off part of the diagram
 	$(UMLET) -action=convert -format=pdf -filename=$^.tmp -output=$(@:.pdf=)
 	-$(RM) $^.tmp
 
 clean-RouteCalculationSequenz:
 	-$(RM) RouteCalculationSequenz.pdf
+
 PreCalculationSequenz.pdf: PreCalculationSequenz.uxf
 	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
 

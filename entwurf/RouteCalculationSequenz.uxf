@@ -6,11 +6,11 @@
     <coordinates>
       <x>0</x>
       <y>10</y>
-      <w>2250</w>
-      <h>740</h>
+      <w>1690</w>
+      <h>680</h>
     </coordinates>
     <panel_attributes>title:Route Calculation
-_user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_:RouteModel~model_|_:RouteCalculator~calc_|_:RouteDescriptionGenerator~gen_|_:Route~route_|_:RouteDescription~desc_
+_user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_:RouteModel~model_|_:RouteCalculator~calc_|_:RouteDescriptionGenerator~gen_
 
 user-&gt;view:user,view:"Sets start point"
 
@@ -25,7 +25,6 @@ user-&gt;view:user,view:"Sets destination point"
 view-&gt;ctrl:view,ctrl:onDestinationChanged
 ctrl-&gt;model:ctrl,model:setDestination
 ctrl-&gt;&gt;&gt;calc:ctrl,calc:calculateRoute
-calc-&gt;&gt;&gt;route:calc,route:&lt;&lt;create&gt;&gt;
 calc.&gt;ctrl:calc,ctrl:Route
 
 ctrl-&gt;&gt;&gt;model:ctrl,model:setRoute
@@ -35,7 +34,6 @@ view-&gt;&gt;&gt;view:view:paint()
 model-&gt;main:model,main:routeModelChanged
 
 ctrl-&gt;&gt;&gt;gen:ctrl,gen:generateRouteDescription
-gen-&gt;&gt;&gt;desc:gen,desc:&lt;&lt;create&gt;&gt;
 gen.&gt;ctrl:gen,ctrl:RouteDescription
 
 ctrl-&gt;&gt;&gt;model:ctrl,model:setRouteDescription
