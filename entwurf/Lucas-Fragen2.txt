@@ -11,5 +11,5 @@ estimatedCalculationTime auch im Controller (analog Command)
 saveAllChanges macht auch Speichern-Hälfte von swap (gemacht) (sinnlos, hat keinen Zugriff auf die Eingabeelemente)
 swap vs switch, delete vs remove (gemacht)
 RemoveProfileCommand, AddProfileCommand? (gemacht) (obsolet)
-onStartChanged: PointOnEdge?
+onStartChanged: PointOnEdge? (gemacht) (Nee. Viel zu viel Logik für die View – braucht Zugriff auf den Graphen etc.)
 Rückgabetyp Konstruktor (Graph) (gemacht)
