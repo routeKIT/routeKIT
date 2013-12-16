@@ -156,6 +156,11 @@
     \hyperref[\@typelabel{#1}]{\code{#2}}}{% then reference it...
     \code{#2}}\xspace% else just print the text.
 }
+% DEPRECATED
+\NewDocumentCommand{\refclass}{mO{#1}}{%
+  \GenericWarning{}{The command \refclass is deprecated -- use \reftype instead}%
+  \reftype{#1}[#2]%
+}
 % Argumente:
 % 1. Klasse
 % 2. Attribut
