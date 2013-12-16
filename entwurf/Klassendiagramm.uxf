@@ -257,7 +257,7 @@ _load(:File): History_</panel_attributes>
 GraphPartitioner
 --
 --
-&lt;&lt;abstract&gt;&gt;partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
+&lt;&lt;abstract&gt;&gt;partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -271,7 +271,7 @@ GraphPartitioner
     <panel_attributes>ExternalPartitionerAdapter
 --
 --
-partitionGraph(:Graph, numberOfPartitions: int): Partition[]</panel_attributes>
+partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1649,9 +1649,9 @@ implements</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>4810</x>
-      <y>3480</y>
+      <y>3470</y>
       <w>300</w>
-      <h>150</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>EdgeBasedGraph
 --
@@ -1661,6 +1661,7 @@ getIncomingTurns(:Edge): Set&lt;Turn&gt;
 getTargetEdge(:Turn): Edge
 getStartEdge(:Turn): Edge
 getPartition(:Edge): Partition
+setPartitions(:Partition[])
 getTurnType(:Turn): TurnType
 allowsTurn(:Turn, :Profile): boolean
 </panel_attributes>
@@ -1672,10 +1673,10 @@ allowsTurn(:Turn, :Profile): boolean
       <x>4920</x>
       <y>3400</y>
       <w>50</w>
-      <h>100</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>30;80;30;30</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>

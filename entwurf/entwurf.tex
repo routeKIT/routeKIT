@@ -550,7 +550,18 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{edge}{Edge}{Die Kante, deren Partition bestimmt werden soll.}
                  }
-                 {Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten des kantenbasierten Graphen) befindet.}
+                 {
+                   Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten des kantenbasierten Graphen) befindet.
+                   
+                   Ist noch keine Partitionierung gegeben, so wird immer eine Standard-Partition zurückgegeben.
+                 }
+          \method{setPartitions}
+                 {
+                   \param{partitions}{Partition[]}{Die neuen Partitionen.}
+                 }
+                 {
+                   Setzt die Partitionen des Graphen. Die \code{Edge}s des Graphen sind die Indizes in \refparam{EdgeBasedGraph}{setPartitions}{partition}.
+                 }
           \method{getTurnType}[TurnType]
                  {
                    \param{turn}{Turn}{Der Abbiegevorgang, dessen Art gesucht wird.}
@@ -1030,21 +1041,25 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Partitioniert einen gegebenen Graphen.}
         {\none}
         {
-          \method{partitionGraph}[Partition[]]
+          \method{partitionGraph}
                  {
-                   \param{graph}{Graph}{Der zu partitionierende Graph.}
+                   \param{graph}{\refclass{EdgeBasedGraph}}{Der zu partitionierende Graph.}
                    \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
                  }
-                 {Teilt den Graphen in die gewünschte Anzahl an Partitionen.}
+                 {
+                   Teilt den Graphen in die gewünschte Anzahl an Partitionen.
+                   
+                   Die ermittelten Partitionen werden über \refmethod{EdgeBasedGraph}{setPartitions} direkt gesetzt.
+                 }
         }
         
   \class{ExternalPartitionerAdapter}
         {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
         {\none}
         {
-          \method{partitionGraph}[Partition[]]
+          \method{partitionGraph}
                  {
-                   \param{graph}{Graph}{Der zu partitionierende Graph.}
+                   \param{graph}{\refclass{EdgeBasedGraph}}{Der zu partitionierende Graph.}
                    \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
                  }
                  {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
