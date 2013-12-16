@@ -979,7 +979,22 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
    \class{MainView}
         {Zeigt das Hauptfenster auf dem Bildschirm an.}
         {\none}
-        {\none}
+        {
+          \method{setCurrentMap}
+                 {
+                   \param{map}{StreetMap}{Die neue Karte.}
+                 }
+                 {
+                   % TODO
+                 }
+          \method{setCurrentProfile}
+                 {
+                   \param{profile}{Profile}{Das neue Profil.}
+                 }
+                 {
+                   % TODO
+                 }
+        }
 
   \class{MapView}
         {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
@@ -1020,12 +1035,37 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
    \class{MapManagerView}
         {Zeigt das Fenster der Kartenverwaltung auf dem Bildschirm an.}
         {\none}
-        {\none}
+        {
+          \method{setCurrentMap}
+                 {
+                   \param{map}{StreetMap}{Die neue Karte.}
+                   \param{profiles}{Set<Profile>}{Die Profile für die neue Karte.}
+                 }
+                 {
+                   Setzt die aktuelle Karte auf die angegebene Karte, aktualisiert die Liste der Profile für die ausgewählte Karte und aktiviert/deaktiviert die „Import“- und „Löschen“-Buttons, je nachdem, ob es sich um eine Standardkarte handelt oder nicht.
+                 }
+          \method{setAvailableMaps}
+                 {
+                   \param{maps}{Set<StreetMap>}{Die verfügbaren Karten.}
+                 }
+                 {
+                   Setzt die Karten, die aktuell ausgewählt werden können.
+                 }
+        }
 
   \class{HistoryView}
         {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}
         {\none}
-        {\none}
+        {
+          \method{HistoryView}
+                 {
+                   \param{history}{History}{Der Verlauf, der angezeigt wird.}
+                 }
+                 {
+                   Erstellt eine HistoryView für den angegebenen Verlauf.
+                   (Der Verlauf kann später nicht mehr geändert werden.)
+                 }
+        }
 
   \class{AboutView}
         {Zeigt das Fenster mit den Informationen über \routeKIT auf dem Bildschirm an.}
