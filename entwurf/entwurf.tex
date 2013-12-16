@@ -29,6 +29,14 @@
 %  \linespread{0}\selectfont % don’t advance line after empty item
   \item[] keine.
 }
+
+\makeatletter
+
+\newcommand{\@classlabel}[1]{K:#1}
+\newcommand{\@attrlabel}[2]{A:#1.#2}
+\newcommand{\@methodlabel}[2]{M:#1.#2}
+\newcommand{\@paramlabel}[3]{P:#1.#2.#3}
+
 % Argumente:
 % 1. Name
 % 2. Beschreibung
@@ -47,7 +55,7 @@
 % 4. Methoden (ein oder mehrere \method, oder \none)
 \newcommand{\class}[4]{
   \newcommand{\currentclass}[0]{#1}
-  \item[\namedlabel{K:#1}{\code{#1}}] #2
+  \item[\namedlabel{\@classlabel{#1}}{\code{#1}}] #2
     \ifstrequal{#3#4}{\none\none}{
       % \none attributes and \none methods, skip
     }{
@@ -77,16 +85,16 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\attr}[3]{
-  \item[\namedlabel{A:\currentclass.#1}{\code{#1}}] #3 Typ:~\code{#2}
+  \item[\namedlabel{\@attrlabel{\currentclass}{#1}}{\code{#1}}] #3 Typ:~\code{#2}
 }
 % Argumente:
 % 1. Name
-% 2. (optional) Typ – default: void (wird nicht angezeigt)
+% 2. (optional) Typ – default: void (wird nicht angezeigt); wird automatisch gelinkt, falls vorhanden
 % 3. Parameter (ein oder mehrere \param, oder \none)
 % 4. Beschreibung
 \NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
   \newcommand{\currentmethod}[0]{#1}
-  \item[\namedlabel{M:\currentclass.#1}{\code{#1}}] #4\\
+  \item[\namedlabel{\@methodlabel{\currentclass}{#1}}{\code{#1}}] #4\\
     \ifstrequal{#3}{\none}{
       % \none parameters, skip
     }{
@@ -105,21 +113,21 @@
 % 2. Typ
 % 3. kurze Beschreibung
 \newcommand{\param}[3]{
-  \item[\namedlabel{P:\currentclass.\currentmethod.#1}{\code{#1}}] #3 Typ:~\code{#2}
+  \item[\namedlabel{\@paramlabel{\currentclass}{\currentmethod}{#1}}{\code{#1}}] #3 Typ:~\code{#2}
 }
 
 % Argumente:
 % 1. Klasse
 % 2. (optional) Text – default: Klasse
 \NewDocumentCommand{\refclass}{mO{#1}}{
-  \hyperref[K:#1]{\code{#2}}\xspace%
+  \hyperref[\@classlabel{#1}]{\code{#2}}\xspace%
 }
 % Argumente:
 % 1. Klasse
 % 2. Attribut
 % 3. (optional) Text – default: Attribut innerhalb der Klasse, sonst Klasse.Attribut
 \NewDocumentCommand{\refattr}{mmO{__DEFAULT__}}{%
-  \hyperref[A:#1.#2]{\code{%
+  \hyperref[\@attrlabel{#1}{#2}]{\code{%
       \ifthenelse{\equal{#3}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           #2% we’re inside the same class, only use the attribute name
@@ -135,7 +143,7 @@
 % 2. Methode
 % 3. (optional) Text – default: Methode innerhalb der Klasse, sonst Klasse.Methode
 \NewDocumentCommand{\refmethod}{mmO{__DEFAULT__}}{%
-  \hyperref[M:#1.#2]{\code{%
+  \hyperref[\@methodlabel{#1}{#2}]{\code{%
       \ifthenelse{\equal{#3}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           #2% we’re inside the same class, only use the method name
@@ -152,7 +160,7 @@
 % 3. Parameter
 % 4. (optional) Text – default: Parameter innerhalb der Methode, sonst Methode.Parameter innerhalb der Klasse, sonst Klasse.Methode.Parameter
 \NewDocumentCommand{\refparam}{mmmO{__DEFAULT__}}{%
-  \hyperref[P:#1.#2.#3]{\code{%
+  \hyperref[\@paramlabel{#1}{#2}{#3}]{\code{%
       \ifthenelse{\equal{#4}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           \ifthenelse{\equal{\currentmethod}{#2}}{%
@@ -165,6 +173,8 @@
         #4%
   }}}\xspace%
 }
+
+\makeatother
 
 \newcommand{\code}[1]{\texttt{#1}}
 
