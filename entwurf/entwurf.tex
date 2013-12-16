@@ -999,15 +999,21 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         
   \class{EdgeWeighter}
-        {Versieht die Kanten eines Graphen mit Kantengewichten.}
+        {
+          Versieht den kantenbasierten Graphen (\refclass{EdgeBasedGraph}) mit Kantengewichten.
+          
+          Die Kantengewichte des kantenbasierten Graphen sind profilabhängig und geben an, wie „teuer“ ein bestimmter Abbiegevorgang ist.
+          Abbiegebeschränkungen werden durch maximale Kantengewichte umgesetzt.
+        }
         {\none}
         {
-          \method{weightEdges}[Weight]
+          \method{weightEdges}
                  {
-                   \param{graph}{Graph}{Der zu gewichtende Graph.}
-                   \param{profile}{Profile}{Das zu verwendende Profil.}
+                   \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus Profil und Karte.}
                  }
-                 {Versieht die Kanten des gegebenen Graphen mit Kantengewichten basierend auf durch das Profil beeinflussten Beschränkungen.}
+                 {
+                   Berechnet die Kantengewichte für die angegebene Kombination und setzt die \refclass{Weight} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
+                 }
         }
         
   \class{ArcFlagsCalculator}

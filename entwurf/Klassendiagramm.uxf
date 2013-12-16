@@ -341,7 +341,7 @@ program</panel_attributes>
     <panel_attributes>EdgeWeighter
 --
 --
-weightEdges(:Graph, :Profile): Weight</panel_attributes>
+weightEdges(:ProfileMapCombination)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

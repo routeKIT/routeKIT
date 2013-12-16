@@ -1,4 +1,4 @@
-EdgeWeighter nimmt auch ProfileMapCombination?
+EdgeWeighter nimmt auch ProfileMapCombination? (gemacht)
 Arc-Flags: 64-bit? BitVector?
 GraphPreCalculation: zwei Proxy-Index-Methoden rausschmeißen (gemacht)
 PreCalculator: muss neues Object zurückgeben (neuer Typ GraphPreCalculation statt ProfileMapCombination) (gemacht) (obsolet)
