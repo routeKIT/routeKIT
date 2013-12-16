@@ -315,7 +315,7 @@
 }
 \newglossaryentry{karte}{
   name={Karte},
-  description={enthält die Daten aus \gls{osm} sowie einen Namen.},
+  description={enthält die Daten aus \gls{osm} sowie einen Namen},
   plural={Karten}
 }
 \newglossaryentry{osmkachel}{
@@ -352,7 +352,7 @@
 }
 \newglossaryentry{verlauf}{
   name={Verlauf},
-  description={speichert Routenanfragen für spätere Wiederverwendung. Es existiert nur ein Verlauf für die gesamte Anwendung.}
+  description={speichert Routenanfragen für spätere Wiederverwendung. Es existiert nur ein Verlauf für die gesamte Anwendung}
 }
 \newglossaryentry{mercator}{
   name={Mercator-Projektion},
@@ -363,8 +363,7 @@
   description={
     Koordinaten, durch die Kartenkacheln einer graphischen Darstellung (mit \gls{mercator}) adressiert werden können.
     Drei Bestandteile: x, y, zoom.
-    Mit nicht-ganzzahligen Werten für x und y können nicht nur Kacheln, sondern auch Geokoordinaten adressiert werden.
-  }
+    Mit nicht-ganzzahligen Werten für x und y können nicht nur Kacheln, sondern auch Geokoordinaten adressiert werden}
 }
 \newglossaryentry{smt}{
   type=\acronymtype,
@@ -884,7 +883,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
   
   Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
   
-  Kartenkacheln werden über \gls{smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
+  Kartenkacheln werden über \gls{G_smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
 }
 {
  \class{TileSource}
