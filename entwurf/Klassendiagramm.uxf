@@ -584,8 +584,11 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
     </coordinates>
     <panel_attributes>Route
 --
+start: PointOnEdge
+destination: PointOnEdge
 --
-getNodes(): Node[]
+getTurns(): List&lt;Turn&gt;
+getNodeIterator(): Iterator&lt;Node&gt;
 // Berechnung der Gesamtlänge der Route?
 </panel_attributes>
     <additional_attributes/>
@@ -769,7 +772,7 @@ parseOSM(f: File): Graph
       <x>4400</x>
       <y>3650</y>
       <w>690</w>
-      <h>190</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>Graph
 --
@@ -1481,7 +1484,7 @@ projectToEdge(lon: float, lat: float): PointOnEdge
     <panel_attributes>lt=&lt;-
 m1=1..n
 index</panel_attributes>
-    <additional_attributes>50;30;50;260;100;260</additional_attributes>
+    <additional_attributes>50;30;50;260;80;260</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>

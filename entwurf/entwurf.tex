@@ -835,11 +835,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
        {\none}
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
-        {\none}
         {
-          \method{getNodes}[Node[]]
+          \attr{start}{\refclass{PointOnEdge}}{Der Startpunkt der Route.}
+          \attr{destination}{\refclass{PointOnEdge}}{Der Zielpunkt der Route.}
+        }
+        {
+          \method{getTurns}[List<Turn>]
                  {\none}
-                 {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
+                 {Liefert eine Liste der Abbiegevorgänge, aus denen die Route besteht.}
+          \method{getNodeIterator}[Iterator<Node>]
+                 {\none}
+                 {Gibt einen Iterator über die Knoten der Route zurück.}
         }
   \class{RouteDescriptionGenerator}
         {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
