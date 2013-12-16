@@ -26,7 +26,7 @@ view-&gt;ctrl:view,ctrl:onDestinationChanged
 ctrl-&gt;model:ctrl,model:setDestination
 ctrl-&gt;&gt;&gt;calc:ctrl,calc:calculateRoute
 calc-&gt;&gt;&gt;route:calc,route:&lt;&lt;create&gt;&gt;
-calc.&gt;&gt;&gt;ctrl:calc,ctrl:Route
+calc.&gt;ctrl:calc,ctrl:Route
 
 ctrl-&gt;&gt;&gt;model:ctrl,model:setRoute
 
@@ -36,7 +36,7 @@ model-&gt;main:model,main:routeModelChanged
 
 ctrl-&gt;&gt;&gt;gen:ctrl,gen:generateRouteDescription
 gen-&gt;&gt;&gt;desc:gen,desc:&lt;&lt;create&gt;&gt;
-gen.&gt;&gt;&gt;ctrl:gen,ctrl:RouteDescription
+gen.&gt;ctrl:gen,ctrl:RouteDescription
 
 ctrl-&gt;&gt;&gt;model:ctrl,model:setRouteDescription
 
