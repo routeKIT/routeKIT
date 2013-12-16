@@ -41,7 +41,7 @@ paint(:Graphics)</panel_attributes>
 Controller()
 onStartChanged(:Coordinates)
 onDestinationChanged(:Coordinates)
-onStartAndDestChanged(:Coordinates, :Coordinates)
+onStartAndDestChanged(start: Coordinates, destination: Coordinates)
 exportGPX(:File)
 exportHTML(:File)
 selectProfile(:Profile)
