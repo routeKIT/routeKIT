@@ -853,16 +853,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {\none}
                  {Gibt den Text der Abbiegeanweisung zurück.}
         }
-  \class{ArcFlags}
-        {Enthält die Arc-Flags für den vorberechneten Graphen.}
-        {\none} % ?
-        {
-          \method{getFlags}[int]
-                 {
-                   \param{node}{Node}{Die Nummer eines Knotens.}
-                 }
-                 {Gibt die zum Knoten gehörenden Arc-Flags zurück.}
-        }
 }
 
 \package{MapDisplay}{
@@ -1394,6 +1384,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
          	    {\none}
 	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
          }
+  \class{ArcFlags}
+        {Enthält die Arc-Flags für den vorberechneten Graphen.}
+        {\none} % ?
+        {
+          \method{getFlags}[int]
+                 {
+                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
+                 }
+                 {Gibt die zum Abbiegevorgang gehörenden Arc-Flags zurück.}
+        }
   \class{RouteModel}
         {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
         {\none}
