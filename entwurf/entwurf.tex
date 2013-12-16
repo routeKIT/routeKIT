@@ -308,14 +308,6 @@
 
 
 % alle Glossareinträge
-\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
-\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
-\newacronym{osm}{OSM}{OpenStreetMap}
-\newacronym{gui}{GUI}{Graphical User Interface}
-\newacronym{gpx}{GPX}{GPS Exchange Format}
-\newacronym{smt}{SMT}{Slippy Map Tile}
-\newacronym{mvc}{MVC}{Model View Controller}
-
 \newglossaryentry{profil}{
   name={Profil},
   description={enthält für die Routenplanung relevante Informationen, z.\,B. die Höhe und das Gewicht des Fahrzeugs},
@@ -366,6 +358,28 @@
   name={Mercator-Projektion},
   description={die Zylinderprojektion der Weltkugel}
 }
+\newglossaryentry{G_smt}{
+  name={Slippy Map Tile},
+  description={
+    Koordinaten, durch die Kartenkacheln einer graphischen Darstellung (mit \gls{mercator}) adressiert werden können.
+    Drei Bestandteile: x, y, zoom.
+    Mit nicht-ganzzahligen Werten für x und y können nicht nur Kacheln, sondern auch Geokoordinaten adressiert werden.
+  }
+}
+\newglossaryentry{smt}{
+  type=\acronymtype,
+  name={SMT},
+  description={Slippy Map Tile},
+  first={Slippy Map Tile (SMT)},
+  see=[Glossareintrag:]{G_smt}
+}
+
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
+\newacronym{osm}{OSM}{OpenStreetMap}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{gpx}{GPX}{GPS Exchange Format}
+\newacronym{mvc}{MVC}{Model View Controller}
 
 
 
