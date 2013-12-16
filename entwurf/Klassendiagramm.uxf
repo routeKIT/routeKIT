@@ -483,15 +483,15 @@ m1=vehicleType</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>4750</x>
-      <y>3380</y>
+      <y>3370</y>
       <w>260</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>StreetMap
 --
 name: String
 --
-</panel_attributes>
+isDefault(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -500,7 +500,7 @@ name: String
       <x>4750</x>
       <y>2800</y>
       <w>150</w>
-      <h>170</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Profile
 --
@@ -511,6 +511,7 @@ weight: int
 speedHighway: int
 speedRoad: int
 --
+isDefault(): boolean
 save(file: File)
 _load(file: File): Profile_</panel_attributes>
     <additional_attributes/>
@@ -518,14 +519,14 @@ _load(file: File): Profile_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4720</x>
-      <y>2940</y>
-      <w>158</w>
-      <h>230</h>
+      <x>4710</x>
+      <y>2960</y>
+      <w>170</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>80;30;80;210</additional_attributes>
+    <additional_attributes>90;30;90;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -550,13 +551,13 @@ speedRoad = 80</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>4820</x>
-      <y>2940</y>
+      <y>2960</y>
       <w>250</w>
-      <h>230</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>30;30;230;210</additional_attributes>
+    <additional_attributes>30;30;230;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -805,12 +806,12 @@ getFlags(:Turn): int
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>4750</x>
-      <y>3400</y>
+      <y>3410</y>
       <w>50</w>
-      <h>270</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=&gt;&gt;&gt;-</panel_attributes>
-    <additional_attributes>30;250;30;30</additional_attributes>
+    <additional_attributes>30;240;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1645,12 +1646,12 @@ allowsTurn(:Turn, :Profile): boolean
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>4920</x>
-      <y>3400</y>
+      <y>3410</y>
       <w>50</w>
-      <h>90</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>30;70;30;30</additional_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>

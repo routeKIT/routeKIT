@@ -1048,6 +1048,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.}
         }
         {
+          \method{isDefault}[boolean]
+                 {\none}
+                 {
+                   Gibt zurück, ob es sich um ein Standardprofil handelt oder nicht.
+                 }
           \method{save}
                  {
                    \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
@@ -1087,7 +1092,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \attr{name}{String}{Der Name der Karte.}
           \attr{graph}{Graph}{Der Graph der Karte, d.\,h. das Straßennetz.}
         }
-        {\none}
+        {
+          \method{isDefault}[boolean]
+                 {\none}
+                 {
+                   Gibt zurück, ob es sich um eine Standardkarte handelt.
+                 }
+        }
 
   \class{Graph}
         {
