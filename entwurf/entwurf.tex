@@ -630,7 +630,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
         }
 \class{ProfileManager}
-        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
+        {Verwaltet die Profile. Hat intern eine Menge von vorhandenen Profilen.}
         {\none}
         {
           \method{saveProfile}
@@ -820,7 +820,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
        {\none}
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
-        {\none} % ?
+        {\none}
         {
           \method{getNodes}[Node[]]
                  {\none}
@@ -839,7 +839,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{RouteDescription}
         {Kapselt die zu einer \reftype{Route} gehörende \gls{wegbeschreibung}.}
-        {\none} % ?
+        {\none}
         {
           \method{getInstructions}[List<TurnInstruction>]
                  {\none}
@@ -847,7 +847,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
   \class{TurnInstruction}
         {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \reftype{RouteDescription} aufgebaut ist.}
-        {\none} % ?
+        {\none}
         {
           \method{toString}[String]
                  {\none}
@@ -1386,7 +1386,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
          }
   \class{ArcFlags}
         {Enthält die Arc-Flags für den vorberechneten Graphen.}
-        {\none} % ?
+        {\none}
         {
           \method{getFlags}[int]
                  {
