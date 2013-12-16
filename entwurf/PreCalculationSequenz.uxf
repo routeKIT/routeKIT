@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.SequenceDiagram</type>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>2200</w>
+      <h>530</h>
+    </coordinates>
+    <panel_attributes>title:PreCalculation
+_controller:Controller~ctrl_|_precalculator:PreCalculator~precalc_|_weighter:EdgeWeighter~weighter_|_arcFlagsCalculator:ArcFlagsCalculator~afc_|_pmc:ProfileMapCombination~pmc_|_weights:Weights~weights_|_arcFlags:ArcFlags~flags_
+ctrl-&gt;&gt;&gt;precalc:ctrl,precalc:doPrecalculation(pmc)
+iframe{:weightEdges
+precalc-&gt;&gt;&gt;weighter:precalc,weighter:weightEdges(pmc)
+weighter.&gt;weights:weighter,weights:&lt;&lt;create&gt;&gt;
+weighter-&gt;&gt;&gt;pmc:weighter,pmc:setWeights(weights)
+weighter.&gt;precalc:precalc
+iframe}
+iframe{:calculateArcFlags
+precalc-&gt;&gt;&gt;afc:precalc,afc:calculateArcFlags(pmc)
+afc.&gt;flags:afc,flags:&lt;&lt;create&gt;&gt;
+afc-&gt;&gt;&gt;pmc:afc,pmc:setArcFlags(arcFlags)
+afc.&gt;precalc
+iframe}
+precalc.&gt;ctrl</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

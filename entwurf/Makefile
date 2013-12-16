@@ -4,11 +4,11 @@ BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 UMLET = java -jar ../Umlet/umlet.jar
 ARTEFAKTE = StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf
 
-all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf
+all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf PreCalculationSequenz.pdf
 
-.PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz
+.PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz clean-PreCalculationSequenz
 
-clean: clean-entwurf clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz
+clean: clean-entwurf clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz clean-PreCalculationSequenz
 
 entwurf.pdf: entwurf.tex $(ARTEFAKTE)
 	$(MAKE) clean-$(@:.pdf=) # if the pdftex build fails fatally, we don’t want the old pdf laying around and confusing the user
@@ -59,6 +59,11 @@ RouteCalculationSequenz.pdf: RouteCalculationSequenz.uxf
 
 clean-RouteCalculationSequenz:
 	-$(RM) RouteCalculationSequenz.pdf
+PreCalculationSequenz.pdf: PreCalculationSequenz.uxf
+	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
+
+clean-PreCalculationSequenz:
+	-$(RM) PreCalculationSequenz.pdf
 
 artefakte: $(ARTEFAKTE)
 	git checkout -B artefakte-$(BRANCH)
