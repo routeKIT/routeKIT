@@ -1020,13 +1020,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
         {\none}
         {
-          \method{calculateArcFlags}[ArcFlags]
+          \method{calculateArcFlags}
                  {
-                   \param{graph}{Graph}{Der Graph.}
-                   \param{partitions}{Partition[]}{Die Partitionen des Graphen.}
-                   \param{weights}{Weights}{Die Kantengewichte des Graphen.}
+                   \param{combination}{\refclass{ProfileMapCombination}}{Die Kombination aus Profil und Karte.}
                  }
-                 {Berechnet Arc-Flags für den gegebenen Graphen mit den gegebenen Partitionen und Kantengewichten.}
+                 {
+                   Berechnet die Arc-Flags für die angegebene Kombination und setzt die \refclass{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
+                 }
         }
         
   \class{GraphPartitioner}
