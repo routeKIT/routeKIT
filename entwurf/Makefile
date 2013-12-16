@@ -61,7 +61,9 @@ clean-RouteCalculationSequenz:
 	-$(RM) RouteCalculationSequenz.pdf
 
 PreCalculationSequenz.pdf: PreCalculationSequenz.uxf
-	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
+	sed 's.<w>1200</w>.<w>1340</w>.' $^ > $^.tmp # work around UMLet bug that cuts off part of the diagram
+	$(UMLET) -action=convert -format=pdf -filename=$^.tmp -output=$(@:.pdf=)
+	-$(RM) $^.tmp
 
 clean-PreCalculationSequenz:
 	-$(RM) PreCalculationSequenz.pdf
