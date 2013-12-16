@@ -386,762 +386,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Pakete und Klassen}
 
-\package{Profiles}{
-  Dieses Paket enthält alle Klassen zu \glslink{profil}{Profilen}.
-}
-{
-  \class{Profile}
-        {Ein \glslink{profil}{Fahrzeugprofil}.}
-        {
-          \attr{name}{String}{Der Name des Profils.}
-          \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp.}
-          \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern.}
-          \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern.}
-          \attr{weight}{int}{Das Gewicht des Fahrzeugs, in Kilogramm.}
-          \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde.}
-          \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.}
-        }
-        {
-          \method{save}
-                 {
-                   \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
-                 }
-                 {Speichert das Profil in die angegebene Datei.}
-          \method{load}[Profile]
-                 {
-                   \param{file}{File}{Die Datei, aus der das Profil geladen wird.}
-                 } 
-                 {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
-        }
-}
-
-\package{Map}{
-  Dieses Paket enthält alle Klassen zu Karten und Kartengraphen.
-  
-  \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
-  \begin{description}
-  \item[\refclass{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Er wird zum \Gls{rendern} der Karte verwendet.
-  \item[\refclass{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
-  \end{description}
-}
-{
-  \class{StreetMap}
-        {Eine Karte.}
-        {
-          \attr{name}{String}{Der Name der Karte.}
-          \attr{graph}{Graph}{Der Graph der Karte, d.\,h. das Straßennetz.}
-        }
-        {\none}
-   \class{GraphIndex}
-        {Eine geometrische Datenstruktur.}
-        {\none}
-        {
-	\method{GraphIndex}
-		{
-		    \param{graph}{Graph}{Ein Adjazenzfeld.}
- 		}
-		    {Erzeugt eine geometrische Datenstruktur für einen Graph aus einem Adjazenzfeld.}	
-	\method{getEdgesIn}[Edge[]]
-		{
-		    \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
- 		    \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
-                      } 
-		    {
-                      Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
-                    }
-	\method{projectToEdge} [PointOnEdge]
-                 {
-                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
-                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
-                 }
-                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
-         }
-  \class{Graph}
-        {
-          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
-        }
-        {
-          \attr{highwayType}{HighwayType}{Der Straßentyp.}
-        }
-        {
-          \method{Graph}
-                 {
-                   \param{nodes}{Node[]}{Der Knoten-Bestandteil des Adjazenzfeldes.}
-                   \param{edges}{Edge[]}{Der Kanten-Bestandteil des Adjazenzfeldes.}
-                   \param{nodeProps}{Map<Node, NodeProperties>}
-                         {
-                           Die \code{NodeProperties} der Knoten des Graphen. Es wird eine \code{Map} anstelle eines Arrays verwendet, da die meisten Knoten keine besonderen Eigenschaften haben und daher das Array zum großen Teil leer wäre.
-                         }
-                   \param{edgeProps}{EdgeProperties[]}
-                         {
-                           Die \code{EdgeProperties} der Kanten des Graphen. Hier wird ein Array verwendet, da jede Kante einen Namen und damit ein \code{EdgeProperties}-Objekt hat.
-                         }
-                   \param{lat}{float[]}{Die geographischen Breiten der Knoten des Graphen.}
-                   \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen.}
-                 }
-                 {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
-          \method{getOutgoingEdges}[Set<Edge>]
-                 {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
-                 {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
-	      \method{getIncomingEdges}[Set<Edge>]
-                 {\param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}}
-                 {Gibt alle in den Knoten eingehende Kanten zurück.}
-          \method{getTargetNode}[Node]
-                 {\param{edge}{Edge}{Die Kante, dessen Endknoten gesucht wird.}}
-                 {Gibt den Endknoten der angegebenen Kante zurück.}
-          \method{getStartNode}[Node]
-                 {\param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}}
-                 {Gibt den Startknoten der angegebenen Kante zurück.}       
-          \method{getLat}[float]
-                 {\param{node}{Node}{Der Knoten, dessen geographische Breite gesucht wird.}}
-                 {Gibt die geographische Breite des angegebenen Knotens zurück.}
-          \method{getLon}[float]
-                 {\param{node}{Node}{Der Knoten, dessen geographische Länge gesucht wird.}}
-                 {Gibt die geographische Länge des angegebenen Knotens zurück.}
-          \method{getNodeProperties}[NodeProperties]
-                 {\param{node}{Node}{Der Knoten, dessen \refclass{NodeProperties} gesucht werden.}}
-                 {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
-          \method{getEdgeProperties}[EdgeProperties]
-                 {\param{edge}{Edge}{Die Kante, deren \refclass{EdgeProperties} gesucht werden.}}
-                 {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
-        }
-  \class{NodeProperties}
-        {Kapselt die Eigenschaften eines Knotens.}
-        {\none}
-        {
-          \method{isMotorwayJunction}[boolean]
-                 {\none}
-                 {Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
-          \method{getJunctionName}[String]
-                 {\none}
-                 {Gibt den Namen der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
-          \method{getJunctionRef}[String]
-                 {\none}
-                 {Gibt die Nummer der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
-          \method{isTrafficLights}[boolean]
-                 {\none}
-                 {Bestimmt, ob sich an dem Knoten eine Ampel befindet.}
-        }
-  \class{EdgeProperties}
-        {Kapselt die Eigenschaften einer Kante.}
-        {\none}
-        {
-          \method{getName}[String]
-                 {\none}
-                 {Gibt den Namen der Straße zurück oder \code{null}, falls nicht vorhanden.}
-          \method{getRoadRef}[String]
-                 {\none}
-                 {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
-          \method{getMaxSpeed}[int]
-                 {\param{profile}{Profile}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
-                 {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
-        }
-  \class{EdgeBasedGraph}
-        {
-          Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \refclass{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
-          
-          Diese Datenstruktur ist profilunabhängig und wird, wie \refclass{Graph}, bei der Vorberechnung für eine Karte erstellt.
-          Erst in Kombination mit den Profil-spezifischen \refclass{Weights} kann sie zur Routenberechnung verwendet werden.
-        }
-        {\none}
-        {
-          \method{getOutgoingTurns}[Set<Turn>]
-                 {
-                   \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht werden.}
-                 }
-                 {Gibt alle Abbiegemöglichkeiten \emph{von} der angegebenen Kante zurück.}
-          \method{getIncomingTurns}[Set<Turn>]
-                 {
-                   \param{edge}{Edge}{Die Kante, deren eingehende Abbiegemöglichkeiten gesucht werden.}
-                 }
-                 {Gibt alle Abbiegemöglichkeiten \emph{auf} die angegebene Kante zurück.}
-          \method{getTargetEdge}[Edge]
-                 {
-                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Endkante gesucht wird.}
-                 }
-                 {Gibt die Kante zurück, auf die die angegebene Abbiegemöglichkeit führt.}
-          \method{getStartEdge}[Edge]
-                 {
-                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Anfangskante gesucht wird.}
-                 }
-                 {Gibt die Kante zurück, von der die angegebene Abbiegemöglichkeit besteht.}
-          \method{getPartition}[Partition]
-                 {
-                   \param{edge}{Edge}{Die Kante, deren Partition bestimmt werden soll.}
-                 }
-                 {
-                   Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten des kantenbasierten Graphen) befindet.
-                   
-                   Ist noch keine Partitionierung gegeben, so wird immer eine Standard-Partition zurückgegeben.
-                 }
-          \method{setPartitions}
-                 {
-                   \param{partitions}{Partition[]}{Die neuen Partitionen.}
-                 }
-                 {
-                   Setzt die Partitionen des Graphen. Die \code{Edge}s des Graphen sind die Indizes in \refparam{EdgeBasedGraph}{setPartitions}{partitions}.
-                 }
-          \method{getTurnType}[TurnType]
-                 {
-                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Art gesucht wird.}
-                 }
-                 {Gibt die Art des angegebenen Abbiegevorgangs zurück.}
-          \method{allowsTurn}[boolean]
-                 {
-                   \param{turn}{Turn}{Der zu betrachtende Abbiegevorgang.}
-                   \param{profile}{Profile}{Das verwendete Profil.}
-                 }
-                 {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
-        }
-}
-
-\package{TODO}{
-  Dieses Paket enthält alle Klassen, die noch in keinem anderen Paket enthalten sind.
-  Vor der endgültigen Abgabe sollten alle diese Klassen einen Platz in einem anderen Paket finden.
-}
-{
-  \class{RouteKit}
-        {Startet die Anwendung.}
-        {\none}
-        {
-	\method{main}
-         	    {
-		\param{args}{String[]}{String-Argumente}
-               }
-	    {Erzeugt einen \refclass{Controller}.}
-         }
-
-  \class{ProfileMapCombination}
-        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
-        {
-          \attr{profile}{Profile}{Das \gls{profil}.}
-          \attr{map}{StreetMap}{Die Karte.}
-        }
-        {
-	\method{isCalculated}[boolean]
-         	    {\none}
-	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
-         }
-  \class{RouteModel}
-        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \refclass{RouteListener}}
-        {\none}
-        {
-          \method{addRouteListener}
-                 {
-                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
-                 }
-                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
-        }
-  \class{RouteModelListener}
-        {Wird bei Änderungen am \refclass{RouteModel} informiert.}
-        {\none}
-        {
-          \method{routeModelChanged}
-                 {\none}
-                 {Wird bei jeder Änderung aufgerufen}
-        }
-}
-
-\package{Util}{
-  Dieses Paket enthält verschiedene nützliche Klassen, die sonst nirgendwo hingehören.
-}
-{
-  \class{Coordinates}
-        {Kapselt ein Paar von geographischen Koordinaten.}
-        {
-          \attr{lat}{float}{Der Breitengrad der Koordinaten.}
-          \attr{lon}{float}{Der Längengrad der Koordinaten.}
-        }
-        {
-          \method{distanceTo}[float]
-                 {
-                   \param{other}{Coordinates}{Die anderen Koordinaten.}
-                 }
-                 {
-                   Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.
-                 }
-          \method{getSmtX}[float]
-                 {
-                   \param{zoom}{int}{Das Zoomlevel.}
-                 }
-                 {
-                   Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.
-                 }
-          \method{getSmtY}[float]
-                 {
-                   \param{zoom}{int}{Das Zoomlevel.}
-                 }
-                 {
-                   Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.
-                 }
-          \method{fromSmt}[Coordinates]
-                 {
-                   \param{x}{float}{Die \gls{smt}-X-Komponente.}
-                   \param{y}{float}{Die \gls{smt}-Y-Komponente.}
-                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
-                 }
-                 {
-                   Statische Methode.
-                   Rechnet \gls{smt}-Koordinaten in Koordinaten um.
-                 }
-        }
-  \class{PointOnEdge}
-        {Beschreibt einen Punkt auf der Kante.}
-        {
-          \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
-          \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
-        }
-        {\none}
-}
-
-\package{RouteCalculator}{
-  Dieses Paket enthält alle Klassen, die zur Routenberechnung benötigt werden.
-}
-{
-  \class{RouteCalculator}
-        {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
-        {\none}
-        {
-          \method{calculateRoute}[Route]
-                 {
-                   \param{start}{PointOnEdge}{Der Startpunkt für die Routenberechnung.}
-                   \param{destination}{PointOnEdge}{Der Zielpunkt für die Routenberechnung.}
-                   \param{data}{ProfileMapCombination}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
-                 }
-                 {Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
-        }
-  \class{Route}
-        {Repräsentiert eine berechnete \gls{route}.}
-        {\none} % ?
-        {
-          \method{getNodes}[Node[]]
-                 {\none}
-                 {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
-        }
-  \class{RouteDescription}
-        {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
-        {\none} % ?
-        {
-          \method{getInstructions}[List<TurnInstruction>]
-                 {\none}
-                 {Liefert eine Liste der Abbiegeanweisungen.}
-        }
-  \class{RouteDescriptionGenerator}
-        {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
-        {\none}
-        {
-          \method{generateRouteDescription}[RouteDescription]
-                 {
-                   \param{route}{Route}{Die Route, deren Beschreibung erzeugt werden soll.}
-                   \param{data}{ProfileMapCombination}{Der Graph der zur Generierung der Beschreibung verwendet wird.}
-                 }
-                 {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
-        }
-  \class{TurnInstruction}
-        {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \refclass{RouteDescription} aufgebaut ist.}
-        {\none} % ?
-        {
-          \method{toString}[String]
-                 {\none}
-                 {Gibt den Text der Abbiegeanweisung zurück.}
-        }
-  \class{ArcFlags}
-        {Enthält die Arc-Flags für den vorberechneten Graphen.}
-        {\none} % ?
-        {
-          \method{getFlags}[int]
-                 {
-                   \param{node}{Node}{Die Nummer eines Knotens.}
-                 }
-                 {Gibt die zum Knoten gehörenden Arc-Flags zurück.}
-        }
-   \class{ArcFlagsDijkstra}
-       {Führt die Berechnung der schnellsten Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil durch unter der Beachtung von Arc-Flags.}
-       {\none}
-       {\none}
-}
-
-\package{History}{
-  Dieses Paket enthält alle Klassen, die für den \gls{verlauf} benötigt werden.
-}
-{
-  \class{History}
-        {Kapselt den \gls{verlauf}.}
-        {\none}
-        {
-          \method{addEntry}
-                 {
-                   \param{start}{Coordinates}{Der Startpunkt.}
-                   \param{destination}{Coordinates}{Der Zielpunkt.}
-                 }
-                 {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
-          \method{getEntries}[List<HistoryEntry>]
-                 {\none}
-                 {Gibt alle Einträge des Verlaufs zurück.}
-          \method{save}
-                 {
-                   \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird.}
-                 }
-                 {Speichert den Verlauf in die angegebene Datei.}
-          \method{load}[History]
-                 {
-                   \param{file}{File}{Die Datei, aus der der Verlauf geladen wird.}
-                 }
-                 {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
-        }
-  \class{HistoryEntry}
-        {Ein Eintrag im \gls{verlauf}.}
-        {
-          \attr{start}{Coordinates}{Der Startpunkt der Anfrage.}
-          \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage.}
-          \attr{date}{Date}{Der Zeitpunkt der Anfrage.}
-        }
-        {\none}
-}
-
-\package{MapDisplay}{
-  Dieses Paket enthält alle Klassen, die an der Darstellung der Karte im \gls{gui} beteiligt sind.
-  
-  Die zentrale Klasse dieses Pakets ist der \refclass{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
-  Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \refclass{TileSource}, welche die Kacheln synchron berechnet.
-  Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \refclass{TileFinishedListener} benachrichtigt.
-  
-  Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
-  
-  Kartenkacheln werden über \gls{smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
-}
-{
-  \class{TileFinishedListener}
-        {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
-        {\none}
-        {
-          \method{tileFinished}
-                 {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
-                   \param{tile}{BufferedImage}{Die berechnete Kachel.}
-                 }
-                 {
-                   Wird vom \refclass{TileCache} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
-                   Die übliche Aktion ist, ein \code{repaint} der Kartenansicht im \gls{gui} auszulösen.
-                 }
-        }
-  \class{TileSource}
-        {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
-        {\none}
-        {
-          \method{getTile}[BufferedImage]
-                 {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
-                 }
-                 {Berechnet die angegebene Kachel und gibt sie zurück.}
-        }
-  \class{TileCache}
-        {
-          Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
-          Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.
-          
-          Intern werden die gecacheten Kacheln so gehalten, dass der Garbage Collector sie bei Speicherknappheit verwerfen kann (etwa durch \code{SoftReference}s).
-        }
-        {\none}
-        {
-          \method{TileCache}
-                 {\param{target}{TileSource}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
-                 {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
-          \method{getTile}[BufferedImage]
-                 {
-                   \param{x}{int}{Die \gls{smt}-X-Komponente.}
-                   \param{y}{int}{Die \gls{smt}-Y-Komponente.}
-                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
-                 }
-                 {
-                   Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
-                   andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target} angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target} angefordert und im Zwischenspeicher gespeichert.
-                 }
-
- \method{addTileFinishedListener}
-                 {\param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}}
-                 {
-                   Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
-                   Die Kachel ist Teil der Nachricht.
-                 }
-}
-  \class{TileRenderer}
-        {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
-        {\none}
-        {
-          \method{TileRenderer}
-	   { 
-		\param{graph}{Graph}{Ein Adjazenzfeld.}
-	    }
-	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
-          \method{getTile}[BufferedImage]
-                 {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
-                 }
-                 {Berechnet die angegebene Kachel und gibt sie zurück.}
-        }
-  \class{OSMRenderer}
-        {Eine \refclass{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
-        {\none}
-        {
-          \method{getTile}[BufferedImage]
-                 {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
-                 }
-                 {Lädt die angegebene Kachel herunter und gibt sie zurück.}
-        }
-}
-
-\package{View}{
-  Dieses Paket enthält die Views nach der \gls{mvc}-Architektur. Alle Views im Klassendiagramm sind Interfaces, die von genau einer Klasse realisiert werden. 
-}
-{
-  \class{MapView}
-        {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
-        {\none}
-        {
-          \method{MapView}
-                 {
-                   \param{s}{TileSource}{eine gerenderte Kachel}
-                 }
-                 {Ein Konstruktor, der ein Objekt der Klasse \refclass{MapView} erzeugt.}
-          \method{paint}
-                 {
-                   \param{graphics}{Graphics}{ein Objekt vom}
-                 }
-                 {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
-        }
-
-   \class{MainView}
-        {Zeigt das Hauptfenster auf dem Bildschirm an.}
-        {\none}
-        {\none}
-
-   \class{MapManagerView}
-        {Zeigt das Fenster der Kartenverwaltung auf dem Bildschirm an.}
-        {\none}
-        {\none}
-
-   \class{ProfileManagerView}
-        {Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.}
-        {\none}
-        {
-          \method{setCurrentProfile}
-                 {
-                   \param{profile}{Profile}{Das neue Profile.}
-                 }
-                 {
-                   Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
-                 }
-          \method{setAvailableProfiles}
-                 {
-                   \param{profiles}{List<Profile>}{Die verfügbaren Profile.}
-                 }
-                 {
-                   Setzt die Profile, die aktuell ausgewählt werden können.
-                 }
-        }
-
-  \class{HistoryView}
-        {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}
-        {\none}
-        {\none}
-
-  \class{AboutView}
-        {Zeigt das Fenster mit den Informationen über \routeKIT auf dem Bildschirm an.}
-        {\none}
-        {\none}
-}
-\package{Precalculation}{
-  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
-  
-  % TODO kurze erklärung, wie die vorberechnung läuft
-}
-{
-  \class{PreCalculationScheduler}
-        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
-        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
-        {
-          \method{scheduleCalculation}
-                 {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
-                 }
-                 {Fügt die \refclass{ProfileMapCombination} zur späteren Vorberechnung zur Queue hinzu.}
-        }
-                        
-  \class{PreCalculator}
-        {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
-        {\none}
-        {
-          \method{doPrecalculation}
-                 {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
-                 }
-                 {
-                   Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.
-                   Dabei werden ein \refclass{EdgeWeighter} und ein \refclass{ArcFlagsCalculator} aufgerufen.
-                 }
-        }
-  \class{MapImporter}
-        {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
-        {\none}
-        {
-          \method{importMap}[StreetMap]
-                 {
-                   \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
-                 }
-                 {Importiert und säubert den Straßengraph. Erzeugt das Adjazenzfeld und den kantenbasierten Graphen aus \refclass{MapNode}.}
-        }
-  \class{OSMParser}
-        {Importiert eine neue Karte.}
-        {\none}
-        {
-          \method{parseOSM}[Graph]
-                 {
-                   \param{f}{File}{}
-                 }
-                 {Wandelt eine OSM-Karte in eine verlinkte Datenstruktur \refclass{MapNode} um.}
-        }
-  \class{MapNode}
-        {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
-        {\none}
-        {
-          \method{getLon}[float]
-                 {\none}
-                 {Gibt den Längengrad dieses Knotens aus.}
-          \method{getLat}[float]
-                 {\none}
-                 {Gibt den Breitengrad dieses Knotens aus.}
-          \method{getEdges}[Set<MapEdge>]
-                 {\none}
-                 {Gibt eine Liste mit allen Kanten zu einem Knoten zurück.}
-        }
-        
-  \class{EdgeWeighter}
-        {
-          Versieht den kantenbasierten Graphen (\refclass{EdgeBasedGraph}) mit Kantengewichten.
-          
-          Die Kantengewichte des kantenbasierten Graphen sind profilabhängig und geben an, wie „teuer“ ein bestimmter Abbiegevorgang ist.
-          Abbiegebeschränkungen werden durch maximale Kantengewichte umgesetzt.
-        }
-        {\none}
-        {
-          \method{weightEdges}
-                 {
-                   \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus Profil und Karte.}
-                 }
-                 {
-                   Berechnet die Kantengewichte für die angegebene Kombination und setzt die \refclass{Weights} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
-                 }
-        }
-        
-  \class{ArcFlagsCalculator}
-        {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
-        {\none}
-        {
-          \method{calculateArcFlags}
-                 {
-                   \param{combination}{ProfileMapCombination}{Die Kombination aus Profil und Karte.}
-                 }
-                 {
-                   Berechnet die Arc-Flags für die angegebene Kombination und setzt die \refclass{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
-                 }
-        }
-        
-  \class{GraphPartitioner}
-        {Partitioniert einen gegebenen Graphen.}
-        {\none}
-        {
-          \method{partitionGraph}
-                 {
-                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
-                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
-                 }
-                 {
-                   Teilt den Graphen in die gewünschte Anzahl an Partitionen.
-                   
-                   Die ermittelten Partitionen werden über \refmethod{EdgeBasedGraph}{setPartitions} direkt gesetzt.
-                 }
-        }
-        
-  \class{ExternalPartitionerAdapter}
-        {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
-        {\none}
-        {
-          \method{partitionGraph}
-                 {
-                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
-                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
-                 }
-                 {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
-        }
-}
-
 \package{Controllers}{
   Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
 }
 {
-  \class{ProfileManager}
-        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
-        {\none}
-        {
-          \method{saveProfile}
-                 {
-                   \param{p}{Profile}{Das Profil, das gespeichert werden soll.}
-                 }
-                 {
-                   Speichert das ausgewählte Profil in der internen Liste und auf der Festplatte.
-                   
-                   (Der Speicherort wird vom Manager deckend verwaltet.) % „deckend“ = “opaque”
-                 }
-          \method{deleteProfile}
-                 {
-                   \param{p}{Profile}{Das Profil, das gelöscht werden soll.}
-                 }
-                 {
-                   Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
-                 }
-          \method{getProfiles}[Set<Profile>]
-                 {\none}
-                 {
-                   Gibt alle Profile in der internen Liste zurück.
-                 }
-        }
-  \class{MapManager}
-        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.} % TODO siehe ProfileManager
-        {\none}
-        {
-          \method{saveMap}
-                 {
-                   \param{m}{StreetMap}{Die Karte, die gespeichert werden soll.}
-                 }
-                 {
-                   Speichert die ausgewählte Karte in der internen Liste und auf der Festplatte.
-
-                   (Der Speicherort wird vom Manager deckend verwaltet.)
-                 }
-          \method{deleteMap}
-                 {
-                   \param{m}{StreetMap}{Die Karte, die gelöscht werden soll.}
-                 }
-                 {
-                   Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
-                 }
-          \method{getMaps}[Set<StreetMap>]
-                 {\none}
-                 {
-                   Gibt alle Karten in der internen Liste zurück.
-                 }
-        }
-
   \class{Controller}
         {Steuert die Programmabläufe zur Routenberechnung.}
         {\none}
@@ -1334,6 +582,624 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Dazu gehören das Importieren und Löschen von Karten sowie das Hinzufügen oder Löschen von Profilen je Karte.
                  }
         }
+\class{ProfileManager}
+        {Verwaltet die Profile. Hat intern eine Liste von vorhandenen Profilen.} % TODO Liste oder Menge? vgl getProfiles - Lucas
+        {\none}
+        {
+          \method{saveProfile}
+                 {
+                   \param{p}{Profile}{Das Profil, das gespeichert werden soll.}
+                 }
+                 {
+                   Speichert das ausgewählte Profil in der internen Liste und auf der Festplatte.
+                   
+                   (Der Speicherort wird vom Manager deckend verwaltet.) % „deckend“ = “opaque”
+                 }
+          \method{deleteProfile}
+                 {
+                   \param{p}{Profile}{Das Profil, das gelöscht werden soll.}
+                 }
+                 {
+                   Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
+                 }
+          \method{getProfiles}[Set<Profile>]
+                 {\none}
+                 {
+                   Gibt alle Profile in der internen Liste zurück.
+                 }
+        }
+  \class{MapManager}
+        {Verwaltet die Kartendaten. Hat intern eine Liste von vorhandenen Kartendaten.} % TODO siehe ProfileManager
+        {\none}
+        {
+          \method{saveMap}
+                 {
+                   \param{m}{StreetMap}{Die Karte, die gespeichert werden soll.}
+                 }
+                 {
+                   Speichert die ausgewählte Karte in der internen Liste und auf der Festplatte.
+
+                   (Der Speicherort wird vom Manager deckend verwaltet.)
+                 }
+          \method{deleteMap}
+                 {
+                   \param{m}{StreetMap}{Die Karte, die gelöscht werden soll.}
+                 }
+                 {
+                   Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
+                 }
+          \method{getMaps}[Set<StreetMap>]
+                 {\none}
+                 {
+                   Gibt alle Karten in der internen Liste zurück.
+                 }
+        }
+
+}
+
+\package{Precalculation}{
+  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
+  
+  % TODO kurze erklärung, wie die vorberechnung läuft
+}
+{
+  \class{MapImporter}
+        {Liest eine OSM-Karte aus dem Dateisystem in ein \refclass{Graph}-Objekt}
+        {\none}
+        {
+          \method{importMap}[StreetMap]
+                 {
+                   \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
+                 }
+                 {Importiert und säubert den Straßengraph. Erzeugt das Adjazenzfeld und den kantenbasierten Graphen aus \refclass{MapNode}.}
+        }
+  \class{OSMParser}
+        {Importiert eine neue Karte.}
+        {\none}
+        {
+          \method{parseOSM}[Graph]
+                 {
+                   \param{f}{File}{}
+                 }
+                 {Wandelt eine OSM-Karte in eine verlinkte Datenstruktur \refclass{MapNode} um.}
+        }
+  \class{MapNode}
+        {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
+        {\none}
+        {
+          \method{getLon}[float]
+                 {\none}
+                 {Gibt den Längengrad dieses Knotens aus.}
+          \method{getLat}[float]
+                 {\none}
+                 {Gibt den Breitengrad dieses Knotens aus.}
+          \method{getEdges}[Set<MapEdge>]
+                 {\none}
+                 {Gibt eine Liste mit allen Kanten zu einem Knoten zurück.}
+        }
+  \class{GraphPartitioner}
+        {Partitioniert einen gegebenen Graphen.}
+        {\none}
+        {
+          \method{partitionGraph}
+                 {
+                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
+                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
+                 }
+                 {
+                   Teilt den Graphen in die gewünschte Anzahl an Partitionen.
+                   
+                   Die ermittelten Partitionen werden über \refmethod{EdgeBasedGraph}{setPartitions} direkt gesetzt.
+                 }
+        }
+        
+  \class{ExternalPartitionerAdapter}
+        {Leitet die Partitionierungsanfrage an ein externes Partitionierungsprogramm weiter.}
+        {\none}
+        {
+          \method{partitionGraph}
+                 {
+                   \param{graph}{EdgeBasedGraph}{Der zu partitionierende Graph.}
+                   \param{numberOfPartitions}{int}{Die gewünschte Anzahl an Partitionen.}
+                 }
+                 {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
+        }
+
+  \class{PreCalculationScheduler}
+        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
+        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
+        {
+          \method{scheduleCalculation}
+                 {
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+                 }
+                 {Fügt die \refclass{ProfileMapCombination} zur späteren Vorberechnung zur Queue hinzu.}
+        }
+                        
+  \class{PreCalculator}
+        {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
+        {\none}
+        {
+          \method{doPrecalculation}
+                 {
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+                 }
+                 {
+                   Führt die Vorberechnung für die gegebene Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.
+                   Dabei werden ein \refclass{EdgeWeighter} und ein \refclass{ArcFlagsCalculator} aufgerufen.
+                 }
+        }
+        
+  \class{EdgeWeighter}
+        {
+          Versieht den kantenbasierten Graphen (\refclass{EdgeBasedGraph}) mit Kantengewichten.
+          
+          Die Kantengewichte des kantenbasierten Graphen sind profilabhängig und geben an, wie „teuer“ ein bestimmter Abbiegevorgang ist.
+          Abbiegebeschränkungen werden durch maximale Kantengewichte umgesetzt.
+        }
+        {\none}
+        {
+          \method{weightEdges}
+                 {
+                   \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus Profil und Karte.}
+                 }
+                 {
+                   Berechnet die Kantengewichte für die angegebene Kombination und setzt die \refclass{Weights} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
+                 }
+        }
+        
+  \class{ArcFlagsCalculator}
+        {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
+        {\none}
+        {
+          \method{calculateArcFlags}
+                 {
+                   \param{combination}{ProfileMapCombination}{Die Kombination aus Profil und Karte.}
+                 }
+                 {
+                   Berechnet die Arc-Flags für die angegebene Kombination und setzt die \refclass{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
+                 }
+        }
+}
+
+\package{RouteCalculator}{
+  Dieses Paket enthält alle Klassen, die zur Routenberechnung benötigt werden.
+}
+{
+  \class{RouteCalculator}
+        {Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.}
+        {\none}
+        {
+          \method{calculateRoute}[Route]
+                 {
+                   \param{start}{PointOnEdge}{Der Startpunkt für die Routenberechnung.}
+                   \param{destination}{PointOnEdge}{Der Zielpunkt für die Routenberechnung.}
+                   \param{data}{ProfileMapCombination}{Der vorberechnete Graph auf dem die Routenberechnung durchgeführt wird.}
+                 }
+                 {Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
+        }
+   \class{ArcFlagsDijkstra}
+       {Führt die Berechnung der schnellsten Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil durch unter der Beachtung von Arc-Flags.}
+       {\none}
+       {\none}
+  \class{Route}
+        {Repräsentiert eine berechnete \gls{route}.}
+        {\none} % ?
+        {
+          \method{getNodes}[Node[]]
+                 {\none}
+                 {Liefert eine Liste der Knoten, aus denen denen die Route besteht.}
+        }
+  \class{RouteDescriptionGenerator}
+        {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
+        {\none}
+        {
+          \method{generateRouteDescription}[RouteDescription]
+                 {
+                   \param{route}{Route}{Die Route, deren Beschreibung erzeugt werden soll.}
+                   \param{data}{ProfileMapCombination}{Der Graph der zur Generierung der Beschreibung verwendet wird.}
+                 }
+                 {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
+        }
+  \class{RouteDescription}
+        {Kapselt die zu einer \refclass{Route} gehörende \gls{wegbeschreibung}.}
+        {\none} % ?
+        {
+          \method{getInstructions}[List<TurnInstruction>]
+                 {\none}
+                 {Liefert eine Liste der Abbiegeanweisungen.}
+        }
+  \class{TurnInstruction}
+        {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \refclass{RouteDescription} aufgebaut ist.}
+        {\none} % ?
+        {
+          \method{toString}[String]
+                 {\none}
+                 {Gibt den Text der Abbiegeanweisung zurück.}
+        }
+  \class{ArcFlags}
+        {Enthält die Arc-Flags für den vorberechneten Graphen.}
+        {\none} % ?
+        {
+          \method{getFlags}[int]
+                 {
+                   \param{node}{Node}{Die Nummer eines Knotens.}
+                 }
+                 {Gibt die zum Knoten gehörenden Arc-Flags zurück.}
+        }
+}
+
+\package{MapDisplay}{
+  Dieses Paket enthält alle Klassen, die an der Darstellung der Karte im \gls{gui} beteiligt sind.
+  
+  Die zentrale Klasse dieses Pakets ist der \refclass{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
+  Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \refclass{TileSource}, welche die Kacheln synchron berechnet.
+  Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \refclass{TileFinishedListener} benachrichtigt.
+  
+  Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
+  
+  Kartenkacheln werden über \gls{smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
+}
+{
+ \class{TileSource}
+        {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
+        {\none}
+        {
+          \method{getTile}[BufferedImage]
+                 {
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                 }
+                 {Berechnet die angegebene Kachel und gibt sie zurück.}
+        }
+  \class{TileCache}
+        {
+          Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
+          Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \refclass{TileFinishedListener} benachrichtigt.
+          
+          Intern werden die gecacheten Kacheln so gehalten, dass der Garbage Collector sie bei Speicherknappheit verwerfen kann (etwa durch \code{SoftReference}s).
+        }
+        {\none}
+        {
+          \method{TileCache}
+                 {\param{target}{TileSource}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
+                 {Erstellt einen neuen Cache für die angegebene \refclass{TileSource}.}
+          \method{getTile}[BufferedImage]
+                 {
+                   \param{x}{int}{Die \gls{smt}-X-Komponente.}
+                   \param{y}{int}{Die \gls{smt}-Y-Komponente.}
+                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
+                 }
+                 {
+                   Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
+                   andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target} angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target} angefordert und im Zwischenspeicher gespeichert.
+                 }
+
+ \method{addTileFinishedListener}
+                 {\param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}}
+                 {
+                   Registriert einen \refclass{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
+                   Die Kachel ist Teil der Nachricht.
+                 }
+}
+  \class{TileFinishedListener}
+        {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
+        {\none}
+        {
+          \method{tileFinished}
+                 {
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                   \param{tile}{BufferedImage}{Die berechnete Kachel.}
+                 }
+                 {
+                   Wird vom \refclass{TileCache} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
+                   Die übliche Aktion ist, ein \code{repaint} der Kartenansicht im \gls{gui} auszulösen.
+                 }
+        }
+ 
+  \class{TileRenderer}
+        {Eine \refclass{TileSource}, die die Kacheln selbst berechnet.}
+        {\none}
+        {
+          \method{TileRenderer}
+	   { 
+		\param{graph}{Graph}{Ein Adjazenzfeld.}
+	    }
+	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
+          \method{getTile}[BufferedImage]
+                 {
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                 }
+                 {Berechnet die angegebene Kachel und gibt sie zurück.}
+        }
+  \class{OSMRenderer}
+        {Eine \refclass{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
+        {\none}
+        {
+          \method{getTile}[BufferedImage]
+                 {
+                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                 }
+                 {Lädt die angegebene Kachel herunter und gibt sie zurück.}
+        }
+}
+
+\package{View}{
+  Dieses Paket enthält die Views nach der \gls{mvc}-Architektur. Alle Views im Klassendiagramm sind Interfaces, die von genau einer Klasse realisiert werden. 
+}
+{
+   \class{MainView}
+        {Zeigt das Hauptfenster auf dem Bildschirm an.}
+        {\none}
+        {\none}
+
+  \class{MapView}
+        {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
+        {\none}
+        {
+          \method{MapView}
+                 {
+                   \param{s}{TileSource}{eine gerenderte Kachel}
+                 }
+                 {Ein Konstruktor, der ein Objekt der Klasse \refclass{MapView} erzeugt.}
+          \method{paint}
+                 {
+                   \param{graphics}{Graphics}{ein Objekt vom}
+                 }
+                 {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden.}
+        }
+
+  \class{ProfileManagerView}
+        {Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.}
+        {\none}
+        {
+          \method{setCurrentProfile}
+                 {
+                   \param{profile}{Profile}{Das neue Profile.}
+                 }
+                 {
+                   Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
+                 }
+          \method{setAvailableProfiles}
+                 {
+                   \param{profiles}{List<Profile>}{Die verfügbaren Profile.}
+                 }
+                 {
+                   Setzt die Profile, die aktuell ausgewählt werden können.
+                 }
+        }
+
+   \class{MapManagerView}
+        {Zeigt das Fenster der Kartenverwaltung auf dem Bildschirm an.}
+        {\none}
+        {\none}
+
+  \class{HistoryView}
+        {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}
+        {\none}
+        {\none}
+
+  \class{AboutView}
+        {Zeigt das Fenster mit den Informationen über \routeKIT auf dem Bildschirm an.}
+        {\none}
+        {\none}
+}
+
+\package{Profiles}{
+  Dieses Paket enthält alle Klassen zu \glslink{profil}{Profilen}.
+}
+{
+  \class{Profile}
+        {Ein \glslink{profil}{Fahrzeugprofil}.}
+        {
+          \attr{name}{String}{Der Name des Profils.}
+          \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp.}
+          \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern.}
+          \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern.}
+          \attr{weight}{int}{Das Gewicht des Fahrzeugs, in Kilogramm.}
+          \attr{speedHighway}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Autobahn, in Kilometern pro Stunde.}
+          \attr{speedRoad}{int}{Die Durchschnittsgeschwindigkeit des Fahrzeugs auf der Landstraße, in Kilometern pro Stunde.}
+        }
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
+                 }
+                 {Speichert das Profil in die angegebene Datei.}
+          \method{load}[Profile]
+                 {
+                   \param{file}{File}{Die Datei, aus der das Profil geladen wird.}
+                 } 
+                 {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
+        }
+}
+
+\package{Map}{
+  Dieses Paket enthält alle Klassen zu Karten und Kartengraphen.
+  
+  \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
+  \begin{description}
+  \item[\refclass{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Er wird zum \Gls{rendern} der Karte verwendet.
+  \item[\refclass{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
+  \end{description}
+}
+{
+  \class{StreetMap}
+        {Eine Karte.}
+        {
+          \attr{name}{String}{Der Name der Karte.}
+          \attr{graph}{Graph}{Der Graph der Karte, d.\,h. das Straßennetz.}
+        }
+        {\none}
+
+  \class{Graph}
+        {
+          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
+        }
+        {
+          \attr{highwayType}{HighwayType}{Der Straßentyp.}
+        }
+        {
+          \method{Graph}
+                 {
+                   \param{nodes}{Node[]}{Der Knoten-Bestandteil des Adjazenzfeldes.}
+                   \param{edges}{Edge[]}{Der Kanten-Bestandteil des Adjazenzfeldes.}
+                   \param{nodeProps}{Map<Node, NodeProperties>}
+                         {
+                           Die \code{NodeProperties} der Knoten des Graphen. Es wird eine \code{Map} anstelle eines Arrays verwendet, da die meisten Knoten keine besonderen Eigenschaften haben und daher das Array zum großen Teil leer wäre.
+                         }
+                   \param{edgeProps}{EdgeProperties[]}
+                         {
+                           Die \code{EdgeProperties} der Kanten des Graphen. Hier wird ein Array verwendet, da jede Kante einen Namen und damit ein \code{EdgeProperties}-Objekt hat.
+                         }
+                   \param{lat}{float[]}{Die geographischen Breiten der Knoten des Graphen.}
+                   \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen.}
+                 }
+                 {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
+          \method{getOutgoingEdges}[Set<Edge>]
+                 {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
+                 {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
+	      \method{getIncomingEdges}[Set<Edge>]
+                 {\param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}}
+                 {Gibt alle in den Knoten eingehende Kanten zurück.}
+          \method{getTargetNode}[Node]
+                 {\param{edge}{Edge}{Die Kante, dessen Endknoten gesucht wird.}}
+                 {Gibt den Endknoten der angegebenen Kante zurück.}
+          \method{getStartNode}[Node]
+                 {\param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}}
+                 {Gibt den Startknoten der angegebenen Kante zurück.}       
+          \method{getLat}[float]
+                 {\param{node}{Node}{Der Knoten, dessen geographische Breite gesucht wird.}}
+                 {Gibt die geographische Breite des angegebenen Knotens zurück.}
+          \method{getLon}[float]
+                 {\param{node}{Node}{Der Knoten, dessen geographische Länge gesucht wird.}}
+                 {Gibt die geographische Länge des angegebenen Knotens zurück.}
+          \method{getNodeProperties}[NodeProperties]
+                 {\param{node}{Node}{Der Knoten, dessen \refclass{NodeProperties} gesucht werden.}}
+                 {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
+          \method{getEdgeProperties}[EdgeProperties]
+                 {\param{edge}{Edge}{Die Kante, deren \refclass{EdgeProperties} gesucht werden.}}
+                 {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
+        }
+  \class{GraphIndex}
+        {Eine geometrische Datenstruktur.}
+        {\none}
+        {
+	\method{GraphIndex}
+		{
+		    \param{graph}{Graph}{Ein Adjazenzfeld.}
+ 		}
+		    {Erzeugt eine geometrische Datenstruktur für einen Graph aus einem Adjazenzfeld.}	
+	\method{getEdgesIn}[Edge[]]
+		{
+		    \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
+ 		    \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
+                      } 
+		    {
+                      Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
+                    }
+	\method{projectToEdge} [PointOnEdge]
+                 {
+                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
+                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
+                 }
+                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
+         }
+  \class{NodeProperties}
+        {Kapselt die Eigenschaften eines Knotens.}
+        {\none}
+        {
+          \method{isMotorwayJunction}[boolean]
+                 {\none}
+                 {Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
+          \method{getJunctionName}[String]
+                 {\none}
+                 {Gibt den Namen der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
+          \method{getJunctionRef}[String]
+                 {\none}
+                 {Gibt die Nummer der Anschlussstelle zurück oder \code{null}, falls es sich nicht um eine Anschlussstelle handelt.}
+          \method{isTrafficLights}[boolean]
+                 {\none}
+                 {Bestimmt, ob sich an dem Knoten eine Ampel befindet.}
+        }
+  \class{EdgeProperties}
+        {Kapselt die Eigenschaften einer Kante.}
+        {\none}
+        {
+          \method{getName}[String]
+                 {\none}
+                 {Gibt den Namen der Straße zurück oder \code{null}, falls nicht vorhanden.}
+          \method{getRoadRef}[String]
+                 {\none}
+                 {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
+          \method{getMaxSpeed}[int]
+                 {\param{profile}{Profile}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
+                 {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
+        }
+  \class{EdgeBasedGraph}
+        {
+          Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \refclass{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
+          
+          Diese Datenstruktur ist profilunabhängig und wird, wie \refclass{Graph}, bei der Vorberechnung für eine Karte erstellt.
+          Erst in Kombination mit den Profil-spezifischen \refclass{Weights} kann sie zur Routenberechnung verwendet werden.
+        }
+        {\none}
+        {
+          \method{getOutgoingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht werden.}
+                 }
+                 {Gibt alle Abbiegemöglichkeiten \emph{von} der angegebenen Kante zurück.}
+          \method{getIncomingTurns}[Set<Turn>]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren eingehende Abbiegemöglichkeiten gesucht werden.}
+                 }
+                 {Gibt alle Abbiegemöglichkeiten \emph{auf} die angegebene Kante zurück.}
+          \method{getTargetEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Endkante gesucht wird.}
+                 }
+                 {Gibt die Kante zurück, auf die die angegebene Abbiegemöglichkeit führt.}
+          \method{getStartEdge}[Edge]
+                 {
+                   \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Anfangskante gesucht wird.}
+                 }
+                 {Gibt die Kante zurück, von der die angegebene Abbiegemöglichkeit besteht.}
+          \method{getPartition}[Partition]
+                 {
+                   \param{edge}{Edge}{Die Kante, deren Partition bestimmt werden soll.}
+                 }
+                 {
+                   Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten des kantenbasierten Graphen) befindet.
+                   
+                   Ist noch keine Partitionierung gegeben, so wird immer eine Standard-Partition zurückgegeben.
+                 }
+          \method{setPartitions}
+                 {
+                   \param{partitions}{Partition[]}{Die neuen Partitionen.}
+                 }
+                 {
+                   Setzt die Partitionen des Graphen. Die \code{Edge}s des Graphen sind die Indizes in \refparam{EdgeBasedGraph}{setPartitions}{partitions}.
+                 }
+          \method{getTurnType}[TurnType]
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, dessen Art gesucht wird.}
+                 }
+                 {Gibt die Art des angegebenen Abbiegevorgangs zurück.}
+          \method{allowsTurn}[boolean]
+                 {
+                   \param{turn}{Turn}{Der zu betrachtende Abbiegevorgang.}
+                   \param{profile}{Profile}{Das verwendete Profil.}
+                 }
+                 {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
+        }
 }
 
 \package{Exporter}{
@@ -1365,6 +1231,142 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
 }
 
+\package{History}{
+  Dieses Paket enthält alle Klassen, die für den \gls{verlauf} benötigt werden.
+}
+{
+  \class{History}
+        {Kapselt den \gls{verlauf}.}
+        {\none}
+        {
+          \method{addEntry}
+                 {
+                   \param{start}{Coordinates}{Der Startpunkt.}
+                   \param{destination}{Coordinates}{Der Zielpunkt.}
+                 }
+                 {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
+          \method{getEntries}[List<HistoryEntry>]
+                 {\none}
+                 {Gibt alle Einträge des Verlaufs zurück.}
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird.}
+                 }
+                 {Speichert den Verlauf in die angegebene Datei.}
+          \method{load}[History]
+                 {
+                   \param{file}{File}{Die Datei, aus der der Verlauf geladen wird.}
+                 }
+                 {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
+        }
+  \class{HistoryEntry}
+        {Ein Eintrag im \gls{verlauf}.}
+        {
+          \attr{start}{Coordinates}{Der Startpunkt der Anfrage.}
+          \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage.}
+          \attr{date}{Date}{Der Zeitpunkt der Anfrage.}
+        }
+        {\none}
+}
+
+\package{Util}{
+  Dieses Paket enthält verschiedene nützliche Klassen, die sonst nirgendwo hingehören.
+}
+{
+  \class{Coordinates}
+        {Kapselt ein Paar von geographischen Koordinaten.}
+        {
+          \attr{lat}{float}{Der Breitengrad der Koordinaten.}
+          \attr{lon}{float}{Der Längengrad der Koordinaten.}
+        }
+        {
+          \method{distanceTo}[float]
+                 {
+                   \param{other}{Coordinates}{Die anderen Koordinaten.}
+                 }
+                 {
+                   Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.
+                 }
+          \method{getSmtX}[float]
+                 {
+                   \param{zoom}{int}{Das Zoomlevel.}
+                 }
+                 {
+                   Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.
+                 }
+          \method{getSmtY}[float]
+                 {
+                   \param{zoom}{int}{Das Zoomlevel.}
+                 }
+                 {
+                   Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.
+                 }
+          \method{fromSmt}[Coordinates]
+                 {
+                   \param{x}{float}{Die \gls{smt}-X-Komponente.}
+                   \param{y}{float}{Die \gls{smt}-Y-Komponente.}
+                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
+                 }
+                 {
+                   Statische Methode.
+                   Rechnet \gls{smt}-Koordinaten in Koordinaten um.
+                 }
+        }
+  \class{PointOnEdge}
+        {Beschreibt einen Punkt auf der Kante.}
+        {
+          \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
+          \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
+        }
+        {\none}
+}
+
+\package{TODO}{
+  Dieses Paket enthält alle Klassen, die noch in keinem anderen Paket enthalten sind.
+  Vor der endgültigen Abgabe sollten alle diese Klassen einen Platz in einem anderen Paket finden.
+}
+{
+  \class{RouteKit}
+        {Startet die Anwendung.}
+        {\none}
+        {
+	\method{main}
+         	    {
+		\param{args}{String[]}{String-Argumente}
+               }
+	    {Erzeugt einen \refclass{Controller}.}
+         }
+
+  \class{ProfileMapCombination}
+        {Eine Kombination aus einem \refclass{Profile}[Profil] und einer \refclass{StreetMap}[Karte].}
+        {
+          \attr{profile}{Profile}{Das \gls{profil}.}
+          \attr{map}{StreetMap}{Die Karte.}
+        }
+        {
+	\method{isCalculated}[boolean]
+         	    {\none}
+	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
+         }
+  \class{RouteModel}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \refclass{RouteListener}}
+        {\none}
+        {
+          \method{addRouteListener}
+                 {
+                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
+                 }
+                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
+        }
+  \class{RouteModelListener}
+        {Wird bei Änderungen am \refclass{RouteModel} informiert.}
+        {\none}
+        {
+          \method{routeModelChanged}
+                 {\none}
+                 {Wird bei jeder Änderung aufgerufen}
+        }
+}
 
 \glsaddallunused % TODO remove this before final submission. If we don’t use a glossary entry, we obviously don’t need it, and it causes funky line number lists.
 \makeatletter
