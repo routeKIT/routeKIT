@@ -1146,7 +1146,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{lon}{float}{Die geographische Länge von einem Punkt.}
                    \param{lat}{float}{Die geographische Breite von einem Punkt.}
                  }
-                 {Sucht zu gegebenen Koordinaten den nähesten Punkt auf einer Kante.}
+                 {Sucht zu gegebenen Koordinaten den nächsten Punkt auf einer Kante.}
          }
   \class{NodeProperties}
         {Kapselt die Eigenschaften eines Knotens.}
@@ -1382,7 +1382,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
 	\method{isCalculated}[boolean]
          	    {\none}
-	    {Gibt "wahr" zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags exestiert.}
+	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags existiert.}
          }
   \class{ArcFlags}
         {Enthält die Arc-Flags für den vorberechneten Graphen.}
