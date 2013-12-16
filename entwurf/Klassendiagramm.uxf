@@ -47,7 +47,7 @@ exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
 getHistoryModel(): ListModel
-Precalculate(:ProfileMapCombination)
+precalculate(:ProfileMapCombination)
 setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 </panel_attributes>
@@ -97,14 +97,14 @@ getTileSource(): TileSource
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1980</x>
+      <x>1990</x>
       <y>3030</y>
-      <w>130</w>
+      <w>110</w>
       <h>2100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>70;2080;70;30</additional_attributes>
+    <additional_attributes>60;2080;60;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -518,14 +518,14 @@ _load(file: File): Profile_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4710</x>
+      <x>4720</x>
       <y>2960</y>
-      <w>160</w>
+      <w>150</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>90;30;90;190</additional_attributes>
+    <additional_attributes>80;30;80;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -874,14 +874,14 @@ routeModelChanged()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2030</x>
+      <x>2040</x>
       <y>3030</y>
-      <w>130</w>
+      <w>110</w>
       <h>410</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>70;390;70;30</additional_attributes>
+    <additional_attributes>60;390;60;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -988,7 +988,7 @@ exportRoute(route: Route, file: File)</panel_attributes>
     <coordinates>
       <x>3120</x>
       <y>1620</y>
-      <w>134</w>
+      <w>130</w>
       <h>1100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -1604,14 +1604,14 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1830</x>
+      <x>1840</x>
       <y>2810</y>
-      <w>270</w>
+      <w>260</w>
       <h>650</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>250;630;70;630;70;30;80;30</additional_attributes>
+    <additional_attributes>240;630;60;630;60;30;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1709,7 +1709,7 @@ Residential</panel_attributes>
     <coordinates>
       <x>5560</x>
       <y>3620</y>
-      <w>184</w>
+      <w>180</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -1754,14 +1754,14 @@ q1=Turn</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3780</x>
+      <x>3790</x>
       <y>5010</y>
-      <w>92</w>
+      <w>70</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=targetNode</panel_attributes>
-    <additional_attributes>50;30;50;70</additional_attributes>
+    <additional_attributes>40;30;40;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
