@@ -831,9 +831,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
                    andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target} angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target} angefordert und im Zwischenspeicher gespeichert.
                  }
-          \method{deleteTiles}
-                 {\param{zoom}{int}{Die Zoomstufe, für die Kacheln gelöscht werden sollen; siehe \refparam{TileCache}{getTile}{zoom}.}}
-                 {Veranlasst, dass alle zwischengespeicherten Kacheln der angegebenen Zoomstufe aus dem Zwischenspeicher gelöscht werden.}
 
  \method{addTileFinishedListener}
                  {\param{listener}{\refclass{TileFinishedListener}}{Der Listener, der hinzugefügt werden soll.}}
