@@ -238,7 +238,7 @@
 \renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
 
 \newcommand{\abbildung}[1]{\autoref{fig:#1}}
-\newcommand{\routeKIT}[0]{\textit{routeKIT}\xspace}
+\newcommand{\routeKIT}[0]{\emph{routeKIT}\xspace}
 
 
 % alle Glossareinträge
@@ -530,12 +530,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {
                    \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht werden.}
                  }
-                 {Gibt alle Abbiegemöglichkeiten \textit{von} der angegebenen Kante zurück.}
+                 {Gibt alle Abbiegemöglichkeiten \emph{von} der angegebenen Kante zurück.}
           \method{getIncomingTurns}[Set<Turn>]
                  {
                    \param{edge}{Edge}{Die Kante, deren eingehende Abbiegemöglichkeiten gesucht werden.}
                  }
-                 {Gibt alle Abbiegemöglichkeiten \textit{auf} die angegebene Kante zurück.}
+                 {Gibt alle Abbiegemöglichkeiten \emph{auf} die angegebene Kante zurück.}
           \method{getTargetEdge}[Edge]
                  {
                    \param{turn}{Turn}{Die Abbiegemöglichkeit, deren Endkante gesucht wird.}
