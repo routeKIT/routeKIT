@@ -16,8 +16,8 @@ GraphPreCalculation name? (gemacht) (obsolet)
 getLat/-Lon in gleicher Datenstruktur für Routenberechnung?
     Graph (Routing), Index (malen), Physik (Koordinaten, Namen) trennen
 
-GenerateDescription.getGraph()
-Route-> Graph
+GenerateDescription.getGraph() (gemacht)
+Route-> Graph (gemacht)
 
 RouteDescriptionBuilder-Klasse (gemacht)
 
@@ -36,10 +36,10 @@ SequenzProfile MapCombination init
 Vorberechnung bestimmt, in welche Richtung Abbiegung geht (gemacht)
 
 Dokument:
-* Einleitung
-* was ist in diesem Dokument
+* Einleitung (gemacht)
+* was ist in diesem Dokument (gemacht)
 * Architektur grob erklären
-* Sequenzdiagramme
+* Sequenzdiagramme (gemacht)
 * Attributnamen in \texttt (gemacht)
 * Wenn nötig: Änderungen gegenüber Pflichtenheft
 
