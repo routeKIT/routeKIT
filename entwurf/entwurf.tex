@@ -845,7 +845,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Liefert eine Liste der Abbiegevorgänge, aus denen die Route besteht.}
           \method{getNodeIterator}[Iterator<Node>]
                  {\none}
-                 {Gibt einen Iterator über die Knoten der Route zurück.}
+                 {Gibt einen Iterator über die Knoten (\code{Node}) der Route einschließlich Start- und Zielpunkt zurück. Der Iterator ermittelt diese dynamisch aus der Liste der Abbiegevorgänge.}
         }
   \class{RouteDescriptionGenerator}
         {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
