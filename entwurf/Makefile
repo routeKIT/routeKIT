@@ -59,3 +59,15 @@ RouteCalculationSequenz.pdf: RouteCalculationSequenz.uxf
 
 clean-RouteCalculationSequenz:
 	-$(RM) RouteCalculationSequenz.pdf
+
+artefakte: $(ARTEFAKTE)
+	git checkout -B artefakte-$(BRANCH)
+	git add -f $(ARTEFAKTE)
+	git commit -m "Artefakte" --author="$(MAKE) $(MAKECMDGOALS) <make@example.com>"
+	git push --set-upstream --force origin artefakte-$(BRANCH)
+	git checkout $(BRANCH)
+	git branch -d artefakte-$(BRANCH)
+
+get-artefakte:
+	git checkout origin/artefakte-$(BRANCH) $(ARTEFAKTE) # get the artifacts...
+	-git reset -q -- $(ARTEFAKTE) # ...and remove them from the index
