@@ -705,39 +705,44 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 }
 {
   \class{MapImporter}
-        {Liest eine OSM-Karte aus dem Dateisystem in ein \reftype{Graph}-Objekt}
+        {Stellt die Funktionalität zum Importieren einer neuen Karte bereit.}
         {\none}
         {
           \method{importMap}[StreetMap]
                  {
-                   \param{f}{File}{Die Datei aus der die OSM-Daten importiert werden sollen.}
+                   \param{f}{File}{Die OSM-Datei, aus der die Kartendaten importiert werden sollen.}
                  }
-                 {Importiert und säubert den Straßengraph. Erzeugt das Adjazenzfeld und den kantenbasierten Graphen aus \reftype{MapNode}.}
+                 {Importiert eine neue Karte aus der angegebenen OSM-Datei. Die vom \reftype{OSMParser} aufgebaute Graphdatenstruktur wird dabei vom \reftype{GraphPartitioner} partitioniert und zurückgegeben.}
         }
   \class{OSMParser}
-        {Importiert eine neue Karte.}
+        {Stellt die Funktionalität zum Parsen einer OSM-Datei bereit. Dafür werden zur temporären Repräsentation des Graphen im Speicher die Klassen \reftype{MapNode}, \reftype{MapEdge} und \reftype{TurnRestriction} verwendet.}
         {\none}
         {
-          \method{parseOSM}[Graph]
+          \method{parseOSM}[StreetMap]
                  {
-                   \param{f}{File}{}
+                   \param{f}{File}{Die OSM-Datei, die eingelesen werden soll.}
                  }
-                 {Wandelt eine OSM-Karte in eine verlinkte Datenstruktur \reftype{MapNode} um.}
+                 {Liest eine OSM-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
         }
   \class{MapNode}
-        {Stellt eine Kreuzung im Straßennetz dar. Diese verknüpfte Darstellung ist nur eine Zwischendarstellung um die OSM-Daten gut einlesen zu können}
-        {\none}
+        {Stellt einen Knoten im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
         {
-          \method{getLon}[float]
-                 {\none}
-                 {Gibt den Längengrad dieses Knotens aus.}
-          \method{getLat}[float]
-                 {\none}
-                 {Gibt den Breitengrad dieses Knotens aus.}
-          \method{getEdges}[Set<MapEdge>]
-                 {\none}
-                 {Gibt eine Liste mit allen Kanten zu einem Knoten zurück.}
+          \attr{lat}{float}{Der Längengrad des Knotens.}
+          \attr{lon}{float}{Der Breitengrad des Knotens.}
         }
+        {
+          \method{getOutgoingEdges}[Set<MapEdge>]
+                 {\none}
+                 {Gibt eine Liste mit allen ausgehenden Kanten des Knotens zurück.}
+        }
+  \class{MapEdge}
+        {Stellt eine Kante im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
+        {\none}
+        {\none}
+  \class{TurnRestriction}
+        {Stellt eine Abbiegebeschränkung dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
+        {\none}
+        {\none}
   \class{GraphPartitioner}
         {Partitioniert einen gegebenen Graphen.}
         {\none}

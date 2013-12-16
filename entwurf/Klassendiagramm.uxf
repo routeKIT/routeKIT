@@ -646,15 +646,15 @@ getNodeIterator(): Iterator&lt;Node&gt;
     <coordinates>
       <x>3670</x>
       <y>4950</y>
-      <w>220</w>
+      <w>250</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>MapNode
 --
+lat: float
+lon: float
 --
-getLat(): float
-getLon(): float
-getEdges(): Set&lt;MapEdge&gt;
+getOutgoingEdges(): Set&lt;MapEdge&gt;
 // --&gt;NodeProperties?
 </panel_attributes>
     <additional_attributes/>
@@ -664,18 +664,18 @@ getEdges(): Set&lt;MapEdge&gt;
     <coordinates>
       <x>3700</x>
       <y>4860</y>
-      <w>150</w>
+      <w>170</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Node for itermediate
+    <panel_attributes>Objects for itermediate
 graph representation
-(in OSMParser/etc)</panel_attributes>
+in OSMParser</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3740</x>
+      <x>3750</x>
       <y>4900</y>
       <w>50</w>
       <h>70</h>
@@ -761,7 +761,7 @@ m2=0..n
     <panel_attributes>OSMParser
 --
 --
-parseOSM(f: File): Graph
+parseOSM(f: File): StreetMap
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1108,9 +1108,9 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>3650</x>
+      <x>3610</x>
       <y>4830</y>
-      <w>1680</w>
+      <w>1720</w>
       <h>770</h>
     </coordinates>
     <panel_attributes>Precalculation</panel_attributes>
@@ -1489,14 +1489,13 @@ index</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>3670</x>
-      <y>5070</y>
-      <w>220</w>
-      <h>50</h>
+      <y>5080</y>
+      <w>250</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>MapEdge
 --
 --
-getTargetNode(): MapNode
 //--&gt; EdgeProperties
 </panel_attributes>
     <additional_attributes/>
@@ -1504,14 +1503,14 @@ getTargetNode(): MapNode
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3750</x>
+      <x>3720</x>
       <y>5010</y>
       <w>50</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n</panel_attributes>
-    <additional_attributes>30;60;30;30</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1751,5 +1750,67 @@ MotorwayJunction</panel_attributes>
     <panel_attributes>lt=--&gt;
 q1=Turn</panel_attributes>
     <additional_attributes>30;30;540;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3780</x>
+      <y>5010</y>
+      <w>92</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=targetNode</panel_attributes>
+    <additional_attributes>50;30;50;70</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>3670</x>
+      <y>5120</y>
+      <w>250</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>TurnRestriction
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3610</x>
+      <y>5060</y>
+      <w>80</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=from</panel_attributes>
+    <additional_attributes>60;30;30;30;30;80;60;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3590</x>
+      <y>4950</y>
+      <w>110</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=via</panel_attributes>
+    <additional_attributes>80;30;30;30;30;210;90;210;90;200</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3620</x>
+      <y>5070</y>
+      <w>70</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=to</panel_attributes>
+    <additional_attributes>50;30;30;30;30;60;50;60</additional_attributes>
   </element>
 </diagram>
