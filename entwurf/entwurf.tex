@@ -1197,7 +1197,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
           \method{getEdgeProperties}[EdgeProperties]
                  {\param{edge}{Edge}{Die Kante, deren \reftype{EdgeProperties} gesucht werden.}}
-                 {Gibt die \code{EdgeProperties} de angegebenen Kante zurück.}
+                 {Gibt die \code{EdgeProperties} der angegebenen Kante zurück.}
+	\method{getIndex}[GraphIndex]
+	      {\param{zoom}{int}{Das Zoomlevel.}}
+                 {Gibt eine geometrische Datenstruktur zu einem bestimmten Zoomlevel zurück.}
         }
   \class{GraphIndex}
         {Eine geometrische Datenstruktur.}
