@@ -464,12 +464,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    Gibt ein \code{javax.swing.ListModel} zurück, das von einer \code{JList} verwendet werden kann, um den Verlauf anzuzeigen.
                  }
                  
-          \method{schedulePrecalculate}
+          \method{Precalculate}
                  {
                    \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
                  }
                  {
-                   Ruft \refmethod{PreCalculationScheduler}{scheduleCalculation} auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
+                   Ruft \refmethod{PreCalculatorr}{doPrecalculation} auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
                  }
 
           \method{setUseOnlineMaps}
@@ -704,18 +704,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {Lässt den Graphen durch das externe Programm in die gewünschte Anzahl an Partitionen teilen.}
         }
-
-  \class{PreCalculationScheduler}
-        {Veranlasst die Vorberechnung für Kombinationen aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte].}
-        {\attr{calculationQueue}{Queue}{Die Queue, in der geplante Vorberechnungen stehen. Sie wird nacheinander abgearbeitet.}}
-        {
-          \method{scheduleCalculation}
-                 {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
-                 }
-                 {Fügt die \refclass{ProfileMapCombination} zur späteren Vorberechnung zur Queue hinzu.}
-        }
-                        
+              
   \class{PreCalculator}
         {Führt die Vorberechnung für eine Kombination aus \refclass{Profile}[Profil] und \refclass{StreetMap}[Karte] durch.}
         {\none}

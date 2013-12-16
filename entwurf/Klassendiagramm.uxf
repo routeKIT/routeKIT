@@ -47,7 +47,7 @@ exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
 getHistoryModel(): ListModel
-schedulePrecalculate(:ProfileMapCombination)
+Precalculate(:ProfileMapCombination)
 setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 </panel_attributes>
@@ -822,34 +822,6 @@ getFlags(:Turn): int
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0...1</panel_attributes>
     <additional_attributes>30;30;30;80</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>4390</x>
-      <y>4890</y>
-      <w>300</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>PreCalculationScheduler
---
-calculationQueue: Queue
---
-scheduleCalculation(:ProfileMapCombination)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>4490</x>
-      <y>4920</y>
-      <w>50</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-m1=    1
-</panel_attributes>
-    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
