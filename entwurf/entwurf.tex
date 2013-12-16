@@ -556,12 +556,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{switchProfile}
                  {
-                   \param{p}{Profile}{Das neue Profil.}
+                   \param{from}{Profile}{Das zuvor ausgewählte Profil, mit gegebenenfalls geänderten Werten.}
+                   \param{to}{String}{Der Name des neuen ausgewählten Profils.}
                  }
                  {
                    Wird aufgerufen, wenn in der \reftype{ProfileManagerView} ein anderes Profil ausgewählt wird.
-                   Speichert die Werte aller Eingabeelemente und setzt sie auf die Werte des neuen Profils (ggf. die bereits gespeicherten Werte, falls das Profil schon zuvor einmal ausgewählt war).
-                   Aktiviert/Deaktiviert den Löschen-Button und die Eingabeelemente, je nachdem, ob das neue Profil ein Standardprofil ist oder nicht.
+                   Die Werte in \refparam{ProfileManagerController}{switchProfile}{from} werden gespeichert.
+                   Anschließend wird das neue Profil gesucht oder neu erstellt und der View mitgeteilt (siehe \refmethod{ProfileManagerView}{setCurrentProfile}).
                  }
           \method{deleteProfile}
                  {\none}

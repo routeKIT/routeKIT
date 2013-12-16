@@ -25,9 +25,9 @@ user-&gt;view:user,view:“New”
 view-&gt;&gt;&gt;user:user,view:“Name of the new profile?”
 user.&gt;view:user,view:“Smart”
 view-&gt;&gt;&gt;view:view:writeValues()
-view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(newProfile)
+view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(currentProfile, "Smart")
 ctrl-&gt;&gt;&gt;ctrl:view,ctrl:storeCurrentProfile()
-ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(newProfile)
+ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(smart)
 view-&gt;&gt;&gt;view:view:readValues()
 user-&gt;user:wait
 
@@ -36,9 +36,9 @@ user-&gt;user:wait
 
 user-&gt;view:user,view:“Select profile ‘Mercedes’”
 view-&gt;&gt;&gt;view:view:writeValues()
-view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(selectedProfile)
+view-&gt;&gt;&gt;ctrl:view,ctrl:switchProfile(currentProfile, "Mercedes")
 ctrl-&gt;&gt;&gt;ctrl:view,ctrl:storeCurrentProfile()
-ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(selectedProfile)
+ctrl-&gt;&gt;&gt;view:view,ctrl:setProfile(mercedes)
 view-&gt;&gt;&gt;view:view:readValues()
 user-&gt;user:*sigh*
 
