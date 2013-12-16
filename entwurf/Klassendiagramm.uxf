@@ -782,6 +782,7 @@ getLat(:Node): float
 getLon(:Node): float
 getNodeProperties(:Node): NodeProperties
 getEdgeProperties(:Edge): EdgeProperties
+getIndex(zoom: int): GraphIndex
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1474,8 +1475,9 @@ projectToEdge(lon: float, lat: float): PointOnEdge
       <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-p1=index</panel_attributes>
-    <additional_attributes>30;30;30;260;80;260</additional_attributes>
+m1=1..n
+index</panel_attributes>
+    <additional_attributes>50;30;50;260;100;260</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
