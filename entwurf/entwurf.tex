@@ -1464,6 +1464,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {Gibt die zum Abbiegevorgang gehörenden Arc-Flags zurück.}
         }
+\class{Weights}
+        {Enthält die Kantengewichte für den vorberechneten Graphen.}
+        {\none}
+        {
+          \method{getWeight}[int]
+                 {
+                   \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
+                 }
+                 {Gibt die zum Abbiegevorgang gehörendes Gewicht zurück.}
+        }
+
   \class{RouteModel}
         {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
         {\none}
