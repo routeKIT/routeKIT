@@ -42,8 +42,8 @@ Controller()
 onStartChanged(:Coordinates)
 onDestinationChanged(:Coordinates)
 onStartAndDestChanged(:Coordinates, :Coordinates)
-exportGPX(target: File)
-exportHTML(target: File)
+exportGPX(:File)
+exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
 getHistoryModel(): ListModel
@@ -729,8 +729,8 @@ r2=profile</panel_attributes>
     <panel_attributes>ProfileManager
 --
 --
-saveProfile(p: Profile)
-deleteProfile(p: Profile)
+saveProfile(:Profile)
+deleteProfile(:Profile)
 getProfiles(): Set&lt;Profile&gt;</panel_attributes>
     <additional_attributes/>
   </element>
@@ -774,14 +774,14 @@ parseOSM(f: File): Graph
 --
 --
 Graph(nodes: Node[], edges: Edge[], :Map&lt;Node, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
-getOutgoingEdges(node: Node): Set&lt;Edge&gt;
-getIncomingEdges(node: Node): Set&lt;Edge&gt;
-getTargetNode(edge: Edge): Node
-getStartNode(edge: Edge): Node
-getLat(node: Node): float
-getLon(node: Node): float
-getNodeProperties(node: Node): NodeProperties
-getEdgeProperties(edge: Edge): EdgeProperties
+getOutgoingEdges(:Node): Set&lt;Edge&gt;
+getIncomingEdges(:Node): Set&lt;Edge&gt;
+getTargetNode(:Edge): Node
+getStartNode(:Edge): Node
+getLat(:Node): float
+getLon(:Node): float
+getNodeProperties(:Node): NodeProperties
+getEdgeProperties(:Edge): EdgeProperties
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -796,7 +796,7 @@ getEdgeProperties(edge: Edge): EdgeProperties
     <panel_attributes>ArcFlags
 --
 --
-getFlags(turn: Turn): int
+getFlags(:Turn): int
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1366,7 +1366,7 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
     <panel_attributes>ProfileManagerController
 --
 --
-switchProfile(p: Profile)
+switchProfile(:Profile)
 deleteProfile()
 estimateDeletionAmount(): int
 saveAllChanges()
@@ -1385,8 +1385,8 @@ saveAllChanges()
 --
 --
 switchMap(m: StreetMap)
-addProfile(p: Profile)
-removeProfile(p: Profile)
+addProfile(:Profile)
+removeProfile(:Profile)
 importMap(name: String, f: File)
 deleteCurrentMap()
 saveAllChanges()
@@ -1656,13 +1656,13 @@ implements</panel_attributes>
     <panel_attributes>EdgeBasedGraph
 --
 --
-getOutgoingTurns(edge: Edge): Set&lt;Turn&gt;
-getIncomingTurns(edge: Edge): Set&lt;Turn&gt;
-getTargetEdge(turn: Turn): Edge
-getStartEdge(turn: Turn): Edge
-getPartition(edge: Edge): Partition
-getTurnType(turn: Turn): TurnType
-allowsTurn(turn: Turn, p: Profile): boolean
+getOutgoingTurns(:Edge): Set&lt;Turn&gt;
+getIncomingTurns(:Edge): Set&lt;Turn&gt;
+getTargetEdge(:Turn): Edge
+getStartEdge(:Turn): Edge
+getPartition(:Edge): Partition
+getTurnType(:Turn): TurnType
+allowsTurn(:Turn, :Profile): boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1700,7 +1700,7 @@ allowsTurn(turn: Turn, p: Profile): boolean
     <panel_attributes>Weights
 --
 --
-getWeight(turn: Turn): int
+getWeight(:Turn): int
 </panel_attributes>
     <additional_attributes/>
   </element>
