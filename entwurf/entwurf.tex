@@ -1254,6 +1254,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  {\param{profile}{Profile}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
         }
+  \enum{HighwayType}
+       {Ein Straßentyp}
+       {
+         \constant{Motorway}{Autobahn}
+         \constant{Trunk}{Schnellstraße}
+         \constant{Primary}{Bundesstraße}
+         \constant{Secondary}{Landesstraße}
+         \constant{Tertiary}{Kreisstraße}
+         \constant{Unclassified}{Gemeindeverbindungsstraße}
+         \constant{Residential}{Ortsstraße}
+       }
   \class{EdgeBasedGraph}
         {
           Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \reftype{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
@@ -1311,6 +1322,20 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
         }
+  \enum{TurnType}
+       {Der Typ einer Abbiegemöglichkeit.}
+       {
+         \constant{RightTurn}{Rechts abbiegen.}
+         \constant{LeftTurn}{Links abbiegen.}
+         \constant{HalfRightTurn}{Rechts halten.}
+         \constant{HalfLeftTurn}{Links halten.}
+         \constant{StraightOn}{Geradeaus.}
+         \constant{NoTurn}{Keine echte Abbiegemöglichkeit.}
+         \constant{RoundaboutEntry}{Einfahrt in einen Kreisverkehr.}
+         \constant{RoundaboutExit}{Ausfahrt aus einem Kreisverkehr.}
+         \constant{RoundaboutNoExit}{An einer Ausfahrt im Kreisverkehr bleiben.}
+         \constant{MotorwayJunction}{Eine Anschlussstelle einer Autobahn oder Schnellstraße.}
+       }
 }
 
 \package{Exporter}{
