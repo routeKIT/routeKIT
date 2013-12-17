@@ -805,7 +805,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         
   \class{ArcFlagsCalculator}
-        {Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.}
+        {Berechnet \gls{arc} für einen partitionierten, gewichteten Graphen.}
         {\none}
         {
           \method{calculateArcFlags}
@@ -813,7 +813,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                    \param{combination}{ProfileMapCombination}{Die Kombination aus Profil und Karte.}
                  }
                  {
-                   Berechnet die Arc-Flags für die angegebene Kombination und setzt die \reftype{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
+                   Berechnet die \gls{arc} für die angegebene Kombination und setzt die \reftype{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
                  }
         }
 }
@@ -834,10 +834,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
                  }
                  {Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen Graphen.}
         }
-   \class{ArcFlagsDijkstra}
-       {Führt die Berechnung der schnellsten Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil durch unter der Beachtung von Arc-Flags.}
-       {\none}
-       {\none}
+  \class{ArcFlagsDijkstra}
+        {
+          Verwended \gls{dijkstra}, um die schnellste Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil zu berechnen.
+          Durch \gls{arc} wird die Berechnung beschleunigt.
+        }
+        {\none}
+        {\none}
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
         {
@@ -994,17 +997,17 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
 	\method{isCalculated}[boolean]
          	    {\none}
-	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der Arc-Flags existiert.}
+	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der \gls{arc} existiert.}
          }
   \class{ArcFlags}
-        {Enthält die Arc-Flags für den vorberechneten Graphen.}
+        {Enthält die \gls{arc} für den vorberechneten Graphen.}
         {\none}
         {
           \method{getFlags}[int]
                  {
                    \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
                  }
-                 {Gibt die zum Abbiegevorgang gehörenden Arc-Flags zurück.}
+                 {Gibt die zum Abbiegevorgang gehörenden \gls{arc} zurück.}
         }
 \class{Weights}
         {Enthält die Kantengewichte für den vorberechneten Graphen.}
@@ -1062,7 +1065,11 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         }
 
   \class{MapView}
-        {Zeigt einen Kartenausschnitt auf dem Bildschirm an.}
+        {
+          Zeigt einen Kartenausschnitt auf dem Bildschirm an.
+          
+          Als Kartenprojektion wird die \gls{mercator} verwendet.
+        }
         {\none}
         {
           \method{MapView}
