@@ -1,0 +1,39 @@
+Diagramm aufteilen / aufräumen
+    Spalten MVC, Zeilen thematisch
+    Farben
+    "sehr optional" oder auch "unbedingt machen"
+RouteModel: currentRoute als Relation statt Attribut?
+RenderSequenz:
+    TileSource muss irgendwo Kartendaten herkriegen
+    Pfeiltypen
+    then-Pfad entfernen (unter dem Diagramm erklären, dass dies der Fall ist, in dem die Tile fehlt)
+    getSource umbenennen?
+    separate Lebenslinie für Worker-Thread
+    enqueueTile enqueued keine Tile, sondern Request
+    Queue/Stack/Dequeue
+ProfileManagementSequenz:
+    switchProfile() macht zu viel -> zwei Methoden: eine zum Speichern, eine zum Wechseln
+    saveAllChanges() -> ?
+im Controller fehlt manage{Profiles,Maps}()
+lange Namen in Ordnung
+speichern, wie lange Vorberechnung dauerte => nicht estimate, sondern getDeletionAmount
+Estimation: Zeitdauer oder einfach „X Vorberechnungen werden gelöscht“?
+PreCalculationSequenz:
+    vom Controller aus asynchron machen
+    Fortschrittsbalken
+    weg oder mehr
+    Lebenslinien durchgängig
+    Kästen weg (weightEdges, calculateArcFlags)
+RouteCalculationSequenz:
+    Lebenslinien durchgängig
+    Parameter an die Methodenaufrufe
+    async calculateRoute (mit extra Lebenslinie und tamtam)
+    RouteCalculator teil vom Model, setzt Route selbst? "so ist auch okay"
+LaTeX: Erklärung, Fonts
+Einrückung: Methodenname weniger als Klassenbeschreibung
+Coordinate(s)? nochmal nachschauen
+Allgemein: Namen aussagekräftig
+Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen
+Alle Figures referenzien
+Kachel rendern: außenrum nachfragen (für Texte)
+LaTeX title: Entwurf -> Entwurfsdokument
