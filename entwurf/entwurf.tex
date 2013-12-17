@@ -252,6 +252,7 @@
   \setkeys{glossadd}{#1}
   \forallglsentries[\@glo@type]{\@glo@entry}{
     \ifglsused{\@glo@entry}{}{
+      \typeout{****Glossary entry '\@glo@entry' unused****}
       \glsaddnp[#1]{\@glo@entry}}}
 }
 \makeatother
