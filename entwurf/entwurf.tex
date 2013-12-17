@@ -548,17 +548,25 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         {\none}
         {
-          \method{switchProfile}
+          \method{saveTemporaryProfile}
                  {
-                   \param{from}{Profile}{Das zuvor ausgewählte Profil, mit gegebenenfalls geänderten Werten.}
-                   \param{to}{String}{Der Name des neuen ausgewählten Profils.}
+                   \param{profile}{Profile}{Das temporäre Profil mit den aktuell eingegebenen Werten.}
                  }
                  {
-                   Wird aufgerufen, wenn in der \reftype{ProfileManagerView} ein anderes Profil ausgewählt wird.
-                   Die Werte in \refparam{ProfileManagerController}{switchProfile}{from} werden gespeichert.
-                   Anschließend wird das neue Profil gesucht oder neu erstellt und der View mitgeteilt (siehe \refmethod{ProfileManagerView}{setCurrentProfile}).
+                   Speichert die Werte des temporären Profils.
+                   Wird üblicherweise direkt vor \refmethod{ProfileManagerController}{changeTemporaryProfile} aufgerufen.
                  }
-          \method{deleteCurrentProfile}
+          \method{changeTemporaryProfile}
+                 {
+                   \param{name}{String}{Der Name des neuen Profils.}
+                 }
+                 {
+                   Wechselt zu dem temporären Profil mit dem angegebenen Namen.
+                   Falls noch kein Profil mit diesem Namen existiert, wird es als Kopie des aktuellen Profils erstellt.
+                   
+                   Die Änderung wird der View über \refmethod{ProfileManagerView}{setCurrentProfile} mitgeteilt.
+                 }
+          \method{deleteCurrentTemporaryProfile}
                  {\none}
                  {
                    Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
@@ -587,7 +595,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         }
         {\none}
         {
-          \method{switchMap}
+          \method{changeMap}
                  {
                    \param{m}{StreetMap}{Die neue Karte.}
                  }

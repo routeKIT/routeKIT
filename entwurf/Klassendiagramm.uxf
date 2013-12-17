@@ -1344,8 +1344,9 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
     <panel_attributes>ProfileManagerController
 --
 --
-switchProfile(from: Profile, to: String)
-deleteCurrentProfile()
+saveTemporaryProfile(:Profile)
+changeTemporaryProfile(name: String)
+deleteCurrentTemporaryProfile()
 estimateDeletionAmount(): int
 saveAllChanges()
 </panel_attributes>
@@ -1362,7 +1363,7 @@ saveAllChanges()
     <panel_attributes>MapManagerController
 --
 --
-switchMap(m: StreetMap)
+changeMap(:StreetMap)
 addProfile(:Profile)
 removeProfile(:Profile)
 importMap(name: String, f: File)

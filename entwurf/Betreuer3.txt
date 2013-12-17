@@ -12,7 +12,7 @@ RenderSequenz:
     enqueueTile enqueued keine Tile, sondern Request
     Queue/Stack/Dequeue
 ProfileManagementSequenz:
-    switchProfile() macht zu viel -> zwei Methoden: eine zum Speichern, eine zum Wechseln
+    switchProfile() macht zu viel -> zwei Methoden: eine zum Speichern, eine zum Wechseln (gemacht) (saveTemporaryProfile, changeTemporaryProfile)
     saveAllChanges() -> ?
 im Controller fehlt manage{Profiles,Maps}()
 lange Namen in Ordnung
