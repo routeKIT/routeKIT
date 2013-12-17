@@ -36,4 +36,4 @@ Allgemein: Namen aussagekräftig
 Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen
 Alle Figures referenzien
 Kachel rendern: außenrum nachfragen (für Texte)
-LaTeX title: Entwurf -> Entwurfsdokument
+LaTeX title: Entwurf -> Entwurfsdokument (gemacht)
