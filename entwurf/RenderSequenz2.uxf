@@ -108,7 +108,7 @@ renderTile(x,y,zoom)
       <x>270</x>
       <y>160</y>
       <w>20</w>
-      <h>40</h>
+      <h>50</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -167,7 +167,7 @@ tile
     <coordinates>
       <x>50</x>
       <y>180</y>
-      <w>214</w>
+      <w>216</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -422,7 +422,7 @@ paint(g)</panel_attributes>
       <x>450</x>
       <y>180</y>
       <w>20</w>
-      <h>160</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -464,12 +464,12 @@ paint(g)</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>430</x>
-      <y>310</y>
+      <y>420</y>
       <w>50</w>
-      <h>430</h>
+      <h>320</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;410</additional_attributes>
+    <additional_attributes>30;30;30;300</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -510,7 +510,7 @@ hasTile(x,y,zoom)</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>20</y>
-      <w>104</w>
+      <w>106</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
@@ -529,5 +529,17 @@ paint(g)</panel_attributes>
 
 triggers</panel_attributes>
     <additional_attributes>30;110;30;80;140;80;140;30;110;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>260</x>
+      <y>150</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+triggers</panel_attributes>
+    <additional_attributes>190;50;30;50</additional_attributes>
   </element>
 </diagram>
