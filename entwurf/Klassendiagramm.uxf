@@ -117,7 +117,7 @@ implements</panel_attributes>
 TileSource
 --
 --
-&lt;&lt;abstract&gt;&gt;getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
+&lt;&lt;abstract&gt;&gt;renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -133,7 +133,7 @@ TileSource
 cache
 --
 TileCache(target: TileSource)
-getTile(x: int, y: int, zoom: int): BufferedImage
+renderTile(x: int, y: int, zoom: int): BufferedImage
 addTileFinishedListener(:TileFinishedListener)
 </panel_attributes>
     <additional_attributes/>
@@ -173,7 +173,7 @@ tileSource</panel_attributes>
 --
 --
 TileRenderer(:Graph)
-getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
+renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -187,7 +187,7 @@ getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <panel_attributes>OSMRenderer
 --
 --
-getTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
+renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
