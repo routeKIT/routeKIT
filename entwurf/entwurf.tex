@@ -1074,14 +1074,21 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{MapView}
                  {
-                   \param{s}{TileSource}{eine gerenderte Kachel}
+                   \param{source}{TileSource}{Ein Objekt, das die Kartenkacheln liefert, die dann angezeigt werden.}
                  }
-                 {Ein Konstruktor, der ein Objekt der Klasse \reftype{MapView} erzeugt.}
+                 {
+                   Erzeugt eine neue \reftype{MapView}. Die angegebene \reftype{TileSource} wird zum \Gls{rendern} verwendet.
+                   
+                   Da die Kacheln bei jedem \refmethod{MapView}{paint} synchron angefragt werden, sollte \refparam{MapView}{MapView}{source} ein \reftype{TileCache} sein.
+                 }
           \method{paint}
                  {
-                   \param{graphics}{Graphics}{ein Objekt vom}
+                   \param{graphics}{Graphics}{Die Java \code{Graphics}, auf welche die Karte gezeichnet wird.}
                  }
-                 {Zeichnet einen Kartenausschnitt, indem fertige Kacheln richtig platziert werden. Bestimmt dazu alle Kacheln, die in der aktuellen Ansicht benötigt werden.}
+                 {
+                   Zeichnet den aktuell sichtbaren Kartenausschnitt.
+                   Alle sichtbaren Kacheln werden von \refparam{MapView}{MapView}{source} synchron angefordert.
+                 }
         }
 
   \class{ProfileManagerView}
