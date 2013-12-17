@@ -2,9 +2,9 @@ LATEX = pdflatex -interaction nonstopmode -file-line-error
 RM = rm -f
 BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 UMLET = java -jar ../Umlet/umlet.jar
-ARTEFAKTE = StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf
+ARTEFAKTE = StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf PreCalculationSequenz.pdf
 
-all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf StartSequenz.pdf RenderSequenz.pdf ProfilSequenz.pdf RouteCalculationSequenz.pdf PreCalculationSequenz.pdf
+all: entwurf.pdf clean-entwurf-build Klassendiagramm.pdf
 
 .PHONY: all clean clean-entwurf clean-entwurf-build clean-Klassendiagramm clean-StartSequenz clean-RenderSequenz clean-ProfilSequenz clean-RouteCalculationSequenz clean-PreCalculationSequenz
 
