@@ -711,7 +711,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{importMap}[StreetMap]
                  {
-                   \param{f}{File}{Die OSM-Datei, aus der die Kartendaten importiert werden sollen.}
+                   \param{file}{File}{Die OSM-Datei, aus der die Kartendaten importiert werden sollen.}
+                   \param{name}{String}{Der Name der neuen \reftype{StreetMap}.}
                  }
                  {Importiert eine neue Karte aus der angegebenen OSM-Datei. Die vom \reftype{OSMParser} aufgebaute Graphdatenstruktur wird dabei vom \reftype{GraphPartitioner} partitioniert und zurückgegeben.}
         }
@@ -721,7 +722,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{parseOSM}[StreetMap]
                  {
-                   \param{f}{File}{Die OSM-Datei, die eingelesen werden soll.}
+                   \param{file}{File}{Die OSM-Datei, die eingelesen werden soll.}
+                   \param{name}{String}{Der Name der neuen \reftype{StreetMap}.}
                  }
                  {Liest eine OSM-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
         }

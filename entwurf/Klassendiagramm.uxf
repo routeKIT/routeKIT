@@ -755,13 +755,13 @@ m2=0..n
     <coordinates>
       <x>3960</x>
       <y>4940</y>
-      <w>210</w>
+      <w>310</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>OSMParser
 --
 --
-parseOSM(f: File): StreetMap
+parseOSM(:File, name: String): StreetMap
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1038,14 +1038,14 @@ toString(): String
     <coordinates>
       <x>3960</x>
       <y>5030</y>
-      <w>210</w>
+      <w>310</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>MapImporter
 --
 
 --
-importMap(:File): StreetMap</panel_attributes>
+importMap(:File, name: String): StreetMap</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
