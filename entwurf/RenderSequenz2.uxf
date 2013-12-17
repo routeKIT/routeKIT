@@ -87,7 +87,7 @@
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-getTile(x,y,zoom)
+renderTile(x,y,zoom)
 </panel_attributes>
     <additional_attributes>190;50;30;50</additional_attributes>
   </element>
@@ -116,14 +116,14 @@ getTile(x,y,zoom)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>220</x>
+      <x>230</x>
       <y>120</y>
-      <w>222</w>
+      <w>218</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;- 
       enqueueTile(x,y,zoom)</panel_attributes>
-    <additional_attributes>60;70;120;70;120;30;60;30</additional_attributes>
+    <additional_attributes>50;70;110;70;110;30;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -146,7 +146,7 @@ dummy</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-async getTile(x,y,zoom)</panel_attributes>
+renderTile(x,y,zoom)</panel_attributes>
     <additional_attributes>250;50;30;50</additional_attributes>
   </element>
   <element>
@@ -167,7 +167,7 @@ tile
     <coordinates>
       <x>50</x>
       <y>180</y>
-      <w>216</w>
+      <w>214</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -224,7 +224,7 @@ tileFinished(x,y,zoom,tile)</panel_attributes>
     <coordinates>
       <x>70</x>
       <y>330</y>
-      <w>142</w>
+      <w>140</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -295,28 +295,28 @@ tileFinished(x,y,zoom,tile)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-getTile(x,y,zoom)
+renderTile(x,y,zoom)
 </panel_attributes>
     <additional_attributes>190;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>240</x>
+      <x>250</x>
       <y>480</y>
-      <w>184</w>
+      <w>178</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
     hasTile(x,y,zoom)</panel_attributes>
-    <additional_attributes>50;70;100;70;100;30;40;30</additional_attributes>
+    <additional_attributes>40;70;90;70;90;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>230</x>
       <y>560</y>
-      <w>210</w>
+      <w>204</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -396,8 +396,8 @@ tile
     <coordinates>
       <x>70</x>
       <y>630</y>
-      <w>178</w>
-      <h>94</h>
+      <w>174</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
    
@@ -409,10 +409,10 @@ tile
     <coordinates>
       <x>0</x>
       <y>440</y>
-      <w>106</w>
+      <w>104</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;  
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 paint(g)</panel_attributes>
     <additional_attributes>80;50;30;50</additional_attributes>
   </element>
@@ -474,14 +474,14 @@ paint(g)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>220</x>
+      <x>250</x>
       <y>60</y>
-      <w>222</w>
+      <w>164</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-      enqueueTile(x,y,zoom)</panel_attributes>
-    <additional_attributes>60;70;120;70;120;30;60;30</additional_attributes>
+hasTile(x,y,zoom)</panel_attributes>
+    <additional_attributes>30;70;90;70;90;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -510,10 +510,10 @@ paint(g)</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>20</y>
-      <w>106</w>
+      <w>104</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;  
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 paint(g)</panel_attributes>
     <additional_attributes>80;50;30;50</additional_attributes>
   </element>
