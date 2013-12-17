@@ -31,7 +31,7 @@ RouteCalculationSequenz:
     RouteCalculator teil vom Model, setzt Route selbst? "so ist auch okay"
 LaTeX: Erklärung, Fonts
 Einrückung: Methodenname weniger als Klassenbeschreibung
-Coordinate(s)? nochmal nachschauen
+Coordinate(s)? nochmal nachschauen (gemacht) (ja, x-Koordinate, y-Koordinate, das Paar sind dann Koordinaten.)
 Allgemein: Namen aussagekräftig
 Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen
 Alle Figures referenzien
