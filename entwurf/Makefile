@@ -38,7 +38,7 @@ StartSequenz.pdf: StartSequenz.uxf
 clean-StartSequenz:
 	-$(RM) StartSequenz.pdf
 
-RenderSequenz.pdf: RenderSequenz.uxf
+RenderSequenz.pdf: RenderSequenz2.uxf
 	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
 
 clean-RenderSequenz:
