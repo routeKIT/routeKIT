@@ -895,11 +895,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Abstrakte Klasse, die ein Interface für das (synchrone) \Gls{rendern} von Kartenkacheln definiert.}
         {\none}
         {
-          \method{getTile}[BufferedImage]
+          \method{renderTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{renderTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{renderTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{renderTile}{zoom}}
                  }
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
@@ -915,7 +915,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
           \method{TileCache}
                  {\param{target}{TileSource}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
                  {Erstellt einen neuen Cache für die angegebene \reftype{TileSource}.}
-          \method{getTile}[BufferedImage]
+          \method{renderTile}[BufferedImage]
                  {
                    \param{x}{int}{Die \gls{smt}-X-Komponente.}
                    \param{y}{int}{Die \gls{smt}-Y-Komponente.}
@@ -939,9 +939,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {
           \method{tileFinished}
                  {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{renderTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{renderTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{renderTile}{zoom}}
                    \param{tile}{BufferedImage}{Die berechnete Kachel.}
                  }
                  {
@@ -959,11 +959,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 		\param{graph}{Graph}{Ein Adjazenzfeld.}
 	    }
 	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
-          \method{getTile}[BufferedImage]
+          \method{renderTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{renderTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{renderTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{renderTile}{zoom}}
                  }
                  {Berechnet die angegebene Kachel und gibt sie zurück.}
         }
@@ -971,11 +971,11 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
         {Eine \reftype{TileSource}, die die \glspl{osmkachel} vom OpenStreetMap-Server herunterlädt.}
         {\none}
         {
-          \method{getTile}[BufferedImage]
+          \method{renderTile}[BufferedImage]
                  {
-                   \param{x}{int}{siehe \refparam{TileCache}{getTile}{x}}
-                   \param{y}{int}{siehe \refparam{TileCache}{getTile}{y}}
-                   \param{zoom}{int}{siehe \refparam{TileCache}{getTile}{zoom}}
+                   \param{x}{int}{siehe \refparam{TileCache}{renderTile}{x}}
+                   \param{y}{int}{siehe \refparam{TileCache}{renderTile}{y}}
+                   \param{zoom}{int}{siehe \refparam{TileCache}{renderTile}{zoom}}
                  }
                  {Lädt die angegebene Kachel herunter und gibt sie zurück.}
         }
