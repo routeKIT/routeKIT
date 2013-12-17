@@ -5,10 +5,10 @@ Diagramm aufteilen / aufräumen
 RouteModel: currentRoute als Relation statt Attribut?
 RenderSequenz:
     TileSource muss irgendwo Kartendaten herkriegen
-    Pfeiltypen
-    then-Pfad entfernen (unter dem Diagramm erklären, dass dies der Fall ist, in dem die Tile fehlt)
+    Pfeiltypen (gemacht)
+    then-Pfad entfernen (unter dem Diagramm erklären, dass dies der Fall ist, in dem die Tile fehlt) (gemacht)
     getSource umbenennen?
-    separate Lebenslinie für Worker-Thread
+    separate Lebenslinie für Worker-Thread (gemacht)
     enqueueTile enqueued keine Tile, sondern Request
     Queue/Stack/Dequeue
 ProfileManagementSequenz:
