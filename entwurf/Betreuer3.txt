@@ -4,7 +4,7 @@ Diagramm aufteilen / aufräumen
     "sehr optional" oder auch "unbedingt machen"
 RouteModel: currentRoute als Relation statt Attribut?
 RenderSequenz:
-    TileSource muss irgendwo Kartendaten herkriegen
+    TileSource muss irgendwo Kartendaten herkriegen (gemacht, da TileRenderer Graph kriegt und OSMRenderer braucht nichts)
     Pfeiltypen (gemacht)
     then-Pfad entfernen (unter dem Diagramm erklären, dass dies der Fall ist, in dem die Tile fehlt) (gemacht)
     getSource umbenennen?
