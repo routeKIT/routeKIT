@@ -9,7 +9,7 @@ RenderSequenz:
     then-Pfad entfernen (unter dem Diagramm erklären, dass dies der Fall ist, in dem die Tile fehlt) (gemacht)
     getSource umbenennen?
     separate Lebenslinie für Worker-Thread (gemacht)
-    enqueueTile enqueued keine Tile, sondern Request
+    enqueueTile enqueued keine Tile, sondern Request (gemacht) (innere Klasse von TileCache, nicht im Klassendiagramm)
     Queue/Stack/Dequeue
 ProfileManagementSequenz:
     switchProfile() macht zu viel -> zwei Methoden: eine zum Speichern, eine zum Wechseln (gemacht) (saveTemporaryProfile, changeTemporaryProfile)
