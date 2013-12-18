@@ -30,7 +30,7 @@ RouteCalculationSequenz:
     async calculateRoute (mit extra Lebenslinie und tamtam)
     RouteCalculator teil vom Model, setzt Route selbst? "so ist auch okay"
 LaTeX: Erklärung, Fonts (gemacht)
-Einrückung: Methodenname weniger als Klassenbeschreibung
+Einrückung: Methodenname weniger als Klassenbeschreibung (gemacht)
 Coordinate(s)? nochmal nachschauen (gemacht) (ja, x-Koordinate, y-Koordinate, das Paar sind dann Koordinaten.)
 Allgemein: Namen aussagekräftig
 Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen

@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{xparse} % powerful commands
 \usepackage{xspace} % \xspace for use in commands: put a space only if no punctuation follows
+\usepackage{enumitem} % for controlling indentation in list environments
 
 \makeglossary
 
@@ -67,7 +68,7 @@
     \ifstrequal{#3#4}{\none\none}{
       % \none attributes and \none methods, skip
     }{
-      \begin{description}
+      \begin{description}[leftmargin=0em,itemindent=0em]
         \ifstrequal{#3}{\none}{
           % \none attributes, skip
         }{
@@ -107,7 +108,7 @@
       % \none parameters, skip
     }{
       Parameter:
-      \begin{description}
+      \begin{description}[leftmargin=0em,itemindent=0em]
         #3
       \end{description}
     }
