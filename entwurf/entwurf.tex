@@ -40,17 +40,17 @@
 \newcommand{\@constantlabel}[2]{C:#1.#2}
 
 % evaluate #2 if the label #1 exists, else #3.
-\newcommand{\ifhaslabel}[3]{
-  \@ifundefined{r@#1}
-               {#3}
-               {#2}
+\newcommand{\ifhaslabel}[3]{%
+  \@ifundefined{r@#1}%
+               {#3}%
+               {#2}%
 }
 
 % Argumente:
 % 1. Name
 % 2. Beschreibung
 % 3. Klassen (ein oder mehrere \class)
-\newcommand{\package}[3]{
+\newcommand{\package}[3]{%
   \subsection{Paket #1}
   #2
   \begin{description}
@@ -62,38 +62,38 @@
 % 2. Beschreibung
 % 3. Attribute (ein oder mehrere \attr, oder \none)
 % 4. Methoden (ein oder mehrere \method, oder \none)
-\newcommand{\class}[4]{
-  \newcommand{\currentclass}[0]{#1}
+\newcommand{\class}[4]{%
+  \newcommand{\currentclass}[0]{#1}%
   \item[\namedlabel{\@typelabel{#1}}{\code{#1}}] #2
-    \ifstrequal{#3#4}{\none\none}{
+    \ifstrequal{#3#4}{\none\none}{%
       % \none attributes and \none methods, skip
-    }{
+    }{%
       \begin{description}[leftmargin=0em,itemindent=0em]
-        \ifstrequal{#3}{\none}{
+        \ifstrequal{#3}{\none}{%
           % \none attributes, skip
-        }{
+        }{%
         \item[Attribute] \hfill % \hfill forces the following description into the next line
           \begin{description}
             #3
           \end{description}
         }
-        \ifstrequal{#4}{\none}{
+        \ifstrequal{#4}{\none}{%
           % \none methods, skip
-        }{
-        \item[Methoden] \hfill % \hfill forces the following description into the next line
+        }{%
+        \item[Methoden] \hfill% \hfill forces the following description into the next line
           \begin{description}
             #4
           \end{description}
         }
       \end{description}
     }
-  \let\currentclass=\undefined
+  \let\currentclass=\undefined%
 }
 % Argumente:
 % 1. Name
 % 2. Typ
 % 3. kurze Beschreibung
-\newcommand{\attr}[3]{
+\newcommand{\attr}[3]{%
   \item[\namedlabel{\@attrlabel{\currentclass}{#1}}{\code{#1}}] #3 Typ:~\reftype{#2}
 }
 % Argumente:
@@ -101,51 +101,50 @@
 % 2. (optional) Typ – default: void (wird nicht angezeigt); wird automatisch gelinkt, falls vorhanden
 % 3. Parameter (ein oder mehrere \param, oder \none)
 % 4. Beschreibung
-\NewDocumentCommand{\method}{m o m +m}{ % the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
-  \newcommand{\currentmethod}[0]{#1}
+\NewDocumentCommand{\method}{m o m +m}{% the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
+  \newcommand{\currentmethod}[0]{#1}%
   \item[\namedlabel{\@methodlabel{\currentclass}{#1}}{\code{#1}}] #4\\
-    \ifstrequal{#3}{\none}{
+    \ifstrequal{#3}{\none}{%
       % \none parameters, skip
-    }{
+    }{%
       Parameter:
       \begin{description}[leftmargin=0em,itemindent=0em]
         #3
       \end{description}
     }
-    \IfValueTF{#2} % if the optional “type” argument is given...
-              {Rückgabetyp:~\reftype{#2}} % then show the return type...
-              {} % else don’t.
-  \let\currentmethod=\undefined
+    \IfValueTF{#2}% if the optional “type” argument is given...
+              {Rückgabetyp:~\reftype{#2}}% then show the return type...
+              {}% else don’t.
+  \let\currentmethod=\undefined%
 }
 % Argumente:
 % 1. Name
 % 2. Typ
 % 3. kurze Beschreibung
-\newcommand{\param}[3]{
+\newcommand{\param}[3]{%
   \item[\namedlabel{\@paramlabel{\currentclass}{\currentmethod}{#1}}{\code{#1}}] #3 Typ:~\reftype{#2}
 }
 % Argumente:
 % 1. Name
 % 2. Beschreibung
 % 3. Konstanten (ein oder mehrere \constant, oder \none)
-\newcommand{\enum}[3]{
-  \newcommand{\currentenum}[0]{#1}
+\newcommand{\enum}[3]{%
+  \newcommand{\currentenum}[0]{#1}%
   \item[\namedlabel{\@typelabel{#1}}{\code{#1}}] #2
-    
-    \ifstrequal{#3}{\none}{
+    \ifstrequal{#3}{\none}{%
       % \none cases, skip
-    }{
+    }{%
       Instanzen:
       \begin{description}
         #3
       \end{description}
     }
-  \let\currentenum=\undefined
+  \let\currentenum=\undefined%
 }
 % Argumente:
 % 1. Name
 % 2. Beschreibung
-\newcommand{\constant}[2]{
+\newcommand{\constant}[2]{%
   \item[\namedlabel{\@constantlabel{\currentenum}{#1}}{\code{#1}}] #2
 }
 
@@ -239,22 +238,22 @@
 % http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
 \newcommand*{\glsgobblenumber}[1]{}
 \makeatletter
-\newcommand*{\glsaddnp}[2][]{
-  \glsdoifexists{#2}{
-    \def\@glsnumberformat{glsgobblenumber}
-    \edef\@gls@counter{\csname glo@#2@counter\endcsname}
-    \setkeys{glossadd}{#1}
-    \@gls@saveentrycounter
-    \@do@wrglossary{#2}
-  }
+\newcommand*{\glsaddnp}[2][]{%
+  \glsdoifexists{#2}{%
+    \def\@glsnumberformat{glsgobblenumber}%
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}%
+    \setkeys{glossadd}{#1}%
+    \@gls@saveentrycounter%
+    \@do@wrglossary{#2}%
+  }%
 }
-\newcommand{\glsaddallunused}[1][]{
-  \edef\@glo@type{\@glo@types}
-  \setkeys{glossadd}{#1}
-  \forallglsentries[\@glo@type]{\@glo@entry}{
-    \ifglsused{\@glo@entry}{}{
-      \typeout{****Glossary entry '\@glo@entry' unused****}
-      \glsaddnp[#1]{\@glo@entry}}}
+\newcommand{\glsaddallunused}[1][]{%
+  \edef\@glo@type{\@glo@types}%
+  \setkeys{glossadd}{#1}%
+  \forallglsentries[\@glo@type]{\@glo@entry}{%
+    \ifglsused{\@glo@entry}{}{%
+      \typeout{****Glossary entry '\@glo@entry' unused****}%
+      \glsaddnp[#1]{\@glo@entry}}}%
 }
 \makeatother
 
