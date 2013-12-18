@@ -44,10 +44,8 @@ RenderSequenz.pdf: RenderSequenz2.uxf
 clean-RenderSequenz:
 	-$(RM) RenderSequenz.pdf
 
-ProfilSequenz.pdf: ProfilSequenz.uxf
-	sed 's.<w>1120</w>.<w>1250</w>.' $^ > $^.tmp # work around UMLet bug that cuts off part of the diagram
-	$(UMLET) -action=convert -format=pdf -filename=$^.tmp -output=$(@:.pdf=)
-	-$(RM) $^.tmp
+ProfilSequenz.pdf: ProfilSequenz2.uxf
+	$(UMLET) -action=convert -format=pdf -filename=$^ -output=$(@:.pdf=)
 
 clean-ProfilSequenz:
 	-$(RM) ProfilSequenz.pdf
