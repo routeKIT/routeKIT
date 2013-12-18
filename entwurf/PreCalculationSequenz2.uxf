@@ -362,7 +362,7 @@ getStreetMap().getGraph()
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-Graph</panel_attributes>
+graph</panel_attributes>
     <additional_attributes>30;50;430;50</additional_attributes>
   </element>
   <element>
@@ -387,7 +387,7 @@ getStreetMap().getEdgeBasedGraph()
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-EdgeBasedGraph</panel_attributes>
+edgeBasedGraph</panel_attributes>
     <additional_attributes>30;50;430;50</additional_attributes>
   </element>
   <element>
@@ -412,7 +412,7 @@ getProfile()
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-Profile</panel_attributes>
+profile</panel_attributes>
     <additional_attributes>30;50;430;50</additional_attributes>
   </element>
   <element>
@@ -455,11 +455,11 @@ setWeights(weights)</panel_attributes>
     <coordinates>
       <x>630</x>
       <y>340</y>
-      <w>134</w>
+      <w>130</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-       Weights</panel_attributes>
+       weights</panel_attributes>
     <additional_attributes>30;60;70;60;70;30;40;30</additional_attributes>
   </element>
   <element>
@@ -519,7 +519,7 @@ getWeights();
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-Weights</panel_attributes>
+weights</panel_attributes>
     <additional_attributes>30;50;250;50</additional_attributes>
   </element>
   <element>
@@ -544,7 +544,7 @@ getStreetMap().getEdgeBasedGraph()
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-EdgeBasedGraph</panel_attributes>
+edgeBasedGraph</panel_attributes>
     <additional_attributes>30;50;250;50</additional_attributes>
   </element>
   <element>
@@ -587,11 +587,11 @@ setArcFlags(flags)</panel_attributes>
     <coordinates>
       <x>810</x>
       <y>580</y>
-      <w>130</w>
+      <w>138</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-       ArcFlags</panel_attributes>
+       arcFlags</panel_attributes>
     <additional_attributes>30;60;70;60;70;30;40;30</additional_attributes>
   </element>
   <element>
