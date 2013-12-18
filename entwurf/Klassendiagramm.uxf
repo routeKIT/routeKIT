@@ -46,7 +46,7 @@ exportGPX(:File)
 exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
-precalculate(:ProfileMapCombination)
+startPrecalculation(:ProfileMapCombination)
 setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 manageProfiles()
