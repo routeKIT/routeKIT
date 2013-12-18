@@ -19,11 +19,11 @@ lange Namen in Ordnung
 speichern, wie lange Vorberechnung dauerte => nicht estimate, sondern getDeletionAmount (gemacht)
 Estimation: Zeitdauer oder einfach „X Vorberechnungen werden gelöscht“?
 PreCalculationSequenz:
-    vom Controller aus asynchron machen
+    vom Controller aus asynchron machen (gemacht)
     Fortschrittsbalken
     weg oder mehr
-    Lebenslinien durchgängig
-    Kästen weg (weightEdges, calculateArcFlags)
+    Lebenslinien durchgängig (gemacht)
+    Kästen weg (weightEdges, calculateArcFlags) (gemacht)
 RouteCalculationSequenz:
     Lebenslinien durchgängig (gemacht)
     Parameter an die Methodenaufrufe

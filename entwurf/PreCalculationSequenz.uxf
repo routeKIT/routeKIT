@@ -6,23 +6,19 @@
     <coordinates>
       <x>0</x>
       <y>0</y>
-      <w>1200</w>
-      <h>470</h>
+      <w>1240</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>title:PreCalculation
-_:Controller~ctrl_|_:PreCalculator~precalc_|_:EdgeWeighter~weighter_|_:ArcFlagsCalculator~afc_|_pmc:ProfileMapCombination~pmc_
-ctrl-&gt;&gt;&gt;precalc:ctrl,precalc:doPrecalculation(pmc)
-iframe{:weightEdges
-precalc-&gt;&gt;&gt;weighter:precalc,weighter:weightEdges(pmc)
-weighter-&gt;&gt;&gt;pmc:weighter,pmc:setWeights(weights)
-weighter.&gt;precalc:precalc
-iframe}
-iframe{:calculateArcFlags
-precalc-&gt;&gt;&gt;afc:precalc,afc:calculateArcFlags(pmc)
-afc-&gt;&gt;&gt;pmc:afc,pmc:setArcFlags(arcFlags)
-afc.&gt;precalc
-iframe}
-precalc.&gt;ctrl</panel_attributes>
+_worker:Thread~t_|_:PreCalculator~precalc_|_:EdgeWeighter~weighter_|_:ArcFlagsCalculator~afc_|_pmc:ProfileMapCombination~pmc_
+t-&gt;&gt;&gt;precalc:t,precalc:doPrecalculation(pmc)
+precalc-&gt;&gt;&gt;weighter:t,precalc,weighter:weightEdges(pmc)
+weighter-&gt;&gt;&gt;pmc:t,precalc,weighter,pmc:setWeights(weights)
+weighter.&gt;precalc:t,precalc,weighter
+precalc-&gt;&gt;&gt;afc:t,precalc,afc:calculateArcFlags(pmc)
+afc-&gt;&gt;&gt;pmc:afc,t,pmc,precalc,afc:setArcFlags(arcFlags)
+afc.&gt;precalc:t,precalc,afc
+precalc.&gt;t:t,precalc</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
