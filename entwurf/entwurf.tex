@@ -493,7 +493,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {\none}
                  {
                    Erstellt den Controller, lädt Profile und Karten und erstellt dann die \reftype{MainView}.
-                   Für den genauen Ablauf siehe Abbildung \ref{fig:sequenz_start}.
+                   Für den genauen Ablauf siehe \abbildung{sequenz_start}.
                  }
                  
           \method{onStartChanged}
@@ -599,7 +599,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           Der Controller für die \reftype{ProfileManagerView}.
 
-	  Ein Beispiel für die Kommunikation zwischen den beiden Klassen ist in Abbildung \ref{fig:sequenz_profilVerwaltung} zu sehen.
+	  Ein Beispiel für die Kommunikation zwischen den beiden Klassen ist in \abbildung{sequenz_profilVerwaltung} zu sehen.
         }
         {\none}
         {
@@ -950,7 +950,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
   Die zentrale Klasse dieses Pakets ist der \reftype{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
   Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \reftype{TileSource}, welche die Kacheln synchron berechnet.
   Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \reftype{TileFinishedListener} benachrichtigt.
-  Ein beispielhafter Ablauf ist in Abbildung \ref{fig:sequenz_rendern} zu sehen.
+  Ein beispielhafter Ablauf ist in \abbildung{sequenz_rendern} zu sehen.
   
   Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
   
