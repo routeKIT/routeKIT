@@ -593,6 +593,11 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Startet einen neuen \reftype{MapManagerController} und öffnet so den Dialog zur Kartenverwaltung.
                  }
+          \method{main}
+                 {
+		           \param{args}{String[]}{Kommandozeilen-Argumente}
+                 }
+	             {Statische Hauptmethode des Programms. Erzeugt einen \reftype{Controller}.}
         }
 
   \class{ProfileManagerController}
@@ -1549,16 +1554,6 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
   Dieses Paket enthält verschiedene nützliche Klassen, die sonst nirgendwo hingehören.
 }
 {
-  \class{RouteKit}
-        {Startet die Anwendung.}
-        {\none}
-        {
-	\method{main}
-         	    {
-		\param{args}{String[]}{String-Argumente}
-               }
-	    {Erzeugt einen \reftype{Controller}.}
-         }
   \class{Coordinates}
         {Kapselt ein Paar von geographischen Koordinaten.}
         {
