@@ -64,18 +64,16 @@ manageMaps()
       <x>3020</x>
       <y>3670</y>
       <w>280</w>
-      <h>120</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>RouteModel
 bg=#FFFFFF
 bt=*
 --
--currentRoute: Route
--start: Coordinates
--destination: Coordinates
--desc: RouteDescription
+start: Coordinates
+destination: Coordinates
 --
-+addRouteListener(:RouteModelListener)
+addRouteListener(:RouteModelListener)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -658,13 +656,14 @@ bt=*
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3220</x>
+      <x>3180</x>
       <y>1620</y>
-      <w>50</w>
+      <w>104</w>
       <h>2070</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;2050</additional_attributes>
+    <panel_attributes>lt=&lt;-
+r1=currentRoute</panel_attributes>
+    <additional_attributes>60;30;60;2050</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -941,14 +940,14 @@ implements</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3140</x>
-      <y>3760</y>
+      <y>3730</y>
       <w>50</w>
-      <h>110</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
 </panel_attributes>
-    <additional_attributes>30;90;30;30</additional_attributes>
+    <additional_attributes>30;120;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1777,6 +1776,18 @@ r1=to</panel_attributes>
     <additional_attributes>50;30;30;30;30;60;50;60</additional_attributes>
   </element>
   <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3260</x>
+      <y>1570</y>
+      <w>330</w>
+      <h>2120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=currentDesc</panel_attributes>
+    <additional_attributes>310;30;30;30;30;2100</additional_attributes>
+  </element>
+  <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
       <x>2960</x>
@@ -1918,16 +1929,5 @@ bg=#DDDDDD</panel_attributes>
     <panel_attributes>Util
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>3440</x>
-      <y>1570</y>
-      <w>150</w>
-      <h>2120</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>130;30;30;30;30;2100</additional_attributes>
   </element>
 </diagram>
