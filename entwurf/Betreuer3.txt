@@ -25,7 +25,7 @@ PreCalculationSequenz:
     Lebenslinien durchgängig
     Kästen weg (weightEdges, calculateArcFlags)
 RouteCalculationSequenz:
-    Lebenslinien durchgängig
+    Lebenslinien durchgängig (gemacht)
     Parameter an die Methodenaufrufe
     async calculateRoute (mit extra Lebenslinie und tamtam)
     RouteCalculator teil vom Model, setzt Route selbst? "so ist auch okay"

@@ -5,8 +5,8 @@
     <type>com.umlet.element.SequenceDiagram</type>
     <coordinates>
       <x>0</x>
-      <y>10</y>
-      <w>1690</w>
+      <y>0</y>
+      <w>1790</w>
       <h>680</h>
     </coordinates>
     <panel_attributes>title:Route Calculation
@@ -15,7 +15,7 @@ _user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_:RouteModel~mod
 user-&gt;view:user,view:"Sets start point"
 
 view-&gt;ctrl:view,ctrl:onStartChanged
-ctrl-&gt;model:ctrl,model:setStart
+ctrl-&gt;model:view,ctrl,model:setStart
 
 //Leerzeile im Diagramm
 ctrl_&gt;view
@@ -23,24 +23,24 @@ ctrl_&gt;view
 user-&gt;view:user,view:"Sets destination point"
 
 view-&gt;ctrl:view,ctrl:onDestinationChanged
-ctrl-&gt;model:ctrl,model:setDestination
-ctrl-&gt;&gt;&gt;calc:ctrl,calc:calculateRoute
-calc.&gt;ctrl:calc,ctrl:Route
+ctrl-&gt;model:view,ctrl,model:setDestination
+ctrl-&gt;&gt;&gt;calc:view,ctrl,calc:calculateRoute
+calc.&gt;ctrl:view,ctrl,calc:Route
 
-ctrl-&gt;&gt;&gt;model:ctrl,model:setRoute
+ctrl-&gt;&gt;&gt;model:view,ctrl,model:setRoute
 
-model-&gt;view:model,view:routeModelChanged
-view-&gt;&gt;&gt;view:view:paint()
-model-&gt;main:model,main:routeModelChanged
+model-&gt;view:view,ctrl,model:routeModelChanged
+view-&gt;&gt;&gt;view:view,ctrl,model:paint()
+model-&gt;main:main,view,ctrl,model:routeModelChanged
 
-ctrl-&gt;&gt;&gt;gen:ctrl,gen:generateRouteDescription
-gen.&gt;ctrl:gen,ctrl:RouteDescription
+ctrl-&gt;&gt;&gt;gen:view,ctrl,gen:generateRouteDescription
+gen.&gt;ctrl:view,ctrl,gen:RouteDescription
 
-ctrl-&gt;&gt;&gt;model:ctrl,model:setRouteDescription
+ctrl-&gt;&gt;&gt;model:view,ctrl,model:setRouteDescription
 
-model-&gt;view:model,view:routeModelChanged
-view-&gt;&gt;&gt;view:view:paint()
-model-&gt;main:model,main:routeModelChanged
+model-&gt;view:view,ctrl,model:routeModelChanged
+view-&gt;&gt;&gt;view:view,ctrl,model:paint()
+model-&gt;main:main,view,ctrl,model:routeModelChanged
 
 </panel_attributes>
     <additional_attributes/>
