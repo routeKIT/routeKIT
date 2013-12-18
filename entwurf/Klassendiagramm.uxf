@@ -1060,18 +1060,6 @@ exportRoute(route: Route, file: File)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3120</x>
-      <y>1620</y>
-      <w>136</w>
-      <h>1100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-r1=route</panel_attributes>
-    <additional_attributes>110;30;110;1080;30;1080</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
       <x>3680</x>
       <y>1590</y>
       <w>50</w>
@@ -1577,17 +1565,6 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>590;30;590;1450;30;1450</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>3150</x>
-      <y>1540</y>
-      <w>440</w>
-      <h>1110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>420;30;200;30;200;1090;30;1090</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
