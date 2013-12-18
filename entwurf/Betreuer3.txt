@@ -14,7 +14,7 @@ RenderSequenz:
 ProfileManagementSequenz:
     switchProfile() macht zu viel -> zwei Methoden: eine zum Speichern, eine zum Wechseln (gemacht) (saveTemporaryProfile, changeTemporaryProfile)
     saveAllChanges() -> ?
-im Controller fehlt manage{Profiles,Maps}()
+im Controller fehlt manage{Profiles,Maps}() (gemacht)
 lange Namen in Ordnung
 speichern, wie lange Vorberechnung dauerte => nicht estimate, sondern getDeletionAmount
 Estimation: Zeitdauer oder einfach „X Vorberechnungen werden gelöscht“?
