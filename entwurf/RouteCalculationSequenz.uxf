@@ -6,11 +6,11 @@
     <coordinates>
       <x>0</x>
       <y>0</y>
-      <w>1790</w>
-      <h>680</h>
+      <w>2000</w>
+      <h>710</h>
     </coordinates>
     <panel_attributes>title:Route Calculation
-_user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_:RouteModel~model_|_:RouteCalculator~calc_|_:RouteDescriptionGenerator~gen_
+_user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_worker:Thread~thr_|_:RouteModel~model_|_:RouteCalculator~calc_|_:RouteDescriptionGenerator~gen_
 
 user-&gt;view:user,view:"Sets start point"
 
@@ -24,23 +24,24 @@ user-&gt;view:user,view:"Sets destination point"
 
 view-&gt;ctrl:view,ctrl:onDestinationChanged
 ctrl-&gt;model:view,ctrl,model:setDestination
-ctrl-&gt;&gt;&gt;calc:view,ctrl,calc:calculateRoute
-calc.&gt;ctrl:view,ctrl,calc:Route
+ctrl.&gt;thr:view,ctrl,thr:triggers
+thr-&gt;&gt;&gt;calc:thr,calc:calculateRoute
+calc.&gt;thr:thr,calc:Route
 
-ctrl-&gt;&gt;&gt;model:view,ctrl,model:setRoute
+thr-&gt;&gt;&gt;model:thr,model:setRoute
 
-model-&gt;view:view,ctrl,model:routeModelChanged
-view-&gt;&gt;&gt;view:view,ctrl,model:paint()
-model-&gt;main:main,view,ctrl,model:routeModelChanged
+model-&gt;view:view,thr,model:routeModelChanged
+view-&gt;&gt;&gt;view:view,thr,model:paint()
+model-&gt;main:main,thr,model:routeModelChanged
 
-ctrl-&gt;&gt;&gt;gen:view,ctrl,gen:generateRouteDescription
-gen.&gt;ctrl:view,ctrl,gen:RouteDescription
+thr-&gt;&gt;&gt;gen:thr,gen:generateRouteDescription
+gen.&gt;thr:thr,gen:RouteDescription
 
-ctrl-&gt;&gt;&gt;model:view,ctrl,model:setRouteDescription
+thr-&gt;&gt;&gt;model:thr,model:setRouteDescription
 
-model-&gt;view:view,ctrl,model:routeModelChanged
-view-&gt;&gt;&gt;view:view,ctrl,model:paint()
-model-&gt;main:main,view,ctrl,model:routeModelChanged
+model-&gt;view:view,thr,model:routeModelChanged
+view-&gt;&gt;&gt;view:view,thr,model:paint()
+model-&gt;main:main,view,thr,model:routeModelChanged
 
 </panel_attributes>
     <additional_attributes/>
