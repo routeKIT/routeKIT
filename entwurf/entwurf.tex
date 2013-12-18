@@ -478,16 +478,23 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 
 \package{Controllers}{
  Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
-Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
+ Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
 }
 {
   \class{Controller}
-        {Steuert die Programmabläufe zur Routenberechnung.}
+        {
+          Der Haupt-Controller von \routeKIT.
+          Er wird beim Programmstart erstellt und erstellt dabei die \reftype{MainView}.
+          Er verwaltet den gesamtem Programmablauf und bleibt so lange bestehen, bis \routeKIT beendet wird.
+        }
         {\none}
         {
           \method{Controller}
                  {\none}
-                 {Ein Konstruktor, der ein Objekt der Klasse \reftype{Controller} erzeugt.}
+                 {
+                   Erstellt den Controller, lädt Profile und Karten und erstellt dann die \reftype{MainView}.
+                   Für den genauen Ablauf siehe Abbildung \ref{fig:sequenz_start}.
+                 }
                  
           \method{onStartChanged}
                  {
