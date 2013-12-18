@@ -445,6 +445,35 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \end{itemize}
 
 
+\section{Legende}
+
+\package{BeispielPaket}{
+  Dies ist ein Paket.
+  Es enthält eine kurze Beschreibung und dann mehrere Klassen.
+}
+{
+  \class{BeispielKlasse}
+        {
+          Dies ist eine Klasse.
+          Sie kann Attribute und Methoden enthalten.
+        }
+        {
+          \attr{beispielAttribut}{Typ}{Dies ist ein Attribut.}
+        }
+        {
+          \method{beispielMethode}[Rückgabetyp]
+                 {
+                   \param{beispielParameter}{Typ}{Dies ist ein Parameter der Methode.}
+                 }
+                 {
+                   Dies ist eine Methode.
+                   Sie kann mehrere Parameter enthalten und einen Wert eines bestimmten Typs zurückgeben.
+                 }
+        }
+}
+Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
+
+
 \section{Pakete und Klassen}
 
 \package{Controllers}{
