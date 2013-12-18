@@ -51,6 +51,7 @@ exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
 startPrecalculation(:ProfileMapCombination)
+onPrecalculationFinished()
 setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 manageProfiles()
@@ -335,8 +336,8 @@ program</panel_attributes>
     <coordinates>
       <x>4180</x>
       <y>5270</y>
-      <w>120</w>
-      <h>40</h>
+      <w>130</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;110;30</additional_attributes>
@@ -406,8 +407,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4030</x>
       <y>4960</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -418,8 +419,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4500</x>
       <y>5040</y>
-      <w>40</w>
-      <h>180</h>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;170;30;30</additional_attributes>
@@ -429,8 +430,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4580</x>
       <y>5040</y>
-      <w>450</w>
-      <h>180</h>
+      <w>460</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>440;170;30;30</additional_attributes>
@@ -440,7 +441,7 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4820</x>
       <y>5000</y>
-      <w>420</w>
+      <w>430</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>bg=#FFFFFF
@@ -454,8 +455,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
     <coordinates>
       <x>4640</x>
       <y>5010</y>
-      <w>190</w>
-      <h>40</h>
+      <w>200</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;180;30</additional_attributes>
@@ -558,7 +559,7 @@ _load(file: File): Profile_</panel_attributes>
     <coordinates>
       <x>4720</x>
       <y>2960</y>
-      <w>158</w>
+      <w>150</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -658,7 +659,7 @@ bt=*
     <coordinates>
       <x>3180</x>
       <y>1620</y>
-      <w>104</w>
+      <w>100</w>
       <h>2070</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -715,8 +716,8 @@ in OSMParser</panel_attributes>
     <coordinates>
       <x>3750</x>
       <y>4900</y>
-      <w>40</w>
-      <h>60</h>
+      <w>50</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>30;50;30;30</additional_attributes>
@@ -785,8 +786,8 @@ getProfiles(): Set&lt;Profile&gt;</panel_attributes>
     <coordinates>
       <x>3090</x>
       <y>2870</y>
-      <w>1680</w>
-      <h>290</h>
+      <w>1670</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
@@ -1486,8 +1487,8 @@ bt=*
     <coordinates>
       <x>3720</x>
       <y>5010</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n</panel_attributes>
@@ -1667,8 +1668,8 @@ Residential</panel_attributes>
     <coordinates>
       <x>5560</x>
       <y>3620</y>
-      <w>170</w>
-      <h>80</h>
+      <w>180</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 p1=highwayType</panel_attributes>
@@ -1714,14 +1715,14 @@ q1=Turn</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3800</x>
+      <x>3780</x>
       <y>5010</y>
-      <w>50</w>
-      <h>80</h>
+      <w>90</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=targetNode</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>50;30;50;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
