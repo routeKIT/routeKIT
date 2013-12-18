@@ -327,7 +327,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
       <w>130</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>calls the external
+    <panel_attributes>bg=#FFFFFF
+calls the external
 program</panel_attributes>
     <additional_attributes/>
   </element>
@@ -350,7 +351,8 @@ program</panel_attributes>
       <w>180</w>
       <h>50</h>
     </coordinates>
-    <panel_attributes>external graph partitioner</panel_attributes>
+    <panel_attributes>bg=#FFFFFF
+external graph partitioner</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -443,7 +445,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
       <w>420</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>- calls the EdgeWeighter to assign weights to the combination
+    <panel_attributes>bg=#FFFFFF
+- calls the EdgeWeighter to assign weights to the combination
 - calls the ArcFlagsCalculator to assign arc flags to the combination
 </panel_attributes>
     <additional_attributes/>
@@ -714,7 +717,8 @@ getOutgoingEdges(): Set&lt;MapEdge&gt;
       <w>170</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>Objects for itermediate
+    <panel_attributes>bg=#FFFFFF
+Objects for itermediate
 graph representation
 in OSMParser</panel_attributes>
     <additional_attributes/>
