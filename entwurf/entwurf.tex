@@ -477,7 +477,8 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 \section{Pakete und Klassen}
 
 \package{Controllers}{
-  Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
+ Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
+Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
 }
 {
   \class{Controller}
@@ -741,8 +742,9 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 }
 
 \package{Precalculation}{
-  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind.
-  Bei der \gls{vorberechnung} werden erst die Gewichte der Kanten vom  \reftype{EdgeWeighter} berechnet und danach die \gls{arc} vom \reftype{ArcFlagsCalculator}.
+  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind oder für den Import einer Karte benötigt werden.
+  Beim Importieren einer Karte wird ein Knotenbasierter und ein Kantenbasierter Graph erzeugt und der Knotenbasierter Graph wird partitioniert.  
+  Bei der \gls{vorberechnung} werden erst die Gewichte der Kanten vom \reftype{EdgeWeighter} berechnet und danach die \gls{arc} vom \reftype{ArcFlagsCalculator}.
   % TODO kurze erklärung, wie die vorberechnung läuft (gemacht)
 }
 {
@@ -863,7 +865,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 }
 
 \package{RouteCalculator}{
-  Dieses Paket enthält alle Klassen, die zur Routenberechnung benötigt werden.
+ Dieses Paket enthält alle Klassen, die zur Routenberechnung unter Berücksichtigung von \gls{arc} und Erzeugung der Wegbeschreibung benötigt werden.
 }
 {
   \class{RouteCalculator}
