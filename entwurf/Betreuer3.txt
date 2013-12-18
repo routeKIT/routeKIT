@@ -35,5 +35,6 @@ Coordinate(s)? nochmal nachschauen (gemacht) (ja, x-Koordinate, y-Koordinate, da
 Allgemein: Namen aussagekräftig
 Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen
 Alle Figures referenzien
+Bilder der Pakete ins TeX
 Kachel rendern: außenrum nachfragen (für Texte)
 LaTeX title: Entwurf -> Entwurfsdokument (gemacht)
