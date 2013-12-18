@@ -100,7 +100,7 @@ manageMaps()
     <coordinates>
       <x>1980</x>
       <y>3030</y>
-      <w>130</w>
+      <w>134</w>
       <h>2100</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -687,13 +687,14 @@ in OSMParser</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3370</x>
+      <x>3350</x>
       <y>3670</y>
-      <w>160</w>
+      <w>180</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>ProfileMapCombination
 --
+calculationTime: int
 --
 isCalculated(): boolean</panel_attributes>
     <additional_attributes/>
@@ -989,7 +990,7 @@ exportRoute(route: Route, file: File)</panel_attributes>
     <coordinates>
       <x>3120</x>
       <y>1620</y>
-      <w>134</w>
+      <w>136</w>
       <h>1100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -1349,7 +1350,7 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
 saveTemporaryProfile(:Profile)
 changeTemporaryProfile(name: String)
 deleteCurrentTemporaryProfile()
-estimateDeletionAmount(): int
+getDeletionTime(): int
 saveAllChanges()
 </panel_attributes>
     <additional_attributes/>
@@ -1664,8 +1665,8 @@ allowsTurn(:Turn, :Profile): boolean
     <coordinates>
       <x>3490</x>
       <y>3700</y>
-      <w>40</w>
-      <h>80</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 </panel_attributes>

@@ -614,11 +614,11 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    
                    Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
                  }
-          \method{estimateDeletionAmount}[int]
+          \method{getDeletionTime}[int]
                  {\none}
                  {
-                   Schätzt, wie viel Rechenzeit durch die aktuell erfassten Änderungen verloren gehen würde (durch notwendige Löschung nun veralteter Vorberechnungen).
-                   Die geschätzte Dauer wird in Minuten zurückgegeben.
+                   Gibt zurück, wie lange die Vorberechnungen benötigten, die durch die aktuell erfassten Änderungen gelöscht werden.
+                   Die geschätzte Dauer wird in Millisekunden zurückgegeben.
                  }
           \method{saveAllChanges}
                  {\none}
@@ -826,6 +826,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Führt die Vorberechnung für die gegebene Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte] durch.
                    Dabei werden ein \reftype{EdgeWeighter} und ein \reftype{ArcFlagsCalculator} aufgerufen.
+                   Die benötigte Zeit wird in \refattr{ProfileMapCombination}{calculationTime} gespeichert.
                  }
         }
         
@@ -1036,6 +1037,11 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \attr{profile}{Profile}{Das \gls{profil}.}
           \attr{map}{StreetMap}{Die Karte.}
+          \attr{calculationTime}{int}{
+            Die Zeit, die benötigt wurde, um diese Kombination vorzuberechnen.
+            Die Zeit wird in Millisekunden angegeben.
+            Für Kombinationen ohne Vorberechnung ist dieser Wert \code{0}.
+          }
         }
         {
 	\method{isCalculated}[boolean]

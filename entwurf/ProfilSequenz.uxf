@@ -51,7 +51,7 @@ view-&gt;&gt;&gt;view:view:readValues()
 user-&gt;user:wait
 
 user-&gt;view:user,view:“OK”
-view-&gt;&gt;&gt;ctrl:view,ctrl:estimateDeletionAmount()
+view-&gt;&gt;&gt;ctrl:view,ctrl:getDeletionTime()
 ctrl.&gt;view:view,ctrl:estimatedAmount
 view-&gt;&gt;&gt;user:user,view:“Are you sure? This will [...]”
 user.&gt;view:user,view:“OK”

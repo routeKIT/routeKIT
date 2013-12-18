@@ -933,7 +933,7 @@ setProfile(previous)</panel_attributes>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-estimateDeletionAmount()</panel_attributes>
+getDeletionTime()</panel_attributes>
     <additional_attributes>176;40;24;40</additional_attributes>
   </element>
   <element>
