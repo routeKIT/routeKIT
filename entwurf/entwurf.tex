@@ -942,6 +942,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
   Die zentrale Klasse dieses Pakets ist der \reftype{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
   Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \reftype{TileSource}, welche die Kacheln synchron berechnet.
   Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \reftype{TileFinishedListener} benachrichtigt.
+  Ein beispielhafter Ablauf ist in Abbildung \ref{fig:sequenz_rendern} zu sehen.
   
   Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
   
@@ -1610,7 +1611,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
 \end{figure}
 Beteiligte Klassen: \reftype{RouteKit}, \reftype{Controller}, \reftype{MapManager}, \reftype{ProfileManager}, \reftype{ProfileMapCombination}, \reftype{RouteModel}, \reftype{MainView}, \reftype{TileCache}, \reftype{MapView}
 
-\subsection{Rendern} % TODO reference
+\subsection{Rendern}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{RenderSequenz}
