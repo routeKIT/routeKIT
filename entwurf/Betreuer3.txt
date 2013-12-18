@@ -38,3 +38,4 @@ Alle Figures referenzien
 Bilder der Pakete ins TeX
 Kachel rendern: außenrum nachfragen (für Texte)
 LaTeX title: Entwurf -> Entwurfsdokument (gemacht)
+glossareintr�ge im LaTeX einheitlich (oder ganz weg)
