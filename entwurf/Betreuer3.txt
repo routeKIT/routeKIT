@@ -1,6 +1,6 @@
 Diagramm aufteilen / aufräumen
     Spalten MVC, Zeilen thematisch
-    Farben
+    Farben (gemacht)
     "sehr optional" oder auch "unbedingt machen"
 RouteModel: currentRoute als Relation statt Attribut?
 RenderSequenz:

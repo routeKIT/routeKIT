@@ -1173,78 +1173,6 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>2410</x>
-      <y>3050</y>
-      <w>740</w>
-      <h>550</h>
-    </coordinates>
-    <panel_attributes>Controllers
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>3610</x>
-      <y>4830</y>
-      <w>1720</w>
-      <h>770</h>
-    </coordinates>
-    <panel_attributes>Precalculation
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>1780</x>
-      <y>4970</y>
-      <w>1160</w>
-      <h>680</h>
-    </coordinates>
-    <panel_attributes>MapDisplay
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>2250</x>
-      <y>1360</y>
-      <w>2290</w>
-      <h>1000</h>
-    </coordinates>
-    <panel_attributes>RouteCalculator
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>4640</x>
-      <y>2750</y>
-      <w>650</w>
-      <h>570</h>
-    </coordinates>
-    <panel_attributes>Profiles
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>4250</x>
-      <y>3340</y>
-      <w>1520</w>
-      <h>540</h>
-    </coordinates>
-    <panel_attributes>Map
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3080</x>
@@ -1256,18 +1184,6 @@ bg=#DDDDDD</panel_attributes>
 m2=0..n
 </panel_attributes>
     <additional_attributes>30;160;360;160;360;30;1670;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>2580</x>
-      <y>4040</y>
-      <w>790</w>
-      <h>400</h>
-    </coordinates>
-    <panel_attributes>History
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1368,18 +1284,6 @@ bt=*
 --
 --
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>1320</x>
-      <y>2740</y>
-      <w>860</w>
-      <h>330</h>
-    </coordinates>
-    <panel_attributes>View
-bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1550,18 +1454,6 @@ m2=1
     <additional_attributes>50;30;30;30;30;740;570;740</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>2760</x>
-      <y>2480</y>
-      <w>440</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes>Exporter
-bg=#DDDDDD</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>4270</x>
@@ -1637,18 +1529,6 @@ bt=*
 
 --
 generateRouteDescription(route: Route): RouteDescription</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Package</type>
-    <coordinates>
-      <x>4010</x>
-      <y>3890</y>
-      <w>600</w>
-      <h>440</h>
-    </coordinates>
-    <panel_attributes>Util
-bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1947,6 +1827,126 @@ r1=to</panel_attributes>
       <h>340</h>
     </coordinates>
     <panel_attributes>Models
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>2410</x>
+      <y>3050</y>
+      <w>740</w>
+      <h>550</h>
+    </coordinates>
+    <panel_attributes>Controllers
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>3610</x>
+      <y>4830</y>
+      <w>1720</w>
+      <h>770</h>
+    </coordinates>
+    <panel_attributes>Precalculation
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1780</x>
+      <y>4970</y>
+      <w>1160</w>
+      <h>680</h>
+    </coordinates>
+    <panel_attributes>MapDisplay
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>2250</x>
+      <y>1360</y>
+      <w>2290</w>
+      <h>1000</h>
+    </coordinates>
+    <panel_attributes>RouteCalculator
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>4640</x>
+      <y>2750</y>
+      <w>650</w>
+      <h>570</h>
+    </coordinates>
+    <panel_attributes>Profiles
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>4250</x>
+      <y>3340</y>
+      <w>1520</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>Map
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>2580</x>
+      <y>4040</y>
+      <w>790</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>History
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>1320</x>
+      <y>2740</y>
+      <w>860</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>View
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>2760</x>
+      <y>2480</y>
+      <w>440</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Exporter
+bg=#DDDDDD</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>4010</x>
+      <y>3890</y>
+      <w>600</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>Util
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
