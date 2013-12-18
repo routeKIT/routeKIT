@@ -1919,4 +1919,15 @@ bg=#DDDDDD</panel_attributes>
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3440</x>
+      <y>1570</y>
+      <w>150</w>
+      <h>2120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;</panel_attributes>
+    <additional_attributes>130;30;30;30;30;2100</additional_attributes>
+  </element>
 </diagram>
