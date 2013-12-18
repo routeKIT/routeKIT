@@ -21,6 +21,8 @@
       <h>140</h>
     </coordinates>
     <panel_attributes>MapView
+bg=#FFFFFF
+bt=*
 --
 --
 MapView(:TileSource)
@@ -36,6 +38,8 @@ paint(:Graphics)</panel_attributes>
       <h>270</h>
     </coordinates>
     <panel_attributes>Controller
+bg=#FFFFFF
+bt=*
 --
 --
 Controller()
@@ -63,6 +67,8 @@ manageMaps()
       <h>120</h>
     </coordinates>
     <panel_attributes>RouteModel
+bg=#FFFFFF
+bt=*
 --
 -currentRoute: Route
 -start: Coordinates
@@ -116,6 +122,8 @@ implements</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
+bg=#FFFFFF
+bt=*
 TileSource
 --
 --
@@ -131,6 +139,8 @@ TileSource
       <h>100</h>
     </coordinates>
     <panel_attributes>TileCache
+bg=#FFFFFF
+bt=*
 --
 cache
 --
@@ -172,6 +182,8 @@ tileSource</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>TileRenderer
+bg=#FFFFFF
+bt=*
 --
 --
 TileRenderer(:Graph)
@@ -187,6 +199,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>OSMRenderer
+bg=#FFFFFF
+bt=*
 --
 --
 renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
@@ -223,6 +237,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>RouteDescription
+bg=#FFFFFF
+bt=*
 --
 --
 getInstructions(): List&lt;TurnInstruction&gt;
@@ -238,6 +254,8 @@ getInstructions(): List&lt;TurnInstruction&gt;
       <h>120</h>
     </coordinates>
     <panel_attributes>History
+bg=#FFFFFF
+bt=*
 --
 --
 addEntry(start: Coordinates, destination: Coordinates)
@@ -255,6 +273,8 @@ _load(:File): History_</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
+bg=#FFFFFF
+bt=*
 GraphPartitioner
 --
 --
@@ -270,6 +290,8 @@ GraphPartitioner
       <h>70</h>
     </coordinates>
     <panel_attributes>ExternalPartitionerAdapter
+bg=#FFFFFF
+bt=*
 --
 --
 partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
@@ -340,6 +362,8 @@ program</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>EdgeWeighter
+bg=#FFFFFF
+bt=*
 --
 --
 weightEdges(:ProfileMapCombination)</panel_attributes>
@@ -354,6 +378,8 @@ weightEdges(:ProfileMapCombination)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>ArcFlagsCalculator
+bg=#FFFFFF
+bt=*
 --
 --
 calculateArcFlags(:ProfileMapCombination)</panel_attributes>
@@ -368,6 +394,8 @@ calculateArcFlags(:ProfileMapCombination)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>PreCalculator
+bg=#FFFFFF
+bt=*
 --
 --
 doPrecalculation(:ProfileMapCombination)</panel_attributes>
@@ -440,6 +468,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
       <h>150</h>
     </coordinates>
     <panel_attributes>_defaultCar_
+bg=#FFFFFF
+bt=*
 --
 name = "PKW (Standard)"
 vehicleType = Car
@@ -459,6 +489,8 @@ speedRoad = 80</panel_attributes>
       <h>110</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+bg=#FFFFFF
+bt=*
 VehicleType
 --
 Car
@@ -488,6 +520,8 @@ m1=vehicleType</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>StreetMap
+bg=#FFFFFF
+bt=*
 --
 name: String
 --
@@ -503,6 +537,8 @@ isDefault(): boolean</panel_attributes>
       <h>190</h>
     </coordinates>
     <panel_attributes>Profile
+bg=#FFFFFF
+bt=*
 --
 name: String
 height: int
@@ -537,6 +573,8 @@ _load(file: File): Profile_</panel_attributes>
       <h>150</h>
     </coordinates>
     <panel_attributes>_defaultTruck_
+bg=#FFFFFF
+bt=*
 --
 name = "LKW (Standard)"
 vehicleType = Truck
@@ -568,6 +606,8 @@ speedRoad = 80</panel_attributes>
       <h>180</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
+bg=#FFFFFF
+bt=*
 RouteCalculator
 --
 --
@@ -583,6 +623,8 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
       <h>110</h>
     </coordinates>
     <panel_attributes>Route
+bg=#FFFFFF
+bt=*
 --
 start: PointOnEdge
 destination: PointOnEdge
@@ -602,6 +644,8 @@ getNodeIterator(): Iterator&lt;Node&gt;
       <h>110</h>
     </coordinates>
     <panel_attributes>ArcFlagsDijkstra
+bg=#FFFFFF
+bt=*
 --
 
 --
@@ -651,6 +695,8 @@ getNodeIterator(): Iterator&lt;Node&gt;
       <h>90</h>
     </coordinates>
     <panel_attributes>MapNode
+bg=#FFFFFF
+bt=*
 --
 lat: float
 lon: float
@@ -693,6 +739,8 @@ in OSMParser</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>ProfileMapCombination
+bg=#FFFFFF
+bt=*
 --
 calculationTime: int
 --
@@ -732,6 +780,8 @@ r2=profile</panel_attributes>
       <h>80</h>
     </coordinates>
     <panel_attributes>ProfileManager
+bg=#FFFFFF
+bt=*
 --
 --
 saveProfile(:Profile)
@@ -761,6 +811,8 @@ m2=0..n
       <h>50</h>
     </coordinates>
     <panel_attributes>OSMParser
+bg=#FFFFFF
+bt=*
 --
 --
 parseOSM(:File, name: String): StreetMap
@@ -776,6 +828,8 @@ parseOSM(:File, name: String): StreetMap
       <h>200</h>
     </coordinates>
     <panel_attributes>Graph
+bg=#FFFFFF
+bt=*
 --
 --
 Graph(nodes: Node[], edges: Edge[], :Map&lt;Node, NodeProperties&gt;, :EdgeProperties[], lat: float[], lon: float[])
@@ -800,6 +854,8 @@ getIndex(zoom: int): GraphIndex
       <h>50</h>
     </coordinates>
     <panel_attributes>ArcFlags
+bg=#FFFFFF
+bt=*
 --
 --
 getFlags(:Turn): int
@@ -851,6 +907,8 @@ m2=0..n
       <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
+bg=#FFFFFF
+bt=*
 TileFinishedListener
 --
 --
@@ -866,6 +924,8 @@ tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
       <h>80</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
+bg=#FFFFFF
+bt=*
 RouteModelListener
 --
 --
@@ -907,6 +967,8 @@ m1=0..n
       <h>80</h>
     </coordinates>
     <panel_attributes>HistoryEntry
+bg=#FFFFFF
+bt=*
 --
 start: Coordinates
 destination: Coordinates
@@ -946,6 +1008,8 @@ m1=0..n</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>PointOnEdge
+bg=#FFFFFF
+bt=*
 --
 edgeid: int
 pointPosition: float
@@ -963,6 +1027,8 @@ pointPosition: float
       <h>90</h>
     </coordinates>
     <panel_attributes>EdgeProperties
+bg=#FFFFFF
+bt=*
 --
 --
 getName(): String
@@ -980,6 +1046,8 @@ getMaxSpeed(:Profile): int
       <h>60</h>
     </coordinates>
     <panel_attributes>GPXExporter
+bg=#FFFFFF
+bt=*
 --
 --
 exportRoute(route: Route, file: File)</panel_attributes>
@@ -1018,6 +1086,8 @@ m2=0..n</panel_attributes>
       <h>50</h>
     </coordinates>
     <panel_attributes>TurnInstruction
+bg=#FFFFFF
+bt=*
 --
 --
 toString(): String
@@ -1044,6 +1114,8 @@ toString(): String
       <h>70</h>
     </coordinates>
     <panel_attributes>MapImporter
+bg=#FFFFFF
+bt=*
 --
 
 --
@@ -1071,6 +1143,8 @@ importMap(:File, name: String): StreetMap</panel_attributes>
       <h>100</h>
     </coordinates>
     <panel_attributes>NodeProperties
+bg=#FFFFFF
+bt=*
 --
 --
 isMotorwayJunction(): boolean
@@ -1089,6 +1163,8 @@ isTrafficLights(): boolean
       <h>80</h>
     </coordinates>
     <panel_attributes>MapManager
+bg=#FFFFFF
+bt=*
 --
 --
 saveMap(m: StreetMap)
@@ -1104,7 +1180,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>740</w>
       <h>550</h>
     </coordinates>
-    <panel_attributes>Controllers</panel_attributes>
+    <panel_attributes>Controllers
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1115,7 +1192,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>1720</w>
       <h>770</h>
     </coordinates>
-    <panel_attributes>Precalculation</panel_attributes>
+    <panel_attributes>Precalculation
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1126,7 +1204,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>1160</w>
       <h>680</h>
     </coordinates>
-    <panel_attributes>MapDisplay</panel_attributes>
+    <panel_attributes>MapDisplay
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1137,7 +1216,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>2290</w>
       <h>1000</h>
     </coordinates>
-    <panel_attributes>RouteCalculator</panel_attributes>
+    <panel_attributes>RouteCalculator
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1148,7 +1228,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>650</w>
       <h>570</h>
     </coordinates>
-    <panel_attributes>Profiles</panel_attributes>
+    <panel_attributes>Profiles
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1159,7 +1240,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
       <w>1520</w>
       <h>540</h>
     </coordinates>
-    <panel_attributes>Map</panel_attributes>
+    <panel_attributes>Map
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1183,7 +1265,8 @@ m2=0..n
       <w>790</w>
       <h>400</h>
     </coordinates>
-    <panel_attributes>History</panel_attributes>
+    <panel_attributes>History
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1195,6 +1278,8 @@ m2=0..n
       <h>80</h>
     </coordinates>
     <panel_attributes>RouteKit
+bg=#FFFFFF
+bt=*
 --
 --
 _+main(args: String[])_</panel_attributes>
@@ -1209,6 +1294,8 @@ _+main(args: String[])_</panel_attributes>
       <h>140</h>
     </coordinates>
     <panel_attributes>MainView
+bg=#FFFFFF
+bt=*
 --
 --
 setCurrentMap(:StreetMap)
@@ -1225,6 +1312,8 @@ setCurrentProfile(:Profile)
       <h>140</h>
     </coordinates>
     <panel_attributes>HistoryView
+bg=#FFFFFF
+bt=*
 --
 --
 HistoryView(:History)</panel_attributes>
@@ -1239,6 +1328,8 @@ HistoryView(:History)</panel_attributes>
       <h>140</h>
     </coordinates>
     <panel_attributes>ProfileManagerView
+bg=#FFFFFF
+bt=*
 --
 --
 setCurrentProfile(:Profile)
@@ -1255,6 +1346,8 @@ setAvailableProfiles(:List&lt;Profile&gt;)
       <h>140</h>
     </coordinates>
     <panel_attributes>MapManagerView
+bg=#FFFFFF
+bt=*
 --
 --
 setCurrentMap(:StreetMap, :Set&lt;Profile&gt;)
@@ -1270,6 +1363,8 @@ setAvailableMaps(:Set&lt;StreetMap&gt;)</panel_attributes>
       <h>140</h>
     </coordinates>
     <panel_attributes>AboutView
+bg=#FFFFFF
+bt=*
 --
 --
 </panel_attributes>
@@ -1283,7 +1378,8 @@ setAvailableMaps(:Set&lt;StreetMap&gt;)</panel_attributes>
       <w>860</w>
       <h>330</h>
     </coordinates>
-    <panel_attributes>View</panel_attributes>
+    <panel_attributes>View
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1320,6 +1416,8 @@ q1=Edge</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>HTMLExporter
+bg=#FFFFFF
+bt=*
 --
 --
 exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attributes>
@@ -1345,6 +1443,8 @@ exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attribute
       <h>120</h>
     </coordinates>
     <panel_attributes>ProfileManagerController
+bg=#FFFFFF
+bt=*
 --
 --
 saveTemporaryProfile(:Profile)
@@ -1364,6 +1464,8 @@ saveAllChanges()
       <h>170</h>
     </coordinates>
     <panel_attributes>MapManagerController
+bg=#FFFFFF
+bt=*
 --
 --
 changeMap(:StreetMap)
@@ -1455,7 +1557,8 @@ m2=1
       <w>440</w>
       <h>280</h>
     </coordinates>
-    <panel_attributes>Exporter</panel_attributes>
+    <panel_attributes>Exporter
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1467,6 +1570,8 @@ m2=1
       <h>90</h>
     </coordinates>
     <panel_attributes>GraphIndex
+bg=#FFFFFF
+bt=*
 --
 --
 GraphIndex(:Graph)
@@ -1497,6 +1602,8 @@ index</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>MapEdge
+bg=#FFFFFF
+bt=*
 --
 --
 //--&gt; EdgeProperties
@@ -1524,6 +1631,8 @@ m1=0..n</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>RouteDescriptionGenerator
+bg=#FFFFFF
+bt=*
 --
 
 --
@@ -1538,7 +1647,8 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
       <w>600</w>
       <h>440</h>
     </coordinates>
-    <panel_attributes>Util</panel_attributes>
+    <panel_attributes>Util
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1550,6 +1660,8 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
       <h>140</h>
     </coordinates>
     <panel_attributes>Coordinates
+bg=#FFFFFF
+bt=*
 --
 lat: float
 lon: float
@@ -1636,6 +1748,8 @@ implements</panel_attributes>
       <h>170</h>
     </coordinates>
     <panel_attributes>EdgeBasedGraph
+bg=#FFFFFF
+bt=*
 --
 --
 getOutgoingTurns(:Edge): Set&lt;Turn&gt;
@@ -1681,6 +1795,8 @@ allowsTurn(:Turn, :Profile): boolean
       <h>50</h>
     </coordinates>
     <panel_attributes>Weights
+bg=#FFFFFF
+bt=*
 --
 --
 getWeight(:Turn): int
@@ -1696,6 +1812,8 @@ getWeight(:Turn): int
       <h>170</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+bg=#FFFFFF
+bt=*
 HighwayType
 --
 Motorway
@@ -1728,6 +1846,8 @@ p1=highwayType</panel_attributes>
       <h>220</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+bg=#FFFFFF
+bt=*
 TurnType
 --
 RightTurn
@@ -1775,6 +1895,8 @@ r1=targetNode</panel_attributes>
       <h>30</h>
     </coordinates>
     <panel_attributes>TurnRestriction
+bg=#FFFFFF
+bt=*
 --
 --
 </panel_attributes>
@@ -1824,7 +1946,8 @@ r1=to</panel_attributes>
       <w>820</w>
       <h>340</h>
     </coordinates>
-    <panel_attributes>Models</panel_attributes>
+    <panel_attributes>Models
+bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
