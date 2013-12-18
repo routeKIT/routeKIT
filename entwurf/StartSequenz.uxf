@@ -9,7 +9,7 @@
       <w>190</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_RouteKit: Class_</panel_attributes>
+    <panel_attributes>_Controller: Class_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -26,13 +26,14 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>70</x>
-      <y>30</y>
-      <w>80</w>
-      <h>50</h>
+      <x>60</x>
+      <y>10</y>
+      <w>96</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;</panel_attributes>
-    <additional_attributes>60;30;30;30</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;
+main()</panel_attributes>
+    <additional_attributes>70;50;40;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -40,7 +41,7 @@
       <x>130</x>
       <y>50</y>
       <w>20</w>
-      <h>610</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -578,17 +579,6 @@ new</panel_attributes>
     <additional_attributes>30;30;300;30</additional_attributes>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>120</x>
-      <y>590</y>
-      <w>240</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;220;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>350</x>
@@ -603,11 +593,11 @@ new</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>110</x>
-      <y>630</y>
+      <y>60</y>
       <w>50</w>
-      <h>120</h>
+      <h>690</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;100;30;30</additional_attributes>
+    <additional_attributes>30;670;30;30</additional_attributes>
   </element>
 </diagram>
