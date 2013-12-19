@@ -620,7 +620,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
           \method{main}
                  {
-		           \param{args}{String[]}{Kommandozeilen-Argumente}
+		           \param{args}{String[]}{Kommandozeilen-Argumente.}
                  }
 	             {Statische Hauptmethode des Programms. Erzeugt einen \reftype{Controller}.}
         }
@@ -682,7 +682,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{changeMap}
                  {
-                   \param{m}{StreetMap}{Die neue \gls{karte}.}
+                   \param{map}{StreetMap}{Die neue \gls{karte}.}
                  }
                  {
                    Wird aufgerufen, wenn in der \reftype{MapManagerView} eine andere \gls{karte} ausgewählt wird.
@@ -691,22 +691,22 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
           \method{addProfile}
                  {
-                   \param{p}{Profile}{Das neue \gls{profil}.}
+                   \param{profile}{Profile}{Das neue \gls{profil}.}
                  }
                  {
                    Fügt das angegebene \gls{profil} zur ausgewählten \gls{karte} hinzu.
                  }
           \method{removeProfile}
                  {
-                   \param{p}{Profile}{Das \gls{profil}, das entfernt werden soll.}
+                   \param{profile}{Profile}{Das \gls{profil}, das entfernt werden soll.}
                  }
                  {
                    Entfernt das angegebene \gls{profil} von der ausgewählten \gls{karte}.
                  }
           \method{importMap}
                  {
-                   \param{name}{String}{Der Name der neuen \gls{karte}}
-                   \param{f}{File}{Die Datei aus der sie geladen werden soll}
+                   \param{name}{String}{Der Name der neuen \gls{karte}.}
+                   \param{file}{File}{Die Datei aus der sie geladen werden soll.}
                  }
                  {
                    Fügt eine neue \gls{karte} mit dem angegebenen Namen hinzu (oder ersetzt eine bestehende mit diesem Namen) und wählt sie aus.
@@ -737,7 +737,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{saveProfile}
                  {
-                   \param{p}{Profile}{Das \gls{profil}, das gespeichert werden soll.}
+                   \param{profile}{Profile}{Das \gls{profil}, das gespeichert werden soll.}
                  }
                  {
                    Speichert das ausgewählte \gls{profil} in der internen Liste und auf der Festplatte.
@@ -746,7 +746,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
           \method{deleteProfile}
                  {
-                   \param{p}{Profile}{Das \gls{profil}, das gelöscht werden soll.}
+                   \param{profile}{Profile}{Das \gls{profil}, das gelöscht werden soll.}
                  }
                  {
                    Löscht das ausgewählte \gls{profil} aus der internen Liste und von der Festplatte.
@@ -763,7 +763,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{saveMap}
                  {
-                   \param{m}{StreetMap}{Die \gls{karte}, die gespeichert werden soll.}
+                   \param{map}{StreetMap}{Die \gls{karte}, die gespeichert werden soll.}
                  }
                  {
                    Speichert die ausgewählte \gls{karte} in der internen Liste und auf der Festplatte.
@@ -772,7 +772,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
           \method{deleteMap}
                  {
-                   \param{m}{StreetMap}{Die \gls{karte}, die gelöscht werden soll.}
+                   \param{map}{StreetMap}{Die \gls{karte}, die gelöscht werden soll.}
                  }
                  {
                    Löscht die ausgewählte \gls{karte} aus der internen Liste und von der Festplatte (die \gls{osm}-Datei, den Graphen und alle \glspl{vorberechnung}).
@@ -789,7 +789,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 \package{Precalculation}{
   Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind oder für den Import einer \gls{karte} benötigt werden.
   Beim Importieren einer \gls{karte} werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph wird partitioniert.
-  Bei der \gls{vorberechnung} wird der kantenbasierte Graph gewichtet vom \reftype{EdgeWeighter} und danach werden die \gls{arc} vom \reftype{ArcFlagsCalculator} berechnet .
+  Bei der \gls{vorberechnung} wird der kantenbasierte Graph gewichtet vom \reftype{EdgeWeighter} und danach werden die \gls{arc} vom \reftype{ArcFlagsCalculator} berechnet.
   % TODO kurze erklärung, wie die vorberechnung läuft (gemacht)
 }
 {
@@ -881,7 +881,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           Versieht den kantenbasierten Graphen (\reftype{EdgeBasedGraph}) mit Kantengewichten.
           
-          Die Kantengewichte des kantenbasierten Graphen sind profilabhängig und geben an, wie „teuer“ ein bestimmter Abbiegevorgang ist.
+          Die Kantengewichte des kantenbasierten Graphen sind profilabhängig und geben an, wie „teuer“ ein bestimmter Abbiegevorgang ist – Kanten mit niedrigerem Gewicht werden bei der Routenberechnung bevorzugt gewählt.
           Abbiegebeschränkungen werden durch maximale Kantengewichte umgesetzt.
         }
         {\none}
@@ -927,7 +927,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         }
   \class{ArcFlagsDijkstra}
         {
-          Verwended \gls{dijkstra}, um die schnellste \gls{route} zwischen Start- und Zielpunkt für die aktuelle Kombination aus \gls{karte} und \gls{profil} zu berechnen.
+          Verwendet \gls{dijkstra}, um die schnellste \gls{route} zwischen Start- und Zielpunkt für die aktuelle Kombination aus \gls{karte} und \gls{profil} zu berechnen.
           Durch \gls{arc} wird die Berechnung beschleunigt.
         }
         {\none}
@@ -1118,12 +1118,12 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         }
 
   \class{RouteModel}
-        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete \gls{route} dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete \gls{route} dar. Die getter liefern dabei immer den aktuellen Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
         {\none}
         {
           \method{addRouteListener}
                  {
-                   \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
+                   \param{listener}{RouteModelListener}{Der neue Listener, der über Änderungen informiert werden will.}
                  }
                  {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an \gls{route}, Start oder Ziel informiert wird}
         }
@@ -1309,6 +1309,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           \attr{name}{String}{Der Name der \gls{karte}.}
           \attr{graph}{Graph}{Der Graph der \gls{karte}, d.\,h. das Straßennetz.}
+          \attr{edgeBasedGraph}{EdgeBasedGraph}{Die kantenbasierte Version des Straßennetzes, die zur Routenberechnung verwendet wird.}
         }
         {
           \method{isDefault}[boolean]
@@ -1383,7 +1384,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
  		           \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
                  } 
 		         {
-                   Bestimmt alle Kanten innerhalb eines rechteckigen Kartenausschnitts, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
+                   Bestimmt alle Kanten innerhalb eines rechteckigen Kartenausschnitts, der durch \refparam{GraphIndex}{getEdgesInRectangle}{leftTop} und \refparam{GraphIndex}{getEdgesInRectangle}{rightBottom} festgelegt ist.
                  }
 	      \method{findNearestPointOnEdge} [PointOnEdge]
                  {
@@ -1423,7 +1424,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene \gls{profil}.}
         }
   \enum{HighwayType}
-       {Ein Straßentyp}
+       {Ein Straßentyp.}
        {
          \constant{Motorway}{Autobahn}
          \constant{Trunk}{Schnellstraße}
