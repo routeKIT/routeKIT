@@ -426,7 +426,7 @@ Prof.~Dr.~Peter~Sanders}
 Dieses Dokument erläutert den Entwurf der Anwendung \routeKIT. % TODO „dieses Dokument dokumentiert“ (gemacht)
 Es beschreibt ausführlich die verwendeten Pakete, Klassen und Methoden und ihre Beziehungen untereinander (wobei die Beziehungen im Klassendiagramm deutlicher ersichtlich sind).
 
-\routeKIT ist eine Anwendung zur Routenplanung; durch Verwendung von \glslink{profil}{Profilen} kann sie dem Benutzer die optimalen Routen für sein spezielles Fahrzeug angeben.
+\routeKIT ist eine Anwendung zur Routenplanung; durch Verwendung von \glslink{profil}{Profilen} kann sie dem Benutzer die optimalen \glspl{route} für sein spezielles Fahrzeug angeben.
 Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} eine zeitaufwändige \gls{vorberechnung} durchgeführt.
 
 
@@ -446,7 +446,7 @@ Dadurch wird die Funktionaltät, dass ältere Zugriffe gespeichert werden, von d
 % TODO Vorteile davon. (gemacht)
 
 Im Paket \refpackage{RouteCalculator} wird das Entwurfsmuster „Strategie“ eingesetzt.
-Der Algorithmus zur Berechnung der Route ist in eine eigene Klasse \reftype{ArcFlagsDijkstra} gekapselt und somit leicht zu ersetzen.  
+Der Algorithmus zur Berechnung der \gls{route} ist in eine eigene Klasse \reftype{ArcFlagsDijkstra} gekapselt und somit leicht zu ersetzen.  
 Im Paket \refpackage{Precalculation} wird ebenfalls dieses Muster verwendet. Somit wird ermöglicht das Programm zum Partitionieren eines Graphen auszutauschen.
 
 \section{Anmerkungen}
@@ -499,10 +499,10 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
  Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
  Der \reftype{Controller} nimmt Benutzeraktionen von der \reftype{MainView} und \reftype{MapView} entgegen und reagiert darauf.
  
- Der \reftype{Controller} erstellt den \reftype{ProfileManagerController} bzw. den \reftype{MapManagerController}, wenn der Benutzer das Fenster der Profil- bzw. Kartenverwaltung öffnet.
+ Der \reftype{Controller} erstellt den \reftype{ProfileManagerController} bzw. den \reftype{MapManagerController}, wenn der Benutzer das Fenster der \gls{profil}- bzw. Kartenverwaltung öffnet.
  Diese sind für \reftype{ProfileManagerView} bzw. die \reftype{MapManagerView} verantwortlich.
 
- Der \reftype{ProfileManager} und der \reftype{MapManager} sind für das Speichern und Laden der Profil- oder Kartendaten zuständig.
+ Der \reftype{ProfileManager} und der \reftype{MapManager} sind für das Speichern und Laden der \gls{profil}- oder Kartendaten zuständig.
 
 }
 {
@@ -517,7 +517,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           \method{Controller}
                  {\none}
                  {
-                   Erstellt den Controller, lädt Profile und Karten und erstellt dann die \reftype{MainView}.
+                   Erstellt den Controller, lädt \glspl{profil} und \glspl{karte} und erstellt dann die \reftype{MainView}.
                    Für den genauen Ablauf siehe \abbildung{sequenz_start}.
                  }
                  
@@ -528,7 +528,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Wird aufgerufen, wenn sich der Startpunkt ändert (z.\,B. durch eine Eingabe des Benutzers).
                    Setzt den neuen Startpunkt in der \reftype{MapView}.
-                   Falls bereits ein Zielpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum Verlauf hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
+                   Falls bereits ein Zielpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum \gls{verlauf} hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
                  }
           \method{onDestinationChanged}
                  {
@@ -537,7 +537,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Wird aufgerufen, wenn sich der Zielpunkt ändert (z.\,B. durch eine Eingabe des Benutzers).
                    Setzt den neuen Zielpunkt in der \reftype{MapView}.
-                   Falls bereits ein Startpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum Verlauf hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
+                   Falls bereits ein Startpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum \gls{verlauf} hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
                  }
           \method{onStartAndDestChanged}
                  {
@@ -551,48 +551,48 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  
           \method{exportGPX}
                  {
-                   \param{target}{File}{Die Datei, in die die Route gespeichert werden soll.}
+                   \param{target}{File}{Die Datei, in die die \gls{route} gespeichert werden soll.}
                  }
                  {
-                   Speichert die aktuelle Route im \gls{gpx}-Format in die angegebene Datei.
-                   Ist keine aktuelle Route verfügbar (z.\,B. da noch keine Vorberechnung vorliegt), so wird eine \code{IllegalStateException} geworfen.
+                   Speichert die aktuelle \gls{route} im \gls{gpx}-Format in die angegebene Datei.
+                   Ist keine aktuelle \gls{route} verfügbar (z.\,B. da noch keine \gls{vorberechnung} vorliegt), so wird eine \code{IllegalStateException} geworfen.
                  }
           \method{exportHTML}
                  {
-                   \param{target}{File}{Die Datei, in die die Wegbeschreibung gespeichert werden soll.}
+                   \param{target}{File}{Die Datei, in die die \gls{wegbeschreibung} gespeichert werden soll.}
                  }
                  {
-                   Speichert die Wegbeschreibung der aktuellen Route im HTML-Format in die angegeben Datei.
-                   Ist keine aktuelle Route verfügbar (z.\,B. da noch keine Vorberechnung vorliegt), so wird eine \code{IllegalStateException} geworfen.
+                   Speichert die \gls{wegbeschreibung} der aktuellen \gls{route} im HTML-Format in die angegeben Datei.
+                   Ist keine aktuelle \gls{route} verfügbar (z.\,B. da noch keine \gls{vorberechnung} vorliegt), so wird eine \code{IllegalStateException} geworfen.
                  }
                  
           \method{selectProfile}
                  {
-                   \param{profile}{Profile}{Das aktuelle Profil.} 
+                   \param{profile}{Profile}{Das aktuelle \gls{profil}.} 
                  }
                  {
-                   Wählt das angegebe Profil aus.
+                   Wählt das angegebe \gls{profil} aus.
                  }
           \method{selectMap}
                  {
-                   \param{map}{StreetMap}{Die aktuelle Karte.} 
+                   \param{map}{StreetMap}{Die aktuelle \gls{karte}.} 
                  }
                  {
-                   Wählt die angegebe Karte aus.
+                   Wählt die angegebe \gls{karte} aus.
                  }
 
           \method{startPrecalculation}
                  {
-                   \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus Profil und Karte.} 
+                   \param{profileAndMap}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus \gls{profil} und \gls{karte}.} 
                  }
                  {
-                   Ruft \refmethod{PreCalculator}{doPrecalculation} auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte existiert.
+                   Ruft \refmethod{PreCalculator}{doPrecalculation} auf, falls keine \gls{vorberechnung} für diese Kombination aus \gls{profil} und \gls{karte} existiert.
                  }
                  
 		  \method{onPrecalculationFinished}
                  {\none}
                  {
-                   Wird aufgerufen, wenn eine Vorberechnung abgeschlossen ist. Reaktiviert Benutzerinteraktion mit der mainView.
+                   Wird aufgerufen, wenn eine \gls{vorberechnung} abgeschlossen ist. Reaktiviert Benutzerinteraktion mit der mainView.
                  }
 
           \method{setUseOnlineMaps}
@@ -606,7 +606,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           \method{getTileSource}[TileSource]
                  {\none}
                  {
-                   Gibt eine \reftype{TileSource} zurück, die zum Rendern der Karten verwendet werden soll.
+                   Gibt eine \reftype{TileSource} zurück, die zum \glslink{rendern}{Rendern} der \glspl{karte} verwendet werden soll.
                  }
           \method{manageProfiles}
                  {\none}
@@ -635,43 +635,43 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{saveTemporaryProfile}
                  {
-                   \param{profile}{Profile}{Das temporäre Profil mit den aktuell eingegebenen Werten.}
+                   \param{profile}{Profile}{Das temporäre \gls{profil} mit den aktuell eingegebenen Werten.}
                  }
                  {
-                   Speichert die Werte des temporären Profils.
+                   Speichert die Werte des temporären \glslink{profil}{Profils}.
                    Wird üblicherweise direkt vor \refmethod{ProfileManagerController}{changeTemporaryProfile} aufgerufen.
                  }
           \method{changeTemporaryProfile}
                  {
-                   \param{name}{String}{Der Name des neuen Profils.}
+                   \param{name}{String}{Der Name des neuen \glslink{profil}{Profils}.}
                  }
                  {
-                   Wechselt zu dem temporären Profil mit dem angegebenen Namen.
-                   Falls noch kein Profil mit diesem Namen existiert, wird es als Kopie des aktuellen Profils erstellt.
+                   Wechselt zu dem temporären \gls{profil} mit dem angegebenen Namen.
+                   Falls noch kein \gls{profil} mit diesem Namen existiert, wird es als Kopie des aktuellen \glslink{profil}{Profils} erstellt.
                    
                    Die Änderung wird der View über \refmethod{ProfileManagerView}{setCurrentProfile} mitgeteilt.
                  }
           \method{deleteCurrentTemporaryProfile}
                  {\none}
                  {
-                   Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus der Auswahlliste.
+                   Markiert das aktuell ausgewählte \gls{profil} zur Löschung und entfernt es aus der Auswahlliste.
                    
-                   Beachte: Das Profil wird erst in \refmethod{ProfileManagerController}{saveAllChanges} tatsächlich gelöscht.
+                   Beachte: Das \gls{profil} wird erst in \refmethod{ProfileManagerController}{saveAllChanges} tatsächlich gelöscht.
                    
-                   Handelt es sich bei dem aktuell ausgewählten Profil um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
+                   Handelt es sich bei dem aktuell ausgewählten \gls{profil} um ein Standardprofil, so wird eine \code{IllegalStateException} geworfen.
                  }
           \method{getDeletionTime}[int]
                  {\none}
                  {
-                   Gibt zurück, wie lange die Vorberechnungen benötigten, die durch die aktuell erfassten Änderungen gelöscht werden.
+                   Gibt zurück, wie lange die \glspl{vorberechnung} benötigten, die durch die aktuell erfassten Änderungen gelöscht werden.
                    Die geschätzte Dauer wird in Millisekunden zurückgegeben.
                  }
           \method{saveAllChanges}
                  {\none}
                  {
                    Führt alle vom Benutzer vorgenommenen Änderungen aus.
-                   Dazu gehören das Hinzufügen, Ändern und Löschen von Profilen.
-                   Für geänderte Profile werden alle Vorberechnungen gelöscht. 
+                   Dazu gehören das Hinzufügen, Ändern und Löschen von \glslink{profil}{Profilen}.
+                   Für geänderte \glspl{profil} werden alle \glspl{vorberechnung} gelöscht. 
                  }
         }
   \class{MapManagerController}
@@ -682,79 +682,79 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{changeMap}
                  {
-                   \param{m}{StreetMap}{Die neue Karte.}
+                   \param{m}{StreetMap}{Die neue \gls{karte}.}
                  }
                  {
-                   Wird aufgerufen, wenn in der \reftype{MapManagerView} eine andere Karte ausgewählt wird.
-                   Speichert die Liste der Profile für diese Karte und setzt sie auf die Liste der neuen Karte (ggf. die bereits gespeicherte Liste, falls die Karte schon zuvor einmal ausgewählt war).
-                   Aktiviert/Deaktiviert den Löschen-Button, je nachdem, ob die neue Karte eine Standardkarte ist oder nicht.
+                   Wird aufgerufen, wenn in der \reftype{MapManagerView} eine andere \gls{karte} ausgewählt wird.
+                   Speichert die Liste der \glspl{profil} für diese \gls{karte} und setzt sie auf die Liste der neuen \gls{karte} (ggf. die bereits gespeicherte Liste, falls die \gls{karte} schon zuvor einmal ausgewählt war).
+                   Aktiviert/Deaktiviert den Löschen-Button, je nachdem, ob die neue \gls{karte} eine Standardkarte ist oder nicht.
                  }
           \method{addProfile}
                  {
-                   \param{p}{Profile}{Das neue Profil.}
+                   \param{p}{Profile}{Das neue \gls{profil}.}
                  }
                  {
-                   Fügt das angegebene Profil zur ausgewählten Karte hinzu.
+                   Fügt das angegebene \gls{profil} zur ausgewählten \gls{karte} hinzu.
                  }
           \method{removeProfile}
                  {
-                   \param{p}{Profile}{Das Profil, das entfernt werden soll.}
+                   \param{p}{Profile}{Das \gls{profil}, das entfernt werden soll.}
                  }
                  {
-                   Entfernt das angegebene Profil von der ausgewählten Karte.
+                   Entfernt das angegebene \gls{profil} von der ausgewählten \gls{karte}.
                  }
           \method{importMap}
                  {
-                   \param{name}{String}{Der Name der neuen Karte}
+                   \param{name}{String}{Der Name der neuen \gls{karte}}
                    \param{f}{File}{Die Datei aus der sie geladen werden soll}
                  }
                  {
-                   Fügt eine neue Karte mit dem angegebenen Namen hinzu (oder ersetzt eine bestehende mit diesem Namen) und wählt sie aus.
+                   Fügt eine neue \gls{karte} mit dem angegebenen Namen hinzu (oder ersetzt eine bestehende mit diesem Namen) und wählt sie aus.
 
-                   Beachte: Die GUI-Aktionen „Importieren“ und „Aktualisieren“ werden beide durch diese Methode implementiert;
-                   bei „Importieren“ stellt die GUI sicher, dass kein bereits existierender Name gewählt wird,
-                   bei „Aktualisieren“ verwendet sie den Namen der existierenden Karte.
+                   Beachte: Die \gls{gui}-Aktionen „Importieren“ und „Aktualisieren“ werden beide durch diese Methode implementiert;
+                   bei „Importieren“ stellt die \gls{gui} sicher, dass kein bereits existierender Name gewählt wird,
+                   bei „Aktualisieren“ verwendet sie den Namen der existierenden \gls{karte}.
                  }
           \method{deleteCurrentMap}
                  {\none}
                  {
-                   Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus der Auswahlliste.
+                   Markiert die aktuell ausgewählte \gls{karte} zur Löschung und entfernt sie aus der Auswahlliste.
                    
-                   Beachte: Die Karte wird erst in \refmethod{MapManagerController}{saveAllChanges} tatsächlich gelöscht.
+                   Beachte: Die \gls{karte} wird erst in \refmethod{MapManagerController}{saveAllChanges} tatsächlich gelöscht.
                    
-                   Handelt es sich bei der aktuell ausgewählten Karte um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
+                   Handelt es sich bei der aktuell ausgewählten \gls{karte} um eine Standardkarte, so wird eine \code{IllegalStateException} geworfen.
                  }
           \method{saveAllChanges}
                  {\none}
                  {
                    Führt alle vom Benutzer vorgenommenen Änderungen aus.
-                   Dazu gehören das Importieren und Löschen von Karten sowie das Hinzufügen oder Löschen von Profilen je Karte.
+                   Dazu gehören das Importieren und Löschen von \glspl{karte} sowie das Hinzufügen oder Löschen von \glslink{profil}{Profilen} je \gls{karte}.
                  }
         }
 \class{ProfileManager}
-        {Verwaltet die Profile. Hat intern eine Menge von vorhandenen Profilen.}
+        {Verwaltet die \glspl{profil}. Hat intern eine Menge von vorhandenen \glslink{profil}{Profilen}.}
         {\none}
         {
           \method{saveProfile}
                  {
-                   \param{p}{Profile}{Das Profil, das gespeichert werden soll.}
+                   \param{p}{Profile}{Das \gls{profil}, das gespeichert werden soll.}
                  }
                  {
-                   Speichert das ausgewählte Profil in der internen Liste und auf der Festplatte.
+                   Speichert das ausgewählte \gls{profil} in der internen Liste und auf der Festplatte.
                    
                    (Der Speicherort wird vom Manager deckend verwaltet.) % „deckend“ = “opaque”
                  }
           \method{deleteProfile}
                  {
-                   \param{p}{Profile}{Das Profil, das gelöscht werden soll.}
+                   \param{p}{Profile}{Das \gls{profil}, das gelöscht werden soll.}
                  }
                  {
-                   Löscht das ausgewählte Profil aus der internen Liste und von der Festplatte.
+                   Löscht das ausgewählte \gls{profil} aus der internen Liste und von der Festplatte.
                  }
           \method{getProfiles}[Set<Profile>]
                  {\none}
                  {
-                   Gibt alle Profile in der internen Liste zurück.
+                   Gibt alle \glspl{profil} in der internen Liste zurück.
                  }
         }
   \class{MapManager}
@@ -763,57 +763,57 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{saveMap}
                  {
-                   \param{m}{StreetMap}{Die Karte, die gespeichert werden soll.}
+                   \param{m}{StreetMap}{Die \gls{karte}, die gespeichert werden soll.}
                  }
                  {
-                   Speichert die ausgewählte Karte in der internen Liste und auf der Festplatte.
+                   Speichert die ausgewählte \gls{karte} in der internen Liste und auf der Festplatte.
 
                    (Der Speicherort wird vom Manager deckend verwaltet.)
                  }
           \method{deleteMap}
                  {
-                   \param{m}{StreetMap}{Die Karte, die gelöscht werden soll.}
+                   \param{m}{StreetMap}{Die \gls{karte}, die gelöscht werden soll.}
                  }
                  {
-                   Löscht die ausgewählte Karte aus der internen Liste und von der Festplatte (die OSM-Datei, den Graphen und alle Vorberechnungen).
+                   Löscht die ausgewählte \gls{karte} aus der internen Liste und von der Festplatte (die \gls{osm}-Datei, den Graphen und alle \glspl{vorberechnung}).
                  }
           \method{getMaps}[Set<StreetMap>]
                  {\none}
                  {
-                   Gibt alle Karten in der internen Liste zurück.
+                   Gibt alle \glspl{karte} in der internen Liste zurück.
                  }
         }
 
 }
 
 \package{Precalculation}{
-  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind oder für den Import einer Karte benötigt werden.
-  Beim Importieren einer Karte werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph wird partitioniert.
+  Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind oder für den Import einer \gls{karte} benötigt werden.
+  Beim Importieren einer \gls{karte} werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph wird partitioniert.
   Bei der \gls{vorberechnung} wird der kantenbasierte Graph gewichtet vom \reftype{EdgeWeighter} und danach werden die \gls{arc} vom \reftype{ArcFlagsCalculator} berechnet .
   % TODO kurze erklärung, wie die vorberechnung läuft (gemacht)
 }
 {
   \class{MapImporter}
-        {Stellt die Funktionalität zum Importieren einer neuen Karte bereit.}
+        {Stellt die Funktionalität zum Importieren einer neuen \gls{karte} bereit.}
         {\none}
         {
           \method{importMap}[StreetMap]
                  {
-                   \param{file}{File}{Die OSM-Datei, aus der die Kartendaten importiert werden sollen.}
+                   \param{file}{File}{Die \gls{osm}-Datei, aus der die Kartendaten importiert werden sollen.}
                    \param{name}{String}{Der Name der neuen \reftype{StreetMap}.}
                  }
-                 {Importiert eine neue Karte aus der angegebenen OSM-Datei. Die vom \reftype{OSMParser} aufgebaute Graphdatenstruktur wird dabei vom \reftype{GraphPartitioner} partitioniert und zurückgegeben.}
+                 {Importiert eine neue \gls{karte} aus der angegebenen \gls{osm}-Datei. Die vom \reftype{OSMParser} aufgebaute Graphdatenstruktur wird dabei vom \reftype{GraphPartitioner} partitioniert und zurückgegeben.}
         }
   \class{OSMParser}
-        {Stellt die Funktionalität zum Parsen einer OSM-Datei bereit. Dafür werden zur temporären Repräsentation des Graphen im Speicher die Klassen \reftype{MapNode}, \reftype{MapEdge} und \reftype{TurnRestriction} verwendet.}
+        {Stellt die Funktionalität zum Parsen einer \gls{osm}-Datei bereit. Dafür werden zur temporären Repräsentation des Graphen im Speicher die Klassen \reftype{MapNode}, \reftype{MapEdge} und \reftype{TurnRestriction} verwendet.}
         {\none}
         {
           \method{parseOSM}[StreetMap]
                  {
-                   \param{file}{File}{Die OSM-Datei, die eingelesen werden soll.}
+                   \param{file}{File}{Die \gls{osm}-Datei, die eingelesen werden soll.}
                    \param{name}{String}{Der Name der neuen \reftype{StreetMap}.}
                  }
-                 {Liest eine OSM-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
+                 {Liest eine \gls{osm}-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
         }
   \class{MapNode}
         {Stellt einen Knoten im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
@@ -863,15 +863,15 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         }
               
   \class{PreCalculator}
-        {Führt die Vorberechnung für eine Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte] durch.}
+        {Führt die \gls{vorberechnung} für eine Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte] durch.}
         {\none}
         {
           \method{doPrecalculation}
                  {
-                   \param{comb}{ProfileMapCombination}{Die Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte], für die die Vorberechnung durchgeführt werden soll.}
+                   \param{comb}{ProfileMapCombination}{Die Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte], für die die \gls{vorberechnung} durchgeführt werden soll.}
                  }
                  {
-                   Führt die Vorberechnung für die gegebene Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte] durch.
+                   Führt die \gls{vorberechnung} für die gegebene Kombination aus \reftype{Profile}[Profil] und \reftype{StreetMap}[Karte] durch.
                    Dabei werden ein \reftype{EdgeWeighter} und ein \reftype{ArcFlagsCalculator} aufgerufen.
                    Die benötigte Zeit wird in \refattr{ProfileMapCombination}{calculationTime} gespeichert.
                  }
@@ -888,7 +888,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{weightEdges}
                  {
-                   \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus Profil und Karte.}
+                   \param{combination}{ProfileMapCombination}{Die zu gewichtende Kombination aus \gls{profil} und \gls{karte}.}
                  }
                  {
                    Berechnet die Kantengewichte für die angegebene Kombination und setzt die \reftype{Weights} von \refparam{EdgeWeighter}{weightEdges}{combination} entsprechend.
@@ -901,7 +901,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{calculateArcFlags}
                  {
-                   \param{combination}{ProfileMapCombination}{Die Kombination aus Profil und Karte.}
+                   \param{combination}{ProfileMapCombination}{Die Kombination aus \gls{profil} und \gls{karte}.}
                  }
                  {
                    Berechnet die \gls{arc} für die angegebene Kombination und setzt die \reftype{ArcFlags} von \refparam{ArcFlagsCalculator}{calculateArcFlags}{combination} entsprechend.
@@ -910,7 +910,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 }
 
 \package{RouteCalculator}{
- Dieses Paket enthält alle Klassen, die zur Routenberechnung unter Berücksichtigung von \gls{arc} und Erzeugung der Wegbeschreibung benötigt werden.
+ Dieses Paket enthält alle Klassen, die zur Routenberechnung unter Berücksichtigung von \gls{arc} und Erzeugung der \gls{wegbeschreibung} benötigt werden.
 }
 {
   \class{RouteCalculator}
@@ -927,7 +927,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         }
   \class{ArcFlagsDijkstra}
         {
-          Verwended \gls{dijkstra}, um die schnellste Route zwischen Start- und Zielpunkt für die aktuelle Kombination aus Karte und Profil zu berechnen.
+          Verwended \gls{dijkstra}, um die schnellste \gls{route} zwischen Start- und Zielpunkt für die aktuelle Kombination aus \gls{karte} und \gls{profil} zu berechnen.
           Durch \gls{arc} wird die Berechnung beschleunigt.
         }
         {\none}
@@ -935,16 +935,16 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
   \class{Route}
         {Repräsentiert eine berechnete \gls{route}.}
         {
-          \attr{start}{PointOnEdge}{Der Startpunkt der Route.}
-          \attr{destination}{PointOnEdge}{Der Zielpunkt der Route.}
+          \attr{start}{PointOnEdge}{Der Startpunkt der \gls{route}.}
+          \attr{destination}{PointOnEdge}{Der Zielpunkt der \gls{route}.}
         }
         {
           \method{getTurns}[List<Turn>]
                  {\none}
-                 {Liefert eine Liste der Abbiegevorgänge, aus denen die Route besteht.}
+                 {Liefert eine Liste der Abbiegevorgänge, aus denen die \gls{route} besteht.}
           \method{getNodeIterator}[Iterator<Node>]
                  {\none}
-                 {Gibt einen Iterator über die Knoten (\code{Node}) der Route einschließlich Start- und Zielpunkt zurück. Der Iterator ermittelt diese dynamisch aus der Liste der Abbiegevorgänge.}
+                 {Gibt einen Iterator über die Knoten (\code{Node}) der \gls{route} einschließlich Start- und Zielpunkt zurück. Der Iterator ermittelt diese dynamisch aus der Liste der Abbiegevorgänge.}
         }
   \class{RouteDescriptionGenerator}
         {Stellt die Funktionalität zur Erzeugung einer \gls{wegbeschreibung} bereit.}
@@ -952,9 +952,9 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{generateRouteDescription}[RouteDescription]
                  {
-                   \param{route}{Route}{Die Route, deren Beschreibung erzeugt werden soll.}
+                   \param{route}{Route}{Die \gls{route}, deren Beschreibung erzeugt werden soll.}
                  }
-                 {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende Wegbeschreibung.}
+                 {Erzeugt die zur \refparam{RouteDescriptionGenerator}{generateRouteDescription}{route} gehörende \gls{wegbeschreibung}.}
         }
   \class{RouteDescription}
         {Kapselt die zu einer \reftype{Route} gehörende \gls{wegbeschreibung}.}
@@ -975,7 +975,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 }
 
 \package{MapDisplay}{
-  Dieses Paket enthält alle Klassen, die an der Darstellung der Karte im \gls{gui} beteiligt sind.
+  Dieses Paket enthält alle Klassen, die an der Darstellung der \gls{karte} im \gls{gui} beteiligt sind.
   
   Die zentrale Klasse dieses Pakets ist der \reftype{TileCache}, der dafür sorgt, dass Kartenkacheln nicht jedes Mal neu berechnet werden müssen.
   Er berechnet selbst keine Kacheln, sondern erhält diese von einer untergeordneten \reftype{TileSource}, welche die Kacheln synchron berechnet.
@@ -1084,17 +1084,17 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {Eine Kombination aus einem \reftype{Profile}[Profil] und einer \reftype{StreetMap}[Karte].}
         {
           \attr{profile}{Profile}{Das \gls{profil}.}
-          \attr{map}{StreetMap}{Die Karte.}
+          \attr{map}{StreetMap}{Die \gls{karte}.}
           \attr{calculationTime}{int}{
             Die Zeit, die benötigt wurde, um diese Kombination vorzuberechnen.
             Die Zeit wird in Millisekunden angegeben.
-            Für Kombinationen ohne Vorberechnung ist dieser Wert \code{0}.
+            Für Kombinationen ohne \gls{vorberechnung} ist dieser Wert \code{0}.
           }
         }
         {
 	\method{isCalculated}[boolean]
          	    {\none}
-	    {Gibt \code{true} zurück, wenn für eine Kombination aus Profil und Karte eine Vorberechnung der Gewichte und der \gls{arc} existiert.}
+	    {Gibt \code{true} zurück, wenn für eine Kombination aus \gls{profil} und \gls{karte} eine \gls{vorberechnung} der Gewichte und der \gls{arc} existiert.}
          }
   \class{ArcFlags}
         {Enthält die \gls{arc} für den vorberechneten Graphen.}
@@ -1118,14 +1118,14 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         }
 
   \class{RouteModel}
-        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete Route dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete \gls{route} dar. Die getter liefern dabei immer den aktuelle Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
         {\none}
         {
           \method{addRouteListener}
                  {
                    \param{listener}{RouteModelListener}{der neue Listener der über Änderungen informiert werden will}
                  }
-                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an Route, Start oder Ziel informiert wird}
+                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an \gls{route}, Start oder Ziel informiert wird}
         }
   \class{RouteModelListener}
         {Wird bei Änderungen am \reftype{RouteModel} informiert.}
@@ -1147,17 +1147,17 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{setCurrentMap}
                  {
-                   \param{map}{StreetMap}{Die neue Karte.}
+                   \param{map}{StreetMap}{Die neue \gls{karte}.}
                  }
                  {
-                   Aktualisiert die Anzeige der aktuellen Karte.
+                   Aktualisiert die Anzeige der aktuellen \gls{karte}.
                  }
           \method{setCurrentProfile}
                  {
-                   \param{profile}{Profile}{Das neue Profil.}
+                   \param{profile}{Profile}{Das neue \gls{profil}.}
                  }
                  {
-                   Aktualisiert die Anzeige des aktuellen Profils.
+                   Aktualisiert die Anzeige des aktuellen \glslink{profil}{Profils}.
                  }
         }
 
@@ -1180,7 +1180,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  }
           \method{paint}
                  {
-                   \param{graphics}{Graphics}{Die Java \code{Graphics}, auf welche die Karte gezeichnet wird.}
+                   \param{graphics}{Graphics}{Die Java \code{Graphics}, auf welche die \gls{karte} gezeichnet wird.}
                  }
                  {
                    Zeichnet den aktuell sichtbaren Kartenausschnitt.
@@ -1194,17 +1194,17 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{setCurrentProfile}
                  {
-                   \param{profile}{Profile}{Das neue Profile.}
+                   \param{profile}{Profile}{Das neue \gls{profil}.}
                  }
                  {
-                   Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
+                   Setzt das aktuelle \gls{profil} auf das angegebene \gls{profil}, lädt seine Werte in die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je nachdem, ob es sich um ein Standardprofil handelt oder nicht.
                  }
           \method{setAvailableProfiles}
                  {
-                   \param{profiles}{List<Profile>}{Die verfügbaren Profile.}
+                   \param{profiles}{List<Profile>}{Die verfügbaren \glspl{profil}.}
                  }
                  {
-                   Setzt die Profile, die aktuell ausgewählt werden können.
+                   Setzt die \glspl{profil}, die aktuell ausgewählt werden können.
                  }
         }
 
@@ -1214,32 +1214,32 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{setCurrentMap}
                  {
-                   \param{map}{StreetMap}{Die neue Karte.}
-                   \param{profiles}{Set<Profile>}{Die Profile für die neue Karte.}
+                   \param{map}{StreetMap}{Die neue \gls{karte}.}
+                   \param{profiles}{Set<Profile>}{Die \glspl{profil} für die neue \gls{karte}.}
                  }
                  {
-                   Setzt die aktuelle Karte auf die angegebene Karte, aktualisiert die Liste der Profile für die ausgewählte Karte und aktiviert/deaktiviert die „Import“- und „Löschen“-Buttons, je nachdem, ob es sich um eine Standardkarte handelt oder nicht.
+                   Setzt die aktuelle \gls{karte} auf die angegebene \gls{karte}, aktualisiert die Liste der \glspl{profil} für die ausgewählte \gls{karte} und aktiviert/deaktiviert die „Import“- und „Löschen“-Buttons, je nachdem, ob es sich um eine Standardkarte handelt oder nicht.
                  }
           \method{setAvailableMaps}
                  {
-                   \param{maps}{Set<StreetMap>}{Die verfügbaren Karten.}
+                   \param{maps}{Set<StreetMap>}{Die verfügbaren \glspl{karte}.}
                  }
                  {
-                   Setzt die Karten, die aktuell ausgewählt werden können.
+                   Setzt die \glspl{karte}, die aktuell ausgewählt werden können.
                  }
         }
 
   \class{HistoryView}
-        {Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.}
+        {Zeigt das Fenster mit dem \gls{verlauf} auf dem Bildschirm an.}
         {\none}
         {
           \method{HistoryView}
                  {
-                   \param{history}{History}{Der Verlauf, der angezeigt wird.}
+                   \param{history}{History}{Der \gls{verlauf}, der angezeigt wird.}
                  }
                  {
-                   Erstellt eine HistoryView für den angegebenen Verlauf.
-                   (Der Verlauf kann später nicht mehr geändert werden.)
+                   Erstellt eine HistoryView für den angegebenen \gls{verlauf}.
+                   (Der \gls{verlauf} kann später nicht mehr geändert werden.)
                  }
         }
 
@@ -1256,7 +1256,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
   \class{Profile}
         {Ein \glslink{profil}{Fahrzeugprofil}.}
         {
-          \attr{name}{String}{Der Name des Profils.}
+          \attr{name}{String}{Der Name des \glslink{profil}{Profils}.}
           \attr{vehicleType}{VehicleType}{Der Fahrzeugtyp.}
           \attr{height}{int}{Die Höhe des Fahrzeugs, in Zentimetern.}
           \attr{width}{int}{Die Breite des Fahrzeugs, in Zentimetern.}
@@ -1272,14 +1272,14 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  }
           \method{save}
                  {
-                   \param{file}{File}{Die Datei, in die das Profil gespeichert wird.}
+                   \param{file}{File}{Die Datei, in die das \gls{profil} gespeichert wird.}
                  }
-                 {Speichert das Profil in die angegebene Datei.}
+                 {Speichert das \gls{profil} in die angegebene Datei.}
           \method{load}[Profile]
                  {
-                   \param{file}{File}{Die Datei, aus der das Profil geladen wird.}
+                   \param{file}{File}{Die Datei, aus der das \gls{profil} geladen wird.}
                  } 
-                 {Lädt ein Profil aus der angegebenen Datei und gibt es zurück.}
+                 {Lädt ein \gls{profil} aus der angegebenen Datei und gibt es zurück.}
         }
   \enum{VehicleType}
        {
@@ -1298,17 +1298,17 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
   
   \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
   \begin{description}
-  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Aus ihm wirden dynamisch geometrische Datenstrukturen \reftype{GraphIndex} für verschiedene Zoomstufen erzeugt. Er wird zum \Gls{rendern} der Karte verwendet.
+  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Aus ihm wirden dynamisch geometrische Datenstrukturen \reftype{GraphIndex} für verschiedene Zoomstufen erzeugt. Er wird zum \Gls{rendern} der \gls{karte} verwendet.
   \item[\reftype{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
   \end{description}
 Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 }
 {
   \class{StreetMap}
-        {Eine Karte.}
+        {Eine \gls{karte}.}
         {
-          \attr{name}{String}{Der Name der Karte.}
-          \attr{graph}{Graph}{Der Graph der Karte, d.\,h. das Straßennetz.}
+          \attr{name}{String}{Der Name der \gls{karte}.}
+          \attr{graph}{Graph}{Der Graph der \gls{karte}, d.\,h. das Straßennetz.}
         }
         {
           \method{isDefault}[boolean]
@@ -1320,7 +1320,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 
   \class{Graph}
         {
-          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine Karte.
+          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer \gls{vorberechnung} für ein \gls{profil} und eine \gls{karte}, sondern nur für eine \gls{karte}.
         }
         {
           \attr{highwayType}{HighwayType}{Der Straßentyp.}
@@ -1419,8 +1419,8 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {\none}
                  {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
           \method{getMaxSpeed}[int]
-                 {\param{profile}{Profile}{Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
-                 {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene Profil.}
+                 {\param{profile}{Profile}{Das \gls{profil}, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
+                 {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene \gls{profil}.}
         }
   \enum{HighwayType}
        {Ein Straßentyp}
@@ -1437,8 +1437,8 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \reftype{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
           
-          Diese Datenstruktur ist profilunabhängig und wird, wie \reftype{Graph}, bei der Vorberechnung für eine Karte erstellt.
-          Erst in Kombination mit den Profil-spezifischen \reftype{Weights} kann sie zur Routenberechnung verwendet werden.
+          Diese Datenstruktur ist profilunabhängig und wird, wie \reftype{Graph}, bei der \gls{vorberechnung} für eine \gls{karte} erstellt.
+          Erst in Kombination mit den \gls{profil}-spezifischen \reftype{Weights} kann sie zur Routenberechnung verwendet werden.
         }
         {\none}
         {
@@ -1486,9 +1486,9 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
           \method{allowsTurn}[boolean]
                  {
                    \param{turn}{Turn}{Der zu betrachtende Abbiegevorgang.}
-                   \param{profile}{Profile}{Das verwendete Profil.}
+                   \param{profile}{Profile}{Das verwendete \gls{profil}.}
                  }
-                 {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil zulässig ist.}
+                 {Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben \gls{profil} zulässig ist.}
         }
   \enum{TurnType}
        {Der Typ einer Abbiegemöglichkeit.}
@@ -1507,7 +1507,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 }
 
 \package{Exporter}{
-  Dieses Paket enthält alle Klassen, die zum Exportieren der Route oder ihrer Beschreibung benötigt werden.
+  Dieses Paket enthält alle Klassen, die zum Exportieren der \gls{route} oder ihrer Beschreibung benötigt werden.
 }
 {
   \class{HTMLExporter}
@@ -1516,22 +1516,22 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           \method{exportRouteDescription}
                  {
-                   \param{routeDesc}{RouteDescription}{Die zu exportierende Wegbeschreibung.}
+                   \param{routeDesc}{RouteDescription}{Die zu exportierende \gls{wegbeschreibung}.}
                    \param{file}{File}{Die HTML-Datei, die geschrieben werden soll.}
                  }
                  {Exportiert die \refparam{HTMLExporter}{exportRouteDescription}{routeDesc} im HTML-Format in die angegebene Datei.}
         }
 
   \class{GPXExporter}
-        {Stellt die Funktionalität zum Export einer \gls{route} im GPX-Format bereit.}
+        {Stellt die Funktionalität zum Export einer \gls{route} im \gls{gpx}-Format bereit.}
         {\none}
         {
           \method{exportRoute}
                  {
-                   \param{route}{Route}{Die zu exportierende Route.}
-                   \param{file}{File}{Die GPX-Datei, die geschrieben werden soll.}
+                   \param{route}{Route}{Die zu exportierende \gls{route}.}
+                   \param{file}{File}{Die \gls{gpx}-Datei, die geschrieben werden soll.}
                  }
-                 {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route} im GPX-Format in die angegebene Datei.}
+                 {Exportiert die Wegpunkte der \refparam{GPXExporter}{exportRoute}{route} im \gls{gpx}-Format in die angegebene Datei.}
         }
 }
 
@@ -1548,20 +1548,20 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                    \param{start}{Coordinates}{Der Startpunkt.}
                    \param{destination}{Coordinates}{Der Zielpunkt.}
                  }
-                 {Fügt einen Eintrag zum Verlauf hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
+                 {Fügt einen Eintrag zum \gls{verlauf} hinzu. Als \refattr{HistoryEntry}{date} des neuen Eintrags wird die aktuelle Zeit verwendet.}
           \method{getEntries}[List<HistoryEntry>]
                  {\none}
-                 {Gibt alle Einträge des Verlaufs zurück.}
+                 {Gibt alle Einträge des \gls{verlauf}{Verlaufs} zurück.}
           \method{save}
                  {
-                   \param{file}{File}{Die Datei, in die der Verlauf gespeichert wird.}
+                   \param{file}{File}{Die Datei, in die der \gls{verlauf} gespeichert wird.}
                  }
-                 {Speichert den Verlauf in die angegebene Datei.}
+                 {Speichert den \gls{verlauf} in die angegebene Datei.}
           \method{load}[History]
                  {
-                   \param{file}{File}{Die Datei, aus der der Verlauf geladen wird.}
+                   \param{file}{File}{Die Datei, aus der der \gls{verlauf} geladen wird.}
                  }
-                 {Lädt einen Verlauf aus der angegebenen Datei und gibt ihn zurück.}
+                 {Lädt einen \gls{verlauf} aus der angegebenen Datei und gibt ihn zurück.}
         }
   \class{HistoryEntry}
         {Ein Eintrag im \gls{verlauf}.}
