@@ -35,14 +35,13 @@ paint(:Graphics)</panel_attributes>
       <x>2820</x>
       <y>2870</y>
       <w>450</w>
-      <h>290</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>Controller
 bg=#FFFFFF
 bt=*
 --
 --
-Controller()
 onStartChanged(:Coordinates)
 onDestinationChanged(:Coordinates)
 onStartAndDestChanged(start: Coordinates, destination: Coordinates)
@@ -56,7 +55,7 @@ setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 manageProfiles()
 manageMaps()
-_+main(args: String[])_
+_main(args: String[])_
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -94,7 +93,7 @@ addRouteListener(:RouteModelListener)
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3240</x>
-      <y>3050</y>
+      <y>3040</y>
       <w>680</w>
       <h>50</h>
     </coordinates>
@@ -727,9 +726,9 @@ in OSMParser</panel_attributes>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>4510</x>
-      <y>2720</y>
+      <y>2710</y>
       <w>180</w>
-      <h>60</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>ProfileMapCombination
 bg=#FFFFFF
@@ -758,11 +757,11 @@ r2=map</panel_attributes>
       <x>2970</x>
       <y>1810</y>
       <w>1710</w>
-      <h>930</h>
+      <h>920</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r2=profile</panel_attributes>
-    <additional_attributes>1690;910;1690;30;30;30</additional_attributes>
+    <additional_attributes>1690;900;1690;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -770,7 +769,7 @@ r2=profile</panel_attributes>
       <x>2880</x>
       <y>2750</y>
       <w>210</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>ProfileManager
 bg=#FFFFFF
@@ -1141,15 +1140,15 @@ isTrafficLights(): boolean
       <x>2890</x>
       <y>3280</y>
       <w>210</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>MapManager
 bg=#FFFFFF
 bt=*
 --
 --
-saveMap(m: StreetMap)
-deleteMap(m: StreetMap)
+saveMap(:StreetMap)
+deleteMap(:StreetMap)
 getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
     <additional_attributes/>
   </element>
@@ -1340,7 +1339,7 @@ bt=*
 changeMap(:StreetMap)
 addProfile(:Profile)
 removeProfile(:Profile)
-importMap(name: String, f: File)
+importMap(name: String, :File)
 deleteCurrentMap()
 saveAllChanges()
 </panel_attributes>
@@ -1383,12 +1382,12 @@ saveAllChanges()
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>2760</x>
-      <y>3130</y>
+      <y>3120</y>
       <w>120</w>
-      <h>170</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;150;100;150;100;30</additional_attributes>
+    <additional_attributes>30;160;100;160;100;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1477,10 +1476,10 @@ m1=0..*</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2910</x>
-      <y>4080</y>
-      <w>620</w>
-      <h>120</h>
+      <x>2890</x>
+      <y>4120</y>
+      <w>640</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>RouteDescriptionGenerator
 bg=#FFFFFF
@@ -1528,12 +1527,12 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3240</x>
-      <y>3100</y>
+      <y>3070</y>
       <w>340</w>
-      <h>1070</h>
+      <h>1100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>290;1050;320;1050;320;30;30;30</additional_attributes>
+    <additional_attributes>290;1080;320;1080;320;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1551,12 +1550,12 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>3240</x>
-      <y>3110</y>
+      <y>3100</y>
       <w>150</w>
-      <h>710</h>
+      <h>720</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>130;690;130;30;30;30</additional_attributes>
+    <additional_attributes>130;700;130;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
