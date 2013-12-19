@@ -377,6 +377,11 @@
   first={Slippy Map Tile (SMT)},
   see=[Glossareintrag:]{G_smt}
 }
+\newglossaryentry{opaque}{
+  name={deckend},
+  description={
+    Die innere Implementierung wird vor anderen Klassen verborgen; Zugriff ist nur über das definierte Interface der Klasse/Methode möglich. (engl. “opaque”)}
+}
 
 \newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
 \newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
@@ -742,7 +747,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Speichert das ausgewählte \gls{profil} in der internen Liste und auf der Festplatte.
                    
-                   (Der Speicherort wird vom Manager deckend verwaltet.) % „deckend“ = “opaque”
+                   (Der Speicherort wird vom Manager \gls{opaque} verwaltet.)
                  }
           \method{deleteProfile}
                  {
@@ -768,7 +773,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    Speichert die ausgewählte \gls{karte} in der internen Liste und auf der Festplatte.
 
-                   (Der Speicherort wird vom Manager deckend verwaltet.)
+                   (Der Speicherort wird vom Manager \gls{opaque} verwaltet.)
                  }
           \method{deleteMap}
                  {
