@@ -1298,9 +1298,10 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
   
   \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
   \begin{description}
-  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Er wird zum \Gls{rendern} der Karte verwendet.
+  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Aus ihm wirden dynamisch geometrische Datenstrukturen \reftype{GraphIndex} für verschiedene Zoomstufen erzeugt. Er wird zum \Gls{rendern} der Karte verwendet.
   \item[\reftype{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
   \end{description}
+Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 }
 {
   \class{StreetMap}
