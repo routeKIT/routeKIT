@@ -1,7 +1,7 @@
-Diagramm aufteilen / aufräumen
-    Spalten MVC, Zeilen thematisch
+Diagramm aufteilen / aufräumen (gemacht)
+    Spalten MVC, Zeilen thematisch (gemacht) (haben wir anders organisiert)
     Farben (gemacht)
-    "sehr optional" oder auch "unbedingt machen"
+    "sehr optional" oder auch "unbedingt machen" (gemacht)
 RouteModel: currentRoute als Relation statt Attribut?
 RenderSequenz:
     TileSource muss irgendwo Kartendaten herkriegen (gemacht) (da TileRenderer Graph kriegt und OSMRenderer braucht nichts)
@@ -26,8 +26,8 @@ PreCalculationSequenz:
     Kästen weg (weightEdges, calculateArcFlags) (gemacht)
 RouteCalculationSequenz:
     Lebenslinien durchgängig (gemacht)
-    Parameter an die Methodenaufrufe
-    async calculateRoute (mit extra Lebenslinie und tamtam)
+    Parameter an die Methodenaufrufe (gemacht)
+    async calculateRoute (mit extra Lebenslinie und tamtam) (gemacht)
     RouteCalculator teil vom Model, setzt Route selbst? "so ist auch okay"
 LaTeX: Erklärung, Fonts (gemacht)
 Einrückung: Methodenname weniger als Klassenbeschreibung (gemacht)
