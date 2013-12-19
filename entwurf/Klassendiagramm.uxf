@@ -15,8 +15,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1910</x>
-      <y>2920</y>
+      <x>1860</x>
+      <y>3190</y>
       <w>260</w>
       <h>140</h>
     </coordinates>
@@ -32,8 +32,8 @@ paint(:Graphics)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2680</x>
-      <y>3210</y>
+      <x>2820</x>
+      <y>2870</y>
       <w>450</w>
       <h>290</h>
     </coordinates>
@@ -63,8 +63,8 @@ _+main(args: String[])_
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3020</x>
-      <y>3670</y>
+      <x>3900</x>
+      <y>3030</y>
       <w>280</w>
       <h>90</h>
     </coordinates>
@@ -82,42 +82,42 @@ addRouteListener(:RouteModelListener)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3100</x>
-      <y>3410</y>
-      <w>300</w>
-      <h>280</h>
+      <x>3240</x>
+      <y>2750</y>
+      <w>1310</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>30;30;280;30;280;260</additional_attributes>
+    <additional_attributes>30;230;1290;230;1290;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2780</x>
-      <y>3470</y>
-      <w>260</w>
-      <h>270</h>
+      <x>3240</x>
+      <y>3050</y>
+      <w>680</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>240;250;30;250;30;30</additional_attributes>
+    <additional_attributes>660;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1980</x>
-      <y>3030</y>
-      <w>130</w>
-      <h>2100</h>
+      <x>1000</x>
+      <y>3300</y>
+      <w>1080</w>
+      <h>950</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>70;2080;70;30</additional_attributes>
+    <additional_attributes>30;930;1030;930;1030;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2200</x>
-      <y>5260</y>
+      <x>1070</x>
+      <y>4330</y>
       <w>390</w>
       <h>70</h>
     </coordinates>
@@ -133,8 +133,8 @@ TileSource
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1940</x>
-      <y>5520</y>
+      <x>810</x>
+      <y>4590</y>
       <w>330</w>
       <h>100</h>
     </coordinates>
@@ -153,8 +153,8 @@ addTileFinishedListener(:TileFinishedListener)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2150</x>
-      <y>5300</y>
+      <x>1020</x>
+      <y>4370</y>
       <w>160</w>
       <h>240</h>
     </coordinates>
@@ -164,8 +164,8 @@ addTileFinishedListener(:TileFinishedListener)
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2060</x>
-      <y>5220</y>
+      <x>930</x>
+      <y>4290</y>
       <w>160</w>
       <h>320</h>
     </coordinates>
@@ -176,8 +176,8 @@ tileSource</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2280</x>
-      <y>5520</y>
+      <x>1150</x>
+      <y>4590</y>
       <w>320</w>
       <h>70</h>
     </coordinates>
@@ -193,8 +193,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2610</x>
-      <y>5520</y>
+      <x>1480</x>
+      <y>4590</y>
       <w>320</w>
       <h>70</h>
     </coordinates>
@@ -209,8 +209,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2450</x>
-      <y>5300</y>
+      <x>1320</x>
+      <y>4370</y>
       <w>270</w>
       <h>240</h>
     </coordinates>
@@ -220,8 +220,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2360</x>
-      <y>5300</y>
+      <x>1230</x>
+      <y>4370</y>
       <w>50</w>
       <h>240</h>
     </coordinates>
@@ -231,8 +231,8 @@ renderTile(x: int, y: int, zoom: int): BufferedImage</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3570</x>
-      <y>1550</y>
+      <x>3810</x>
+      <y>4060</y>
       <w>260</w>
       <h>70</h>
     </coordinates>
@@ -248,8 +248,8 @@ getInstructions(): List&lt;TurnInstruction&gt;
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2680</x>
-      <y>4160</y>
+      <x>3270</x>
+      <y>2200</y>
       <w>340</w>
       <h>120</h>
     </coordinates>
@@ -267,8 +267,8 @@ _load(:File): History_</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3780</x>
-      <y>5170</y>
+      <x>2600</x>
+      <y>4880</y>
       <w>460</w>
       <h>70</h>
     </coordinates>
@@ -284,8 +284,8 @@ GraphPartitioner
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3810</x>
-      <y>5280</y>
+      <x>2630</x>
+      <y>4990</y>
       <w>400</w>
       <h>70</h>
     </coordinates>
@@ -300,8 +300,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3980</x>
-      <y>5210</y>
+      <x>2800</x>
+      <y>4920</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -311,8 +311,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3980</x>
-      <y>5320</y>
+      <x>2800</x>
+      <y>5030</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -322,8 +322,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>4290</x>
-      <y>5300</y>
+      <x>3110</x>
+      <y>5010</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -335,8 +335,8 @@ program</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4180</x>
-      <y>5270</y>
+      <x>3000</x>
+      <y>4980</y>
       <w>130</w>
       <h>50</h>
     </coordinates>
@@ -346,8 +346,8 @@ program</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Node</type>
     <coordinates>
-      <x>3930</x>
-      <y>5370</y>
+      <x>2750</x>
+      <y>5080</y>
       <w>180</w>
       <h>50</h>
     </coordinates>
@@ -358,8 +358,8 @@ external graph partitioner</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4350</x>
-      <y>5210</y>
+      <x>3170</x>
+      <y>4920</y>
       <w>360</w>
       <h>70</h>
     </coordinates>
@@ -374,8 +374,8 @@ weightEdges(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4760</x>
-      <y>5210</y>
+      <x>3580</x>
+      <y>4920</y>
       <w>530</w>
       <h>70</h>
     </coordinates>
@@ -390,8 +390,8 @@ calculateArcFlags(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4390</x>
-      <y>5000</y>
+      <x>3210</x>
+      <y>4710</y>
       <w>280</w>
       <h>70</h>
     </coordinates>
@@ -406,8 +406,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4030</x>
-      <y>4960</y>
+      <x>2850</x>
+      <y>4670</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -418,8 +418,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4500</x>
-      <y>5040</y>
+      <x>3320</x>
+      <y>4750</y>
       <w>50</w>
       <h>190</h>
     </coordinates>
@@ -429,8 +429,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4580</x>
-      <y>5040</y>
+      <x>3400</x>
+      <y>4750</y>
       <w>460</w>
       <h>190</h>
     </coordinates>
@@ -440,8 +440,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>4820</x>
-      <y>5000</y>
+      <x>3640</x>
+      <y>4710</y>
       <w>430</w>
       <h>70</h>
     </coordinates>
@@ -454,8 +454,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4640</x>
-      <y>5010</y>
+      <x>3460</x>
+      <y>4720</y>
       <w>200</w>
       <h>50</h>
     </coordinates>
@@ -465,8 +465,8 @@ doPrecalculation(:ProfileMapCombination)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4700</x>
-      <y>3150</y>
+      <x>2420</x>
+      <y>1720</y>
       <w>200</w>
       <h>150</h>
     </coordinates>
@@ -486,8 +486,8 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5120</x>
-      <y>2800</y>
+      <x>2430</x>
+      <y>1570</y>
       <w>110</w>
       <h>110</h>
     </coordinates>
@@ -505,20 +505,20 @@ Motorcycle</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4870</x>
-      <y>2790</y>
-      <w>270</w>
-      <h>50</h>
+      <x>2510</x>
+      <y>1600</y>
+      <w>320</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=vehicleType</panel_attributes>
-    <additional_attributes>250;30;30;30</additional_attributes>
+    <additional_attributes>30;30;180;30;180;120;300;120</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4750</x>
-      <y>3370</y>
+      <x>5160</x>
+      <y>3740</y>
       <w>260</w>
       <h>70</h>
     </coordinates>
@@ -534,10 +534,10 @@ isDefault(): boolean</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4750</x>
-      <y>2800</y>
-      <w>150</w>
-      <h>190</h>
+      <x>2810</x>
+      <y>1710</y>
+      <w>190</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>Profile
 bg=#FFFFFF
@@ -558,21 +558,21 @@ _load(file: File): Profile_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4720</x>
-      <y>2960</y>
-      <w>158</w>
-      <h>210</h>
+      <x>2590</x>
+      <y>1710</y>
+      <w>240</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>80;30;80;190</additional_attributes>
+    <additional_attributes>220;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4950</x>
-      <y>3150</y>
-      <w>190</w>
+      <x>2420</x>
+      <y>1880</y>
+      <w>200</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>_defaultTruck_
@@ -591,22 +591,22 @@ speedRoad = 80</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4820</x>
-      <y>2960</y>
-      <w>250</w>
-      <h>210</h>
+      <x>2590</x>
+      <y>1860</y>
+      <w>240</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;instanceOf&gt;&gt;</panel_attributes>
-    <additional_attributes>30;30;230;190</additional_attributes>
+    <additional_attributes>220;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2570</x>
-      <y>1760</y>
+      <x>2890</x>
+      <y>3800</y>
       <w>640</w>
-      <h>180</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 bg=#FFFFFF
@@ -620,8 +620,8 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2990</x>
-      <y>1540</y>
+      <x>3720</x>
+      <y>3810</y>
       <w>270</w>
       <h>110</h>
     </coordinates>
@@ -641,8 +641,8 @@ getNodeIterator(): Iterator&lt;Node&gt;
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2620</x>
-      <y>1550</y>
+      <x>2420</x>
+      <y>3810</y>
       <w>210</w>
       <h>110</h>
     </coordinates>
@@ -658,31 +658,31 @@ bt=*
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3180</x>
-      <y>1620</y>
-      <w>104</w>
-      <h>2070</h>
+      <x>3960</x>
+      <y>3060</y>
+      <w>300</w>
+      <h>790</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=currentRoute</panel_attributes>
-    <additional_attributes>60;30;60;2050</additional_attributes>
+    <additional_attributes>30;770;280;770;280;30;220;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2690</x>
-      <y>1630</y>
-      <w>50</w>
-      <h>150</h>
+      <x>2600</x>
+      <y>3840</y>
+      <w>310</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;</panel_attributes>
-    <additional_attributes>30;130;30;30</additional_attributes>
+    <additional_attributes>290;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3670</x>
-      <y>4950</y>
+      <x>2490</x>
+      <y>4660</y>
       <w>250</w>
       <h>90</h>
     </coordinates>
@@ -701,8 +701,8 @@ getOutgoingEdges(): Set&lt;MapEdge&gt;
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>3700</x>
-      <y>4860</y>
+      <x>2520</x>
+      <y>4570</y>
       <w>170</w>
       <h>70</h>
     </coordinates>
@@ -715,8 +715,8 @@ in OSMParser</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3750</x>
-      <y>4900</y>
+      <x>2570</x>
+      <y>4610</y>
       <w>50</w>
       <h>70</h>
     </coordinates>
@@ -726,8 +726,8 @@ in OSMParser</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3350</x>
-      <y>3670</y>
+      <x>4510</x>
+      <y>2720</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -743,32 +743,32 @@ isCalculated(): boolean</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3500</x>
-      <y>3370</y>
-      <w>1270</w>
-      <h>350</h>
+      <x>4660</x>
+      <y>2720</y>
+      <w>730</w>
+      <h>1040</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r2=map</panel_attributes>
-    <additional_attributes>30;330;70;330;70;30;1250;30</additional_attributes>
+    <additional_attributes>30;30;710;30;710;1020</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3470</x>
-      <y>2900</y>
-      <w>1300</w>
-      <h>790</h>
+      <x>2970</x>
+      <y>1810</y>
+      <w>1710</w>
+      <h>930</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r2=profile</panel_attributes>
-    <additional_attributes>30;770;30;30;1280;30</additional_attributes>
+    <additional_attributes>1690;910;1690;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2910</x>
-      <y>3090</y>
+      <x>2880</x>
+      <y>2750</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -785,21 +785,21 @@ getProfiles(): Set&lt;Profile&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3090</x>
-      <y>2870</y>
-      <w>1680</w>
-      <h>280</h>
+      <x>2950</x>
+      <y>1900</y>
+      <w>50</w>
+      <h>870</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
 </panel_attributes>
-    <additional_attributes>30;260;270;260;270;30;1660;30</additional_attributes>
+    <additional_attributes>30;850;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3960</x>
-      <y>4940</y>
+      <x>2780</x>
+      <y>4650</y>
       <w>310</w>
       <h>50</h>
     </coordinates>
@@ -815,8 +815,8 @@ parseOSM(:File, name: String): StreetMap
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4400</x>
-      <y>3650</y>
+      <x>4810</x>
+      <y>4020</y>
       <w>690</w>
       <h>200</h>
     </coordinates>
@@ -841,8 +841,8 @@ getIndex(zoom: int): GraphIndex
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3350</x>
-      <y>3840</y>
+      <x>4610</x>
+      <y>3040</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -858,8 +858,8 @@ getFlags(:Turn): int
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4750</x>
-      <y>3410</y>
+      <x>5160</x>
+      <y>3780</y>
       <w>50</w>
       <h>260</h>
     </coordinates>
@@ -869,20 +869,20 @@ getFlags(:Turn): int
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3370</x>
-      <y>3700</y>
+      <x>4600</x>
+      <y>2750</y>
       <w>50</w>
-      <h>160</h>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0...1</panel_attributes>
-    <additional_attributes>30;30;30;140</additional_attributes>
+    <additional_attributes>30;30;30;290</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1940</x>
-      <y>5160</y>
+      <x>810</x>
+      <y>4230</y>
       <w>50</w>
       <h>380</h>
     </coordinates>
@@ -894,8 +894,8 @@ m2=0..n
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1810</x>
-      <y>5110</y>
+      <x>680</x>
+      <y>4180</y>
       <w>350</w>
       <h>80</h>
     </coordinates>
@@ -911,8 +911,8 @@ tileFinished(x: int, y: int, zoom: int, tile: BufferedImage)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3090</x>
-      <y>3850</y>
+      <x>3950</x>
+      <y>3280</y>
       <w>170</w>
       <h>80</h>
     </coordinates>
@@ -929,33 +929,33 @@ routeModelChanged()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2030</x>
-      <y>3030</y>
-      <w>1080</w>
-      <h>870</h>
+      <x>2020</x>
+      <y>3300</y>
+      <w>1990</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>1060;850;70;850;70;30</additional_attributes>
+    <additional_attributes>1970;60;1970;170;30;170;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3140</x>
-      <y>3730</y>
+      <x>4000</x>
+      <y>3090</y>
       <w>50</w>
-      <h>140</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
 </panel_attributes>
-    <additional_attributes>30;120;30;30</additional_attributes>
+    <additional_attributes>30;190;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3070</x>
-      <y>4160</y>
+      <x>3660</x>
+      <y>2200</y>
       <w>160</w>
       <h>80</h>
     </coordinates>
@@ -972,8 +972,8 @@ date: Date
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2990</x>
-      <y>4160</y>
+      <x>3580</x>
+      <y>2200</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
@@ -984,19 +984,19 @@ m1=0..n</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2800</x>
-      <y>3470</y>
-      <w>50</w>
-      <h>710</h>
+      <x>3240</x>
+      <y>2290</y>
+      <w>160</w>
+      <h>620</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;690;30;30</additional_attributes>
+    <additional_attributes>140;30;140;600;30;600</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4240</x>
-      <y>4120</y>
+      <x>4930</x>
+      <y>4780</y>
       <w>290</w>
       <h>70</h>
     </coordinates>
@@ -1014,8 +1014,8 @@ pointPosition: float
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5230</x>
-      <y>3600</y>
+      <x>5640</x>
+      <y>3970</y>
       <w>360</w>
       <h>90</h>
     </coordinates>
@@ -1033,9 +1033,9 @@ getMaxSpeed(:Profile): int
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2910</x>
-      <y>2680</y>
-      <w>240</w>
+      <x>3790</x>
+      <y>2480</y>
+      <w>330</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>GPXExporter
@@ -1043,26 +1043,26 @@ bg=#FFFFFF
 bt=*
 --
 --
-exportRoute(route: Route, file: File)</panel_attributes>
+exportRoute(:Route, :File)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3680</x>
-      <y>1590</y>
+      <x>3920</x>
+      <y>4100</y>
       <w>50</w>
-      <h>180</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0..n</panel_attributes>
-    <additional_attributes>30;30;30;160</additional_attributes>
+    <additional_attributes>30;30;30;190</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3640</x>
-      <y>1750</y>
+      <x>3880</x>
+      <y>4290</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
@@ -1078,19 +1078,19 @@ toString(): String
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3100</x>
-      <y>2690</y>
-      <w>90</w>
-      <h>620</h>
+      <x>3240</x>
+      <y>2510</y>
+      <w>620</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>50;30;70;30;70;600;30;600</additional_attributes>
+    <additional_attributes>600;30;600;440;30;440</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3960</x>
-      <y>5030</y>
+      <x>2780</x>
+      <y>4740</y>
       <w>310</w>
       <h>70</h>
     </coordinates>
@@ -1106,8 +1106,8 @@ importMap(:File, name: String): StreetMap</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4030</x>
-      <y>5070</y>
+      <x>2850</x>
+      <y>4780</y>
       <w>50</w>
       <h>120</h>
     </coordinates>
@@ -1118,8 +1118,8 @@ importMap(:File, name: String): StreetMap</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5230</x>
-      <y>3730</y>
+      <x>5640</x>
+      <y>4100</y>
       <w>360</w>
       <h>100</h>
     </coordinates>
@@ -1138,8 +1138,8 @@ isTrafficLights(): boolean
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2900</x>
-      <y>3510</y>
+      <x>2890</x>
+      <y>3280</y>
       <w>210</w>
       <h>80</h>
     </coordinates>
@@ -1156,21 +1156,21 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3080</x>
-      <y>3350</y>
-      <w>1690</w>
-      <h>210</h>
+      <x>3070</x>
+      <y>3280</y>
+      <w>2160</w>
+      <h>480</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
 </panel_attributes>
-    <additional_attributes>30;190;110;190;110;30;1670;30</additional_attributes>
+    <additional_attributes>30;30;580;30;580;320;2140;320;2140;460</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1910</x>
-      <y>2770</y>
+      <x>1860</x>
+      <y>2940</y>
       <w>260</w>
       <h>140</h>
     </coordinates>
@@ -1187,8 +1187,8 @@ setCurrentProfile(:Profile)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1330</x>
-      <y>2920</y>
+      <x>1460</x>
+      <y>2940</y>
       <w>260</w>
       <h>140</h>
     </coordinates>
@@ -1203,8 +1203,8 @@ HistoryView(:History)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1610</x>
-      <y>2920</y>
+      <x>1860</x>
+      <y>2700</y>
       <w>270</w>
       <h>140</h>
     </coordinates>
@@ -1221,8 +1221,8 @@ setAvailableProfiles(:List&lt;Profile&gt;)
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1610</x>
-      <y>2770</y>
+      <x>1460</x>
+      <y>3200</y>
       <w>270</w>
       <h>140</h>
     </coordinates>
@@ -1238,8 +1238,8 @@ setAvailableMaps(:Set&lt;StreetMap&gt;)</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1330</x>
-      <y>2770</y>
+      <x>1460</x>
+      <y>2700</y>
       <w>260</w>
       <h>140</h>
     </coordinates>
@@ -1254,8 +1254,8 @@ bt=*
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>5060</x>
-      <y>3750</y>
+      <x>5470</x>
+      <y>4120</y>
       <w>190</w>
       <h>50</h>
     </coordinates>
@@ -1267,8 +1267,8 @@ m2=0..1</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>5060</x>
-      <y>3620</y>
+      <x>5470</x>
+      <y>3990</y>
       <w>190</w>
       <h>100</h>
     </coordinates>
@@ -1279,9 +1279,9 @@ q1=Edge</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2770</x>
-      <y>2600</y>
-      <w>410</w>
+      <x>3460</x>
+      <y>2480</y>
+      <w>320</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>HTMLExporter
@@ -1289,25 +1289,25 @@ bg=#FFFFFF
 bt=*
 --
 --
-exportRouteDescription(routeDesc: RouteDescription, file: File)</panel_attributes>
+exportRouteDescription(:RouteDescription, :File)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2850</x>
-      <y>2630</y>
-      <w>50</w>
-      <h>600</h>
+      <x>3240</x>
+      <y>2510</y>
+      <w>350</w>
+      <h>430</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;580</additional_attributes>
+    <additional_attributes>330;30;330;410;30;410</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2430</x>
-      <y>3080</y>
+      <x>2490</x>
+      <y>2740</y>
       <w>260</w>
       <h>120</h>
     </coordinates>
@@ -1327,8 +1327,8 @@ saveAllChanges()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>2430</x>
-      <y>3430</y>
+      <x>2580</x>
+      <y>3220</y>
       <w>210</w>
       <h>140</h>
     </coordinates>
@@ -1349,80 +1349,80 @@ saveAllChanges()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2660</x>
-      <y>3100</y>
-      <w>270</w>
+      <x>2720</x>
+      <y>2760</y>
+      <w>180</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>250;30;30;30</additional_attributes>
+    <additional_attributes>160;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2660</x>
-      <y>3120</y>
-      <w>70</w>
+      <x>2720</x>
+      <y>2780</y>
+      <w>150</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;50;30;50;90</additional_attributes>
+    <additional_attributes>30;30;130;30;130;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2610</x>
-      <y>3510</y>
-      <w>310</w>
+      <x>2760</x>
+      <y>3280</y>
+      <w>150</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>290;30;30;30</additional_attributes>
+    <additional_attributes>130;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2610</x>
-      <y>3420</y>
-      <w>90</w>
-      <h>50</h>
+      <x>2760</x>
+      <y>3130</y>
+      <w>120</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;70;30</additional_attributes>
+    <additional_attributes>30;150;100;150;100;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1660</x>
-      <y>3030</y>
-      <w>790</w>
-      <h>120</h>
+      <x>2100</x>
+      <y>2760</y>
+      <w>410</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 </panel_attributes>
-    <additional_attributes>30;30;30;100;770;100</additional_attributes>
+    <additional_attributes>30;30;390;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1860</x>
-      <y>2780</y>
-      <w>590</w>
-      <h>760</h>
+      <x>2090</x>
+      <y>3010</y>
+      <w>560</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1
 </panel_attributes>
-    <additional_attributes>50;30;30;30;30;740;570;740</additional_attributes>
+    <additional_attributes>30;30;540;30;540;210</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4270</x>
-      <y>3420</y>
+      <x>4680</x>
+      <y>3790</y>
       <w>440</w>
       <h>90</h>
     </coordinates>
@@ -1440,8 +1440,8 @@ projectToEdge(lon: float, lat: float): PointOnEdge
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4320</x>
-      <y>3480</y>
+      <x>4730</x>
+      <y>3850</y>
       <w>100</w>
       <h>280</h>
     </coordinates>
@@ -1453,8 +1453,8 @@ index</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3670</x>
-      <y>5080</y>
+      <x>2490</x>
+      <y>4790</y>
       <w>250</w>
       <h>30</h>
     </coordinates>
@@ -1470,8 +1470,8 @@ bt=*
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3720</x>
-      <y>5010</y>
+      <x>2540</x>
+      <y>4720</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -1482,10 +1482,10 @@ m1=0..n</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3500</x>
-      <y>1850</y>
-      <w>400</w>
-      <h>60</h>
+      <x>2910</x>
+      <y>4080</y>
+      <w>620</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>RouteDescriptionGenerator
 bg=#FFFFFF
@@ -1499,8 +1499,8 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4040</x>
-      <y>3940</y>
+      <x>4730</x>
+      <y>4600</y>
       <w>350</w>
       <h>140</h>
     </coordinates>
@@ -1520,53 +1520,53 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3230</x>
-      <y>1590</y>
-      <w>230</w>
-      <h>2100</h>
+      <x>3960</x>
+      <y>2750</y>
+      <w>620</w>
+      <h>1160</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>210;2080;210;30;30;30</additional_attributes>
+    <additional_attributes>600;30;600;1140;30;1140</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3100</x>
-      <y>1880</y>
-      <w>610</w>
-      <h>1470</h>
+      <x>3240</x>
+      <y>3100</y>
+      <w>340</w>
+      <h>1070</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>590;30;590;1450;30;1450</additional_attributes>
+    <additional_attributes>290;1050;320;1050;320;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1830</x>
-      <y>2810</y>
-      <w>1280</w>
-      <h>1130</h>
+      <x>2080</x>
+      <y>3030</y>
+      <w>1910</w>
+      <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
 implements</panel_attributes>
-    <additional_attributes>1260;1110;70;1110;70;30;80;30</additional_attributes>
+    <additional_attributes>1890;330;1890;420;70;420;70;30;40;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2950</x>
-      <y>1910</y>
-      <w>280</w>
-      <h>1420</h>
+      <x>3240</x>
+      <y>3110</y>
+      <w>150</w>
+      <h>710</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;80;260;80;260;1400;180;1400</additional_attributes>
+    <additional_attributes>130;690;130;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4810</x>
-      <y>3470</y>
+      <x>5220</x>
+      <y>3840</y>
       <w>300</w>
       <h>170</h>
     </coordinates>
@@ -1589,8 +1589,8 @@ allowsTurn(:Turn, :Profile): boolean
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4920</x>
-      <y>3410</y>
+      <x>5330</x>
+      <y>3780</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -1600,20 +1600,20 @@ allowsTurn(:Turn, :Profile): boolean
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3490</x>
-      <y>3700</y>
+      <x>4650</x>
+      <y>2750</y>
       <w>50</w>
-      <h>90</h>
+      <h>250</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 </panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>30;30;30;230</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3460</x>
-      <y>3770</y>
+      <x>4670</x>
+      <y>2980</y>
       <w>210</w>
       <h>50</h>
     </coordinates>
@@ -1629,8 +1629,8 @@ getWeight(:Turn): int
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5630</x>
-      <y>3690</y>
+      <x>6040</x>
+      <y>4060</y>
       <w>130</w>
       <h>170</h>
     </coordinates>
@@ -1651,9 +1651,9 @@ Residential</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>5560</x>
-      <y>3620</y>
-      <w>184</w>
+      <x>5970</x>
+      <y>3990</y>
+      <w>180</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -1663,8 +1663,8 @@ p1=highwayType</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>5620</x>
-      <y>3370</y>
+      <x>6030</x>
+      <y>3740</y>
       <w>140</w>
       <h>220</h>
     </coordinates>
@@ -1688,8 +1688,8 @@ MotorwayJunction</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>5080</x>
-      <y>3470</y>
+      <x>5490</x>
+      <y>3840</y>
       <w>560</w>
       <h>50</h>
     </coordinates>
@@ -1700,20 +1700,20 @@ q1=Turn</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3780</x>
-      <y>5010</y>
-      <w>90</w>
+      <x>2610</x>
+      <y>4720</y>
+      <w>70</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=targetNode</panel_attributes>
-    <additional_attributes>50;30;50;70</additional_attributes>
+    <additional_attributes>40;30;40;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>3670</x>
-      <y>5120</y>
+      <x>2490</x>
+      <y>4830</y>
       <w>250</w>
       <h>30</h>
     </coordinates>
@@ -1728,8 +1728,8 @@ bt=*
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3610</x>
-      <y>5060</y>
+      <x>2430</x>
+      <y>4770</y>
       <w>80</w>
       <h>100</h>
     </coordinates>
@@ -1740,8 +1740,8 @@ r1=from</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3590</x>
-      <y>4950</y>
+      <x>2410</x>
+      <y>4660</y>
       <w>110</w>
       <h>230</h>
     </coordinates>
@@ -1752,8 +1752,8 @@ r1=via</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3620</x>
-      <y>5070</y>
+      <x>2440</x>
+      <y>4780</y>
       <w>70</w>
       <h>80</h>
     </coordinates>
@@ -1764,22 +1764,22 @@ r1=to</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3260</x>
-      <y>1570</y>
-      <w>330</w>
-      <h>2120</h>
+      <x>4040</x>
+      <y>3040</y>
+      <w>250</w>
+      <h>1080</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=currentDesc</panel_attributes>
-    <additional_attributes>310;30;30;30;30;2100</additional_attributes>
+    <additional_attributes>30;1060;230;1060;230;30;140;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2960</x>
-      <y>3620</y>
-      <w>820</w>
-      <h>340</h>
+      <x>3860</x>
+      <y>2650</y>
+      <w>1260</w>
+      <h>750</h>
     </coordinates>
     <panel_attributes>Models
 bg=#DDDDDD</panel_attributes>
@@ -1788,10 +1788,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2410</x>
-      <y>3040</y>
-      <w>740</w>
-      <h>560</h>
+      <x>2460</x>
+      <y>2650</y>
+      <w>1260</w>
+      <h>750</h>
     </coordinates>
     <panel_attributes>Controllers
 bg=#DDDDDD</panel_attributes>
@@ -1800,10 +1800,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>3610</x>
-      <y>4830</y>
-      <w>1720</w>
-      <h>770</h>
+      <x>2360</x>
+      <y>4480</y>
+      <w>1790</w>
+      <h>830</h>
     </coordinates>
     <panel_attributes>Precalculation
 bg=#DDDDDD</panel_attributes>
@@ -1812,19 +1812,19 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>3230</x>
-      <y>1550</y>
-      <w>360</w>
-      <h>50</h>
+      <x>3920</x>
+      <y>3890</y>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;340;30</additional_attributes>
+    <additional_attributes>30;30;30;170</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1780</x>
-      <y>4970</y>
+      <x>650</x>
+      <y>4040</y>
       <w>1160</w>
       <h>680</h>
     </coordinates>
@@ -1835,10 +1835,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2250</x>
-      <y>1360</y>
-      <w>2290</w>
-      <h>1000</h>
+      <x>2350</x>
+      <y>3650</y>
+      <w>1800</w>
+      <h>730</h>
     </coordinates>
     <panel_attributes>RouteCalculator
 bg=#DDDDDD</panel_attributes>
@@ -1847,8 +1847,8 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>4640</x>
-      <y>2750</y>
+      <x>2410</x>
+      <y>1520</y>
       <w>650</w>
       <h>570</h>
     </coordinates>
@@ -1859,10 +1859,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>4250</x>
-      <y>3340</y>
+      <x>4660</x>
+      <y>3690</y>
       <w>1520</w>
-      <h>540</h>
+      <h>560</h>
     </coordinates>
     <panel_attributes>Map
 bg=#DDDDDD</panel_attributes>
@@ -1871,10 +1871,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2580</x>
-      <y>4040</y>
+      <x>3160</x>
+      <y>2090</y>
       <w>790</w>
-      <h>400</h>
+      <h>300</h>
     </coordinates>
     <panel_attributes>History
 bg=#DDDDDD</panel_attributes>
@@ -1883,10 +1883,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>1320</x>
-      <y>2740</y>
+      <x>1380</x>
+      <y>2650</y>
       <w>860</w>
-      <h>330</h>
+      <h>750</h>
     </coordinates>
     <panel_attributes>Views
 bg=#DDDDDD</panel_attributes>
@@ -1895,10 +1895,10 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>2760</x>
-      <y>2480</y>
-      <w>440</w>
-      <h>280</h>
+      <x>3450</x>
+      <y>2420</y>
+      <w>710</w>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Exporter
 bg=#DDDDDD</panel_attributes>
@@ -1907,8 +1907,8 @@ bg=#DDDDDD</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>4010</x>
-      <y>3890</y>
+      <x>4700</x>
+      <y>4550</y>
       <w>600</w>
       <h>340</h>
     </coordinates>
