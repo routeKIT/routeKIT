@@ -434,7 +434,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 Beim Entwurf der Anwendung \routeKIT wurden Entwurfsmuster eingesetzt.
 Das Muster \gls{mvc} umfasst die Pakete \refpackage{Controllers}, \refpackage{Models} und \refpackage{Views}, wobei die Klassen in \refpackage{Controllers} die Kommunikation zwischen den Klassen in \refpackage{Views} und den funktionalem Teil des Programms übernehmen.
-Das Anfordern der Kacheln aus dem Paket \refpackage{MapDisplay} erfolgt von der Klasse \refclass{MapView} direkt (ohne Einsatz von Controllern).
+Das Anfordern der Kacheln aus dem Paket \refpackage{MapDisplay} erfolgt von der Klasse \reftype{MapView} direkt (ohne Einsatz von Controllern).
 Die Klassen in \refpackage{Views} sind für die Interaktion des Benutzers mit den Programm und die Darstellung der Daten aus dem Paket \refpackage{Models} zuständig.
 Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem Entwurfsmuster „Beobachter“.
 Durch den Einsatz vom Entwurfsmuster \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
