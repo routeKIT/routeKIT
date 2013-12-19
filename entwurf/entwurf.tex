@@ -440,7 +440,10 @@ Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem
 Durch den Einsatz vom Entwurfsmuster \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
 Alle Klassen im Paket \refpackage{Controllers} basieren auf dem Entwurfsmuster „Einzelstück“. % TODO nein? ManagerController werden immer wieder erstellt – Lucas
 
-Im Paket \refpackage{MapDisplay} wird das Entwurfsmuster „Dekorierer“ verwendet. % Vorteile davon.
+Im Paket \refpackage{MapDisplay} wird das Entwurfsmuster „Dekorierer“ verwendet.
+Der Cache baut dabei eine Kapselung für einen effizienteren Zugriff um eine Kachelquelle herum.
+Dadurch wird die Funktionaltät, dass ältere Zugriffe gespeichert werden, von der Funktion, die Kacheln zu beschaffen, abgetrennt.
+% TODO Vorteile davon. (gemacht)
 
 Im Paket \refpackage{RouteCalculator} wird das Entwurfsmuster „Strategie“ eingesetzt.
 Der Algorithmus zur Berechnung der Route ist in eine eigene Klasse \reftype{ArcFlagsDijkstra} gekapselt und somit leicht zu ersetzen.  
