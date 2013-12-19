@@ -15,51 +15,51 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>110</x>
+      <x>100</x>
       <y>140</y>
-      <w>150</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>_:ProfileManagerView_</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Class</type>
-    <coordinates>
-      <x>310</x>
-      <y>70</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:ProfileManagerController_</panel_attributes>
+    <panel_attributes>_pmv:ProfileManagerView_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>630</x>
+      <x>290</x>
+      <y>70</y>
+      <w>210</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>_pmc:ProfileManagerController_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>680</x>
       <y>0</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:MainView_</panel_attributes>
+    <panel_attributes>_mv:MainView_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>510</x>
+      <x>500</x>
       <y>0</y>
-      <w>110</w>
+      <w>130</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:ProfileManager_</panel_attributes>
+    <panel_attributes>_pm:ProfileManager_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>650</x>
+      <x>700</x>
       <y>80</y>
       <w>50</w>
       <h>1630</h>
@@ -92,7 +92,7 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>650</x>
+      <x>700</x>
       <y>0</y>
       <w>50</w>
       <h>70</h>
@@ -125,7 +125,7 @@
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
-      <x>670</x>
+      <x>720</x>
       <y>50</y>
       <w>20</w>
       <h>60</h>
@@ -193,24 +193,24 @@
     <coordinates>
       <x>30</x>
       <y>10</y>
-      <w>660</w>
+      <w>710</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;
 "Manage Profiles"</panel_attributes>
-    <additional_attributes>640;50;30;50</additional_attributes>
+    <additional_attributes>690;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>450</x>
+      <x>470</x>
       <y>30</y>
-      <w>240</w>
+      <w>420</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-new()</panel_attributes>
-    <additional_attributes>30;50;220;50</additional_attributes>
+new(pm)</panel_attributes>
+    <additional_attributes>30;50;400;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -283,14 +283,14 @@ profiles</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>230</x>
+      <x>240</x>
       <y>110</y>
-      <w>180</w>
+      <w>170</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-new()</panel_attributes>
-    <additional_attributes>30;50;160;50</additional_attributes>
+new(pmc)</panel_attributes>
+    <additional_attributes>30;50;150;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -657,7 +657,7 @@ setProfile(mercedes)</panel_attributes>
     <coordinates>
       <x>330</x>
       <y>810</y>
-      <w>208</w>
+      <w>200</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -954,7 +954,7 @@ deletionTime</panel_attributes>
       <x>30</x>
       <y>1280</y>
       <w>170</w>
-      <h>94</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 “Are you sure?
@@ -1011,7 +1011,7 @@ This will [...]”</panel_attributes>
     <coordinates>
       <x>170</x>
       <y>1410</y>
-      <w>248</w>
+      <w>240</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -1058,7 +1058,7 @@ saveProfile(smart)</panel_attributes>
     <coordinates>
       <x>380</x>
       <y>1550</y>
-      <w>206</w>
+      <w>200</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -1130,5 +1130,61 @@ deleteProfile(marcedes)</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>30;30;30;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>830</x>
+      <y>0</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>_ctrl:Controller_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>850</x>
+      <y>0</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;30;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>870</x>
+      <y>50</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>710</x>
+      <y>20</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+manageProfiles()</panel_attributes>
+    <additional_attributes>160;50;30;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>840</x>
+      <y>80</y>
+      <w>60</w>
+      <h>1630</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>40;30;30;1610</additional_attributes>
   </element>
 </diagram>

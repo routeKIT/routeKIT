@@ -20,7 +20,7 @@
       <w>150</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:PreCalculator_</panel_attributes>
+    <panel_attributes>_pc:PreCalculator_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -31,7 +31,7 @@
       <w>150</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:EdgeWeighter_</panel_attributes>
+    <panel_attributes>_ew:EdgeWeighter_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -42,7 +42,7 @@
       <w>170</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:ArcFlagsCalculator_</panel_attributes>
+    <panel_attributes>_afc:ArcFlagsCalculator_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -64,7 +64,7 @@
       <w>180</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_:Controller_</panel_attributes>
+    <panel_attributes>_ctrl:Controller_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -9,7 +9,7 @@
       <w>160</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_mapView:MapView_</panel_attributes>
+    <panel_attributes>_mv:MapView_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -20,7 +20,7 @@
       <w>160</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_tileSource:TileSource_</panel_attributes>
+    <panel_attributes>_ts:TileSource_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -99,7 +99,7 @@ renderTile(x,y,zoom)
       <w>130</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_cache:TileCache_</panel_attributes>
+    <panel_attributes>_tc:TileCache_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
