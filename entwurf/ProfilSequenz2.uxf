@@ -945,7 +945,7 @@ getDeletionTime()</panel_attributes>
       <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-estimatedAmount</panel_attributes>
+deletionTime</panel_attributes>
     <additional_attributes>24;40;176;40</additional_attributes>
   </element>
   <element>
