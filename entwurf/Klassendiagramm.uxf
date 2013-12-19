@@ -84,8 +84,8 @@ addRouteListener(:RouteModelListener)
     <coordinates>
       <x>3240</x>
       <y>2750</y>
-      <w>1310</w>
-      <h>250</h>
+      <w>1300</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>30;230;1290;230;1290;30</additional_attributes>
@@ -95,8 +95,8 @@ addRouteListener(:RouteModelListener)
     <coordinates>
       <x>3240</x>
       <y>3050</y>
-      <w>680</w>
-      <h>50</h>
+      <w>670</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>660;30;30;30</additional_attributes>
@@ -302,8 +302,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
     <coordinates>
       <x>2800</x>
       <y>4920</y>
-      <w>50</w>
-      <h>90</h>
+      <w>40</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>30;30;30;70</additional_attributes>
@@ -313,8 +313,8 @@ partitionGraph(:EdgeBasedGraph, numberOfPartitions: int)</panel_attributes>
     <coordinates>
       <x>2800</x>
       <y>5030</y>
-      <w>50</w>
-      <h>70</h>
+      <w>40</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;50;30;30</additional_attributes>
@@ -337,8 +337,8 @@ program</panel_attributes>
     <coordinates>
       <x>3000</x>
       <y>4980</y>
-      <w>130</w>
-      <h>50</h>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>30;30;110;30</additional_attributes>
@@ -507,8 +507,8 @@ Motorcycle</panel_attributes>
     <coordinates>
       <x>2510</x>
       <y>1600</y>
-      <w>320</w>
-      <h>140</h>
+      <w>310</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=vehicleType</panel_attributes>
@@ -560,7 +560,7 @@ _load(file: File): Profile_</panel_attributes>
     <coordinates>
       <x>2590</x>
       <y>1710</y>
-      <w>240</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -593,7 +593,7 @@ speedRoad = 80</panel_attributes>
     <coordinates>
       <x>2590</x>
       <y>1860</y>
-      <w>240</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -660,8 +660,8 @@ bt=*
     <coordinates>
       <x>3960</x>
       <y>3060</y>
-      <w>300</w>
-      <h>790</h>
+      <w>290</w>
+      <h>780</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=currentRoute</panel_attributes>
@@ -672,8 +672,8 @@ r1=currentRoute</panel_attributes>
     <coordinates>
       <x>2600</x>
       <y>3840</y>
-      <w>310</w>
-      <h>50</h>
+      <w>300</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;</panel_attributes>
     <additional_attributes>290;30;30;30</additional_attributes>
@@ -745,8 +745,8 @@ isCalculated(): boolean</panel_attributes>
     <coordinates>
       <x>4660</x>
       <y>2720</y>
-      <w>730</w>
-      <h>1040</h>
+      <w>720</w>
+      <h>1030</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r2=map</panel_attributes>
@@ -757,8 +757,8 @@ r2=map</panel_attributes>
     <coordinates>
       <x>2970</x>
       <y>1810</y>
-      <w>1710</w>
-      <h>930</h>
+      <w>1700</w>
+      <h>920</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 r2=profile</panel_attributes>
@@ -787,8 +787,8 @@ getProfiles(): Set&lt;Profile&gt;</panel_attributes>
     <coordinates>
       <x>2950</x>
       <y>1900</y>
-      <w>50</w>
-      <h>870</h>
+      <w>40</w>
+      <h>860</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
@@ -870,8 +870,8 @@ getFlags(:Turn): int
     <coordinates>
       <x>4600</x>
       <y>2750</y>
-      <w>50</w>
-      <h>310</h>
+      <w>40</w>
+      <h>300</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 m2=0...1</panel_attributes>
@@ -930,7 +930,7 @@ routeModelChanged()
     <coordinates>
       <x>2020</x>
       <y>3300</y>
-      <w>1990</w>
+      <w>1980</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -942,8 +942,8 @@ implements</panel_attributes>
     <coordinates>
       <x>4000</x>
       <y>3090</y>
-      <w>50</w>
-      <h>210</h>
+      <w>40</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n
@@ -973,8 +973,8 @@ date: Date
     <coordinates>
       <x>3580</x>
       <y>2200</y>
-      <w>100</w>
-      <h>50</h>
+      <w>90</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes>
@@ -985,8 +985,8 @@ m1=0..n</panel_attributes>
     <coordinates>
       <x>3240</x>
       <y>2290</y>
-      <w>160</w>
-      <h>620</h>
+      <w>150</w>
+      <h>610</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>140;30;140;600;30;600</additional_attributes>
@@ -1079,8 +1079,8 @@ toString(): String
     <coordinates>
       <x>3240</x>
       <y>2510</y>
-      <w>620</w>
-      <h>460</h>
+      <w>610</w>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>600;30;600;440;30;440</additional_attributes>
@@ -1107,8 +1107,8 @@ importMap(:File, name: String): StreetMap</panel_attributes>
     <coordinates>
       <x>2850</x>
       <y>4780</y>
-      <w>50</w>
-      <h>120</h>
+      <w>40</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 </panel_attributes>
@@ -1157,8 +1157,8 @@ getMaps(): Set&lt;StreetMap&gt;</panel_attributes>
     <coordinates>
       <x>3070</x>
       <y>3280</y>
-      <w>2160</w>
-      <h>480</h>
+      <w>2150</w>
+      <h>470</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m2=0..n
@@ -1296,8 +1296,8 @@ exportRouteDescription(:RouteDescription, :File)</panel_attributes>
     <coordinates>
       <x>3240</x>
       <y>2510</y>
-      <w>350</w>
-      <h>430</h>
+      <w>340</w>
+      <h>420</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>330;30;330;410;30;410</additional_attributes>
@@ -1350,8 +1350,8 @@ saveAllChanges()
     <coordinates>
       <x>2720</x>
       <y>2760</y>
-      <w>180</w>
-      <h>50</h>
+      <w>170</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>160;30;30;30</additional_attributes>
@@ -1361,8 +1361,8 @@ saveAllChanges()
     <coordinates>
       <x>2720</x>
       <y>2780</y>
-      <w>150</w>
-      <h>110</h>
+      <w>140</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;130;30;130;90</additional_attributes>
@@ -1372,8 +1372,8 @@ saveAllChanges()
     <coordinates>
       <x>2760</x>
       <y>3280</y>
-      <w>150</w>
-      <h>50</h>
+      <w>140</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>130;30;30;30</additional_attributes>
@@ -1383,8 +1383,8 @@ saveAllChanges()
     <coordinates>
       <x>2760</x>
       <y>3130</y>
-      <w>120</w>
-      <h>170</h>
+      <w>110</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;150;100;150;100;30</additional_attributes>
@@ -1394,8 +1394,8 @@ saveAllChanges()
     <coordinates>
       <x>2100</x>
       <y>2760</y>
-      <w>410</w>
-      <h>50</h>
+      <w>400</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -1408,8 +1408,8 @@ m2=1
     <coordinates>
       <x>2090</x>
       <y>3010</y>
-      <w>560</w>
-      <h>230</h>
+      <w>550</w>
+      <h>220</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -1521,8 +1521,8 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <coordinates>
       <x>3960</x>
       <y>2750</y>
-      <w>620</w>
-      <h>1160</h>
+      <w>610</w>
+      <h>1150</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>600;30;600;1140;30;1140</additional_attributes>
@@ -1532,8 +1532,8 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <coordinates>
       <x>3240</x>
       <y>3100</y>
-      <w>340</w>
-      <h>1070</h>
+      <w>330</w>
+      <h>1060</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>290;1050;320;1050;320;30;30;30</additional_attributes>
@@ -1543,7 +1543,7 @@ _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
     <coordinates>
       <x>2080</x>
       <y>3030</y>
-      <w>1910</w>
+      <w>1900</w>
       <h>440</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -1555,8 +1555,8 @@ implements</panel_attributes>
     <coordinates>
       <x>3240</x>
       <y>3110</y>
-      <w>150</w>
-      <h>710</h>
+      <w>140</w>
+      <h>700</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>130;690;130;30;30;30</additional_attributes>
@@ -1601,8 +1601,8 @@ allowsTurn(:Turn, :Profile): boolean
     <coordinates>
       <x>4650</x>
       <y>2750</y>
-      <w>50</w>
-      <h>250</h>
+      <w>40</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
 </panel_attributes>
@@ -1652,7 +1652,7 @@ Residential</panel_attributes>
     <coordinates>
       <x>5970</x>
       <y>3990</y>
-      <w>180</w>
+      <w>170</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
@@ -1699,14 +1699,14 @@ q1=Turn</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2600</x>
+      <x>2620</x>
       <y>4720</y>
-      <w>92</w>
+      <w>60</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=targetNode</panel_attributes>
-    <additional_attributes>50;30;50;70</additional_attributes>
+    <additional_attributes>30;30;30;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1729,8 +1729,8 @@ bt=*
     <coordinates>
       <x>2430</x>
       <y>4770</y>
-      <w>80</w>
-      <h>100</h>
+      <w>70</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=from</panel_attributes>
@@ -1753,8 +1753,8 @@ r1=via</panel_attributes>
     <coordinates>
       <x>2440</x>
       <y>4780</y>
-      <w>70</w>
-      <h>80</h>
+      <w>60</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=to</panel_attributes>
@@ -1765,8 +1765,8 @@ r1=to</panel_attributes>
     <coordinates>
       <x>4040</x>
       <y>3040</y>
-      <w>250</w>
-      <h>1080</h>
+      <w>240</w>
+      <h>1070</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=currentDesc</panel_attributes>
@@ -1813,8 +1813,8 @@ bg=#DDDDDD</panel_attributes>
     <coordinates>
       <x>3920</x>
       <y>3890</y>
-      <w>50</w>
-      <h>190</h>
+      <w>40</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>30;30;30;170</additional_attributes>
