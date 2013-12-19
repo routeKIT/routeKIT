@@ -818,7 +818,7 @@ parseOSM(:File, name: String): StreetMap
       <x>4810</x>
       <y>4020</y>
       <w>690</w>
-      <h>200</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>Graph
 bg=#FFFFFF
@@ -830,8 +830,7 @@ getOutgoingEdges(:Node): Set&lt;Edge&gt;
 getIncomingEdges(:Node): Set&lt;Edge&gt;
 getTargetNode(:Edge): Node
 getStartNode(:Edge): Node
-getLat(:Node): float
-getLon(:Node): float
+getCoordinates(:Node): Coordinates
 getNodeProperties(:Node): NodeProperties
 getEdgeProperties(:Edge): EdgeProperties
 getIndex(zoom: int): GraphIndex
@@ -1507,8 +1506,8 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
 bg=#FFFFFF
 bt=*
 --
-lat: float
-lon: float
+latitude: float
+longitude: float
 --
 Coordinates(lat: float, lon: float)
 distanceTo(:Coordinates): float

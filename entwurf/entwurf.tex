@@ -1341,7 +1341,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                    \param{lat}{float[]}{Die geographischen Breiten der Knoten des Graphen.}
                    \param{lon}{float[]}{Die geographischen Längen der Knoten des Graphen.}
                  }
-                 {Erstellt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
+                 {Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
           \method{getOutgoingEdges}[Set<Edge>]
                  {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
                  {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
@@ -1354,21 +1354,18 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
           \method{getStartNode}[Node]
                  {\param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}}
                  {Gibt den Startknoten der angegebenen Kante zurück.}       
-          \method{getLat}[float]
-                 {\param{node}{Node}{Der Knoten, dessen geographische Breite gesucht wird.}}
-                 {Gibt die geographische Breite des angegebenen Knotens zurück.}
-          \method{getLon}[float]
-                 {\param{node}{Node}{Der Knoten, dessen geographische Länge gesucht wird.}}
-                 {Gibt die geographische Länge des angegebenen Knotens zurück.}
+          \method{getCoordinates}[Coordinates]
+                 {\param{node}{Node}{Der Knoten, dessen Koordinaten gesucht werden.}}
+                 {Gibt die Koordinaten des angegebenen Knotens zurück.}
           \method{getNodeProperties}[NodeProperties]
                  {\param{node}{Node}{Der Knoten, dessen \reftype{NodeProperties} gesucht werden.}}
                  {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
           \method{getEdgeProperties}[EdgeProperties]
                  {\param{edge}{Edge}{Die Kante, deren \reftype{EdgeProperties} gesucht werden.}}
                  {Gibt die \code{EdgeProperties} der angegebenen Kante zurück.}
-	\method{getIndex}[GraphIndex]
-	      {\param{zoom}{int}{Das Zoomlevel.}}
-                 {Gibt eine geometrische Datenstruktur zu einem bestimmten Zoomlevel zurück.}
+	      \method{getIndex}[GraphIndex]
+	             {\param{zoom}{int}{Die Zoomstufe.}}
+                 {Gibt eine geometrische Datenstruktur zur angegebenen Zoomstufe zurück.}
         }
   \class{GraphIndex}
         {Eine geometrische Datenstruktur zum schnellen Auffinden von Kanten innerhalb eines Kartenausschnitts.}
@@ -1583,8 +1580,8 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
   \class{Coordinates}
         {Kapselt ein Paar geographischer Koordinaten.}
         {
-          \attr{lat}{float}{Der Breitengrad des Koordinatenpaars.}
-          \attr{lon}{float}{Der Längengrad des Koordinatenpaars.}
+          \attr{latitude}{float}{Der Breitengrad des Koordinatenpaars.}
+          \attr{longitude}{float}{Der Längengrad des Koordinatenpaars.}
         }
         {
           \method{Coordinates}
