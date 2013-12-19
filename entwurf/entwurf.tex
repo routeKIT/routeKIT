@@ -33,6 +33,7 @@
 
 \makeatletter
 
+\newcommand{\@packagelabel}[1]{P:#1}
 \newcommand{\@typelabel}[1]{T:#1} % for classes and enums
 \newcommand{\@attrlabel}[2]{A:#1.#2}
 \newcommand{\@methodlabel}[2]{M:#1.#2}
@@ -51,7 +52,7 @@
 % 2. Beschreibung
 % 3. Klassen (ein oder mehrere \class)
 \newcommand{\package}[3]{%
-  \subsection{Paket #1}
+  \subsection{Paket #1}\label{\@packagelabel{#1}}
   #2
   \begin{description}
     #3%
@@ -148,6 +149,9 @@
   \item[\namedlabel{\@constantlabel{\currentenum}{#1}}{\code{#1}}] #2
 }
 
+\NewDocumentCommand{\refpackage}{mO{#1}}{%
+  \hyperref[\@packagelabel{#1}]{\code{#2}}\xspace%
+}
 % Argumente:
 % 1. Typ (Klasse oder Enum)
 % 2. (optional) Text – default: Typ
