@@ -173,14 +173,14 @@ main()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>330</x>
+      <x>320</x>
       <y>310</y>
-      <w>110</w>
+      <w>136</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 &lt;&lt;create&gt;&gt;</panel_attributes>
-    <additional_attributes>90;50;30;50</additional_attributes>
+    <additional_attributes>100;50;40;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -390,19 +390,19 @@ ProfileMapCombination</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>330</x>
+      <x>340</x>
       <y>500</y>
-      <w>320</w>
+      <w>310</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 currentSource</panel_attributes>
-    <additional_attributes>300;50;30;50</additional_attributes>
+    <additional_attributes>290;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>800</x>
+      <x>980</x>
       <y>540</y>
       <w>70</w>
       <h>30</h>
@@ -415,17 +415,17 @@ currentSource</panel_attributes>
     <coordinates>
       <x>620</x>
       <y>510</y>
-      <w>200</w>
+      <w>380</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 &lt;&lt;create&gt;&gt; MapView(currentSource)</panel_attributes>
-    <additional_attributes>180;50;30;50</additional_attributes>
+    <additional_attributes>360;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
-      <x>820</x>
+      <x>1000</x>
       <y>570</y>
       <w>20</w>
       <h>20</h>
@@ -436,19 +436,19 @@ currentSource</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>330</x>
+      <x>340</x>
       <y>440</y>
-      <w>320</w>
+      <w>310</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 getTileSource()</panel_attributes>
-    <additional_attributes>30;50;300;50</additional_attributes>
+    <additional_attributes>30;50;290;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>940</x>
+      <x>720</x>
       <y>490</y>
       <w>170</w>
       <h>30</h>
@@ -461,17 +461,17 @@ getTileSource()</panel_attributes>
     <coordinates>
       <x>340</x>
       <y>460</y>
-      <w>620</w>
+      <w>400</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 &lt;&lt;create&gt;&gt;</panel_attributes>
-    <additional_attributes>600;50;30;50</additional_attributes>
+    <additional_attributes>380;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
-      <x>1010</x>
+      <x>790</x>
       <y>520</y>
       <w>20</w>
       <h>20</h>
@@ -482,7 +482,7 @@ getTileSource()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>990</x>
+      <x>770</x>
       <y>510</y>
       <w>50</w>
       <h>160</h>
@@ -493,7 +493,7 @@ getTileSource()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>800</x>
+      <x>980</x>
       <y>560</y>
       <w>50</w>
       <h>180</h>
@@ -505,9 +505,9 @@ getTileSource()</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>350</x>
-      <y>500</y>
+      <y>480</y>
       <w>20</w>
-      <h>40</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
