@@ -31,7 +31,7 @@
       <w>96</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 main()</panel_attributes>
     <additional_attributes>70;50;40;50</additional_attributes>
   </element>
@@ -87,8 +87,8 @@ main()</panel_attributes>
       <w>200</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>180;50;30;50</additional_attributes>
   </element>
   <element>
@@ -143,8 +143,8 @@ new</panel_attributes>
       <w>200</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>180;50;30;50</additional_attributes>
   </element>
   <element>
@@ -166,8 +166,8 @@ new</panel_attributes>
       <w>330</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>310;50;30;50</additional_attributes>
   </element>
   <element>
@@ -178,8 +178,8 @@ new</panel_attributes>
       <w>110</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>90;50;30;50</additional_attributes>
   </element>
   <element>
@@ -241,28 +241,6 @@ Festplatte</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>330</x>
-      <y>90</y>
-      <w>240</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;220;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>330</x>
-      <y>160</y>
-      <w>380</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;360;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
       <x>390</x>
@@ -316,20 +294,9 @@ ProfileMapCombination</panel_attributes>
       <w>510</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>490;50;30;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>330</x>
-      <y>310</y>
-      <w>590</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;570;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -376,17 +343,6 @@ new</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>330</x>
-      <y>380</y>
-      <w>150</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;130;30</additional_attributes>
-  </element>
-  <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>600</x>
@@ -405,8 +361,8 @@ new</panel_attributes>
       <w>290</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>270;50;30;50</additional_attributes>
   </element>
   <element>
@@ -439,7 +395,7 @@ new</panel_attributes>
       <w>320</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;.
 currentSource</panel_attributes>
     <additional_attributes>300;50;30;50</additional_attributes>
   </element>
@@ -462,8 +418,8 @@ currentSource</panel_attributes>
       <w>200</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-new(currentSource)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt; MapView(currentSource)</panel_attributes>
     <additional_attributes>180;50;30;50</additional_attributes>
   </element>
   <element>
@@ -485,7 +441,7 @@ new(currentSource)</panel_attributes>
       <w>320</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 getTileSource()</panel_attributes>
     <additional_attributes>30;50;300;50</additional_attributes>
   </element>
@@ -508,8 +464,8 @@ getTileSource()</panel_attributes>
       <w>620</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-new</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+&lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>600;50;30;50</additional_attributes>
   </element>
   <element>
@@ -522,17 +478,6 @@ new</panel_attributes>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>340</x>
-      <y>500</y>
-      <w>690</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;670;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -555,28 +500,6 @@ new</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>30;160;30;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>620</x>
-      <y>550</y>
-      <w>220</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;200;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>330</x>
-      <y>560</y>
-      <w>320</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;</panel_attributes>
-    <additional_attributes>30;30;300;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
