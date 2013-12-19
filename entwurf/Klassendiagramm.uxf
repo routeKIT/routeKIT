@@ -106,7 +106,7 @@ addRouteListener(:RouteModelListener)
     <coordinates>
       <x>1000</x>
       <y>3300</y>
-      <w>1080</w>
+      <w>1090</w>
       <h>950</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;
@@ -858,7 +858,7 @@ getFlags(:Turn): int
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>5160</x>
+      <x>5170</x>
       <y>3780</y>
       <w>50</w>
       <h>260</h>
@@ -995,19 +995,19 @@ m1=0..n</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>4930</x>
+      <x>4730</x>
       <y>4780</y>
-      <w>290</w>
-      <h>70</h>
+      <w>350</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>PointOnEdge
 bg=#FFFFFF
 bt=*
 --
-edgeid: int
-pointPosition: float
+edge: Edge
+position: float
 --
-
+PointOnEdge(:Edge, position: float)
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -1422,8 +1422,8 @@ m2=1
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>4680</x>
-      <y>3790</y>
-      <w>440</w>
+      <y>3840</y>
+      <w>500</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>GraphIndex
@@ -1431,24 +1431,23 @@ bg=#FFFFFF
 bt=*
 --
 --
-GraphIndex(:Graph)
-getEdgesIn(leftTop: Coordinates, rightBottom: Coordinates): Edge[]
-projectToEdge(lon: float, lat: float): PointOnEdge
+GraphIndex(:Graph, zoom: int)
+getEdgesInRectangle(leftTop: Coordinates, rightBottom: Coordinates): Edge[]
+findNearestPointOnEdge(:Coordinates): PointOnEdge
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>4730</x>
-      <y>3850</y>
-      <w>100</w>
-      <h>280</h>
+      <x>4750</x>
+      <y>3900</y>
+      <w>80</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m1=1..n
-index</panel_attributes>
-    <additional_attributes>50;30;50;260;80;260</additional_attributes>
+m1=1..n</panel_attributes>
+    <additional_attributes>30;30;30;210;60;210</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1502,7 +1501,7 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
       <x>4730</x>
       <y>4600</y>
       <w>350</w>
-      <h>140</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Coordinates
 bg=#FFFFFF
@@ -1511,6 +1510,7 @@ bt=*
 lat: float
 lon: float
 --
+Coordinates(lat: float, lon: float)
 distanceTo(:Coordinates): float
 getSmtX(zoom: int): float
 getSmtY(zoom: int): float
@@ -1700,14 +1700,14 @@ q1=Turn</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2610</x>
+      <x>2600</x>
       <y>4720</y>
-      <w>70</w>
+      <w>92</w>
       <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=targetNode</panel_attributes>
-    <additional_attributes>40;30;40;70</additional_attributes>
+    <additional_attributes>50;30;50;70</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>

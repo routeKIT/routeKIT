@@ -1371,29 +1371,29 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {Gibt eine geometrische Datenstruktur zu einem bestimmten Zoomlevel zurück.}
         }
   \class{GraphIndex}
-        {Eine geometrische Datenstruktur.}
+        {Eine geometrische Datenstruktur zum schnellen Auffinden von Kanten innerhalb eines Kartenausschnitts.}
         {\none}
         {
-	\method{GraphIndex}
-		{
-		    \param{graph}{Graph}{Ein Adjazenzfeld.}
- 		}
-		    {Erzeugt eine geometrische Datenstruktur für einen Graph aus einem Adjazenzfeld.}	
-	\method{getEdgesIn}[Edge[]]
-		{
-		    \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
- 		    \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
-                      } 
-		    {
-                      Bestimmt alle Kanten in einem Kartenausschnitt, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
-                    }
-	\method{projectToEdge} [PointOnEdge]
+	      \method{GraphIndex}
+		         {
+		           \param{graph}{Graph}{Ein Graph.}
+		           \param{zoom}{int}{Die Zoomstufe.}
+ 		         }
+		         {Erzeugt die Datenstruktur für den gegebenen Graph und die angegebenen Zoomstufe.}	
+	      \method{getEdgesInRectangle} [Edge[]]
+		         {
+		           \param{leftTop}{Coordinates}{Die Koordinaten der linken oberen Ecke des Ausschnitts.}
+ 		           \param{rightBottom}{Coordinates}{Die Koordinaten der rechten unteren Ecke des Ausschnitts.}
+                 } 
+		         {
+                   Bestimmt alle Kanten innerhalb eines rechteckigen Kartenausschnitts, der durch \refparam{GraphIndex}{getEdgesIn}{leftTop} und \refparam{GraphIndex}{getEdgesIn}{rightBottom} festgelegt ist.
+                 }
+	      \method{findNearestPointOnEdge} [PointOnEdge]
                  {
-                   \param{lon}{float}{Die geographische Länge von einem Punkt.}
-                   \param{lat}{float}{Die geographische Breite von einem Punkt.}
+                   \param{coords}{Coordinates}{Die Koordinaten eines Punktes.}
                  }
                  {Sucht zu gegebenen Koordinaten den nächsten Punkt auf einer Kante.}
-         }
+        }
   \class{NodeProperties}
         {Kapselt die Eigenschaften eines Knotens.}
         {\none}
@@ -1581,12 +1581,20 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 }
 {
   \class{Coordinates}
-        {Kapselt ein Paar von geographischen Koordinaten.}
+        {Kapselt ein Paar geographischer Koordinaten.}
         {
-          \attr{lat}{float}{Der Breitengrad der Koordinaten.}
-          \attr{lon}{float}{Der Längengrad der Koordinaten.}
+          \attr{lat}{float}{Der Breitengrad des Koordinatenpaars.}
+          \attr{lon}{float}{Der Längengrad des Koordinatenpaars.}
         }
         {
+          \method{Coordinates}
+                 {
+                   \param{lat}{float}{Der Breitengrad.}
+                   \param{lon}{float}{Der Längengrad.}
+                 }
+                 {
+                   Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.
+                 }
           \method{distanceTo}[float]
                  {
                    \param{other}{Coordinates}{Die anderen Koordinaten.}
@@ -1622,10 +1630,19 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
   \class{PointOnEdge}
         {Beschreibt einen Punkt auf der Kante.}
         {
-          \attr{edgeid}{int}{Die eindeutige Id einer Kante.}
-          \attr{pointPosition}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Ausgangsknoten von der Gesamtlänge der Kante angibt.}
+          \attr{edge}{Edge}{Die Kante, auf der sich der Punkt befindet.}
+          \attr{position}{float}{Eine Zahl zwischen 0 und 1, die den Anteil der Strecke vom Punkt zum Anfangsknoten an der Gesamtlänge der Kante angibt.}
         }
-        {\none}
+        {
+          \method{PointOnEdge}
+                 {
+                   \param{edge}{Edge}{Die Kante.}
+                   \param{position}{float}{Der Wert für das Attribut \refattr{PointOnEdge}{position}.}
+                 }
+                 {
+                   Konstruktor: Erstellt ein neues Objekt aus den gegebenen Attributen.
+                 }
+        }
 }
 
 
