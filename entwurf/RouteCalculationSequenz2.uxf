@@ -185,8 +185,8 @@
       <w>310</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-onStartChanged(:Coordinates)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+onStartChanged(start)</panel_attributes>
     <additional_attributes>290;50;30;50</additional_attributes>
   </element>
   <element>
@@ -208,8 +208,8 @@ onStartChanged(:Coordinates)</panel_attributes>
       <w>550</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-setStart(:Coordinates)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+setStart(start)</panel_attributes>
     <additional_attributes>530;50;30;50</additional_attributes>
   </element>
   <element>
@@ -231,8 +231,8 @@ setStart(:Coordinates)</panel_attributes>
       <w>310</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-onDestinationChanged(:Coordinates)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+onDestinationChanged(dest)</panel_attributes>
     <additional_attributes>290;50;30;50</additional_attributes>
   </element>
   <element>
@@ -243,7 +243,7 @@ onDestinationChanged(:Coordinates)</panel_attributes>
       <w>390</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 "Sets destination point"</panel_attributes>
     <additional_attributes>370;50;30;50</additional_attributes>
   </element>
@@ -266,7 +266,7 @@ onDestinationChanged(:Coordinates)</panel_attributes>
       <w>390</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 "Sets start point"</panel_attributes>
     <additional_attributes>370;50;30;50</additional_attributes>
   </element>
@@ -300,8 +300,8 @@ onDestinationChanged(:Coordinates)</panel_attributes>
       <w>550</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-setStart(:Coordinates)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+setDestination(dest)</panel_attributes>
     <additional_attributes>530;50;30;50</additional_attributes>
   </element>
   <element>
@@ -324,6 +324,7 @@ setStart(:Coordinates)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;
+// note: this is not a synchronous call.
 &lt;&lt;create&gt;&gt;</panel_attributes>
     <additional_attributes>200;50;30;50</additional_attributes>
   </element>
@@ -346,8 +347,8 @@ setStart(:Coordinates)</panel_attributes>
       <w>650</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCombination)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+calculateRoute(start, dest, pmc)</panel_attributes>
     <additional_attributes>630;50;30;50</additional_attributes>
   </element>
   <element>
@@ -359,7 +360,7 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-Route</panel_attributes>
+route</panel_attributes>
     <additional_attributes>30;50;630;50</additional_attributes>
   </element>
   <element>
@@ -392,8 +393,8 @@ Route</panel_attributes>
       <w>320</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-setRoute(:Route)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+setRoute(route)</panel_attributes>
     <additional_attributes>300;50;30;50</additional_attributes>
   </element>
   <element>
@@ -415,7 +416,7 @@ setRoute(:Route)</panel_attributes>
       <w>830</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 routeModelChanged()</panel_attributes>
     <additional_attributes>30;50;810;50</additional_attributes>
   </element>
@@ -427,7 +428,7 @@ routeModelChanged()</panel_attributes>
       <w>1000</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 routeModelChanged()</panel_attributes>
     <additional_attributes>30;50;980;50</additional_attributes>
   </element>
@@ -461,7 +462,7 @@ routeModelChanged()</panel_attributes>
       <w>108</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 paint()</panel_attributes>
     <additional_attributes>40;60;60;60;60;30;30;30</additional_attributes>
   </element>
@@ -550,8 +551,8 @@ paint()</panel_attributes>
       <w>880</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-generateRouteDescription(route: Route)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+generateRouteDescription(route)</panel_attributes>
     <additional_attributes>860;50;30;50</additional_attributes>
   </element>
   <element>
@@ -574,7 +575,7 @@ generateRouteDescription(route: Route)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-RouteDescription</panel_attributes>
+routeDescription</panel_attributes>
     <additional_attributes>30;50;860;50</additional_attributes>
   </element>
   <element>
@@ -596,8 +597,8 @@ RouteDescription</panel_attributes>
       <w>320</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
-setRouteDescription(:RouteDescription)</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+setRouteDescription(routeDescription)</panel_attributes>
     <additional_attributes>300;50;30;50</additional_attributes>
   </element>
   <element>
@@ -630,7 +631,7 @@ setRouteDescription(:RouteDescription)</panel_attributes>
       <w>830</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 routeModelChanged()</panel_attributes>
     <additional_attributes>30;50;810;50</additional_attributes>
   </element>
@@ -653,7 +654,7 @@ routeModelChanged()</panel_attributes>
       <w>108</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 paint()</panel_attributes>
     <additional_attributes>40;60;60;60;60;30;30;30</additional_attributes>
   </element>
@@ -676,7 +677,7 @@ paint()</panel_attributes>
       <w>1000</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 routeModelChanged()</panel_attributes>
     <additional_attributes>30;50;980;50</additional_attributes>
   </element>
