@@ -483,6 +483,13 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 \package{Controllers}{
  Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
  Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
+ Der \reftype{Controller} nimmt Benutzeraktionen von der \reftype{MainView} und \reftype{MapView} entgegen und reagiert darauf.
+ 
+ Der \reftype{Controller} erstellt den \reftype{ProfileManagerController} bzw. den \reftype{MapManagerController}, wenn der Benutzer das Fenster der Profil- bzw. Kartenverwaltung öffnet.
+ Diese sind für \reftype{ProfileManagerView} bzw. die \reftype{MapManagerView} verantwortlich.
+
+ Der \reftype{ProfileManager} und der \reftype{MapManager} sind für das Speichern und Laden der Profil- oder Kartendaten zuständig.
+
 }
 {
   \class{Controller}
