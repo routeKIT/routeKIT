@@ -2,7 +2,7 @@ Diagramm aufteilen / aufräumen (gemacht)
     Spalten MVC, Zeilen thematisch (gemacht) (haben wir anders organisiert)
     Farben (gemacht)
     "sehr optional" oder auch "unbedingt machen" (gemacht)
-RouteModel: currentRoute als Relation statt Attribut?
+RouteModel: currentRoute als Relation statt Attribut? (gemacht)
 RenderSequenz:
     TileSource muss irgendwo Kartendaten herkriegen (gemacht) (da TileRenderer Graph kriegt und OSMRenderer braucht nichts)
     Pfeiltypen (gemacht)
