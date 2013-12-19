@@ -1570,7 +1570,15 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
           \attr{destination}{Coordinates}{Der Zielpunkt der Anfrage.}
           \attr{date}{Date}{Der Zeitpunkt der Anfrage.}
         }
-        {\none}
+        {
+          \method{HistoryEntry}
+                 {
+                   \param{start}{Coordinates}{Der Startpunkt.}
+                   \param{destination}{Coordinates}{Der Zielpunkt.}
+                   \param{date}{Date}{Der Zeitpunkt.}
+                 }
+                 {Konstruktor: Erzeugt einen neues Objekt mit den angegebenen Attributen.}
+        }
 }
 
 \package{Util}{
