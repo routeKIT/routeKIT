@@ -428,8 +428,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Übersicht}
 
-% TODO
+Beim Entwurf der Anwendung \routeKIT wurden Entwurfsmuster eingesetzt. Das Muster \gls{mvc} umfasst die Pakete Controllers, Models, Views , wobei die Klassen im Controllers die Kommunikation zwischen den Klassen im Views und dem funktionalem Teil des Programms übernehmen. Das Anfordern der Kacheln aus dem Paket MapDisplay erfolgt von der Klasse MapView direkt (ohne Einsatz von Controllern). Die Klassen im Views sind für die Interraktion des Benutzers mit den Programm und die Darstellung der Daten aus dem Paket Models zuständig. Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem Entwurfsmuster „Beobachter“. Durch den Einsatz vom Entwurfsmuster \gls{mvc} ist das Paket Views leich austauschbar. Alle Klassen im Paket Controllers sind basieren auf dem Entwurfsmuster Singleton. 
 
+Im Paket MapDisplay wird das Entwurfsmuster Decorator verwendet. % Vorteile davon.
+
+Im Paket RouteCalculator wird das Entwurfsmuster Strategie eingesetz. Der Algorithmus zur Berechnung der Route ist in eine eigene Klasse \reftype{ArcFlagsDijkstra} gekapselt und somit leicht zu ersetzen.  
+Im Paket Precalculation wird ebenfalls dieses Muster verwendet. Somit wird ermöglicht das Programm zum Partitionieren eines Graphen auszutauschen.
 
 \section{Anmerkungen}
 
