@@ -576,14 +576,14 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    \param{profile}{Profile}{Das aktuelle \gls{profil}.} 
                  }
                  {
-                   Wählt das angegebe \gls{profil} aus.
+                   Wählt das angegebene \gls{profil} aus.
                  }
           \method{selectMap}
                  {
                    \param{map}{StreetMap}{Die aktuelle \gls{karte}.} 
                  }
                  {
-                   Wählt die angegebe \gls{karte} aus.
+                   Wählt die angegebene \gls{karte} aus.
                  }
 
           \method{startPrecalculation}
@@ -987,7 +987,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
   Der Cache stellt diese Kacheln dann asynchron bereit, indem er für nicht gespeicherte Kacheln zunächst eine „Dummy-Kachel“ zurückgibt und bei abgeschlossener Berechnung registrierte \reftype{TileFinishedListener} benachrichtigt.
   Ein beispielhafter Ablauf ist in \abbildung{sequenz_rendern} zu sehen.
   
-  Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit von der JVM garbage-collected werden können.
+  Um nicht zu viel Arbeitsspeicher zu beanspruchen, verwaltet der Cache die gespeicherten Kacheln so, dass sie bei Speicherknappheit vom Garbage Collector der JVM freigegeben werden können.
   
   Kartenkacheln werden über \gls{G_smt}-Koordinaten, wie sie auch bei anderen \gls{osm}-Viewern verwendet werden, adressiert.
 }
@@ -1009,7 +1009,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für diese.
           Kacheln können angefragt werden, und nachdem die (asynchrone) Berechnung abgeschlossen ist, werden registrierte \reftype{TileFinishedListener} benachrichtigt.
           
-          Intern werden die gecacheten Kacheln so gehalten, dass der Garbage Collector sie bei Speicherknappheit verwerfen kann (etwa durch \code{SoftReference}s).
+          Intern werden die zwischengespeicherten Kacheln so gehalten, dass der Garbage Collector sie bei Speicherknappheit verwerfen kann (etwa durch \code{SoftReference}s).
         }
         {\none}
         {
@@ -1020,7 +1020,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    \param{x}{int}{Die \gls{smt}-X-Komponente.}
                    \param{y}{int}{Die \gls{smt}-Y-Komponente.}
-                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
+                   \param{zoom}{int}{Die Zoomstufe.}
                  }
                  {
                    Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so wird sie direkt zurückgegeben;
@@ -1028,7 +1028,9 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
 
  \method{addTileFinishedListener}
-                 {\param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}}
+                 {
+                   \param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}
+                 }
                  {
                    Registriert einen \reftype{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
                    Die Kachel ist Teil der Nachricht.
@@ -1091,7 +1093,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
           \attr{profile}{Profile}{Das \gls{profil}.}
           \attr{map}{StreetMap}{Die \gls{karte}.}
           \attr{calculationTime}{int}{
-            Die Zeit, die benötigt wurde, um diese Kombination vorzuberechnen.
+            Die Zeit, die für die Vorberechnung dieser Kombination benötigt wurde.
             Die Zeit wird in Millisekunden angegeben.
             Für Kombinationen ohne \gls{vorberechnung} ist dieser Wert \code{0}.
           }
@@ -1123,14 +1125,14 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         }
 
   \class{RouteModel}
-        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete \gls{route} dar. Die getter liefern dabei immer den aktuellen Zustand (auch null möglich). Die setter ändern den Wert und informieren eventuelle \reftype{RouteListener}}
+        {Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete \gls{route} dar. Die Getter liefern dabei immer den aktuellen Zustand (auch \code{null} möglich). Die Setter ändern den Wert und informieren eventuelle \reftype{RouteListener}.}
         {\none}
         {
           \method{addRouteListener}
                  {
                    \param{listener}{RouteModelListener}{Der neue Listener, der über Änderungen informiert werden will.}
                  }
-                 {fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an \gls{route}, Start oder Ziel informiert wird}
+                 {Fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an \gls{route}, Start oder Ziel informiert wird}
         }
   \class{RouteModelListener}
         {Wird bei Änderungen am \reftype{RouteModel} informiert.}
@@ -1138,7 +1140,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{routeModelChanged}
                  {\none}
-                 {Wird bei jeder Änderung aufgerufen}
+                 {Wird bei jeder Änderung am \reftype{RouteModel} aufgerufen.}
         }
 }
 
@@ -1154,16 +1156,12 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  {
                    \param{map}{StreetMap}{Die neue \gls{karte}.}
                  }
-                 {
-                   Aktualisiert die Anzeige der aktuellen \gls{karte}.
-                 }
+                 {Aktualisiert die Anzeige der aktuellen \gls{karte}.}
           \method{setCurrentProfile}
                  {
                    \param{profile}{Profile}{Das neue \gls{profil}.}
                  }
-                 {
-                   Aktualisiert die Anzeige des aktuellen \glslink{profil}{Profils}.
-                 }
+                 {Aktualisiert die Anzeige des aktuellen \glslink{profil}{Profils}.}
         }
 
   \class{MapView}
@@ -1272,9 +1270,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
         {
           \method{isDefault}[boolean]
                  {\none}
-                 {
-                   Gibt zurück, ob es sich um ein Standardprofil handelt oder nicht.
-                 }
+                 {Gibt an, ob es sich um ein Standardprofil handelt oder nicht.}
           \method{save}
                  {
                    \param{file}{File}{Die Datei, in die das \gls{profil} gespeichert wird.}
@@ -1319,14 +1315,12 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           \method{isDefault}[boolean]
                  {\none}
-                 {
-                   Gibt zurück, ob es sich um eine Standardkarte handelt.
-                 }
+                 {Gibt zurück, ob es sich um eine Standardkarte handelt.}
         }
 
   \class{Graph}
         {
-          Ein Kartengraph / Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer \gls{vorberechnung} für ein \gls{profil} und eine \gls{karte}, sondern nur für eine \gls{karte}.
+          Ein Kartengraph/Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis einer \gls{vorberechnung} für ein \gls{profil} und eine \gls{karte}, sondern nur für eine \gls{karte}.
         }
         {
           \attr{highwayType}{HighwayType}{Der Straßentyp.}
@@ -1349,28 +1343,44 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  }
                  {Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen Adjazenzfeld.}
           \method{getOutgoingEdges}[Set<Edge>]
-                 {\param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}}
+                 {
+                   \param{node}{Node}{Der Knoten, dessen ausgehende Kanten gesucht werden.}
+                 }
                  {Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.}
 	      \method{getIncomingEdges}[Set<Edge>]
-                 {\param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}}
+                 {
+                   \param{node}{Node}{Der Knoten, dessen eingehende Kanten gesucht werden.}
+                 }
                  {Gibt alle in den Knoten eingehende Kanten zurück.}
           \method{getTargetNode}[Node]
-                 {\param{edge}{Edge}{Die Kante, dessen Endknoten gesucht wird.}}
+                 {
+                   \param{edge}{Edge}{Die Kante, dessen Endknoten gesucht wird.}
+                 }
                  {Gibt den Endknoten der angegebenen Kante zurück.}
           \method{getStartNode}[Node]
-                 {\param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}}
+                 {
+                   \param{edge}{Edge}{Die Kante, dessen Startknoten gesucht wird.}
+                 }
                  {Gibt den Startknoten der angegebenen Kante zurück.}       
           \method{getCoordinates}[Coordinates]
-                 {\param{node}{Node}{Der Knoten, dessen Koordinaten gesucht werden.}}
+                 {
+                   \param{node}{Node}{Der Knoten, dessen Koordinaten gesucht werden.}
+                 }
                  {Gibt die Koordinaten des angegebenen Knotens zurück.}
           \method{getNodeProperties}[NodeProperties]
-                 {\param{node}{Node}{Der Knoten, dessen \reftype{NodeProperties} gesucht werden.}}
+                 {
+                   \param{node}{Node}{Der Knoten, dessen \reftype{NodeProperties} gesucht werden.}
+                 }
                  {Gibt die \code{NodeProperties} des angegebenen Knotens zurück.}
           \method{getEdgeProperties}[EdgeProperties]
-                 {\param{edge}{Edge}{Die Kante, deren \reftype{EdgeProperties} gesucht werden.}}
+                 {
+                   \param{edge}{Edge}{Die Kante, deren \reftype{EdgeProperties} gesucht werden.}
+                 }
                  {Gibt die \code{EdgeProperties} der angegebenen Kante zurück.}
 	      \method{getIndex}[GraphIndex]
-	             {\param{zoom}{int}{Die Zoomstufe.}}
+	             {
+	               \param{zoom}{int}{Die Zoomstufe.}
+	             }
                  {Gibt eine geometrische Datenstruktur zur angegebenen Zoomstufe zurück.}
         }
   \class{GraphIndex}
@@ -1443,8 +1453,8 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses Graphen entsprechen den Kanten des zugehörigen \reftype{Graph}-Objekts und werden daher mit \code{Edge} bezeichnet. Die Kanten dieses Graphen repräsentieren Abbiegemöglichkeiten und werden mit \code{Turn} bezeichnet.
           
-          Diese Datenstruktur ist profilunabhängig und wird, wie \reftype{Graph}, bei der \gls{vorberechnung} für eine \gls{karte} erstellt.
-          Erst in Kombination mit den \gls{profil}-spezifischen \reftype{Weights} kann sie zur Routenberechnung verwendet werden.
+          Diese Datenstruktur ist unabhängig vom \gls{profil} und wird wie \reftype{Graph} bei der \gls{vorberechnung} für eine \gls{karte} erstellt.
+          Erst in Kombination mit den profilspezifischen \reftype{Weights} kann sie zur Routenberechnung verwendet werden.
         }
         {\none}
         {
@@ -1615,14 +1625,14 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  }
           \method{getSmtX}[float]
                  {
-                   \param{zoom}{int}{Das Zoomlevel.}
+                   \param{zoom}{int}{Die Zoomstufe.}
                  }
                  {
                    Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.
                  }
           \method{getSmtY}[float]
                  {
-                   \param{zoom}{int}{Das Zoomlevel.}
+                   \param{zoom}{int}{Die Zoomstufe.}
                  }
                  {
                    Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.
@@ -1631,7 +1641,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{x}{float}{Die \gls{smt}-X-Komponente.}
                    \param{y}{float}{Die \gls{smt}-Y-Komponente.}
-                   \param{zoom}{int}{Die \gls{smt}-Zoom-Komponente.}
+                   \param{zoom}{int}{Die Zoomstufe.}
                  }
                  {
                    Statische Methode.
@@ -1650,9 +1660,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                    \param{edge}{Edge}{Die Kante.}
                    \param{position}{float}{Der Wert für das Attribut \refattr{PointOnEdge}{position}.}
                  }
-                 {
-                   Konstruktor: Erstellt ein neues Objekt aus den gegebenen Attributen.
-                 }
+                 {Konstruktor: Erstellt ein neues Objekt aus den gegebenen Attributen.}
         }
 }
 
