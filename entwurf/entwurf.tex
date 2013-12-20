@@ -556,7 +556,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           \method{MainController}
                  {\none}
                  {
-                   Erstellt den Controller, lädt \glspl{profil}, die Namen der \glspl{karte} und die aktuelle \gls{karte} vollständig und erstellt dann die \reftype{MainView}.
+                   Konstruktor: Erstellt den Controller, lädt \glspl{profil}, die Namen der \glspl{karte} und die aktuelle \gls{karte} vollständig und erstellt dann die \reftype{MainView}.
                    Für den genauen Ablauf siehe \abbildung{sequenz_start}.
                  }
                  
@@ -662,7 +662,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           Der Controller für die \reftype{ProfileManagerView}.
 
-	  Ein Beispiel für die Kommunikation zwischen den beiden Klassen ist in \abbildung{sequenz_profilVerwaltung} zu sehen.
+	      Ein Beispiel für die Kommunikation zwischen den beiden Klassen ist in \abbildung{sequenz_profilVerwaltung} zu sehen.
         }
         {\none}
         {
@@ -858,7 +858,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
                    \param{props}{Map<String, String>}{Eine Liste von OSM-Tags.}
                  }
-                 {Konstrukor: Erzeugt ein neues Objekt aus den angegebenen OSM-Tags.}
+                 {Konstruktor: Erzeugt ein neues Objekt aus den angegebenen OSM-Tags.}
           \method{isOneway}[boolean]
                  {\none}
                  {Bestimmt, ob es sich um eine Einbahnstraße handelt.}
@@ -870,7 +870,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {Liefert ein \reftype{EdgeProperties}-Objekt mit den Eigenschaften des Wegs.}
           \method{getRestriction}[Restriction]
                  {\none}
-                 {Liefert ein \reftype{Restriction}-Objekt mit den Beschränkungen des Wegs.}
+                 {Liefert ein \reftype{Restriction}-Objekt mit der/den Beschränkung(en) des Wegs oder \code{null}, falls nicht vorhanden.}
         }
   \class{MapEdge}
         {Stellt eine Kante im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
@@ -1098,7 +1098,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{TileCache}
                  {\param{target}{TileSource}{Die \code{TileSource}, die die tatsächliche Berechnung durchführt und deren Ergebnisse zwischengespeichert werden.}}
-                 {Erstellt einen neuen Cache für die angegebene \reftype{TileSource}.}
+                 {Konstruktor: Erstellt einen neuen Cache für die angegebene \reftype{TileSource}.}
           \method{renderTile}[BufferedImage]
                  {
                    \param{x}{int}{Die \gls{smt}-X-Komponente.}
@@ -1141,10 +1141,10 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {\none}
         {
           \method{TileRenderer}
-	   { 
-		\param{graph}{Graph}{Ein Adjazenzfeld.}
-	    }
-	   {Ein Konstruktor, der einen neuen TileRenderer erzeugt.}
+	             { 
+		           \param{graph}{Graph}{Ein Adjazenzfeld.}
+	             }
+	             {Konstruktor: Erzeugt einen neuen \code{TileRenderer}.}
           \method{renderTile}[BufferedImage]
                  {
                    \param{x}{int}{siehe \refparam{TileCache}{renderTile}{x}}
@@ -1260,7 +1260,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                    \param{source}{TileSource}{Ein Objekt, das die Kartenkacheln liefert, die dann angezeigt werden.}
                  }
                  {
-                   Erzeugt eine neue \reftype{MapView}. Die angegebene \reftype{TileSource} wird zum \Gls{rendern} verwendet.
+                   Konstruktor: Erzeugt eine neue \reftype{MapView}. Die angegebene \reftype{TileSource} wird zum \Gls{rendern} verwendet.
                    
                    Da die Kacheln bei jedem \refmethod{MapView}{paint} synchron angefragt werden, sollte \refparam{MapView}{MapView}{source} ein \reftype{TileCache} sein.
                  }
@@ -1324,7 +1324,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                    \param{history}{History}{Der \gls{verlauf}, der angezeigt wird.}
                  }
                  {
-                   Erstellt eine HistoryView für den angegebenen \gls{verlauf}.
+                   Konstruktor: Erstellt eine HistoryView für den angegebenen \gls{verlauf}.
                    (Der \gls{verlauf} kann später nicht mehr geändert werden.)
                  }
         }
@@ -1640,7 +1640,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{type}{VehicleType}{Der Fahrzeugtyp.}
                  }
-                 {Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
+                 {(statisch) Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
         }
   \class{WeightRestriction}
         {Repräsentiert eine Beschränkung des Fahrzeuggewichts.}
@@ -1650,7 +1650,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{weight}{int}{Das maximale Fahrzeuggewicht.}
                  }
-                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+                 {(statisch) Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }
   \class{WidthRestriction}
         {Repräsentiert eine Beschränkung der Fahrzeugbreite.}
@@ -1660,7 +1660,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{width}{int}{Die maximale Fahrzeugbreite.}
                  }
-                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+                 {(statisch) Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }
   \class{HeightRestriction}
         {Repräsentiert eine Beschränkung der Fahrzeughöhe.}
@@ -1670,7 +1670,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{height}{int}{Die maximale Fahrzeughöhe.}
                  }
-                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+                 {(statisch) Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }
   \class{MultipleRestrictions}
         {Repräsentiert eine Kombination aus mehreren Beschränkungen.}
@@ -1680,7 +1680,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{restrictions}{Set<Restriction>}{Eine Menge von Beschränkungen.}
                  }
-                 {Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
+                 {(statisch) Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
         }
 }
 
@@ -1775,16 +1775,12 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                    \param{lat}{float}{Der Breitengrad.}
                    \param{lon}{float}{Der Längengrad.}
                  }
-                 {
-                   Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.
-                 }
+                 {Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.}
           \method{distanceTo}[float]
                  {
                    \param{other}{Coordinates}{Die anderen Koordinaten.}
                  }
-                 {
-                   Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.
-                 }
+                 {Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei Koordinaten.}
           \method{angleBetween}[float]
                  {
                    \param{coords1}{Coordinates}{Die Koordinaten des ersten Punkts.}
@@ -1795,26 +1791,19 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{zoom}{int}{Die Zoomstufe.}
                  }
-                 {
-                   Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.
-                 }
+                 {Berechnet die \gls{smt}-X-Komponente zu diesen Koordinaten.}
           \method{getSmtY}[float]
                  {
                    \param{zoom}{int}{Die Zoomstufe.}
                  }
-                 {
-                   Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.
-                 }
+                 {Berechnet die \gls{smt}-Y-Komponente zu diesen Koordinaten.}
           \method{fromSmt}[Coordinates]
                  {
                    \param{x}{float}{Die \gls{smt}-X-Komponente.}
                    \param{y}{float}{Die \gls{smt}-Y-Komponente.}
                    \param{zoom}{int}{Die Zoomstufe.}
                  }
-                 {
-                   Statische Methode.
-                   Rechnet \gls{smt}-Koordinaten in Koordinaten um.
-                 }
+                 {(statisch) Rechnet \gls{smt}-Koordinaten in Koordinaten um.}
         }
   \class{PointOnEdge}
         {Beschreibt einen Punkt auf der Kante.}
