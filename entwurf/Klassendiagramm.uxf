@@ -51,7 +51,6 @@ exportHTML(:File)
 selectProfile(:Profile)
 selectMap(:StreetMap)
 startPrecalculation(:ProfileMapCombination)
-onPrecalculationFinished()
 setUseOnlineMaps(:boolean)
 getTileSource(): TileSource
 manageProfiles()
