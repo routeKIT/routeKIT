@@ -857,7 +857,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{OSMWay}
                  {
-                   \param{properties}{Map<String, String>}{Eine Liste von OSM-Tags.}
+                   \param{props}{Map<String, String>}{Eine Liste von OSM-Tags.}
                  }
                  {Konstrukor: Erzeugt ein neues Objekt aus den angegebenen OSM-Tags.}
           \method{isOneway}[boolean]
@@ -881,7 +881,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {
           \method{MapEdge}
                  {
-                   \param{targetNode}{int}{Die ID des Zielknotens.}
+                   \param{target}{int}{Die ID des Zielknotens.}
                    \param{way}{OSMWay}{Der zur Kante gehörige OSM-Weg.}
                  }
                  {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Attributen.}
@@ -1643,27 +1643,27 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           \method{getInstance}[Restriction]
                  {
-                   \param{maxWeight}{int}{Das maximale Fahrzeuggewicht.}
+                   \param{weight}{int}{Das maximale Fahrzeuggewicht.}
                  }
                  {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }
-  \class{WidthTypeRestriction}
+  \class{WidthRestriction}
         {Repräsentiert eine Beschränkung der Fahrzeugbreite.}
         {\none}
         {
           \method{getInstance}[Restriction]
                  {
-                   \param{maxWidth}{int}{Die maximale Fahrzeugbreite.}
+                   \param{width}{int}{Die maximale Fahrzeugbreite.}
                  }
                  {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }
-  \class{HeightTypeRestriction}
+  \class{HeightRestriction}
         {Repräsentiert eine Beschränkung der Fahrzeughöhe.}
         {\none}
         {
           \method{getInstance}[Restriction]
                  {
-                   \param{maxHeight}{int}{Die maximale Fahrzeughöhe.}
+                   \param{height}{int}{Die maximale Fahrzeughöhe.}
                  }
                  {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
         }

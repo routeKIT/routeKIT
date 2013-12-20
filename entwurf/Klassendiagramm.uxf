@@ -1483,7 +1483,7 @@ longitude: float
 --
 Coordinates(lat: float, lon: float)
 distanceTo(:Coordinates): float
-angleBetween(:Coordinates, :Coordinates)
+angleBetween(:Coordinates, :Coordinates): float
 getSmtX(zoom: int): float
 getSmtY(zoom: int): float
 _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
