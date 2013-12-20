@@ -626,7 +626,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    \param{combination}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus \gls{profil} und \gls{karte}.} 
                  }
                  {
-                   Ruft in einem neuen WorkerThread \refmethod{PreCalculator}{doPrecalculation} auf, falls keine \gls{vorberechnung} für diese Kombination aus \gls{profil} und \gls{karte} existiert. Sperrt währenddessen die \refclass{MainView}.
+                   Ruft in einem neuen WorkerThread \refmethod{PreCalculator}{doPrecalculation} auf, falls keine \gls{vorberechnung} für diese Kombination aus \gls{profil} und \gls{karte} existiert. Sperrt währenddessen die \reftype{MainView}.
                  }
 
           \method{setUseOnlineMaps}
@@ -825,6 +825,8 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
   Beim Importieren einer \gls{karte} werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph wird partitioniert.
   Bei der \gls{vorberechnung} wird der kantenbasierte Graph gewichtet vom \reftype{EdgeWeighter} und danach werden die \gls{arc} vom \reftype{ArcFlagsCalculator} berechnet.
   % TODO kurze erklärung, wie die vorberechnung läuft (gemacht)
+  
+  Ein beispielhafter Ablauf der Vorberechnung ist in \abbildung{sequenz_vorberechnung} zu sehen.
 }
 {
   \class{MapImporter}
@@ -973,7 +975,9 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 
 \package{RouteCalculator}{
  Dieses Paket enthält alle Klassen, die zur Routenberechnung unter Berücksichtigung von \gls{arc} und Erzeugung der \gls{wegbeschreibung} benötigt werden.
- Die Klasse \reftype{ArcFlagsDijkstra}, die das Interface \reftype{RouteCalculator} implementiert, erstellt eine \reftype{Route}. Zu dieser \reftype{Route} erstellt \reftype{RouteDescriptionGenerator} eine \reftype{RouteDescription}. 
+ Die Klasse \reftype{ArcFlagsDijkstra}, die das Interface \reftype{RouteCalculator} implementiert, erstellt eine \reftype{Route}. Zu dieser \reftype{Route} erstellt \reftype{RouteDescriptionGenerator} eine \reftype{RouteDescription}.
+ 
+ Ein beispielhafter Ablauf der Routenberechnung ist in \abbildung{sequenz_routeCalculation} zu sehen.
 }
 {
   \class{RouteCalculator}
@@ -1838,7 +1842,7 @@ Beteiligte Klassen: \reftype{RouteKit}, \reftype{MainController}, \reftype{MapMa
 \end{figure}
 Beteiligte Klassen: \reftype{MapView}, \reftype{TileCache}, \reftype{TileSource}
 
-\subsection{Routenberechnung} % TODO reference
+\subsection{Routenberechnung}
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90, height=\textheight]{RouteCalculationSequenz}
@@ -1856,7 +1860,7 @@ Beteiligte Klassen: \reftype{MainView}, \reftype{MapView}, \reftype{MainControll
 \end{figure}
 Beteiligte Klassen: \reftype{ProfileManagerView}, \reftype{ProfileManagerController}, \reftype{ProfileManager}, \reftype{MainView}
 
-\subsection{Vorberechnung} % TODO reference
+\subsection{Vorberechnung}
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90, height=0.9\textheight]{PreCalculationSequenz}
