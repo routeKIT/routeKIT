@@ -1472,7 +1472,7 @@ generateRouteDescription(route: Route): RouteDescription</panel_attributes>
       <x>4730</x>
       <y>4600</y>
       <w>350</w>
-      <h>160</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes>Coordinates
 bg=#FFFFFF
@@ -1483,6 +1483,7 @@ longitude: float
 --
 Coordinates(lat: float, lon: float)
 distanceTo(:Coordinates): float
+angleBetween(:Coordinates, :Coordinates)
 getSmtX(zoom: int): float
 getSmtY(zoom: int): float
 _fromSmt(x: float, y: float, zoom: int): Coordinates_</panel_attributes>
