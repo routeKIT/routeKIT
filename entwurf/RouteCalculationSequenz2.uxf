@@ -150,7 +150,7 @@
       <x>40</x>
       <y>60</y>
       <w>20</w>
-      <h>80</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -232,7 +232,7 @@ setDestinationPoint(dest)</panel_attributes>
       <w>290</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+    <panel_attributes>lt=&lt;
 "Sets destination point"</panel_attributes>
     <additional_attributes>270;50;30;50</additional_attributes>
   </element>
@@ -255,7 +255,7 @@ setDestinationPoint(dest)</panel_attributes>
       <w>290</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
+    <panel_attributes>lt=&lt;
 "Sets start point"</panel_attributes>
     <additional_attributes>270;50;30;50</additional_attributes>
   </element>
@@ -358,7 +358,7 @@ route</panel_attributes>
       <x>40</x>
       <y>150</y>
       <w>20</w>
-      <h>160</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -470,12 +470,12 @@ paint()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>20</x>
-      <y>110</y>
+      <y>70</y>
       <w>50</w>
-      <h>60</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;40;30;30</additional_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -707,12 +707,12 @@ routeModelChanged()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>20</x>
-      <y>280</y>
+      <y>160</y>
       <w>50</w>
-      <h>770</h>
+      <h>890</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;750</additional_attributes>
+    <additional_attributes>30;30;30;870</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
