@@ -64,7 +64,7 @@
       <w>180</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_ctrl:Controller_</panel_attributes>
+    <panel_attributes>_mc:Controller_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -253,7 +253,7 @@ doPrecalculation(pmc)
       <w>150</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 new()</panel_attributes>
     <additional_attributes>130;50;30;50</additional_attributes>
   </element>
@@ -265,7 +265,7 @@ new()</panel_attributes>
       <w>140</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 new()</panel_attributes>
     <additional_attributes>120;50;30;50</additional_attributes>
   </element>
@@ -277,7 +277,7 @@ new()</panel_attributes>
       <w>320</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 new()</panel_attributes>
     <additional_attributes>300;50;30;50</additional_attributes>
   </element>

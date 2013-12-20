@@ -37,12 +37,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>130</x>
+      <x>120</x>
       <y>0</y>
-      <w>100</w>
+      <w>120</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_mv:MainView_</panel_attributes>
+    <panel_attributes>_mainV:MainView_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -59,12 +59,12 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>470</x>
+      <x>450</x>
       <y>0</y>
-      <w>100</w>
+      <w>140</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_ctrl:Controller_</panel_attributes>
+    <panel_attributes>_mc:MainController_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -663,7 +663,7 @@ paint()</panel_attributes>
     <coordinates>
       <x>160</x>
       <y>870</y>
-      <w>840</w>
+      <w>850</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
@@ -719,8 +719,8 @@ routeModelChanged()</panel_attributes>
     <coordinates>
       <x>280</x>
       <y>860</y>
-      <w>40</w>
-      <h>180</h>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>30;170;30;30</additional_attributes>
