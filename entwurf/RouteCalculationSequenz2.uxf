@@ -150,7 +150,7 @@
       <x>40</x>
       <y>60</y>
       <w>20</w>
-      <h>40</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -161,7 +161,7 @@
       <x>300</x>
       <y>70</y>
       <w>20</w>
-      <h>40</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -265,7 +265,7 @@ setDestinationPoint(dest)</panel_attributes>
       <x>300</x>
       <y>160</y>
       <w>20</w>
-      <h>40</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -358,7 +358,7 @@ route</panel_attributes>
       <x>40</x>
       <y>150</y>
       <w>20</w>
-      <h>40</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -470,23 +470,23 @@ paint()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>20</x>
-      <y>70</y>
+      <y>110</y>
       <w>50</w>
-      <h>100</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;80;30;30</additional_attributes>
+    <additional_attributes>30;40;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>280</x>
-      <y>170</y>
+      <y>270</y>
       <w>50</w>
-      <h>280</h>
+      <h>180</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;260</additional_attributes>
+    <additional_attributes>30;30;30;160</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -503,12 +503,12 @@ paint()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>280</x>
-      <y>80</y>
+      <y>120</y>
       <w>50</w>
-      <h>100</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;80</additional_attributes>
+    <additional_attributes>30;30;30;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -573,7 +573,7 @@ routeDescription</panel_attributes>
       <x>990</x>
       <y>740</y>
       <w>20</w>
-      <h>190</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -707,12 +707,12 @@ routeModelChanged()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>20</x>
-      <y>160</y>
+      <y>280</y>
       <w>50</w>
-      <h>890</h>
+      <h>770</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;870</additional_attributes>
+    <additional_attributes>30;30;30;750</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -740,12 +740,12 @@ routeModelChanged()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>970</x>
-      <y>900</y>
+      <y>920</y>
       <w>50</w>
-      <h>150</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;130;30;30</additional_attributes>
+    <additional_attributes>30;110;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
