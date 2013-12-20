@@ -60,12 +60,12 @@
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>700</x>
-      <y>80</y>
+      <y>260</y>
       <w>50</w>
-      <h>1630</h>
+      <h>1450</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;1610;30;30</additional_attributes>
+    <additional_attributes>30;1430;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -117,7 +117,7 @@
       <x>390</x>
       <y>100</y>
       <w>20</w>
-      <h>140</h>
+      <h>170</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -128,7 +128,7 @@
       <x>720</x>
       <y>50</y>
       <w>20</w>
-      <h>60</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -139,7 +139,7 @@
       <x>40</x>
       <y>300</y>
       <w>20</w>
-      <h>90</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -161,7 +161,7 @@
       <x>180</x>
       <y>200</y>
       <w>20</w>
-      <h>60</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -181,12 +181,12 @@
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>160</x>
-      <y>230</y>
+      <y>240</y>
       <w>50</w>
-      <h>90</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>30;30;30;60</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -227,9 +227,9 @@ new(pm)</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>390</x>
-      <y>440</y>
+      <y>490</y>
       <w>20</w>
-      <h>120</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -275,10 +275,10 @@ profiles</panel_attributes>
       <x>540</x>
       <y>130</y>
       <w>50</w>
-      <h>1450</h>
+      <h>1440</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;1430;30;30</additional_attributes>
+    <additional_attributes>30;1420;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -308,11 +308,11 @@ setAvailableProfiles(profiles)</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>170</x>
-      <y>180</y>
+      <y>200</y>
       <w>240</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>lt=&lt;
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
 show()</panel_attributes>
     <additional_attributes>30;50;220;50</additional_attributes>
   </element>
@@ -320,12 +320,12 @@ show()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>370</x>
-      <y>210</y>
+      <y>240</y>
       <w>50</w>
-      <h>250</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;230;30;30</additional_attributes>
+    <additional_attributes>30;220;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -343,9 +343,9 @@ show()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>30</x>
-      <y>290</y>
+      <y>300</y>
       <w>170</w>
-      <h>94</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 "Name of the 
@@ -367,14 +367,14 @@ new profile?"</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>140</x>
+      <x>150</x>
       <y>370</y>
-      <w>162</w>
+      <w>150</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
       writeValues()</panel_attributes>
-    <additional_attributes>70;60;90;60;90;30;60;30</additional_attributes>
+    <additional_attributes>60;60;80;60;80;30;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -391,9 +391,9 @@ new profile?"</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>560</x>
-      <y>1560</y>
+      <y>1590</y>
       <w>20</w>
-      <h>60</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -403,7 +403,7 @@ new profile?"</panel_attributes>
     <coordinates>
       <x>170</x>
       <y>420</y>
-      <w>248</w>
+      <w>242</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -415,7 +415,7 @@ saveTemporaryProfile(current)</panel_attributes>
     <coordinates>
       <x>160</x>
       <y>450</y>
-      <w>268</w>
+      <w>262</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -425,32 +425,32 @@ changeTemporaryProfile("Smart")</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>170</x>
+      <x>180</x>
       <y>480</y>
-      <w>240</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 setProfile(smart)</panel_attributes>
-    <additional_attributes>30;50;220;50</additional_attributes>
+    <additional_attributes>30;50;210;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>150</x>
-      <y>520</y>
-      <w>150</w>
+      <x>170</x>
+      <y>500</y>
+      <w>156</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
       readValues()</panel_attributes>
-    <additional_attributes>60;60;80;60;80;30;50;30</additional_attributes>
+    <additional_attributes>50;60;80;60;80;40;40;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
-      <x>190</x>
-      <y>560</y>
+      <x>200</x>
+      <y>550</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -485,7 +485,7 @@ setProfile(smart)</panel_attributes>
       <x>30</x>
       <y>590</y>
       <w>170</w>
-      <h>94</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;
 “Decrease weight
@@ -531,7 +531,7 @@ by 500kg”</panel_attributes>
       <x>30</x>
       <y>660</y>
       <w>170</w>
-      <h>94</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;
 “Select profile 
@@ -585,14 +585,14 @@ by 500kg”</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>140</x>
+      <x>150</x>
       <y>700</y>
-      <w>162</w>
+      <w>150</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
       writeValues()</panel_attributes>
-    <additional_attributes>70;60;90;60;90;30;60;30</additional_attributes>
+    <additional_attributes>60;60;80;60;80;30;50;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
@@ -609,9 +609,9 @@ by 500kg”</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>390</x>
-      <y>790</y>
+      <y>820</y>
       <w>20</w>
-      <h>110</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -621,7 +621,7 @@ by 500kg”</panel_attributes>
     <coordinates>
       <x>170</x>
       <y>750</y>
-      <w>248</w>
+      <w>242</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -633,7 +633,7 @@ saveTemporaryProfile(current)</panel_attributes>
     <coordinates>
       <x>160</x>
       <y>780</y>
-      <w>268</w>
+      <w>262</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -643,21 +643,21 @@ changeTemporaryProfile("Smart")</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>170</x>
+      <x>180</x>
       <y>840</y>
-      <w>240</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 setProfile(mercedes)</panel_attributes>
-    <additional_attributes>30;50;220;50</additional_attributes>
+    <additional_attributes>30;50;210;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>330</x>
       <y>810</y>
-      <w>208</w>
+      <w>202</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -681,28 +681,28 @@ setProfile(mercedes)</panel_attributes>
       <x>370</x>
       <y>870</y>
       <w>50</w>
-      <h>160</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;140;30;30</additional_attributes>
+    <additional_attributes>30;170;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>150</x>
-      <y>910</y>
-      <w>150</w>
+      <x>170</x>
+      <y>880</y>
+      <w>156</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
       readValues()</panel_attributes>
-    <additional_attributes>60;60;80;60;80;30;50;30</additional_attributes>
+    <additional_attributes>50;60;80;60;80;40;40;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
-      <x>190</x>
-      <y>950</y>
+      <x>200</x>
+      <y>930</y>
       <w>20</w>
       <h>30</h>
     </coordinates>
@@ -724,9 +724,9 @@ setProfile(mercedes)</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>390</x>
-      <y>1010</y>
+      <y>1040</y>
       <w>20</w>
-      <h>110</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -770,7 +770,7 @@ setProfile(mercedes)</panel_attributes>
     <coordinates>
       <x>160</x>
       <y>1000</y>
-      <w>260</w>
+      <w>254</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -780,46 +780,46 @@ deleteCurrentTemporaryProfile()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>170</x>
+      <x>180</x>
       <y>1030</y>
-      <w>240</w>
+      <w>230</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 setAvailableProfiles(profiles)</panel_attributes>
-    <additional_attributes>30;50;220;50</additional_attributes>
+    <additional_attributes>30;50;210;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>180</x>
+      <y>1060</y>
+      <w>230</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+setProfile(previous)</panel_attributes>
+    <additional_attributes>30;50;210;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>170</x>
-      <y>1060</y>
-      <w>240</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-setProfile(previous)</panel_attributes>
-    <additional_attributes>30;50;220;50</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>150</x>
-      <y>1100</y>
-      <w>150</w>
+      <y>1080</y>
+      <w>156</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
       readValues()</panel_attributes>
-    <additional_attributes>60;60;80;60;80;30;50;30</additional_attributes>
+    <additional_attributes>50;60;80;60;80;40;40;40</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>190</x>
-      <y>1140</y>
+      <y>1100</y>
       <w>20</w>
-      <h>40</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -841,7 +841,7 @@ setProfile(previous)</panel_attributes>
       <x>390</x>
       <y>1230</y>
       <w>20</w>
-      <h>110</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -852,7 +852,7 @@ setProfile(previous)</panel_attributes>
       <x>180</x>
       <y>1240</y>
       <w>20</w>
-      <h>310</h>
+      <h>420</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -941,12 +941,12 @@ deletionTime</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>370</x>
-      <y>1310</y>
+      <y>1280</y>
       <w>50</w>
-      <h>160</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;140;30;30</additional_attributes>
+    <additional_attributes>30;170;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -954,7 +954,7 @@ deletionTime</panel_attributes>
       <x>30</x>
       <y>1280</y>
       <w>170</w>
-      <h>94</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 “Are you sure?
@@ -999,9 +999,9 @@ This will [...]”</panel_attributes>
     <type>com.umlet.element.custom.SeqObjectActive</type>
     <coordinates>
       <x>390</x>
-      <y>1450</y>
+      <y>1490</y>
       <w>20</w>
-      <h>190</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -1011,7 +1011,7 @@ This will [...]”</panel_attributes>
     <coordinates>
       <x>170</x>
       <y>1410</y>
-      <w>248</w>
+      <w>242</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -1034,12 +1034,12 @@ saveAllChanges()</panel_attributes>
     <type>com.umlet.element.Relation</type>
     <coordinates>
       <x>160</x>
-      <y>1520</y>
+      <y>1630</y>
       <w>50</w>
-      <h>190</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>30;170;30;30</additional_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -1058,7 +1058,7 @@ saveProfile(smart)</panel_attributes>
     <coordinates>
       <x>380</x>
       <y>1550</y>
-      <w>206</w>
+      <w>202</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
@@ -1139,7 +1139,7 @@ deleteProfile(mercedes)</panel_attributes>
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>_mc:Controller_</panel_attributes>
+    <panel_attributes>_:MainController_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1159,7 +1159,7 @@ deleteProfile(mercedes)</panel_attributes>
       <x>870</x>
       <y>50</y>
       <w>20</w>
-      <h>60</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -1179,12 +1179,188 @@ manageProfiles()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>840</x>
-      <y>80</y>
-      <w>60</w>
-      <h>1630</h>
+      <x>850</x>
+      <y>250</y>
+      <w>50</w>
+      <h>1460</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>40;30;30;1610</additional_attributes>
+    <additional_attributes>30;30;30;1440</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>180</x>
+      <y>240</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>160</x>
+      <y>200</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;30;30;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>40</x>
+      <y>340</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>20</x>
+      <y>300</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;40;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>390</x>
+      <y>460</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>370</x>
+      <y>450</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;40;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>190</x>
+      <y>520</y>
+      <w>20</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>390</x>
+      <y>790</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>370</x>
+      <y>780</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;40;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>190</x>
+      <y>880</y>
+      <w>20</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>190</x>
+      <y>1070</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>200</x>
+      <y>1130</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>390</x>
+      <y>1450</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>370</x>
+      <y>1450</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;30;30;40</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SeqObjectActive</type>
+    <coordinates>
+      <x>560</x>
+      <y>1550</y>
+      <w>20</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>540</x>
+      <y>1550</y>
+      <w>50</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>30;40;30;30</additional_attributes>
   </element>
 </diagram>
