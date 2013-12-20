@@ -1923,4 +1923,16 @@ bg=#DDDDDD</panel_attributes>
 </panel_attributes>
     <additional_attributes>30;30;730;30</additional_attributes>
   </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2020</x>
+      <y>3070</y>
+      <w>820</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>30;120;30;30;800;30</additional_attributes>
+  </element>
 </diagram>
