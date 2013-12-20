@@ -1831,45 +1831,54 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 \section{Sequenzdiagramme}
 
 \subsection{Programmstart}
+\abbildung{sequenz_start} zeigt den Programmstart.
+Zunächst wird der \reftype{MainController} erstellt (Konstruktor \refmethod{MainController}{MainController});
+dieser erstellt wiederum die restlichen Komponenten des Programms.
 \begin{figure}[H]
 \centering
-\includegraphics[angle=90, width=0.9\textwidth]{StartSequenz}
+\includegraphics[angle=90, width=\textwidth]{StartSequenz}
 \caption{Start des Programms}
 \label{fig:sequenz_start}
 \end{figure}
 Beteiligte Klassen: \reftype{RouteKit}, \reftype{MainController}, \reftype{MapManager}, \reftype{ProfileManager}, \reftype{ProfileMapCombination}, \reftype{RouteModel}, \reftype{MainView}, \reftype{TileCache}, \reftype{MapView}
 
 \subsection{Rendern}
+\abbildung{sequenz_rendern} zeigt, wie die \reftype{MapView} eine Kartenkachel vom \reftype{TileCache} anfordert.
+Hier ist die Kachel noch nicht zwischengespeichert und wird vom Cache also auf Anfrage generiert.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{RenderSequenz}
+\includegraphics[width=\textwidth]{RenderSequenz}
 \caption{Rendern der Karte}
 \label{fig:sequenz_rendern}
 \end{figure}
 Beteiligte Klassen: \reftype{MapView}, \reftype{TileCache}, \reftype{TileSource}
 
 \subsection{Routenberechnung}
+\abbildung{sequenz_routeCalculation} zeigt den Ablauf der Routenberechnung, wenn noch kein Start- und Zielpunkt gesetzt sind.
+(Wäre ein Zielpunkt bereits gesetzt, so würde bereits das Setzen des Startpunkts die Routenberechnung auslösen.)
 \begin{figure}[H]
 \centering
-\includegraphics[angle=90, height=\textheight]{RouteCalculationSequenz}
+\includegraphics[angle=90, height=0.9\textheight]{RouteCalculationSequenz}
 \caption{Berechnen der Route}
 \label{fig:sequenz_routeCalculation}
 \end{figure}
 Beteiligte Klassen: \reftype{MainView}, \reftype{MapView}, \reftype{MainController}, \reftype{RouteModel}, \reftype{RouteCalculator}, \reftype{RouteDescription}, \reftype{Route}, \reftype{RouteDescription}
 
 \subsection{Profilverwaltung}
+\abbildung{sequenz_profilVerwaltung} zeigt den Ablauf einer Profilverwaltung, bei der der Benutzer ein neues Profil „Smart“ anlegt, es 500\,kg leichter macht und dann ein Profil „Mercedes“ löscht.
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.9\textheight]{ProfilSequenz}
+\includegraphics[height=0.8\textheight]{ProfilSequenz}
 \caption{Hinzufügen und Entfernen von Profilen}
 \label{fig:sequenz_profilVerwaltung}
 \end{figure}
 Beteiligte Klassen: \reftype{ProfileManagerView}, \reftype{ProfileManagerController}, \reftype{ProfileManager}, \reftype{MainView}
 
 \subsection{Vorberechnung}
+\abbildung{sequenz_vorberechnung} zeigt den Ablauf der Vorberechnung.
 \begin{figure}[H]
 \centering
-\includegraphics[angle=90, height=0.9\textheight]{PreCalculationSequenz}
+\includegraphics[angle=90, height=0.8\textheight]{PreCalculationSequenz}
 \caption{Vorberechnung für eine Karte und ein Profil}
 \label{fig:sequenz_vorberechnung}
 \end{figure}
