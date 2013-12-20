@@ -33,8 +33,8 @@ LaTeX: Erklärung, Fonts (gemacht)
 Einrückung: Methodenname weniger als Klassenbeschreibung (gemacht)
 Coordinate(s)? nochmal nachschauen (gemacht) (ja, x-Koordinate, y-Koordinate, das Paar sind dann Koordinaten.)
 Allgemein: Namen aussagekräftig
-Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen
-Alle Figures referenzien
+Sequenzdiagramme: *kurz* was dazuschreiben, Vorbedingungen (gemacht)
+Alle Figures referenzien (gemacht)
 Bilder der Pakete ins TeX
 Kachel rendern: außenrum nachfragen (für Texte)
 LaTeX title: Entwurf -> Entwurfsdokument (gemacht)
