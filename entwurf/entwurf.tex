@@ -371,7 +371,7 @@
   name={Beobachter},
   description={Ein \gls{entwurfsmuster}, das bei Änderung des Zustands eines Objektes alle abhängenden Objekte banachrichtigt.}
 }
-\newglossaryentry{einzelstück}{
+\newglossaryentry{einzelstueck}{
   name={Einzelstück},
   description={Ein \gls{entwurfsmuster}, das zusichert, dass eine Klasse genau ein Exemplar besitzt und stellt einen globalen Zugriffspunkt darauf bereit.}
 }
@@ -463,7 +463,7 @@ Das Anfordern der Kacheln aus dem Paket \refpackage{MapDisplay} erfolgt von der 
 Die Klassen in \refpackage{Views} sind für die Interaktion des Benutzers mit den Programm und die Darstellung der Daten aus dem Paket \refpackage{Models} zuständig.
 Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem \gls{entwurfsmuster} \gls{beobachter}.
 Durch den Einsatz vom \gls{entwurfsmuster} \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
-Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstück}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
+Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstueck}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
 
 Im Paket \refpackage{MapDisplay} wird das \gls{entwurfsmuster} \gls{dekorierer} verwendet.
 Der Cache baut dabei eine Kapselung für einen effizienteren Zugriff um eine Kachelquelle herum.
