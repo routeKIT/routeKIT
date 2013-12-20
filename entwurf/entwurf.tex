@@ -461,13 +461,15 @@ Beim Entwurf der Anwendung \routeKIT wurden \gls{entwurfsmuster} eingesetzt.
 Das Muster \gls{mvc} umfasst die Pakete \refpackage{Controllers}, \refpackage{Models} und \refpackage{Views}, wobei die Klassen in \refpackage{Controllers} die Kommunikation zwischen den Klassen in \refpackage{Views} und den funktionalem Teil des Programms übernehmen.
 Das Anfordern der Kacheln aus dem Paket \refpackage{MapDisplay} erfolgt von der Klasse \reftype{MapView} direkt (ohne Einsatz von Controllern).
 Die Klassen in \refpackage{Views} sind für die Interaktion des Benutzers mit den Programm und die Darstellung der Daten aus dem Paket \refpackage{Models} zuständig.
-Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem  \gls{entwurfsmuster} „\gls{beobachter}“.
-Durch den Einsatz vom  \gls{entwurfsmuster} \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
-Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager}  im Paket \refpackage{Controllers} basieren auf dem  \gls{entwurfsmuster} „\gls{einzelstück}“. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
+Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem \gls{entwurfsmuster} \gls{beobachter}.
+Durch den Einsatz vom \gls{entwurfsmuster} \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
+Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstück}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
 
-Im Paket \refpackage{MapDisplay} wird das  \gls{entwurfsmuster} „\gls{dekorierer}“ verwendet.
+Im Paket \refpackage{MapDisplay} wird das \gls{entwurfsmuster} \gls{dekorierer} verwendet.
 Der Cache baut dabei eine Kapselung für einen effizienteren Zugriff um eine Kachelquelle herum.
 Dadurch wird die Funktionaltät, dass ältere Zugriffe gespeichert werden, von der Funktion, die Kacheln zu beschaffen, abgetrennt.
+Es wird außerdem das \gls{entwurfsmuster} \gls{beobachter} verwendet, wobei \reftype{TileFinishedListener} der Beobachter ist. Die genauere Funktionsweise wird in \refpackage{MapDisplay} erläutert.
+
 % TODO Vorteile davon. (gemacht)
 
 Im Paket \refpackage{RouteCalculator} wird das  \gls{entwurfsmuster} „\gls{strategie}“ eingesetzt.
