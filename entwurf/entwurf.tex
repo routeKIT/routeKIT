@@ -469,7 +469,7 @@ Da bei \gls{mvc} die Verteilung von Zuständigkeiten zwischen den drei Teilen ni
 Benutzeraktionen, die den Zustand ändern, sind etwa das Öffnen des Profilmanagers (siehe \abbildung{sequenz_profilVerwaltung}) oder die Eingabe eines Startpunkts;
 Benutzeraktionen, die den Zustand \emph{nicht} ändern, sind etwa das Scrollen im Verlauf oder Navigation auf der Karte – wobei letztere das Anfordern neuer Kartenkacheln aus dem Model auslöst.
 
-Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstueck}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
+Die Klassen \reftype{MainController}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstueck}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
 
 Im Paket \refpackage{MapDisplay} wird das \gls{entwurfsmuster} \gls{dekorierer} verwendet.
 Der Cache baut dabei eine Kapselung für einen effizienteren Zugriff um eine Kachelquelle herum.
@@ -530,16 +530,16 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 \package{Controllers}{
  Dieses Paket enthält die Controller aus der \gls{mvc}-Architektur.
  Die Controller übernehmen die Steuerung des Programms und regeln die Kommunikation unter den einzelnen Komponenten.
- Der \reftype{Controller} nimmt Benutzeraktionen von der \reftype{MainView} und \reftype{MapView} entgegen und reagiert darauf.
+ Der \reftype{MainController} nimmt Benutzeraktionen von der \reftype{MainView} und \reftype{MapView} entgegen und reagiert darauf.
  
- Der \reftype{Controller} erstellt den \reftype{ProfileManagerController} bzw. den \reftype{MapManagerController}, wenn der Benutzer das Fenster der \gls{profil}- bzw. Kartenverwaltung öffnet.
+ Der \reftype{MainController} erstellt den \reftype{ProfileManagerController} bzw. den \reftype{MapManagerController}, wenn der Benutzer das Fenster der \gls{profil}- bzw. Kartenverwaltung öffnet.
  Diese sind für \reftype{ProfileManagerView} bzw. die \reftype{MapManagerView} verantwortlich.
 
  Der \reftype{ProfileManager} und der \reftype{MapManager} sind für das Speichern und Laden der \gls{profil}- oder Kartendaten zuständig.
 
 }
 {
-  \class{Controller}
+  \class{MainController}
         {
           Der Haupt-Controller von \routeKIT.
           Er wird beim Programmstart erstellt und erstellt dabei die \reftype{MainView}.
@@ -547,7 +547,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         }
         {\none}
         {
-          \method{Controller}
+          \method{MainController}
                  {\none}
                  {
                    Erstellt den Controller, lädt \glspl{profil} und \glspl{karte} und erstellt dann die \reftype{MainView}.
@@ -579,7 +579,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
                  {
                    Wird aufgerufen, wenn sich der Start- und Zielpunkt ändern (z.\,B. durch die Auswahl eines Eintrags aus dem \gls{verlauf}).
-                   Die gleichen Aktionen wie für \refmethod{Controller}{onStartChanged} und \refmethod{Controller}{onDestinationChanged} werden ausgeführt, nur nicht doppelt.
+                   Die gleichen Aktionen wie für \refmethod{MainController}{onStartChanged} und \refmethod{MainController}{onDestinationChanged} werden ausgeführt, nur nicht doppelt.
                  }
                  
           \method{exportGPX}
@@ -655,7 +655,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
 		           \param{args}{String[]}{Kommandozeilen-Argumente.}
                  }
-	             {Statische Hauptmethode des Programms. Erzeugt einen \reftype{Controller}.}
+	             {Statische Hauptmethode des Programms. Erzeugt einen \reftype{MainController}.}
         }
 
   \class{ProfileManagerController}
@@ -1703,7 +1703,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
 \caption{Start des Programms}
 \label{fig:sequenz_start}
 \end{figure}
-Beteiligte Klassen: \reftype{RouteKit}, \reftype{Controller}, \reftype{MapManager}, \reftype{ProfileManager}, \reftype{ProfileMapCombination}, \reftype{RouteModel}, \reftype{MainView}, \reftype{TileCache}, \reftype{MapView}
+Beteiligte Klassen: \reftype{RouteKit}, \reftype{MainController}, \reftype{MapManager}, \reftype{ProfileManager}, \reftype{ProfileMapCombination}, \reftype{RouteModel}, \reftype{MainView}, \reftype{TileCache}, \reftype{MapView}
 
 \subsection{Rendern}
 \begin{figure}[H]
@@ -1721,7 +1721,7 @@ Beteiligte Klassen: \reftype{MapView}, \reftype{TileCache}, \reftype{TileSource}
 \caption{Berechnen der Route}
 \label{fig:sequenz_routeCalculation}
 \end{figure}
-Beteiligte Klassen: \reftype{MainView}, \reftype{MapView}, \reftype{Controller}, \reftype{RouteModel}, \reftype{RouteCalculator}, \reftype{RouteDescription}, \reftype{Route}, \reftype{RouteDescription}
+Beteiligte Klassen: \reftype{MainView}, \reftype{MapView}, \reftype{MainController}, \reftype{RouteModel}, \reftype{RouteCalculator}, \reftype{RouteDescription}, \reftype{Route}, \reftype{RouteDescription}
 
 \subsection{Profilverwaltung}
 \begin{figure}[H]
@@ -1739,7 +1739,7 @@ Beteiligte Klassen: \reftype{ProfileManagerView}, \reftype{ProfileManagerControl
 \caption{Vorberechnung für eine Karte und ein Profil}
 \label{fig:sequenz_vorberechnung}
 \end{figure}
-Beteiligte Klassen: \reftype{Controller}, \reftype{PreCalculator}, \reftype{EdgeWeighter}, \reftype{ArcFlagsCalculator}, \reftype{ProfileMapCombination}
+Beteiligte Klassen: \reftype{MainController}, \reftype{PreCalculator}, \reftype{EdgeWeighter}, \reftype{ArcFlagsCalculator}, \reftype{ProfileMapCombination}
 
 
 \makeatletter
