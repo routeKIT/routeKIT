@@ -17,7 +17,7 @@ ProfileManagementSequenz:
 im Controller fehlt manage{Profiles,Maps}() (gemacht)
 lange Namen in Ordnung
 speichern, wie lange Vorberechnung dauerte => nicht estimate, sondern getDeletionAmount (gemacht)
-Estimation: Zeitdauer oder einfach „X Vorberechnungen werden gelöscht“?
+Estimation: Zeitdauer oder einfach „X Vorberechnungen werden gelöscht“? (gemacht) (keine Schätzung)
 PreCalculationSequenz:
     vom Controller aus asynchron machen (gemacht)
     Fortschrittsbalken

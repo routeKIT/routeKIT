@@ -1,5 +1,5 @@
-Controller -> MainController?
+Controller -> MainController? (gemacht)
 MapView onStartChanged?
 RenderSequenz: Pfeile (gemacht)
-ProfileManagerView braucht Referenz auf Controller – Constructor
+ProfileManagerView braucht Referenz auf Controller – Constructor (gemacht) (nicht explizit, aber die Linie ist da)
 PreCalculationSequenz: pmc -> combination? (gemacht) (ach was, passt)
