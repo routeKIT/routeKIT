@@ -528,7 +528,7 @@ bt=*
 --
 name: String
 --
-StreetMap(:Graph, :EdgedBasedGraph)
+StreetMap(:Graph, :EdgeBasedGraph)
 isDefault(): boolean</panel_attributes>
     <additional_attributes/>
   </element>
