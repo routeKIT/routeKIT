@@ -655,7 +655,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {
 		           \param{args}{String[]}{Kommandozeilen-Argumente.}
                  }
-	             {Statische Hauptmethode des Programms. Erzeugt einen \reftype{MainController}.}
+	             {(statische) Hauptmethode des Programms. Erzeugt einen \reftype{MainController}.}
         }
 
   \class{ProfileManagerController}
@@ -1170,21 +1170,23 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 \package{Models} {
 Dieses Paket enthält die Models aus der \gls{mvc}-Architektur. 
 }
-{  \class{ProfileMapCombination}
+{
+  \class{ProfileMapCombination}
         {Eine Kombination aus einem \reftype{Profile}[Profil] und einer \reftype{StreetMap}[Karte].}
         {
           \attr{profile}{Profile}{Das \gls{profil}.}
           \attr{map}{StreetMap}{Die \gls{karte}.}
-          \attr{calculationTime}{int}{
-            Die Zeit, die für die Vorberechnung dieser Kombination benötigt wurde.
-            Die Zeit wird in Millisekunden angegeben.
-            Für Kombinationen ohne \gls{vorberechnung} ist dieser Wert \code{0}.
-          }
+          \attr{calculationTime}{int}
+               {
+                  Die Zeit, die für die Vorberechnung dieser Kombination benötigt wurde, in Millisekunden.
+
+                  Für Kombinationen ohne \gls{vorberechnung} ist dieser Wert \code{0}.
+               }
         }
         {
-	\method{isCalculated}[boolean]
-         	    {\none}
-	    {Gibt \code{true} zurück, wenn für eine Kombination aus \gls{profil} und \gls{karte} eine \gls{vorberechnung} der Gewichte und der \gls{arc} existiert.}
+	      \method{isCalculated}[boolean]
+                 {\none}
+	             {Gibt \code{true} zurück, wenn für eine Kombination aus \gls{profil} und \gls{karte} eine \gls{vorberechnung} der Gewichte und der \gls{arc} existiert.}
          }
   \class{ArcFlags}
         {Enthält die \gls{arc} für den vorberechneten Graphen.}
@@ -1363,7 +1365,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  {
                    \param{file}{File}{Die Datei, aus der das \gls{profil} geladen wird.}
                  } 
-                 {Lädt ein \gls{profil} aus der angegebenen Datei und gibt es zurück.}
+                 {(statisch) Lädt ein \gls{profil} aus der angegebenen Datei und gibt es zurück.}
         }
   \enum{VehicleType}
        {
@@ -1739,7 +1741,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                  {
                    \param{file}{File}{Die Datei, aus der der \gls{verlauf} geladen wird.}
                  }
-                 {Lädt einen \gls{verlauf} aus der angegebenen Datei und gibt ihn zurück.}
+                 {(statisch) Lädt einen \gls{verlauf} aus der angegebenen Datei und gibt ihn zurück.}
         }
   \class{HistoryEntry}
         {Ein Eintrag im \gls{verlauf}.}
