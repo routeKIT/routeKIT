@@ -37,7 +37,7 @@ paint(:Graphics)</panel_attributes>
       <w>450</w>
       <h>280</h>
     </coordinates>
-    <panel_attributes>Controller
+    <panel_attributes>MainController
 bg=#FFFFFF
 bt=*
 --
