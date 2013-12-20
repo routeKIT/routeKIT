@@ -1770,6 +1770,41 @@ r1=currentDesc</panel_attributes>
     <additional_attributes>30;1060;230;1060;230;30;140;30</additional_attributes>
   </element>
   <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>3920</x>
+      <y>3890</y>
+      <w>50</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;170</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2090</x>
+      <y>2960</y>
+      <w>750</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>30;30;730;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2020</x>
+      <y>3070</y>
+      <w>820</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>30;120;30;30;800;30</additional_attributes>
+  </element>
+  <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
       <x>3860</x>
@@ -1804,17 +1839,6 @@ bg=#DDDDDD</panel_attributes>
     <panel_attributes>Precalculation
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>3920</x>
-      <y>3890</y>
-      <w>50</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;170</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
@@ -1911,29 +1935,5 @@ bg=#DDDDDD</panel_attributes>
     <panel_attributes>Util
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>2090</x>
-      <y>2960</y>
-      <w>750</w>
-      <h>50</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>30;30;730;30</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>2020</x>
-      <y>3070</y>
-      <w>820</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=-
-</panel_attributes>
-    <additional_attributes>30;120;30;30;800;30</additional_attributes>
   </element>
 </diagram>
