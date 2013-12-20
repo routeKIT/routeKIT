@@ -288,6 +288,8 @@
 \begin{document}
 \shorthandoff{"}
 
+\sloppy % fix overfull hboxes
+
 % place a symbol before clickable links
 % this has to come *after* \begin{document} because hyperref installs a \AtBeginDocument hook that updates the ref command.
 \newcommand{\refsymbol}[0]{\scalebox{0.5}{$\nearrow$}}
@@ -1833,7 +1835,7 @@ Zunächst wird der \reftype{MainController} erstellt (Konstruktor \refmethod{Mai
 dieser erstellt wiederum die restlichen Komponenten des Programms.
 \begin{figure}[H]
 \centering
-\includegraphics[angle=90, width=\textwidth]{StartSequenz}
+\includegraphics[angle=90, width=0.8\textwidth]{StartSequenz}
 \caption{Start des Programms}
 \label{fig:sequenz_start}
 \end{figure}
