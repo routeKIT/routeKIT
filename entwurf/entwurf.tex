@@ -458,11 +458,17 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \section{Übersicht}
 
 Beim Entwurf der Anwendung \routeKIT wurden \gls{entwurfsmuster} eingesetzt.
-Das Muster \gls{mvc} umfasst die Pakete \refpackage{Controllers}, \refpackage{Models} und \refpackage{Views}, wobei die Klassen in \refpackage{Controllers} die Kommunikation zwischen den Klassen in \refpackage{Views} und den funktionalem Teil des Programms übernehmen.
-Das Anfordern der Kacheln aus dem Paket \refpackage{MapDisplay} erfolgt von der Klasse \reftype{MapView} direkt (ohne Einsatz von Controllern).
-Die Klassen in \refpackage{Views} sind für die Interaktion des Benutzers mit den Programm und die Darstellung der Daten aus dem Paket \refpackage{Models} zuständig.
-Die Bekanntgabe von Änderungen an relevanten Daten im Modell geschieht nach dem \gls{entwurfsmuster} \gls{beobachter}.
-Durch den Einsatz vom \gls{entwurfsmuster} \gls{mvc} ist das Paket \refpackage{Views} leicht austauschbar.
+Der grobe Entwurf der Anwendung wird durch das Muster \gls{mvc} vorgegeben, welches in den Paketen \refpackage{Models}, \refpackage{Views} und \refpackage{Controllers} umgesetzt ist.
+Da bei \gls{mvc} die Verteilung von Zuständigkeiten zwischen den drei Teilen nicht vollständig festgelegt und auch durchaus umstritten ist, sei hier unsere Variante von \gls{mvc} erläutert:
+\begin{description}
+\item[Controller] Der Controller behandelt die Benutzeraktionen, die den Zustand der Anwendung ändern, und sendet entsprechende Befehle an das Model und die View.
+\item[Model] Das Model benachrichtigt über das Entwurfsmuster \gls{beobachter} die View und den Controller bei Änderungen der Daten.
+\item[View] Die View bekommt Informationen aus dem Model und sendet Benutzeraktionen, die den Zustand der Anwendung ändern, an den Controller.
+  Benutzeraktionen, die den Zustand der Anwendung \emph{nicht} ändern, werden rein in der View behandelt.
+\end{description}
+Benutzeraktionen, die den Zustand ändern, sind etwa das Öffnen des Profilmanagers (siehe \abbildung{sequenz_profilVerwaltung}) oder die Eingabe eines Startpunkts;
+Benutzeraktionen, die den Zustand \emph{nicht} ändern, sind etwa das Scrollen im Verlauf oder Navigation auf der Karte – wobei letztere das Anfordern neuer Kartenkacheln aus dem Model auslöst.
+
 Die Klassen \reftype{Controller}, \reftype{ProfileManager}, \reftype{MapManager} im Paket \refpackage{Controllers} basieren auf dem \gls{entwurfsmuster} \gls{einzelstueck}. % TODO nein? ManagerController werden immer wieder erstellt – Lucas (gemacht, stimmt hab mich vertan)
 
 Im Paket \refpackage{MapDisplay} wird das \gls{entwurfsmuster} \gls{dekorierer} verwendet.
