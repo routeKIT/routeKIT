@@ -35,13 +35,14 @@ paint(:Graphics)</panel_attributes>
       <x>2820</x>
       <y>2870</y>
       <w>450</w>
-      <h>280</h>
+      <h>290</h>
     </coordinates>
     <panel_attributes>MainController
 bg=#FFFFFF
 bt=*
 --
 --
+MainController()
 onStartChanged(:Coordinates)
 onDestinationChanged(:Coordinates)
 onStartAndDestChanged(start: Coordinates, destination: Coordinates)
