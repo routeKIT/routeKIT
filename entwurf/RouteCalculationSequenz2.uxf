@@ -175,7 +175,7 @@
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
-onStartChanged(start)</panel_attributes>
+setStartPoint(start)</panel_attributes>
     <additional_attributes>220;50;30;50</additional_attributes>
   </element>
   <element>
@@ -221,7 +221,7 @@ setStart(start)</panel_attributes>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;
-onDestinationChanged(dest)</panel_attributes>
+setDestinationPoint(dest)</panel_attributes>
     <additional_attributes>220;50;30;50</additional_attributes>
   </element>
   <element>

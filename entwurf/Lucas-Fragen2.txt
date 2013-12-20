@@ -5,7 +5,7 @@ PreCalculator: muss neues Object zurückgeben (neuer Typ GraphPreCalculation sta
 RouteDescription -> TurnInstruction: 0..r? (gemacht) (nein)
 Zum Routing Kantenzüge zusammenfassen?
 Wo genau läuft Asynchronität bei TileRendering? (gemacht)
-onXChanged vs setX? wenn’s nicht handler sind?
+onXChanged vs setX? wenn’s nicht handler sind? (gemacht)
 estimatedCalculationTime auch im Controller (analog Command)
     im MapManagementController fehlt’s ganz
 saveAllChanges macht auch Speichern-Hälfte von swap (gemacht) (sinnlos, hat keinen Zugriff auf die Eingabeelemente)

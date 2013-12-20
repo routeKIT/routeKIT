@@ -561,7 +561,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Für den genauen Ablauf siehe \abbildung{sequenz_start}.
                  }
                  
-          \method{onStartChanged}
+          \method{setStartPoint}
                  {
                    \param{start}{Coordinates}{Die Koordinaten des neuen Startpunkts.}
                  }
@@ -570,7 +570,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Setzt den neuen Startpunkt in der \reftype{MapView}.
                    Falls bereits ein Zielpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum \gls{verlauf} hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
                  }
-          \method{onDestinationChanged}
+          \method{setDestinationPoint}
                  {
                    \param{destination}{Coordinates}{Die Koordinaten des neuen Zielpunkts.}
                  }
@@ -579,14 +579,14 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Setzt den neuen Zielpunkt in der \reftype{MapView}.
                    Falls bereits ein Startpunkt ausgewählt ist, wird außerdem ein neuer Eintrag zum \gls{verlauf} hinzugefügt (siehe \refmethod{History}{addEntry}) und die Routenberechnung gestartet.
                  }
-          \method{onStartAndDestChanged}
+          \method{setStartAndDestinationPoint}
                  {
                    \param{start}{Coordinates}{Die Koordinaten des neuen Startpunkts.}
                    \param{destination}{Coordinates}{Die Koordinaten des neuen Zielpunkts.}
                  }
                  {
                    Wird aufgerufen, wenn sich der Start- und Zielpunkt ändern (z.\,B. durch die Auswahl eines Eintrags aus dem \gls{verlauf}).
-                   Die gleichen Aktionen wie für \refmethod{MainController}{onStartChanged} und \refmethod{MainController}{onDestinationChanged} werden ausgeführt, nur nicht doppelt.
+                   Die gleichen Aktionen wie für \refmethod{MainController}{setStartPoint} und \refmethod{MainController}{setDestinationPoint} werden ausgeführt, nur nicht doppelt.
                  }
                  
           \method{exportGPX}

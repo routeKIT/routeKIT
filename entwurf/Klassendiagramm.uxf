@@ -43,9 +43,9 @@ bt=*
 --
 --
 MainController()
-onStartChanged(:Coordinates)
-onDestinationChanged(:Coordinates)
-onStartAndDestChanged(start: Coordinates, destination: Coordinates)
+setStartPoint(:Coordinates)
+setDestinationPoint(:Coordinates)
+setStartAndDestinationPoint(start: Coordinates, destination: Coordinates)
 exportGPX(:File)
 exportHTML(:File)
 selectProfile(:Profile)

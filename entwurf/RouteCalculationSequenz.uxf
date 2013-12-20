@@ -14,7 +14,7 @@ _user~user_|_:MainView~main_|_:MapView~view_|_:Controller~ctrl_|_worker:Thread~t
 
 user-&gt;view:user,view:"Sets start point"
 
-view-&gt;ctrl:view,ctrl:onStartChanged
+view-&gt;ctrl:view,ctrl:setStartPoint
 ctrl-&gt;model:view,ctrl,model:setStart
 
 //Leerzeile im Diagramm
@@ -22,7 +22,7 @@ ctrl_&gt;view
 
 user-&gt;view:user,view:"Sets destination point"
 
-view-&gt;ctrl:view,ctrl:onDestinationChanged
+view-&gt;ctrl:view,ctrl:setDestinationPoint
 ctrl-&gt;model:view,ctrl,model:setDestination
 ctrl.&gt;thr:view,ctrl,thr:triggers
 thr-&gt;&gt;&gt;calc:thr,calc:calculateRoute
