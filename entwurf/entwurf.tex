@@ -839,7 +839,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {Importiert eine neue \gls{karte} aus der angegebenen \gls{osm}-Datei. Die vom \reftype{OSMParser} aufgebaute Graphdatenstruktur wird dabei vom \reftype{GraphPartitioner} partitioniert und zurückgegeben.}
         }
   \class{OSMParser}
-        {Stellt die Funktionalität zum Parsen einer \gls{osm}-Datei bereit. Dafür werden zur temporären Repräsentation des Graphen im Speicher die Klassen \reftype{MapNode}, \reftype{MapEdge} und \reftype{TurnRestriction} verwendet.}
+        {Stellt die Funktionalität zum Parsen einer \gls{osm}-Datei bereit. Dafür werden zur temporären Repräsentation des Graphen im Speicher die Klassen \reftype{OSMWay}, \reftype{MapEdge} und \reftype{TurnRestriction} verwendet.}
         {\none}
         {
           \method{parseOSM}[StreetMap]
@@ -849,25 +849,53 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  }
                  {Liest eine \gls{osm}-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
         }
-  \class{MapNode}
-        {Stellt einen Knoten im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
+  \class{OSMWay}
+        {Stellt ein Weg aus der OSM-Datei dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Hilfsklasse.}
+        {\none}
         {
-          \attr{lat}{float}{Der Längengrad des Knotens.}
-          \attr{lon}{float}{Der Breitengrad des Knotens.}
-        }
-        {
-          \method{getOutgoingEdges}[Set<MapEdge>]
+          \method{OSMWay}
+                 {
+                   \param{properties}{Map<String, String>}{Eine Liste von OSM-Tags.}
+                 }
+                 {Konstrukor: Erzeugt ein neues Objekt aus den angegebenen OSM-Tags.}
+          \method{isOneway}[boolean]
                  {\none}
-                 {Gibt eine Liste mit allen ausgehenden Kanten des Knotens zurück.}
+                 {Bestimmt, ob es sich um eine Einbahnstraße handelt.}
+          \method{isRoundabout}[boolean]
+                 {\none}
+                 {Bestimmt, ob es sich um einen Kreisverkehr handelt.}
+          \method{getEdgeProperties}[EdgeProperties]
+                 {\none}
+                 {Liefert ein \reftype{EdgeProperties}-Objekt mit den Eigenschaften des Wegs.}
+          \method{getRestriction}[Restriction]
+                 {\none}
+                 {Liefert ein \reftype{Restriction}-Objekt mit den Beschränkungen des Wegs.}
         }
   \class{MapEdge}
         {Stellt eine Kante im Straßengraphen dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
-        {\none}
-        {\none}
+        {
+          \attr{targetNode}{int}{Die ID des Zielknotens in der OSM-Datei.}
+        }
+        {
+          \method{MapEdge}
+                 {
+                   \param{targetNode}{int}{Die ID des Zielknotens.}
+                   \param{way}{OSMWay}{Der zur Kante gehörige OSM-Weg.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Attributen.}
+        }
   \class{TurnRestriction}
         {Stellt eine Abbiegebeschränkung dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Zwischendarstellung.}
-        {\none}
-        {\none}
+        {
+          \attr{onlyAllowedTurn}{boolean}{Gibt an, ob es sich um die ausschließlich erlaubte Abbiegemöglichkeit handelt (\code{true}) oder um ein Abbiegeverbot (\code{false}).}
+        }
+        {
+          \method{TurnRestriction}
+                 {
+                   \param{onlyAllowedTurn}{boolean}{Der Wert des gleichnamigen Attributs.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit dem angegebenen Attribut.}
+        }
   \class{GraphPartitioner}
         {Partitioniert einen gegebenen Graphen.}
         {\none}
