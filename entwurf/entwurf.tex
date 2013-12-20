@@ -53,6 +53,16 @@
 % 3. Klassen (ein oder mehrere \class)
 \newcommand{\package}[3]{%
   \subsection{Paket #1}\label{\@packagelabel{#1}}
+  \ifstrequal{#1}{BeispielPaket}{%
+    % no figure for the sample package
+  }{
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.9\pagewidth]{Package_#1}
+      \caption{Das Paket #1}
+      \label{fig:package_#1}
+    \end{figure}
+  }
   #2
   \begin{description}
     #3%
