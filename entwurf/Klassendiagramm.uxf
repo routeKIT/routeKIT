@@ -1404,14 +1404,14 @@ saveAllChanges()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>2090</x>
-      <y>3010</y>
-      <w>560</w>
-      <h>230</h>
+      <x>1550</x>
+      <y>3120</y>
+      <w>1100</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
-    <additional_attributes>30;30;540;30;540;210</additional_attributes>
+    <additional_attributes>30;80;30;30;1080;30;1080;100</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
@@ -1910,5 +1910,17 @@ bg=#DDDDDD</panel_attributes>
     <panel_attributes>Util
 bg=#DDDDDD</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>2090</x>
+      <y>2960</y>
+      <w>750</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>30;30;730;30</additional_attributes>
   </element>
 </diagram>
