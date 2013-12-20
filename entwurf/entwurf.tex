@@ -1455,14 +1455,19 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         }
   \class{EdgeProperties}
         {Kapselt die Eigenschaften einer Kante.}
-        {\none}
         {
-          \method{getName}[String]
-                 {\none}
-                 {Gibt den Namen der Straße zurück oder \code{null}, falls nicht vorhanden.}
-          \method{getRoadRef}[String]
-                 {\none}
-                 {Gibt die Nummer der Straße zurück oder \code{null}, falls nicht vorhanden.}
+          \attr{name}{String}{Der Name der Straße oder \code{null}, falls nicht vorhanden.}
+          \attr{roadRef}{String}{Die Nummer der Straße oder \code{null}, falls nicht vorhanden.}
+        }
+        {
+          \method{EdgeProperties}
+                 {
+                   \param{type}{HighwayType}{Der Straßentyp.}
+                   \param{name}{String}{Der Wert für \refattr{EdgeProperties}{name}.}
+                   \param{roadRef}{String}{Der Wert für \refattr{EdgeProperties}{roadRef}.}
+                   \param{maxSpeed}{int}{Die zulässige Höchstgeschwindigkeit für diese Kante oder 0, falls nicht festgelegt.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Eigenschaften.}
           \method{getMaxSpeed}[int]
                  {\param{profile}{Profile}{Das \gls{profil}, für das die Höchstgeschwindigkeit auf dieser Kante bestimmt werden soll.}}
                  {Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde) auf dieser Kante für das angegebene \gls{profil}.}
@@ -1487,6 +1492,14 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         }
         {\none}
         {
+          \method{EdgeBasedGraph}
+                 {
+                   \param{edges}{Edge[]}{Das Knoten-Array (Kanten im Straßengraph) des Adjazenzfelds.}
+                   \param{turns}{turn[]}{Das Kanten-Array (Abbiegemöglichkeiten) des Adjazenzfelds.}
+                   \param{turnTypes}{TurnType[]}{Die Typen der Abbiegemöglichkeiten.}
+                   \param{restrictions}{Map<Turn, Restriction>}{Die Beschränkungen der Abbiegemöglichkeiten.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt aus dem gegebenen Adjazenzfeld.}
           \method{getOutgoingTurns}[Set<Turn>]
                  {
                    \param{edge}{Edge}{Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht werden.}
@@ -1549,6 +1562,66 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
          \constant{RoundaboutNoExit}{An einer Ausfahrt im Kreisverkehr bleiben.}
          \constant{MotorwayJunction}{Eine Anschlussstelle einer Autobahn oder Schnellstraße.}
        }
+  \class{Restriction}
+        {Abstrakte Klasse zur Repräsentation unterschiedlicher Beschränkungen für Straßen oder Abbiegemöglichkeiten. Die einzelnen Unterklassen sind Multitons, um nicht unnötig Speicherplatz für mehrere gleiche Objekte zu verbrauchen.}
+        {\none}
+        {
+          \method{allows}[boolean]
+                 {
+                   \param{profile}{Profile}{Das verwendete \gls{profil}.}
+                 }
+                 {Bestimmt, ob es die Beschränkung erlaubt, unter dem angegebenen \gls{profil} eine Straße oder Abbiegemöglichkeit zu nutzen.}
+        }
+  \class{VehicleTypeRestriction}
+        {Repräsentiert eine Beschränkung der Benutzung durch einen bestimmten Fahrzeugtyp.}
+        {\none}
+        {
+          \method{getInstance}[Restriction]
+                 {
+                   \param{type}{}{}
+                 }
+                 {Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
+        }
+  \class{WeightRestriction}
+        {Repräsentiert eine Beschränkung des Fahrzeuggewichts.}
+        {\none}
+        {
+          \method{getInstance}[Restriction]
+                 {
+                   \param{maxWeight}{int}{Das maximale Fahrzeuggewicht.}
+                 }
+                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+        }
+  \class{WidthTypeRestriction}
+        {Repräsentiert eine Beschränkung der Fahrzeugbreite.}
+        {\none}
+        {
+          \method{getInstance}[Restriction]
+                 {
+                   \param{maxWidth}{int}{Die maximale Fahrzeugbreite.}
+                 }
+                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+        }
+  \class{HeightTypeRestriction}
+        {Repräsentiert eine Beschränkung der Fahrzeughöhe.}
+        {\none}
+        {
+          \method{getInstance}[Restriction]
+                 {
+                   \param{maxHeight}{int}{Die maximale Fahrzeughöhe.}
+                 }
+                 {Gibt eine Instanz dieser Klasse für den angegebenen Wert zurück.}
+        }
+  \class{MultipleRestrictions}
+        {Repräsentiert eine Kombination aus mehreren Beschränkungen.}
+        {\none}
+        {
+          \method{getInstance}[Restriction]
+                 {
+                   \param{restrictions}{Set<Restriction>}{Eine Menge von Beschränkungen.}
+                 }
+                 {Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
+        }
 }
 
 \package{Exporter}{
