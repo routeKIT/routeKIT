@@ -475,7 +475,7 @@ Die Klassen \reftype{MainController}, \reftype{ProfileManager}, \reftype{MapMana
 
 Im Paket \refpackage{MapDisplay} wird das \gls{entwurfsmuster} \gls{dekorierer} verwendet.
 Der Cache baut dabei eine Kapselung für einen effizienteren Zugriff um eine Kachelquelle herum.
-Dadurch wird die Funktionaltät, dass ältere Zugriffe gespeichert werden, von der Funktion, die Kacheln zu beschaffen, abgetrennt.
+Dadurch wird die Funktionalität, dass ältere Zugriffe zwischengespeichert werden, von der Funktion, die Kacheln zu beschaffen, abgetrennt.
 Es wird außerdem das \gls{entwurfsmuster} \gls{beobachter} verwendet, wobei \reftype{TileFinishedListener} der Beobachter ist. Die genauere Funktionsweise wird in \refpackage{MapDisplay} erläutert.
 
 % TODO Vorteile davon. (gemacht)
@@ -500,7 +500,7 @@ Im Paket \refpackage{Precalculation} wird ebenfalls dieses Muster verwendet. Som
 
 \section{Änderungen gegenüber dem Pflichtenheft}
 \begin{itemize}
-\item Es findet keine Schätzung statt, wie lange eine Vorberechnung dauern wird; stattdessen wird einfach gemeldet, dass die Vorberechnung mehrere Stunden dauern kann. (Pflichtenheft Abschnitte 9.2, 9.5)
+\item Es findet keine Angabe darüber statt, wie lange eine Vorberechnung voraussichtlich dauern wird, da dies kaum abschätzbar ist; stattdessen wird einfach darauf hingewiesen, dass die Vorberechnung mehrere Stunden dauern kann. (Pflichtenheft Abschnitte 9.2, 9.5)
 \end{itemize}
 
 
@@ -810,7 +810,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    \param{map}{StreetMap}{Die \gls{karte}, die gelöscht werden soll.}
                  }
                  {
-                   Löscht die ausgewählte \gls{karte} aus der internen Liste und von der Festplatte (die 2  Graphen, Daten über Beschränkungen und alle \glspl{vorberechnung}).
+                   Löscht die ausgewählte \gls{karte} aus der internen Liste und von der Festplatte (die zwei Graphen, Daten über Beschränkungen und alle \glspl{vorberechnung}).
                  }
           \method{getMaps}[Set<StreetMap>]
                  {\none}
@@ -818,7 +818,6 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Gibt alle \glspl{karte} in der internen Liste zurück.
                  }
         }
-
 }
 
 \package{Precalculation}{
@@ -1112,7 +1111,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    andernfalls wird eine Dummy-Kachel zurückgegeben und die richtige von \refparam{TileCache}{TileCache}{target} angefordert, im Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer Zoomstufe und der Umgebung einer Kachel werden von \refparam{TileCache}{TileCache}{target} angefordert und im Zwischenspeicher gespeichert.
                  }
 
- \method{addTileFinishedListener}
+          \method{addTileFinishedListener}
                  {
                    \param{listener}{TileFinishedListener}{Der Listener, der hinzugefügt werden soll.}
                  }
@@ -1120,7 +1119,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Registriert einen \reftype{TileFinishedListener}, der benachrichtigt wird, wenn eine Kachel fertig berechnet ist.
                    Die Kachel ist Teil der Nachricht.
                  }
-}
+        }
   \class{TileFinishedListener}
         {Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen ist.}
         {\none}
@@ -1136,8 +1135,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    Wird vom \reftype{TileCache} aufgerufen, wenn die Berechnung einer Kachel abgeschlossen ist.
                    Die übliche Aktion ist, ein \code{repaint} der Kartenansicht im \gls{gui} auszulösen.
                  }
-        }
- 
+        } 
   \class{TileRenderer}
         {Eine \reftype{TileSource}, die die Kacheln selbst berechnet.}
         {\none}
@@ -1189,7 +1187,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
 	      \method{isCalculated}[boolean]
                  {\none}
 	             {Gibt \code{true} zurück, wenn für eine Kombination aus \gls{profil} und \gls{karte} eine \gls{vorberechnung} der Gewichte und der \gls{arc} existiert.}
-         }
+        }
   \class{ArcFlags}
         {Enthält die \gls{arc} für den vorberechneten Graphen.}
         {\none}
@@ -1200,7 +1198,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  }
                  {Gibt die zum Abbiegevorgang gehörenden \gls{arc} zurück.}
         }
-\class{Weights}
+  \class{Weights}
         {Enthält die Kantengewichte für den vorberechneten Graphen.}
         {\none}
         {
@@ -1529,7 +1527,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
                    \param{type}{HighwayType}{Der Straßentyp.}
                    \param{name}{String}{Der Wert für \refattr{EdgeProperties}{name}.}
                    \param{roadRef}{String}{Der Wert für \refattr{EdgeProperties}{roadRef}.}
-                   \param{maxSpeed}{int}{Die zulässige Höchstgeschwindigkeit für diese Kante oder 0, falls nicht festgelegt.}
+                   \param{maxSpeed}{int}{Die zulässige Höchstgeschwindigkeit für diese Kante oder \code{0}, falls nicht festgelegt.}
                  }
                  {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Eigenschaften.}
           \method{getMaxSpeed}[int]
