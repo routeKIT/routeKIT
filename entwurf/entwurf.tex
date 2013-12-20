@@ -626,7 +626,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                    \param{combination}{ProfileMapCombination}{Eine nicht vorberechnete Kombination aus \gls{profil} und \gls{karte}.} 
                  }
                  {
-                   Ruft \refmethod{PreCalculator}{doPrecalculation} auf, falls keine \gls{vorberechnung} für diese Kombination aus \gls{profil} und \gls{karte} existiert.
+                   Ruft in einem neuen WorkerThread \refmethod{PreCalculator}{doPrecalculation} auf, falls keine \gls{vorberechnung} für diese Kombination aus \gls{profil} und \gls{karte} existiert. Sperrt währenddessen die \refclass{MainView}.
                  }
 
           \method{setUseOnlineMaps}
