@@ -973,6 +973,14 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           \attr{destination}{PointOnEdge}{Der Zielpunkt der \gls{route}.}
         }
         {
+          \method{Route}
+                 {
+                   \param{data}{ProfileMapCombination}{Die Karte, auf dem die Route berechnet wurde.}
+                   \param{start}{PointOnEdge}{Der Startpunkt der Route.}
+                   \param{destination}{PointOnEdge}{Der Zielpunkt der Route.}
+                   \param{turns}{List<Turn>}{Die Liste der Abbiegevorgänge der Route.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Routen-Objekt mit den angegebenen Attributen.}
           \method{getTurns}[List<Turn>]
                  {\none}
                  {Liefert eine Liste der Abbiegevorgänge, aus denen die \gls{route} besteht.}
@@ -994,14 +1002,28 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
         {Kapselt die zu einer \reftype{Route} gehörende \gls{wegbeschreibung}.}
         {\none}
         {
+          \method{RouteDescription}
+                 {
+                   \param{route}{Route}{Die Route, die die Wegbeschreibung beschreibt.}
+                   \param{instructions}{List<TurnInstruction>}{Eine Liste von Abbiegeanweisungen.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Parametern.}
           \method{getInstructions}[List<TurnInstruction>]
                  {\none}
                  {Liefert eine Liste der Abbiegeanweisungen.}
         }
   \class{TurnInstruction}
         {Kapselt eine einzelne Abbiegeanweisung, aus welchen eine \reftype{RouteDescription} aufgebaut ist.}
-        {\none}
         {
+          \attr{turn}{Turn}{Der Abbiegevorgang, den die Anweisung beschreibt.}
+        }
+        {
+          \method{TurnInstruction}
+                 {
+                   \param{turn}{Turn}{Der Abbiegevorgang, den die Anweisung beschreibt.}
+                   \param{text}{String}{Der Text der Abbiegeanweisung.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Attributen.}
           \method{toString}[String]
                  {\none}
                  {Gibt den Text der Abbiegeanweisung zurück.}
