@@ -696,8 +696,8 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
           \method{getDeletionTime}[int]
                  {\none}
                  {
-                   Gibt zurück, wie lange die \glspl{vorberechnung} benötigten, die durch die aktuell erfassten Änderungen gelöscht werden.
-                   Die geschätzte Dauer wird in Millisekunden zurückgegeben.
+                   Gibt zurück, wie viel Zeit die \glspl{vorberechnung} benötigt haben, die durch die aktuell erfassten Änderungen gelöscht werden.
+                   Die Dauer wird in Millisekunden zurückgegeben.
                  }
           \method{saveAllChanges}
                  {\none}
@@ -821,8 +821,8 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
 
 \package{Precalculation}{
   Dieses Paket enthält alle Klassen, die an der \gls{vorberechnung} beteiligt sind oder für den Import einer \gls{karte} benötigt werden.
-  Beim Importieren einer \gls{karte} werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph wird partitioniert.
-  Bei der \gls{vorberechnung} wird der kantenbasierte Graph gewichtet vom \reftype{EdgeWeighter} und danach werden die \gls{arc} vom \reftype{ArcFlagsCalculator} berechnet.
+  Beim Importieren einer \gls{karte} werden ein knotenbasierter und ein kantenbasierter Graph aufgebaut und der kantenbasierte Graph partitioniert.
+  Bei der \gls{vorberechnung} wird der kantenbasierte Graph vom \reftype{EdgeWeighter} gewichtet und danach vom \reftype{ArcFlagsCalculator} mit \gls{arc} versehen.
   % TODO kurze erklärung, wie die vorberechnung läuft (gemacht)
   
   Ein beispielhafter Ablauf der Vorberechnung ist in \abbildung{sequenz_vorberechnung} zu sehen.
@@ -851,7 +851,7 @@ Bezeichner und weiterer Code sind in \code{dicktengleicher Schrift} gesetzt.
                  {Liest eine \gls{osm}-Datei ein und erzeugt daraus einen \reftype{Graph} sowie den zugehörigen (unpartitionierten) \reftype{EdgeBasedGraph} und gibt diese als \reftype{StreetMap} zurück.}
         }
   \class{OSMWay}
-        {Stellt ein Weg aus der OSM-Datei dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Hilfsklasse.}
+        {Stellt einen Weg aus der OSM-Datei dar. Dies ist nur eine vom \reftype{OSMParser} verwendete Hilfsklasse.}
         {\none}
         {
           \method{OSMWay}
@@ -1204,7 +1204,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
                  {
                    \param{turn}{Turn}{Die Nummer eines Abbiegevorgang.}
                  }
-                 {Gibt die zum Abbiegevorgang gehörendes Gewicht zurück.}
+                 {Gibt das zum Abbiegevorgang gehörende Gewicht zurück.}
         }
 
   \class{RouteModel}
@@ -1382,7 +1382,7 @@ Dieses Paket enthält die Models aus der \gls{mvc}-Architektur.
   
   \routeKIT verwendet zwei Datenstrukturen für den Straßengraphen:
   \begin{description}
-  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Aus ihm wirden dynamisch geometrische Datenstrukturen \reftype{GraphIndex} für verschiedene Zoomstufen erzeugt. Er wird zum \Gls{rendern} der \gls{karte} verwendet.
+  \item[\reftype{Graph}] ist ein regulärer, knotenbasierter Graph, gespeichert als Adjazenzfeld. Aus ihm werden geometrische Datenstrukturen \reftype{GraphIndex} für verschiedene Zoomstufen erzeugt. Er wird zum \Gls{rendern} der \gls{karte} verwendet.
   \item[\reftype{EdgeBasedGraph}] ist ein kantenbasierter Graph (ebenfalls gespeichert als Adjazenzfeld). Er wird zur Routenberechnung verwendet.
   \end{description}
 Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
