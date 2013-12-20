@@ -622,9 +622,9 @@ calculateRoute(start: PointOnEdge, destination: PointOnEdge, data: ProfileMapCom
     <type>com.umlet.element.Class</type>
     <coordinates>
       <x>3650</x>
-      <y>3810</y>
+      <y>3790</y>
       <w>390</w>
-      <h>120</h>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Route
 bg=#FFFFFF
@@ -633,7 +633,8 @@ bt=*
 start: PointOnEdge
 destination: PointOnEdge
 --
-Route(start: PointOnEdge, dest: PointOnEdge, :List&lt;Turn&gt;)
+Route(:ProfileMapCombination, start: PointOnEdge, 
+     dest: PointOnEdge, :List&lt;Turn&gt;)
 getTurns(): List&lt;Turn&gt;
 getNodeIterator(): Iterator&lt;Node&gt;
 // Berechnung der Gesamtlänge der Route?
@@ -1818,7 +1819,7 @@ bg=#FFFFFF
 bt=*
 --
 --
-_getInstance(Set&lt;Restriction&gt;): Restriction_</panel_attributes>
+_getInstance(:Set&lt;Restriction&gt;): Restriction_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

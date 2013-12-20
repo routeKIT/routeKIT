@@ -1396,6 +1396,12 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
           \attr{edgeBasedGraph}{EdgeBasedGraph}{Die kantenbasierte Version des Straßennetzes, die zur Routenberechnung verwendet wird.}
         }
         {
+          \method{StreetMap}
+                 {
+                   \param{graph}{Graph}{Der Kartengraph.}
+                   \param{edgeBasedGraph}{EdgeBasedGraph}{Der kantenbasierte Graph.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt aus den gegebenen Graphen.}
           \method{isDefault}[boolean]
                  {\none}
                  {Gibt zurück, ob es sich um eine Standardkarte handelt.}
@@ -1632,7 +1638,7 @@ Zusammen mit einem Namen ergeben sie \reftype{StreetMap}.
         {
           \method{getInstance}[Restriction]
                  {
-                   \param{type}{}{}
+                   \param{type}{VehicleType}{Der Fahrzeugtyp.}
                  }
                  {Gibt eine Instanz dieser Klasse für den angegebenen Fahrzeugtyp zurück.}
         }
