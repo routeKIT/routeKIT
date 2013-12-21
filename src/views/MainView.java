@@ -3,9 +3,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -47,7 +49,7 @@ public class MainView extends JFrame{
 	}
 	private JPanel initLeftPane() {
 		JPanel left = new JPanel(new BorderLayout());
-		left.setMinimumSize(new Dimension(300, 100));
+		left.setMinimumSize(new Dimension(200, 100));
 
 		JPanel controls = new JPanel(new BorderLayout());
 		JPanel hist = new JPanel();
@@ -55,9 +57,10 @@ public class MainView extends JFrame{
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
-		swap.add(new JButton("<=>"));
+		JButton swapKnopf = new JButton(new ImageIcon(MainView.class.getResource("Knopf.png")));
+		swapKnopf.setMargin(new Insets(0, 0, 0, 0));
+		swap.add(swapKnopf);
 		controls.add(swap, BorderLayout.WEST);
-		
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
 
 
