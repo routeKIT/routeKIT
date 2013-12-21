@@ -27,7 +27,7 @@ public class ProfileManagerView extends JFrame {
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
 		setResizable(false);
-
+		
 		JPanel contentPane = new JPanel(new BorderLayout());
 		
 		JPanel north = initNorthPane();
@@ -90,6 +90,7 @@ public class ProfileManagerView extends JFrame {
 	private JPanel innerTypePane() {
 		JPanel type = new JPanel(new FlowLayout());
 		type.setBackground(Color.WHITE);
+		
 		JList<String> vehicleType = new JList<String>(new String[]{"Fahrzeugtyp:"});
 		JRadioButton car = new JRadioButton("PKW");
 		car.setBackground(Color.WHITE);
@@ -118,28 +119,65 @@ public class ProfileManagerView extends JFrame {
 	private JPanel innerDimentionsPane() {
 		JPanel dimentions = new JPanel(new GridLayout(3, 1));
 		
-		JPanel hight = new JPanel(new FlowLayout());
-		JList<String> vehicleHeight = new JList<String>(new String[]{"Höhe des Fahrzeugs:"});
-		JSpinner spinner1 = new JSpinner(new SpinnerNumberModel(1, 1, 4, 0.1));
-		spinner1.setSize(100, 100);
-		JList<String> meter = new JList<String>(new String[]{"m"});
-		hight.add(vehicleHeight);
-		hight.add(spinner1);
-		hight.add(meter);
-		
-		JPanel width = new JPanel(new FlowLayout());
-		JPanel weight = new JPanel(new FlowLayout());
+		JPanel height = innerHeightPane();
+		JPanel width = innerWidthPane();
+		JPanel weight = innerWeightPane();
 		
 		
-		dimentions.add(hight);
+		dimentions.add(height);
 		dimentions.add(width);
 		dimentions.add(weight);
 		return dimentions;
 	}
 	
 	private JPanel innerVelocityPane() {
-		JPanel velocity = new JPanel();
+		JPanel velocity = new JPanel(new GridLayout(2, 1));
 		return velocity;
+	}
+	
+	private JPanel innerHeightPane() {
+		JPanel height = new JPanel(new FlowLayout());
+		height.setBackground(Color.WHITE);
+		JList<String> vehicleHeight = new JList<String>(new String[]{"Höhe des Fahrzeugs:"});
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 0, 4, 0.1));
+		spinner.setPreferredSize(new Dimension(50, 20));
+		JList<String> meter = new JList<String>(new String[]{"m"});
+		JList<String> space = new JList<String>(new String[]{"                                         "});
+		height.add(vehicleHeight);
+		height.add(spinner);
+		height.add(meter);
+		height.add(space);
+		return height;
+	}
+	
+	private JPanel innerWidthPane() {
+		JPanel width = new JPanel(new FlowLayout());
+		width.setBackground(Color.WHITE);
+		JList<String> vehicleWidth = new JList<String>(new String[]{"Breite des Fahrzeugs:"});
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 3, 0.1));
+		spinner.setPreferredSize(new Dimension(50, 20));
+		JList<String> ton = new JList<String>(new String[]{"m"});
+		JList<String> space = new JList<String>(new String[]{"                                         "});
+		width.add(vehicleWidth);
+		width.add(spinner);
+		width.add(ton);
+		width.add(space);
+		return width;
+	}
+	
+	private JPanel innerWeightPane() {
+		JPanel weight = new JPanel(new FlowLayout());
+		weight.setBackground(Color.WHITE);
+		JList<String> vehicleWeight = new JList<String>(new String[]{"Gewicht des Fahrzeugs:"});
+		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 50, 0.5));
+		spinner.setPreferredSize(new Dimension(50, 20));
+		JList<String> meter = new JList<String>(new String[]{"t"});
+		JList<String> space = new JList<String>(new String[]{"                                         "});
+		weight.add(vehicleWeight);
+		weight.add(spinner);
+		weight.add(meter);
+		weight.add(space);
+		return weight;
 	}
 	
 	public static void main(String[] args) {
