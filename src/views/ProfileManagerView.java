@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -54,7 +55,17 @@ public class ProfileManagerView extends JFrame {
 	}
 	
 	private JPanel initSouthPane() {
-		JPanel south = new JPanel();
+		JPanel south = new JPanel(new GridLayout(1, 2));
+		south.setBackground(Color.WHITE);
+		JList<String> space = new JList<String>(new String[]{" "});
+		south.add(space);
+		
+		JPanel buttons = new JPanel(new FlowLayout());
+		buttons.setBackground(Color.WHITE);
+		buttons.add(new JButton("OK"));
+		buttons.add(new JButton("Abbrechen"));
+		
+		south.add(buttons);
 		return south;
 	}
 	
