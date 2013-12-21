@@ -40,7 +40,7 @@ public class AboutView extends JFrame {
 		JPanel text = new JPanel(new BorderLayout());
 		JTextPane information = new JTextPane();
 		information.setText("routeKIT, Version 0.1" + "\n"
-				+ "PSE-Projekt WS 2013/14"
+				+ "PSE-Projekt WS 2013/14" + "\n"
 				+ "KIT, Institut für Theoretische Informatik" + "\n"
 				+ "Algorithmik II" + "\n" + "Prof. Dr. Peter Sanders" + "\n"
 				+ "Julian Arz" + "\n" + "G. Veit Batz" + "\n"
@@ -52,7 +52,7 @@ public class AboutView extends JFrame {
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
+        information.setEditable(false);
 		information.setFont(displayFont);
 		text.add(information, BorderLayout.CENTER);
 		return text;
