@@ -41,6 +41,10 @@
             <depend id="14" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2014-01-18" duration="1" complete="0" expand="true"/>
+        <task id="15" name="Profil-IO" color="#0000ff" meeting="false" start="2013-12-21" duration="9" complete="0" expand="true">
+            <notes><![CDATA[Profile.save(:File)
+Profile.load(:File)]]></notes>
+        </task>
     </tasks>
     <resources>
         <resource id="7" name="Dominic Ziegler" function="1" contacts="dominic.ziegler@student.kit.edu" phone=""/>
@@ -55,6 +59,7 @@
         <allocation task-id="7" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="8" function="2" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
         <vacation start="2013-12-31" end="2014-01-06" resourceid="8"/>
