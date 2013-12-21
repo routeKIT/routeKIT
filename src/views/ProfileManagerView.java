@@ -6,11 +6,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import profiles.Profile;
 /**
@@ -70,9 +72,57 @@ public class ProfileManagerView extends JFrame {
 	}
 	
 	private JPanel initCenterPane() {
-		JPanel center = new JPanel();
+		JPanel center = new JPanel(new BorderLayout());
+		
+		JPanel type = innerTypePane();
+		JPanel dimensions = innerDimentionsPane();
+		JPanel velocity = innerVelocityPane();
+		
+		center.add(type, BorderLayout.NORTH);
+		center.add(dimensions, BorderLayout.CENTER);
+		center.add(velocity, BorderLayout.SOUTH);
+		
 		return center;
 	}
+	
+	private JPanel innerTypePane() {
+		JPanel type = new JPanel(new FlowLayout());
+		type.setBackground(Color.WHITE);
+		JList<String> vehicleType = new JList<String>(new String[]{"Fahrzeugtyp:"});
+		JRadioButton car = new JRadioButton("PKW");
+		car.setBackground(Color.WHITE);
+		JRadioButton truck = new JRadioButton("LKW");
+		truck.setBackground(Color.WHITE);
+		JRadioButton bus = new JRadioButton("Bus");
+		bus.setBackground(Color.WHITE);
+		JRadioButton motorcycle = new JRadioButton("Motorrad");
+		motorcycle.setBackground(Color.WHITE);
+		
+		type.add(vehicleType);
+		type.add(car);
+		type.add(truck);
+		type.add(bus);
+		type.add(motorcycle);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(car);
+		group.add(truck);
+		group.add(bus);
+		group.add(motorcycle);
+		
+		return type;
+	}
+	
+	private JPanel innerDimentionsPane() {
+		JPanel dimentions = new JPanel();
+		return dimentions;
+	}
+	
+	private JPanel innerVelocityPane() {
+		JPanel velocity = new JPanel();
+		return velocity;
+	}
+	
 	public static void main(String[] args) {
 		new ProfileManagerView();
 	}
