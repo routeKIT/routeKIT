@@ -1,6 +1,7 @@
 package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -31,7 +33,7 @@ public class MainView extends JFrame{
 		initMenu();
 
 		JSplitPane contentPane = new JSplitPane();
-		JPanel left = new JPanel();
+		JPanel left = initLeftPane();
 
 		contentPane.add(left, JSplitPane.LEFT);
 
@@ -40,6 +42,26 @@ public class MainView extends JFrame{
 
 		setContentPane(contentPane);
 		setVisible(true);
+	}
+	private JPanel initLeftPane() {
+		JPanel left = new JPanel(new BorderLayout());
+		left.setMinimumSize(new Dimension(300, 100));
+
+		JPanel controls = new JPanel(new BorderLayout());
+		JPanel hist = new JPanel();
+		hist.add(new JButton("Verlauf"));
+		controls.add(hist, BorderLayout.SOUTH);
+
+		JPanel swap = new JPanel();
+		swap.add(new JButton("<=>"));
+		controls.add(swap, BorderLayout.WEST);
+		
+
+		left.add(controls, BorderLayout.NORTH);
+		JList<String> routeDescription = new JList<String>(new String[]{
+				"sdfsdfsd", "dsdfsd", "sdf"});
+		left.add(routeDescription, BorderLayout.CENTER);
+		return left;
 	}
 
 	private JPanel initRightPanel() {
