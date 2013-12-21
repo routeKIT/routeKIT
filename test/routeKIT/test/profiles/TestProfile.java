@@ -2,6 +2,9 @@ package routeKIT.test.profiles;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.Test;
 
 import profiles.Profile;
@@ -102,5 +105,21 @@ public class TestProfile {
 		p.setSpeedRoad(testValue);
 		assertEquals(p.getSpeedRoad(), testValue);
 		Profile.defaultCar.setSpeedRoad(testValue); // should not be allowed
+	}
+	
+	@SuppressWarnings("static-method")
+	@Test
+	public void testSaveLoad() throws IOException {
+		final String name = "Test name";
+		final VehicleType vehicleType = VehicleType.Bus;
+		final int height = 300;
+		final int width = 200;
+		final int weight = 15000;
+		final int speedHighway = 100;
+		final int speedRoad = 80;
+		final Profile p = new Profile(name, vehicleType, height, width, weight, speedHighway, speedRoad);
+		File file = File.createTempFile("routeKit_testProfile_", ".properties");
+		p.save(file);
+		assertEquals(Profile.load(file), p);
 	}
 }
