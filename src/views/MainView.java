@@ -2,6 +2,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 
 import map.StreetMap;
 import profiles.Profile;
@@ -56,12 +58,37 @@ public class MainView extends JFrame{
 		swap.add(new JButton("<=>"));
 		controls.add(swap, BorderLayout.WEST);
 		
+		controls.add(initCoordEntry(), BorderLayout.CENTER);
+
 
 		left.add(controls, BorderLayout.NORTH);
 		JList<String> routeDescription = new JList<String>(new String[]{
 				"sdfsdfsd", "dsdfsd", "sdf"});
 		left.add(routeDescription, BorderLayout.CENTER);
 		return left;
+	}
+	private JPanel initCoordEntry() {
+		JPanel coords = new JPanel(new GridLayout(2, 1));
+		JPanel start = new JPanel();
+		JPanel target = new JPanel();
+
+		JLabel startLabel = new JLabel("Start");
+		JLabel targetLabel = new JLabel("Ziel");
+		Dimension startD = startLabel.getPreferredSize();
+		Dimension targetD = targetLabel.getPreferredSize();
+		Dimension preffered = new Dimension((int) Math.max(startD.getWidth(),
+				targetD.getWidth()), (int) Math.max(startD.getHeight(),
+				targetD.getHeight()));
+		startLabel.setPreferredSize(preffered);
+		targetLabel.setPreferredSize(preffered);
+		start.add(startLabel);
+		start.add(new JTextField(15));
+		target.add(targetLabel);
+		target.add(new JTextField(15));
+
+		coords.add(start);
+		coords.add(target);
+		return coords;
 	}
 
 	private JPanel initRightPanel() {
