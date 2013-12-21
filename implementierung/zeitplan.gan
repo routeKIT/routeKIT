@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2012-12-10" view-index="0" gantt-divider-location="369" resource-divider-location="322" version="2.0" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-01-04" view-index="0" gantt-divider-location="369" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
-    <view zooming-state="default:6" id="gantt-chart">
+    <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="56" order="0"/>
         <field id="tpd4" name="Anfang" width="22" order="1"/>
         <field id="tpd5" name="Ende" width="21" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Ressource" width="59" order="0"/>
-        <field id="1" name="Rolle" width="40" order="1"/>
+        <field id="0" name="Ressource" width="52" order="0"/>
+        <field id="1" name="Rolle" width="47" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -15,7 +15,7 @@
             <day-type id="0"/>
             <day-type id="1"/>
             <calendar id="1" name="default">
-                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <default-week sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
                 <only-show-weekends value="true"/>
                 <overriden-day-types/>
                 <days/>
@@ -35,6 +35,12 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
+        <task id="4" name="OSM-Parser" color="#8cb6ce" meeting="false" start="2013-01-05" duration="7" complete="0" expand="true"/>
+        <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2013-01-12" duration="2" complete="0" expand="true"/>
+        <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2013-01-14" duration="4" complete="0" expand="true">
+            <depend id="14" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2013-01-18" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="7" name="Dominic Ziegler" function="1" contacts="dominic.ziegler@student.kit.edu" phone=""/>
@@ -44,8 +50,15 @@
         <resource id="11" name="Anastasia Zinkina" function="2" contacts="uajzt@student.kit.edu" phone=""/>
         <resource id="12" name="Kevin Birke" function="2" contacts="kevin.birke@student.kit.edu" phone=""/>
     </resources>
-    <allocations/>
-    <vacations/>
+    <allocations>
+        <allocation task-id="4" resource-id="7" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="7" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="7" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations>
+        <vacation start="2013-12-21" end="2014-01-04" resourceid="12"/>
+    </vacations>
     <taskdisplaycolumns>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
