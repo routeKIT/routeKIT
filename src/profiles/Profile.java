@@ -129,4 +129,32 @@ public class Profile implements Cloneable {
 			throw new IllegalStateException("Can't set parameter of a default profile!");
 		this.speedRoad = speedRoad;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Profile) {
+			return equals((Profile)obj, true);
+		}
+		return false;
+	}
+	
+	public boolean equals(Profile other, boolean checkDefault) {
+		if(!this.name.equals(other.name))
+			return false;
+		if(!this.vehicleType.equals(other.vehicleType))
+			return false;
+		if(this.height != other.height)
+			return false;
+		if(this.width != other.width)
+			return false;
+		if(this.weight != other.weight)
+			return false;
+		if(this.speedHighway != other.speedHighway)
+			return false;
+		if(this.speedRoad != other.speedRoad)
+			return false;
+		if(checkDefault && this.isDefault != other.isDefault)
+			return false;
+		return true;
+	}
 }
