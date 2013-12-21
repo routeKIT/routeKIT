@@ -3,7 +3,7 @@ import java.io.File;
 /**
  * Ein Fahrzeugprofil.
  */
-public class Profile {
+public class Profile implements Cloneable {
 	
 	private String name;
 	private VehicleType vehicleType;
@@ -19,6 +19,10 @@ public class Profile {
 	public static Profile defaultTruck =
 			new Profile("LKW (Standard)", VehicleType.Truck, 350, 240, 20000, 80, 80, true);
 	
+	public Profile(String name, VehicleType vehicleType, int height, int width, int weight, int speedHighway, int speedRoad) {
+		this(name, vehicleType, height, width, weight, speedHighway, speedRoad, false);
+	}
+	
 	private Profile(String name, VehicleType vehicleType, int height, int width, int weight, int speedHighway, int speedRoad, boolean isDefault) {
 		this.name = name;
 		this.vehicleType = vehicleType;
@@ -28,6 +32,11 @@ public class Profile {
 		this.speedHighway = speedHighway;
 		this.speedRoad = speedRoad;
 		this.isDefault = isDefault;
+	}
+	
+	@Override
+	public Profile clone() {
+		return new Profile(name, vehicleType, height, width, weight, speedHighway, speedRoad);
 	}
 	
 	/**
