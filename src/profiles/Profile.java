@@ -1,5 +1,10 @@
 package profiles;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Properties;
 /**
  * Ein Fahrzeugprofil.
  */
@@ -44,8 +49,20 @@ public class Profile implements Cloneable {
 	 * 
 	 * @param file
 	 *            Die Datei, in die das Profil gespeichert wird.
+	 * @throws IOException 
 	 */
-	public void save(File file) {
+	public void save(File file) throws IOException {
+		Properties p = new Properties();
+		p.setProperty("name", name);
+		p.setProperty("vehicleType", vehicleType.name());
+		p.setProperty("height", Integer.toString(height));
+		p.setProperty("width", Integer.toString(width));
+		p.setProperty("weight", Integer.toString(weight));
+		p.setProperty("speedHighway", Integer.toString(speedHighway));
+		p.setProperty("speedRoad", Integer.toString(speedRoad));
+		try (FileWriter writer = new FileWriter(file)) {
+			p.store(new FileWriter(file), null);
+		}
 	}
 	/**
 	 * (statisch) Lädt ein Profil aus der angegebenen Datei und gibt es zurück.
@@ -53,9 +70,52 @@ public class Profile implements Cloneable {
 	 * @param file
 	 *            Die Datei, aus der das Profil geladen wird.
 	 * @return
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static Profile load(File file) {
-		return null;
+	public static Profile load(File file) throws FileNotFoundException, IOException {
+		Properties p = new Properties();
+		try (FileReader reader = new FileReader(file)) {
+			p.load(reader);
+		}
+		String name = p.getProperty("name");
+		VehicleType vehicleType = VehicleType.valueOf(p.getProperty("vehicleType"));
+		Integer height = parseIntElseNull(p.getProperty("height"));
+		Integer width = parseIntElseNull(p.getProperty("width"));
+		Integer weight = parseIntElseNull(p.getProperty("weight"));
+		Integer speedHighway = parseIntElseNull(p.getProperty("speedHighway"));
+		Integer speedRoad = parseIntElseNull(p.getProperty("speedRoad"));
+
+		if (name == null) {
+			throw new IOException("name missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (vehicleType == null) {
+			throw new IOException("vehicleType missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (width == null) {
+			throw new IOException("width missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (height == null) {
+			throw new IOException("height missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (weight == null) {
+			throw new IOException("weight missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (speedHighway == null) {
+			throw new IOException("speedHighway missing or cannot be parsed in profile file '" + file + "'");
+		}
+		if (speedRoad == null) {
+			throw new IOException("speedRoad missing or cannot be parsed in profile file '" + file + "'");
+		}
+		
+		return new Profile(name, vehicleType, height, width, weight, speedHighway, speedRoad);
+	}
+	private static Integer parseIntElseNull(String s) {
+		try {
+			return new Integer(s);
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 	
 	/**
