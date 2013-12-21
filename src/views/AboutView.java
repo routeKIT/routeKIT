@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  */
 public class AboutView extends JFrame {
 	public AboutView() {
-		super("About");
+		super("Über");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(400, 350);
 		
