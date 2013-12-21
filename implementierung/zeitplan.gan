@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-19" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-26" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="55" order="0"/>
         <field id="tpd4" name="Anfang" width="22" order="1"/>
-        <field id="tpd5" name="Ende" width="22" order="2"/>
+        <field id="tpd5" name="Ende" width="21" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Ressource" width="50" order="0"/>
-        <field id="1" name="Rolle" width="50" order="1"/>
+        <field id="1" name="Rolle" width="49" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -35,12 +35,13 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="4" name="OSM-Parser" color="#8cb6ce" meeting="false" start="2014-01-05" duration="7" complete="0" expand="true"/>
-        <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2014-01-12" duration="2" complete="0" expand="true"/>
-        <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2014-01-14" duration="4" complete="0" expand="true">
+        <task id="4" name="OSM-Parser" color="#8cb6ce" meeting="false" start="2014-01-04" duration="7" complete="0" expand="true"/>
+        <task id="32" name="Partitionierung" color="#8cb6ce" meeting="false" start="2014-01-11" duration="4" complete="0" expand="true"/>
+        <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2014-01-15" duration="2" complete="0" expand="true"/>
+        <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2014-01-17" duration="5" complete="0" expand="true">
             <depend id="14" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2014-01-18" duration="1" complete="0" expand="true"/>
+        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2014-01-22" duration="1" complete="0" expand="true"/>
         <task id="15" name="Profil-IO" color="#0000ff" meeting="false" start="2013-12-21" duration="9" complete="0" expand="true">
             <notes><![CDATA[Profile.save(:File)
 Profile.load(:File)]]></notes>
@@ -64,6 +65,7 @@ Profile.load(:File)]]></notes>
         <allocation task-id="7" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
+        <allocation task-id="32" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="9" function="2" responsible="false" load="20.0"/>
         <allocation task-id="28" resource-id="9" function="2" responsible="false" load="20.0"/>
@@ -75,6 +77,7 @@ Profile.load(:File)]]></notes>
         <allocation task-id="31" resource-id="11" function="2" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
+        <vacation start="2013-12-23" end="2014-01-02" resourceid="7"/>
         <vacation start="2013-12-31" end="2014-01-06" resourceid="8"/>
         <vacation start="2013-12-21" end="2014-01-04" resourceid="12"/>
     </vacations>
@@ -89,7 +92,7 @@ Profile.load(:File)]]></notes>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd3" order="0" width="198" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="78" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="79" visible="true"/>
         <displaycolumn property-id="tpd5" order="2" width="78" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
