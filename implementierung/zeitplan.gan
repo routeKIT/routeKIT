@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-01-04" view-index="0" gantt-divider-location="369" resource-divider-location="322" version="2.0" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-21" view-index="0" gantt-divider-location="369" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="56" order="0"/>
@@ -35,12 +35,12 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="4" name="OSM-Parser" color="#8cb6ce" meeting="false" start="2013-01-05" duration="7" complete="0" expand="true"/>
-        <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2013-01-12" duration="2" complete="0" expand="true"/>
-        <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2013-01-14" duration="4" complete="0" expand="true">
+        <task id="4" name="OSM-Parser" color="#8cb6ce" meeting="false" start="2014-01-05" duration="7" complete="0" expand="true"/>
+        <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2014-01-12" duration="2" complete="0" expand="true"/>
+        <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2014-01-14" duration="4" complete="0" expand="true">
             <depend id="14" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2013-01-18" duration="1" complete="0" expand="true"/>
+        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2014-01-18" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="7" name="Dominic Ziegler" function="1" contacts="dominic.ziegler@student.kit.edu" phone=""/>
