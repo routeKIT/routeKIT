@@ -57,6 +57,7 @@
         <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
+        <vacation start="2013-12-31" end="2014-01-06" resourceid="8"/>
         <vacation start="2013-12-21" end="2014-01-04" resourceid="12"/>
     </vacations>
     <taskdisplaycolumns>
