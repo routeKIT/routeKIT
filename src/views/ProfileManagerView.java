@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 import profiles.Profile;
 /**
@@ -114,7 +116,24 @@ public class ProfileManagerView extends JFrame {
 	}
 	
 	private JPanel innerDimentionsPane() {
-		JPanel dimentions = new JPanel();
+		JPanel dimentions = new JPanel(new GridLayout(3, 1));
+		
+		JPanel hight = new JPanel(new FlowLayout());
+		JList<String> vehicleHeight = new JList<String>(new String[]{"Höhe des Fahrzeugs:"});
+		JSpinner spinner1 = new JSpinner(new SpinnerNumberModel(1, 1, 4, 0.1));
+		spinner1.setSize(100, 100);
+		JList<String> meter = new JList<String>(new String[]{"m"});
+		hight.add(vehicleHeight);
+		hight.add(spinner1);
+		hight.add(meter);
+		
+		JPanel width = new JPanel(new FlowLayout());
+		JPanel weight = new JPanel(new FlowLayout());
+		
+		
+		dimentions.add(hight);
+		dimentions.add(width);
+		dimentions.add(weight);
 		return dimentions;
 	}
 	
