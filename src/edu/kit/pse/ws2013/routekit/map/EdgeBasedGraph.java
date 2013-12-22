@@ -119,4 +119,8 @@ public class EdgeBasedGraph {
 	public Set<Integer> getIncomingTurns(int edge) {
 		return null;
 	}
+	public int getNumberOfTurns() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

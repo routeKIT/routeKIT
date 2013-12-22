@@ -4,7 +4,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 /**
  * Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.
  */
-public class ArcFlagsCalculator {
+public interface ArcFlagsCalculator {
 	/**
 	 * Berechnet die Arc-Flags für die angegebene Kombination und setzt die
 	 * {@link ArcFlags} von {@code combination} entsprechend.
@@ -12,6 +12,5 @@ public class ArcFlagsCalculator {
 	 * @param combination
 	 *            Die Kombination aus Profil und Karte.
 	 */
-	public void calculateArcFlags(ProfileMapCombination combination) {
-	}
+	public void calculateArcFlags(ProfileMapCombination combination);
 }

@@ -11,7 +11,7 @@ import edu.kit.pse.ws2013.routekit.models.Weights;
  * Gewicht werden bei der Routenberechnung bevorzugt gewählt.
  * Abbiegebeschränkungen werden durch maximale Kantengewichte umgesetzt.
  */
-public class EdgeWeighter {
+public interface EdgeWeighter {
 	/**
 	 * Berechnet die Kantengewichte für die angegebene Kombination und setzt die
 	 * {@link Weights} von {@code combination} entsprechend.
@@ -19,6 +19,5 @@ public class EdgeWeighter {
 	 * @param combination
 	 *            Die zu gewichtende Kombination aus Profil und Karte.
 	 */
-	public void weightEdges(ProfileMapCombination combination) {
-	}
+	public void weightEdges(ProfileMapCombination combination);
 }

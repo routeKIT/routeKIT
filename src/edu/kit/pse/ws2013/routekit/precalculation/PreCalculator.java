@@ -7,6 +7,14 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * {@link StreetMap Karte} durch.
  */
 public class PreCalculator {
+	EdgeWeighter weighter;
+	ArcFlagsCalculator calulator;
+	
+	public PreCalculator() {
+		weighter = new EdgeWeighterDummy();
+		calulator = new ArcFlagsCalculatorDummy();
+	}
+	
 	/**
 	 * Führt die Vorberechnung für die gegebene Kombination aus {@link Profile
 	 * Profil} und {@link StreetMap Karte} durch. Dabei werden ein
@@ -19,5 +27,7 @@ public class PreCalculator {
 	 *            durchgeführt werden soll.
 	 */
 	public void doPrecalculation(ProfileMapCombination comb) {
+		weighter.weightEdges(comb);
+		calulator.calculateArcFlags(comb);
 	}
 }

@@ -15,4 +15,19 @@ public class ProfileMapCombination {
 	public boolean isCalculated() {
 		return false;
 	}
+
+	public StreetMap getStreetMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setWeights(Weights weights) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setArcFlags(ArcFlags arcFlags) {
+		// TODO Auto-generated method stub
+		
+	}
 }

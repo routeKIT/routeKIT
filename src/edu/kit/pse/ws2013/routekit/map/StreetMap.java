@@ -21,4 +21,8 @@ public class StreetMap {
 	 */
 	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
 	}
+	public EdgeBasedGraph getEdgeBasedGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
