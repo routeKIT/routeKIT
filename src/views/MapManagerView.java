@@ -9,7 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import map.StreetMap;
 import profiles.Profile;
@@ -39,7 +41,7 @@ public class MapManagerView extends JFrame {
 		setVisible(true);
 	}
 	private JPanel initNorthPane() {
-		JPanel north = new JPanel(new FlowLayout());
+		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
 		JLabel map = new JLabel("Karte auswählen:");
 		JComboBox<Object> mapname = new JComboBox<>();
@@ -51,7 +53,7 @@ public class MapManagerView extends JFrame {
 		return north;
 	}
 	private JPanel initCenterPane() {
-		JPanel center = new JPanel(new BorderLayout());
+		JPanel center = new JPanel(new BorderLayout(10, 10));
 		center.setBackground(Color.WHITE);
 
 		JPanel buttons = initButtonsPane();
@@ -59,6 +61,7 @@ public class MapManagerView extends JFrame {
 
 		center.add(buttons, BorderLayout.NORTH);
 		center.add(mapProfile, BorderLayout.CENTER);
+		center.add(new JPanel(), BorderLayout.WEST);
 
 		return center;
 	}
@@ -84,12 +87,29 @@ public class MapManagerView extends JFrame {
 	}
 
 	private JPanel initMapProfilePane() {
-		JPanel mapProfile = new JPanel(new FlowLayout());
+		JPanel mapProfile = new JPanel(new BorderLayout(10, 10));
 		mapProfile.setBackground(Color.WHITE);
+		JPanel addDelete = initAddDelete();
+		JList<String> profile = new JList<String>(new String[]{"sdfsdfsd",
+				"hallo"});
+		profile.setBackground(Color.lightGray);
+
+		mapProfile.add(new JLabel("Profile für diese Karte:"),
+				BorderLayout.NORTH);
+		mapProfile.add(addDelete, BorderLayout.EAST);
+		mapProfile.add(new JScrollPane(profile), BorderLayout.CENTER);
 
 		return mapProfile;
 	}
 
+	private JPanel initAddDelete() {
+		JPanel addDelete = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		addDelete.setBackground(Color.WHITE);
+		addDelete.add(new JButton("Hinzufügen"));
+		addDelete.add(new JButton("Entfernen"));
+		addDelete.setPreferredSize(new Dimension(130, 200));
+		return addDelete;
+	}
 	public static void main(String[] args) {
 		new MapManagerView();
 	}
