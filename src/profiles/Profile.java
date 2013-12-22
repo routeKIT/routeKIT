@@ -371,4 +371,19 @@ public class Profile implements Cloneable {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((vehicleType == null) ? 0 : vehicleType.hashCode());
+		result = prime * result + height;
+		result = prime * result + width;
+		result = prime * result + weight;
+		result = prime * result + speedHighway;
+		result = prime * result + speedRoad;
+		result = prime * result + (isDefault ? 1231 : 1237);
+		return result;
+	}
 }
