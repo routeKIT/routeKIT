@@ -154,4 +154,9 @@ public class MainController {
 	 */
 	public void selectMap(StreetMap map) {
 	}
+
+	
+	public static MainController getInstance() {
+		return null;
+	}
 }

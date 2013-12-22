@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
+import controllers.MainController;
 import map.StreetMap;
 import profiles.Profile;
 /**
@@ -28,6 +30,7 @@ import profiles.Profile;
 public class MainView extends JFrame{
 	private JLabel mapLabel;
 	private JLabel profileLabel;
+	JFileChooser fileChooser = new JFileChooser();
 
 	public MainView() {
 		super("routeKIT");
@@ -47,6 +50,7 @@ public class MainView extends JFrame{
 		setContentPane(contentPane);
 		setVisible(true);
 	}
+
 	private JPanel initLeftPane() {
 		JPanel left = new JPanel(new BorderLayout());
 		left.setMinimumSize(new Dimension(200, 100));
@@ -57,12 +61,11 @@ public class MainView extends JFrame{
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
-		JButton swapKnopf = new JButton(new ImageIcon(MainView.class.getResource("Knopf.png")));
+		JButton swapKnopf = new JButton(new ImageIcon("Knopf.png"));
 		swapKnopf.setMargin(new Insets(0, 0, 0, 0));
 		swap.add(swapKnopf);
 		controls.add(swap, BorderLayout.WEST);
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
-
 
 		left.add(controls, BorderLayout.NORTH);
 		JList<String> routeDescription = new JList<String>(new String[]{
@@ -70,6 +73,7 @@ public class MainView extends JFrame{
 		left.add(routeDescription, BorderLayout.CENTER);
 		return left;
 	}
+
 	private JPanel initCoordEntry() {
 		JPanel coords = new JPanel(new GridLayout(2, 1));
 		JPanel start = new JPanel();
@@ -97,10 +101,18 @@ public class MainView extends JFrame{
 	private JPanel initRightPanel() {
 		JPanel right = new JPanel();
 		JPanel buttons = new JPanel();
-		buttons.add(new JButton("Karte"));
+		JButton mapButton = new JButton("Karte");
+		buttons.add(mapButton);
 		mapLabel = new JLabel("Karlsruhe");
 		buttons.add(mapLabel);
-		buttons.add(new JButton("Profil"));
+		JButton profileButton = new JButton("Profil");
+		profileButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ProfileManagerView();
+			}
+		});
+		buttons.add(profileButton);
 		profileLabel = new JLabel("PKW [default]");
 		buttons.add(profileLabel);
 		buttons.setBackground(Color.WHITE);
@@ -112,12 +124,13 @@ public class MainView extends JFrame{
 		right.add(map, BorderLayout.CENTER);
 		return right;
 	}
+
 	private void initMenu() {
 		JMenuBar menu = new JMenuBar();
 		JMenu routeKIT = new JMenu("routeKIT");
 
 		JMenuItem history = new JMenuItem("Verlauf...");
-		JMenuItem about = new JMenuItem("Über...");
+		JMenuItem about = new JMenuItem("�ber...");
 		JMenuItem exit = new JMenuItem("Beenden");
 		exit.addActionListener(new ActionListener() {
 
@@ -132,12 +145,32 @@ public class MainView extends JFrame{
 
 		JMenu export = new JMenu("Export");
 		JMenuItem html = new JMenuItem("HTML...");
+		html.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileChooser.showDialog(MainView.this, "Exportieren");
+				MainController.getInstance().exportHTML(fileChooser.getSelectedFile());
+			}
+		});
 		JMenuItem gpx = new JMenuItem("GPX...");
+		gpx.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileChooser.showDialog(MainView.this, "Exportieren");
+				MainController.getInstance().exportGPX(fileChooser.getSelectedFile());
+			}
+		});
 		export.add(html);
 		export.add(gpx);
 
 		JMenu admin = new JMenu("Verwaltung");
 		JMenuItem profile = new JMenuItem("Profil...");
+		profile.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ProfileManagerView();
+			}
+		});
 		JMenuItem map = new JMenuItem("Karte...");
 		JCheckBoxMenuItem osm = new JCheckBoxMenuItem("OSM-Renderer verwenden");
 		admin.add(profile);
