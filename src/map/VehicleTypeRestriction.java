@@ -1,4 +1,7 @@
 package map;
+
+import profiles.VehicleType;
+
 /**
  * Repräsentiert eine Beschränkung der Benutzung durch einen bestimmten
  * Fahrzeugtyp.

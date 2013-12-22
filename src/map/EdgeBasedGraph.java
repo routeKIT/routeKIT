@@ -105,7 +105,7 @@ public class EdgeBasedGraph {
 	 * @param restrictions
 	 *            Die Beschränkungen der Abbiegemöglichkeiten.
 	 */
-	public EdgeBasedGraph(int[] edges, turn[] turns, TurnType[] turnTypes,
+	public EdgeBasedGraph(int[] edges, int[] turns, TurnType[] turnTypes,
 			Map<Integer, Restriction> restrictions) {
 	}
 	/**
