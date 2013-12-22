@@ -7,8 +7,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import profiles.Profile;
-import profiles.VehicleType;
+import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 @SuppressWarnings("static-method")
 public class TestProfile {
