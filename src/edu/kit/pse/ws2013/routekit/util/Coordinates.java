@@ -52,7 +52,7 @@ public class Coordinates {
 	 * @return
 	 */
 	public float getSmtX(int zoom) {
-		return (float) Math.floor( (lon + 180) / 360 * (1<<zoom) ) ;
+		return (lon + 180) / 360 * (1 << zoom);
 	}
 	/**
 	 * Berechnet die SMT-Y-Komponente zu diesen Koordinaten.
@@ -62,10 +62,9 @@ public class Coordinates {
 	 * @return
 	 */
 	public float getSmtY(int zoom) {
-		return (float) Math.floor((1 - Math.log(Math.tan(Math.toRadians(lat))
-				+ 1 / Math.cos(Math.toRadians(lat)))
-				/ Math.PI)
-				/ 2 * (1 << zoom));
+		return (float) ((1 - Math.log(Math.tan(Math.toRadians(lat)) + 1
+				/ Math.cos(Math.toRadians(lat)))
+				/ Math.PI) / 2 * (1 << zoom));
 	}
 	/**
 	 * Rechnet SlippyMapTile-Koordinaten in Koordinaten um.
@@ -83,9 +82,12 @@ public class Coordinates {
 	 * @return die Geokoordinaten dieses Punktes
 	 */
 	public static Coordinates fromSmt(float x, float y, int zoom) {
+		x %= 1 << zoom;
+		y %= 1 << zoom;
 		float lon = (float) (x / Math.pow(2.0, zoom) * 360.0 - 180);
 		double n = Math.PI - (2.0 * Math.PI * y) / Math.pow(2.0, zoom);
 		float lat = (float) Math.toDegrees(Math.atan(Math.sinh(n)));
 		return new Coordinates(lat, lon);
 	}
+
 }
