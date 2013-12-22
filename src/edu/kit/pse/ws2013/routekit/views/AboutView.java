@@ -13,9 +13,12 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 /**
- * Zeigt das Fenster mit den Informationen über routeKIT auf dem Bildschirm an.
+ * Shows the window with information about routeKIT on the screen.
  */
 public class AboutView extends JFrame {
+	/**
+	 * A constructor that creates a new "About"-window.
+	 */
 	public AboutView() {
 		super("Über");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

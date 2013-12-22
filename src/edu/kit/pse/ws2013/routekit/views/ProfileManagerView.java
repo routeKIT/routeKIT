@@ -21,6 +21,9 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
  */
 public class ProfileManagerView extends JFrame {
+	/**
+	 *  A constructor that creates a new ProfileManagerView.
+	 */
 	public ProfileManagerView() {
 		super("Profilverwaltung");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -210,20 +213,21 @@ public class ProfileManagerView extends JFrame {
 		new ProfileManagerView();
 	}
 	/**
-	 * Setzt das aktuelle Profil auf das angegebene Profil, lädt seine Werte in
-	 * die Eingabefelder und aktiviert/deaktiviert die Eingabeelemente, je
-	 * nachdem, ob es sich um ein Standardprofil handelt oder nicht.
+	 * Sets the current profile to the specified profile, 
+	 * loads its values ​​in the input fields, 
+	 * enables / disables the input elements and the „Löschen“-Button
+	 * depending on whether it is a default profile or not.
 	 * 
 	 * @param profile
-	 *            Das neue Profil.
+	 *            The new Profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
 	}
 	/**
-	 * Setzt die Profil, die aktuell ausgewählt werden können.
+	 * Sets the profiles that can be currently selected.
 	 * 
 	 * @param profiles
-	 *            Die verfügbaren Profil.
+	 *            The available profiles.
 	 */
 	public void setAvailableProfiles(List<Profile> profiles) {
 	}

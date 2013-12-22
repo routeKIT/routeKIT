@@ -25,13 +25,16 @@ import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 /**
- * Zeigt das Hauptfenster auf dem Bildschirm an.
+ * Displays the main window on the screen.
  */
 public class MainView extends JFrame{
 	private JLabel mapLabel;
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
 
+	/**
+	 * A constructor that creates a new MainView.
+	 */
 	public MainView() {
 		super("routeKIT");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -186,18 +189,18 @@ public class MainView extends JFrame{
 	}
 	
 	/**
-	 * Aktualisiert die Anzeige des aktuellen Profils.
+	 * Updates the display of the current profile.
 	 * 
 	 * @param profile
-	 *            Das neue Profil.
+	 *            The new profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
 	}
 	/**
-	 * Aktualisiert die Anzeige der aktuellen Karte.
+	 * Updates the display of the current map.
 	 * 
 	 * @param map
-	 *            Die neue Karte.
+	 *            The new map.
 	 */
 	public void setCurrentMap(StreetMap map) {
 	}

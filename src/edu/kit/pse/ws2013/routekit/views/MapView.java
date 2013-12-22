@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 /**
- * Zeigt einen Kartenausschnitt auf dem Bildschirm an.
+ * Displays a map section on the screen.
  * 
- * Als Kartenprojektion wird die Mercator-Projektion verwendet.
+ * As a map projection, the Mercator projection is used.
  */
 public class MapView extends JPanel
 		implements
@@ -27,15 +27,14 @@ public class MapView extends JPanel
 	float y;
 	int zoom = 16;
 	/**
-	 * Konstruktor: Erzeugt eine neue {@link MapView}. Die angegebene
-	 * {@link TileSource} wird zum Rendern verwendet.
+	 * A constructor that creates a new MapView. 
+	 * The specified TileSource is used for rendering.
 	 * 
-	 * Da die Kacheln bei jedem {@link MapView#paint} synchron angefragt werden,
-	 * sollte {@code source} ein {@link TileCache} sein.
+	 * Because the tiles are requested synchronously with each MapView.paint(), 
+	 * source should be a TileCache.
 	 * 
 	 * @param source
-	 *            Ein Objekt, das die Kartenkacheln liefert, die dann angezeigt
-	 *            werden.
+	 *            An object that provides the map tiles, which are then displayed.
 	 */
 	public MapView(TileSource source) {
 		addMouseListener(this);
@@ -43,12 +42,11 @@ public class MapView extends JPanel
 		addMouseWheelListener(this);
 	}
 	/**
-	 * Zeichnet den aktuell sichtbaren Kartenausschnitt. Alle sichtbaren Kacheln
-	 * werden von {@code source} synchron angefordert.
+	 * Draws the currently visible map section. 
+	 * All visible tiles are requested simultaneously from source.
 	 * 
 	 * @param graphics
-	 *            Die Java {@code Graphics}, auf welche die Karte gezeichnet
-	 *            wird.
+	 *            The Java Graphics, on which the map is drawn.
 	 */
 	@Override
 	public void paint(Graphics g) {

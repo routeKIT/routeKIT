@@ -17,9 +17,12 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
- * Zeigt das Fenster der Kartenverwaltung auf dem Bildschirm an.
+ * Displays the window of the map management on the screen.
  */
 public class MapManagerView extends JFrame {
+	/**
+	 * A constructor that creates a new MapManagerView.
+	 */
 	public MapManagerView() {
 		super("Kartenverwaltung");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -114,23 +117,22 @@ public class MapManagerView extends JFrame {
 		new MapManagerView();
 	}
 	/**
-	 * Setzt die Karte, die aktuell ausgewählt werden können.
+	 * Sets the maps that can be currently selected.
 	 * 
 	 * @param maps
-	 *            Die verfügbaren Karte.
+	 *            The available maps.
 	 */
 	public void setAvailableMaps(Set<StreetMap> maps) {
 	}
 	/**
-	 * Setzt die aktuelle Karte auf die angegebene Karte, aktualisiert die Liste
-	 * der Profil für die ausgewählte Karte und aktiviert/deaktiviert die
-	 * „Import“- und „Löschen“-Buttons, je nachdem, ob es sich um eine
-	 * Standardkarte handelt oder nicht.
-	 * 
+	 * Sets the current map to the specified map, 
+	 * updates the list of profiles for the selected map, 
+	 * enable / disable the „Import“- und „Löschen“-Buttons 
+	 * depending on whether it is a default map or not.
 	 * @param map
-	 *            Die neue Karte.
+	 *            The new map.
 	 * @param profiles
-	 *            Die Profil für die neue Karte.
+	 *            The profiles for the new map.
 	 */
 	public void setCurrentMap(StreetMap map, Set<Profile> profiles) {
 	}

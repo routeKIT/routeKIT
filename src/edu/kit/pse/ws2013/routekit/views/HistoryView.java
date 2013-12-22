@@ -14,15 +14,15 @@ import javax.swing.JScrollPane;
 
 import edu.kit.pse.ws2013.routekit.history.History;
 /**
- * Zeigt das Fenster mit dem Verlauf auf dem Bildschirm an.
+ * Shows the window with the History on the screen.
  */
 public class HistoryView extends JFrame{
 	/**
-	 * Konstruktor: Erstellt eine HistoryView für den angegebenen Verlauf. (Der
-	 * Verlauf kann später nicht mehr geändert werden.)
+	 * The constructor creates a HistoryView for the specified history. 
+	 * The history can not be subsequently changed.
 	 * 
 	 * @param history
-	 *            Der Verlauf, der angezeigt wird.
+	 *            The history that is displayed.
 	 */
 	public HistoryView(History history) {
 		super("Verlauf");
