@@ -3,11 +3,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -19,13 +20,13 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 /**
  * Displays the window of the map management on the screen.
  */
-public class MapManagerView extends JFrame {
+public class MapManagerView extends JDialog {
 	/**
 	 * A constructor that creates a new MapManagerView.
 	 */
-	public MapManagerView() {
-		super("Kartenverwaltung");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public MapManagerView(Window parent) {
+		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
 		setResizable(false);
@@ -112,9 +113,6 @@ public class MapManagerView extends JFrame {
 		addDelete.add(new JButton("Entfernen"));
 		addDelete.setPreferredSize(new Dimension(130, 200));
 		return addDelete;
-	}
-	public static void main(String[] args) {
-		new MapManagerView();
 	}
 	/**
 	 * Sets the maps that can be currently selected.

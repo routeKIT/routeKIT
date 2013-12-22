@@ -4,12 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Window;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -20,13 +21,13 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 /**
  * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
  */
-public class ProfileManagerView extends JFrame {
+public class ProfileManagerView extends JDialog {
 	/**
 	 *  A constructor that creates a new ProfileManagerView.
 	 */
-	public ProfileManagerView() {
-		super("Profilverwaltung");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public ProfileManagerView(Window parent) {
+		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
 		setResizable(false);
@@ -209,9 +210,6 @@ public class ProfileManagerView extends JFrame {
 		return weight;
 	}
 
-	public static void main(String[] args) {
-		new ProfileManagerView();
-	}
 	/**
 	 * Sets the current profile to the specified profile, 
 	 * loads its values ​​in the input fields, 

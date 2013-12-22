@@ -9,9 +9,10 @@ import edu.kit.pse.ws2013.routekit.views.MapManagerView;
  * Der Controller für die {@link MapManagerView}.
  */
 public class MapManagerController {
-	MapManagerView mmv = new MapManagerView();
+	MapManagerView mmv;
 	
 	public MapManagerController(MainView view) {
+		mmv = new MapManagerView(view);
 	}
 	/**
 	 * Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus
