@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-22" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-22" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:3" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="55" order="0"/>
@@ -8,7 +7,7 @@
     </view>
     <view id="resource-table">
         <field id="0" name="Ressource" width="50" order="0"/>
-        <field id="1" name="Rolle" width="50" order="1"/>
+        <field id="1" name="Rolle" width="49" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -49,7 +48,7 @@ Profile.load(:File)]]></notes>
         </task>
         <task id="19" name="GUI Fenster" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-21" duration="2" complete="0" expand="true"/>
         <task id="22" name="GUI listener" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-22" duration="8" complete="0" expand="true"/>
-        <task id="29" name="DummyRenderer" color="#33ff00" meeting="false" start="2014-01-04" duration="4" complete="0" expand="true"/>
+        <task id="29" name="Renderer (Dummy)" color="#33ff00" meeting="false" start="2014-01-04" duration="4" complete="0" expand="true"/>
         <task id="31" name="Renderer" color="#33ff00" meeting="false" start="2014-01-08" duration="12" complete="0" expand="true"/>
         <task id="28" name="MapView" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-14" duration="9" complete="0" expand="true"/>
         <task id="39" name="History + IO" color="#0000ff" meeting="false" start="2013-12-22" duration="8" complete="0" expand="true"/>
@@ -64,8 +63,8 @@ MapManagerController]]></notes>
         <task id="52" name="PreCalculator" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="59" name="Weights" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="58" name="ArcFlags" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
-        <task id="53" name="EdgeWeighterDummy" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
-        <task id="55" name="ArcFlagsCalculatorDummy" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
+        <task id="53" name="EdgeWeighter (Dummy)" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
+        <task id="55" name="ArcFlagsCalculator (Dummy)" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="56" name="EdgeWeighter" color="#ff0000" meeting="false" start="2014-01-04" duration="9" complete="0" expand="true"/>
         <task id="57" name="ArcFlagsCalculator" color="#ff0000" meeting="false" start="2014-01-13" duration="10" complete="0" expand="true"/>
     </tasks>
@@ -123,9 +122,9 @@ MapManagerController]]></notes>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="197" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="79" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="78" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="196" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="80" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="79" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
