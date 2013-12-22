@@ -1,15 +1,18 @@
 package routeKIT.test.models;
 
-import static org.junit.Assert.*;
-import models.RouteModel;
-import models.RouteModelListener;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import routeCalculation.Route;
-import routeCalculation.RouteDescription;
-import util.Coordinates;
+import edu.kit.pse.ws2013.routekit.models.RouteModel;
+import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
+import edu.kit.pse.ws2013.routekit.routecalculation.Route;
+import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
+import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestRouteModel {
 	int listenerFired = 0;

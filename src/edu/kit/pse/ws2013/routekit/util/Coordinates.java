@@ -1,22 +1,25 @@
 package edu.kit.pse.ws2013.routekit.util;
+
 /**
  * Kapselt ein Paar geographischer Koordinaten.
  */
 public class Coordinates {
+	float lat;
+	float lon;
+
 	/**
-	 * (statisch) Rechnet -Koordinaten in Koordinaten um.
+	 * Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.
 	 * 
-	 * @param x
-	 *            Die -X-Komponente.
-	 * @param y
-	 *            Die -Y-Komponente.
-	 * @param zoom
-	 *            Die Zoomstufe.
-	 * @return
+	 * @param lat
+	 *            Der Breitengrad.
+	 * @param lon
+	 *            Der Längengrad.
 	 */
-	public Coordinates fromSmt(float x, float y, int zoom) {
-		return null;
+	public Coordinates(float lat, float lon) {
+		this.lat = lat;
+		this.lon = lon;
 	}
+
 	/**
 	 * Berechnet den zwischen einer Linie von diesem zum ersten und einer Linie
 	 * von diesem zum zweiten Punkt eingeschlossenen Winkel.
@@ -62,13 +65,17 @@ public class Coordinates {
 		return 0;
 	}
 	/**
-	 * Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.
+	 * (statisch) Rechnet -Koordinaten in Koordinaten um.
 	 * 
-	 * @param lat
-	 *            Der Breitengrad.
-	 * @param lon
-	 *            Der Längengrad.
+	 * @param x
+	 *            Die -X-Komponente.
+	 * @param y
+	 *            Die -Y-Komponente.
+	 * @param zoom
+	 *            Die Zoomstufe.
+	 * @return
 	 */
-	public Coordinates(float lat, float lon) {
+	public static Coordinates fromSmt(float x, float y, int zoom) {
+		return null;
 	}
 }
