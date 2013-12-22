@@ -45,37 +45,47 @@ public class Coordinates {
 		return 0;
 	}
 	/**
-	 * Berechnet die -X-Komponente zu diesen Koordinaten.
+	 * Berechnet die SMT-X-Komponente zu diesen Koordinaten.
 	 * 
 	 * @param zoom
 	 *            Die Zoomstufe.
 	 * @return
 	 */
 	public float getSmtX(int zoom) {
-		return 0;
+		return (float) Math.floor( (lon + 180) / 360 * (1<<zoom) ) ;
 	}
 	/**
-	 * Berechnet die -Y-Komponente zu diesen Koordinaten.
+	 * Berechnet die SMT-Y-Komponente zu diesen Koordinaten.
 	 * 
 	 * @param zoom
 	 *            Die Zoomstufe.
 	 * @return
 	 */
 	public float getSmtY(int zoom) {
-		return 0;
+		return (float) Math.floor((1 - Math.log(Math.tan(Math.toRadians(lat))
+				+ 1 / Math.cos(Math.toRadians(lat)))
+				/ Math.PI)
+				/ 2 * (1 << zoom));
 	}
 	/**
-	 * (statisch) Rechnet -Koordinaten in Koordinaten um.
+	 * Rechnet SlippyMapTile-Koordinaten in Koordinaten um.
 	 * 
 	 * @param x
-	 *            Die -X-Komponente.
+	 *            Die SMT-X-Komponente.
 	 * @param y
-	 *            Die -Y-Komponente.
+	 *            Die SMT-Y-Komponente.
 	 * @param zoom
 	 *            Die Zoomstufe.
-	 * @return
+	 * 
+	 * @see <a
+	 *      href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames">Slippy
+	 *      Map Tile im OSM Wiki</a>
+	 * @return die Geokoordinaten dieses Punktes
 	 */
 	public static Coordinates fromSmt(float x, float y, int zoom) {
-		return null;
+		float lon = (float) (x / Math.pow(2.0, zoom) * 360.0 - 180);
+		double n = Math.PI - (2.0 * Math.PI * y) / Math.pow(2.0, zoom);
+		float lat = (float) Math.toDegrees(Math.atan(Math.sinh(n)));
+		return new Coordinates(lat, lon);
 	}
 }
