@@ -5,10 +5,11 @@ import models.RouteModel;
 import models.RouteModelListener;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import routeCalculation.Route;
 import routeCalculation.RouteDescription;
+import util.Coordinates;
 
 public class TestRouteModel {
 	int listenerFired = 0;
@@ -47,23 +48,66 @@ public class TestRouteModel {
 		assertEquals(2, listenerFired);
 	}
 
-
-	@Ignore
 	@Test
 	public void testCurrentRoute() {
-		fail("Not yet implemented");
+		Route r1 = new Route(null, null, null, null);
+		Route r2 = new Route(null, null, null, null);
+		assertNotSame(r1, r2); // Sanity check
+
+		assertEquals(0, listenerFired);
+		assertNull(rm.getCurrentRoute());
+		assertEquals(0, listenerFired);
+		rm.setCurrentRoute(r1);
+		assertEquals(1, listenerFired);
+		assertSame(r1, rm.getCurrentRoute());
+		assertEquals(1, listenerFired);
+		rm.setCurrentRoute(r2);
+		assertEquals(2, listenerFired);
+		assertSame(r2, rm.getCurrentRoute());
+		assertEquals(2, listenerFired);
 	}
 
-	@Ignore
 	@Test
-	public void testDestination() {
-		fail("Not yet implemented");
-	}
+	public void testStartAndDestination() {
+		Coordinates c1 = new Coordinates(10, 10);
+		Coordinates c2 = new Coordinates(11, 11);
+		assertNotSame(c1, c2); // Sanity check
 
-	@Ignore
+		assertEquals(0, listenerFired);
+		assertNull(rm.getStart());
+		assertEquals(0, listenerFired);
+		assertNull(rm.getDestination());
+		assertEquals(0, listenerFired);
+
+		rm.setStart(c1);
+		assertEquals(1, listenerFired);
+		assertSame(c1, rm.getStart());
+		assertEquals(1, listenerFired);
+
+		rm.setDestination(c2);
+		assertEquals(2, listenerFired);
+		assertSame(c2, rm.getDestination());
+		assertEquals(2, listenerFired);
+
+		rm.setStart(c2);
+		assertEquals(3, listenerFired);
+		assertSame(c2, rm.getStart());
+		assertEquals(3, listenerFired);
+	}
 	@Test
-	public void testStart() {
-		fail("Not yet implemented");
+	public void testMultipleListeners() {
+		rm.addRouteListener(new DummyListener());
+		Coordinates c1 = new Coordinates(10, 10);
+		Coordinates c2 = new Coordinates(11, 11);
+
+		assertEquals(0, listenerFired);
+
+		rm.setStart(c1);
+		assertEquals(2, listenerFired);
+
+		rm.setDestination(c2);
+		assertEquals(4, listenerFired);
+
 	}
 
 }
