@@ -51,6 +51,12 @@ Profile.load(:File)]]></notes>
         <task id="29" name="DummyRenderer" color="#33ff00" meeting="false" start="2014-01-04" duration="4" complete="0" expand="true"/>
         <task id="31" name="Renderer" color="#33ff00" meeting="false" start="2014-01-08" duration="12" complete="0" expand="true"/>
         <task id="28" name="MapView" color="#33ff00" meeting="false" start="2014-01-14" duration="9" complete="0" expand="true"/>
+        <task id="39" name="History + IO" color="#0000ff" meeting="false" start="2013-12-22" duration="8" complete="0" expand="true"/>
+        <task id="40" name="Karten-IO" color="#0000ff" meeting="false" start="2014-01-06" duration="7" complete="0" expand="true"/>
+        <task id="41" name="ManagerController" color="#0000ff" meeting="false" start="2014-01-10" duration="7" complete="0" expand="true">
+            <notes><![CDATA[ProfileManagerController
+MapManagerController]]></notes>
+        </task>
     </tasks>
     <resources>
         <resource id="7" name="Dominic Ziegler" function="1" contacts="dominic.ziegler@student.kit.edu" phone=""/>
@@ -75,6 +81,9 @@ Profile.load(:File)]]></notes>
         <allocation task-id="28" resource-id="11" function="2" responsible="true" load="80.0"/>
         <allocation task-id="29" resource-id="11" function="2" responsible="true" load="100.0"/>
         <allocation task-id="31" resource-id="11" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="39" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="40" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="41" resource-id="8" function="2" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
         <vacation start="2013-12-23" end="2014-01-02" resourceid="7"/>
