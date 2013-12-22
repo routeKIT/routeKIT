@@ -7,6 +7,7 @@ import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -18,6 +19,16 @@ import edu.kit.pse.ws2013.routekit.views.MapView;
  * und bleibt so lange bestehen, bis routeKIT beendet wird.
  */
 public class MainController {
+	private static MainController instance;
+	private RouteModel rm = new RouteModel();
+
+	/**
+	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
+	 * und die aktuelle Karte vollständig und erstellt dann die {@link MainView}
+	 * . Für den genauen Ablauf siehe \abbildung{sequenz_start}.
+	 */
+	private MainController() {
+	}
 	/**
 	 * Wird aufgerufen, wenn sich der Startpunkt ändert (z. B. durch eine
 	 * Eingabe des Benutzers). Setzt den neuen Startpunkt in der {@link MapView}
@@ -29,6 +40,7 @@ public class MainController {
 	 *            Die Koordinaten des neuen Startpunkts.
 	 */
 	public void setStartPoint(Coordinates start) {
+		rm.setStart(start);
 	}
 	/**
 	 * Wird aufgerufen, wenn sich der Zielpunkt ändert (z. B. durch eine Eingabe
@@ -41,23 +53,9 @@ public class MainController {
 	 *            Die Koordinaten des neuen Zielpunkts.
 	 */
 	public void setDestinationPoint(Coordinates destination) {
+		rm.setDestination(destination);
 	}
-	/**
-	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
-	 * und die aktuelle Karte vollständig und erstellt dann die {@link MainView}
-	 * . Für den genauen Ablauf siehe \abbildung{sequenz_start}.
-	 */
-	public MainController() {
-	}
-	/**
-	 * (statisch) Hauptmethode des Programms. Erzeugt einen
-	 * {@link MainController}.
-	 * 
-	 * @param args
-	 *            Kommandozeilen-Argumente.
-	 */
-	public void main(String[] args) {
-	}
+
 	/**
 	 * Speichert die Wegbeschreibung der aktuellen Route im HTML-Format in die
 	 * angegeben Datei. Ist keine aktuelle Route verfügbar (z. B. da noch keine
@@ -83,6 +81,8 @@ public class MainController {
 	 */
 	public void setStartAndDestinationPoint(Coordinates start,
 			Coordinates destination) {
+		rm.setStart(start);
+		rm.setDestination(destination);
 	}
 	/**
 	 * Ruft in einem neuen WorkerThread {@link PreCalculator#doPrecalculation}
@@ -154,8 +154,19 @@ public class MainController {
 	public void selectMap(StreetMap map) {
 	}
 
-	
 	public static MainController getInstance() {
-		return null;
+		if (instance == null) {
+			instance = new MainController();
+		}
+		return instance;
+	}
+
+	/**
+	 * Hauptmethode des Programms. Erzeugt einen {@link MainController}.
+	 * 
+	 * @param args
+	 *            Kommandozeilen-Argumente.
+	 */
+	public static void main(String[] args) {
 	}
 }
