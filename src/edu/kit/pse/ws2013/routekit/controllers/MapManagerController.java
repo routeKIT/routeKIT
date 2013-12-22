@@ -3,11 +3,16 @@ import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
 /**
  * Der Controller für die {@link MapManagerView}.
  */
 public class MapManagerController {
+	MapManagerView mmv = new MapManagerView();
+	
+	public MapManagerController(MainView view) {
+	}
 	/**
 	 * Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus
 	 * der Auswahlliste.

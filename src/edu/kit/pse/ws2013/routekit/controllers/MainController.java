@@ -21,6 +21,7 @@ import edu.kit.pse.ws2013.routekit.views.MapView;
 public class MainController {
 	private static MainController instance;
 	private RouteModel rm = new RouteModel();
+	MainView view;
 
 	/**
 	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
@@ -28,6 +29,8 @@ public class MainController {
 	 * . Für den genauen Ablauf siehe \abbildung{sequenz_start}.
 	 */
 	private MainController() {
+		instance = this;
+		view = new MainView();
 	}
 	/**
 	 * Wird aufgerufen, wenn sich der Startpunkt ändert (z. B. durch eine
@@ -110,6 +113,15 @@ public class MainController {
 	 * Dialog zur Profilverwaltung.
 	 */
 	public void manageProfiles() {
+		new ProfileManagerController(view);
+	}
+	
+	/**
+	 * Startet einen neuen {@link MapManagerController} und öffnet so den Dialog
+	 * zur Kartenverwaltung.
+	 */
+	public void manageMaps() {
+		new MapManagerController(view);
 	}
 	/**
 	 * Speichert die aktuelle Route im GPS Exchange Format-Format in die
@@ -131,12 +143,7 @@ public class MainController {
 	public TileSource getTileSource() {
 		return null;
 	}
-	/**
-	 * Startet einen neuen {@link MapManagerController} und öffnet so den Dialog
-	 * zur Kartenverwaltung.
-	 */
-	public void manageMaps() {
-	}
+
 	/**
 	 * Wählt das angegebene Profil aus.
 	 * 
@@ -156,7 +163,7 @@ public class MainController {
 
 	public static MainController getInstance() {
 		if (instance == null) {
-			instance = new MainController();
+			new MainController();
 		}
 		return instance;
 	}
@@ -168,5 +175,6 @@ public class MainController {
 	 *            Kommandozeilen-Argumente.
 	 */
 	public static void main(String[] args) {
+		instance = new MainController();
 	}
 }

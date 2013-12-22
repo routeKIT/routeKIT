@@ -1,5 +1,6 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
 /**
  * Der Controller für die {@link ProfileManagerView}.
@@ -8,6 +9,9 @@ import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
  * \abbildung{sequenz_profilVerwaltung} zu sehen.
  */
 public class ProfileManagerController {
+	ProfileManagerView pmv = new ProfileManagerView();
+	public ProfileManagerController(MainView view) {
+	}
 	/**
 	 * Wechselt zu dem temporären Profil mit dem angegebenen Namen. Falls noch
 	 * kein Profil mit diesem Namen existiert, wird es als Kopie des aktuellen

@@ -64,7 +64,7 @@ public class MainView extends JFrame{
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
-		JButton swapKnopf = new JButton(new ImageIcon("Knopf.png"));
+		JButton swapKnopf = new JButton(new ImageIcon(MainView.class.getResource("Knopf.png")));
 		swapKnopf.setMargin(new Insets(0, 0, 0, 0));
 		swap.add(swapKnopf);
 		controls.add(swap, BorderLayout.WEST);
@@ -105,14 +105,23 @@ public class MainView extends JFrame{
 		JPanel right = new JPanel();
 		JPanel buttons = new JPanel();
 		JButton mapButton = new JButton("Karte");
+		mapButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.getInstance().manageMaps();
+			}
+		});
 		buttons.add(mapButton);
 		mapLabel = new JLabel("Karlsruhe");
 		buttons.add(mapLabel);
+		
+		
+		
 		JButton profileButton = new JButton("Profil");
 		profileButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ProfileManagerView();
+				MainController.getInstance().manageProfiles();
 			}
 		});
 		buttons.add(profileButton);
@@ -131,7 +140,7 @@ public class MainView extends JFrame{
 		JMenu routeKIT = new JMenu("routeKIT");
 
 		JMenuItem history = new JMenuItem("Verlauf...");
-		JMenuItem about = new JMenuItem("�ber...");
+		JMenuItem about = new JMenuItem("Über...");
 		JMenuItem exit = new JMenuItem("Beenden");
 		exit.addActionListener(new ActionListener() {
 
@@ -169,10 +178,16 @@ public class MainView extends JFrame{
 		profile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new ProfileManagerView();
+				MainController.getInstance().manageProfiles();
 			}
 		});
 		JMenuItem map = new JMenuItem("Karte...");
+		map.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainController.getInstance().manageMaps();
+			}
+		});
 		JCheckBoxMenuItem osm = new JCheckBoxMenuItem("OSM-Renderer verwenden");
 		admin.add(profile);
 		admin.add(map);
