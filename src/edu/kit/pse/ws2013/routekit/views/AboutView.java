@@ -3,9 +3,12 @@ package edu.kit.pse.ws2013.routekit.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
@@ -15,13 +18,13 @@ import javax.swing.text.StyledDocument;
 /**
  * Shows the window with information about routeKIT on the screen.
  */
-public class AboutView extends JFrame {
+public class AboutView extends JDialog {
 	/**
 	 * A constructor that creates a new "About"-window.
 	 */
-	public AboutView() {
-		super("Über");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public AboutView(Window parent) {
+		super(parent, "Über", ModalityType.APPLICATION_MODAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(500, 350);
 		setLocationRelativeTo(getParent());
 		setResizable(false);
@@ -55,7 +58,7 @@ public class AboutView extends JFrame {
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-        information.setEditable(false);
+		information.setEditable(false);
 		information.setFont(displayFont);
 		text.add(information, BorderLayout.CENTER);
 		return text;
@@ -63,12 +66,17 @@ public class AboutView extends JFrame {
 
 	private JPanel initOkPane() {
 		JPanel ok = new JPanel();
-		ok.add(new JButton("OK"));
+		JButton cancel = new JButton("OK");
+		cancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		ok.add(cancel);
 		ok.setBackground(Color.WHITE);
 		return ok;
 	}
 
-	public static void main(String[] args) {
-		new AboutView();
-	}
 }

@@ -141,6 +141,13 @@ public class MainView extends JFrame{
 
 		JMenuItem history = new JMenuItem("Verlauf...");
 		JMenuItem about = new JMenuItem("Über...");
+		about.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AboutView(MainView.this);
+			}
+		});
 		JMenuItem exit = new JMenuItem("Beenden");
 		exit.addActionListener(new ActionListener() {
 
