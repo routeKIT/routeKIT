@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -75,7 +77,15 @@ public class MapManagerView extends JDialog {
 		south.setBackground(Color.WHITE);
 
 		south.add(new JButton("OK"));
-		south.add(new JButton("Abbrechen"));
+		JButton cancel = new JButton("Abbrechen");
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+
+		south.add(cancel);
 		return south;
 	}
 

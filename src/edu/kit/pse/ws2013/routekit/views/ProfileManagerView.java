@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -71,7 +73,14 @@ public class ProfileManagerView extends JDialog {
 		buttons.setBackground(Color.WHITE);
 
 		buttons.add(new JButton("OK"));
-		buttons.add(new JButton("Abbrechen"));
+		JButton cancel = new JButton("Abbrechen");
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		buttons.add(cancel);
 
 		south.add(buttons);
 		return south;
