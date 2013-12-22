@@ -1,5 +1,10 @@
 package views;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JPanel;
 
 import mapDisplay.TileCache;
 import mapDisplay.TileSource;
@@ -8,7 +13,7 @@ import mapDisplay.TileSource;
  * 
  * Als Kartenprojektion wird die Mercator-Projektion verwendet.
  */
-public class MapView {
+public class MapView extends JPanel {
 	/**
 	 * Zeichnet den aktuell sichtbaren Kartenausschnitt. Alle sichtbaren Kacheln
 	 * werden von {@code source} synchron angefordert.
@@ -17,7 +22,15 @@ public class MapView {
 	 *            Die Java {@code Graphics}, auf welche die Karte gezeichnet
 	 *            wird.
 	 */
+	@Override
 	public void paint(Graphics graphics) {
+		graphics.setColor(Color.WHITE);
+		graphics.fillRect(0, 0, getWidth(), getHeight());
+		graphics.translate(getWidth() / 2, getHeight() / 2);
+		((Graphics2D) graphics).rotate(45);
+		graphics.setColor(Color.BLACK);
+		graphics.setFont(new Font(Font.SANS_SERIF, 0, 20));
+		graphics.drawString("Ich bin ein Karte", -100, 0);
 	}
 	/**
 	 * Konstruktor: Erzeugt eine neue {@link MapView}. Die angegebene

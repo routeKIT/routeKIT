@@ -117,11 +117,9 @@ public class MainView extends JFrame{
 		buttons.add(profileLabel);
 		buttons.setBackground(Color.WHITE);
 
-		JPanel map = new JPanel();
-		map.add(new JButton("Ich bin eine Karte"));
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
-		right.add(map, BorderLayout.CENTER);
+		right.add(new MapView(null), BorderLayout.CENTER);
 		return right;
 	}
 
