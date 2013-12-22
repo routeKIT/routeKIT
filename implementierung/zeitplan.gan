@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-26" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de_DE">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-15" view-index="1" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="55" order="0"/>
@@ -57,6 +57,9 @@ Profile.load(:File)]]></notes>
             <notes><![CDATA[ProfileManagerController
 MapManagerController]]></notes>
         </task>
+        <task id="42" name="MainController" color="#8cb6ce" meeting="false" start="2014-01-08" duration="9" complete="0" expand="true"/>
+        <task id="44" name="ProfileMapCombination" color="#8cb6ce" meeting="false" start="2013-12-27" duration="4" complete="0" expand="true"/>
+        <task id="43" name="RouteModel" color="#8cb6ce" meeting="false" start="2013-12-22" duration="2" complete="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="7" name="Dominic Ziegler" function="1" contacts="dominic.ziegler@student.kit.edu" phone=""/>
@@ -73,21 +76,25 @@ MapManagerController]]></notes>
         <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="39" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="40" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="41" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="9" function="2" responsible="false" load="20.0"/>
         <allocation task-id="28" resource-id="9" function="2" responsible="false" load="20.0"/>
         <allocation task-id="22" resource-id="9" function="2" responsible="false" load="5.0"/>
+        <allocation task-id="42" resource-id="9" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="44" resource-id="9" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="43" resource-id="9" function="2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="11" function="2" responsible="true" load="80.0"/>
         <allocation task-id="22" resource-id="11" function="2" responsible="true" load="95.0"/>
         <allocation task-id="28" resource-id="11" function="2" responsible="true" load="80.0"/>
         <allocation task-id="29" resource-id="11" function="2" responsible="true" load="100.0"/>
         <allocation task-id="31" resource-id="11" function="2" responsible="true" load="100.0"/>
-        <allocation task-id="39" resource-id="8" function="2" responsible="true" load="100.0"/>
-        <allocation task-id="40" resource-id="8" function="2" responsible="true" load="100.0"/>
-        <allocation task-id="41" resource-id="8" function="2" responsible="true" load="100.0"/>
     </allocations>
     <vacations>
         <vacation start="2013-12-23" end="2014-01-02" resourceid="7"/>
         <vacation start="2013-12-31" end="2014-01-06" resourceid="8"/>
+        <vacation start="2013-12-31" end="2014-01-08" resourceid="9"/>
         <vacation start="2013-12-30" end="2014-01-04" resourceid="11"/>
         <vacation start="2013-12-21" end="2014-01-04" resourceid="12"/>
     </vacations>
