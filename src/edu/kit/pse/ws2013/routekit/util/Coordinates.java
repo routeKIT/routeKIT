@@ -89,5 +89,10 @@ public class Coordinates {
 		float lat = (float) Math.toDegrees(Math.atan(Math.sinh(n)));
 		return new Coordinates(lat, lon);
 	}
-
+	public float getLat() {
+		return lat;
+	}
+	public float getLon() {
+		return lon;
+	}
 }
