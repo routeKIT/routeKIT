@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-22" view-index="0" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-16" view-index="1" gantt-divider-location="358" resource-divider-location="322" version="2.0" locale="de_DE">
     <description><![CDATA[Implementierungsphase]]></description>
-    <view zooming-state="default:3" id="gantt-chart">
+    <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="55" order="0"/>
         <field id="tpd4" name="Anfang" width="22" order="1"/>
         <field id="tpd5" name="Ende" width="22" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Ressource" width="50" order="0"/>
-        <field id="1" name="Rolle" width="49" order="1"/>
+        <field id="1" name="Rolle" width="50" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -109,6 +110,7 @@ MapManagerController]]></notes>
         <vacation start="2013-12-23" end="2014-01-02" resourceid="7"/>
         <vacation start="2013-12-31" end="2014-01-06" resourceid="8"/>
         <vacation start="2013-12-31" end="2014-01-08" resourceid="9"/>
+        <vacation start="2013-12-23" end="2014-01-02" resourceid="10"/>
         <vacation start="2013-12-30" end="2014-01-04" resourceid="11"/>
         <vacation start="2013-12-21" end="2014-01-04" resourceid="12"/>
     </vacations>
@@ -122,7 +124,7 @@ MapManagerController]]></notes>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="196" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="195" visible="true"/>
         <displaycolumn property-id="tpd4" order="1" width="80" visible="true"/>
         <displaycolumn property-id="tpd5" order="2" width="79" visible="true"/>
     </taskdisplaycolumns>
