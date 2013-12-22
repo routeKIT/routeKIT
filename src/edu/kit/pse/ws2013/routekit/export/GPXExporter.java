@@ -1,4 +1,4 @@
-package edu.kit.pse.ws2013.routekit.exporter;
+package edu.kit.pse.ws2013.routekit.export;
 import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
