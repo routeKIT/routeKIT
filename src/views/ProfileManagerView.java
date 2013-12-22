@@ -10,7 +10,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -46,8 +46,7 @@ public class ProfileManagerView extends JFrame {
 		JPanel north = new JPanel(new FlowLayout());
 		north.setBackground(Color.WHITE);
 
-		JList<String> profile = new JList<String>(
-				new String[] { "Proﬁl auswählen:" });
+		JLabel profile = new JLabel("Proﬁl auswählen:");
 		JComboBox<Object> profilename = new JComboBox<>();
 		profilename.setMinimumSize(new Dimension(250, 26));
 		profilename.setPreferredSize(new Dimension(250, 26));
@@ -64,7 +63,7 @@ public class ProfileManagerView extends JFrame {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
-		JPanel buttons = new JPanel(new FlowLayout());
+		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,10));
 		buttons.setBackground(Color.WHITE);
 
 		buttons.add(new JButton("OK"));
@@ -92,8 +91,7 @@ public class ProfileManagerView extends JFrame {
 		JPanel type = new JPanel(new FlowLayout());
 		type.setBackground(Color.WHITE);
 
-		JList<String> vehicleType = new JList<String>(
-				new String[] { "Fahrzeugtyp:" });
+		JLabel vehicleType = new JLabel ("Fahrzeugtyp:");
 		JRadioButton car = new JRadioButton("PKW");
 		car.setBackground(Color.WHITE);
 		JRadioButton truck = new JRadioButton("LKW");
@@ -144,13 +142,12 @@ public class ProfileManagerView extends JFrame {
 	}
 
 	private JPanel innerHighwayPane() {
-		JPanel highway = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel highway = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
 		highway.setBackground(Color.WHITE);
-		JList<String> highwaySpeed = new JList<String>(
-				new String[] { "Durchschnittsgeschwindigkeit auf der Autobahn:" });
+		JLabel highwaySpeed = new JLabel("Durchschnittsgeschwindigkeit auf der Autobahn:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
 		spinner.setPreferredSize(new Dimension(50, 20));
-		JList<String> kmPerh = new JList<String>(new String[] { "km/h" });
+		JLabel kmPerh = new JLabel("km/h");
 		highway.add(highwaySpeed);
 		highway.add(spinner);
 		highway.add(kmPerh);
@@ -158,13 +155,12 @@ public class ProfileManagerView extends JFrame {
 	}
 
 	private JPanel innerSecondaryRoadPane() {
-		JPanel secondaryRoad = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel secondaryRoad = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
 		secondaryRoad.setBackground(Color.WHITE);
-		JList<String> secondaryRoadSpeed = new JList<String>(
-				new String[] { "Durchschnittsgeschwindigkeit auf der Landstraße:" });
+		JLabel secondaryRoadSpeed = new JLabel("Durchschnittsgeschwindigkeit auf der Landstraße:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
 		spinner.setPreferredSize(new Dimension(50, 20));
-		JList<String> kmPerh = new JList<String>(new String[] { "km/h" });
+		JLabel kmPerh = new JLabel("km/h");
 		secondaryRoad.add(secondaryRoadSpeed);
 		secondaryRoad.add(spinner);
 		secondaryRoad.add(kmPerh);
@@ -172,13 +168,12 @@ public class ProfileManagerView extends JFrame {
 	}
 
 	private JPanel innerHeightPane() {
-		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
 		height.setBackground(Color.WHITE);
-		JList<String> vehicleHeight = new JList<String>(
-				new String[] { "Höhe des Fahrzeugs:" });
+		JLabel vehicleHeight = new JLabel("Höhe des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 0, 4, 0.1));
 		spinner.setPreferredSize(new Dimension(50, 20));
-		JList<String> meter = new JList<String>(new String[] { "m" });
+		JLabel meter = new JLabel("m");
 		height.add(vehicleHeight);
 		height.add(spinner);
 		height.add(meter);
@@ -186,13 +181,12 @@ public class ProfileManagerView extends JFrame {
 	}
 
 	private JPanel innerWidthPane() {
-		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
 		width.setBackground(Color.WHITE);
-		JList<String> vehicleWidth = new JList<String>(
-				new String[] { "Breite des Fahrzeugs:" });
+		JLabel vehicleWidth = new JLabel("Breite des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 3, 0.1));
 		spinner.setPreferredSize(new Dimension(50, 20));
-		JList<String> ton = new JList<String>(new String[] { "m" });
+		JLabel ton = new JLabel("m");
 		width.add(vehicleWidth);
 		width.add(spinner);
 		width.add(ton);
@@ -200,13 +194,12 @@ public class ProfileManagerView extends JFrame {
 	}
 
 	private JPanel innerWeightPane() {
-		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
 		weight.setBackground(Color.WHITE);
-		JList<String> vehicleWeight = new JList<String>(
-				new String[] { "Gewicht des Fahrzeugs:" });
+		JLabel vehicleWeight = new JLabel("Gewicht des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 50, 0.5));
 		spinner.setPreferredSize(new Dimension(50, 20));
-		JList<String> meter = new JList<String>(new String[] { "t" });
+		JLabel meter = new JLabel("t");
 		weight.add(vehicleWeight);
 		weight.add(spinner);
 		weight.add(meter);
