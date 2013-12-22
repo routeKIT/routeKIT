@@ -53,7 +53,7 @@ public class MainView extends JFrame{
 
 	private JPanel initLeftPane() {
 		JPanel left = new JPanel(new BorderLayout());
-		left.setMinimumSize(new Dimension(200, 100));
+		left.setMinimumSize(new Dimension(260, 100));
 
 		JPanel controls = new JPanel(new BorderLayout());
 		JPanel hist = new JPanel();
