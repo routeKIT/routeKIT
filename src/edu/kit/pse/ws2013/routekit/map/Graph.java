@@ -11,6 +11,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 public class Graph {
 	int[] nodes;
 	int[] edges;
+	int[] edgesReverse;
 	Map<Integer, NodeProperties> nodeProps;
 	EdgeProperties[] edgeProps;
 	float[] lat;
@@ -48,6 +49,16 @@ public class Graph {
 		this.edgeProps = edgeProps;
 		this.lat = lat;
 		this.lon = lon;
+		this.edgesReverse = new int[edges.length];
+		int currentNode = 0;
+		for (int i = 0; i < edges.length; i++) {
+			while (currentNode + 1 < nodes.length
+					&& nodes[currentNode + 1] <= i) {
+				currentNode++;
+
+			}
+			edgesReverse[i] = currentNode;
+		}
 	}
 
 	/**
@@ -78,7 +89,7 @@ public class Graph {
 	 * @return
 	 */
 	public int getStartNode(int edge) {
-		return 0;
+		return edgesReverse[edge];
 	}
 	/**
 	 * Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.
