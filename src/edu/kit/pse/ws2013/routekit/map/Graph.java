@@ -58,7 +58,7 @@ public class Graph {
 	 * @return
 	 */
 	public NodeProperties getNodeProperties(int node) {
-		return null;
+		return nodeProps.get(node);
 	}
 	/**
 	 * Gibt die Koordinaten des angegebenen Knotens zurück.
@@ -68,7 +68,7 @@ public class Graph {
 	 * @return
 	 */
 	public Coordinates getCoordinates(int node) {
-		return null;
+		return new Coordinates(lat[node], lon[node]);
 	}
 	/**
 	 * Gibt den Startknoten der angegebenen Kante zurück.
@@ -119,7 +119,7 @@ public class Graph {
 	 * @return
 	 */
 	public EdgeProperties getEdgeProperties(int edge) {
-		return null;
+		return edgeProps[edge];
 	}
 	/**
 	 * Gibt den Endknoten der angegebenen Kante zurück.
@@ -129,6 +129,6 @@ public class Graph {
 	 * @return
 	 */
 	public int getTargetNode(int edge) {
-		return 0;
+		return edges[edge];
 	}
 }
