@@ -9,6 +9,47 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * Karte.
  */
 public class Graph {
+	int[] nodes;
+	int[] edges;
+	Map<Integer, NodeProperties> nodeProps;
+	EdgeProperties[] edgeProps;
+	float[] lat;
+	float[] lon;
+	/**
+	 * Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen
+	 * Adjazenzfeld.
+	 * 
+	 * @param nodes
+	 *            Der Knoten-Bestandteil des Adjazenzfeldes.
+	 * @param edges
+	 *            Der Kanten-Bestandteil des Adjazenzfeldes.
+	 * @param nodeProps
+	 *            Die {@code NodeProperties} der Knoten des Graphen. Es wird
+	 *            eine {@code Map} anstelle eines Arrays verwendet, da die
+	 *            meisten Knoten keine besonderen Eigenschaften haben und daher
+	 *            das Array zum großen Teil leer wäre.
+	 * 
+	 * @param edgeProps
+	 *            Die {@code EdgeProperties} der Kanten des Graphen. Hier wird
+	 *            ein Array verwendet, da jede Kante einen Namen und damit ein
+	 *            {@code EdgeProperties}-Objekt hat.
+	 * 
+	 * @param lat
+	 *            Die geographischen Breiten der Knoten des Graphen.
+	 * @param lon
+	 *            Die geographischen Längen der Knoten des Graphen.
+	 */
+	public Graph(int[] nodes, int[] edges,
+			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
+			float[] lat, float[] lon) {
+		this.nodes = nodes;
+		this.edges = edges;
+		this.nodeProps = nodeProps;
+		this.edgeProps = edgeProps;
+		this.lat = lat;
+		this.lon = lon;
+	}
+
 	/**
 	 * Gibt die {@code NodeProperties} des angegebenen Knotens zurück.
 	 * 
@@ -59,34 +100,7 @@ public class Graph {
 	public GraphIndex getIndex(int zoom) {
 		return null;
 	}
-	/**
-	 * Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen
-	 * Adjazenzfeld.
-	 * 
-	 * @param nodes
-	 *            Der Knoten-Bestandteil des Adjazenzfeldes.
-	 * @param edges
-	 *            Der Kanten-Bestandteil des Adjazenzfeldes.
-	 * @param nodeProps
-	 *            Die {@code NodeProperties} der Knoten des Graphen. Es wird
-	 *            eine {@code Map} anstelle eines Arrays verwendet, da die
-	 *            meisten Knoten keine besonderen Eigenschaften haben und daher
-	 *            das Array zum großen Teil leer wäre.
-	 * 
-	 * @param edgeProps
-	 *            Die {@code EdgeProperties} der Kanten des Graphen. Hier wird
-	 *            ein Array verwendet, da jede Kante einen Namen und damit ein
-	 *            {@code EdgeProperties}-Objekt hat.
-	 * 
-	 * @param lat
-	 *            Die geographischen Breiten der Knoten des Graphen.
-	 * @param lon
-	 *            Die geographischen Längen der Knoten des Graphen.
-	 */
-	public Graph(int[] nodes, int[] edges,
-			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
-			float[] lat, float[] lon) {
-	}
+
 	/**
 	 * Gibt alle in den Knoten eingehende Kanten zurück.
 	 * 
