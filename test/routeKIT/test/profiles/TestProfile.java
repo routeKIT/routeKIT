@@ -10,9 +10,9 @@ import org.junit.Test;
 import profiles.Profile;
 import profiles.VehicleType;
 
+@SuppressWarnings("static-method")
 public class TestProfile {
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testEquals() {
 		assertTrue(Profile.defaultCar.equals(Profile.defaultCar));
@@ -27,7 +27,6 @@ public class TestProfile {
 		assertFalse(Profile.defaultCar.equals(Profile.defaultTruck, false));
 	}
 
-	@SuppressWarnings("static-method")
 	@Test
 	public void testClone() {
 		assertTrue(Profile.defaultCar.clone().equals(Profile.defaultCar, false));
@@ -37,7 +36,6 @@ public class TestProfile {
 		assertFalse(Profile.defaultCar.clone().isDefault());
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testName() {
 		final Profile p = Profile.defaultCar.clone();
@@ -47,7 +45,6 @@ public class TestProfile {
 		Profile.defaultCar.setName(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testVehicleType() {
 		final Profile p = Profile.defaultCar.clone();
@@ -57,7 +54,6 @@ public class TestProfile {
 		Profile.defaultCar.setVehicleType(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testHeight() {
 		final Profile p = Profile.defaultCar.clone();
@@ -67,7 +63,6 @@ public class TestProfile {
 		Profile.defaultCar.setHeight(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testWidth() {
 		final Profile p = Profile.defaultCar.clone();
@@ -77,7 +72,6 @@ public class TestProfile {
 		Profile.defaultCar.setWidth(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testWeight() {
 		final Profile p = Profile.defaultCar.clone();
@@ -87,7 +81,6 @@ public class TestProfile {
 		Profile.defaultCar.setWeight(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testSpeedHighway() {
 		final Profile p = Profile.defaultCar.clone();
@@ -97,7 +90,6 @@ public class TestProfile {
 		Profile.defaultCar.setSpeedHighway(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test(expected = IllegalStateException.class)
 	public void testSpeedRoad() {
 		final Profile p = Profile.defaultCar.clone();
@@ -107,7 +99,6 @@ public class TestProfile {
 		Profile.defaultCar.setSpeedRoad(testValue); // should not be allowed
 	}
 	
-	@SuppressWarnings("static-method")
 	@Test
 	public void testSaveLoad() throws IOException {
 		final String name = "Test name";
