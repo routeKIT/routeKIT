@@ -21,14 +21,14 @@ public class HistoryEntry {
 	private final Date date;
 	
 	/**
-	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Attributen.
+	 * Creates a new {@link HistoryEntry} with the specified attributes.
 	 * 
 	 * @param start
-	 *            Der Startpunkt.
+	 *            The start point.
 	 * @param dest
-	 *            Der Zielpunkt.
+	 *            The destination point.
 	 * @param date
-	 *            Der Zeitpunkt.
+	 *            The date.
 	 */
 	public HistoryEntry(Coordinates start, Coordinates dest, Date date) {
 		this.start = start;

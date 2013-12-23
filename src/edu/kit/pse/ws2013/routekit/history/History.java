@@ -7,10 +7,13 @@ import java.util.List;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 /**
- * Kapselt den Verlauf.
+ * A history of route calculation queries.
  */
 public class History {
 	
+	/**
+	 * The internal list of history entries.
+	 */
 	private final List<HistoryEntry> entries;
 	
 	/**
@@ -34,42 +37,54 @@ public class History {
 	}
 
 	/**
-	 * Fügt einen Eintrag zum Verlauf hinzu. Als {@code date} des neuen Eintrags
-	 * wird die aktuelle Zeit verwendet.
+	 * Add a new {@link HistoryEntry entry} to the {@link History}.
+	 * The {@link HistoryEntry#getDate() date} of the new entry will be the current date.
 	 * 
 	 * @param start
-	 *            Der Startpunkt.
+	 *            The start point.
 	 * @param destination
-	 *            Der Zielpunkt.
+	 *            The destination point.
 	 */
 	public void addEntry(Coordinates start, Coordinates destination) {
 		entries.add(new HistoryEntry(start, destination, new Date()));
 	}
 	
 	/**
-	 * Speichert den Verlauf in die angegebene Datei.
+	 * Saves the history to the specified file.
 	 * 
 	 * @param file
-	 *            Die Datei, in die der Verlauf gespeichert wird.
+	 *            The file where the history should be saved.
 	 */
 	public void save(File file) {
 	}
 	/**
-	 * (statisch) Lädt einen Verlauf aus der angegebenen Datei und gibt ihn
-	 * zurück.
+	 * Loads a history from the specified file and returns it.
 	 * 
 	 * @param file
-	 *            Die Datei, aus der der Verlauf geladen wird.
-	 * @return
+	 *            The file where the history should be loaded.
+	 * @return A new {@link History} with the entries from the specified file.
 	 */
 	public History load(File file) {
 		return null;
 	}
 	
 	/**
-	 * Gibt alle Einträge des Verlaufs zurück.
+	 * <p>
+	 * Returns all entries from the history.
+	 * </p><p>
+	 * The history may not be modified through the {@link List}
+	 * returned by this method (or its iterator); attempts to do so
+	 * will result in an {@link UnsupportedOperationException}
+	 * (see {@link Collections#unmodifiableList(List)}).
+	 * </p><p>
+	 * (Note that while the current implementation will return a list
+	 * that will reflect future changes to the history, users should
+	 * not rely on this behavior, and instead call this method again
+	 * each time the history entries are needed.)
+	 * </p>
 	 * 
-	 * @return
+	 * @return An (unmodifiable) {@link List} containing all
+	 *         entries of the history.
 	 */
 	public List<HistoryEntry> getEntries() {
 		return Collections.unmodifiableList(entries);
