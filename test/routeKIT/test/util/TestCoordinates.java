@@ -47,4 +47,13 @@ public class TestCoordinates {
 		assertEquals(c.getLon(), c2.getLon(),EPSILON);
 	}
 
+	@Test
+	public void testToFromString() {
+		float lat = 49.013766f;
+		float lon = 8.419944f;
+		Coordinates c1 = new Coordinates(lat, lon);
+		Coordinates c2 = Coordinates.fromString(c1.toString());
+		assertEquals(c1.getLat(), c2.getLat(), EPSILON);
+		assertEquals(c1.getLon(), c2.getLon(), EPSILON);
+	}
 }

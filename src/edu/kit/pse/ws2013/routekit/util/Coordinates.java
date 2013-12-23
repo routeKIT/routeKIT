@@ -95,4 +95,46 @@ public class Coordinates {
 	public float getLon() {
 		return lon;
 	}
+	
+	/**
+	 * <p>
+	 * Returns a string representation of the coordinates
+	 * suitable for parsing with {@link #fromString(String) fromString}.
+	 * </p><p>
+	 * The exact format is: {@code lat lon}, where {@code lat} and {@code lon}
+	 * are the latitude and the longitude respectively, in decimal floating point number format.
+	 * </p>
+	 * @return A string representation of the coordinates.
+	 */
+	@Override
+	public String toString() {
+		return lat + " " + lon;
+	}
+	
+	/**
+	 * Parse a coordinates string as returned by {@link #toString()}
+	 * back into {@link Coordinates}.
+	 * @param s The coordinates string.
+	 * @return The {@link Coordinates} parsed from the string.
+	 * @throws IllegalArgumentException If the coordinates string can’t be parsed.
+	 */
+	public static Coordinates fromString(String s) {
+		String[] coords = s.split(" ");
+		if(coords.length != 2) {
+			throw new IllegalArgumentException("Coordinates string must contain exactly two space-separated components!");
+		}
+		float lat;
+		float lon;
+		try {
+			lat = Float.parseFloat(coords[0]);
+		} catch(NumberFormatException e) {
+			throw new IllegalArgumentException("Can’t parse latitude!", e);
+		}
+		try {
+			lon = Float.parseFloat(coords[1]);
+		} catch(NumberFormatException e) {
+			throw new IllegalArgumentException("Can’t parse longitude!", e);
+		}
+		return new Coordinates(lat, lon);
+	}
 }
