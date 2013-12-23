@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-23" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-20" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:3" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="52" order="0"/>
@@ -57,9 +57,9 @@ Profile.load(:File)]]></notes>
             <notes><![CDATA[ProfileManagerController
 MapManagerController]]></notes>
         </task>
-        <task id="42" name="MainController" color="#ffcc00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-08" duration="9" complete="0" expand="true"/>
-        <task id="44" name="ProfileMapCombination" color="#ffcc00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-27" duration="4" complete="0" expand="true"/>
-        <task id="43" name="RouteModel" color="#ffcc00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-22" duration="2" complete="0" expand="true"/>
+        <task id="42" name="MainController" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-08" duration="9" complete="0" expand="true"/>
+        <task id="44" name="ProfileMapCombination" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-27" duration="4" complete="0" expand="true"/>
+        <task id="43" name="RouteModel" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-22" duration="2" complete="0" expand="true"/>
         <task id="52" name="PreCalculator" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="59" name="Weights" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="58" name="ArcFlags" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
