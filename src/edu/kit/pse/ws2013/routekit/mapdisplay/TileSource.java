@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
  * Abstrakte Klasse, die ein Interface für das (synchrone) Rendern von
  * Kartenkacheln definiert.
  */
-public class TileSource {
+public interface TileSource {
 	/**
 	 * Berechnet die angegebene Kachel und gibt sie zurück.
 	 * 
@@ -16,7 +16,5 @@ public class TileSource {
 	 *            siehe {@code zoom}
 	 * @return
 	 */
-	public BufferedImage renderTile(int x, int y, int zoom) {
-		return null;
-	}
+	public BufferedImage renderTile(int x, int y, int zoom);
 }
