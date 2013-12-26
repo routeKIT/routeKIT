@@ -6,6 +6,16 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Karte}.
  */
 public class ProfileMapCombination {
+	private StreetMap map;
+	private Profile p;
+	private Weights weights;
+	private ArcFlags arc;
+
+	public ProfileMapCombination(StreetMap map, Profile p) {
+		this.map = map;
+		this.p = p;
+	}
+
 	/**
 	 * Gibt {@code true} zurück, wenn für eine Kombination aus Profil und Karte
 	 * eine Vorberechnung der Gewichte und der Arc-Flags existiert.
@@ -13,21 +23,28 @@ public class ProfileMapCombination {
 	 * @return
 	 */
 	public boolean isCalculated() {
-		return false;
+		return weights != null && arc != null;
 	}
 
 	public StreetMap getStreetMap() {
-		// TODO Auto-generated method stub
-		return null;
+		return map;
+	}
+	public Profile getProfile() {
+		return p;
+	}
+	public Weights getWeights() {
+		return weights;
+	}
+	public ArcFlags getArc() {
+		return arc;
 	}
 
 	public void setWeights(Weights weights) {
-		// TODO Auto-generated method stub
-		
+		this.weights = weights;
 	}
 
 	public void setArcFlags(ArcFlags arcFlags) {
-		// TODO Auto-generated method stub
-		
+		arc = arcFlags;
+
 	}
 }
