@@ -5,7 +5,7 @@ import edu.kit.pse.ws2013.routekit.map.Graph;
 /**
  * Eine {@link TileSource}, die die Kacheln selbst berechnet.
  */
-public class TileRenderer {
+public class TileRenderer implements TileSource{
 	/**
 	 * Konstruktor: Erzeugt einen neuen {@code TileRenderer}.
 	 * 

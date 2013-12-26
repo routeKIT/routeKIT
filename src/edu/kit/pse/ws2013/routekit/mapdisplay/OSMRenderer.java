@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
  * Eine {@link TileSource}, die die OSM-Kachel vom OpenStreetMap-Server
  * herunterlädt.
  */
-public class OSMRenderer {
+public class OSMRenderer implements TileSource{
 	/**
 	 * Lädt die angegebene Kachel herunter und gibt sie zurück.
 	 * 

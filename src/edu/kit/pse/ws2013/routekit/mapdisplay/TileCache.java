@@ -14,7 +14,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * Collector sie bei Speicherknappheit verwerfen kann (etwa durch
  * {@code SoftReference}s).
  */
-public class TileCache {
+public class TileCache implements TileSource{
 	private class TileJob implements Runnable {
 		private int x;
 		private int y;
