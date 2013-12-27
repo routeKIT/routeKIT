@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,12 +21,13 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
  */
 public class ProfileManagerView extends JDialog {
 	/**
-	 *  A constructor that creates a new ProfileManagerView.
+	 * A constructor that creates a new ProfileManagerView.
 	 */
 	public ProfileManagerView(Window parent) {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
@@ -69,7 +71,7 @@ public class ProfileManagerView extends JDialog {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
-		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,10));
+		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
 		buttons.setBackground(Color.WHITE);
 
 		buttons.add(new JButton("OK"));
@@ -104,7 +106,7 @@ public class ProfileManagerView extends JDialog {
 		JPanel type = new JPanel(new FlowLayout());
 		type.setBackground(Color.WHITE);
 
-		JLabel vehicleType = new JLabel ("Fahrzeugtyp:");
+		JLabel vehicleType = new JLabel("Fahrzeugtyp:");
 		JRadioButton car = new JRadioButton("PKW");
 		car.setBackground(Color.WHITE);
 		JRadioButton truck = new JRadioButton("LKW");
@@ -155,9 +157,10 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	private JPanel innerHighwayPane() {
-		JPanel highway = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
+		JPanel highway = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		highway.setBackground(Color.WHITE);
-		JLabel highwaySpeed = new JLabel("Durchschnittsgeschwindigkeit auf der Autobahn:");
+		JLabel highwaySpeed = new JLabel(
+				"Durchschnittsgeschwindigkeit auf der Autobahn:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
 		spinner.setPreferredSize(new Dimension(50, 20));
 		JLabel kmPerh = new JLabel("km/h");
@@ -168,9 +171,11 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	private JPanel innerSecondaryRoadPane() {
-		JPanel secondaryRoad = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
+		JPanel secondaryRoad = new JPanel(
+				new FlowLayout(FlowLayout.LEFT, 15, 5));
 		secondaryRoad.setBackground(Color.WHITE);
-		JLabel secondaryRoadSpeed = new JLabel("Durchschnittsgeschwindigkeit auf der Landstraße:");
+		JLabel secondaryRoadSpeed = new JLabel(
+				"Durchschnittsgeschwindigkeit auf der Landstraße:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
 		spinner.setPreferredSize(new Dimension(50, 20));
 		JLabel kmPerh = new JLabel("km/h");
@@ -181,7 +186,7 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	private JPanel innerHeightPane() {
-		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
+		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		height.setBackground(Color.WHITE);
 		JLabel vehicleHeight = new JLabel("Höhe des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 0, 4, 0.1));
@@ -194,7 +199,7 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	private JPanel innerWidthPane() {
-		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
+		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		width.setBackground(Color.WHITE);
 		JLabel vehicleWidth = new JLabel("Breite des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 3, 0.1));
@@ -207,7 +212,7 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	private JPanel innerWeightPane() {
-		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT,15,5));
+		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		weight.setBackground(Color.WHITE);
 		JLabel vehicleWeight = new JLabel("Gewicht des Fahrzeugs:");
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 50, 0.5));
@@ -220,16 +225,16 @@ public class ProfileManagerView extends JDialog {
 	}
 
 	/**
-	 * Sets the current profile to the specified profile, 
-	 * loads its values ​​in the input fields, 
-	 * enables / disables the input elements and the „Löschen“-Button
-	 * depending on whether it is a default profile or not.
+	 * Sets the current profile to the specified profile, loads its values ​​in
+	 * the input fields, enables / disables the input elements and the
+	 * „Löschen“-Button depending on whether it is a default profile or not.
 	 * 
 	 * @param profile
 	 *            The new Profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
 	}
+
 	/**
 	 * Sets the profiles that can be currently selected.
 	 * 

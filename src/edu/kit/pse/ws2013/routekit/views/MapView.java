@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.views;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -13,37 +14,38 @@ import javax.swing.JPanel;
 
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
+
 /**
  * Displays a map section on the screen.
  * 
  * As a map projection, the Mercator projection is used.
  */
-public class MapView extends JPanel
-		implements
-			MouseListener,
-			MouseMotionListener,
-			MouseWheelListener {
+public class MapView extends JPanel implements MouseListener,
+		MouseMotionListener, MouseWheelListener {
 	float x;
 	float y;
 	int zoom = 16;
+
 	/**
-	 * A constructor that creates a new MapView. 
-	 * The specified TileSource is used for rendering.
+	 * A constructor that creates a new MapView. The specified TileSource is
+	 * used for rendering.
 	 * 
-	 * Because the tiles are requested synchronously with each MapView.paint(), 
+	 * Because the tiles are requested synchronously with each MapView.paint(),
 	 * source should be a TileCache.
 	 * 
 	 * @param source
-	 *            An object that provides the map tiles, which are then displayed.
+	 *            An object that provides the map tiles, which are then
+	 *            displayed.
 	 */
 	public MapView(TileSource source) {
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
 	}
+
 	/**
-	 * Draws the currently visible map section. 
-	 * All visible tiles are requested simultaneously from source.
+	 * Draws the currently visible map section. All visible tiles are requested
+	 * simultaneously from source.
 	 * 
 	 * @param graphics
 	 *            The Java Graphics, on which the map is drawn.
@@ -108,6 +110,7 @@ public class MapView extends JPanel
 	public void mouseMoved(MouseEvent e) {
 
 	}
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		int xp = e.getX();

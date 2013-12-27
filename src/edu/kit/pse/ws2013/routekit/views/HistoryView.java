@@ -1,15 +1,14 @@
 package edu.kit.pse.ws2013.routekit.views;
-import java.awt.BorderLayout;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.event.ListSelectionListener;
-import java.util.Arrays;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -17,17 +16,21 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 
+import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.history.History;
+import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
+import edu.kit.pse.ws2013.routekit.util.Coordinates;
+
 /**
  * Shows the window with the History on the screen.
  */
-public class HistoryView extends JFrame{
-	int selectedElement = -1;
+public class HistoryView extends JFrame {
+	JList<HistoryEntry> historyvar;
+
 	/**
-	 * The constructor creates a HistoryView for the specified history. 
-	 * The history can not be subsequently changed.
+	 * The constructor creates a HistoryView for the specified history. The
+	 * history can not be subsequently changed.
 	 * 
 	 * @param history
 	 *            The history that is displayed.
@@ -50,43 +53,69 @@ public class HistoryView extends JFrame{
 	}
 
 	private JComponent initCenterPane(History history) {
-		String[] strings = new String[100];
-		Arrays.fill(strings, "hallo");
-		strings[0] = "sdfsdfsd";
-		final JList<String> historyvar = new JList<String>(strings);
+		// String[] strings = new String[100];
+		// Arrays.fill(strings, "hallo");
+		// strings[0] = "sdfsdfsd";
+		// final JList<String> historyvar = new JList<String>(strings);
+		historyvar = new JList<HistoryEntry>(history.getEntries().toArray(
+				new HistoryEntry[0]));
 		historyvar.setBackground(Color.lightGray);
 		historyvar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	    final JScrollPane jScrollPane = new JScrollPane(historyvar);
-		historyvar.addListSelectionListener(new ListSelectionListener() 
-		  {
-			  @Override
-		         public void valueChanged (ListSelectionEvent e){
-				  	selectedElement = historyvar.getSelectedIndex();
+		historyvar.addMouseListener(new MouseAdapter() {
+			/**
+			 * A listener for a double mouse click. The coordinates for the
+			 * calculation of the route are passed on and the windows closed.
+			 */
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Coordinates start = historyvar.getSelectedValue()
+							.getStart();
+					Coordinates destination = historyvar.getSelectedValue()
+							.getDest();
+					MainController.getInstance().setStartAndDestinationPoint(
+							start, destination);
+					dispose();
 				}
-			  });
+			}
+		});
+		final JScrollPane jScrollPane = new JScrollPane(historyvar);
 		return jScrollPane;
 	}
 
-	private JPanel initSouthPane(History history) {
+	private JPanel initSouthPane(final History history) {
 		JPanel south = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JButton ok = new JButton("OK");
 		south.add(ok);
 		ok.addActionListener(new ActionListener() {
-			
+
+			/**
+			 * A listener for the "OK"-button. When a row is selected, the
+			 * coordinates for the calculation of the route are passed on and
+			 * the windows closed. When no row is selected, the window stays
+			 * open.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (selectedElement == -1)
+				if (historyvar.getSelectedValue() == null)
 					return;
 				else {
-					//String historyentry = history.getEntries().get(selectedElement).;
-					//setStartAndDestinationPoint(start, destination);
+					Coordinates start = historyvar.getSelectedValue()
+							.getStart();
+					Coordinates destination = historyvar.getSelectedValue()
+							.getDest();
+					MainController.getInstance().setStartAndDestinationPoint(
+							start, destination);
 					dispose();
 				}
 			}
 		});
 		JButton cancel = new JButton("Abbrechen");
 		cancel.addActionListener(new ActionListener() {
-			
+
+			/**
+			 * A listener for the "Abbrechen"-button. Closes the window.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -95,10 +124,9 @@ public class HistoryView extends JFrame{
 		south.add(cancel);
 		return south;
 	}
-	
+
 	public static void main(String[] args) {
-		new HistoryView(null);
+		new HistoryView(new History());
 	}
-	
 
 }

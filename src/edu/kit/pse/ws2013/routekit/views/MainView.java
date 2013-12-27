@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,10 +25,11 @@ import javax.swing.JTextField;
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Displays the main window on the screen.
  */
-public class MainView extends JFrame{
+public class MainView extends JFrame {
 	private JLabel mapLabel;
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
@@ -64,15 +66,16 @@ public class MainView extends JFrame{
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
-		JButton swapKnopf = new JButton(new ImageIcon(MainView.class.getResource("Knopf.png")));
+		JButton swapKnopf = new JButton(new ImageIcon(
+				MainView.class.getResource("Knopf.png")));
 		swapKnopf.setMargin(new Insets(0, 0, 0, 0));
 		swap.add(swapKnopf);
 		controls.add(swap, BorderLayout.WEST);
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
 
 		left.add(controls, BorderLayout.NORTH);
-		JList<String> routeDescription = new JList<String>(new String[]{
-				"sdfsdfsd", "dsdfsd", "sdf"});
+		JList<String> routeDescription = new JList<String>(new String[] {
+				"sdfsdfsd", "dsdfsd", "sdf" });
 		left.add(routeDescription, BorderLayout.CENTER);
 		return left;
 	}
@@ -114,9 +117,7 @@ public class MainView extends JFrame{
 		buttons.add(mapButton);
 		mapLabel = new JLabel("Karlsruhe");
 		buttons.add(mapLabel);
-		
-		
-		
+
 		JButton profileButton = new JButton("Profil");
 		profileButton.addActionListener(new ActionListener() {
 			@Override
@@ -142,7 +143,7 @@ public class MainView extends JFrame{
 		JMenuItem history = new JMenuItem("Verlauf...");
 		JMenuItem about = new JMenuItem("Über...");
 		about.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new AboutView(MainView.this);
@@ -166,7 +167,8 @@ public class MainView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fileChooser.showDialog(MainView.this, "Exportieren");
-				MainController.getInstance().exportHTML(fileChooser.getSelectedFile());
+				MainController.getInstance().exportHTML(
+						fileChooser.getSelectedFile());
 			}
 		});
 		JMenuItem gpx = new JMenuItem("GPX...");
@@ -174,7 +176,8 @@ public class MainView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fileChooser.showDialog(MainView.this, "Exportieren");
-				MainController.getInstance().exportGPX(fileChooser.getSelectedFile());
+				MainController.getInstance().exportGPX(
+						fileChooser.getSelectedFile());
 			}
 		});
 		export.add(html);
@@ -206,10 +209,11 @@ public class MainView extends JFrame{
 
 		setJMenuBar(menu);
 	}
+
 	public static void main(String[] args) {
 		new MainView();
 	}
-	
+
 	/**
 	 * Updates the display of the current profile.
 	 * 
@@ -218,6 +222,7 @@ public class MainView extends JFrame{
 	 */
 	public void setCurrentProfile(Profile profile) {
 	}
+
 	/**
 	 * Updates the display of the current map.
 	 * 

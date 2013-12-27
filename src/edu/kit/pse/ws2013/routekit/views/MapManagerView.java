@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.views;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,6 +47,7 @@ public class MapManagerView extends JDialog {
 		setContentPane(contentPane);
 		setVisible(true);
 	}
+
 	private JPanel initNorthPane() {
 		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
@@ -58,6 +60,7 @@ public class MapManagerView extends JDialog {
 		north.add(mapname);
 		return north;
 	}
+
 	private JPanel initCenterPane() {
 		JPanel center = new JPanel(new BorderLayout(10, 10));
 		center.setBackground(Color.WHITE);
@@ -104,8 +107,8 @@ public class MapManagerView extends JDialog {
 		JPanel mapProfile = new JPanel(new BorderLayout(10, 10));
 		mapProfile.setBackground(Color.WHITE);
 		JPanel addDelete = initAddDelete();
-		JList<String> profile = new JList<String>(new String[]{"sdfsdfsd",
-				"hallo"});
+		JList<String> profile = new JList<String>(new String[] { "sdfsdfsd",
+				"hallo" });
 		profile.setBackground(Color.lightGray);
 
 		mapProfile.add(new JLabel("Profile für diese Karte:"),
@@ -124,6 +127,7 @@ public class MapManagerView extends JDialog {
 		addDelete.setPreferredSize(new Dimension(130, 200));
 		return addDelete;
 	}
+
 	/**
 	 * Sets the maps that can be currently selected.
 	 * 
@@ -132,11 +136,12 @@ public class MapManagerView extends JDialog {
 	 */
 	public void setAvailableMaps(Set<StreetMap> maps) {
 	}
+
 	/**
-	 * Sets the current map to the specified map, 
-	 * updates the list of profiles for the selected map, 
-	 * enable / disable the „Import“- und „Löschen“-Buttons 
-	 * depending on whether it is a default map or not.
+	 * Sets the current map to the specified map, updates the list of profiles
+	 * for the selected map, enable / disable the „Import“- und
+	 * „Löschen“-Buttons depending on whether it is a default map or not.
+	 * 
 	 * @param map
 	 *            The new map.
 	 * @param profiles

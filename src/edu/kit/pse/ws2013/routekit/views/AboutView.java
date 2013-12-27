@@ -68,7 +68,7 @@ public class AboutView extends JDialog {
 		JPanel ok = new JPanel();
 		JButton cancel = new JButton("OK");
 		cancel.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
