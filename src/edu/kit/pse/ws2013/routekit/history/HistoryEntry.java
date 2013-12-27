@@ -29,8 +29,18 @@ public class HistoryEntry {
 	 *            The destination point.
 	 * @param date
 	 *            The date.
+	 * @throws IllegalArgumentException If start, dest or date are null.
 	 */
 	public HistoryEntry(Coordinates start, Coordinates dest, Date date) {
+		if(start == null) {
+			throw new IllegalArgumentException("start is null!", new NullPointerException());
+		}
+		if(dest == null) {
+			throw new IllegalArgumentException("dest is null!", new NullPointerException());
+		}
+		if(date == null) {
+			throw new IllegalArgumentException("date is null!", new NullPointerException());
+		}
 		this.start = start;
 		this.dest = dest;
 		this.date = date;
