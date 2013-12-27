@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
@@ -22,6 +23,7 @@ public class TestGraph {
 						1, 0, 1});
 	}
 
+	@Ignore
 	@Test
 	public void testGetNodeProperties() {
 		fail("Not yet implemented");
@@ -50,6 +52,7 @@ public class TestGraph {
 		assertEquals(3, g.getTargetNode(2));
 	}
 
+	@Ignore
 	@Test
 	public void testGetEdgeProperties() {
 		fail("Not yet implemented");
