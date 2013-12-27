@@ -119,6 +119,9 @@ public class Coordinates {
 	 * @throws IllegalArgumentException If the coordinates string can’t be parsed.
 	 */
 	public static Coordinates fromString(String s) {
+		if(s == null) {
+			throw new IllegalArgumentException("Coordinates string is null!", new NullPointerException());
+		}
 		String[] coords = s.split(" ");
 		if(coords.length != 2) {
 			throw new IllegalArgumentException("Coordinates string must contain exactly two space-separated components!");
