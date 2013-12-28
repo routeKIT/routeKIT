@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,13 +25,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
+import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
  * Displays the main window on the screen.
  */
-public class MainView extends JFrame {
+public class MainView extends JFrame implements RouteModelListener {
 	private JLabel mapLabel;
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
@@ -62,7 +67,14 @@ public class MainView extends JFrame {
 
 		JPanel controls = new JPanel(new BorderLayout());
 		JPanel hist = new JPanel();
-		hist.add(new JButton("Verlauf"));
+		JButton historyButton = new JButton("Verlauf");
+		hist.add(historyButton);
+		historyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new HistoryView(new History(), MainView.this);
+			}
+		});
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
@@ -74,7 +86,7 @@ public class MainView extends JFrame {
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
 
 		left.add(controls, BorderLayout.NORTH);
-		JList<String> routeDescription = new JList<String>(new String[] {
+		final JList<String> routeDescription = new JList<String>(new String[] {
 				"sdfsdfsd", "dsdfsd", "sdf" });
 		left.add(routeDescription, BorderLayout.CENTER);
 		return left;
@@ -95,9 +107,89 @@ public class MainView extends JFrame {
 		startLabel.setPreferredSize(preffered);
 		targetLabel.setPreferredSize(preffered);
 		start.add(startLabel);
-		start.add(new JTextField(15));
+		final JTextField startField = new JTextField(15);
+		startField.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				float xcoordinate = Float.MAX_VALUE;
+				float ycoordinate = Float.MAX_VALUE;
+				String[] strings = startField.getText().split("\\s+");
+				if (strings.length != 2) {
+					startField.setBackground(Color.RED);
+					return;
+				}
+				try {
+					xcoordinate = Float.parseFloat(strings[0]);
+				} catch (NumberFormatException error) {
+					startField.setBackground(Color.RED);
+					return;
+				}
+				if (Float.compare(Math.abs(xcoordinate), 90f) > 0) {
+					startField.setBackground(Color.RED);
+					return;
+				}
+
+				try {
+					ycoordinate = Float.parseFloat(strings[1]);
+				} catch (NumberFormatException error) {
+					startField.setBackground(Color.RED);
+					return;
+				}
+				if (Float.compare(Math.abs(ycoordinate), 180f) > 0) {
+					startField.setBackground(Color.RED);
+					return;
+				}
+				MainController.getInstance().setStartPoint(
+						new Coordinates(xcoordinate, ycoordinate));
+			}
+
+			public void focusGained(FocusEvent e) {
+				startField.setBackground(Color.WHITE);
+			}
+		});
+
+		start.add(startField);
 		target.add(targetLabel);
-		target.add(new JTextField(15));
+		final JTextField targetField = new JTextField(15);
+		target.add(targetField);
+		targetField.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				float xcoordinate = Float.MAX_VALUE;
+				float ycoordinate = Float.MAX_VALUE;
+				String[] strings = targetField.getText().split("\\s+");
+				if (strings.length != 2) {
+					targetField.setBackground(Color.RED);
+					return;
+				}
+				try {
+					xcoordinate = Float.parseFloat(strings[0]);
+				} catch (NumberFormatException error) {
+					targetField.setBackground(Color.RED);
+					return;
+				}
+				if (Float.compare(Math.abs(xcoordinate), 90f) > 0) {
+					targetField.setBackground(Color.RED);
+					return;
+				}
+
+				try {
+					ycoordinate = Float.parseFloat(strings[1]);
+				} catch (NumberFormatException error) {
+					targetField.setBackground(Color.RED);
+					return;
+				}
+				if (Float.compare(Math.abs(ycoordinate), 180f) > 0) {
+					targetField.setBackground(Color.RED);
+					return;
+				}
+
+				MainController.getInstance().setDestinationPoint(
+						new Coordinates(xcoordinate, ycoordinate));
+			}
+
+			public void focusGained(FocusEvent e) {
+				targetField.setBackground(Color.WHITE);
+			}
+		});
 
 		coords.add(start);
 		coords.add(target);
@@ -230,5 +322,11 @@ public class MainView extends JFrame {
 	 *            The new map.
 	 */
 	public void setCurrentMap(StreetMap map) {
+	}
+
+	@Override
+	public void routeModelChanged() {
+		// TODO Auto-generated method stub
+
 	}
 }
