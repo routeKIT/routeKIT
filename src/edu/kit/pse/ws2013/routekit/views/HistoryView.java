@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,7 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +26,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 /**
  * Shows the window with the History on the screen.
  */
-public class HistoryView extends JFrame {
+public class HistoryView extends JDialog {
 	JList<HistoryEntry> historyvar;
 
 	/**
@@ -35,9 +36,9 @@ public class HistoryView extends JFrame {
 	 * @param history
 	 *            The history that is displayed.
 	 */
-	public HistoryView(History history) {
-		super("Verlauf");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	public HistoryView(History history, Window parent) {
+		super(parent, "Verlauf", ModalityType.APPLICATION_MODAL);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 500);
 		setLocationRelativeTo(getParent());
 		setResizable(false);
@@ -124,9 +125,4 @@ public class HistoryView extends JFrame {
 		south.add(cancel);
 		return south;
 	}
-
-	public static void main(String[] args) {
-		new HistoryView(new History());
-	}
-
 }
