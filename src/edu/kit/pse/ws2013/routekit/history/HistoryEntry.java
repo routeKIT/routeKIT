@@ -112,7 +112,6 @@ public class HistoryEntry {
 			throw new IllegalArgumentException("History entry string is null!", new NullPointerException());
 		}
 		try {
-			System.out.println(s);
 			Matcher m = Pattern.compile("(.*): (.*) -> (.*)").matcher(s);
 			if(!m.matches()) { // matches() is necessary because the matcher is lazy
 				throw new IllegalArgumentException("No match found!");
