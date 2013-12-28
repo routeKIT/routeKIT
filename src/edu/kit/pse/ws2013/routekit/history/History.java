@@ -1,5 +1,12 @@
 package edu.kit.pse.ws2013.routekit.history;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
@@ -54,8 +61,15 @@ public class History {
 	 * 
 	 * @param file
 	 *            The file where the history should be saved.
+	 * @throws IOException 
 	 */
-	public void save(File file) {
+	public void save(File file) throws IOException {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+			for(HistoryEntry entry : entries) {
+				writer.write(entry.toString());
+				writer.newLine();
+			}
+		}
 	}
 	/**
 	 * Loads a history from the specified file and returns it.
@@ -63,9 +77,18 @@ public class History {
 	 * @param file
 	 *            The file where the history should be loaded.
 	 * @return A new {@link History} with the entries from the specified file.
+	 * @throws IOException 
 	 */
-	public History load(File file) {
-		return null;
+	public static History load(File file) throws IOException {
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+			String line;
+			List<HistoryEntry> entries = new LinkedList<>();
+			while ((line = reader.readLine()) != null) {
+				HistoryEntry entry = HistoryEntry.fromString(line);
+				entries.add(entry);
+			}
+			return new History(entries);
+		}
 	}
 	
 	/**

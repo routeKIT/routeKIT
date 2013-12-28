@@ -27,7 +27,7 @@ public class TestHistoryEntry {
 		assertHistoryEntryEquals(entry, parsed);
 	}
 
-	public void assertHistoryEntryEquals(HistoryEntry expected, HistoryEntry actual) {
+	public static void assertHistoryEntryEquals(HistoryEntry expected, HistoryEntry actual) {
 		assertCoordinatesEquals(expected.getStart(), actual.getStart());
 		assertCoordinatesEquals(expected.getDest(), actual.getDest());
 		assertEquals(expected.getDate().getTime(), actual.getDate().getTime(), 1000.0);
