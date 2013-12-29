@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.AbstractButton;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -323,6 +324,19 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		JCheckBoxMenuItem osm = new JCheckBoxMenuItem("OSM-Renderer verwenden");
+		osm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				AbstractButton aButton = (AbstractButton) event.getSource();
+				boolean selected = aButton.getModel().isSelected();
+				if (selected) {
+					MainController.getInstance().setUseOnlineMaps(true);
+					System.out.println("1");
+				} else {
+					MainController.getInstance().setUseOnlineMaps(false);
+					System.out.println("2");
+				}
+			}
+		});
 		admin.add(profile);
 		admin.add(map);
 		admin.add(osm);
