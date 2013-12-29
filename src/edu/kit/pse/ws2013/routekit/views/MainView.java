@@ -37,6 +37,9 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * Displays the main window on the screen.
  */
 public class MainView extends JFrame implements RouteModelListener {
+	final float maxcoordinate = Float.MAX_VALUE;
+	JTextField startField;
+	JTextField targetField;
 	private JLabel mapLabel;
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
@@ -86,6 +89,17 @@ public class MainView extends JFrame implements RouteModelListener {
 		swap.add(swapKnopf);
 		controls.add(swap, BorderLayout.WEST);
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
+		swapKnopf.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String starttemp = startField.getText();
+				startField.setText(targetField.getText());
+				targetField.setText(starttemp);
+				// MainController.getInstance().setStartAndDestinationPoint(new
+				// Coordinates(startField, ta), destination)
+			}
+		});
 
 		left.add(controls, BorderLayout.NORTH);
 		final JList<String> routeDescription = new JList<String>(new String[] {
@@ -121,34 +135,18 @@ public class MainView extends JFrame implements RouteModelListener {
 		startLabel.setPreferredSize(preffered);
 		targetLabel.setPreferredSize(preffered);
 		start.add(startLabel);
-		final JTextField startField = new JTextField(15);
+		startField = new JTextField(15);
 		startField.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				float xcoordinate = Float.MAX_VALUE;
-				float ycoordinate = Float.MAX_VALUE;
 				String[] strings = startField.getText().split("\\s+");
 				if (strings.length != 2) {
 					startField.setBackground(Color.RED);
 					return;
 				}
-				try {
-					xcoordinate = Float.parseFloat(strings[0]);
-				} catch (NumberFormatException error) {
-					startField.setBackground(Color.RED);
-					return;
-				}
-				if (Float.compare(Math.abs(xcoordinate), 90f) > 0) {
-					startField.setBackground(Color.RED);
-					return;
-				}
-
-				try {
-					ycoordinate = Float.parseFloat(strings[1]);
-				} catch (NumberFormatException error) {
-					startField.setBackground(Color.RED);
-					return;
-				}
-				if (Float.compare(Math.abs(ycoordinate), 180f) > 0) {
+				float xcoordinate = checkCoords(strings[0], 90f);
+				float ycoordinate = checkCoords(strings[1], 180f);
+				if (Float.compare(xcoordinate, maxcoordinate) == 0
+						|| Float.compare(ycoordinate, maxcoordinate) == 0) {
 					startField.setBackground(Color.RED);
 					return;
 				}
@@ -163,39 +161,22 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		start.add(startField);
 		target.add(targetLabel);
-		final JTextField targetField = new JTextField(15);
+		targetField = new JTextField(15);
 		target.add(targetField);
 		targetField.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				float xcoordinate = Float.MAX_VALUE;
-				float ycoordinate = Float.MAX_VALUE;
 				String[] strings = targetField.getText().split("\\s+");
 				if (strings.length != 2) {
 					targetField.setBackground(Color.RED);
 					return;
 				}
-				try {
-					xcoordinate = Float.parseFloat(strings[0]);
-				} catch (NumberFormatException error) {
+				float xcoordinate = checkCoords(strings[0], 90f);
+				float ycoordinate = checkCoords(strings[1], 180f);
+				if (Float.compare(xcoordinate, maxcoordinate) == 0
+						|| Float.compare(ycoordinate, maxcoordinate) == 0) {
 					targetField.setBackground(Color.RED);
 					return;
 				}
-				if (Float.compare(Math.abs(xcoordinate), 90f) > 0) {
-					targetField.setBackground(Color.RED);
-					return;
-				}
-
-				try {
-					ycoordinate = Float.parseFloat(strings[1]);
-				} catch (NumberFormatException error) {
-					targetField.setBackground(Color.RED);
-					return;
-				}
-				if (Float.compare(Math.abs(ycoordinate), 180f) > 0) {
-					targetField.setBackground(Color.RED);
-					return;
-				}
-
 				MainController.getInstance().setDestinationPoint(
 						new Coordinates(xcoordinate, ycoordinate));
 			}
@@ -208,6 +189,19 @@ public class MainView extends JFrame implements RouteModelListener {
 		coords.add(start);
 		coords.add(target);
 		return coords;
+	}
+
+	private float checkCoords(String str, float limit) {
+		float coordinate;
+		try {
+			coordinate = Float.parseFloat(str);
+		} catch (NumberFormatException error) {
+			return maxcoordinate;
+		}
+		if (Float.compare(Math.abs(coordinate), limit) > 0) {
+			return maxcoordinate;
+		}
+		return coordinate;
 	}
 
 	private JPanel initRightPanel() {
