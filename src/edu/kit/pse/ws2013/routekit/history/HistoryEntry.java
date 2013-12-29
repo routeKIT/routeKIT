@@ -8,7 +8,12 @@ import java.util.regex.Pattern;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 /**
- * Ein Eintrag im Verlauf.
+ * A {@link History} entry, consisting of
+ * <ul>
+ * <li>a {@link #getStart() start point}</li>
+ * <li>a {@link #getDest() destination point}</li>
+ * <li>a {@link #getDate() date}</li>
+ * </ul>
  */
 public class HistoryEntry {
 	
