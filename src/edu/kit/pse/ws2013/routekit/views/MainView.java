@@ -259,6 +259,12 @@ public class MainView extends JFrame implements RouteModelListener {
 		JMenu routeKIT = new JMenu("routeKIT");
 
 		JMenuItem history = new JMenuItem("Verlauf...");
+		history.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new HistoryView(new History(), MainView.this);
+			}
+		});
 		JMenuItem about = new JMenuItem("Über...");
 		about.addActionListener(new ActionListener() {
 
