@@ -330,10 +330,8 @@ public class MainView extends JFrame implements RouteModelListener {
 				boolean selected = aButton.getModel().isSelected();
 				if (selected) {
 					MainController.getInstance().setUseOnlineMaps(true);
-					System.out.println("1");
 				} else {
 					MainController.getInstance().setUseOnlineMaps(false);
-					System.out.println("2");
 				}
 			}
 		});
