@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -47,7 +48,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	/**
 	 * A constructor that creates a new MainView.
 	 */
-	public MainView() {
+	public MainView(RouteModel routeModel) {
 		super("routeKIT");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1000, 700);
@@ -55,7 +56,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		initMenu();
 
 		JSplitPane contentPane = new JSplitPane();
-		JPanel left = initLeftPane();
+		JPanel left = initLeftPane(routeModel);
 
 		contentPane.add(left, JSplitPane.LEFT);
 
@@ -66,7 +67,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		setVisible(true);
 	}
 
-	private JPanel initLeftPane() {
+	private JPanel initLeftPane(final RouteModel routeModel) {
 		JPanel left = new JPanel(new BorderLayout());
 		left.setMinimumSize(new Dimension(260, 100));
 
@@ -96,8 +97,25 @@ public class MainView extends JFrame implements RouteModelListener {
 				String starttemp = startField.getText();
 				startField.setText(targetField.getText());
 				targetField.setText(starttemp);
-				// MainController.getInstance().setStartAndDestinationPoint(new
-				// Coordinates(startField, ta), destination)
+				if (startField.getText().equals("")
+						&& targetField.getText().equals("")) {
+					startField.setBackground(Color.WHITE);
+					targetField.setBackground(Color.WHITE);
+				}
+				if (!startField.getBackground().equals(
+						targetField.getBackground())) {
+					Color colortemp = startField.getBackground();
+					startField.setBackground(targetField.getBackground());
+					targetField.setBackground(colortemp);
+				}
+				if (startField.getBackground().equals(Color.WHITE)
+						&& targetField.getBackground().equals(Color.WHITE)
+						&& !startField.getText().equals("")
+						&& !targetField.getText().equals("")) {
+
+					MainController.getInstance().setStartAndDestinationPoint(
+							routeModel.getDestination(), routeModel.getStart());
+				}
 			}
 		});
 
@@ -308,10 +326,6 @@ public class MainView extends JFrame implements RouteModelListener {
 		menu.add(admin);
 
 		setJMenuBar(menu);
-	}
-
-	public static void main(String[] args) {
-		new MainView();
 	}
 
 	/**

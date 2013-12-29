@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.controllers;
+
 import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.history.History;
@@ -13,6 +14,7 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapView;
+
 /**
  * Der Haupt-Controller von routeKIT. Er wird beim Programmstart erstellt und
  * erstellt dabei die {@link MainView}. Er verwaltet den gesamtem Programmablauf
@@ -30,8 +32,9 @@ public class MainController {
 	 */
 	private MainController() {
 		instance = this;
-		view = new MainView();
+		view = new MainView(rm);
 	}
+
 	/**
 	 * Wird aufgerufen, wenn sich der Startpunkt ändert (z. B. durch eine
 	 * Eingabe des Benutzers). Setzt den neuen Startpunkt in der {@link MapView}
@@ -45,6 +48,7 @@ public class MainController {
 	public void setStartPoint(Coordinates start) {
 		rm.setStart(start);
 	}
+
 	/**
 	 * Wird aufgerufen, wenn sich der Zielpunkt ändert (z. B. durch eine Eingabe
 	 * des Benutzers). Setzt den neuen Zielpunkt in der {@link MapView}. Falls
@@ -70,6 +74,7 @@ public class MainController {
 	 */
 	public void exportHTML(File target) {
 	}
+
 	/**
 	 * Wird aufgerufen, wenn sich der Start- und Zielpunkt ändern (z. B. durch
 	 * die Auswahl eines Eintrags aus dem Verlauf). Die gleichen Aktionen wie
@@ -87,6 +92,7 @@ public class MainController {
 		rm.setStart(start);
 		rm.setDestination(destination);
 	}
+
 	/**
 	 * Ruft in einem neuen WorkerThread {@link PreCalculator#doPrecalculation}
 	 * auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte
@@ -97,6 +103,7 @@ public class MainController {
 	 */
 	public void startPrecalculation(ProfileMapCombination combination) {
 	}
+
 	/**
 	 * Legt fest, ob OSM-Kachel oder selbst gerenderte Kacheln verwendet werden
 	 * sollen. Für OSM-Kachel wird der {@link OSMRenderer} verwendet, für die
@@ -108,6 +115,7 @@ public class MainController {
 	 */
 	public void setUseOnlineMaps(boolean useOnlineMaps) {
 	}
+
 	/**
 	 * Startet einen neuen {@link ProfileManagerController} und öffnet so den
 	 * Dialog zur Profilverwaltung.
@@ -115,7 +123,7 @@ public class MainController {
 	public void manageProfiles() {
 		new ProfileManagerController(view);
 	}
-	
+
 	/**
 	 * Startet einen neuen {@link MapManagerController} und öffnet so den Dialog
 	 * zur Kartenverwaltung.
@@ -123,6 +131,7 @@ public class MainController {
 	public void manageMaps() {
 		new MapManagerController(view);
 	}
+
 	/**
 	 * Speichert die aktuelle Route im GPS Exchange Format-Format in die
 	 * angegebene Datei. Ist keine aktuelle Route verfügbar (z. B. da noch keine
@@ -134,6 +143,7 @@ public class MainController {
 	 */
 	public void exportGPX(File target) {
 	}
+
 	/**
 	 * Gibt eine {@link TileSource} zurück, die zum Rendern der Karte verwendet
 	 * werden soll.
@@ -152,6 +162,7 @@ public class MainController {
 	 */
 	public void selectProfile(Profile profile) {
 	}
+
 	/**
 	 * Wählt die angegebene Karte aus.
 	 * 
