@@ -26,6 +26,17 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
  */
 public class ProfileManagerView extends JDialog {
+	private JComboBox<Object> profilename;
+	private JRadioButton bus;
+	private JRadioButton motorcycle;
+	private JRadioButton truck;
+	private JRadioButton car;
+	private JSpinner hSpeedspinner;
+	private JSpinner srSpeedspinner;
+	private JSpinner heightspinner;
+	private JSpinner widthspinner;
+	private JSpinner weightspinner;
+
 	/**
 	 * A constructor that creates a new ProfileManagerView.
 	 */
@@ -46,6 +57,12 @@ public class ProfileManagerView extends JDialog {
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
 
+		// ......................................
+		profilename.addItem((Profile.defaultCar.getName()));
+		profilename.addItem((Profile.defaultTruck.getName()));
+		setCurrentProfile(Profile.defaultCar);
+		// .....................................
+
 		setContentPane(contentPane);
 		setVisible(true);
 	}
@@ -55,7 +72,7 @@ public class ProfileManagerView extends JDialog {
 		north.setBackground(Color.WHITE);
 
 		JLabel profile = new JLabel("Proﬁl auswählen:");
-		JComboBox<Object> profilename = new JComboBox<>();
+		profilename = new JComboBox<>();
 		profilename.setMinimumSize(new Dimension(250, 26));
 		profilename.setPreferredSize(new Dimension(250, 26));
 
@@ -107,13 +124,13 @@ public class ProfileManagerView extends JDialog {
 		type.setBackground(Color.WHITE);
 
 		JLabel vehicleType = new JLabel("Fahrzeugtyp:");
-		JRadioButton car = new JRadioButton("PKW");
+		car = new JRadioButton("PKW");
 		car.setBackground(Color.WHITE);
-		JRadioButton truck = new JRadioButton("LKW");
+		truck = new JRadioButton("LKW");
 		truck.setBackground(Color.WHITE);
-		JRadioButton bus = new JRadioButton("Bus");
+		bus = new JRadioButton("Bus");
 		bus.setBackground(Color.WHITE);
-		JRadioButton motorcycle = new JRadioButton("Motorrad");
+		motorcycle = new JRadioButton("Motorrad");
 		motorcycle.setBackground(Color.WHITE);
 
 		type.add(vehicleType);
@@ -161,11 +178,11 @@ public class ProfileManagerView extends JDialog {
 		highway.setBackground(Color.WHITE);
 		JLabel highwaySpeed = new JLabel(
 				"Durchschnittsgeschwindigkeit auf der Autobahn:");
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
-		spinner.setPreferredSize(new Dimension(50, 20));
+		hSpeedspinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
+		hSpeedspinner.setPreferredSize(new Dimension(50, 20));
 		JLabel kmPerh = new JLabel("km/h");
 		highway.add(highwaySpeed);
-		highway.add(spinner);
+		highway.add(hSpeedspinner);
 		highway.add(kmPerh);
 		return highway;
 	}
@@ -176,11 +193,11 @@ public class ProfileManagerView extends JDialog {
 		secondaryRoad.setBackground(Color.WHITE);
 		JLabel secondaryRoadSpeed = new JLabel(
 				"Durchschnittsgeschwindigkeit auf der Landstraße:");
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
-		spinner.setPreferredSize(new Dimension(50, 20));
+		srSpeedspinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
+		srSpeedspinner.setPreferredSize(new Dimension(50, 20));
 		JLabel kmPerh = new JLabel("km/h");
 		secondaryRoad.add(secondaryRoadSpeed);
-		secondaryRoad.add(spinner);
+		secondaryRoad.add(srSpeedspinner);
 		secondaryRoad.add(kmPerh);
 		return secondaryRoad;
 	}
@@ -189,12 +206,12 @@ public class ProfileManagerView extends JDialog {
 		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		height.setBackground(Color.WHITE);
 		JLabel vehicleHeight = new JLabel("Höhe des Fahrzeugs:");
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 0, 4, 0.1));
-		spinner.setPreferredSize(new Dimension(50, 20));
-		JLabel meter = new JLabel("m");
+		heightspinner = new JSpinner(new SpinnerNumberModel(100, 0, 400, 10));
+		heightspinner.setPreferredSize(new Dimension(50, 20));
+		JLabel cm = new JLabel("cm");
 		height.add(vehicleHeight);
-		height.add(spinner);
-		height.add(meter);
+		height.add(heightspinner);
+		height.add(cm);
 		return height;
 	}
 
@@ -202,12 +219,12 @@ public class ProfileManagerView extends JDialog {
 		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		width.setBackground(Color.WHITE);
 		JLabel vehicleWidth = new JLabel("Breite des Fahrzeugs:");
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 3, 0.1));
-		spinner.setPreferredSize(new Dimension(50, 20));
-		JLabel ton = new JLabel("m");
+		widthspinner = new JSpinner(new SpinnerNumberModel(150, 0, 300, 10));
+		widthspinner.setPreferredSize(new Dimension(50, 20));
+		JLabel cm = new JLabel("cm");
 		width.add(vehicleWidth);
-		width.add(spinner);
-		width.add(ton);
+		width.add(widthspinner);
+		width.add(cm);
 		return width;
 	}
 
@@ -215,12 +232,13 @@ public class ProfileManagerView extends JDialog {
 		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		weight.setBackground(Color.WHITE);
 		JLabel vehicleWeight = new JLabel("Gewicht des Fahrzeugs:");
-		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1.5, 0, 50, 0.5));
-		spinner.setPreferredSize(new Dimension(50, 20));
-		JLabel meter = new JLabel("t");
+		weightspinner = new JSpinner(
+				new SpinnerNumberModel(1500, 0, 50000, 100));
+		weightspinner.setPreferredSize(new Dimension(70, 20));
+		JLabel kg = new JLabel("kg");
 		weight.add(vehicleWeight);
-		weight.add(spinner);
-		weight.add(meter);
+		weight.add(weightspinner);
+		weight.add(kg);
 		return weight;
 	}
 
@@ -233,6 +251,28 @@ public class ProfileManagerView extends JDialog {
 	 *            The new Profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
+		switch (profile.getVehicleType()) {
+		case Bus:
+			bus.setSelected(true);
+			break;
+		case Car:
+			car.setSelected(true);
+			break;
+		case Truck:
+			truck.setSelected(true);
+			break;
+		case Motorcycle:
+			motorcycle.setSelected(true);
+			break;
+		default:
+			break;
+		}
+		hSpeedspinner.setValue(profile.getSpeedHighway());
+		heightspinner.setValue(profile.getHeight());
+		srSpeedspinner.setValue(profile.getSpeedRoad());
+		widthspinner.setValue(profile.getWidth());
+		weightspinner.setValue(profile.getWeight());
+
 	}
 
 	/**
@@ -242,5 +282,9 @@ public class ProfileManagerView extends JDialog {
 	 *            The available profiles.
 	 */
 	public void setAvailableProfiles(List<Profile> profiles) {
+		profilename.removeAllItems();
+		for (Profile p : profiles) {
+			profilename.addItem(p.getName());
+		}
 	}
 }
