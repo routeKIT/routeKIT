@@ -2,6 +2,7 @@ package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -89,6 +91,18 @@ public class MainView extends JFrame implements RouteModelListener {
 		final JList<String> routeDescription = new JList<String>(new String[] {
 				"sdfsdfsd", "dsdfsd", "sdf" });
 		left.add(routeDescription, BorderLayout.CENTER);
+		routeDescription.setCellRenderer(new DefaultListCellRenderer() {
+
+			@Override
+			public Component getListCellRendererComponent(JList list,
+					Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				super.getListCellRendererComponent(list, value, index, false,
+						false);
+
+				return this;
+			}
+		});
 		return left;
 	}
 
