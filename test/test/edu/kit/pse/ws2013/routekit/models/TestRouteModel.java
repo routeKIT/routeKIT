@@ -1,4 +1,4 @@
-package routeKIT.test.models;
+package test.edu.kit.pse.ws2013.routekit.models;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;

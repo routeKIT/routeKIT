@@ -1,4 +1,4 @@
-package routeKIT.test.map;
+package test.edu.kit.pse.ws2013.routekit.map;
 
 import static org.junit.Assert.*;
 

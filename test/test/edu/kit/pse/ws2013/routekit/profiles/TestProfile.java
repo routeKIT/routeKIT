@@ -1,4 +1,4 @@
-package routeKIT.test.profiles;
+package test.edu.kit.pse.ws2013.routekit.profiles;
 
 import static org.junit.Assert.*;
 

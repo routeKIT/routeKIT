@@ -1,7 +1,7 @@
-package routeKIT.test.history;
+package test.edu.kit.pse.ws2013.routekit.history;
 
 import static org.junit.Assert.*;
-import static routeKIT.test.history.TestHistoryEntry.assertHistoryEntryEquals;
+import static test.edu.kit.pse.ws2013.routekit.history.TestHistoryEntry.assertHistoryEntryEquals;
 
 import java.io.File;
 import java.io.IOException;

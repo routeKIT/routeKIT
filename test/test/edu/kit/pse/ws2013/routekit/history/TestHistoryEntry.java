@@ -1,7 +1,7 @@
-package routeKIT.test.history;
+package test.edu.kit.pse.ws2013.routekit.history;
 
 import static org.junit.Assert.assertEquals;
-import static routeKIT.test.util.TestCoordinates.assertCoordinatesEquals;
+import static test.edu.kit.pse.ws2013.routekit.util.TestCoordinates.assertCoordinatesEquals;
 
 import java.util.Date;
 
