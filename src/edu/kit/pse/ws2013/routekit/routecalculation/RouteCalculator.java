@@ -4,7 +4,7 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 /**
  * Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.
  */
-public class RouteCalculator {
+public interface RouteCalculator {
 	/**
 	 * Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen
 	 * Graphen.
@@ -19,7 +19,5 @@ public class RouteCalculator {
 	 * @return
 	 */
 	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
-			ProfileMapCombination data) {
-		return null;
-	}
+			ProfileMapCombination data);
 }
