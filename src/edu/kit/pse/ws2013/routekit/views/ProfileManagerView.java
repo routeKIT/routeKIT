@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -54,7 +55,7 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel north = initNorthPane(pmc);
 		JPanel center = initCenterPane();
-		JPanel south = initSouthPane();
+		JPanel south = initSouthPane(pmc);
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -139,14 +140,50 @@ public class ProfileManagerView extends JDialog {
 		return VehicleType.Motorcycle;
 	}
 
-	private JPanel initSouthPane() {
+	private JPanel initSouthPane(final ProfileManagerController pmc) {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
 		buttons.setBackground(Color.WHITE);
 
-		buttons.add(new JButton("OK"));
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int showOptionDialog = JOptionPane
+						.showOptionDialog(
+								null,
+								"Sie speichern hiermit alle \n"
+										+ "vorgenommenen Änderungen für alle Profile.\n"
+										+ warning(pmc)
+										+ "Wollen sie die Änderungen vornehmen?",
+								"Bestätigung",
+								JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null,
+								new String[] { "Ja", "Nein" }, "Nein");
+				if (showOptionDialog == JOptionPane.YES_OPTION) {
+					Profile current = writeValues();
+					pmc.saveTemporaryProfile(current);
+					pmc.saveAllChanges();
+					ProfileManagerView.this.dispose();
+				}
+
+				/*
+				 * final JOptionPane optionPane = new JOptionPane(
+				 * "Sie speichern hiermit alle \n"
+				 * 
+				 * + "vorgenommenen Änderungen für alle Profile.\n" +
+				 * warning(pmc) + "Wollen sie die Änderungen vornehmen?",
+				 * JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
+				 * JDialog dialog = optionPane.createDialog(
+				 * ProfileManagerView.this, "Bestätigung"); dialog.show();
+				 */
+			}
+		});
+		buttons.add(okButton);
 		JButton cancel = new JButton("Abbrechen");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -158,6 +195,13 @@ public class ProfileManagerView extends JDialog {
 
 		south.add(buttons);
 		return south;
+	}
+
+	private String warning(ProfileManagerController pmc) {
+		if (pmc.getDeletionTime() == 0) {
+			return "";
+		}
+		return "Sie löschen " + pmc.getDeletionTime() + "Stunden an Arbeit.\n";
 	}
 
 	private JPanel initCenterPane() {
