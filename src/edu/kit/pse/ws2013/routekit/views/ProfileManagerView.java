@@ -21,6 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 /**
  * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
@@ -61,6 +62,7 @@ public class ProfileManagerView extends JDialog {
 		profilename.addItem((Profile.defaultCar.getName()));
 		profilename.addItem((Profile.defaultTruck.getName()));
 		setCurrentProfile(Profile.defaultCar);
+		writeValues();
 		// .....................................
 
 		setContentPane(contentPane);
@@ -73,15 +75,63 @@ public class ProfileManagerView extends JDialog {
 
 		JLabel profile = new JLabel("Proﬁl auswählen:");
 		profilename = new JComboBox<>();
+
+		profilename.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Profile current = writeValues();
+				// saveTemporaryProfile(current);
+				// changeTemporaryProfile(profilename.getSelectedItem());
+			}
+		});
+
 		profilename.setMinimumSize(new Dimension(250, 26));
 		profilename.setPreferredSize(new Dimension(250, 26));
 
 		north.add(profile);
 		north.add(profilename);
-		north.add(new JButton("Löschen"));
-		north.add(new JButton("Neu"));
+		JButton deleteButton = new JButton("Löschen");
+		deleteButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// deleteCurrentTemporaryProfile();
+			}
+		});
+		north.add(deleteButton);
+		JButton neuButton = new JButton("Neu");
+		neuButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		north.add(neuButton);
 
 		return north;
+	}
+
+	private Profile writeValues() {
+
+		Profile current = new Profile((String) profilename.getSelectedItem(),
+				selectedButton(), (int) heightspinner.getValue(),
+				(int) widthspinner.getValue(), (int) weightspinner.getValue(),
+				(int) hSpeedspinner.getValue(), (int) srSpeedspinner.getValue());
+		return current;
+	}
+
+	private VehicleType selectedButton() {
+		if (car.isSelected()) {
+			return VehicleType.Car;
+		}
+		if (bus.isSelected()) {
+			return VehicleType.Bus;
+		}
+		if (truck.isSelected()) {
+			return VehicleType.Truck;
+		}
+		return VehicleType.Motorcycle;
 	}
 
 	private JPanel initSouthPane() {
