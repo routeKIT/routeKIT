@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
+
 import java.util.List;
+
 /**
  * Kapselt die zu einer {@link Route} gehörende Wegbeschreibung.
  */
@@ -12,6 +14,7 @@ public class RouteDescription {
 	public List<TurnInstruction> getInstructions() {
 		return null;
 	}
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Parametern.
 	 * 

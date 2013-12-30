@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
+
 /**
  * Partitioniert einen gegebenen Graphen.
  */

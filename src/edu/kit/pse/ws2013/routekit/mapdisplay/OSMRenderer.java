@@ -1,14 +1,16 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+
 /**
  * Eine {@link TileSource}, die die OSM-Kachel vom OpenStreetMap-Server
  * herunterlädt.
  */
-public class OSMRenderer implements TileSource{
+public class OSMRenderer implements TileSource {
 	/**
 	 * Lädt die angegebene Kachel herunter und gibt sie zurück.
 	 * 

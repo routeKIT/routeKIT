@@ -34,14 +34,15 @@ public class ArcFlags {
 	public int getFlag(int turn) {
 		return flags[turn];
 	}
-	
-	public void save(DataOutputStream os) throws IOException{
+
+	public void save(DataOutputStream os) throws IOException {
 		os.writeInt(flags.length);
 		for (int i = 0; i < flags.length; i++) {
 			os.writeInt(flags[i]);
 		}
 	}
-	public static ArcFlags load(DataInputStream is) throws IOException{
+
+	public static ArcFlags load(DataInputStream is) throws IOException {
 		int[] flags = new int[is.readInt()];
 		for (int i = 0; i < flags.length; i++) {
 			flags[i] = is.readInt();

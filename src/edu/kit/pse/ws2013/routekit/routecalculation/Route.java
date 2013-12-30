@@ -1,10 +1,12 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
+
 /**
  * Repräsentiert eine berechnete Route.
  */
@@ -16,15 +18,16 @@ public class Route {
 	 * 
 	 * @return
 	 */
-	
+
 	ProfileMapCombination data;
 	PointOnEdge start;
 	PointOnEdge destination;
 	List<Integer> turns = new ArrayList<Integer>();
-	
+
 	public Iterator<Integer> getNodeIterator() {
 		return turns.iterator();
 	}
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Routen-Objekt mit den angegebenen
 	 * Attributen.
@@ -45,6 +48,7 @@ public class Route {
 		this.destination = destination;
 		this.turns = turns;
 	}
+
 	/**
 	 * Liefert eine Liste der Abbiegevorgänge, aus denen die Route besteht.
 	 * 

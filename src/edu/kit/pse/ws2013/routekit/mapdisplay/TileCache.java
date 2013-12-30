@@ -1,9 +1,11 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
+
 import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  * Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für
  * diese. Kacheln können angefragt werden, und nachdem die (asynchrone)
@@ -14,7 +16,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * Collector sie bei Speicherknappheit verwerfen kann (etwa durch
  * {@code SoftReference}s).
  */
-public class TileCache implements TileSource{
+public class TileCache implements TileSource {
 	private class TileJob implements Runnable {
 		private int x;
 		private int y;
@@ -33,6 +35,7 @@ public class TileCache implements TileSource{
 			fireListeners(x, y, zoom, result);
 		}
 	}
+
 	private class Worker extends Thread {
 		@Override
 		public void run() {
@@ -48,6 +51,7 @@ public class TileCache implements TileSource{
 			}
 		}
 	}
+
 	private boolean running = true;
 	private LinkedBlockingDeque<TileJob> waiting = new LinkedBlockingDeque<>();
 
@@ -70,6 +74,7 @@ public class TileCache implements TileSource{
 		worker = new Worker();
 		worker.start();
 	}
+
 	/**
 	 * Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so
 	 * wird sie direkt zurückgegeben; andernfalls wird eine Dummy-Kachel
@@ -95,6 +100,7 @@ public class TileCache implements TileSource{
 		waiting.addFirst(new TileJob(x, y, zoom));
 		return null;
 	}
+
 	/**
 	 * Registriert einen {@link TileFinishedListener}, der benachrichtigt wird,
 	 * wenn eine Kachel fertig berechnet ist. Die Kachel ist Teil der Nachricht.
@@ -112,6 +118,7 @@ public class TileCache implements TileSource{
 
 		}
 	}
+
 	private static String key(int x, int y, int zoom) {
 		return x + "/" + y + "/" + zoom;
 	}

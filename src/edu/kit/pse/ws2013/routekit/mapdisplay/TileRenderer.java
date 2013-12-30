@@ -1,11 +1,13 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
+
 import java.awt.image.BufferedImage;
 
 import edu.kit.pse.ws2013.routekit.map.Graph;
+
 /**
  * Eine {@link TileSource}, die die Kacheln selbst berechnet.
  */
-public class TileRenderer implements TileSource{
+public class TileRenderer implements TileSource {
 	/**
 	 * Konstruktor: Erzeugt einen neuen {@code TileRenderer}.
 	 * 
@@ -14,6 +16,7 @@ public class TileRenderer implements TileSource{
 	 */
 	public TileRenderer(Graph graph) {
 	}
+
 	/**
 	 * Berechnet die angegebene Kachel und gibt sie zurück.
 	 * 

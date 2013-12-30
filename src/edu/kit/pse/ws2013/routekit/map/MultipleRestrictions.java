@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import java.util.Set;
+
 /**
  * Repräsentiert eine Kombination aus mehreren Beschränkungen.
  */

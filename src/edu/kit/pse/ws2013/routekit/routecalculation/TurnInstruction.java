@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
+
 /**
  * Kapselt eine einzelne Abbiegeanweisung, aus welchen eine
  * {@link RouteDescription} aufgebaut ist.
@@ -14,6 +15,7 @@ public class TurnInstruction {
 	 */
 	public TurnInstruction(int turn, String text) {
 	}
+
 	/**
 	 * Gibt den Text der Abbiegeanweisung zurück.
 	 * 

@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 /**
  * Stellt eine Abbiegebeschränkung dar. Dies ist nur eine vom {@link OSMParser}
  * verwendete Zwischendarstellung.

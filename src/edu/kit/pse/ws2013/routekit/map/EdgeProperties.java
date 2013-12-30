@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Kapselt die Eigenschaften einer Kante.
  */
@@ -16,6 +18,7 @@ public class EdgeProperties {
 	public int getMaxSpeed(Profile profile) {
 		return 0;
 	}
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Eigenschaften.
 	 * 

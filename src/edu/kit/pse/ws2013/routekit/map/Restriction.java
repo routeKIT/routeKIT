@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Abstrakte Klasse zur Repräsentation unterschiedlicher Beschränkungen für
  * Straßen oder Abbiegemöglichkeiten. Die einzelnen Unterklassen sind Multitons,

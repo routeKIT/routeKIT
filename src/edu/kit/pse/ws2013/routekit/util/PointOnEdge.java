@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.util;
+
 /**
  * Beschreibt einen Punkt auf der Kante.
  */

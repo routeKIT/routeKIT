@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.controllers;
+
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Verwaltet die Profil. Hat intern eine Menge von vorhandenen Profilen.
  */
@@ -15,6 +17,7 @@ public class ProfileManager {
 	 */
 	public void deleteProfile(Profile profile) {
 	}
+
 	/**
 	 * Speichert das ausgewählte Profil in der internen Liste und auf der
 	 * Festplatte.
@@ -26,6 +29,7 @@ public class ProfileManager {
 	 */
 	public void saveProfile(Profile profile) {
 	}
+
 	/**
 	 * Gibt alle Profil in der internen Liste zurück.
 	 * 

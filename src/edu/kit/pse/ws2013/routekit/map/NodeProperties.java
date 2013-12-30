@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 /**
  * Kapselt die Eigenschaften eines Knotens.
  */
@@ -12,6 +13,7 @@ public class NodeProperties {
 	public String getJunctionRef() {
 		return null;
 	}
+
 	/**
 	 * Gibt den Namen der Anschlussstelle zurück oder {@code null}, falls es
 	 * sich nicht um eine Anschlussstelle handelt.
@@ -21,6 +23,7 @@ public class NodeProperties {
 	public String getJunctionName() {
 		return null;
 	}
+
 	/**
 	 * Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle
 	 * ist.
@@ -30,6 +33,7 @@ public class NodeProperties {
 	public boolean isMotorwayJunction() {
 		return false;
 	}
+
 	/**
 	 * Bestimmt, ob sich an dem Knoten eine Ampel befindet.
 	 * 

@@ -1,6 +1,8 @@
 package edu.kit.pse.ws2013.routekit.models;
+
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Eine Kombination aus einem {@link Profile Profil} und einer {@link StreetMap
  * Karte}.
@@ -29,12 +31,15 @@ public class ProfileMapCombination {
 	public StreetMap getStreetMap() {
 		return map;
 	}
+
 	public Profile getProfile() {
 		return p;
 	}
+
 	public Weights getWeights() {
 		return weights;
 	}
+
 	public ArcFlags getArc() {
 		return arc;
 	}

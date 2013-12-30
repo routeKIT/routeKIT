@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.controllers;
+
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+
 /**
  * Verwaltet die Kartendaten. Hat intern eine Menge von vorhandenen Kartendaten.
  */
@@ -16,6 +18,7 @@ public class MapManager {
 	 */
 	public void deleteMap(StreetMap map) {
 	}
+
 	/**
 	 * Gibt alle Karte in der internen Liste zurück.
 	 * 
@@ -24,6 +27,7 @@ public class MapManager {
 	public Set<StreetMap> getMaps() {
 		return null;
 	}
+
 	/**
 	 * Speichert die ausgewählte Karte in der internen Liste und auf der
 	 * Festplatte.

@@ -7,7 +7,8 @@ public class EdgeWeighterDummy implements EdgeWeighter {
 
 	@Override
 	public void weightEdges(ProfileMapCombination combination) {
-		int [] weightArray = new int[combination.getStreetMap().getEdgeBasedGraph().getNumberOfTurns()];
+		int[] weightArray = new int[combination.getStreetMap()
+				.getEdgeBasedGraph().getNumberOfTurns()];
 		for (int i = 0; i < weightArray.length; i++) {
 			weightArray[i] = 1;
 		}

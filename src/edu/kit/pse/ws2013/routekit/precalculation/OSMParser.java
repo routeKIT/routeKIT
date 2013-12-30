@@ -1,9 +1,11 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+
 /**
  * Stellt die Funktionalität zum Parsen einer OpenStreetMap-Datei bereit. Dafür
  * werden zur temporären Repräsentation des Graphen im Speicher die Klassen

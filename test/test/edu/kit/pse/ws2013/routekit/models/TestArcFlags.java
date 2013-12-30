@@ -21,7 +21,7 @@ public class TestArcFlags {
 
 	@Test
 	public void testSaveLoad() throws IOException {
-		int[] flags = new int[]{2, 4, 6892, 3, 3, 2, 4, 6, 823, 3, 4};
+		int[] flags = new int[] { 2, 4, 6892, 3, 3, 2, 4, 6, 823, 3, 4 };
 		ArcFlags af = new ArcFlags(flags);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream os = new DataOutputStream(baos);

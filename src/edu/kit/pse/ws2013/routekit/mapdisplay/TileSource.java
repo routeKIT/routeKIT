@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
+
 import java.awt.image.BufferedImage;
+
 /**
  * Abstrakte Klasse, die ein Interface für das (synchrone) Rendern von
  * Kartenkacheln definiert.

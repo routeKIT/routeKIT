@@ -7,7 +7,8 @@ public class ArcFlagsCalculatorDummy implements ArcFlagsCalculator {
 
 	@Override
 	public void calculateArcFlags(ProfileMapCombination combination) {
-		int[] flagsArray = new int[combination.getStreetMap().getEdgeBasedGraph().getNumberOfTurns()];
+		int[] flagsArray = new int[combination.getStreetMap()
+				.getEdgeBasedGraph().getNumberOfTurns()];
 		for (int i = 0; i < flagsArray.length; i++) {
 			flagsArray[i] = Integer.MAX_VALUE;
 		}

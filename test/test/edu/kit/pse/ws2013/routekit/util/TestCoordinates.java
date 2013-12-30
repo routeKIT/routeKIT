@@ -37,12 +37,14 @@ public class TestCoordinates {
 		assertEquals(a, c.getSmtX(10), EPSILON);
 		assertEquals(b, c.getSmtY(10), EPSILON);
 	}
+
 	@Test
 	public void testToSmt() {
 		float a = 50;
 		float b = 35;
 		Coordinates c1 = new Coordinates(a, b);
-		Coordinates c2 = Coordinates.fromSmt(c1.getSmtX(14), c1.getSmtY(14), 14);
+		Coordinates c2 = Coordinates
+				.fromSmt(c1.getSmtX(14), c1.getSmtY(14), 14);
 		assertCoordinatesEquals(c1, c2);
 	}
 
@@ -54,8 +56,9 @@ public class TestCoordinates {
 		Coordinates c2 = Coordinates.fromString(c1.toString());
 		assertCoordinatesEquals(c1, c2);
 	}
-	
-	public static void assertCoordinatesEquals(Coordinates expected, Coordinates actual) {
+
+	public static void assertCoordinatesEquals(Coordinates expected,
+			Coordinates actual) {
 		assertEquals(expected.getLat(), actual.getLat(), EPSILON);
 		assertEquals(expected.getLon(), actual.getLon(), EPSILON);
 	}

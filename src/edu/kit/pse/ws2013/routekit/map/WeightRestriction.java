@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 /**
  * Repräsentiert eine Beschränkung des Fahrzeuggewichts.
  */

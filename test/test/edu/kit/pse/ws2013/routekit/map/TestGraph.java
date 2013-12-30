@@ -15,12 +15,13 @@ import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 public class TestGraph {
 	public static final double EPSILON = 0.00001;
 	Graph g;
+
 	@Before
 	public void setUp() throws Exception {
-		g = new Graph(new int[]{0, 3, 6, 6}, new int[]{1, 2, 3, 0, 2, 3, 0, 1,
-				2}, new HashMap<Integer, NodeProperties>(),
-				new EdgeProperties[]{}, new float[]{0, 0, 1, 1}, new float[]{0,
-						1, 0, 1});
+		g = new Graph(new int[] { 0, 3, 6, 6 }, new int[] { 1, 2, 3, 0, 2, 3,
+				0, 1, 2 }, new HashMap<Integer, NodeProperties>(),
+				new EdgeProperties[] {}, new float[] { 0, 0, 1, 1 },
+				new float[] { 0, 1, 0, 1 });
 	}
 
 	@Ignore
@@ -45,6 +46,7 @@ public class TestGraph {
 		assertEquals(1, g.getStartNode(5));
 		assertEquals(3, g.getStartNode(6));
 	}
+
 	@Test
 	public void testGetTargetNode() {
 		assertEquals(1, g.getTargetNode(0));

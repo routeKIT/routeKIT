@@ -1,9 +1,11 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses
  * Graphen entsprechen den Kanten des zugehörigen {@link Graph}-Objekts und
@@ -30,6 +32,7 @@ public class EdgeBasedGraph {
 	public int getPartition(int edge) {
 		return 0;
 	}
+
 	/**
 	 * Setzt die Partitionen des Graphen. Die {@code Edge}s des Graphen sind die
 	 * Indizes in {@code partitions}.
@@ -39,6 +42,7 @@ public class EdgeBasedGraph {
 	 */
 	public void setPartitions(int[] partitions) {
 	}
+
 	/**
 	 * Gibt die Kante zurück, auf die die angegebene Abbiegemöglichkeit führt.
 	 * 
@@ -49,6 +53,7 @@ public class EdgeBasedGraph {
 	public int getTargetEdge(int turn) {
 		return 0;
 	}
+
 	/**
 	 * Gibt die Art des angegebenen Abbiegevorgangs zurück.
 	 * 
@@ -59,6 +64,7 @@ public class EdgeBasedGraph {
 	public TurnType getTurnType(int turn) {
 		return null;
 	}
+
 	/**
 	 * Gibt die Kante zurück, von der die angegebene Abbiegemöglichkeit besteht.
 	 * 
@@ -69,6 +75,7 @@ public class EdgeBasedGraph {
 	public int getStartEdge(int turn) {
 		return 0;
 	}
+
 	/**
 	 * Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil
 	 * zulässig ist.
@@ -82,6 +89,7 @@ public class EdgeBasedGraph {
 	public boolean allowsTurn(int turn, Profile profile) {
 		return false;
 	}
+
 	/**
 	 * Gibt alle Abbiegemöglichkeiten <b>von</b> der angegebenen Kante zurück.
 	 * 
@@ -93,6 +101,7 @@ public class EdgeBasedGraph {
 	public Set<Integer> getOutgoingTurns(int edge) {
 		return null;
 	}
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Objekt aus dem gegebenen Adjazenzfeld.
 	 * 
@@ -108,6 +117,7 @@ public class EdgeBasedGraph {
 	public EdgeBasedGraph(int[] edges, int[] turns, TurnType[] turnTypes,
 			Map<Integer, Restriction> restrictions) {
 	}
+
 	/**
 	 * Gibt alle Abbiegemöglichkeiten <b>auf</b> die angegebene Kante zurück.
 	 * 
@@ -119,6 +129,7 @@ public class EdgeBasedGraph {
 	public Set<Integer> getIncomingTurns(int edge) {
 		return null;
 	}
+
 	public int getNumberOfTurns() {
 		// TODO Auto-generated method stub
 		return 0;

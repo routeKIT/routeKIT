@@ -21,11 +21,13 @@ public class TestTileCache {
 		}
 
 	}
+
 	@Before
 	public void setUp() throws Exception {
 	}
 
 	Throwable failed = null;
+
 	@Test
 	public void test() throws Throwable {
 		final TileCache tc = new TileCache(new WaitingSource());
@@ -38,7 +40,7 @@ public class TestTileCache {
 					if (last == -1) {
 						assertEquals(0, x);
 						last = 120;
-					}else if(last > 20){
+					} else if (last > 20) {
 						last--;
 						assertEquals(last, x);
 					}

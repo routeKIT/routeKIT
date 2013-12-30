@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
+
 /**
  * Versieht den kantenbasierten Graphen ({@link EdgeBasedGraph}) mit
  * Kantengewichten.

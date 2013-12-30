@@ -1,6 +1,8 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
+
 /**
  * Eine geometrische Datenstruktur zum schnellen Auffinden von Kanten innerhalb
  * eines Kartenausschnitts.
@@ -16,6 +18,7 @@ public class GraphIndex {
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
 		return null;
 	}
+
 	/**
 	 * Bestimmt alle Kanten innerhalb eines rechteckigen Kartenausschnitts, der
 	 * durch {@code leftTop} und {@code rightBottom} festgelegt ist.
@@ -30,6 +33,7 @@ public class GraphIndex {
 			Coordinates rightBottom) {
 		return null;
 	}
+
 	/**
 	 * Konstruktor: Erzeugt die Datenstruktur für den gegebenen Graph und die
 	 * angegebene Zoomstufe.

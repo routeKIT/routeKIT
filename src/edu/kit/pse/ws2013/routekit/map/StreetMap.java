@@ -1,4 +1,5 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 /**
  * Eine Karte.
  */
@@ -11,6 +12,7 @@ public class StreetMap {
 	public boolean isDefault() {
 		return false;
 	}
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Objekt aus den gegebenen Graphen.
 	 * 
@@ -21,6 +23,7 @@ public class StreetMap {
 	 */
 	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
 	}
+
 	public EdgeBasedGraph getEdgeBasedGraph() {
 		// TODO Auto-generated method stub
 		return null;

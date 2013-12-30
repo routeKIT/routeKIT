@@ -33,14 +33,15 @@ public class Weights {
 	public int getWeight(int turn) {
 		return weights[turn];
 	}
-	
-	public void save(DataOutputStream os) throws IOException{
+
+	public void save(DataOutputStream os) throws IOException {
 		os.writeInt(weights.length);
 		for (int i = 0; i < weights.length; i++) {
 			os.writeInt(weights[i]);
 		}
 	}
-	public static Weights load(DataInputStream is) throws IOException{
+
+	public static Weights load(DataInputStream is) throws IOException {
 		int[] weights = new int[is.readInt()];
 		for (int i = 0; i < weights.length; i++) {
 			weights[i] = is.readInt();

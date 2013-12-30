@@ -1,8 +1,10 @@
 package edu.kit.pse.ws2013.routekit.map;
+
 import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
+
 /**
  * Ein Kartengraph/Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis
  * einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine
@@ -16,6 +18,7 @@ public class Graph {
 	EdgeProperties[] edgeProps;
 	float[] lat;
 	float[] lon;
+
 	/**
 	 * Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen
 	 * Adjazenzfeld.
@@ -71,6 +74,7 @@ public class Graph {
 	public NodeProperties getNodeProperties(int node) {
 		return nodeProps.get(node);
 	}
+
 	/**
 	 * Gibt die Koordinaten des angegebenen Knotens zurück.
 	 * 
@@ -81,6 +85,7 @@ public class Graph {
 	public Coordinates getCoordinates(int node) {
 		return new Coordinates(lat[node], lon[node]);
 	}
+
 	/**
 	 * Gibt den Startknoten der angegebenen Kante zurück.
 	 * 
@@ -91,6 +96,7 @@ public class Graph {
 	public int getStartNode(int edge) {
 		return edgesReverse[edge];
 	}
+
 	/**
 	 * Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.
 	 * 
@@ -101,6 +107,7 @@ public class Graph {
 	public Set<Integer> getOutgoingEdges(int node) {
 		return null;
 	}
+
 	/**
 	 * Gibt eine geometrische Datenstruktur zur angegebenen Zoomstufe zurück.
 	 * 
@@ -122,6 +129,7 @@ public class Graph {
 	public Set<Integer> getIncomingEdges(int node) {
 		return null;
 	}
+
 	/**
 	 * Gibt die {@code EdgeProperties} der angegebenen Kante zurück.
 	 * 
@@ -132,6 +140,7 @@ public class Graph {
 	public EdgeProperties getEdgeProperties(int edge) {
 		return edgeProps[edge];
 	}
+
 	/**
 	 * Gibt den Endknoten der angegebenen Kante zurück.
 	 * 

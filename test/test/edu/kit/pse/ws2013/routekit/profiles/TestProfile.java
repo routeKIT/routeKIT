@@ -12,7 +12,7 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 @SuppressWarnings("static-method")
 public class TestProfile {
-	
+
 	@Test
 	public void testEquals() {
 		assertTrue(Profile.defaultCar.equals(Profile.defaultCar));
@@ -21,7 +21,7 @@ public class TestProfile {
 		assertTrue(Profile.defaultTruck.equals(Profile.defaultTruck, true));
 		assertTrue(Profile.defaultCar.equals(Profile.defaultCar, false));
 		assertTrue(Profile.defaultTruck.equals(Profile.defaultTruck, false));
-		
+
 		assertFalse(Profile.defaultCar.equals("nope"));
 		assertFalse(Profile.defaultCar.equals(Profile.defaultTruck));
 		assertFalse(Profile.defaultCar.equals(Profile.defaultTruck, false));
@@ -30,12 +30,13 @@ public class TestProfile {
 	@Test
 	public void testClone() {
 		assertTrue(Profile.defaultCar.clone().equals(Profile.defaultCar, false));
-		assertTrue(Profile.defaultTruck.clone().equals(Profile.defaultTruck, false));
-		
+		assertTrue(Profile.defaultTruck.clone().equals(Profile.defaultTruck,
+				false));
+
 		assertTrue(Profile.defaultCar.isDefault());
 		assertFalse(Profile.defaultCar.clone().isDefault());
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testName() {
 		final Profile p = Profile.defaultCar.clone();
@@ -44,7 +45,7 @@ public class TestProfile {
 		assertEquals(p.getName(), testValue);
 		Profile.defaultCar.setName(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testVehicleType() {
 		final Profile p = Profile.defaultCar.clone();
@@ -53,7 +54,7 @@ public class TestProfile {
 		assertEquals(p.getVehicleType(), testValue);
 		Profile.defaultCar.setVehicleType(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testHeight() {
 		final Profile p = Profile.defaultCar.clone();
@@ -62,7 +63,7 @@ public class TestProfile {
 		assertEquals(p.getHeight(), testValue);
 		Profile.defaultCar.setHeight(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testWidth() {
 		final Profile p = Profile.defaultCar.clone();
@@ -71,7 +72,7 @@ public class TestProfile {
 		assertEquals(p.getWidth(), testValue);
 		Profile.defaultCar.setWidth(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testWeight() {
 		final Profile p = Profile.defaultCar.clone();
@@ -80,7 +81,7 @@ public class TestProfile {
 		assertEquals(p.getWeight(), testValue);
 		Profile.defaultCar.setWeight(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testSpeedHighway() {
 		final Profile p = Profile.defaultCar.clone();
@@ -89,7 +90,7 @@ public class TestProfile {
 		assertEquals(p.getSpeedHighway(), testValue);
 		Profile.defaultCar.setSpeedHighway(testValue); // should not be allowed
 	}
-	
+
 	@Test(expected = IllegalStateException.class)
 	public void testSpeedRoad() {
 		final Profile p = Profile.defaultCar.clone();
@@ -98,7 +99,7 @@ public class TestProfile {
 		assertEquals(p.getSpeedRoad(), testValue);
 		Profile.defaultCar.setSpeedRoad(testValue); // should not be allowed
 	}
-	
+
 	@Test
 	public void testSaveLoad() throws IOException {
 		final String name = "Test name";
@@ -108,7 +109,8 @@ public class TestProfile {
 		final int weight = 15000;
 		final int speedHighway = 100;
 		final int speedRoad = 80;
-		final Profile p = new Profile(name, vehicleType, height, width, weight, speedHighway, speedRoad);
+		final Profile p = new Profile(name, vehicleType, height, width, weight,
+				speedHighway, speedRoad);
 		File file = File.createTempFile("routeKit_testProfile_", ".properties");
 		p.save(file);
 		assertEquals(Profile.load(file), p);

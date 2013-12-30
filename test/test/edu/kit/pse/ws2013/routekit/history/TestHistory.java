@@ -25,11 +25,11 @@ public class TestHistory {
 		History h2 = History.load(f);
 		assertHistoryEquals(h1, h2);
 	}
-	
+
 	public static void assertHistoryEquals(History expected, History actual) {
 		Iterator<HistoryEntry> iExpected = expected.getEntries().iterator();
 		Iterator<HistoryEntry> iActual = actual.getEntries().iterator();
-		while(iExpected.hasNext()) {
+		while (iExpected.hasNext()) {
 			assertTrue("not enough entries!", iActual.hasNext());
 			assertHistoryEntryEquals(iExpected.next(), iActual.next());
 		}

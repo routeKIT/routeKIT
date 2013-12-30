@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
+
 import java.awt.image.BufferedImage;
+
 /**
  * Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen
  * ist.

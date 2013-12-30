@@ -1,19 +1,22 @@
 package edu.kit.pse.ws2013.routekit.controllers;
+
 import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
+
 /**
  * Der Controller für die {@link MapManagerView}.
  */
 public class MapManagerController {
 	MapManagerView mmv;
-	
+
 	public MapManagerController(MainView view) {
 		mmv = new MapManagerView(view);
 	}
+
 	/**
 	 * Markiert die aktuell ausgewählte Karte zur Löschung und entfernt sie aus
 	 * der Auswahlliste.
@@ -26,6 +29,7 @@ public class MapManagerController {
 	 */
 	public void deleteCurrentMap() {
 	}
+
 	/**
 	 * Entfernt das angegebene Profil von der ausgewählten Karte.
 	 * 
@@ -34,6 +38,7 @@ public class MapManagerController {
 	 */
 	public void removeProfile(Profile profile) {
 	}
+
 	/**
 	 * Führt alle vom Benutzer vorgenommenen Änderungen aus. Dazu gehören das
 	 * Importieren und Löschen von Karte sowie das Hinzufügen oder Löschen von
@@ -41,6 +46,7 @@ public class MapManagerController {
 	 */
 	public void saveAllChanges() {
 	}
+
 	/**
 	 * Fügt das angegebene Profil zur ausgewählten Karte hinzu.
 	 * 
@@ -49,6 +55,7 @@ public class MapManagerController {
 	 */
 	public void addProfile(Profile profile) {
 	}
+
 	/**
 	 * Fügt eine neue Karte mit dem angegebenen Namen hinzu (oder ersetzt eine
 	 * bestehende mit diesem Namen) und wählt sie aus.
@@ -66,6 +73,7 @@ public class MapManagerController {
 	 */
 	public void importMap(String name, File file) {
 	}
+
 	/**
 	 * Wird aufgerufen, wenn in der {@link MapManagerView} eine andere Karte
 	 * ausgewählt wird. Speichert die Liste der Profil für diese Karte und setzt

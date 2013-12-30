@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
  * Führt die Vorberechnung für eine Kombination aus {@link Profile Profil} und
  * {@link StreetMap Karte} durch.
@@ -9,12 +11,12 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 public class PreCalculator {
 	EdgeWeighter weighter;
 	ArcFlagsCalculator calulator;
-	
+
 	public PreCalculator() {
 		weighter = new EdgeWeighterDummy();
 		calulator = new ArcFlagsCalculatorDummy();
 	}
-	
+
 	/**
 	 * Führt die Vorberechnung für die gegebene Kombination aus {@link Profile
 	 * Profil} und {@link StreetMap Karte} durch. Dabei werden ein

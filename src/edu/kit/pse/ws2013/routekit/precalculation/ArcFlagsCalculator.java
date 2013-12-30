@@ -1,6 +1,8 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
+
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+
 /**
  * Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.
  */

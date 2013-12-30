@@ -16,6 +16,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestRouteModel {
 	int listenerFired = 0;
+
 	class DummyListener implements RouteModelListener {
 
 		@Override
@@ -24,6 +25,7 @@ public class TestRouteModel {
 		}
 
 	}
+
 	RouteModel rm;
 
 	@Before
@@ -97,6 +99,7 @@ public class TestRouteModel {
 		assertSame(c2, rm.getStart());
 		assertEquals(3, listenerFired);
 	}
+
 	@Test
 	public void testMultipleListeners() {
 		rm.addRouteListener(new DummyListener());
