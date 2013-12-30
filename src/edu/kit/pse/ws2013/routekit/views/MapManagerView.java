@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
@@ -27,7 +28,7 @@ public class MapManagerView extends JDialog {
 	/**
 	 * A constructor that creates a new MapManagerView.
 	 */
-	public MapManagerView(Window parent) {
+	public MapManagerView(Window parent, MapManagerController mmc) {
 		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);

@@ -14,7 +14,7 @@ public class MapManagerController {
 	MapManagerView mmv;
 
 	public MapManagerController(MainView view) {
-		mmv = new MapManagerView(view);
+		mmv = new MapManagerView(view, this);
 	}
 
 	/**
