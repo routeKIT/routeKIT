@@ -9,6 +9,8 @@ public class StreetMap {
 	 * 
 	 * @return
 	 */
+	private String name;
+
 	public boolean isDefault() {
 		return false;
 	}
@@ -27,5 +29,13 @@ public class StreetMap {
 	public EdgeBasedGraph getEdgeBasedGraph() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

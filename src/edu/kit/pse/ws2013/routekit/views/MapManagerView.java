@@ -7,8 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -25,6 +27,10 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Displays the window of the map management on the screen.
  */
 public class MapManagerView extends JDialog {
+	private JComboBox<Object> mapname;
+	private DefaultListModel<String> listenModell;
+	private JList<String> profile;
+
 	/**
 	 * A constructor that creates a new MapManagerView.
 	 */
@@ -45,6 +51,13 @@ public class MapManagerView extends JDialog {
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
 
+		// ....................
+		Set<Profile> a = new HashSet<Profile>();
+		a.add(Profile.defaultCar);
+		a.add(Profile.defaultTruck);
+		setCurrentMap(null, a);
+		// .....................
+
 		setContentPane(contentPane);
 		setVisible(true);
 	}
@@ -53,7 +66,7 @@ public class MapManagerView extends JDialog {
 		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
 		JLabel map = new JLabel("Karte auswählen:");
-		JComboBox<Object> mapname = new JComboBox<>();
+		mapname = new JComboBox<>();
 		mapname.setMinimumSize(new Dimension(250, 26));
 		mapname.setPreferredSize(new Dimension(250, 26));
 
@@ -108,8 +121,8 @@ public class MapManagerView extends JDialog {
 		JPanel mapProfile = new JPanel(new BorderLayout(10, 10));
 		mapProfile.setBackground(Color.WHITE);
 		JPanel addDelete = initAddDelete();
-		JList<String> profile = new JList<String>(new String[] { "sdfsdfsd",
-				"hallo" });
+		listenModell = new DefaultListModel<String>();
+		profile = new JList<String>(listenModell);
 		profile.setBackground(Color.lightGray);
 
 		mapProfile.add(new JLabel("Profile für diese Karte:"),
@@ -136,6 +149,10 @@ public class MapManagerView extends JDialog {
 	 *            The available maps.
 	 */
 	public void setAvailableMaps(Set<StreetMap> maps) {
+		mapname.removeAllItems();
+		for (StreetMap m : maps) {
+			mapname.addItem(m.getName());
+		}
 	}
 
 	/**
@@ -149,5 +166,9 @@ public class MapManagerView extends JDialog {
 	 *            The profiles for the new map.
 	 */
 	public void setCurrentMap(StreetMap map, Set<Profile> profiles) {
+		listenModell.clear();
+		for (Profile p : profiles) {
+			listenModell.addElement(p.getName());
+		}
 	}
 }
