@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -105,6 +106,8 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				new DialogNew(ProfileManagerView.this);
+
 			}
 		});
 		north.add(neuButton);
@@ -335,6 +338,80 @@ public class ProfileManagerView extends JDialog {
 		profilename.removeAllItems();
 		for (Profile p : profiles) {
 			profilename.addItem(p.getName());
+		}
+	}
+
+	private class DialogNew extends JDialog {
+		private JTextField input;
+
+		public DialogNew(Window parent) {
+			super(parent, "Name", ModalityType.APPLICATION_MODAL);
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setSize(300, 200);
+			setLocationRelativeTo(getParent());
+			setResizable(false);
+			JPanel contentPane = new JPanel(new BorderLayout());
+
+			JPanel north = innerNorthTextPane();
+			JPanel center = initCenterInputPane();
+			JPanel south = initSouthButtonPane();
+
+			contentPane.add(north, BorderLayout.NORTH);
+			contentPane.add(south, BorderLayout.SOUTH);
+			contentPane.add(center, BorderLayout.CENTER);
+
+			setContentPane(contentPane);
+			setVisible(true);
+
+		}
+
+		private JPanel initSouthButtonPane() {
+			JPanel buttonpane = new JPanel();
+			buttonpane.setBackground(Color.WHITE);
+			JButton ok = new JButton("OK");
+			JButton cancel = new JButton("Abbrechen");
+			buttonpane.add(ok);
+			ok.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (input.getText().equals("")) {
+						return;
+					}
+					Profile current = writeValues();
+					// saveTemporaryProfile(current);
+					// changeTemporaryProfile(input.getText());
+					dispose();
+				}
+			});
+			buttonpane.add(cancel);
+			cancel.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			return buttonpane;
+		}
+
+		private JPanel initCenterInputPane() {
+			JPanel inputpane = new JPanel();
+			inputpane.setBackground(Color.WHITE);
+			input = new JTextField(20);
+			input.setBackground(Color.LIGHT_GRAY);
+			inputpane.add(input);
+			return inputpane;
+		}
+
+		private JPanel innerNorthTextPane() {
+			JPanel textpane = new JPanel();
+			textpane.setBackground(Color.WHITE);
+			JLabel text = new JLabel(
+					"Geben Sie einen Namen für das neue Profil ein:");
+			textpane.add(text);
+
+			return textpane;
 		}
 	}
 }
