@@ -64,7 +64,7 @@ public class ProfileManagerView extends JDialog {
 		// ......................................
 		profilename.addItem((Profile.defaultCar.getName()));
 		profilename.addItem((Profile.defaultTruck.getName()));
-		setCurrentProfile(Profile.defaultCar);
+		setCurrentProfile(Profile.defaultTruck);
 		writeValues();
 		// .....................................
 
@@ -371,6 +371,7 @@ public class ProfileManagerView extends JDialog {
 		srSpeedspinner.setValue(profile.getSpeedRoad());
 		widthspinner.setValue(profile.getWidth());
 		weightspinner.setValue(profile.getWeight());
+		profilename.setSelectedItem(profile.getName());
 
 	}
 

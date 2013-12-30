@@ -10,14 +10,18 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
@@ -30,6 +34,7 @@ public class MapManagerView extends JDialog {
 	private JComboBox<Object> mapname;
 	private DefaultListModel<String> listenModell;
 	private JList<String> profile;
+	private JFileChooser fileChooser = new JFileChooser();
 
 	/**
 	 * A constructor that creates a new MapManagerView.
@@ -44,7 +49,7 @@ public class MapManagerView extends JDialog {
 		JPanel contentPane = new JPanel(new BorderLayout());
 
 		JPanel north = initNorthPane();
-		JPanel center = initCenterPane();
+		JPanel center = initCenterPane(mmc);
 		JPanel south = initSouthPane();
 
 		contentPane.add(north, BorderLayout.NORTH);
@@ -55,7 +60,6 @@ public class MapManagerView extends JDialog {
 		Set<Profile> a = new HashSet<Profile>();
 		a.add(Profile.defaultCar);
 		a.add(Profile.defaultTruck);
-		setCurrentMap(null, a);
 		// .....................
 
 		setContentPane(contentPane);
@@ -75,11 +79,11 @@ public class MapManagerView extends JDialog {
 		return north;
 	}
 
-	private JPanel initCenterPane() {
+	private JPanel initCenterPane(MapManagerController mmc) {
 		JPanel center = new JPanel(new BorderLayout(10, 10));
 		center.setBackground(Color.WHITE);
 
-		JPanel buttons = initButtonsPane();
+		JPanel buttons = initButtonsPane(mmc);
 		JPanel mapProfile = initMapProfilePane();
 
 		center.add(buttons, BorderLayout.NORTH);
@@ -106,11 +110,52 @@ public class MapManagerView extends JDialog {
 		return south;
 	}
 
-	private JPanel initButtonsPane() {
+	private JPanel initButtonsPane(final MapManagerController mmc) {
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttons.setBackground(Color.WHITE);
 
-		buttons.add(new JButton("Importieren"));
+		JButton importButton = new JButton("Importieren");
+		importButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton pathButton = new JButton("Suche...");
+				final JTextField path = new JTextField(20);
+				pathButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						fileChooser.showDialog(MapManagerView.this,
+								"Importieren");
+						if (fileChooser.getSelectedFile() == null) {
+							return;
+						}
+						path.setText(fileChooser.getSelectedFile()
+								.getAbsolutePath());
+					}
+				});
+				JTextField name = new JTextField(20);
+
+				JPanel myPanel = new JPanel();
+				myPanel.add(pathButton);
+				myPanel.add(new JLabel("Pfad:"));
+				myPanel.add(path);
+				myPanel.add(Box.createHorizontalStrut(15));
+				myPanel.add(new JLabel("Name der Karte:"));
+				myPanel.add(name);
+
+				int result = JOptionPane.showConfirmDialog(null, myPanel,
+						"Eingabe Pfad und Name", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					if (!path.getText().equals("")
+							&& !name.getText().equals(""))
+						;
+					mmc.importMap(name.getText(), fileChooser.getSelectedFile());
+
+				}
+			}
+		});
+		buttons.add(importButton);
 		buttons.add(new JButton("Aktualisieren"));
 		buttons.add(new JButton("Löschen"));
 
@@ -170,5 +215,6 @@ public class MapManagerView extends JDialog {
 		for (Profile p : profiles) {
 			listenModell.addElement(p.getName());
 		}
+		mapname.setSelectedItem(map.getName());
 	}
 }
