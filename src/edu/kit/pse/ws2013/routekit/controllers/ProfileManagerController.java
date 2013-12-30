@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.controllers;
+
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
+
 /**
  * Der Controller für die {@link ProfileManagerView}.
  * 
@@ -10,9 +12,11 @@ import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
  */
 public class ProfileManagerController {
 	ProfileManagerView pmv;
+
 	public ProfileManagerController(MainView view) {
-		pmv = new ProfileManagerView(view);
+		pmv = new ProfileManagerView(view, this);
 	}
+
 	/**
 	 * Wechselt zu dem temporären Profil mit dem angegebenen Namen. Falls noch
 	 * kein Profil mit diesem Namen existiert, wird es als Kopie des aktuellen
@@ -26,6 +30,7 @@ public class ProfileManagerController {
 	 */
 	public void changeTemporaryProfile(String name) {
 	}
+
 	/**
 	 * Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus
 	 * der Auswahlliste.
@@ -38,6 +43,7 @@ public class ProfileManagerController {
 	 */
 	public void deleteCurrentTemporaryProfile() {
 	}
+
 	/**
 	 * Speichert die Werte des temporären Profils. Wird üblicherweise direkt vor
 	 * {@link ProfileManagerController#changeTemporaryProfile} aufgerufen.
@@ -47,6 +53,7 @@ public class ProfileManagerController {
 	 */
 	public void saveTemporaryProfile(Profile profile) {
 	}
+
 	/**
 	 * Führt alle vom Benutzer vorgenommenen Änderungen aus. Dazu gehören das
 	 * Hinzufügen, Ändern und Löschen von Profilen. Für geänderte Profil werden
@@ -54,6 +61,7 @@ public class ProfileManagerController {
 	 */
 	public void saveAllChanges() {
 	}
+
 	/**
 	 * Gibt zurück, wie viel Zeit die Vorberechnung benötigt haben, die durch
 	 * die aktuell erfassten Änderungen gelöscht werden. Die Dauer wird in

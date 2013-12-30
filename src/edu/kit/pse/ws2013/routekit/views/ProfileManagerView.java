@@ -21,6 +21,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import edu.kit.pse.ws2013.routekit.controllers.ProfileManagerController;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
@@ -42,7 +43,7 @@ public class ProfileManagerView extends JDialog {
 	/**
 	 * A constructor that creates a new ProfileManagerView.
 	 */
-	public ProfileManagerView(Window parent) {
+	public ProfileManagerView(Window parent, ProfileManagerController pmc) {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
@@ -51,7 +52,7 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane();
+		JPanel north = initNorthPane(pmc);
 		JPanel center = initCenterPane();
 		JPanel south = initSouthPane();
 
@@ -70,7 +71,7 @@ public class ProfileManagerView extends JDialog {
 		setVisible(true);
 	}
 
-	private JPanel initNorthPane() {
+	private JPanel initNorthPane(final ProfileManagerController pmc) {
 		JPanel north = new JPanel(new FlowLayout());
 		north.setBackground(Color.WHITE);
 
@@ -82,8 +83,9 @@ public class ProfileManagerView extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Profile current = writeValues();
-				// saveTemporaryProfile(current);
-				// changeTemporaryProfile(profilename.getSelectedItem());
+				pmc.saveTemporaryProfile(current);
+				pmc.changeTemporaryProfile((String) profilename
+						.getSelectedItem());
 			}
 		});
 
@@ -97,7 +99,7 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// deleteCurrentTemporaryProfile();
+				pmc.deleteCurrentTemporaryProfile();
 			}
 		});
 		north.add(deleteButton);
@@ -106,7 +108,7 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new DialogNew(ProfileManagerView.this);
+				new DialogNew(ProfileManagerView.this, pmc);
 
 			}
 		});
@@ -344,7 +346,7 @@ public class ProfileManagerView extends JDialog {
 	private class DialogNew extends JDialog {
 		private JTextField input;
 
-		public DialogNew(Window parent) {
+		public DialogNew(Window parent, ProfileManagerController pmc) {
 			super(parent, "Name", ModalityType.APPLICATION_MODAL);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			setSize(300, 200);
@@ -354,7 +356,7 @@ public class ProfileManagerView extends JDialog {
 
 			JPanel north = innerNorthTextPane();
 			JPanel center = initCenterInputPane();
-			JPanel south = initSouthButtonPane();
+			JPanel south = initSouthButtonPane(pmc);
 
 			contentPane.add(north, BorderLayout.NORTH);
 			contentPane.add(south, BorderLayout.SOUTH);
@@ -365,7 +367,7 @@ public class ProfileManagerView extends JDialog {
 
 		}
 
-		private JPanel initSouthButtonPane() {
+		private JPanel initSouthButtonPane(final ProfileManagerController pmc) {
 			JPanel buttonpane = new JPanel();
 			buttonpane.setBackground(Color.WHITE);
 			JButton ok = new JButton("OK");
@@ -379,8 +381,8 @@ public class ProfileManagerView extends JDialog {
 						return;
 					}
 					Profile current = writeValues();
-					// saveTemporaryProfile(current);
-					// changeTemporaryProfile(input.getText());
+					pmc.saveTemporaryProfile(current);
+					pmc.changeTemporaryProfile(input.getText());
 					dispose();
 				}
 			});
