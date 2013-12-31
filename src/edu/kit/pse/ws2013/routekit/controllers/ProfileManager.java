@@ -8,6 +8,13 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Verwaltet die Profil. Hat intern eine Menge von vorhandenen Profilen.
  */
 public class ProfileManager {
+
+	private static ProfileManager instance;
+
+	private ProfileManager() {
+		// TODO implement
+	}
+
 	/**
 	 * Löscht das ausgewählte Profil aus der internen Liste und von der
 	 * Festplatte.
@@ -37,5 +44,33 @@ public class ProfileManager {
 	 */
 	public Set<Profile> getProfiles() {
 		return null;
+	}
+
+	/**
+	 * Initializes the {@link ProfileManager}.
+	 * 
+	 * @throws IllegalStateException
+	 *             If the ProfileManager is already initialized.
+	 */
+	public static void init() {
+		if (instance != null) {
+			throw new IllegalStateException("Already initialized!");
+		}
+		instance = new ProfileManager();
+	}
+
+	/**
+	 * Returns the {@link ProfileManager} instance. This is only allowed if the
+	 * ProfileManager was previously {@link #init() initialized}.
+	 * 
+	 * @return The ProfileManager instance.
+	 * @throws IllegalStateException
+	 *             If the ProfileManager is uninitialized.
+	 */
+	public static ProfileManager getInstance() {
+		if (instance == null) {
+			throw new IllegalStateException("Not yet initialized!");
+		}
+		return instance;
 	}
 }
