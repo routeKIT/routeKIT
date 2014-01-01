@@ -53,6 +53,17 @@ public class TestGraph {
 		assertEquals(2, g.getTargetNode(1));
 		assertEquals(3, g.getTargetNode(2));
 	}
+	@Test
+	public void testGetOutgoing() {
+		Integer[] data = g.getOutgoingEdges(0).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[]{1,2,3}, data);
+		data = g.getOutgoingEdges(1).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[]{0,2,3}, data);
+		data = g.getOutgoingEdges(2).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[]{}, data);
+		data = g.getOutgoingEdges(3).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[]{0,1,2}, data);
+	}
 
 	@Ignore
 	@Test

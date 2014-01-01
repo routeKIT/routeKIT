@@ -105,7 +105,9 @@ public class Graph {
 	 * @return
 	 */
 	public Set<Integer> getOutgoingEdges(int node) {
-		return null;
+		return new IntArraySet(nodes[node],
+				(node == nodes.length - 1 ? edges.length : nodes[node + 1])
+						- nodes[node], edges);
 	}
 
 	/**
