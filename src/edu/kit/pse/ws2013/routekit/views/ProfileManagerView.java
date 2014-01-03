@@ -39,6 +39,7 @@ public class ProfileManagerView extends JDialog {
 	private JSpinner heightspinner;
 	private JSpinner widthspinner;
 	private JSpinner weightspinner;
+	private JButton deleteButton;
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -87,7 +88,7 @@ public class ProfileManagerView extends JDialog {
 
 		north.add(profile);
 		north.add(profilename);
-		JButton deleteButton = new JButton("Löschen");
+		deleteButton = new JButton("Löschen");
 		deleteButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -360,6 +361,19 @@ public class ProfileManagerView extends JDialog {
 		widthspinner.setValue(profile.getWidth());
 		weightspinner.setValue(profile.getWeight());
 		profilename.setSelectedItem(profile.getName());
+
+		if (profile.isDefault()) {
+			deleteButton.setEnabled(false);
+			bus.setEnabled(false);
+			car.setEnabled(false);
+			truck.setEnabled(false);
+			motorcycle.setEnabled(false);
+			heightspinner.setEnabled(false);
+			hSpeedspinner.setEnabled(false);
+			weightspinner.setEnabled(false);
+			widthspinner.setEnabled(false);
+			srSpeedspinner.setEnabled(false);
+		}
 
 	}
 

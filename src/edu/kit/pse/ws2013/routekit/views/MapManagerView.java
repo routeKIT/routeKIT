@@ -35,6 +35,9 @@ public class MapManagerView extends JDialog {
 	private DefaultListModel<String> listenModell;
 	private JList<String> profile;
 	private JFileChooser fileChooser = new JFileChooser();
+	private JButton importButton;
+	private JButton update;
+	private JButton delete;
 
 	/**
 	 * A constructor that creates a new MapManagerView.
@@ -114,7 +117,7 @@ public class MapManagerView extends JDialog {
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttons.setBackground(Color.WHITE);
 
-		JButton importButton = new JButton("Importieren");
+		importButton = new JButton("Importieren");
 		importButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -156,8 +159,10 @@ public class MapManagerView extends JDialog {
 			}
 		});
 		buttons.add(importButton);
-		buttons.add(new JButton("Aktualisieren"));
-		buttons.add(new JButton("Löschen"));
+		update = new JButton("Aktualisieren");
+		buttons.add(update);
+		delete = new JButton("Löschen");
+		buttons.add(delete);
 
 		return buttons;
 	}
@@ -198,6 +203,7 @@ public class MapManagerView extends JDialog {
 		for (StreetMap m : maps) {
 			mapname.addItem(m.getName());
 		}
+
 	}
 
 	/**
@@ -216,5 +222,9 @@ public class MapManagerView extends JDialog {
 			listenModell.addElement(p.getName());
 		}
 		mapname.setSelectedItem(map.getName());
+		if (map.isDefault()) {
+			delete.setEnabled(false);
+			update.setEnabled(false);
+		}
 	}
 }
