@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import edu.kit.pse.ws2013.routekit.controllers.ProfileManagerController;
@@ -27,7 +26,7 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 /**
- * Zeigt das Fenster der Profilverwaltung auf dem Bildschirm an.
+ * Displays the window of the profile management on the screen.
  */
 public class ProfileManagerView extends JDialog {
 	private JComboBox<Object> profilename;
@@ -60,13 +59,6 @@ public class ProfileManagerView extends JDialog {
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
-
-		// ......................................
-		profilename.addItem((Profile.defaultCar.getName()));
-		profilename.addItem((Profile.defaultTruck.getName()));
-		setCurrentProfile(Profile.defaultTruck);
-		writeValues();
-		// .....................................
 
 		setContentPane(contentPane);
 		setVisible(true);
@@ -109,9 +101,17 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new DialogNew(ProfileManagerView.this, pmc);
-
+				String result = (String) JOptionPane.showInputDialog(
+						ProfileManagerView.this,
+						"Geben Sie einen Namen für das neue Profil ein:",
+						"Name", JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if ((result != null) && (result.length() > 0)) {
+					Profile current = writeValues();
+					pmc.saveTemporaryProfile(current);
+					pmc.changeTemporaryProfile(result);
+				}
 			}
+
 		});
 		north.add(neuButton);
 
@@ -160,8 +160,7 @@ public class ProfileManagerView extends JDialog {
 										+ "vorgenommenen Änderungen für alle Profile.\n"
 										+ warning(pmc)
 										+ "Wollen sie die Änderungen vornehmen?",
-								"Bestätigung",
-								JOptionPane.YES_NO_CANCEL_OPTION,
+								"Bestätigung", JOptionPane.YES_NO_OPTION,
 								JOptionPane.QUESTION_MESSAGE, null,
 								new String[] { "Ja", "Nein" }, "Nein");
 				if (showOptionDialog == JOptionPane.YES_OPTION) {
@@ -170,17 +169,6 @@ public class ProfileManagerView extends JDialog {
 					pmc.saveAllChanges();
 					ProfileManagerView.this.dispose();
 				}
-
-				/*
-				 * final JOptionPane optionPane = new JOptionPane(
-				 * "Sie speichern hiermit alle \n"
-				 * 
-				 * + "vorgenommenen Änderungen für alle Profile.\n" +
-				 * warning(pmc) + "Wollen sie die Änderungen vornehmen?",
-				 * JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION);
-				 * JDialog dialog = optionPane.createDialog(
-				 * ProfileManagerView.this, "Bestätigung"); dialog.show();
-				 */
 			}
 		});
 		buttons.add(okButton);
@@ -385,80 +373,6 @@ public class ProfileManagerView extends JDialog {
 		profilename.removeAllItems();
 		for (Profile p : profiles) {
 			profilename.addItem(p.getName());
-		}
-	}
-
-	private class DialogNew extends JDialog {
-		private JTextField input;
-
-		public DialogNew(Window parent, ProfileManagerController pmc) {
-			super(parent, "Name", ModalityType.APPLICATION_MODAL);
-			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			setSize(300, 200);
-			setLocationRelativeTo(getParent());
-			setResizable(false);
-			JPanel contentPane = new JPanel(new BorderLayout());
-
-			JPanel north = innerNorthTextPane();
-			JPanel center = initCenterInputPane();
-			JPanel south = initSouthButtonPane(pmc);
-
-			contentPane.add(north, BorderLayout.NORTH);
-			contentPane.add(south, BorderLayout.SOUTH);
-			contentPane.add(center, BorderLayout.CENTER);
-
-			setContentPane(contentPane);
-			setVisible(true);
-
-		}
-
-		private JPanel initSouthButtonPane(final ProfileManagerController pmc) {
-			JPanel buttonpane = new JPanel();
-			buttonpane.setBackground(Color.WHITE);
-			JButton ok = new JButton("OK");
-			JButton cancel = new JButton("Abbrechen");
-			buttonpane.add(ok);
-			ok.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (input.getText().equals("")) {
-						return;
-					}
-					Profile current = writeValues();
-					pmc.saveTemporaryProfile(current);
-					pmc.changeTemporaryProfile(input.getText());
-					dispose();
-				}
-			});
-			buttonpane.add(cancel);
-			cancel.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-				}
-			});
-			return buttonpane;
-		}
-
-		private JPanel initCenterInputPane() {
-			JPanel inputpane = new JPanel();
-			inputpane.setBackground(Color.WHITE);
-			input = new JTextField(20);
-			input.setBackground(Color.LIGHT_GRAY);
-			inputpane.add(input);
-			return inputpane;
-		}
-
-		private JPanel innerNorthTextPane() {
-			JPanel textpane = new JPanel();
-			textpane.setBackground(Color.WHITE);
-			JLabel text = new JLabel(
-					"Geben Sie einen Namen für das neue Profil ein:");
-			textpane.add(text);
-
-			return textpane;
 		}
 	}
 }
