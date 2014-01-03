@@ -155,22 +155,16 @@ public class MainView extends JFrame implements RouteModelListener {
 		targetLabel.setPreferredSize(preffered);
 		start.add(startLabel);
 		startField = new JTextField(15);
+		startField.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		startField.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				String[] strings = startField.getText().split("\\s+");
-				if (strings.length != 2) {
-					startField.setBackground(Color.RED);
-					return;
-				}
-				float xcoordinate = checkCoords(strings[0], 90f);
-				float ycoordinate = checkCoords(strings[1], 180f);
-				if (Float.compare(xcoordinate, maxcoordinate) == 0
-						|| Float.compare(ycoordinate, maxcoordinate) == 0) {
-					startField.setBackground(Color.RED);
-					return;
-				}
-				MainController.getInstance().setStartPoint(
-						new Coordinates(xcoordinate, ycoordinate));
+				callController(startField);
 			}
 
 			public void focusGained(FocusEvent e) {
@@ -184,20 +178,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		target.add(targetField);
 		targetField.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				String[] strings = targetField.getText().split("\\s+");
-				if (strings.length != 2) {
-					targetField.setBackground(Color.RED);
-					return;
-				}
-				float xcoordinate = checkCoords(strings[0], 90f);
-				float ycoordinate = checkCoords(strings[1], 180f);
-				if (Float.compare(xcoordinate, maxcoordinate) == 0
-						|| Float.compare(ycoordinate, maxcoordinate) == 0) {
-					targetField.setBackground(Color.RED);
-					return;
-				}
-				MainController.getInstance().setDestinationPoint(
-						new Coordinates(xcoordinate, ycoordinate));
+				callController(targetField);
 			}
 
 			public void focusGained(FocusEvent e) {
@@ -208,6 +189,29 @@ public class MainView extends JFrame implements RouteModelListener {
 		coords.add(start);
 		coords.add(target);
 		return coords;
+	}
+
+	private void callController(JTextField textfield) {
+		String[] strings = textfield.getText().split("\\s+");
+		if (strings.length != 2) {
+			textfield.setBackground(Color.RED);
+			return;
+		}
+		float xcoordinate = checkCoords(strings[0], 90f);
+		float ycoordinate = checkCoords(strings[1], 180f);
+		if (Float.compare(xcoordinate, maxcoordinate) == 0
+				|| Float.compare(ycoordinate, maxcoordinate) == 0) {
+			textfield.setBackground(Color.RED);
+			return;
+		}
+		if (textfield.getText().equals(startField.getText())) {
+			MainController.getInstance().setStartPoint(
+					new Coordinates(xcoordinate, ycoordinate));
+		} else {
+			MainController.getInstance().setDestinationPoint(
+					new Coordinates(xcoordinate, ycoordinate));
+		}
+
 	}
 
 	private float checkCoords(String str, float limit) {
