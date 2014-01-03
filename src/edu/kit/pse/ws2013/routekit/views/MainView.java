@@ -159,7 +159,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				callController(startField);
 			}
 		});
 		startField.addFocusListener(new FocusAdapter() {
@@ -176,6 +176,14 @@ public class MainView extends JFrame implements RouteModelListener {
 		target.add(targetLabel);
 		targetField = new JTextField(15);
 		target.add(targetField);
+		targetField.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				callController(targetField);
+
+			}
+		});
 		targetField.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
 				callController(targetField);
