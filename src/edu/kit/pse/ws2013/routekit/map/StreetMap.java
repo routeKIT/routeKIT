@@ -4,13 +4,15 @@ package edu.kit.pse.ws2013.routekit.map;
  * Eine Karte.
  */
 public class StreetMap {
+	private String name;
+	private Graph graph;
+	private EdgeBasedGraph edgeBasedGraph;
+
 	/**
 	 * Gibt zurück, ob es sich um eine Standardkarte handelt.
 	 * 
 	 * @return
 	 */
-	private String name;
-
 	public boolean isDefault() {
 		return false;
 	}
@@ -24,11 +26,15 @@ public class StreetMap {
 	 *            Der kantenbasierte Graph.
 	 */
 	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
+		this.graph = graph;
+		this.edgeBasedGraph = edgeBasedGraph;
 	}
 
 	public EdgeBasedGraph getEdgeBasedGraph() {
-		// TODO Auto-generated method stub
-		return null;
+		return edgeBasedGraph;
+	}
+	public Graph getGraph() {
+		return graph;
 	}
 
 	public String getName() {
