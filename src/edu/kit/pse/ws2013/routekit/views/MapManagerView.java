@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
@@ -128,6 +130,20 @@ public class MapManagerView extends JDialog {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+
+						fileChooser.addChoosableFileFilter(new FileFilter() {
+
+							@Override
+							public boolean accept(File f) {
+								return f.getName().endsWith(".osm");
+							}
+
+							@Override
+							public String getDescription() {
+								return "OSM(*.osm)";
+							}
+
+						});
 						fileChooser.showDialog(MapManagerView.this,
 								"Importieren");
 						if (fileChooser.getSelectedFile() == null) {
