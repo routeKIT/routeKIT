@@ -126,12 +126,14 @@ public class MainController {
 		new ProfileManagerController(view);
 	}
 
+	MapManagerController mapManagement;
+	
 	/**
 	 * Startet einen neuen {@link MapManagerController} und öffnet so den Dialog
 	 * zur Kartenverwaltung.
 	 */
 	public void manageMaps() {
-		new MapManagerController(view);
+		mapManagement = new MapManagerController(view);
 	}
 
 	/**
@@ -164,6 +166,11 @@ public class MainController {
 	 */
 	public void selectProfile(Profile profile) {
 		// TODO must set pmc – Lucas
+		if(mapManagement != null && mapManagement.getView().isVisible()){
+			mapManagement.getView().addProfile(profile);
+		}else{
+			// MainView
+		}
 	}
 
 	/**
@@ -174,6 +181,7 @@ public class MainController {
 	 */
 	public void selectMap(StreetMap map) {
 		// TODO must set pmc – Lucas
+		mapManagement = null;
 	}
 
 	/**

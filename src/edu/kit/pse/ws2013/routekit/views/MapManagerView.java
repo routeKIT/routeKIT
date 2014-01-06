@@ -296,4 +296,7 @@ public class MapManagerView extends JDialog {
 			update.setEnabled(false);
 		}
 	}
+	public void addProfile(Profile p){
+		
+	}
 }

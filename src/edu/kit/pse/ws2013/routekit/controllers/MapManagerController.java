@@ -88,4 +88,8 @@ public class MapManagerController {
 	 */
 	public void changeMap(StreetMap map) {
 	}
+	
+	protected MapManagerView getView() {
+		return mmv;
+	}
 }
