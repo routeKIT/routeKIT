@@ -24,6 +24,7 @@ public class MainController {
 	private static MainController instance;
 	private RouteModel rm = new RouteModel();
 	MainView view;
+	private ProfileMapCombination pmc; // TODO initialize, use – Lucas
 
 	/**
 	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
@@ -161,6 +162,7 @@ public class MainController {
 	 *            Das aktuelle Profil.
 	 */
 	public void selectProfile(Profile profile) {
+		// TODO must set pmc – Lucas
 	}
 
 	/**
@@ -170,6 +172,16 @@ public class MainController {
 	 *            Die aktuelle Karte.
 	 */
 	public void selectMap(StreetMap map) {
+		// TODO must set pmc – Lucas
+	}
+
+	/**
+	 * Gets the current profile and map.
+	 * 
+	 * @return The current {@link ProfileMapCombination}.
+	 */
+	public ProfileMapCombination getCurrentProfileMap() {
+		return pmc;
 	}
 
 	public static MainController getInstance() {

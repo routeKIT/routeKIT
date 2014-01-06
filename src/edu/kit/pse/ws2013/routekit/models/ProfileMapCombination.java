@@ -52,4 +52,17 @@ public class ProfileMapCombination {
 		arc = arcFlags;
 
 	}
+
+	/**
+	 * The time that the precalculation of this {@link ProfileMapCombination}
+	 * took, in milliseconds. For not yet precalculated combinations, this is
+	 * {@code 0}.
+	 * 
+	 * @return The calculation time of this combination, in milliseconds.
+	 */
+	public int getCalculationTime() {
+		// TODO implement
+		// (stub added by Lucas)
+		return 0;
+	}
 }
