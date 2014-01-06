@@ -1,75 +1,195 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
 
 /**
- * Der Controller für die {@link ProfileManagerView}.
- * 
- * Ein Beispiel für die Kommunikation zwischen den beiden Klassen ist in
- * \abbildung{sequenz_profilVerwaltung} zu sehen.
+ * The controller for the {@link ProfileManagerView}.
  */
 public class ProfileManagerController {
-	ProfileManagerView pmv;
+	private final ProfileManagerView pmv;
+	private final Map<String, Profile> profiles; // note: contents of the map
+													// are not final at all
+	private Profile currentProfile;
 
-	public ProfileManagerController(MainView view) {
+	public ProfileManagerController(final MainView view) {
 		pmv = new ProfileManagerView(view, this);
+		profiles = new HashMap<>();
+		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
+			profiles.put(p.getName(), p);
+		}
+		assert (!profiles.isEmpty());
+		setCurrentProfile(MainController.getInstance().getCurrentProfileMap()
+				.getProfile());
 	}
 
 	/**
-	 * Wechselt zu dem temporären Profil mit dem angegebenen Namen. Falls noch
-	 * kein Profil mit diesem Namen existiert, wird es als Kopie des aktuellen
-	 * Profils erstellt.
-	 * 
-	 * Die Änderung wird der View über
-	 * {@link ProfileManagerView#setCurrentProfile} mitgeteilt.
+	 * Switches to the temporary profile with the given name. If no temporary
+	 * profile with the given name exists, it is created as a
+	 * {@link Profile#clone() copy} of the current profile.
+	 * <p>
+	 * The View is informed about this change via
+	 * {@link ProfileManagerView#setCurrentProfile}.
 	 * 
 	 * @param name
-	 *            Der Name des neuen Profils.
+	 *            The name of the new profile.
 	 */
-	public void changeTemporaryProfile(String name) {
+	public void changeTemporaryProfile(final String name) {
+		Profile p = profiles.get(name);
+		if (p == null) {
+			p = currentProfile.clone();
+			p.setName(name);
+		}
+		setCurrentProfile(p);
+	}
+
+	private void setCurrentProfile(Profile p) {
+		assert (p != null);
+		currentProfile = p;
+		pmv.setCurrentProfile(p);
 	}
 
 	/**
-	 * Markiert das aktuell ausgewählte Profil zur Löschung und entfernt es aus
-	 * der Auswahlliste.
-	 * 
-	 * Beachte: Das Profil wird erst in
-	 * {@link ProfileManagerController#saveAllChanges} tatsächlich gelöscht.
-	 * 
-	 * Handelt es sich bei dem aktuell ausgewählten Profil um ein
-	 * Standardprofil, so wird eine {@code IllegalStateException} geworfen.
+	 * Marks the currently selected profile for deletion and removes it from the
+	 * selection list.
+	 * <p>
+	 * Profile Note that the profile is only actually deleted in
+	 * {@link ProfileManagerController#saveAllChanges}.
+	 * <p>
+	 * If the currently selected profile is a {@link Profile#isDefault() default
+	 * profile}, an {@code IllegalStateException} is thrown.
 	 */
 	public void deleteCurrentTemporaryProfile() {
+		if (currentProfile.isDefault()) {
+			throw new IllegalStateException("Can’t delete a default profile!");
+		}
+		profiles.remove(currentProfile);
+		assert (!profiles.isEmpty());
+		changeTemporaryProfile(profiles.values().iterator().next().getName());
+		// TODO use the last selected profile instead of an arbitrary one
 	}
 
 	/**
-	 * Speichert die Werte des temporären Profils. Wird üblicherweise direkt vor
-	 * {@link ProfileManagerController#changeTemporaryProfile} aufgerufen.
+	 * Saves the values of the temporary profile. Usually called before
+	 * {@link ProfileManagerController#changeTemporaryProfile}.
 	 * 
 	 * @param profile
-	 *            Das temporäre Profil mit den aktuell eingegebenen Werten.
+	 *            The temporary profile with the currently entered values.
 	 */
-	public void saveTemporaryProfile(Profile profile) {
+	public void saveTemporaryProfile(final Profile profile) {
+		profiles.put(profile.getName(), profile);
 	}
 
 	/**
-	 * Führt alle vom Benutzer vorgenommenen Änderungen aus. Dazu gehören das
-	 * Hinzufügen, Ändern und Löschen von Profilen. Für geänderte Profil werden
-	 * alle Vorberechnung gelöscht.
+	 * Executes all requested changes – the adding, changing and deleting of
+	 * profiles. For changed profiles, all precalculations are deleted.
+	 * 
+	 * @see ProfileManager#saveProfile(Profile)
+	 * @see ProfileManager#deleteProfile(Profile)
 	 */
 	public void saveAllChanges() {
+		final ProfilesDiff diff = diff();
+		final ProfileManager manager = ProfileManager.getInstance();
+		for (final Profile deleted : diff.getDeletedProfiles()) {
+			manager.deleteProfile(deleted);
+		}
+		for (final Profile changed : diff.getChangedProfiles()) {
+			manager.saveProfile(changed);
+		}
 	}
 
 	/**
-	 * Gibt zurück, wie viel Zeit die Vorberechnung benötigt haben, die durch
-	 * die aktuell erfassten Änderungen gelöscht werden. Die Dauer wird in
-	 * Millisekunden zurückgegeben.
+	 * Determines how much time the precalculations that will be deleted in
+	 * {@link #saveAllChanges()} took, in milliseconds.
 	 * 
-	 * @return
+	 * @return The deletion time, in milliseconds.
 	 */
 	public int getDeletionTime() {
-		return 0;
+		final ProfilesDiff diff = diff();
+		final Set<Profile> changedProfiles = diff.getChangedProfiles();
+		final Set<Profile> deletedProfiles = diff.getDeletedProfiles();
+		int time = 0;
+		for (final ProfileMapCombination pmc :
+		// TODO somewhere.getPrecalculations()
+		new HashSet<ProfileMapCombination>()) {
+			final Profile p = pmc.getProfile();
+			if (changedProfiles.contains(p) || deletedProfiles.contains(p)) {
+				time += pmc.getCalculationTime();
+			}
+		}
+		return time;
+	}
+
+	private ProfilesDiff diff() {
+		return ProfilesDiff.calc(ProfileManager.getInstance().getProfiles(),
+				new HashSet<Profile>(profiles.values()));
+	}
+
+	private static class ProfilesDiff {
+		/**
+		 * {@link Profile Profiles} that need to be
+		 * {@link ProfileManager#deleteProfile(Profile) deleted}.
+		 */
+		private final Set<Profile> deletedProfiles;
+		/**
+		 * {@link Profile Profiles} that need to be
+		 * {@link ProfileManager#saveProfile(Profile) saved}, i. e. changed and
+		 * new profiles.
+		 */
+		private final Set<Profile> changedProfiles;
+
+		private ProfilesDiff(final Set<Profile> deletedProfiles,
+				final Set<Profile> changedProfiles) {
+			this.deletedProfiles = deletedProfiles;
+			this.changedProfiles = changedProfiles;
+		}
+
+		public Set<Profile> getDeletedProfiles() {
+			return deletedProfiles;
+		}
+
+		public Set<Profile> getChangedProfiles() {
+			return changedProfiles;
+		}
+
+		public static ProfilesDiff calc(final Set<Profile> from,
+				final Set<Profile> to) {
+			final Set<Profile> deletedProfiles = new HashSet<>();
+			final Set<Profile> changedProfiles = new HashSet<>();
+			for (final Profile p : from) {
+				final String pName = p.getName();
+				boolean deleted = true;
+				for (final Profile q : to) {
+					if (pName.equals(q.getName())) {
+						deleted = false;
+						break;
+					}
+				}
+				if (deleted) {
+					deletedProfiles.add(p);
+				}
+			}
+			for (final Profile q : to) {
+				final String qName = q.getName();
+				boolean changed = true;
+				for (final Profile p : from) {
+					if (qName.equals(p.getName())) {
+						changed = !q.equals(p);
+						break;
+					}
+				}
+				if (changed) {
+					changedProfiles.add(q);
+				}
+			}
+			return new ProfilesDiff(deletedProfiles, changedProfiles);
+		}
 	}
 }
