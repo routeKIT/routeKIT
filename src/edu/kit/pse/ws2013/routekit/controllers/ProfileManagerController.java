@@ -1,5 +1,6 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -25,9 +26,14 @@ public class ProfileManagerController {
 		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
 		}
-		assert (!profiles.isEmpty());
+		setAvailableProfiles();
 		setCurrentProfile(MainController.getInstance().getCurrentProfileMap()
 				.getProfile());
+	}
+
+	private void setAvailableProfiles() {
+		assert (!profiles.isEmpty());
+		pmv.setAvailableProfiles(new ArrayList<>(profiles.values()));
 	}
 
 	/**
@@ -71,7 +77,7 @@ public class ProfileManagerController {
 			throw new IllegalStateException("Can’t delete a default profile!");
 		}
 		profiles.remove(currentProfile);
-		assert (!profiles.isEmpty());
+		setAvailableProfiles();
 		changeTemporaryProfile(profiles.values().iterator().next().getName());
 		// TODO use the last selected profile instead of an arbitrary one
 	}
@@ -129,7 +135,7 @@ public class ProfileManagerController {
 
 	private ProfilesDiff diff() {
 		return ProfilesDiff.calc(ProfileManager.getInstance().getProfiles(),
-				new HashSet<Profile>(profiles.values()));
+				new HashSet<>(profiles.values()));
 	}
 
 	private static class ProfilesDiff {
