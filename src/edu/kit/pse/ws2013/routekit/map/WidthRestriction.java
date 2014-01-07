@@ -1,18 +1,44 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.kit.pse.ws2013.routekit.profiles.Profile;
+
 /**
- * Repräsentiert eine Beschränkung der Fahrzeugbreite.
+ * A restriction of the vehicle width.
  */
-public class WidthRestriction {
+public class WidthRestriction implements Restriction {
+	private static Map<Integer, WidthRestriction> instances = new HashMap<>();
+
 	/**
-	 * (statisch) Gibt eine Instanz dieser Klasse für den angegebenen Wert
-	 * zurück.
+	 * Returns an instance of the class for the specified width.
 	 * 
 	 * @param width
-	 *            Die maximale Fahrzeugbreite.
-	 * @return
+	 *            the maximum allowed width of a vehicle (in centimeters)
+	 * @return the desired instance
+	 * @throws IllegalArgumentException
+	 *             if {@code width} is negative
 	 */
-	public Restriction getInstance(int width) {
-		return null;
+	public static Restriction getInstance(int width) {
+		if (width < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		if (!instances.containsKey(width)) {
+			instances.put(width, new WidthRestriction(width));
+		}
+		return instances.get(width);
+	}
+
+	private final int width;
+
+	private WidthRestriction(int width) {
+		this.width = width;
+	}
+
+	@Override
+	public boolean allows(Profile profile) {
+		return profile.getWidth() <= width;
 	}
 }
