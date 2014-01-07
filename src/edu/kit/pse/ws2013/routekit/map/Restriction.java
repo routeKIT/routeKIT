@@ -3,20 +3,17 @@ package edu.kit.pse.ws2013.routekit.map;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
- * Abstrakte Klasse zur Repräsentation unterschiedlicher Beschränkungen für
- * Straßen oder Abbiegemöglichkeiten. Die einzelnen Unterklassen sind Multitons,
- * um nicht unnötig Speicherplatz für mehrere gleiche Objekte zu verbrauchen.
+ * A restriction of using roads or turns with certain vehicles.
  */
-public class Restriction {
+public interface Restriction {
 	/**
-	 * Bestimmt, ob es die Beschränkung erlaubt, unter dem angegebenen Profil
-	 * eine Straße oder Abbiegemöglichkeit zu nutzen.
+	 * Determines whether the use of a road or turn with this restriction is
+	 * allowed under the specified profile.
 	 * 
 	 * @param profile
-	 *            Das verwendete Profil.
-	 * @return
+	 *            the profile in use
+	 * @return {@code true} if this restriction allows the use of the road or
+	 *         turn, otherwise {@code false}
 	 */
-	public boolean allows(Profile profile) {
-		return false;
-	}
+	public boolean allows(Profile profile);
 }
