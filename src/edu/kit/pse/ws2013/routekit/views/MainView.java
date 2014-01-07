@@ -212,7 +212,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			textfield.setBackground(Color.RED);
 			return;
 		}
-		if (textfield.getText().equals(startField.getText())) {
+		if (textfield == startField) {
 			MainController.getInstance().setStartPoint(
 					new Coordinates(xcoordinate, ycoordinate));
 		} else {
