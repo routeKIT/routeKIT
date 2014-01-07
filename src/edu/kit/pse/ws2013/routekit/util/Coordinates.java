@@ -131,6 +131,7 @@ public class Coordinates {
 	 *             If the coordinates string can’t be parsed.
 	 */
 	public static Coordinates fromString(String s) {
+		// TODO verify values (90° and stuff) – Lucas
 		if (s == null) {
 			throw new IllegalArgumentException("Coordinates string is null!",
 					new NullPointerException());
