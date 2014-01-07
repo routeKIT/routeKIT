@@ -46,9 +46,9 @@ public class Profile implements Cloneable {
 	 */
 	private boolean isDefault;
 
-	public static Profile defaultCar = new Profile("PKW (Standard)",
+	public static final Profile defaultCar = new Profile("PKW (Standard)",
 			VehicleType.Car, 160, 160, 1400, 120, 80, true);
-	public static Profile defaultTruck = new Profile("LKW (Standard)",
+	public static final Profile defaultTruck = new Profile("LKW (Standard)",
 			VehicleType.Truck, 350, 240, 20000, 80, 80, true);
 
 	/**
