@@ -8,7 +8,6 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -44,8 +43,8 @@ public class MapManagerView extends JDialog {
 	/**
 	 * A constructor that creates a new MapManagerView.
 	 * <p>
-	 * This constructor does <i>not</i> call {@link #setVisible(boolean) setVisible(true)},
-	 * i.&nbsp;e. it doesn’t block.
+	 * This constructor does <i>not</i> call {@link #setVisible(boolean)
+	 * setVisible(true)}, i.&nbsp;e. it doesn’t block.
 	 */
 	public MapManagerView(Window parent, MapManagerController mmc) {
 		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
@@ -77,12 +76,6 @@ public class MapManagerView extends JDialog {
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
-
-		// ....................
-		Set<Profile> a = new HashSet<Profile>();
-		a.add(Profile.defaultCar);
-		a.add(Profile.defaultTruck);
-		// .....................
 
 		setContentPane(contentPane);
 	}
