@@ -200,39 +200,20 @@ public class MainView extends JFrame implements RouteModelListener {
 	}
 
 	private void callController(JTextField textfield) {
-		String[] strings = textfield.getText().split("\\s+");
-		if (strings.length != 2) {
-			textfield.setBackground(Color.RED);
-			return;
-		}
-		float xcoordinate = checkCoords(strings[0], 90f);
-		float ycoordinate = checkCoords(strings[1], 180f);
-		if (Float.compare(xcoordinate, maxcoordinate) == 0
-				|| Float.compare(ycoordinate, maxcoordinate) == 0) {
-			textfield.setBackground(Color.RED);
-			return;
-		}
-		if (textfield == startField) {
-			MainController.getInstance().setStartPoint(
-					new Coordinates(xcoordinate, ycoordinate));
-		} else {
-			MainController.getInstance().setDestinationPoint(
-					new Coordinates(xcoordinate, ycoordinate));
-		}
-
-	}
-
-	private float checkCoords(String str, float limit) {
-		float coordinate;
 		try {
-			coordinate = Float.parseFloat(str);
-		} catch (NumberFormatException error) {
-			return maxcoordinate;
+			Coordinates coordinates = Coordinates.fromString(textfield
+					.getText()); // can throw IllegalArgumentException
+
+			if (textfield == startField) {
+				MainController.getInstance().setStartPoint(coordinates);
+			} else {
+				MainController.getInstance().setDestinationPoint(coordinates);
+			}
+		} catch (IllegalArgumentException e) {
+			textfield.setBackground(Color.RED);
+			// TODO show e.getMessage() in "route instructions" area
+			return;
 		}
-		if (Float.compare(Math.abs(coordinate), limit) > 0) {
-			return maxcoordinate;
-		}
-		return coordinate;
 	}
 
 	private JPanel initRightPanel() {
