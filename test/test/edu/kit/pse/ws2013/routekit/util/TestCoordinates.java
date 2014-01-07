@@ -1,6 +1,7 @@
 package test.edu.kit.pse.ws2013.routekit.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -55,6 +56,51 @@ public class TestCoordinates {
 		Coordinates c1 = new Coordinates(lat, lon);
 		Coordinates c2 = Coordinates.fromString(c1.toString());
 		assertCoordinatesEquals(c1, c2);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_null() {
+		Coordinates.fromString(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_oneCoordinate() {
+		Coordinates.fromString("42");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_threeCoordinates() {
+		Coordinates.fromString("11 38 42");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_latNonNumeric() {
+		Coordinates.fromString("bogus 42");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_latNotOnEarth() {
+		Coordinates.fromString("91 42");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_latBarelyNotOnEarth() {
+		Coordinates.fromString("90.00000000000000000000000001 42");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_lonNonNumeric() {
+		Coordinates.fromString("42 bogus");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_lonNotOnEarth() {
+		Coordinates.fromString("42 -182");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromStringFail_lonBarelyNotOnEarth() {
+		Coordinates.fromString("42 -180.00000000000000000000000001");
 	}
 
 	public static void assertCoordinatesEquals(Coordinates expected,

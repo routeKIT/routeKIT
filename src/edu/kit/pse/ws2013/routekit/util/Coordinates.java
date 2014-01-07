@@ -131,7 +131,6 @@ public class Coordinates {
 	 *             If the coordinates string can’t be parsed.
 	 */
 	public static Coordinates fromString(String s) {
-		// TODO verify values (90° and stuff) – Lucas
 		if (s == null) {
 			throw new IllegalArgumentException("Coordinates string is null!",
 					new NullPointerException());
@@ -152,6 +151,16 @@ public class Coordinates {
 			lon = Float.parseFloat(coords[1]);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Can’t parse longitude!", e);
+		}
+		if (lat < -90 || lat > 90
+				|| (Math.abs(lat) == 90 && !coords[0].matches("-?90(.0+)?"))) {
+			throw new IllegalArgumentException(
+					"Latitude must be in range [-90°,90°]!");
+		}
+		if (lon < -180 || lon > 180
+				|| (Math.abs(lon) == 180 && !coords[1].matches("-?180(.0+)?"))) {
+			throw new IllegalArgumentException(
+					"Longitude must be in range [-180°,180°]!");
 		}
 		return new Coordinates(lat, lon);
 	}
