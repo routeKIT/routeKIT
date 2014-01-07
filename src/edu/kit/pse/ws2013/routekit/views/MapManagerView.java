@@ -243,11 +243,27 @@ public class MapManagerView extends JDialog {
 		return mapProfile;
 	}
 
-	private JPanel initAddDelete() {
+	private JPanel initAddDelete(final MapManagerController mmc) {
 		JPanel addDelete = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		addDelete.setBackground(Color.WHITE);
-		addDelete.add(new JButton("Hinzufügen"));
-		addDelete.add(new JButton("Entfernen"));
+		JButton addProfile = new JButton("Hinzufügen");
+		addProfile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		addDelete.add(addProfile);
+		JButton remove = new JButton("Entfernen");
+		remove.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// mmc.removeProfile(profile.getSelectedValue());
+			}
+		});
+		addDelete.add(remove);
 		addDelete.setPreferredSize(new Dimension(130, 200));
 		return addDelete;
 	}
