@@ -105,7 +105,7 @@ public class MapManagerView extends JDialog {
 		center.setBackground(Color.WHITE);
 
 		JPanel buttons = initButtonsPane(mmc);
-		JPanel mapProfile = initMapProfilePane();
+		JPanel mapProfile = initMapProfilePane(mmc);
 
 		center.add(buttons, BorderLayout.NORTH);
 		center.add(mapProfile, BorderLayout.CENTER);
@@ -170,26 +170,67 @@ public class MapManagerView extends JDialog {
 						"Eingabe Pfad und Name", JOptionPane.OK_CANCEL_OPTION);
 				if (result == JOptionPane.OK_OPTION) {
 					if (!path.getText().equals("")
-							&& !name.getText().equals(""))
-						;
-					mmc.importMap(name.getText(), fileChooser.getSelectedFile());
-
+							&& !name.getText().equals("")) {
+						mmc.importMap(name.getText(),
+								fileChooser.getSelectedFile());
+					}
 				}
 			}
 		});
 		buttons.add(importButton);
 		update = new JButton("Aktualisieren");
 		buttons.add(update);
+		update.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JButton pathUpdateButton = new JButton("Suche...");
+				final JTextField pathUpdate = new JTextField(20);
+				pathUpdateButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+						fileChooser.showDialog(MapManagerView.this,
+								"Aktualisieren");
+						if (fileChooser.getSelectedFile() == null) {
+							return;
+						}
+						pathUpdate.setText(fileChooser.getSelectedFile()
+								.getAbsolutePath());
+					}
+				});
+				JPanel myPanel = new JPanel();
+				myPanel.add(pathUpdateButton);
+				myPanel.add(new JLabel("Pfad:"));
+				myPanel.add(pathUpdate);
+				int result = JOptionPane.showConfirmDialog(null, myPanel,
+						"Eingabe Pfad", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					if (!pathUpdate.getText().equals("")) {
+						mmc.importMap((String) mapname.getSelectedItem(),
+								fileChooser.getSelectedFile());
+					}
+				}
+			}
+		});
 		delete = new JButton("Löschen");
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mmc.deleteCurrentMap();
+			}
+		});
 		buttons.add(delete);
 
 		return buttons;
 	}
 
-	private JPanel initMapProfilePane() {
+	private JPanel initMapProfilePane(MapManagerController mmc) {
 		JPanel mapProfile = new JPanel(new BorderLayout(10, 10));
 		mapProfile.setBackground(Color.WHITE);
-		JPanel addDelete = initAddDelete();
+		JPanel addDelete = initAddDelete(mmc);
 		listenModell = new DefaultListModel<String>();
 		profile = new JList<String>(listenModell);
 		profile.setBackground(Color.lightGray);
