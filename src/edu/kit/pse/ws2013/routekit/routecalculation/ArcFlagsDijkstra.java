@@ -1,5 +1,8 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
@@ -13,7 +16,11 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 	@Override
 	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Integer> turns = new ArrayList<Integer>();
+		
+		Route route = new Route(data, start, destination, turns);
+		
+		return route;
 	}
 }
