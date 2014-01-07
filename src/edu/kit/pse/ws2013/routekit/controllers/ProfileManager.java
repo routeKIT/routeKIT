@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -43,7 +45,9 @@ public class ProfileManager {
 	 * @return
 	 */
 	public Set<Profile> getProfiles() {
-		return null;
+		// TODO this is only a dummy implementation
+		return new HashSet<>(Arrays.asList(new Profile[] { Profile.defaultCar,
+				Profile.defaultTruck }));
 	}
 
 	/**

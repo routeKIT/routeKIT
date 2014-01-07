@@ -27,8 +27,8 @@ public class ProfileManagerController {
 			profiles.put(p.getName(), p);
 		}
 		setAvailableProfiles();
-		setCurrentProfile(MainController.getInstance().getCurrentProfileMap()
-				.getProfile());
+		// setCurrentProfile(MainController.getInstance().getCurrentProfileMap().getProfile());
+		setCurrentProfile(profiles.values().iterator().next()); // TODO
 		pmv.setVisible(true);
 	}
 
