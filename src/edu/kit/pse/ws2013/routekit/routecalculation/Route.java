@@ -19,9 +19,9 @@ public class Route {
 	 * @return
 	 */
 
-	ProfileMapCombination data;
-	PointOnEdge start;
-	PointOnEdge destination;
+	ProfileMapCombination data = null;
+	PointOnEdge start = null;
+	PointOnEdge destination = null;
 	List<Integer> turns = new ArrayList<Integer>();
 
 	public Iterator<Integer> getNodeIterator() {
