@@ -29,6 +29,7 @@ public class ProfileManagerController {
 		setAvailableProfiles();
 		setCurrentProfile(MainController.getInstance().getCurrentProfileMap()
 				.getProfile());
+		pmv.setVisible(true);
 	}
 
 	private void setAvailableProfiles() {

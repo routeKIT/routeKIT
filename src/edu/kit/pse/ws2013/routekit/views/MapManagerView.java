@@ -43,6 +43,9 @@ public class MapManagerView extends JDialog {
 
 	/**
 	 * A constructor that creates a new MapManagerView.
+	 * <p>
+	 * This constructor does <i>not</i> call {@link #setVisible(boolean) setVisible(true)},
+	 * i.&nbsp;e. it doesn’t block.
 	 */
 	public MapManagerView(Window parent, MapManagerController mmc) {
 		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
@@ -68,7 +71,6 @@ public class MapManagerView extends JDialog {
 		// .....................
 
 		setContentPane(contentPane);
-		setVisible(true);
 	}
 
 	private JPanel initNorthPane() {

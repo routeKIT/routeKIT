@@ -15,6 +15,7 @@ public class MapManagerController {
 
 	public MapManagerController(MainView view) {
 		mmv = new MapManagerView(view, this);
+		mmv.setVisible(true);
 	}
 
 	/**
