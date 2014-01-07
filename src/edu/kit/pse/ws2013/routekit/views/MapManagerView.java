@@ -54,6 +54,20 @@ public class MapManagerView extends JDialog {
 		setLocationRelativeTo(getParent());
 		setResizable(false);
 
+		fileChooser.addChoosableFileFilter(new FileFilter() {
+
+			@Override
+			public boolean accept(File f) {
+				return f.getName().endsWith(".osm");
+			}
+
+			@Override
+			public String getDescription() {
+				return "OSM(*.osm)";
+			}
+
+		});
+
 		JPanel contentPane = new JPanel(new BorderLayout());
 
 		JPanel north = initNorthPane();
@@ -133,19 +147,6 @@ public class MapManagerView extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 
-						fileChooser.addChoosableFileFilter(new FileFilter() {
-
-							@Override
-							public boolean accept(File f) {
-								return f.getName().endsWith(".osm");
-							}
-
-							@Override
-							public String getDescription() {
-								return "OSM(*.osm)";
-							}
-
-						});
 						fileChooser.showDialog(MapManagerView.this,
 								"Importieren");
 						if (fileChooser.getSelectedFile() == null) {
