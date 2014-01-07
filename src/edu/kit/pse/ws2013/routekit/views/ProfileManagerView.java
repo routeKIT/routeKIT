@@ -47,7 +47,8 @@ public class ProfileManagerView extends JDialog {
 	 * This constructor does <i>not</i> call {@link #setVisible(boolean)
 	 * setVisible(true)}, i.&nbsp;e. it doesn’t block.
 	 */
-	public ProfileManagerView(Window parent, ProfileManagerController pmc) {
+	public ProfileManagerView(Window parent, ProfileManagerController pmc,
+			Profile currentProfile, List<Profile> availableProfiles) {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
@@ -65,6 +66,8 @@ public class ProfileManagerView extends JDialog {
 		contentPane.add(center, BorderLayout.CENTER);
 
 		setContentPane(contentPane);
+
+		// TODO use currentProfile, availableProfiles
 	}
 
 	private JPanel initNorthPane(final ProfileManagerController pmc) {

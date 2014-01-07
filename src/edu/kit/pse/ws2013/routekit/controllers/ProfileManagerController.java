@@ -21,14 +21,18 @@ public class ProfileManagerController {
 	private Profile currentProfile;
 
 	public ProfileManagerController(final MainView view) {
-		pmv = new ProfileManagerView(view, this);
 		profiles = new HashMap<>();
 		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
 		}
-		setAvailableProfiles();
-		// setCurrentProfile(MainController.getInstance().getCurrentProfileMap().getProfile());
-		setCurrentProfile(profiles.values().iterator().next()); // TODO
+		assert (!profiles.isEmpty());
+		// Profile p =
+		// MainController.getInstance().getCurrentProfileMap().getProfile();
+		Profile p = profiles.values().iterator().next(); // TODO
+		assert (p != null);
+		currentProfile = p;
+		pmv = new ProfileManagerView(view, this, p, new ArrayList<Profile>(
+				profiles.values()));
 		pmv.setVisible(true);
 	}
 
