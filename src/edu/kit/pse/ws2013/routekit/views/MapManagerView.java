@@ -253,7 +253,7 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// mmc.removeProfile(profile.getSelectedValue());
+				mmc.removeProfile(profile.getSelectedValue());
 			}
 		});
 		addDelete.add(remove);

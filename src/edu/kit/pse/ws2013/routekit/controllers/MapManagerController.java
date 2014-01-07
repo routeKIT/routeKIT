@@ -37,7 +37,7 @@ public class MapManagerController {
 	 * @param profile
 	 *            Das Profil, das entfernt werden soll.
 	 */
-	public void removeProfile(Profile profile) {
+	public void removeProfile(String string) {
 	}
 
 	/**
