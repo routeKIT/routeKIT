@@ -118,7 +118,7 @@ public class Graph {
 	 * @return
 	 */
 	public GraphIndex getIndex(int zoom) {
-		return null;
+		return new GraphIndex(this, zoom);
 	}
 
 	/**
@@ -152,5 +152,9 @@ public class Graph {
 	 */
 	public int getTargetNode(int edge) {
 		return edges[edge];
+	}
+	
+	public int getEdgesCount() {
+		return edges.length;
 	}
 }
