@@ -3,36 +3,82 @@ package edu.kit.pse.ws2013.routekit.map;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
- * Kapselt die Eigenschaften einer Kante.
+ * This class encapsulates the properties of an edge.
  */
 public class EdgeProperties {
-	/**
-	 * Bestimmt die zulässige Höchstgeschwindigkeit (in Kilometern pro Stunde)
-	 * auf dieser Kante für das angegebene Profil.
-	 * 
-	 * @param profile
-	 *            Das Profil, für das die Höchstgeschwindigkeit auf dieser Kante
-	 *            bestimmt werden soll.
-	 * @return
-	 */
-	public int getMaxSpeed(Profile profile) {
-		return 0;
-	}
+	private final HighwayType type;
+	private final String name;
+	private final String roadRef;
+	private final int maxSpeed;
 
 	/**
-	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Eigenschaften.
+	 * Creates a new object with the given properties.
 	 * 
 	 * @param type
-	 *            Der Straßentyp.
+	 *            the highway type
 	 * @param name
-	 *            Der Wert für {@code name}.
+	 *            the name of the street, or {@code null} if none
 	 * @param roadRef
-	 *            Der Wert für {@code roadRef}.
+	 *            the reference number of the road, or {@code null} if none
 	 * @param maxSpeed
-	 *            Die zulässige Höchstgeschwindigkeit für diese Kante oder
-	 *            {@code 0}, falls nicht festgelegt.
+	 *            the allowed maximum speed (in kilometers per hour), or
+	 *            {@code 0} if unspecified
+	 * @throws IllegalArgumentException
+	 *             if {@code type} is {@code null} or {@code maxSpeed} is
+	 *             negative
 	 */
 	public EdgeProperties(HighwayType type, String name, String roadRef,
 			int maxSpeed) {
+		if (type == null || maxSpeed < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		this.type = type;
+		this.name = name;
+		this.roadRef = roadRef;
+		this.maxSpeed = maxSpeed;
+	}
+
+	/**
+	 * Returns the highway type of the edge.
+	 * 
+	 * @return the highway type
+	 */
+	public HighwayType getType() {
+		return type;
+	}
+
+	/**
+	 * Returns the street name of the edge.
+	 * 
+	 * @return the street name, or {@code null} if none
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Returns the road reference number of the edge.
+	 * 
+	 * @return the road reference number, or {@code null} if none
+	 */
+	public String getRoadRef() {
+		return roadRef;
+	}
+
+	/**
+	 * Calculates the allowed maximum speed of the edge for the specified profile.
+	 * 
+	 * @param profile
+	 *            the profile in use
+	 * @return the allowed maximum speed (in kilometers per hour)
+	 */
+	public int getMaxSpeed(Profile profile) {
+		int profileSpeed = (type == HighwayType.Motorway || type == HighwayType.Trunk) 
+				? profile.getSpeedHighway() : profile.getSpeedRoad();
+		if (maxSpeed == 0 || profileSpeed < maxSpeed) {
+			return profileSpeed;
+		}
+		return maxSpeed;
 	}
 }
