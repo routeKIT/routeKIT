@@ -29,7 +29,7 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
  * Displays the window of the profile management on the screen.
  */
 public class ProfileManagerView extends JDialog {
-	private JComboBox<Object> profilename;
+	private JComboBox<String> profilename;
 	private JRadioButton bus;
 	private JRadioButton motorcycle;
 	private JRadioButton truck;
@@ -40,6 +40,7 @@ public class ProfileManagerView extends JDialog {
 	private JSpinner widthspinner;
 	private JSpinner weightspinner;
 	private JButton deleteButton;
+	int listenerCheck = 0;
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -57,7 +58,7 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane(pmc);
+		JPanel north = initNorthPane(pmc, currentProfile);
 		JPanel center = initCenterPane();
 		JPanel south = initSouthPane(pmc);
 
@@ -67,24 +68,35 @@ public class ProfileManagerView extends JDialog {
 
 		setContentPane(contentPane);
 
-		// TODO use currentProfile, availableProfiles
+		setAvailableProfiles(availableProfiles);
+		setCurrentProfile(currentProfile);
 	}
 
-	private JPanel initNorthPane(final ProfileManagerController pmc) {
+	private JPanel initNorthPane(final ProfileManagerController pmc,
+			final Profile currentProfile) {
 		JPanel north = new JPanel(new FlowLayout());
 		north.setBackground(Color.WHITE);
 
 		JLabel profile = new JLabel("Proﬁl auswählen:");
-		profilename = new JComboBox<>();
+		profilename = new JComboBox<String>();
 
 		profilename.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Profile current = writeValues();
-				pmc.saveTemporaryProfile(current);
-				pmc.changeTemporaryProfile((String) profilename
-						.getSelectedItem());
+				if (listenerCheck == 0) {
+					if (profilename.getSelectedItem() == null) {
+						return;
+					} else {
+						if (!currentProfile.isDefault()) {
+							Profile current = writeValues();
+							pmc.saveTemporaryProfile(current);
+						}
+						pmc.changeTemporaryProfile((String) profilename
+								.getSelectedItem());
+
+					}
+				}
 			}
 		});
 
@@ -344,6 +356,7 @@ public class ProfileManagerView extends JDialog {
 	 *            The new Profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
+		listenerCheck++;
 		switch (profile.getVehicleType()) {
 		case Bus:
 			bus.setSelected(true);
@@ -379,7 +392,7 @@ public class ProfileManagerView extends JDialog {
 			widthspinner.setEnabled(false);
 			srSpeedspinner.setEnabled(false);
 		}
-
+		listenerCheck--;
 	}
 
 	/**
@@ -389,9 +402,11 @@ public class ProfileManagerView extends JDialog {
 	 *            The available profiles.
 	 */
 	public void setAvailableProfiles(List<Profile> profiles) {
+		listenerCheck++;
 		profilename.removeAllItems();
 		for (Profile p : profiles) {
 			profilename.addItem(p.getName());
 		}
+		listenerCheck--;
 	}
 }
