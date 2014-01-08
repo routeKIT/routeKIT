@@ -57,6 +57,8 @@ public class ProfileManagerController {
 		if (p == null) {
 			p = currentProfile.clone();
 			p.setName(name);
+			profiles.put(name, p);
+			setAvailableProfiles();
 		}
 		setCurrentProfile(p);
 	}
