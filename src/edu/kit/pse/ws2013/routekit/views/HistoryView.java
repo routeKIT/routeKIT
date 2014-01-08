@@ -70,6 +70,8 @@ public class HistoryView extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
+					if (historyvar.getSelectedValue() == null)
+						return;
 					Coordinates start = historyvar.getSelectedValue()
 							.getStart();
 					Coordinates destination = historyvar.getSelectedValue()
