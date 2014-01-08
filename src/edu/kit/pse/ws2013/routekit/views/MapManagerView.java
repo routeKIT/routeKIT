@@ -296,9 +296,13 @@ public class MapManagerView extends JDialog {
 		if (map.isDefault()) {
 			delete.setEnabled(false);
 			update.setEnabled(false);
+		} else {
+			delete.setEnabled(true);
+			update.setEnabled(true);
 		}
 	}
-	public void addProfile(Profile p){
-		
+
+	public void addProfile(Profile p) {
+
 	}
 }

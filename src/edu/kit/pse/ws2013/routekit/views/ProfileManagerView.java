@@ -391,6 +391,17 @@ public class ProfileManagerView extends JDialog {
 			weightspinner.setEnabled(false);
 			widthspinner.setEnabled(false);
 			srSpeedspinner.setEnabled(false);
+		} else {
+			deleteButton.setEnabled(true);
+			bus.setEnabled(true);
+			car.setEnabled(true);
+			truck.setEnabled(true);
+			motorcycle.setEnabled(true);
+			heightspinner.setEnabled(true);
+			hSpeedspinner.setEnabled(true);
+			weightspinner.setEnabled(true);
+			widthspinner.setEnabled(true);
+			srSpeedspinner.setEnabled(true);
 		}
 		listenerCheck--;
 	}
