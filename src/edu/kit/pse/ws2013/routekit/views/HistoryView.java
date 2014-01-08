@@ -54,10 +54,6 @@ public class HistoryView extends JDialog {
 	}
 
 	private JComponent initCenterPane(History history) {
-		// String[] strings = new String[100];
-		// Arrays.fill(strings, "hallo");
-		// strings[0] = "sdfsdfsd";
-		// final JList<String> historyvar = new JList<String>(strings);
 		historyvar = new JList<HistoryEntry>(history.getEntries().toArray(
 				new HistoryEntry[0]));
 		historyvar.setBackground(Color.lightGray);

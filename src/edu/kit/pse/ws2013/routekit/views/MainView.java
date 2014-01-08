@@ -346,6 +346,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	 *            The new profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
+		profileLabel.setText(profile.getName());
 	}
 
 	/**
@@ -355,6 +356,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	 *            The new map.
 	 */
 	public void setCurrentMap(StreetMap map) {
+		mapLabel.setText(map.getName());
 	}
 
 	@Override
