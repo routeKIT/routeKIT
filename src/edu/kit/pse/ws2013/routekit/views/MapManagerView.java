@@ -102,7 +102,9 @@ public class MapManagerView extends JDialog {
 
 		center.add(buttons, BorderLayout.NORTH);
 		center.add(mapProfile, BorderLayout.CENTER);
-		center.add(new JPanel(), BorderLayout.WEST);
+		JPanel space = new JPanel();
+		space.setBackground(Color.WHITE);
+		center.add(space, BorderLayout.WEST);
 
 		return center;
 	}
