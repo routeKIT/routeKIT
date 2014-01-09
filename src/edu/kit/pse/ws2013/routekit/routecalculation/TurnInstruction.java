@@ -1,27 +1,40 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
 /**
- * Kapselt eine einzelne Abbiegeanweisung, aus welchen eine
- * {@link RouteDescription} aufgebaut ist.
+ * A single turn instruction which is part of a {@link RouteDescription}.
  */
 public class TurnInstruction {
+	private int turn;
+	private String text;
+	
 	/**
-	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Attributen.
+	 * Creates a new {@code TurnInstruction} with the given attributes. 
 	 * 
 	 * @param turn
-	 *            Der Abbiegevorgang, den die Anweisung beschreibt.
+	 *            the turn this instruction describes
 	 * @param text
-	 *            Der Text der Abbiegeanweisung.
+	 *            the instruction text
 	 */
 	public TurnInstruction(int turn, String text) {
+		this.turn = turn;
+		this.text = text;
 	}
 
 	/**
-	 * Gibt den Text der Abbiegeanweisung zurück.
-	 * 
-	 * @return
+	 * Returns the turn which this instruction describes.
+	 * @return the described turn
 	 */
+	public int getTurn() {
+		return turn;
+	}
+
+	/**
+	 * Returns a string representation of this turn instruction.
+	 * 
+	 * @return the text of this instruction
+	 */
+	@Override
 	public String toString() {
-		return null;
+		return text;
 	}
 }
