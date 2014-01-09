@@ -99,6 +99,8 @@ public class ProfileManagerController {
 	public void saveTemporaryProfile(final Profile profile) {
 		Profile p = profiles.get(profile.getName());
 		if (p != null && p.isDefault()) {
+			if (p.equals(profile))
+				return;
 			throw new IllegalArgumentException(
 					"Can’t update a default profile!");
 		}
