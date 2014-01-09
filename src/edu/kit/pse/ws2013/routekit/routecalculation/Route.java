@@ -1,14 +1,14 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
- * Repräsentiert eine berechnete Route.
+ * A calculated route.
  */
 public class Route {
 	/**
@@ -19,27 +19,26 @@ public class Route {
 	 * @return
 	 */
 
-	ProfileMapCombination data = null;
-	PointOnEdge start = null;
-	PointOnEdge destination = null;
-	List<Integer> turns = new ArrayList<Integer>();
+	private ProfileMapCombination data;
+	private PointOnEdge start;
+	private PointOnEdge destination;
+	private List<Integer> turns;
 
 	public Iterator<Integer> getNodeIterator() {
 		return turns.iterator();
 	}
 
 	/**
-	 * Konstruktor: Erzeugt ein neues Routen-Objekt mit den angegebenen
-	 * Attributen.
+	 * Creates a new {@code Route} object with the given attributes.
 	 * 
 	 * @param data
-	 *            Die Karte, auf dem die Route berechnet wurde.
+	 *            the map data on which the route was calculated
 	 * @param start
-	 *            Der Startpunkt der Route.
+	 *            the start point of the route
 	 * @param destination
-	 *            Der Zielpunkt der Route.
+	 *            the destination point of the route
 	 * @param turns
-	 *            Die Liste der Abbiegevorgänge der Route.
+	 *            a list of turns the route consists of
 	 */
 	public Route(ProfileMapCombination data, PointOnEdge start,
 			PointOnEdge destination, List<Integer> turns) {
@@ -50,11 +49,38 @@ public class Route {
 	}
 
 	/**
-	 * Liefert eine Liste der Abbiegevorgänge, aus denen die Route besteht.
+	 * Returns the map data on which this route was calculated.
 	 * 
-	 * @return
+	 * @return the map data
+	 */
+	public ProfileMapCombination getData() {
+		return data;
+	}
+
+	/**
+	 * Returns the start point of this route.
+	 * 
+	 * @return the start point
+	 */
+	public PointOnEdge getStart() {
+		return start;
+	}
+
+	/**
+	 * Returns the destination point of this route.
+	 * 
+	 * @return the destination point
+	 */
+	public PointOnEdge getDestination() {
+		return destination;
+	}
+
+	/**
+	 * Returns the turns which this route consists of.
+	 * 
+	 * @return the list of turns
 	 */
 	public List<Integer> getTurns() {
-		return turns;
+		return Collections.unmodifiableList(turns);
 	}
 }
