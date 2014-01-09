@@ -1,21 +1,27 @@
 package edu.kit.pse.ws2013.routekit.util;
 
 /**
- * Kapselt ein Paar geographischer Koordinaten.
+ * A pair of geographic coordinates.
  */
 public class Coordinates {
-	float lat;
-	float lon;
+	private float lat;
+	private float lon;
 
 	/**
-	 * Konstruktor: Erstellt ein neues Objekt aus den gegebenen Koordinaten.
+	 * Creates a new object from the given coordinates.
 	 * 
 	 * @param lat
-	 *            Der Breitengrad.
+	 *            the latitude
 	 * @param lon
-	 *            Der Längengrad.
+	 *            the longitude
+	 * @throws IllegalArgumentException
+	 *             if the coordinates are out of range
 	 */
 	public Coordinates(float lat, float lon) {
+		if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+			throw new IllegalArgumentException();
+		}
+
 		this.lat = lat;
 		this.lon = lon;
 	}
@@ -47,22 +53,22 @@ public class Coordinates {
 	}
 
 	/**
-	 * Berechnet die SMT-X-Komponente zu diesen Koordinaten.
+	 * Calculates the SlippyMap tile x-component of these coordinates.
 	 * 
 	 * @param zoom
-	 *            Die Zoomstufe.
-	 * @return
+	 *            the zoom level
+	 * @return the SMT x-component
 	 */
 	public float getSmtX(int zoom) {
 		return (lon + 180) / 360 * (1 << zoom);
 	}
 
 	/**
-	 * Berechnet die SMT-Y-Komponente zu diesen Koordinaten.
+	 * Calculates the SlippyMap tile y-component of these coordinates.
 	 * 
 	 * @param zoom
-	 *            Die Zoomstufe.
-	 * @return
+	 *            the zoom leven
+	 * @return the SMT y-component
 	 */
 	public float getSmtY(int zoom) {
 		return (float) ((1 - Math.log(Math.tan(Math.toRadians(lat)) + 1
@@ -71,19 +77,20 @@ public class Coordinates {
 	}
 
 	/**
-	 * Rechnet SlippyMapTile-Koordinaten in Koordinaten um.
+	 * Creates a new {@code Coordinates} object from the given SlippyMap tile
+	 * coordinates.
 	 * 
 	 * @param x
-	 *            Die SMT-X-Komponente.
+	 *            the SMT x-component
 	 * @param y
-	 *            Die SMT-Y-Komponente.
+	 *            the SMT y-component
 	 * @param zoom
-	 *            Die Zoomstufe.
+	 *            the zoom level
 	 * 
 	 * @see <a
-	 *      href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames">Slippy
-	 *      Map Tile im OSM Wiki</a>
-	 * @return die Geokoordinaten dieses Punktes
+	 *      href="http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames">SlippyMap
+	 *      tiles in the OSM wiki</a>
+	 * @return the coordinates of the given point
 	 */
 	public static Coordinates fromSmt(float x, float y, int zoom) {
 		x %= 1 << zoom;
@@ -94,11 +101,21 @@ public class Coordinates {
 		return new Coordinates(lat, lon);
 	}
 
-	public float getLat() {
+	/**
+	 * Returns the latitude.
+	 * 
+	 * @return the latitude
+	 */
+	public float getLatitude() {
 		return lat;
 	}
 
-	public float getLon() {
+	/**
+	 * Returns the longitude.
+	 * 
+	 * @return the longitude
+	 */
+	public float getLongitude() {
 		return lon;
 	}
 

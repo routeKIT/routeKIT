@@ -32,8 +32,8 @@ public class TestGraph {
 
 	@Test
 	public void testGetCoordinates() {
-		assertEquals(0, g.getCoordinates(1).getLat(), EPSILON);
-		assertEquals(1, g.getCoordinates(1).getLon(), EPSILON);
+		assertEquals(0, g.getCoordinates(1).getLatitude(), EPSILON);
+		assertEquals(1, g.getCoordinates(1).getLongitude(), EPSILON);
 	}
 
 	@Test

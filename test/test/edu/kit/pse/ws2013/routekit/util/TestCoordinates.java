@@ -105,7 +105,7 @@ public class TestCoordinates {
 
 	public static void assertCoordinatesEquals(Coordinates expected,
 			Coordinates actual) {
-		assertEquals(expected.getLat(), actual.getLat(), EPSILON);
-		assertEquals(expected.getLon(), actual.getLon(), EPSILON);
+		assertEquals(expected.getLatitude(), actual.getLatitude(), EPSILON);
+		assertEquals(expected.getLongitude(), actual.getLongitude(), EPSILON);
 	}
 }

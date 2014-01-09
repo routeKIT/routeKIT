@@ -17,14 +17,14 @@ public class GraphIndex {
 
 	private static boolean isSmaller(boolean lat, float threshhold,
 			Coordinates from, Coordinates to) {
-		return (lat ? from.getLat() : from.getLon()) <= threshhold
-				|| (lat ? to.getLat() : to.getLon()) <= threshhold;
+		return (lat ? from.getLatitude() : from.getLongitude()) <= threshhold
+				|| (lat ? to.getLatitude() : to.getLongitude()) <= threshhold;
 	}
 
 	private static boolean isGreater(boolean lat, float threshhold,
 			Coordinates from, Coordinates to) {
-		return (lat ? from.getLat() : from.getLon()) >= threshhold
-				|| (lat ? to.getLat() : to.getLon()) >= threshhold;
+		return (lat ? from.getLatitude() : from.getLongitude()) >= threshhold
+				|| (lat ? to.getLatitude() : to.getLongitude()) >= threshhold;
 	}
 
 	public class Node {
@@ -47,17 +47,17 @@ public class GraphIndex {
 						int edge = integer;
 						Coordinates a = g.getCoordinates(g.getStartNode(edge));
 						Coordinates b = g.getCoordinates(g.getTargetNode(edge));
-						float f1 = a.getLat();
-						float f2 = b.getLat();
+						float f1 = a.getLatitude();
+						float f2 = b.getLatitude();
 						sum += f1 + f2;
 					}
 				} else {
 					for (Integer integer : contents) {
 						int edge = integer;
 						float f1 = g.getCoordinates(g.getStartNode(edge))
-								.getLon();
+								.getLongitude();
 						float f2 = g.getCoordinates(g.getTargetNode(edge))
-								.getLon();
+								.getLongitude();
 						sum += f1 + f2;
 					}
 				}
@@ -88,12 +88,12 @@ public class GraphIndex {
 					int edge = edg;
 					Coordinates from = g.getCoordinates(g.getStartNode(edge));
 					Coordinates to = g.getCoordinates(g.getTargetNode(edge));
-					float minA = Math.min(from.getLat(), to.getLat());
-					float minO = Math.min(from.getLon(), to.getLon());
-					float maxA = Math.max(from.getLat(), to.getLat());
-					float maxO = Math.max(from.getLon(), to.getLon());
-					if(minA<=rightBottom.getLat() && minO<=rightBottom.getLon()
-							&&maxA>=leftTop.getLat() && maxO>=leftTop.getLon()){
+					float minA = Math.min(from.getLatitude(), to.getLatitude());
+					float minO = Math.min(from.getLongitude(), to.getLongitude());
+					float maxA = Math.max(from.getLatitude(), to.getLatitude());
+					float maxO = Math.max(from.getLongitude(), to.getLongitude());
+					if(minA<=rightBottom.getLatitude() && minO<=rightBottom.getLongitude()
+							&&maxA>=leftTop.getLatitude() && maxO>=leftTop.getLongitude()){
 						target.add(edg);
 					}
 				}
