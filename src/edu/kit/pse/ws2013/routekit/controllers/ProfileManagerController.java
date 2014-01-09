@@ -83,7 +83,7 @@ public class ProfileManagerController {
 		if (currentProfile.isDefault()) {
 			throw new IllegalStateException("Can’t delete a default profile!");
 		}
-		profiles.remove(currentProfile);
+		profiles.remove(currentProfile.getName());
 		setAvailableProfiles();
 		changeTemporaryProfile(profiles.values().iterator().next().getName());
 		// TODO use the last selected profile instead of an arbitrary one
@@ -97,6 +97,11 @@ public class ProfileManagerController {
 	 *            The temporary profile with the currently entered values.
 	 */
 	public void saveTemporaryProfile(final Profile profile) {
+		Profile p = profiles.get(profile.getName());
+		if (p != null && p.isDefault()) {
+			throw new IllegalArgumentException(
+					"Can’t update a default profile!");
+		}
 		profiles.put(profile.getName(), profile);
 	}
 
