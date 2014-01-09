@@ -1,28 +1,43 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
- * Kapselt die zu einer {@link Route} gehörende Wegbeschreibung.
+ * The description of a {@link Route}.
  */
 public class RouteDescription {
+	private Route route;
+	private List<TurnInstruction> instructions;
+
 	/**
-	 * Liefert eine Liste der Abbiegeanweisungen.
+	 * Creates a new {@code RouteDescription} with the given attributes.
 	 * 
-	 * @return
+	 * @param route
+	 *            the described route
+	 * @param instructions
+	 *            a list of turn instructions
 	 */
-	public List<TurnInstruction> getInstructions() {
-		return null;
+	public RouteDescription(Route route, List<TurnInstruction> instructions) {
+		this.route = route;
+		this.instructions = instructions;
 	}
 
 	/**
-	 * Konstruktor: Erzeugt ein neues Objekt mit den angegebenen Parametern.
+	 * Returns the route this description is about.
 	 * 
-	 * @param route
-	 *            Die Route, die die Wegbeschreibung beschreibt.
-	 * @param instructions
-	 *            Eine Liste von Abbiegeanweisungen.
+	 * @return the described route
 	 */
-	public RouteDescription(Route route, List<TurnInstruction> instructions) {
+	public Route getRoute() {
+		return route;
+	}
+
+	/**
+	 * Returns the turn instructions this description consists of.
+	 * 
+	 * @return the list of instructions
+	 */
+	public List<TurnInstruction> getInstructions() {
+		return Collections.unmodifiableList(instructions);
 	}
 }
