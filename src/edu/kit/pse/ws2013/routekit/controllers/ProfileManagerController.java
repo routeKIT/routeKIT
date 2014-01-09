@@ -123,6 +123,7 @@ public class ProfileManagerController {
 		for (final Profile changed : diff.getChangedProfiles()) {
 			manager.saveProfile(changed);
 		}
+		MainController.getInstance().selectProfile(currentProfile);
 	}
 
 	/**
