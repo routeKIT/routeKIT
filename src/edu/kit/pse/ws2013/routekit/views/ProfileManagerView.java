@@ -60,7 +60,7 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel north = initNorthPane(pmc, currentProfile);
 		JPanel center = initCenterPane();
-		JPanel south = initSouthPane(pmc);
+		JPanel south = initSouthPane(pmc, currentProfile);
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -124,9 +124,12 @@ public class ProfileManagerView extends JDialog {
 						"Geben Sie einen Namen für das neue Profil ein:",
 						"Name", JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if ((result != null) && (result.length() > 0)) {
-					Profile current = writeValues();
-					pmc.saveTemporaryProfile(current);
+					if (!currentProfile.isDefault()) {
+						Profile current = writeValues();
+						pmc.saveTemporaryProfile(current);
+					}
 					pmc.changeTemporaryProfile(result);
+
 				}
 			}
 
@@ -158,7 +161,8 @@ public class ProfileManagerView extends JDialog {
 		return VehicleType.Motorcycle;
 	}
 
-	private JPanel initSouthPane(final ProfileManagerController pmc) {
+	private JPanel initSouthPane(final ProfileManagerController pmc,
+			final Profile currentProfile) {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
@@ -182,8 +186,10 @@ public class ProfileManagerView extends JDialog {
 								JOptionPane.QUESTION_MESSAGE, null,
 								new String[] { "Ja", "Nein" }, "Nein");
 				if (showOptionDialog == JOptionPane.YES_OPTION) {
-					Profile current = writeValues();
-					pmc.saveTemporaryProfile(current);
+					if (!currentProfile.isDefault()) {
+						Profile current = writeValues();
+						pmc.saveTemporaryProfile(current);
+					}
 					pmc.saveAllChanges();
 					ProfileManagerView.this.dispose();
 				}
