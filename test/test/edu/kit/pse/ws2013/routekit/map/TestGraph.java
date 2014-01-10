@@ -4,6 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -79,6 +81,26 @@ public class TestGraph {
 	@Test
 	public void testGetEdgeProperties() {
 		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSaveLoad() throws IOException {
+		File f = File.createTempFile("routeKit_testGraph_", ".graph");
+		g.save(f);
+		Graph loaded = Graph.load(f);
+		assertEquals(1, loaded.getTargetNode(0));
+		assertEquals(2, loaded.getTargetNode(1));
+		assertEquals(3, loaded.getTargetNode(2));
+		Integer[] data = loaded.getOutgoingEdges(0).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[] { 1, 2, 3 }, data);
+		data = loaded.getOutgoingEdges(1).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[] { 0, 2, 3 }, data);
+		data = loaded.getOutgoingEdges(2).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[] {}, data);
+		data = loaded.getOutgoingEdges(3).toArray(new Integer[0]);
+		assertArrayEquals(new Integer[] { 0, 1, 2 }, data);
+
+		// TODO test lats, lons, {Node,Edge}Properties
 	}
 
 }
