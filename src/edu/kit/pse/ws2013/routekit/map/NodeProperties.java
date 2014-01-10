@@ -65,6 +65,45 @@ public class NodeProperties {
 		return isTrafficLights;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (isMotorwayJunction ? 1231 : 1237);
+		result = prime * result + (isTrafficLights ? 1231 : 1237);
+		result = prime * result
+				+ ((junctionName == null) ? 0 : junctionName.hashCode());
+		result = prime * result
+				+ ((junctionRef == null) ? 0 : junctionRef.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NodeProperties other = (NodeProperties) obj;
+		if (isMotorwayJunction != other.isMotorwayJunction)
+			return false;
+		if (isTrafficLights != other.isTrafficLights)
+			return false;
+		if (junctionName == null) {
+			if (other.junctionName != null)
+				return false;
+		} else if (!junctionName.equals(other.junctionName))
+			return false;
+		if (junctionRef == null) {
+			if (other.junctionRef != null)
+				return false;
+		} else if (!junctionRef.equals(other.junctionRef))
+			return false;
+		return true;
+	}
+
 	public void save(DataOutput out) throws IOException {
 		out.writeUTF(junctionRef);
 		out.writeUTF(junctionName);
