@@ -27,28 +27,30 @@ public class Coordinates {
 	}
 
 	/**
-	 * Berechnet den zwischen einer Linie von diesem zum ersten und einer Linie
-	 * von diesem zum zweiten Punkt eingeschlossenen Winkel.
+	 * Calculates the angle enclosed between a line from this point to the given
+	 * first point and a line from this point to the given second point.
 	 * 
 	 * @param coords1
-	 *            Die Koordinaten des ersten Punkts.
+	 *            the coordinates of the first point
 	 * @param coords2
-	 *            Die Koordinaten des zweiten Punkts.
-	 * @return
+	 *            the coordinates of the second point
+	 * @return that angle
 	 */
 	public float angleBetween(Coordinates coords1, Coordinates coords2) {
+		// TODO: auto-generated method stub
 		return 0;
 	}
 
 	/**
-	 * Berechnet die Entfernung (Luftlinie, in Metern) zwischen den zwei
-	 * Koordinaten.
+	 * Calculates the distance (air-line, in meters) between these and the given
+	 * coordinates.
 	 * 
 	 * @param other
-	 *            Die anderen Koordinaten.
-	 * @return
+	 *            the other coordinates
+	 * @return the distance between the two coordinates
 	 */
 	public float distanceTo(Coordinates other) {
+		// TODO: auto-generated method stub
 		return 0;
 	}
 
@@ -67,7 +69,7 @@ public class Coordinates {
 	 * Calculates the SlippyMap tile y-component of these coordinates.
 	 * 
 	 * @param zoom
-	 *            the zoom leven
+	 *            the zoom level
 	 * @return the SMT y-component
 	 */
 	public float getSmtY(int zoom) {
