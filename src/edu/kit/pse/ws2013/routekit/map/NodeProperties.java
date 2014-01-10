@@ -1,5 +1,8 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 
 /**
  * This class encapsulates the properties of a node.
@@ -60,5 +63,19 @@ public class NodeProperties {
 	 */
 	public boolean isTrafficLights() {
 		return isTrafficLights;
+	}
+
+	public void save(DataOutput out) throws IOException {
+		out.writeUTF(junctionRef);
+		out.writeUTF(junctionName);
+		out.writeBoolean(isMotorwayJunction);
+		out.writeBoolean(isTrafficLights);
+	}
+
+	public static NodeProperties load(DataInput in) throws IOException {
+		return new NodeProperties(in.readUTF(), // junctionRef
+				in.readUTF(), // junctionName
+				in.readBoolean(), // isMotorwayJunction
+				in.readBoolean()); // isTrafficLights
 	}
 }

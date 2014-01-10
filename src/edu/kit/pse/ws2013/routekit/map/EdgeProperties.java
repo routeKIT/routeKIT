@@ -1,5 +1,9 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
@@ -67,18 +71,33 @@ public class EdgeProperties {
 	}
 
 	/**
-	 * Calculates the allowed maximum speed of the edge for the specified profile.
+	 * Calculates the allowed maximum speed of the edge for the specified
+	 * profile.
 	 * 
 	 * @param profile
 	 *            the profile in use
 	 * @return the allowed maximum speed (in kilometers per hour)
 	 */
 	public int getMaxSpeed(Profile profile) {
-		int profileSpeed = (type == HighwayType.Motorway || type == HighwayType.Trunk) 
-				? profile.getSpeedHighway() : profile.getSpeedRoad();
+		int profileSpeed = (type == HighwayType.Motorway || type == HighwayType.Trunk) ? profile
+				.getSpeedHighway() : profile.getSpeedRoad();
 		if (maxSpeed == 0 || profileSpeed < maxSpeed) {
 			return profileSpeed;
 		}
 		return maxSpeed;
+	}
+
+	public void save(DataOutput out) throws IOException {
+		out.writeInt(type.ordinal());
+		out.writeUTF(name);
+		out.writeUTF(roadRef);
+		out.writeInt(maxSpeed);
+	}
+
+	public static EdgeProperties load(DataInput in) throws IOException {
+		return new EdgeProperties(HighwayType.values()[in.readInt()], // HighwayType
+				in.readUTF(), // name
+				in.readUTF(), // roadRef
+				in.readInt());// maxSpeed
 	}
 }
