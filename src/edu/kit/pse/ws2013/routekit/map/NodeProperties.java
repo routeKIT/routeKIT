@@ -1,45 +1,64 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+
 /**
- * Kapselt die Eigenschaften eines Knotens.
+ * This class encapsulates the properties of a node.
  */
 public class NodeProperties {
+
+	private final String junctionRef;
+	private final String junctionName;
+	private final boolean isMotorwayJunction;
+	private final boolean isTrafficLights;
+
 	/**
-	 * Gibt die Nummer der Anschlussstelle zurück oder {@code null}, falls es
-	 * sich nicht um eine Anschlussstelle handelt.
+	 * Creates a new {@link NodeProperties} object with the given fields.
 	 * 
-	 * @return
+	 * @param junctionRef
+	 *            The junction reference, see {@link #getJunctionRef()}
+	 * @param junctionName
+	 *            The junction name, see {@link #getJunctionName()}
+	 * @param isMotorwayJunction
+	 *            If the junction is a motorway junction, see
+	 *            {@link #isMotorwayJunction()}
+	 * @param isTrafficLights
+	 *            If the junction has traffic lights, see
+	 *            {@link #isTrafficLights()}
+	 */
+	public NodeProperties(String junctionRef, String junctionName,
+			boolean isMotorwayJunction, boolean isTrafficLights) {
+		this.junctionRef = junctionRef;
+		this.junctionName = junctionName;
+		this.isMotorwayJunction = isMotorwayJunction;
+		this.isTrafficLights = isTrafficLights;
+	}
+
+	/**
+	 * Gets the reference number of the junction or {@code null} if it’s not a
+	 * junction.
 	 */
 	public String getJunctionRef() {
-		return null;
+		return junctionRef;
 	}
 
 	/**
-	 * Gibt den Namen der Anschlussstelle zurück oder {@code null}, falls es
-	 * sich nicht um eine Anschlussstelle handelt.
-	 * 
-	 * @return
+	 * Gets the name of the junction or {@code null} if it’s not a junction.
 	 */
 	public String getJunctionName() {
-		return null;
+		return junctionName;
 	}
 
 	/**
-	 * Bestimmt, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle
-	 * ist.
-	 * 
-	 * @return
+	 * Determines if the node is a motorway junction.
 	 */
 	public boolean isMotorwayJunction() {
-		return false;
+		return isMotorwayJunction;
 	}
 
 	/**
-	 * Bestimmt, ob sich an dem Knoten eine Ampel befindet.
-	 * 
-	 * @return
+	 * Determines if the node has traffic lights.
 	 */
 	public boolean isTrafficLights() {
-		return false;
+		return isTrafficLights;
 	}
 }
