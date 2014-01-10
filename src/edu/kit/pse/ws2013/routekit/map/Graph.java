@@ -46,6 +46,10 @@ public class Graph {
 	public Graph(int[] nodes, int[] edges,
 			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
 			float[] lat, float[] lon) {
+		if (edgeProps.length != edges.length) {
+			throw new IllegalArgumentException(
+					"Must have as many EdgeProperties as Edges!");
+		}
 		this.nodes = nodes;
 		this.edges = edges;
 		this.nodeProps = nodeProps;
