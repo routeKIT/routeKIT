@@ -33,7 +33,8 @@ public class EdgeProperties {
 	 */
 	public EdgeProperties(HighwayType type, String name, String roadRef,
 			int maxSpeed) {
-		if (type == null || maxSpeed < 0) {
+		if (type == null || (name != null && name.isEmpty())
+				|| (roadRef != null && roadRef.isEmpty()) || maxSpeed < 0) {
 			throw new IllegalArgumentException();
 		}
 
@@ -126,15 +127,17 @@ public class EdgeProperties {
 
 	public void save(DataOutput out) throws IOException {
 		out.writeInt(type.ordinal());
-		out.writeUTF(name);
-		out.writeUTF(roadRef);
+		out.writeUTF(name == null ? "" : name);
+		out.writeUTF(roadRef == null ? "" : roadRef);
 		out.writeInt(maxSpeed);
 	}
 
 	public static EdgeProperties load(DataInput in) throws IOException {
-		return new EdgeProperties(HighwayType.values()[in.readInt()], // HighwayType
-				in.readUTF(), // name
-				in.readUTF(), // roadRef
-				in.readInt());// maxSpeed
+		final HighwayType type = HighwayType.values()[in.readInt()];
+		final String name = in.readUTF();
+		final String roadRef = in.readUTF();
+		final int maxSpeed = in.readInt();
+		return new EdgeProperties(type, name.isEmpty() ? null : name,
+				roadRef.isEmpty() ? null : roadRef, maxSpeed);
 	}
 }

@@ -30,6 +30,11 @@ public class NodeProperties {
 	 */
 	public NodeProperties(String junctionRef, String junctionName,
 			boolean isMotorwayJunction, boolean isTrafficLights) {
+		if ((junctionRef != null && junctionRef.isEmpty())
+				|| (junctionName != null && junctionName.isEmpty())) {
+			throw new IllegalArgumentException();
+		}
+
 		this.junctionRef = junctionRef;
 		this.junctionName = junctionName;
 		this.isMotorwayJunction = isMotorwayJunction;
@@ -105,16 +110,19 @@ public class NodeProperties {
 	}
 
 	public void save(DataOutput out) throws IOException {
-		out.writeUTF(junctionRef);
-		out.writeUTF(junctionName);
+		out.writeUTF(junctionRef == null ? "" : junctionRef);
+		out.writeUTF(junctionName == null ? "" : junctionName);
 		out.writeBoolean(isMotorwayJunction);
 		out.writeBoolean(isTrafficLights);
 	}
 
 	public static NodeProperties load(DataInput in) throws IOException {
-		return new NodeProperties(in.readUTF(), // junctionRef
-				in.readUTF(), // junctionName
-				in.readBoolean(), // isMotorwayJunction
-				in.readBoolean()); // isTrafficLights
+		final String junctionRef = in.readUTF();
+		final String junctionName = in.readUTF();
+		final boolean isMotorwayJunction = in.readBoolean();
+		final boolean isTrafficLights = in.readBoolean();
+		return new NodeProperties(junctionRef.isEmpty() ? null : junctionRef,
+				junctionName.isEmpty() ? null : junctionName,
+				isMotorwayJunction, isTrafficLights);
 	}
 }
