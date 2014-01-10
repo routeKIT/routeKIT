@@ -109,6 +109,23 @@ public class NodeProperties {
 		return true;
 	}
 
+	/**
+	 * Save this {@link NodeProperties} object to the specified
+	 * {@link DataOutput}; it can be loaded again by {@link #load(DataInput)}.
+	 * 
+	 * <h4>Data format</h4>
+	 * 
+	 * Pretty straightforward: {@link #getJunctionRef() junctionRef},
+	 * {@link #getJunctionName() junctionName}, {@link #isMotorwayJunction()
+	 * isMotorwayJunction} and {@link #isTrafficLights() isTrafficLights} are
+	 * (in this order) written using {@link DataOutput#writeUTF(String)} and
+	 * {@link DataOutput#writeBoolean(boolean)}.
+	 * 
+	 * @param out
+	 *            The output.
+	 * @throws IOException
+	 *             If an I/O error occurs.
+	 */
 	public void save(DataOutput out) throws IOException {
 		out.writeUTF(junctionRef == null ? "" : junctionRef);
 		out.writeUTF(junctionName == null ? "" : junctionName);
@@ -116,6 +133,16 @@ public class NodeProperties {
 		out.writeBoolean(isTrafficLights);
 	}
 
+	/**
+	 * Loads a {@link NodeProperties} object from the specified
+	 * {@link DataInput}. For the data format, see {@link #save(DataOutput)}.
+	 * 
+	 * @param in
+	 *            The input.
+	 * @return {@link NodeProperties} parsed from {@code in}.
+	 * @throws IOException
+	 *             If an I/O error occurs.
+	 */
 	public static NodeProperties load(DataInput in) throws IOException {
 		final String junctionRef = in.readUTF();
 		final String junctionName = in.readUTF();

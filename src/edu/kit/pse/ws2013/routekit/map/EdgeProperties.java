@@ -125,6 +125,22 @@ public class EdgeProperties {
 		return true;
 	}
 
+	/**
+	 * Save this {@link EdgeProperties} object to the specified
+	 * {@link DataOutput}; it can be loaded again by {@link #load(DataInput)}.
+	 * 
+	 * <h4>Data format</h4>
+	 * 
+	 * Pretty straightforward: {@link #getType() type.ordinal()},
+	 * {@link #getName() name}, {@link #getRoadRef() roadRef} and
+	 * {@link #getMaxSpeed(Profile) maxSpeed} are (in this order) written using
+	 * {@link DataOutput#writeUTF(String)} and {@link DataOutput#writeInt(int)}.
+	 * 
+	 * @param out
+	 *            The output.
+	 * @throws IOException
+	 *             If an I/O error occurs.
+	 */
 	public void save(DataOutput out) throws IOException {
 		out.writeInt(type.ordinal());
 		out.writeUTF(name == null ? "" : name);
@@ -132,6 +148,16 @@ public class EdgeProperties {
 		out.writeInt(maxSpeed);
 	}
 
+	/**
+	 * Load an {@link EdgeProperties} object from the specified
+	 * {@link DataInput}. For the data format, see {@link #save(DataOutput)}.
+	 * 
+	 * @param in
+	 *            The input.
+	 * @return {@link EdgeProperties} parsed from {@code in}.
+	 * @throws IOException
+	 *             If an I/O error occurs.
+	 */
 	public static EdgeProperties load(DataInput in) throws IOException {
 		final HighwayType type = HighwayType.values()[in.readInt()];
 		final String name = in.readUTF();
