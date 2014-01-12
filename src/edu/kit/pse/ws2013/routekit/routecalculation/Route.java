@@ -3,29 +3,69 @@ package edu.kit.pse.ws2013.routekit.routecalculation;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
  * A calculated route.
  */
 public class Route {
-	/**
-	 * Gibt einen Iterator über die Knoten ({@code Node}) der Route
-	 * einschließlich Start- und Zielpunkt zurück. Der Iterator ermittelt diese
-	 * dynamisch aus der Liste der Abbiegevorgänge.
-	 * 
-	 * @return
-	 */
-
 	private ProfileMapCombination data;
 	private PointOnEdge start;
 	private PointOnEdge destination;
 	private List<Integer> turns;
 
-	public Iterator<Integer> getNodeIterator() {
-		return turns.iterator();
+	/**
+	 * Returns an iterator over the coordinates of the route points, including
+	 * the start and destination point. The iterator are determined dynamically
+	 * from the list of turns.
+	 * 
+	 * @return the iterator
+	 */
+	public Iterator<Coordinates> getNodeIterator() {
+		return new Iterator<Coordinates>() {
+			private int item = -2;
+
+			@Override
+			public boolean hasNext() {
+				return item < turns.size();
+			}
+
+			@Override
+			public Coordinates next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException();
+				}
+				
+				item++;
+				if (item == -1) {
+					getCoordinatesFromPoint(start);
+				}
+				if (item == turns.size()) {
+					getCoordinatesFromPoint(destination);
+				}
+				Graph graph = data.getStreetMap().getGraph();
+				return graph.getCoordinates(graph.getTargetNode(
+						data.getStreetMap().getEdgeBasedGraph()
+						.getStartEdge(turns.get(item))));
+			}
+			
+			private Coordinates getCoordinatesFromPoint(PointOnEdge point) {
+				Graph graph = data.getStreetMap().getGraph();
+				Coordinates start = graph.getCoordinates(graph.getStartNode(point.getEdge()));
+				Coordinates target = graph.getCoordinates(graph.getTargetNode(point.getEdge()));
+				return start.goIntoDirection(target, point.getPosition());
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
 	}
 
 	/**

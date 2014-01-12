@@ -55,6 +55,24 @@ public class Coordinates {
 	}
 
 	/**
+	 * Calculates the coordinates of the point with the specified position on a
+	 * line between these coordinates and the given coordinates. This method can
+	 * be used to determine the coordinates of a {@link PointOnEdge}.
+	 * 
+	 * @param to
+	 *            indicates the direction into which to go
+	 * @param position
+	 *            a value between 0 and 1 indicating how far to go into that
+	 *            direction
+	 * @return the wanted coordinates
+	 */
+	public Coordinates goIntoDirection(Coordinates to, float position) {
+		// TODO: auto-generated method stub
+		return to;
+
+	}
+
+	/**
 	 * Calculates the SlippyMap tile x-component of these coordinates.
 	 * 
 	 * @param zoom
