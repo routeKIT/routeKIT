@@ -20,55 +20,6 @@ public class Route {
 	private List<Integer> turns;
 
 	/**
-	 * Returns an iterator over the coordinates of the route points, including
-	 * the start and destination point. The iterator are determined dynamically
-	 * from the list of turns.
-	 * 
-	 * @return the iterator
-	 */
-	public Iterator<Coordinates> getNodeIterator() {
-		return new Iterator<Coordinates>() {
-			private int item = -2;
-
-			@Override
-			public boolean hasNext() {
-				return item < turns.size();
-			}
-
-			@Override
-			public Coordinates next() {
-				if (!hasNext()) {
-					throw new NoSuchElementException();
-				}
-				
-				item++;
-				if (item == -1) {
-					getCoordinatesFromPoint(start);
-				}
-				if (item == turns.size()) {
-					getCoordinatesFromPoint(destination);
-				}
-				Graph graph = data.getStreetMap().getGraph();
-				return graph.getCoordinates(graph.getTargetNode(
-						data.getStreetMap().getEdgeBasedGraph()
-						.getStartEdge(turns.get(item))));
-			}
-			
-			private Coordinates getCoordinatesFromPoint(PointOnEdge point) {
-				Graph graph = data.getStreetMap().getGraph();
-				Coordinates start = graph.getCoordinates(graph.getStartNode(point.getEdge()));
-				Coordinates target = graph.getCoordinates(graph.getTargetNode(point.getEdge()));
-				return start.goIntoDirection(target, point.getPosition());
-			}
-
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-		};
-	}
-
-	/**
 	 * Creates a new {@code Route} object with the given attributes.
 	 * 
 	 * @param data
@@ -122,5 +73,54 @@ public class Route {
 	 */
 	public List<Integer> getTurns() {
 		return Collections.unmodifiableList(turns);
+	}
+	
+	/**
+	 * Returns an iterator over the coordinates of the route points, including
+	 * the start and destination point. The iterator are determined dynamically
+	 * from the list of turns.
+	 * 
+	 * @return the said iterator
+	 */
+	public Iterator<Coordinates> getNodeIterator() {
+		return new Iterator<Coordinates>() {
+			private int item = -2;
+
+			@Override
+			public boolean hasNext() {
+				return item < turns.size();
+			}
+
+			@Override
+			public Coordinates next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException();
+				}
+				
+				item++;
+				if (item == -1) {
+					getCoordinatesFromPoint(start);
+				}
+				if (item == turns.size()) {
+					getCoordinatesFromPoint(destination);
+				}
+				Graph graph = data.getStreetMap().getGraph();
+				return graph.getCoordinates(graph.getTargetNode(
+						data.getStreetMap().getEdgeBasedGraph()
+						.getStartEdge(turns.get(item))));
+			}
+			
+			private Coordinates getCoordinatesFromPoint(PointOnEdge point) {
+				Graph graph = data.getStreetMap().getGraph();
+				Coordinates start = graph.getCoordinates(graph.getStartNode(point.getEdge()));
+				Coordinates target = graph.getCoordinates(graph.getTargetNode(point.getEdge()));
+				return start.goIntoDirection(target, point.getPosition());
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
 	}
 }
