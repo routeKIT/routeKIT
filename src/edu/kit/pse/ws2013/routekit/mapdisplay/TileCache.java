@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
@@ -60,6 +62,7 @@ public class TileCache implements TileSource {
 	private HashMap<String, SoftReference<BufferedImage>> map = new HashMap<>();
 
 	private Worker worker;
+	BufferedImage tile;
 
 	/**
 	 * Konstruktor: Erstellt einen neuen Cache für die angegebene
@@ -73,6 +76,10 @@ public class TileCache implements TileSource {
 		this.target = target;
 		worker = new Worker();
 		worker.start();
+		tile = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+		Graphics g = tile.createGraphics();
+		g.setColor(Color.gray);
+		g.fillRect(0, 0, 255, 255);
 	}
 
 	/**
@@ -98,7 +105,7 @@ public class TileCache implements TileSource {
 			return cacheVal.get();
 		}
 		waiting.addFirst(new TileJob(x, y, zoom));
-		return null;
+		return tile;
 	}
 
 	/**

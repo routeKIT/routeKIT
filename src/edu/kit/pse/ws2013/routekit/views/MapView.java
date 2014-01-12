@@ -1,18 +1,17 @@
 package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
+import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 
 /**
@@ -21,10 +20,11 @@ import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
  * As a map projection, the Mercator projection is used.
  */
 public class MapView extends JPanel implements MouseListener,
-		MouseMotionListener, MouseWheelListener {
+		MouseMotionListener, MouseWheelListener, TileFinishedListener {
 	float x;
 	float y;
-	int zoom = 16;
+	int zoom = 4;
+	TileSource source;
 
 	/**
 	 * A constructor that creates a new MapView. The specified TileSource is
@@ -38,6 +38,7 @@ public class MapView extends JPanel implements MouseListener,
 	 *            displayed.
 	 */
 	public MapView(TileSource source) {
+		this.source = source;
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
@@ -54,12 +55,14 @@ public class MapView extends JPanel implements MouseListener,
 	public void paint(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		g.translate((int) (x * 256), (int) (y * 256));
-		g.translate(getWidth() / 2, getHeight() / 2);
-		((Graphics2D) g).rotate(45);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font(Font.SANS_SERIF, 0, 20));
-		g.drawString("Ich bin ein Karte", -100, 0);
+		for (int i = (int) Math.floor(x); (i - x) * 256 < getWidth(); i++) {
+			for (int j = (int) Math.floor(y); (j - y) * 256 < getHeight(); j++) {
+				BufferedImage tile = source.renderTile(i & ((1 << zoom) - 1), j
+						& ((1 << zoom) - 1), zoom);
+				g.drawImage(tile, (int) ((i - x) * 256), (int) ((j - y) * 256),
+						null);
+			}
+		}
 	}
 
 	int dx = 0;
@@ -68,8 +71,8 @@ public class MapView extends JPanel implements MouseListener,
 	float orgY;
 
 	private void applyDrag(MouseEvent e) {
-		x = orgX + (e.getX() - dx) / 256f;
-		y = orgY + (e.getY() - dy) / 256f;
+		x = orgX - (e.getX() - dx) / 256f;
+		y = orgY - (e.getY() - dy) / 256f;
 		repaint();
 	}
 
@@ -128,6 +131,12 @@ public class MapView extends JPanel implements MouseListener,
 			// zoomOut;
 		}
 		repaint();
+	}
+
+	@Override
+	public void tileFinished(int x, int y, int zoom, BufferedImage tile) {
+		repaint();
+
 	}
 
 }

@@ -30,6 +30,8 @@ import javax.swing.JTextField;
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
+import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -244,7 +246,8 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
-		right.add(new MapView(null), BorderLayout.CENTER);
+		right.add(new MapView(new TileCache(new OSMRenderer())),
+				BorderLayout.CENTER);
 		return right;
 	}
 
