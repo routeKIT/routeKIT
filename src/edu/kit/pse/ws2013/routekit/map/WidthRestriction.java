@@ -1,5 +1,8 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +11,7 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 /**
  * A restriction of the vehicle width.
  */
-public class WidthRestriction implements Restriction {
+public class WidthRestriction extends Restriction {
 	private static Map<Integer, WidthRestriction> instances = new HashMap<>();
 
 	/**
@@ -40,5 +43,14 @@ public class WidthRestriction implements Restriction {
 	@Override
 	public boolean allows(Profile profile) {
 		return profile.getWidth() <= width;
+	}
+
+	@Override
+	protected void saveInternal(DataOutput out) throws IOException {
+		out.writeInt(width);
+	}
+
+	protected static Restriction loadInternal(DataInput in) throws IOException {
+		return getInstance(in.readInt());
 	}
 }

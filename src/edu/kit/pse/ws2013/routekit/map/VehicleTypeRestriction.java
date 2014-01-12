@@ -1,5 +1,8 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -9,9 +12,9 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 /**
  * A restriction of the vehicle type.
  */
-public class VehicleTypeRestriction implements Restriction {
-	private static Map<VehicleType, VehicleTypeRestriction> instances =
-			new EnumMap<>(VehicleType.class);
+public class VehicleTypeRestriction extends Restriction {
+	private static Map<VehicleType, VehicleTypeRestriction> instances = new EnumMap<>(
+			VehicleType.class);
 
 	/**
 	 * Returns an instance of this class with the specified {@link VehicleType}.
@@ -42,5 +45,14 @@ public class VehicleTypeRestriction implements Restriction {
 	@Override
 	public boolean allows(Profile profile) {
 		return type != profile.getVehicleType();
+	}
+
+	@Override
+	protected void saveInternal(DataOutput out) throws IOException {
+		out.writeByte(type.ordinal());
+	}
+
+	protected static Restriction loadInternal(DataInput in) throws IOException {
+		return getInstance(VehicleType.values()[in.readByte()]);
 	}
 }

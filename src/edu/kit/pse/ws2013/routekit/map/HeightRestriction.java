@@ -1,5 +1,8 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +11,7 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 /**
  * A restriction of the vehicle height.
  */
-public class HeightRestriction implements Restriction {
+public class HeightRestriction extends Restriction {
 	private static Map<Integer, HeightRestriction> instances = new HashMap<>();
 
 	/**
@@ -40,5 +43,14 @@ public class HeightRestriction implements Restriction {
 	@Override
 	public boolean allows(Profile profile) {
 		return profile.getHeight() <= height;
+	}
+
+	@Override
+	protected void saveInternal(DataOutput out) throws IOException {
+		out.writeInt(height);
+	}
+
+	protected static Restriction loadInternal(DataInput in) throws IOException {
+		return getInstance(in.readInt());
 	}
 }
