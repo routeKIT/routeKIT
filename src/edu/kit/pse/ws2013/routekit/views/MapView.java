@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 
@@ -39,6 +40,9 @@ public class MapView extends JPanel implements MouseListener,
 	 */
 	public MapView(TileSource source) {
 		this.source = source;
+		if (source instanceof TileCache) {
+			((TileCache) source).addTileFinishedListener(this);
+		}
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
