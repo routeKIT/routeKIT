@@ -40,6 +40,7 @@ public class MapManagerView extends JDialog {
 	private JButton importButton;
 	private JButton update;
 	private JButton delete;
+	int listenerCheck = 0;
 
 	/**
 	 * A constructor that creates a new MapManagerView.
@@ -47,7 +48,9 @@ public class MapManagerView extends JDialog {
 	 * This constructor does <i>not</i> call {@link #setVisible(boolean)
 	 * setVisible(true)}, i.&nbsp;e. it doesn’t block.
 	 */
-	public MapManagerView(Window parent, MapManagerController mmc) {
+	public MapManagerView(Window parent, MapManagerController mmc,
+			StreetMap currentMap, Set<StreetMap> maps,
+			Set<Profile> currentMapProfiles) {
 		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
@@ -70,22 +73,38 @@ public class MapManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane();
+		JPanel north = initNorthPane(mmc);
 		JPanel center = initCenterPane(mmc);
-		JPanel south = initSouthPane();
+		JPanel south = initSouthPane(mmc);
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
 
 		setContentPane(contentPane);
+
+		// setAvailableMaps(maps);
+		// setCurrentMap(currentMap, currentMapProfiles);
 	}
 
-	private JPanel initNorthPane() {
+	private JPanel initNorthPane(final MapManagerController mmc) {
 		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
 		JLabel map = new JLabel("Karte auswählen:");
 		mapname = new JComboBox<>();
+		mapname.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (listenerCheck == 0) {
+					if (mapname.getSelectedItem() == null) {
+						return;
+					} else {
+						mmc.changeMap((String) mapname.getSelectedItem());
+					}
+				}
+			}
+		});
 		mapname.setMinimumSize(new Dimension(250, 26));
 		mapname.setPreferredSize(new Dimension(250, 26));
 
@@ -110,11 +129,18 @@ public class MapManagerView extends JDialog {
 		return center;
 	}
 
-	private JPanel initSouthPane() {
+	private JPanel initSouthPane(final MapManagerController mmc) {
 		JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		south.setBackground(Color.WHITE);
 
-		south.add(new JButton("OK"));
+		JButton okButton = new JButton("OK");
+		okButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		south.add(okButton);
 		JButton cancel = new JButton("Abbrechen");
 		cancel.addActionListener(new ActionListener() {
 			@Override
@@ -256,7 +282,9 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mmc.removeProfile(profile.getSelectedValue());
+				if (profile.getSelectedValue() != null) {
+					mmc.removeProfile(profile.getSelectedValue());
+				}
 			}
 		});
 		addDelete.add(remove);
@@ -271,11 +299,12 @@ public class MapManagerView extends JDialog {
 	 *            The available maps.
 	 */
 	public void setAvailableMaps(Set<StreetMap> maps) {
+		listenerCheck++;
 		mapname.removeAllItems();
 		for (StreetMap m : maps) {
 			mapname.addItem(m.getName());
 		}
-
+		listenerCheck--;
 	}
 
 	/**
@@ -289,6 +318,7 @@ public class MapManagerView extends JDialog {
 	 *            The profiles for the new map.
 	 */
 	public void setCurrentMap(StreetMap map, Set<Profile> profiles) {
+		listenerCheck++;
 		listenModell.clear();
 		for (Profile p : profiles) {
 			listenModell.addElement(p.getName());
@@ -301,6 +331,7 @@ public class MapManagerView extends JDialog {
 			delete.setEnabled(true);
 			update.setEnabled(true);
 		}
+		listenerCheck--;
 	}
 
 	public void addProfile(Profile p) {

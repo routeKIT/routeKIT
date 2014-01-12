@@ -2,8 +2,6 @@ package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
 
-import edu.kit.pse.ws2013.routekit.map.StreetMap;
-import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
 
@@ -14,7 +12,8 @@ public class MapManagerController {
 	MapManagerView mmv;
 
 	public MapManagerController(MainView view) {
-		mmv = new MapManagerView(view, this);
+		// TODO Controller Parameter - Anastasia
+		mmv = new MapManagerView(view, this, null, null, null);
 		mmv.setVisible(true);
 	}
 
@@ -37,7 +36,7 @@ public class MapManagerController {
 	 * @param profile
 	 *            Das Profil, das entfernt werden soll.
 	 */
-	public void removeProfile(String string) {
+	public void removeProfile(String profileName) {
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class MapManagerController {
 	 * @param profile
 	 *            Das neue Profil.
 	 */
-	public void addProfile(Profile profile) {
+	public void addProfile(String profileName) {
 	}
 
 	/**
@@ -86,9 +85,9 @@ public class MapManagerController {
 	 * @param map
 	 *            Die neue Karte.
 	 */
-	public void changeMap(StreetMap map) {
+	public void changeMap(String mapName) {
 	}
-	
+
 	protected MapManagerView getView() {
 		return mmv;
 	}
