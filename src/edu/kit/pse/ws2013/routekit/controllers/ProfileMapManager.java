@@ -17,6 +17,7 @@ import java.util.Set;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
  * The {@link ProfileMapManager} manages {@link ProfileMapCombination
@@ -141,33 +142,39 @@ public class ProfileMapManager {
 				e.printStackTrace();
 			}
 			// 2. write a new index file
-			Map<StreetMap, Set<ProfileMapCombination>> combinationsByMap = new HashMap<>();
-			for (ProfileMapCombination combo : combinations) {
-				Set<ProfileMapCombination> combos = combinationsByMap.get(combo
-						.getStreetMap());
-				if (combos == null) {
-					combos = new HashSet<>();
-				}
-				combos.add(combo);
-				combinationsByMap.put(combo.getStreetMap(), combos);
-			}
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(
-					new File(root, "routeKIT.idx")))) {
-				for (Entry<StreetMap, Set<ProfileMapCombination>> map : combinationsByMap
-						.entrySet()) {
-					bw.write(map.getKey().getName());
-					bw.newLine();
-					for (ProfileMapCombination combo : map.getValue()) {
-						bw.write("\t");
-						if (combo == current) {
-							bw.write("* ");
-						}
-						bw.write(combo.getProfile().getName());
-						bw.newLine();
-					}
-				}
+			try {
+				rewriteIndex();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+
+	private void rewriteIndex() throws IOException {
+		Map<StreetMap, Set<ProfileMapCombination>> combinationsByMap = new HashMap<>();
+		for (ProfileMapCombination combo : combinations) {
+			Set<ProfileMapCombination> combos = combinationsByMap.get(combo
+					.getStreetMap());
+			if (combos == null) {
+				combos = new HashSet<>();
+			}
+			combos.add(combo);
+			combinationsByMap.put(combo.getStreetMap(), combos);
+		}
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+				root, "routeKIT.idx")))) {
+			for (Entry<StreetMap, Set<ProfileMapCombination>> map : combinationsByMap
+					.entrySet()) {
+				bw.write(map.getKey().getName());
+				bw.newLine();
+				for (ProfileMapCombination combo : map.getValue()) {
+					bw.write("\t");
+					if (combo == current) {
+						bw.write("* ");
+					}
+					bw.write(combo.getProfile().getName());
+					bw.newLine();
+				}
 			}
 		}
 	}
@@ -220,6 +227,55 @@ public class ProfileMapManager {
 		}
 		setCurrentCombination(combination);
 		return combination;
+	}
+
+	/**
+	 * Remove a precalculation from the internal list and optionally delete it
+	 * from disk.
+	 * 
+	 * @param precalculation
+	 *            The precalculation. (This must be an actual precalculation –
+	 *            i.&nbsp;e. an element of {@link #getCombinations()} – and not
+	 *            just any {@link ProfileMapCombination}.)
+	 * @param deleteFromDisk
+	 *            If {@code true}, delete from disk as well. You usually want to
+	 *            do this; the only case where you don’t need this is if you’re
+	 *            deleting a precalculation because you’re deleting it’s
+	 *            {@link StreetMap}, in which case the recursive delete of the
+	 *            Map’s folder will delete all precalculations as well.
+	 */
+	public void deletePrecalculation(ProfileMapCombination precalculation,
+			boolean deleteFromDisk) {
+		if (!precalculation.isCalculated()) {
+			throw new IllegalArgumentException(
+					"Can’t delete a not precalculated ProfileMapCombination!");
+		}
+		if (!combinations.contains(precalculation)) {
+			throw new IllegalArgumentException("Unknown precalculation!");
+		}
+		combinations.remove(precalculation);
+		try {
+			FileUtil.rmRf(new File(new File(root, precalculation.getStreetMap()
+					.getName()), precalculation.getProfile().getName()));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			rewriteIndex();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Remove a precalculation from the internal list and delete it from disk.
+	 * 
+	 * @param precalculation
+	 *            The precalculation.
+	 * @see #deletePrecalculation(ProfileMapCombination, boolean)
+	 */
+	public void deletePrecalculation(ProfileMapCombination precalculation) {
+		deletePrecalculation(precalculation, true);
 	}
 
 	public Set<ProfileMapCombination> getCombinations() {

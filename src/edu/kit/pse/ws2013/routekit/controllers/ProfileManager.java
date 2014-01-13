@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
@@ -36,8 +37,9 @@ public class ProfileManager {
 	}
 
 	/**
-	 * Removes the given profile from the internal list and deletes it from
-	 * disk.
+	 * Removes the given profile from the internal list,
+	 * {@link ProfileMapManager#deletePrecalculation(ProfileMapCombination)
+	 * deletes} all its precalculations and deletes it from disk.
 	 * 
 	 * @param profile
 	 *            The profile that shall be deleted.
@@ -48,6 +50,13 @@ public class ProfileManager {
 					"Can’t delete a default profile!");
 		}
 		profiles.get(profile).delete();
+		for (ProfileMapCombination precalculation : ProfileMapManager
+				.getInstance().getCombinations()) {
+			if (profile.equals(precalculation.getProfile())) {
+				ProfileMapManager.getInstance().deletePrecalculation(
+						precalculation);
+			}
+		}
 		profiles.remove(profile);
 	}
 

@@ -2,16 +2,13 @@ package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
  * Manages the street maps and saves/loads them to/from disk.
@@ -39,44 +36,25 @@ public class MapManager {
 	}
 
 	/**
-	 * Removes the given map from the internal list and deletes it from disk.
+	 * Removes the given map from the internal list,
+	 * {@link ProfileMapManager#deletePrecalculation(ProfileMapCombination)
+	 * deletes} all its precalculations and deletes it from disk.
 	 * 
 	 * @param map
 	 *            The map that shall be deleted.
 	 */
 	public void deleteMap(StreetMap map) {
 		try {
-			// recursive directory delete:
-			// http://stackoverflow.com/a/8685959/1420237
-			Files.walkFileTree(maps.get(map).toPath(),
-					new SimpleFileVisitor<Path>() {
-						@Override
-						public FileVisitResult visitFile(Path file,
-								BasicFileAttributes attrs) throws IOException {
-							Files.delete(file);
-							return FileVisitResult.CONTINUE;
-						}
-
-						@Override
-						public FileVisitResult visitFileFailed(Path file,
-								IOException exc) throws IOException {
-							Files.delete(file);
-							return FileVisitResult.CONTINUE;
-						}
-
-						@Override
-						public FileVisitResult postVisitDirectory(Path dir,
-								IOException exc) throws IOException {
-							if (exc == null) {
-								Files.delete(dir);
-								return FileVisitResult.CONTINUE;
-							} else {
-								throw exc;
-							}
-						}
-					});
+			FileUtil.rmRf(maps.get(map));
 		} catch (IOException e) {
 
+		}
+		for (ProfileMapCombination precalculation : ProfileMapManager
+				.getInstance().getCombinations()) {
+			if (map.equals(precalculation.getStreetMap())) {
+				ProfileMapManager.getInstance().deletePrecalculation(
+						precalculation, false);
+			}
 		}
 		maps.remove(map);
 	}
