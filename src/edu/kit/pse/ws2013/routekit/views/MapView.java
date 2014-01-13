@@ -19,6 +19,8 @@ import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
+import edu.kit.pse.ws2013.routekit.models.RouteModel;
+import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -27,9 +29,10 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * As a map projection, the Mercator projection is used.
  */
 public class MapView extends JPanel implements MouseListener,
-		MouseMotionListener, MouseWheelListener, TileFinishedListener {
+		MouseMotionListener, MouseWheelListener, TileFinishedListener,
+		RouteModelListener {
 	double x = 34297.855;
-	double y = -108570.16;
+	double y = 22501.84;
 	int zoom = 16;
 
 	class ContextMenu extends JPopupMenu {
@@ -61,6 +64,7 @@ public class MapView extends JPanel implements MouseListener,
 	}
 
 	TileSource source;
+	private RouteModel rm;
 
 	/**
 	 * A constructor that creates a new MapView. The specified TileSource is
@@ -72,8 +76,12 @@ public class MapView extends JPanel implements MouseListener,
 	 * @param source
 	 *            An object that provides the map tiles, which are then
 	 *            displayed.
+	 * @param rm
+	 *            RouteModel to display
 	 */
-	public MapView(TileSource source) {
+	public MapView(TileSource source, RouteModel rm) {
+		this.rm = rm;
+		rm.addRouteListener(this);
 		this.source = source;
 		if (source instanceof TileCache) {
 			((TileCache) source).addTileFinishedListener(this);
@@ -101,6 +109,25 @@ public class MapView extends JPanel implements MouseListener,
 				g.drawImage(tile, (int) ((i - x) * 256), (int) ((j - y) * 256),
 						null);
 			}
+		}
+		Coordinates c = rm.getStart();
+		if (c != null) {
+			g.setColor(Color.RED);
+			drawPoint(g, c);
+		}
+		c = rm.getDestination();
+		if (c != null) {
+			g.setColor(Color.GREEN);
+			drawPoint(g, c);
+		}
+	}
+
+	private void drawPoint(Graphics g, Coordinates c) {
+		int it = 1 << zoom;
+		int smtX = (int) ((c.getSmtX(zoom) - x) * 256f);
+		int smtY = (int) ((c.getSmtY(zoom) - y) * 256f);
+		for (double i = Math.floor(x / it); (i * it - x) * 256 < getWidth(); i++) {
+			g.fillRect((int) (smtX + (i * it * 256) - 10), smtY - 10, 20, 20);
 		}
 	}
 
@@ -199,6 +226,11 @@ public class MapView extends JPanel implements MouseListener,
 	public void tileFinished(int x, int y, int zoom, BufferedImage tile) {
 		repaint();
 
+	}
+
+	@Override
+	public void routeModelChanged() {
+		repaint();
 	}
 
 }

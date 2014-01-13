@@ -66,7 +66,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		contentPane.add(left, JSplitPane.LEFT);
 
-		JPanel right = initRightPanel();
+		JPanel right = initRightPanel(routeModel);
 		contentPane.add(right, JSplitPane.RIGHT);
 
 		setContentPane(contentPane);
@@ -225,7 +225,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		}
 	}
 
-	private JPanel initRightPanel() {
+	private JPanel initRightPanel(RouteModel rm) {
 		JPanel right = new JPanel();
 		JPanel buttons = new JPanel();
 		JButton mapButton = new JButton("Karte");
@@ -253,7 +253,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
-		right.add(new MapView(new TileCache(new OSMRenderer())),
+		right.add(new MapView(new TileCache(new OSMRenderer()), rm),
 				BorderLayout.CENTER);
 		return right;
 	}
