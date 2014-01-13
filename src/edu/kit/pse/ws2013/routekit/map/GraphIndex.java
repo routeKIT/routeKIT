@@ -66,8 +66,7 @@ public class GraphIndex {
 				for (Integer integer : contents) {
 					int edge = integer;
 					Coordinates f1 = g.getCoordinates(g.getStartNode(edge));
-					Coordinates f2 = g
-							.getCoordinates(g.getTargetNode(edge));
+					Coordinates f2 = g.getCoordinates(g.getTargetNode(edge));
 					if (isSmaller(splitLat, sum, f1, f2)) {
 						low.add(edge);
 					}
@@ -89,15 +88,19 @@ public class GraphIndex {
 					Coordinates from = g.getCoordinates(g.getStartNode(edge));
 					Coordinates to = g.getCoordinates(g.getTargetNode(edge));
 					float minA = Math.min(from.getLatitude(), to.getLatitude());
-					float minO = Math.min(from.getLongitude(), to.getLongitude());
+					float minO = Math.min(from.getLongitude(),
+							to.getLongitude());
 					float maxA = Math.max(from.getLatitude(), to.getLatitude());
-					float maxO = Math.max(from.getLongitude(), to.getLongitude());
-					if(minA<=rightBottom.getLatitude() && minO<=rightBottom.getLongitude()
-							&&maxA>=leftTop.getLatitude() && maxO>=leftTop.getLongitude()){
+					float maxO = Math.max(from.getLongitude(),
+							to.getLongitude());
+					if (minA <= rightBottom.getLatitude()
+							&& minO <= rightBottom.getLongitude()
+							&& maxA >= leftTop.getLatitude()
+							&& maxO >= leftTop.getLongitude()) {
 						target.add(edg);
 					}
 				}
-				//target.addAll(contents);
+				// target.addAll(contents);
 			} else {
 				if (isSmaller(splitLat, threshhold, leftTop, rightBottom)) {
 					left.addAll(g, leftTop, rightBottom, target);
@@ -162,7 +165,10 @@ public class GraphIndex {
 	 * @return
 	 */
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
-		return null;
+		// TODO Dummy
+		PointOnEdge point = new PointOnEdge(0, 0.5f);
+
+		return point;
 	}
 
 	/**
