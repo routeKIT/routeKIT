@@ -159,47 +159,78 @@ public class Coordinates {
 	}
 
 	/**
-	 * Parse a coordinates string as returned by {@link #toString()} back into
+	 * Parses a coordinates string as returned by {@link #toString()} back into
 	 * {@link Coordinates}.
 	 * 
 	 * @param s
-	 *            The coordinates string.
+	 *            the coordinates string
 	 * @return The {@link Coordinates} parsed from the string.
 	 * @throws IllegalArgumentException
-	 *             If the coordinates string can’t be parsed.
+	 *             if the coordinates string cannot be parsed
 	 */
 	public static Coordinates fromString(String s) {
 		if (s == null) {
 			throw new IllegalArgumentException("Coordinates string is null!",
 					new NullPointerException());
 		}
+
 		String[] coords = s.split(" ");
 		if (coords.length != 2) {
 			throw new IllegalArgumentException(
 					"Coordinates string must contain exactly two space-separated components!");
 		}
+
+		float lat = parseLatitude(coords[0]);
+		float lon = parseLongitude(coords[1]);
+
+		return new Coordinates(lat, lon);
+	}
+
+	/**
+	 * Parses a latitude specification from a string.
+	 * 
+	 * @param s
+	 *            the string to be parsed
+	 * @return the latitude parsed from the string
+	 * @throws IllegalArgumentException
+	 *             if the string cannot be parsed
+	 */
+	public static float parseLatitude(String s) {
 		float lat;
-		float lon;
 		try {
-			lat = Float.parseFloat(coords[0]);
+			lat = Float.parseFloat(s);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Can’t parse latitude!", e);
 		}
-		try {
-			lon = Float.parseFloat(coords[1]);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("Can’t parse longitude!", e);
-		}
 		if (lat < -85 || lat > 85
-				|| (Math.abs(lat) == 85 && !coords[0].matches("-?85(.0+)?"))) {
+				|| (Math.abs(lat) == 85 && s.matches("-?85(.0+)?"))) {
 			throw new IllegalArgumentException(
 					"Latitude must be in range [-85°,85°]!");
 		}
+		return lat;
+	}
+
+	/**
+	 * Parses a longitude specification from a string.
+	 * 
+	 * @param s
+	 *            the string to be parsed
+	 * @return the longitude parsed from the string
+	 * @throws IllegalArgumentException
+	 *             if the string cannot be parsed
+	 */
+	public static float parseLongitude(String s) {
+		float lon;
+		try {
+			lon = Float.parseFloat(s);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Can’t parse longitude!", e);
+		}
 		if (lon < -180 || lon > 180
-				|| (Math.abs(lon) == 180 && !coords[1].matches("-?180(.0+)?"))) {
+				|| (Math.abs(lon) == 180 && s.matches("-?180(.0+)?"))) {
 			throw new IllegalArgumentException(
 					"Longitude must be in range [-180°,180°]!");
 		}
-		return new Coordinates(lat, lon);
+		return lon;
 	}
 }
