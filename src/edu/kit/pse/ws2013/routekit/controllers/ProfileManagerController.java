@@ -2,7 +2,6 @@ package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,10 +23,7 @@ public class ProfileManagerController {
 
 	public ProfileManagerController(final MainView view) {
 		profiles = new HashMap<>();
-		for (final Profile p : // ProfileManager.getInstance().getProfiles()
-								// TODO re-add
-		Arrays.asList(Profile.defaultCar, Profile.defaultTruck) // TODO remove
-		) {
+		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
 		}
 		assert (!profiles.isEmpty());

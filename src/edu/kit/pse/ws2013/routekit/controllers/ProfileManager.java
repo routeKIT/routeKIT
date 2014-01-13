@@ -31,6 +31,8 @@ public class ProfileManager {
 		})) {
 			profiles.put(Profile.load(f), f);
 		}
+		profiles.put(Profile.defaultCar, null);
+		profiles.put(Profile.defaultTruck, null);
 	}
 
 	/**
@@ -41,6 +43,10 @@ public class ProfileManager {
 	 *            The profile that shall be deleted.
 	 */
 	public void deleteProfile(Profile profile) {
+		if (profile.isDefault()) {
+			throw new IllegalArgumentException(
+					"Can’t delete a default profile!");
+		}
 		profiles.get(profile).delete();
 		profiles.remove(profile);
 	}
@@ -53,6 +59,9 @@ public class ProfileManager {
 	 * @throws IOException
 	 */
 	public void saveProfile(Profile profile) throws IOException {
+		if (profile.isDefault()) {
+			throw new IllegalArgumentException("Can’t save a default profile!");
+		}
 		File f = profiles.get(profile);
 		if (f == null) {
 			f = new File(root, profile.getName() + ".profile");
