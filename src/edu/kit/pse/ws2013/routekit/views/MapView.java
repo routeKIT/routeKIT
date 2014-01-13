@@ -2,6 +2,8 @@ package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -9,11 +11,15 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
+import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
+import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
  * Displays a map section on the screen.
@@ -25,6 +31,35 @@ public class MapView extends JPanel implements MouseListener,
 	double x = 34297.855;
 	double y = -108570.16;
 	int zoom = 16;
+
+	class ContextMenu extends JPopupMenu {
+		JMenuItem start;
+		JMenuItem target;
+
+		public ContextMenu(final Coordinates coordinates) {
+			start = new JMenuItem("Start hier");
+			add(start);
+			start.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					MainController.getInstance().setStartPoint(coordinates);
+				}
+			});
+			target = new JMenuItem("Ziel hier");
+			target.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					MainController.getInstance().setDestinationPoint(
+							coordinates);
+
+				}
+			});
+			add(target);
+		}
+	}
+
 	TileSource source;
 
 	/**
@@ -91,11 +126,25 @@ public class MapView extends JPanel implements MouseListener,
 		dy = e.getY();
 		orgX = x;
 		orgY = y;
+		if (e.isPopupTrigger()) {
+			doPop(e);
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		applyDrag(e);
+		if (e.isPopupTrigger()) {
+			doPop(e);
+		}
+	}
+
+	private void doPop(MouseEvent e) {
+		Coordinates coordinates = Coordinates.fromSmt(
+				(float) (x + e.getX() / 256f), (float) (y + e.getY() / 256f),
+				zoom);
+		ContextMenu menu = new ContextMenu(coordinates);
+		menu.show(e.getComponent(), e.getX(), e.getY());
 	}
 
 	@Override

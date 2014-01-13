@@ -47,12 +47,15 @@ public class MainView extends JFrame implements RouteModelListener {
 	private JLabel mapLabel;
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
+	private RouteModel routeModel;
 
 	/**
 	 * A constructor that creates a new MainView.
 	 */
 	public MainView(RouteModel routeModel) {
 		super("routeKIT");
+		this.routeModel = routeModel;
+		routeModel.addRouteListener(this);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(1000, 700);
 
@@ -369,7 +372,17 @@ public class MainView extends JFrame implements RouteModelListener {
 
 	@Override
 	public void routeModelChanged() {
-		// TODO Auto-generated method stub
+		Coordinates start = routeModel.getStart();
+		Coordinates destination = routeModel.getDestination();
+		if (start != null) {
+			startField
+					.setText(start.getLatitude() + " " + start.getLongitude());
+		}
+		if (destination != null) {
+			targetField.setText(destination.getLatitude() + " "
+					+ destination.getLongitude());
+		}
+		;
 
 	}
 }
