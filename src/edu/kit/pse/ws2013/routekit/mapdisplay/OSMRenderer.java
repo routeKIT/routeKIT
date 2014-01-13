@@ -2,6 +2,7 @@ package edu.kit.pse.ws2013.routekit.mapdisplay;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -27,8 +28,11 @@ public class OSMRenderer implements TileSource {
 			return null;
 		}
 		try {
-			return ImageIO.read(new URL("http://c.tile.openstreetmap.org/"
-					+ zoom + "/" + x + "/" + y + ".png"));
+			URL url = new URL("http://c.tile.openstreetmap.org/" + zoom + "/"
+					+ x + "/" + y + ".png");
+			HttpURLConnection huc = ((HttpURLConnection) url.openConnection());
+			huc.setRequestProperty("User-Agent", "routeKit/1.0 (study project)");
+			return ImageIO.read(huc.getInputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
