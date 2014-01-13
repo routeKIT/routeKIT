@@ -37,7 +37,6 @@ public class MainController {
 	 */
 	private MainController() {
 		instance = this;
-		ProfileManager.init();
 		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
 	}
