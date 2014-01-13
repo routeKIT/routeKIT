@@ -128,7 +128,7 @@ public class MapView extends JPanel implements MouseListener,
 		if (klick == 0) {
 			return;
 		}
-		while (klick > 0 && zoom < 18) {
+		while (klick > 0 && zoom < 19) {
 			klick--;
 			yZ *= 2;
 			xZ *= 2;
