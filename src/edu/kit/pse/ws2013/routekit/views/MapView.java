@@ -190,6 +190,8 @@ public class MapView extends JPanel implements MouseListener,
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		applyDrag(e);
+		int limit = 1 << zoom;
+		x = (x % limit + limit) % limit;
 	}
 
 	@Override
