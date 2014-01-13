@@ -228,6 +228,12 @@ public class ProfileMapManager {
 
 	public static ProfileMapCombination init(File rootDirectory)
 			throws IOException {
+		if (!rootDirectory.exists()) {
+			initFirstStart(rootDirectory);
+		} else if (!rootDirectory.isDirectory()) {
+			throw new IllegalArgumentException(rootDirectory.toString()
+					+ " is not a directory!");
+		}
 		if (instance != null) {
 			throw new IllegalStateException("Already initialized!");
 		}
@@ -235,6 +241,16 @@ public class ProfileMapManager {
 		MapManager.init(rootDirectory);
 		instance = new ProfileMapManager(rootDirectory);
 		return instance.getCurrentCombination();
+	}
+
+	/**
+	 * create the root directory and add an empty index file
+	 * 
+	 * @throws IOException
+	 */
+	private static void initFirstStart(File rootDirectory) throws IOException {
+		rootDirectory.mkdir();
+		new File(rootDirectory, "routeKIT.idx").createNewFile();
 	}
 
 	public static ProfileMapManager getInstance() {

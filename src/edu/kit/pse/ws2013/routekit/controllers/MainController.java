@@ -1,6 +1,7 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
+import java.io.IOException;
 
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
@@ -36,6 +37,12 @@ public class MainController {
 	 */
 	private MainController() {
 		instance = this;
+		try {
+			ProfileMapManager.init(new File(new File(System
+					.getProperty("user.home")), "routeKIT"));
+		} catch (IOException e) {
+			return; // die
+		}
 		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
 	}
