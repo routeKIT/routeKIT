@@ -1,8 +1,14 @@
 package edu.kit.pse.ws2013.routekit.models;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
 
 /**
  * Enthält die Kantengewichte für den vorberechneten Graphen.
@@ -34,18 +40,26 @@ public class Weights {
 		return weights[turn];
 	}
 
-	public void save(DataOutputStream os) throws IOException {
-		os.writeInt(weights.length);
-		for (int i = 0; i < weights.length; i++) {
-			os.writeInt(weights[i]);
+	public void save(File f) throws IOException {
+		try (RandomAccessFile raf = new RandomAccessFile(f, "rw");
+				FileChannel fc = raf.getChannel()) {
+			MappedByteBuffer mbb = fc.map(MapMode.READ_WRITE, 0,
+					(1 + weights.length) * 4);
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().put(weights.length)
+					.put(weights);
+			mbb.force();
 		}
 	}
 
-	public static Weights load(DataInputStream is) throws IOException {
-		int[] weights = new int[is.readInt()];
-		for (int i = 0; i < weights.length; i++) {
-			weights[i] = is.readInt();
+	public static Weights load(File f) throws IOException {
+		try (FileInputStream fis = new FileInputStream(f);
+				DataInputStream dis = new DataInputStream(fis);
+				FileChannel fc = fis.getChannel()) {
+			int length = dis.readInt();
+			MappedByteBuffer mbb = fc.map(MapMode.READ_ONLY, 4, length * 4);
+			int[] weights = new int[length];
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(weights);
+			return new Weights(weights);
 		}
-		return new Weights(weights);
 	}
 }
