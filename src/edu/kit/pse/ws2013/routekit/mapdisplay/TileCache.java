@@ -32,6 +32,9 @@ public class TileCache implements TileSource {
 
 		@Override
 		public void run() {
+			if (map.containsKey(key(x, y, zoom))) {
+				return;
+			}
 			BufferedImage result = target.renderTile(x, y, zoom);
 			map.put(key(x, y, zoom), new SoftReference<BufferedImage>(result));
 			fireListeners(x, y, zoom, result);
