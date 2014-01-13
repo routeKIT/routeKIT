@@ -6,53 +6,55 @@ import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Restriction;
 
 /**
- * Stellt einen Weg aus der OSM-Datei dar. Dies ist nur eine vom
- * {@link OSMParser} verwendete Hilfsklasse.
+ * A way in an OpenStreetMap file. This is only a helper class used by the
+ * {@link OSMParser}.
  */
 public class OSMWay {
 	/**
-	 * Liefert ein {@link Restriction}-Objekt mit der/den Beschränkung(en) des
-	 * Wegs oder {@code null}, falls nicht vorhanden.
+	 * Creates a new object from the given OSM tags.
 	 * 
-	 * @return
+	 * @param props
+	 *            a list of OSM tags (name/value pairs)
+	 */
+	public OSMWay(Map<String, String> props) {
+	}
+
+	/**
+	 * Returns a {@link Restriction} object with the restriction(s) applicable
+	 * for this way.
+	 * 
+	 * @return the restriction(s) of this way, or {@code null} if none
 	 */
 	public Restriction getRestriction() {
 		return null;
 	}
 
 	/**
-	 * Bestimmt, ob es sich um einen Kreisverkehr handelt.
+	 * Determines if this way is (part of) a roundabout.
 	 * 
-	 * @return
+	 * @return {@code} if it is a roundabout, otherwise {@code false}
 	 */
 	public boolean isRoundabout() {
 		return false;
 	}
 
 	/**
-	 * Bestimmt, ob es sich um eine Einbahnstraße handelt.
+	 * Determines if this way constitutes a one-way street.
 	 * 
-	 * @return
+	 * @return {@code true} if this way is a one-way street, or {@code false} if
+	 *         it can be used in both directions
 	 */
 	public boolean isOneway() {
 		return false;
 	}
 
 	/**
-	 * Liefert ein {@link EdgeProperties}-Objekt mit den Eigenschaften des Wegs.
+	 * Returns an {@link EdgeProperties} object containing the properties of
+	 * this way.
 	 * 
-	 * @return
+	 * @return the said properties object
 	 */
 	public EdgeProperties getEdgeProperties() {
 		return null;
-	}
-
-	/**
-	 * Konstruktor: Erzeugt ein neues Objekt aus den angegebenen OSM-Tags.
-	 * 
-	 * @param props
-	 *            Eine Liste von OSM-Tags.
-	 */
-	public OSMWay(Map<String, String> props) {
 	}
 }
