@@ -27,7 +27,6 @@ public class MainController {
 	private static MainController instance;
 	private RouteModel rm = new RouteModel();
 	MainView view;
-	private ProfileMapCombination pmc; // TODO initialize, use – Lucas
 	private RouteCalculator rc;
 
 	/**
@@ -78,9 +77,13 @@ public class MainController {
 	 */
 	private void checkAndCalculate() {
 		if (rm.getStart() != null && rm.getDestination() != null) {
-			GraphIndex index = pmc.getStreetMap().getGraph().getIndex(18);
+			ProfileMapCombination currentCombination = ProfileMapManager
+					.getInstance().getCurrentCombination();
+			GraphIndex index = currentCombination.getStreetMap().getGraph()
+					.getIndex(18);
 			rc.calculateRoute(index.findNearestPointOnEdge(rm.getStart()),
-					index.findNearestPointOnEdge(rm.getDestination()), pmc);
+					index.findNearestPointOnEdge(rm.getDestination()),
+					currentCombination);
 		}
 	}
 
@@ -201,15 +204,6 @@ public class MainController {
 	public void selectMap(StreetMap map) {
 		// TODO must set pmc – Lucas
 		mapManagement = null;
-	}
-
-	/**
-	 * Gets the current profile and map.
-	 * 
-	 * @return The current {@link ProfileMapCombination}.
-	 */
-	public ProfileMapCombination getCurrentProfileMap() {
-		return pmc;
 	}
 
 	public static MainController getInstance() {

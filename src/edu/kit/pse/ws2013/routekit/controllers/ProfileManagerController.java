@@ -27,9 +27,8 @@ public class ProfileManagerController {
 			profiles.put(p.getName(), p);
 		}
 		assert (!profiles.isEmpty());
-		// Profile p =
-		// MainController.getInstance().getCurrentProfileMap().getProfile();
-		Profile p = profiles.values().iterator().next(); // TODO
+		Profile p = ProfileMapManager.getInstance().getCurrentCombination()
+				.getProfile();
 		assert (p != null);
 		currentProfile = p;
 		pmv = new ProfileManagerView(view, this, p, new ArrayList<Profile>(
@@ -145,9 +144,8 @@ public class ProfileManagerController {
 		final Set<Profile> changedProfiles = diff.getChangedProfiles();
 		final Set<Profile> deletedProfiles = diff.getDeletedProfiles();
 		int time = 0;
-		for (final ProfileMapCombination pmc :
-		// TODO somewhere.getPrecalculations()
-		new HashSet<ProfileMapCombination>()) {
+		for (final ProfileMapCombination pmc : ProfileMapManager.getInstance()
+				.getCombinations()) {
 			final Profile p = pmc.getProfile();
 			if (changedProfiles.contains(p) || deletedProfiles.contains(p)) {
 				time += pmc.getCalculationTime();
