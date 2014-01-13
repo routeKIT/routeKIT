@@ -12,6 +12,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.routecalculation.ArcFlagsDijkstra;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteCalculator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.views.MainView;
@@ -38,6 +39,7 @@ public class MainController {
 		instance = this;
 		ProfileManager.init();
 		view = new MainView(rm);
+		rc = new ArcFlagsDijkstra();
 	}
 
 	/**
