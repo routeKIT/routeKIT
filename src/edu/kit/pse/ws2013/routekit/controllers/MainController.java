@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.controllers;
 import java.io.File;
 
 import edu.kit.pse.ws2013.routekit.history.History;
+import edu.kit.pse.ws2013.routekit.map.GraphIndex;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
@@ -11,6 +12,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.routecalculation.RouteCalculator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapView;
@@ -25,6 +27,7 @@ public class MainController {
 	private RouteModel rm = new RouteModel();
 	MainView view;
 	private ProfileMapCombination pmc; // TODO initialize, use – Lucas
+	private RouteCalculator rc;
 
 	/**
 	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
@@ -49,6 +52,8 @@ public class MainController {
 	 */
 	public void setStartPoint(Coordinates start) {
 		rm.setStart(start);
+
+		checkAndCalculate();
 	}
 
 	/**
@@ -63,6 +68,19 @@ public class MainController {
 	 */
 	public void setDestinationPoint(Coordinates destination) {
 		rm.setDestination(destination);
+
+		checkAndCalculate();
+	}
+
+	/**
+	 * Ruft bei bedarf die Routenberechnung auf.
+	 */
+	private void checkAndCalculate() {
+		if (rm.getStart() != null && rm.getDestination() != null) {
+			GraphIndex index = pmc.getStreetMap().getGraph().getIndex(18);
+			rc.calculateRoute(index.findNearestPointOnEdge(rm.getStart()),
+					index.findNearestPointOnEdge(rm.getDestination()), pmc);
+		}
 	}
 
 	/**
@@ -127,7 +145,7 @@ public class MainController {
 	}
 
 	MapManagerController mapManagement;
-	
+
 	/**
 	 * Startet einen neuen {@link MapManagerController} und öffnet so den Dialog
 	 * zur Kartenverwaltung.
@@ -166,9 +184,9 @@ public class MainController {
 	 */
 	public void selectProfile(Profile profile) {
 		// TODO must set pmc – Lucas
-		if(mapManagement != null && mapManagement.getView().isVisible()){
+		if (mapManagement != null && mapManagement.getView().isVisible()) {
 			mapManagement.getView().addProfile(profile);
-		}else{
+		} else {
 			// MainView
 		}
 	}
