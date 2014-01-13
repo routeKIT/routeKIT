@@ -22,9 +22,9 @@ import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
  */
 public class MapView extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener, TileFinishedListener {
-	float x;
-	float y;
-	int zoom = 4;
+	double x = 34297.855;
+	double y = -108570.16;
+	int zoom = 16;
 	TileSource source;
 
 	/**
@@ -71,8 +71,8 @@ public class MapView extends JPanel implements MouseListener,
 
 	int dx = 0;
 	int dy = 0;
-	float orgX;
-	float orgY;
+	double orgX;
+	double orgY;
 
 	private void applyDrag(MouseEvent e) {
 		x = orgX - (e.getX() - dx) / 256f;
@@ -122,18 +122,27 @@ public class MapView extends JPanel implements MouseListener,
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		int xp = e.getX();
 		int yp = e.getY();
+		double yZ = y + yp / 256f;
+		double xZ = x + xp / 256f;
 		int klick = e.getWheelRotation();
 		if (klick == 0) {
 			return;
 		}
-		while (klick > 0) {
+		while (klick > 0 && zoom < 18) {
 			klick--;
-			// zoomIn;
+			yZ *= 2;
+			xZ *= 2;
+			zoom++;
 		}
-		while (klick < 0) {
+		while (klick < 0 && zoom > 0) {
 			klick++;
-			// zoomOut;
+			yZ /= 2;
+			xZ /= 2;
+			zoom--;
 		}
+
+		y = yZ - yp / 256f;
+		x = xZ - xp / 256f;
 		repaint();
 	}
 
