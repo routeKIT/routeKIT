@@ -79,13 +79,13 @@ public class TestCoordinates {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFromStringFail_latNotOnEarth() {
-		Coordinates.fromString("91 42");
+	public void testFromStringFail_latNotDisplayable() {
+		Coordinates.fromString("86 42");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testFromStringFail_latBarelyNotOnEarth() {
-		Coordinates.fromString("90.00000000000000000000000001 42");
+	public void testFromStringFail_latBarelyNotDisplayable() {
+		Coordinates.fromString("85.00000000000000000000000001 42");
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -18,7 +18,7 @@ public class Coordinates {
 	 *             if the coordinates are out of range
 	 */
 	public Coordinates(float lat, float lon) {
-		if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+		if (lat < -85 || lat > 85 || lon < -180 || lon > 180) {
 			throw new IllegalArgumentException();
 		}
 
@@ -189,10 +189,10 @@ public class Coordinates {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Can’t parse longitude!", e);
 		}
-		if (lat < -90 || lat > 90
-				|| (Math.abs(lat) == 90 && !coords[0].matches("-?90(.0+)?"))) {
+		if (lat < -85 || lat > 85
+				|| (Math.abs(lat) == 85 && !coords[0].matches("-?85(.0+)?"))) {
 			throw new IllegalArgumentException(
-					"Latitude must be in range [-90°,90°]!");
+					"Latitude must be in range [-85°,85°]!");
 		}
 		if (lon < -180 || lon > 180
 				|| (Math.abs(lon) == 180 && !coords[1].matches("-?180(.0+)?"))) {
