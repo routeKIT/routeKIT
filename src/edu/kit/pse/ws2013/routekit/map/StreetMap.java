@@ -121,20 +121,24 @@ public class StreetMap {
 
 		@Override
 		public Graph getGraph() {
-			try {
-				this.graph = Graph.load(graphFile);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (this.graph == null) {
+				try {
+					this.graph = Graph.load(graphFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			return graph;
 		}
 
 		@Override
 		public EdgeBasedGraph getEdgeBasedGraph() {
-			try {
-				this.edgeBasedGraph = EdgeBasedGraph.load(egraphFile);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (this.edgeBasedGraph == null) {
+				try {
+					this.edgeBasedGraph = EdgeBasedGraph.load(egraphFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			return edgeBasedGraph;
 		}
