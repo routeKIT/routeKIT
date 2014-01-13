@@ -113,8 +113,9 @@ public class Coordinates {
 	 * @return the coordinates of the given point
 	 */
 	public static Coordinates fromSmt(float x, float y, int zoom) {
-		x %= 1 << zoom;
-		y %= 1 << zoom;
+		int limit = 1 << zoom;
+		x = (x % limit + limit) % limit;
+		y = (y % limit + limit) % limit;
 		float lon = (float) (x / Math.pow(2.0, zoom) * 360.0 - 180);
 		double n = Math.PI - (2.0 * Math.PI * y) / Math.pow(2.0, zoom);
 		float lat = (float) Math.toDegrees(Math.atan(Math.sinh(n)));
