@@ -104,8 +104,11 @@ public class MapView extends JPanel implements MouseListener,
 		g.fillRect(0, 0, getWidth(), getHeight());
 		for (int i = (int) Math.floor(x); (i - x) * 256 < getWidth(); i++) {
 			for (int j = (int) Math.floor(y); (j - y) * 256 < getHeight(); j++) {
-				BufferedImage tile = source.renderTile(i & ((1 << zoom) - 1), j
-						& ((1 << zoom) - 1), zoom);
+				if (j < 0 || j >= 1 << zoom) {
+					continue;
+				}
+				BufferedImage tile = source.renderTile(i & ((1 << zoom) - 1),
+						j, zoom);
 				g.drawImage(tile, (int) ((i - x) * 256), (int) ((j - y) * 256),
 						null);
 			}
