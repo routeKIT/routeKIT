@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,11 +17,12 @@ public class ProfileManager {
 
 	private static ProfileManager instance;
 
-	private File root;
-	private Map<Profile, File> profiles;
+	private final File root;
+	private final Map<Profile, File> profiles;
 
 	private ProfileManager(File root) throws FileNotFoundException, IOException {
 		this.root = root;
+		this.profiles = new HashMap<>();
 		for (File f : root.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
@@ -28,7 +30,6 @@ public class ProfileManager {
 			}
 		})) {
 			profiles.put(Profile.load(f), f);
-			root = f.getParentFile();
 		}
 	}
 
@@ -49,17 +50,15 @@ public class ProfileManager {
 	 * 
 	 * @param profile
 	 *            The profile that shall be saved.
+	 * @throws IOException
 	 */
-	public void saveProfile(Profile profile) {
+	public void saveProfile(Profile profile) throws IOException {
 		File f = profiles.get(profile);
 		if (f == null) {
 			f = new File(root, profile.getName() + ".profile");
+			f.createNewFile();
 		}
-		try {
-			profile.save(f);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		profile.save(f);
 		profiles.put(profile, f);
 	}
 

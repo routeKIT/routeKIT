@@ -1,5 +1,6 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -122,7 +123,13 @@ public class ProfileManagerController {
 			manager.deleteProfile(deleted);
 		}
 		for (final Profile changed : diff.getChangedProfiles()) {
-			manager.saveProfile(changed);
+			try {
+				manager.saveProfile(changed);
+			} catch (IOException e) {
+				// TODO throw to the view instead, which could then show an info
+				// box
+				e.printStackTrace();
+			}
 		}
 		MainController.getInstance().selectProfile(currentProfile);
 	}
