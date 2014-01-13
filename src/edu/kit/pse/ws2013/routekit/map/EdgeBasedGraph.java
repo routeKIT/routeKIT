@@ -55,6 +55,10 @@ public class EdgeBasedGraph {
 		this.restrictions = restrictions;
 	}
 
+	public int[] getEdges() {
+		return edges;
+	}
+
 	/**
 	 * Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten
 	 * des kantenbasierten Graphen) befindet.
