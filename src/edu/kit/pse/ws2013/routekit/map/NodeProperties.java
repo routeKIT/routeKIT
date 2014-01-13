@@ -85,27 +85,36 @@ public class NodeProperties {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		NodeProperties other = (NodeProperties) obj;
-		if (isMotorwayJunction != other.isMotorwayJunction)
+		if (isMotorwayJunction != other.isMotorwayJunction) {
 			return false;
-		if (isTrafficLights != other.isTrafficLights)
+		}
+		if (isTrafficLights != other.isTrafficLights) {
 			return false;
+		}
 		if (junctionName == null) {
-			if (other.junctionName != null)
+			if (other.junctionName != null) {
 				return false;
-		} else if (!junctionName.equals(other.junctionName))
+			}
+		} else if (!junctionName.equals(other.junctionName)) {
 			return false;
+		}
 		if (junctionRef == null) {
-			if (other.junctionRef != null)
+			if (other.junctionRef != null) {
 				return false;
-		} else if (!junctionRef.equals(other.junctionRef))
+			}
+		} else if (!junctionRef.equals(other.junctionRef)) {
 			return false;
+		}
 		return true;
 	}
 

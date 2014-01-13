@@ -241,8 +241,9 @@ public class Graph {
 			floats.put(lon, 0, nNodes);
 
 			int toSkip = nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4;
-			while (toSkip > 0)
+			while (toSkip > 0) {
 				toSkip -= raf.skipBytes(toSkip);
+			}
 
 			for (Entry<Integer, NodeProperties> entry : nodeProps.entrySet()) {
 				raf.writeInt(entry.getKey());
@@ -254,8 +255,9 @@ public class Graph {
 			for (int i = 0; i < nEdges; i++) {
 				EdgeProperties props = edgeProps[i];
 				Set<Integer> current = reverseEdgeProperties.get(props);
-				if (current == null)
+				if (current == null) {
 					current = new HashSet<>();
+				}
 				current.add(i);
 				reverseEdgeProperties.put(props, current);
 			}
@@ -318,8 +320,9 @@ public class Graph {
 			floats.get(lons, 0, nNodes);
 
 			int toSkip = nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4;
-			while (toSkip > 0)
+			while (toSkip > 0) {
 				toSkip -= dis.skipBytes(toSkip);
+			}
 
 			Map<Integer, NodeProperties> nodeProps = new HashMap<>();
 			int node;

@@ -165,10 +165,12 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		startField.addFocusListener(new FocusAdapter() {
+			@Override
 			public void focusLost(FocusEvent e) {
 				callController(startField);
 			}
 
+			@Override
 			public void focusGained(FocusEvent e) {
 				startField.setBackground(Color.WHITE);
 			}
@@ -187,10 +189,12 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		targetField.addFocusListener(new FocusAdapter() {
+			@Override
 			public void focusLost(FocusEvent e) {
 				callController(targetField);
 			}
 
+			@Override
 			public void focusGained(FocusEvent e) {
 				targetField.setBackground(Color.WHITE);
 			}
@@ -321,6 +325,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		});
 		JCheckBoxMenuItem osm = new JCheckBoxMenuItem("OSM-Renderer verwenden");
 		osm.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent event) {
 				AbstractButton aButton = (AbstractButton) event.getSource();
 				boolean selected = aButton.getModel().isSelected();

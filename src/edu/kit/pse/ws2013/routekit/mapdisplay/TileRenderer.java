@@ -33,6 +33,7 @@ public class TileRenderer implements TileSource {
 	 *            siehe {@code zoom}
 	 * @return
 	 */
+	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
 		int startNode;
 		int targetNode;

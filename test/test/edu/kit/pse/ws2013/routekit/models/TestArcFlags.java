@@ -22,14 +22,16 @@ public class TestArcFlags {
 		final int length = 1000000;
 		int[] flags = new int[length];
 		Random r = new Random();
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			flags[i] = r.nextInt();
+		}
 		ArcFlags af = new ArcFlags(flags);
 		File f = File.createTempFile("routeKIT_testWeights_", ".weights");
 		af.save(f);
 		ArcFlags af2 = ArcFlags.load(f);
-		for (int i = 0; i < flags.length; i++)
+		for (int i = 0; i < flags.length; i++) {
 			assertEquals(af.getFlag(i), af2.getFlag(i));
+		}
 	}
 
 }

@@ -22,18 +22,19 @@ public abstract class Restriction {
 	public abstract boolean allows(Profile profile);
 
 	public void save(DataOutput out) throws IOException {
-		if (this instanceof NoRestriction)
+		if (this instanceof NoRestriction) {
 			out.writeByte(0);
-		else if (this instanceof WidthRestriction)
+		} else if (this instanceof WidthRestriction) {
 			out.writeByte(1);
-		else if (this instanceof HeightRestriction)
+		} else if (this instanceof HeightRestriction) {
 			out.writeByte(2);
-		else if (this instanceof WeightRestriction)
+		} else if (this instanceof WeightRestriction) {
 			out.writeByte(3);
-		else if (this instanceof VehicleTypeRestriction)
+		} else if (this instanceof VehicleTypeRestriction) {
 			out.writeByte(4);
-		else if (this instanceof MultipleRestrictions)
+		} else if (this instanceof MultipleRestrictions) {
 			out.writeByte(5);
+		}
 		saveInternal(out);
 	}
 

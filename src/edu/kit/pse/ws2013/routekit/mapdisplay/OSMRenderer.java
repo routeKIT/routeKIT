@@ -23,6 +23,7 @@ public class OSMRenderer implements TileSource {
 	 *            siehe {@code zoom}
 	 * @return
 	 */
+	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
 		if (zoom > 19 || zoom < 0) {
 			return null;

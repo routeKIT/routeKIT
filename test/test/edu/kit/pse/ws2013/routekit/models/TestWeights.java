@@ -17,13 +17,15 @@ public class TestWeights {
 		final int length = 1000000;
 		int[] weights = new int[length];
 		Random r = new Random();
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			weights[i] = r.nextInt();
+		}
 		Weights w = new Weights(weights);
 		File f = File.createTempFile("routeKIT_testWeights_", ".weights");
 		w.save(f);
 		Weights w2 = Weights.load(f);
-		for (int i = 0; i < weights.length; i++)
+		for (int i = 0; i < weights.length; i++) {
 			assertEquals(w.getWeight(i), w2.getWeight(i));
+		}
 	}
 }

@@ -257,9 +257,10 @@ public class Profile implements Cloneable {
 	 *            The name of the profile.
 	 */
 	public void setName(String name) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.name = name;
 	}
 
@@ -284,9 +285,10 @@ public class Profile implements Cloneable {
 	 *            The type of the vehicle.
 	 */
 	public void setVehicleType(VehicleType vehicleType) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.vehicleType = vehicleType;
 	}
 
@@ -311,9 +313,10 @@ public class Profile implements Cloneable {
 	 *            The height of the vehicle, in centimeters.
 	 */
 	public void setHeight(int height) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.height = height;
 	}
 
@@ -338,9 +341,10 @@ public class Profile implements Cloneable {
 	 *            The width of the vehicle, in centimeters.
 	 */
 	public void setWidth(int width) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.width = width;
 	}
 
@@ -365,9 +369,10 @@ public class Profile implements Cloneable {
 	 *            The weight of the vehicle, in kilograms.
 	 */
 	public void setWeight(int weight) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.weight = weight;
 	}
 
@@ -396,9 +401,10 @@ public class Profile implements Cloneable {
 	 *            per hour.
 	 */
 	public void setSpeedHighway(int speedHighway) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.speedHighway = speedHighway;
 	}
 
@@ -427,9 +433,10 @@ public class Profile implements Cloneable {
 	 *            road, in kilometers per hour.
 	 */
 	public void setSpeedRoad(int speedRoad) {
-		if (isDefault())
+		if (isDefault()) {
 			throw new IllegalStateException(
 					"Can't set parameter of a default profile!");
+		}
 		this.speedRoad = speedRoad;
 	}
 
@@ -468,22 +475,30 @@ public class Profile implements Cloneable {
 	 *         otherwise.
 	 */
 	public boolean equals(Profile other, boolean checkDefault) {
-		if (!this.name.equals(other.name))
+		if (!this.name.equals(other.name)) {
 			return false;
-		if (!this.vehicleType.equals(other.vehicleType))
+		}
+		if (!this.vehicleType.equals(other.vehicleType)) {
 			return false;
-		if (this.height != other.height)
+		}
+		if (this.height != other.height) {
 			return false;
-		if (this.width != other.width)
+		}
+		if (this.width != other.width) {
 			return false;
-		if (this.weight != other.weight)
+		}
+		if (this.weight != other.weight) {
 			return false;
-		if (this.speedHighway != other.speedHighway)
+		}
+		if (this.speedHighway != other.speedHighway) {
 			return false;
-		if (this.speedRoad != other.speedRoad)
+		}
+		if (this.speedRoad != other.speedRoad) {
 			return false;
-		if (checkDefault && this.isDefault != other.isDefault)
+		}
+		if (checkDefault && this.isDefault != other.isDefault) {
 			return false;
+		}
 		return true;
 	}
 

@@ -218,21 +218,24 @@ public class EdgeBasedGraph {
 			ints.put(partitions, 0, nEdges);
 			b.position(b.position() + nEdges * 4 + nTurns * 4 + nEdges * 4);
 			byte[] byteTurnTypes = new byte[nTurns];
-			for (int i = 0; i < nTurns; i++)
+			for (int i = 0; i < nTurns; i++) {
 				byteTurnTypes[i] = (byte) turnTypes[i].ordinal();
+			}
 			b.put(byteTurnTypes, 0, nTurns);
 
 			int toSkip = nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4;
-			while (toSkip > 0)
+			while (toSkip > 0) {
 				toSkip -= raf.skipBytes(toSkip);
+			}
 
 			Map<Restriction, Set<Integer>> reverseRestrictions = new HashMap<>();
 			for (int i = 0; i < nTurns; i++) {
 				Restriction r = restrictions.get(i);
 				if (r != null) {
 					Set<Integer> current = reverseRestrictions.get(r);
-					if (current == null)
+					if (current == null) {
 						current = new HashSet<>();
+					}
 					current.add(i);
 					reverseRestrictions.put(r, current);
 				}
@@ -294,12 +297,14 @@ public class EdgeBasedGraph {
 			b.position(b.position() + nEdges * 4 + nTurns * 4 + nEdges * 4);
 			b.get(byteTurnTypes, 0, nTurns);
 			TurnType[] turnTypes = new TurnType[nTurns];
-			for (int i = 0; i < nTurns; i++)
+			for (int i = 0; i < nTurns; i++) {
 				turnTypes[i] = TurnType.values()[byteTurnTypes[i]];
+			}
 
 			int toSkip = nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4;
-			while (toSkip > 0)
+			while (toSkip > 0) {
 				toSkip -= dis.skipBytes(toSkip);
+			}
 
 			Map<Integer, Restriction> restrictions = new HashMap<>();
 			int length;

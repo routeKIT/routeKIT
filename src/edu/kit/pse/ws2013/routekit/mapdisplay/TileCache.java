@@ -101,6 +101,7 @@ public class TileCache implements TileSource {
 	 *            Die Zoomstufe.
 	 * @return
 	 */
+	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
 		String key = key(x, y, zoom);
 		SoftReference<BufferedImage> cacheVal = map.get(key);

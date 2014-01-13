@@ -66,8 +66,9 @@ public class HistoryView extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					if (historyvar.getSelectedValue() == null)
+					if (historyvar.getSelectedValue() == null) {
 						return;
+					}
 					Coordinates start = historyvar.getSelectedValue()
 							.getStart();
 					Coordinates destination = historyvar.getSelectedValue()
@@ -96,9 +97,9 @@ public class HistoryView extends JDialog {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (historyvar.getSelectedValue() == null)
+				if (historyvar.getSelectedValue() == null) {
 					return;
-				else {
+				} else {
 					Coordinates start = historyvar.getSelectedValue()
 							.getStart();
 					Coordinates destination = historyvar.getSelectedValue()

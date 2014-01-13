@@ -56,15 +56,17 @@ public class MultipleRestrictions extends Restriction {
 	@Override
 	protected void saveInternal(DataOutput out) throws IOException {
 		out.writeInt(restrictions.length);
-		for (Restriction r : restrictions)
+		for (Restriction r : restrictions) {
 			r.save(out);
+		}
 	}
 
 	protected static Restriction loadInternal(DataInput in) throws IOException {
 		int length = in.readInt();
 		Restriction[] restrictions = new Restriction[length];
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < length; i++) {
 			restrictions[i] = Restriction.load(in);
+		}
 		return getInstance(Arrays.asList(restrictions));
 	}
 }
