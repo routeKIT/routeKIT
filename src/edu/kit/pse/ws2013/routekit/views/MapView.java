@@ -152,27 +152,32 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		dx = e.getX();
-		dy = e.getY();
-		orgX = x;
-		orgY = y;
 		if (e.isPopupTrigger()) {
 			doPop(e);
+		} else {
+			dx = e.getX();
+			dy = e.getY();
+			orgX = x;
+			orgY = y;
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		applyDrag(e);
 		if (e.isPopupTrigger()) {
 			doPop(e);
+		} else {
+			applyDrag(e);
 		}
 	}
 
 	private void doPop(MouseEvent e) {
+		float y2 = (float) (y + e.getY() / 256f);
+		if (y2 < 0 || y2 > 1 << zoom) {
+			return;
+		}
 		Coordinates coordinates = Coordinates.fromSmt(
-				(float) (x + e.getX() / 256f), (float) (y + e.getY() / 256f),
-				zoom);
+				(float) (x + e.getX() / 256f), y2, zoom);
 		ContextMenu menu = new ContextMenu(coordinates);
 		menu.show(e.getComponent(), e.getX(), e.getY());
 	}
