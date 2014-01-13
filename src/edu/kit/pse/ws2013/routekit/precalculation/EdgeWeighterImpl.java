@@ -23,6 +23,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 
 	@Override
 	public void weightEdges(ProfileMapCombination combination) {
+		long t1 = System.currentTimeMillis();
 		Graph graph = combination.getStreetMap().getGraph();
 		EdgeBasedGraph eGraph = combination.getStreetMap().getEdgeBasedGraph();
 		Profile profile = combination.getProfile();
@@ -80,7 +81,9 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 					weightArray[turn] = baseTime + turnTime;
 				}
 			}
-			combination.setWeights(new Weights(weightArray));
+			long t2 = System.currentTimeMillis();
+			int time = (int) (t2 - t1);
+			combination.setWeights(new Weights(weightArray), time);
 		}
 	}
 }
