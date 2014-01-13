@@ -1,12 +1,10 @@
 package test.edu.kit.pse.ws2013.routekit.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,17 +19,17 @@ public class TestArcFlags {
 
 	@Test
 	public void testSaveLoad() throws IOException {
-		int[] flags = new int[] { 2, 4, 6892, 3, 3, 2, 4, 6, 823, 3, 4 };
+		final int length = 1000000;
+		int[] flags = new int[length];
+		Random r = new Random();
+		for (int i = 0; i < length; i++)
+			flags[i] = r.nextInt();
 		ArcFlags af = new ArcFlags(flags);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		DataOutputStream os = new DataOutputStream(baos);
-		af.save(os);
-		os.flush();
-		ArcFlags f = ArcFlags.load(new DataInputStream(
-				new ByteArrayInputStream(baos.toByteArray())));
-		for (int i = 0; i < flags.length; i++) {
-			assertEquals("Diff in " + i, flags[i], f.getFlag(i));
-		}
+		File f = File.createTempFile("routeKIT_testWeights_", ".weights");
+		af.save(f);
+		ArcFlags af2 = ArcFlags.load(f);
+		for (int i = 0; i < flags.length; i++)
+			assertEquals(af.getFlag(i), af2.getFlag(i));
 	}
 
 }

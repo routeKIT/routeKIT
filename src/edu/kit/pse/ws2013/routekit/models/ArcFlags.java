@@ -1,8 +1,14 @@
 package edu.kit.pse.ws2013.routekit.models;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
 
 /**
  * Enthält die Arc-Flags für den vorberechneten Graphen.
@@ -35,18 +41,26 @@ public class ArcFlags {
 		return flags[turn];
 	}
 
-	public void save(DataOutputStream os) throws IOException {
-		os.writeInt(flags.length);
-		for (int i = 0; i < flags.length; i++) {
-			os.writeInt(flags[i]);
+	public void save(File f) throws IOException {
+		try (RandomAccessFile raf = new RandomAccessFile(f, "rw");
+				FileChannel fc = raf.getChannel()) {
+			MappedByteBuffer mbb = fc.map(MapMode.READ_WRITE, 0,
+					(1 + flags.length) * 4);
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().put(flags.length)
+					.put(flags);
+			mbb.force();
 		}
 	}
 
-	public static ArcFlags load(DataInputStream is) throws IOException {
-		int[] flags = new int[is.readInt()];
-		for (int i = 0; i < flags.length; i++) {
-			flags[i] = is.readInt();
+	public static ArcFlags load(File f) throws IOException {
+		try (FileInputStream fis = new FileInputStream(f);
+				DataInputStream dis = new DataInputStream(fis);
+				FileChannel fc = fis.getChannel()) {
+			int length = dis.readInt();
+			MappedByteBuffer mbb = fc.map(MapMode.READ_ONLY, 4, length * 4);
+			int[] flags = new int[length];
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(flags);
+			return new ArcFlags(flags);
 		}
-		return new ArcFlags(flags);
 	}
 }
