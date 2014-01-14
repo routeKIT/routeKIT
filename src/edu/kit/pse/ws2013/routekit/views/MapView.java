@@ -2,7 +2,9 @@ package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -11,6 +13,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -97,7 +100,15 @@ public class MapView extends JPanel implements MouseListener,
 		out.setPreferredSize(new Dimension(45, 30));
 		add(in);
 		add(out);
+		add(startCalc);
+		startCalc.setVisible(false);
+		startCalc.setFont(new Font("Arial", Font.BOLD, 20));
+		startCalc.setBackground(Color.RED);
+		startCalc.setForeground(Color.WHITE);
+		startCalc.setSize(300, 200);
 	}
+
+	JButton startCalc = new JButton("<html>Vorberechnung starten</html>");
 
 	JButton in = new JButton("+");
 	JButton out = new JButton("-");
@@ -122,9 +133,21 @@ public class MapView extends JPanel implements MouseListener,
 				}
 				BufferedImage tile = source.renderTile(i & ((1 << zoom) - 1),
 						j, zoom);
+				if (!isEnabled()) {
+					ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+					ColorConvertOp op = new ColorConvertOp(cs, null);
+					tile = op.filter(tile, null);
+				}
 				g.drawImage(tile, (int) ((i - x) * 256), (int) ((j - y) * 256),
 						null);
 			}
+		}
+		if (!isEnabled()) {
+			startCalc.setBounds((getWidth() - 300) / 2,
+					(getHeight() - 200) / 2, 300, 200);
+			super.paintComponents(g);
+
+			return;
 		}
 		Coordinates c = rm.getStart();
 		if (c != null) {
@@ -166,6 +189,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		if (!isEnabled()) {
+			return;
+		}
 		if (e.isPopupTrigger()) {
 			doPop(e);
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
@@ -178,6 +204,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if (!isEnabled()) {
+			return;
+		}
 		if (e.isPopupTrigger()) {
 			doPop(e);
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
@@ -208,6 +237,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if (!isEnabled()) {
+			return;
+		}
 		if (e.isPopupTrigger()) {
 			return;
 		}
@@ -223,6 +255,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
+		if (!isEnabled()) {
+			return;
+		}
 		int klick = e.getWheelRotation();
 		if (klick == 0) {
 			return;
@@ -268,6 +303,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (!isEnabled()) {
+			return;
+		}
 		if (e.getSource() == in && zoom < 19) {
 			zoom(getWidth() / 2, getHeight() / 2, false);
 			repaint();
@@ -277,4 +315,11 @@ public class MapView extends JPanel implements MouseListener,
 		}
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		in.setEnabled(enabled);
+		out.setEnabled(enabled);
+		startCalc.setVisible(!enabled);
+		super.setEnabled(enabled);
+	}
 }

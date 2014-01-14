@@ -48,6 +48,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	private JLabel profileLabel;
 	JFileChooser fileChooser = new JFileChooser();
 	private RouteModel routeModel;
+	private MapView mapView;
 
 	/**
 	 * A constructor that creates a new MainView.
@@ -253,8 +254,8 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
-		right.add(new MapView(new TileCache(new OSMRenderer()), rm),
-				BorderLayout.CENTER);
+		mapView = new MapView(new TileCache(new OSMRenderer()), rm);
+		right.add(mapView, BorderLayout.CENTER);
 		return right;
 	}
 
