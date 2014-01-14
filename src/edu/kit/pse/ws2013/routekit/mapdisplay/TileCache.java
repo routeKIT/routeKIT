@@ -32,11 +32,12 @@ public class TileCache implements TileSource {
 
 		@Override
 		public void run() {
-			if (map.containsKey(key(x, y, zoom))) {
+			String key = key(x, y, zoom);
+			if (map.containsKey(key) && map.get(key).get() != null) {
 				return;
 			}
 			BufferedImage result = target.renderTile(x, y, zoom);
-			map.put(key(x, y, zoom), new SoftReference<BufferedImage>(result));
+			map.put(key, new SoftReference<BufferedImage>(result));
 			fireListeners(x, y, zoom, result);
 		}
 	}
@@ -105,11 +106,13 @@ public class TileCache implements TileSource {
 	public BufferedImage renderTile(int x, int y, int zoom) {
 		String key = key(x, y, zoom);
 		SoftReference<BufferedImage> cacheVal = map.get(key);
-		if (cacheVal != null && cacheVal.get() != null) {
-			return cacheVal.get();
+		BufferedImage tile;
+		if (cacheVal != null && (tile = cacheVal.get()) != null) {
+			return tile;
 		}
+		map.remove(key);
 		waiting.addFirst(new TileJob(x, y, zoom));
-		return tile;
+		return this.tile;
 	}
 
 	/**
