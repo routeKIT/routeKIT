@@ -82,7 +82,7 @@ public class TileCache implements TileSource {
 		tile = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
 		Graphics g = tile.createGraphics();
 		g.setColor(Color.gray);
-		g.fillRect(0, 0, 255, 255);
+		g.fillRect(1, 1, 254, 254);
 	}
 
 	/**
