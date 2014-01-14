@@ -116,6 +116,9 @@ public class ProfileMapCombination {
 	 * @see #load(File)
 	 */
 	public void save(File directory) throws IOException {
+		if (!directory.exists()) {
+			directory.mkdir();
+		}
 		if (!directory.isDirectory()) {
 			throw new IllegalArgumentException(directory.toString()
 					+ " is not a directory!");
