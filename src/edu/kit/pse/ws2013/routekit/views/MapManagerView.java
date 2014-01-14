@@ -24,7 +24,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
-import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -138,6 +137,8 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				mmc.saveAllChanges();
+				setVisible(false);
 			}
 		});
 		south.add(okButton);
@@ -273,7 +274,7 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainController.getInstance().manageProfiles();
+				mmc.addProfile();
 			}
 		});
 		addDelete.add(addProfile);

@@ -1,5 +1,6 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
-import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
 
 /**
@@ -22,7 +22,7 @@ public class ProfileManagerController {
 	private Profile currentProfile;
 	private Profile selectedProfile; // set in saveAllChanges
 
-	public ProfileManagerController(final MainView view) {
+	public ProfileManagerController(final Window parent) {
 		profiles = new HashMap<>();
 		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
@@ -33,7 +33,7 @@ public class ProfileManagerController {
 		Profile p = profiles.values().iterator().next(); // TODO remove
 		assert (p != null);
 		currentProfile = p;
-		pmv = new ProfileManagerView(view, this, p, new ArrayList<>(
+		pmv = new ProfileManagerView(parent, this, p, new ArrayList<>(
 				profiles.values()));
 		pmv.setVisible(true);
 	}
