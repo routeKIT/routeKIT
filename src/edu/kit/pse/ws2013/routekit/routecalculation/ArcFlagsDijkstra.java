@@ -1,7 +1,9 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
@@ -18,12 +20,11 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 	int[] distance;
 	int[] previous;
 
-	// TODO: FibonacciHeap fh;
+	FibonacciHeap fh;
 
 	@Override
 	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data) {
-
 		// List<Integer> turns = new ArrayList<Integer>();
 		// Route route = new Route(data, start, destination, turns);
 
@@ -32,48 +33,70 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		return route;
 	}
 
-	/*
-	 * TODO private List<Integer> dijkstra(int start, int destination,
-	 * ProfileMapCombination data) {
-	 * 
-	 * graph = data.getStreetMap().getEdgeBasedGraph().getEdges(); distance =
-	 * new int[graph.length]; previous = new int[graph.length]; fh = new
-	 * FibonacciHeap();
-	 * 
-	 * Map<Integer, FibonacciHeap.Entry> entries = new HashMap<Integer,
-	 * FibonacciHeap.Entry>();
-	 * 
-	 * // Initialisierung distance[start] = 0; previous[start] = -1;
-	 * 
-	 * for (int i = 0; i < graph.length; i++) { if (i != start) { distance[i] =
-	 * Integer.MAX_VALUE; previous[i] = -1; }
-	 * 
-	 * entries.put(i, fh.enqueue(i, distance[i])); }
-	 * 
-	 * while (!fh.isEmpty()) { int u = fh.dequeueMin().getValue();
-	 * 
-	 * if (u == destination) { break; // GEFUNDEN! }
-	 * 
-	 * Set<Integer> eins = data.getStreetMap().getEdgeBasedGraph()
-	 * .getOutgoingTurns(u);
-	 * 
-	 * for (Integer integer : eins) { int edge =
-	 * data.getStreetMap().getEdgeBasedGraph() .getTargetEdge(integer);
-	 * 
-	 * int alt = distance[u] + data.getWeights().getWeight(integer);
-	 * 
-	 * if (alt < distance[edge]) { distance[edge] = alt; previous[edge] = u;
-	 * 
-	 * FibonacciHeap.Entry toDecrease = entries.get(edge);
-	 * fh.decreaseKey(toDecrease, alt); } } }
-	 * 
-	 * // Weg rekonstruieren List<Integer> turns = new ArrayList<Integer>();
-	 * 
-	 * int x = destination; while (previous[x] != -1) { turns.add(x); x =
-	 * previous[x]; }
-	 * 
-	 * return turns; }
-	 */
+	private List<Integer> dijkstra(int start, int destination,
+			ProfileMapCombination data) {
+		graph = data.getStreetMap().getEdgeBasedGraph().getEdges();
+		distance = new int[graph.length];
+		previous = new int[graph.length];
+		fh = new FibonacciHeap();
+
+		List<Integer> turns = new ArrayList<Integer>();
+		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
+
+		// Partition der Zielkante
+		int destinationPartition = data.getStreetMap().getEdgeBasedGraph()
+				.getPartition(destination);
+
+		// Initialisierung
+		distance[start] = 0;
+		previous[start] = -1;
+
+		for (int i = 0; i < graph.length; i++) {
+			if (i != start) {
+				distance[i] = Integer.MAX_VALUE;
+				previous[i] = -1;
+			}
+
+			fhList.put(i, fh.add(i, distance[i]));
+		}
+
+		// Berechnung
+		while (!fh.isEmpty()) {
+			int u = fh.deleteMin().getValue();
+			if (u == destination) {
+				// GEFUNDEN!
+				break;
+			}
+
+			Set<Integer> eins = data.getStreetMap().getEdgeBasedGraph()
+					.getOutgoingTurns(u);
+
+			for (Integer integer : eins) {
+				int edge = data.getStreetMap().getEdgeBasedGraph()
+						.getTargetEdge(integer);
+
+				// TODO: Prüfen der Arcflag
+
+				int alt = distance[u] + data.getWeights().getWeight(integer);
+
+				if (alt < distance[edge]) {
+					distance[edge] = alt;
+					previous[edge] = u;
+					FibonacciHeap.Entry toDecrease = fhList.get(edge);
+					fh.decreaseKey(toDecrease, alt);
+				}
+			}
+		}
+
+		// Weg rekonstruieren List<Integer> turns = new ArrayList<Integer>();
+		int x = destination;
+		while (previous[x] != -1) {
+			turns.add(x);
+			x = previous[x];
+		}
+
+		return turns;
+	}
 
 	private Route calculateDummy(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data) {
