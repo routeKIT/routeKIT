@@ -189,8 +189,9 @@ public class MapManagerView extends JDialog {
 				myPanel.add(new JLabel("Name der Karte:"));
 				myPanel.add(name);
 
-				int result = JOptionPane.showConfirmDialog(null, myPanel,
-						"Eingabe Pfad und Name", JOptionPane.OK_CANCEL_OPTION);
+				int result = JOptionPane.showConfirmDialog(MapManagerView.this,
+						myPanel, "Eingabe Pfad und Name",
+						JOptionPane.OK_CANCEL_OPTION);
 				if (result == JOptionPane.OK_OPTION) {
 					if (!path.getText().equals("")
 							&& !name.getText().equals("")) {
@@ -227,8 +228,8 @@ public class MapManagerView extends JDialog {
 				myPanel.add(pathUpdateButton);
 				myPanel.add(new JLabel("Pfad:"));
 				myPanel.add(pathUpdate);
-				int result = JOptionPane.showConfirmDialog(null, myPanel,
-						"Eingabe Pfad", JOptionPane.OK_CANCEL_OPTION);
+				int result = JOptionPane.showConfirmDialog(MapManagerView.this,
+						myPanel, "Eingabe Pfad", JOptionPane.OK_CANCEL_OPTION);
 				if (result == JOptionPane.OK_OPTION) {
 					if (!pathUpdate.getText().equals("")) {
 						mmc.importMap((String) mapname.getSelectedItem(),

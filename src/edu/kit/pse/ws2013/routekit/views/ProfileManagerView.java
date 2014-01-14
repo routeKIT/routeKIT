@@ -177,7 +177,7 @@ public class ProfileManagerView extends JDialog {
 
 				int showOptionDialog = JOptionPane
 						.showOptionDialog(
-								null,
+								ProfileManagerView.this,
 								"Sie speichern hiermit alle \n"
 										+ "vorgenommenen Änderungen für alle Profile.\n"
 										+ warning(pmc)
