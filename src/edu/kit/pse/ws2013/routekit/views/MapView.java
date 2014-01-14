@@ -1,6 +1,7 @@
 package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -30,7 +32,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  */
 public class MapView extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener, TileFinishedListener,
-		RouteModelListener {
+		RouteModelListener, ActionListener {
 	double x = 34297.855;
 	double y = 22501.84;
 	int zoom = 16;
@@ -89,7 +91,16 @@ public class MapView extends JPanel implements MouseListener,
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
+		in.addActionListener(this);
+		out.addActionListener(this);
+		in.setPreferredSize(new Dimension(45, 30));
+		out.setPreferredSize(new Dimension(45, 30));
+		add(in);
+		add(out);
 	}
+
+	JButton in = new JButton("+");
+	JButton out = new JButton("-");
 
 	/**
 	 * Draws the currently visible map section. All visible tiles are requested
@@ -100,6 +111,8 @@ public class MapView extends JPanel implements MouseListener,
 	 */
 	@Override
 	public void paint(Graphics g) {
+		in.setLocation(getWidth() - in.getWidth() - 10, 10);
+		out.setLocation(getWidth() - out.getWidth() - 10, 20 + in.getHeight());
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		for (int i = (int) Math.floor(x); (i - x) * 256 < getWidth(); i++) {
@@ -123,6 +136,7 @@ public class MapView extends JPanel implements MouseListener,
 			g.setColor(Color.GREEN);
 			drawPoint(g, c);
 		}
+		super.paintComponents(g);
 	}
 
 	private void drawPoint(Graphics g, Coordinates c) {
@@ -209,30 +223,36 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		int xp = e.getX();
-		int yp = e.getY();
-		double yZ = y + yp / 256f;
-		double xZ = x + xp / 256f;
 		int klick = e.getWheelRotation();
 		if (klick == 0) {
 			return;
 		}
 		while (klick > 0 && zoom > 0) {
 			klick--;
+			zoom(e.getX(), e.getY(), true);
+		}
+		while (klick < 0 && zoom > 0) {
+			klick++;
+			zoom(e.getX(), e.getY(), false);
+		}
+
+		repaint();
+	}
+
+	private void zoom(int xp, int yp, boolean out) {
+		double yZ = y + yp / 256f;
+		double xZ = x + xp / 256f;
+		if (out) {
 			yZ /= 2;
 			xZ /= 2;
 			zoom--;
-		}
-		while (klick < 0 && zoom < 19) {
-			klick++;
+		} else {
 			yZ *= 2;
 			xZ *= 2;
 			zoom++;
 		}
-
 		y = yZ - yp / 256f;
 		x = xZ - xp / 256f;
-		repaint();
 	}
 
 	@Override
@@ -244,6 +264,17 @@ public class MapView extends JPanel implements MouseListener,
 	@Override
 	public void routeModelChanged() {
 		repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == in && zoom < 19) {
+			zoom(getWidth() / 2, getHeight() / 2, false);
+			repaint();
+		} else if (e.getSource() == out && zoom > 1) {
+			zoom(getWidth() / 2, getHeight() / 2, true);
+			repaint();
+		}
 	}
 
 }
