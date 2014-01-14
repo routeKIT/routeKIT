@@ -154,7 +154,7 @@ public class MapView extends JPanel implements MouseListener,
 	public void mousePressed(MouseEvent e) {
 		if (e.isPopupTrigger()) {
 			doPop(e);
-		} else {
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			dx = e.getX();
 			dy = e.getY();
 			orgX = x;
@@ -166,7 +166,7 @@ public class MapView extends JPanel implements MouseListener,
 	public void mouseReleased(MouseEvent e) {
 		if (e.isPopupTrigger()) {
 			doPop(e);
-		} else {
+		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			applyDrag(e);
 		}
 	}
@@ -194,6 +194,9 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		if (e.isPopupTrigger()) {
+			return;
+		}
 		applyDrag(e);
 		int limit = 1 << zoom;
 		x = (x % limit + limit) % limit;
