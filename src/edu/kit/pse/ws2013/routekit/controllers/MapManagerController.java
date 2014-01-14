@@ -1,19 +1,33 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
 
 /**
- * Der Controller für die {@link MapManagerView}.
+ * The controller for the {@link MapManagerView}.
  */
 public class MapManagerController {
 	MapManagerView mmv;
 
 	public MapManagerController(MainView view) {
-		// TODO Controller Parameter - Anastasia
-		mmv = new MapManagerView(view, this, null, null, null);
+		ProfileMapManager pmm = ProfileMapManager.getInstance();
+		Set<StreetMap> maps = MapManager.getInstance().getMaps();
+		Set<Profile> currentProfiles = new HashSet<>();
+		StreetMap currentMap = pmm.getCurrentCombination().getStreetMap();
+		assert (maps.contains(currentMap));
+		for (ProfileMapCombination combination : pmm.getCombinations()) {
+			if (currentMap == combination.getStreetMap()) {
+				currentProfiles.add(combination.getProfile());
+			}
+		}
+		mmv = new MapManagerView(view, this, currentMap, maps, currentProfiles);
 		mmv.setVisible(true);
 	}
 

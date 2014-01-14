@@ -83,8 +83,8 @@ public class MapManagerView extends JDialog {
 
 		setContentPane(contentPane);
 
-		// setAvailableMaps(maps);
-		// setCurrentMap(currentMap, currentMapProfiles);
+		setAvailableMaps(maps);
+		setCurrentMap(currentMap, currentMapProfiles);
 	}
 
 	private JPanel initNorthPane(final MapManagerController mmc) {
