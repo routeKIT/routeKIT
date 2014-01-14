@@ -80,6 +80,10 @@ public class ProfileMapManager {
 				}
 			}
 		}
+		if (current == null) {
+			System.err
+					.println("No current combination found, will choose arbitrary one!"); // TODO
+		}
 		final Map<String, Profile> profilesByName = new HashMap<>();
 		for (Profile p : ProfileManager.getInstance().getProfiles()) {
 			profilesByName.put(p.getName(), p);
@@ -94,8 +98,23 @@ public class ProfileMapManager {
 			StreetMap map = mapsByName.get(mapName);
 			for (String profileName : entry.getValue()) {
 				Profile profile = profilesByName.get(profileName);
-				this.combinations.add(ProfileMapCombination.load(profile, map,
-						new File(new File(root, mapName), profileName)));
+				ProfileMapCombination combination = ProfileMapCombination.load(
+						profile, map, new File(new File(root, mapName),
+								profileName));
+				this.combinations.add(combination);
+				if (current != null && mapName.equals(current.getKey())
+						&& profileName.equals(current.getValue())) {
+					this.current = combination;
+				}
+			}
+		}
+		if (current == null) {
+			// choose any precalculation
+			this.current = this.combinations.iterator().next();
+			if (this.current == null) {
+				// there are no precalculations
+				selectProfileAndMap(Profile.defaultCar, mapsByName.values()
+						.iterator().next());
 			}
 		}
 	}
