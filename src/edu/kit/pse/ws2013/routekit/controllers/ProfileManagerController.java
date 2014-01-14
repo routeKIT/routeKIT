@@ -20,6 +20,7 @@ public class ProfileManagerController {
 	private final Map<String, Profile> profiles; // note: contents of the map
 													// are not final at all
 	private Profile currentProfile;
+	private Profile selectedProfile; // set in saveAllChanges
 
 	public ProfileManagerController(final MainView view) {
 		profiles = new HashMap<>();
@@ -131,7 +132,7 @@ public class ProfileManagerController {
 				e.printStackTrace();
 			}
 		}
-		MainController.getInstance().selectProfile(currentProfile);
+		selectedProfile = currentProfile;
 	}
 
 	/**
@@ -153,6 +154,20 @@ public class ProfileManagerController {
 			}
 		}
 		return time;
+	}
+
+	/**
+	 * Returns the profile that the user selected. Note that this is current
+	 * from the <i>current</i> profile (which is the one that the user has
+	 * currently selected, while the view is still visible); the selected
+	 * profile is only set in {@link #saveAllChanges()}, and if that method is
+	 * never called (e.&nbsp;g. because the user clicked “Cancel”), then this
+	 * method returns {@code null} to indicate that.
+	 * 
+	 * @return The profile that the user selected.
+	 */
+	public Profile getSelectedProfile() {
+		return selectedProfile;
 	}
 
 	private ProfilesDiff diff() {

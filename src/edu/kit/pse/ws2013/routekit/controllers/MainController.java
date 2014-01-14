@@ -152,7 +152,15 @@ public class MainController {
 	 * Dialog zur Profilverwaltung.
 	 */
 	public void manageProfiles() {
-		new ProfileManagerController(view);
+		ProfileManagerController c = new ProfileManagerController(view);
+		Profile selected = c.getSelectedProfile();
+		if (selected != null) {
+			ProfileMapManager.getInstance().selectProfileAndMap(
+					selected,
+					ProfileMapManager.getInstance().getCurrentCombination()
+							.getStreetMap());
+			// TODO update view elements etc.
+		}
 	}
 
 	MapManagerController mapManagement;
