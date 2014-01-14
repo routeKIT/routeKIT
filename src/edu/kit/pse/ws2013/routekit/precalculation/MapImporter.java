@@ -59,7 +59,7 @@ public class MapImporter {
 				new HashMap<Integer, NodeProperties>(), props, lat, lon);
 
 		EdgeBasedGraph edgeGraph = createDummyEdgedBasedGraph();
-		int partitions[] = { 1, 1, 1, 1 };
+		int partitions[] = { 1, 1, 1, 1, 1, 1, 1 };
 		edgeGraph.setPartitions(partitions);
 
 		StreetMap map = new StreetMap(graph, edgeGraph);
