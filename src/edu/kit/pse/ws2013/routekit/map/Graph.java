@@ -1,8 +1,6 @@
 package edu.kit.pse.ws2013.routekit.map;
 
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.FloatBuffer;
@@ -240,10 +238,8 @@ public class Graph {
 			floats.put(lat, 0, nNodes);
 			floats.put(lon, 0, nNodes);
 
-			int toSkip = nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4;
-			while (toSkip > 0) {
-				toSkip -= raf.skipBytes(toSkip);
-			}
+			raf.seek(raf.getFilePointer()
+					+ (nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4));
 
 			for (Entry<Integer, NodeProperties> entry : nodeProps.entrySet()) {
 				raf.writeInt(entry.getKey());
@@ -287,28 +283,27 @@ public class Graph {
 	 *             If an I/O error occurs.
 	 */
 	public static Graph load(File file) throws IOException {
-		try (FileInputStream fis = new FileInputStream(file);
-				DataInputStream dis = new DataInputStream(fis)) {
-			if (!dis.readUTF().equals("routeKIT")) {
+		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+			if (!raf.readUTF().equals("routeKIT")) {
 				throw new IOException("Wrong magic!");
 			}
-			if (dis.readByte() != 0x67) { // 'g', for "graph"
+			if (raf.readByte() != 0x67) { // 'g', for "graph"
 				throw new IOException("Wrong file type!");
 			}
-			if (dis.readByte() != 1) { // version 1
+			if (raf.readByte() != 1) { // version 1
 				throw new IOException("Unsupported version!");
 			}
-			if (dis.readByte() != 0x04) { // End of Transmission
+			if (raf.readByte() != 0x04) { // End of Transmission
 				throw new IOException("Wrong magic!");
 			}
 
-			int nNodes = dis.readInt();
-			int nEdges = dis.readInt();
+			int nNodes = raf.readInt();
+			int nEdges = raf.readInt();
 			int[] nodes = new int[nNodes];
 			int[] edges = new int[nEdges];
 			float[] lats = new float[nNodes];
 			float[] lons = new float[nNodes];
-			MappedByteBuffer b = fis.getChannel().map(MapMode.READ_ONLY,
+			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_ONLY,
 					2 + "routeKIT".length() + 3 + 8,
 					nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4);
 			IntBuffer ints = b.asIntBuffer();
@@ -319,24 +314,22 @@ public class Graph {
 			floats.get(lats, 0, nNodes);
 			floats.get(lons, 0, nNodes);
 
-			int toSkip = nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4;
-			while (toSkip > 0) {
-				toSkip -= dis.skipBytes(toSkip);
-			}
+			raf.seek(raf.getFilePointer()
+					+ (nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4));
 
 			Map<Integer, NodeProperties> nodeProps = new HashMap<>();
 			int node;
-			while ((node = dis.readInt()) != -1) {
-				NodeProperties props = NodeProperties.load(dis);
+			while ((node = raf.readInt()) != -1) {
+				NodeProperties props = NodeProperties.load(raf);
 				nodeProps.put(node, props);
 			}
 
 			EdgeProperties[] edgeProps = new EdgeProperties[nEdges];
 			int length;
-			while ((length = dis.readInt()) != 0) {
-				EdgeProperties props = EdgeProperties.load(dis);
+			while ((length = raf.readInt()) != 0) {
+				EdgeProperties props = EdgeProperties.load(raf);
 				while (length-- > 0) {
-					edgeProps[dis.readInt()] = props;
+					edgeProps[raf.readInt()] = props;
 				}
 			}
 

@@ -1,8 +1,6 @@
 package edu.kit.pse.ws2013.routekit.map;
 
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.IntBuffer;
@@ -227,10 +225,8 @@ public class EdgeBasedGraph {
 			}
 			b.put(byteTurnTypes, 0, nTurns);
 
-			int toSkip = nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4;
-			while (toSkip > 0) {
-				toSkip -= raf.skipBytes(toSkip);
-			}
+			raf.seek(raf.getFilePointer() + nEdges * 4 + nTurns * 4 + nEdges
+					* 4 + nTurns * 4);
 
 			Map<Restriction, Set<Integer>> reverseRestrictions = new HashMap<>();
 			for (int i = 0; i < nTurns; i++) {
@@ -270,28 +266,27 @@ public class EdgeBasedGraph {
 	 *             If an I/O error occurs.
 	 */
 	public static EdgeBasedGraph load(File file) throws IOException {
-		try (FileInputStream fis = new FileInputStream(file);
-				DataInputStream dis = new DataInputStream(fis)) {
-			if (!dis.readUTF().equals("routeKIT")) {
+		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+			if (!raf.readUTF().equals("routeKIT")) {
 				throw new IOException("Wrong magic!");
 			}
-			if (dis.readByte() != 0x65) { // 'e', for "edge-based graph"
+			if (raf.readByte() != 0x65) { // 'e', for "edge-based graph"
 				throw new IOException("Wrong file type!");
 			}
-			if (dis.readByte() != 1) { // version 1
+			if (raf.readByte() != 1) { // version 1
 				throw new IOException("Unsupported version!");
 			}
-			if (dis.readByte() != 0x04) { // End of Transmission
+			if (raf.readByte() != 0x04) { // End of Transmission
 				throw new IOException("Wrong magic!");
 			}
 
-			int nEdges = dis.readInt();
-			int nTurns = dis.readInt();
+			int nEdges = raf.readInt();
+			int nTurns = raf.readInt();
 			int[] edges = new int[nEdges];
 			int[] turns = new int[nTurns];
 			int[] partitions = new int[nEdges];
 			byte[] byteTurnTypes = new byte[nTurns];
-			MappedByteBuffer b = fis.getChannel().map(MapMode.READ_ONLY,
+			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_ONLY,
 					2 + "routeKIT".length() + 3 + 8,
 					nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4);
 			IntBuffer ints = b.asIntBuffer();
@@ -305,17 +300,15 @@ public class EdgeBasedGraph {
 				turnTypes[i] = TurnType.values()[byteTurnTypes[i]];
 			}
 
-			int toSkip = nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4;
-			while (toSkip > 0) {
-				toSkip -= dis.skipBytes(toSkip);
-			}
+			raf.seek(raf.getFilePointer()
+					+ (nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4));
 
 			Map<Integer, Restriction> restrictions = new HashMap<>();
 			int length;
-			while ((length = dis.readInt()) != 0) {
-				Restriction r = Restriction.load(dis);
+			while ((length = raf.readInt()) != 0) {
+				Restriction r = Restriction.load(raf);
 				while (length-- > 0) {
-					restrictions.put(dis.readInt(), r);
+					restrictions.put(raf.readInt(), r);
 				}
 			}
 
