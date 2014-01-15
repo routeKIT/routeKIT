@@ -2,6 +2,7 @@ package edu.kit.pse.ws2013.routekit.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.xml.sax.SAXException;
 
@@ -22,8 +23,12 @@ public class Dummies {
 		ProfileMapCombination combination = new ProfileMapCombination(
 				new MapImporter().importMap(new File("dummy"), "Karlsruhe"),
 				Profile.defaultCar);
-		combination.setArcFlags(new ArcFlags(new int[7]), 1000);
-		combination.setWeights(new Weights(new int[7]), 1000);
+		int[] arc = new int[7];
+		int[] w = new int[7];
+		Arrays.fill(arc, -1);
+		Arrays.fill(w, 1);
+		combination.setArcFlags(new ArcFlags(arc), 1000);
+		combination.setWeights(new Weights(w), 1000);
 		MapManager.getInstance().saveMap(combination.getStreetMap());
 		ProfileMapManager.getInstance().setCurrentCombination(combination);
 	}
