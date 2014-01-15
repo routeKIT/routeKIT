@@ -16,7 +16,8 @@ import java.nio.channels.FileChannel.MapMode;
 public class ArcFlags {
 
 	/**
-	 * Die Arc-Flags des Graphen (als long-Bitvektoren).
+	 * Die Arc-Flags des Graphen (als long-Bitvektoren). Partition entspricht
+	 * dem niedrigsten Bit.
 	 */
 	private int[] flags;
 
@@ -31,7 +32,8 @@ public class ArcFlags {
 	}
 
 	/**
-	 * Gibt die Arc-Flags des angegebenen Abbiegevorgangs zurück.
+	 * Gibt die Arc-Flags des angegebenen Abbiegevorgangs zurück. Partition
+	 * entspricht dem niedrigsten Bit.
 	 * 
 	 * @param turn
 	 *            Die Nummer des Abbiegevorgangs.
