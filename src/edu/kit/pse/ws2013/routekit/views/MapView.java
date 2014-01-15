@@ -1,9 +1,12 @@
 package edu.kit.pse.ws2013.routekit.views;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -26,6 +30,7 @@ import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
+import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -159,7 +164,36 @@ public class MapView extends JPanel implements MouseListener,
 			g.setColor(Color.GREEN);
 			drawPoint(g, c);
 		}
+		final Route r = rm.getCurrentRoute();
+		if (r != null) {
+			drawRoute(g, r);
+		}
 		super.paintComponents(g);
+	}
+
+	private void drawRoute(Graphics g, final Route r) {
+		g.setColor(Color.BLACK);
+		Graphics2D g2 = (Graphics2D) g;
+		Stroke s = g2.getStroke();
+		g2.setStroke(new BasicStroke(10));
+		Coordinates last = null;
+		for (Coordinates co : new Iterable<Coordinates>() {
+
+			@Override
+			public Iterator<Coordinates> iterator() {
+				return r.getNodeIterator();
+			}
+
+		}) {
+			if (last != null) {
+				g.drawLine((int) ((last.getSmtX(zoom) - x) * 256),
+						(int) ((last.getSmtY(zoom) - y) * 256),
+						(int) ((co.getSmtX(zoom) - x) * 256),
+						(int) ((co.getSmtY(zoom) - y) * 256));
+			}
+			last = co;
+		}
+		g2.setStroke(s);
 	}
 
 	private void drawPoint(Graphics g, Coordinates c) {
