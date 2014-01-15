@@ -110,7 +110,6 @@ public class TileCache implements TileSource {
 		if (cacheVal != null && (tile = cacheVal.get()) != null) {
 			return tile;
 		}
-		map.remove(key);
 		waiting.addFirst(new TileJob(x, y, zoom));
 		return this.tile;
 	}
