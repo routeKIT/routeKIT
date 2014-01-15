@@ -20,6 +20,7 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
+import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -38,8 +39,14 @@ public class OSMParser {
 	 */
 	private List<Set<MapEdge>> edges = new ArrayList<>();
 
+	private int numberOfEdges = 0;
+
 	private float lat[];
 	private float lon[];
+
+	private EdgeProperties edgeProps[];
+	private int nodeArray[];
+	private int edgeArray[];
 
 	/**
 	 * Reads an OpenStreetMap data file and creates a {@link Graph} from it as
@@ -54,6 +61,7 @@ public class OSMParser {
 	 * @throws IOException
 	 *             if any I/O error occurs
 	 * @throws SAXException
+	 *             TODO
 	 */
 	public StreetMap parseOSM(File file) throws SAXException, IOException {
 		if (file == null) {
@@ -70,7 +78,26 @@ public class OSMParser {
 		parser.parse(file, new FirstRunHandler());
 		parser.parse(file, new SecondRunHandler());
 
-		return null;
+		createAdjacencyField();
+		Graph graph = new Graph(nodeArray, edgeArray, null, edgeProps, lat, lon);
+
+		return new StreetMap(graph, null);
+	}
+
+	private void createAdjacencyField() {
+		nodeArray = new int[nodes.size()];
+		edgeArray = new int[numberOfEdges];
+		edgeProps = new EdgeProperties[numberOfEdges];
+
+		int edgeCount = 0;
+		for (int node = 0; node < nodes.size(); node++) {
+			nodeArray[node] = edgeCount;
+			for (MapEdge edge : edges.get(node)) {
+				edgeProps[edgeCount] = edge.getWay().getEdgeProperties();
+				edgeArray[edgeCount] = edge.getTargetNode();
+				edgeCount++;
+			}
+		}
 	}
 
 	/*
@@ -109,7 +136,9 @@ public class OSMParser {
 				OSMWay way = new OSMWay(wayTags);
 				if (way.getHighwayType() != null) {
 					for (int i = 0; i < wayNodes.size() - 1; i++) {
-						addEdge(wayNodes.get(i), wayNodes.get(i + 1), way);
+						int from = resolveNodeID(wayNodes.get(i));
+						int to = resolveNodeID(wayNodes.get(i + 1));
+						addEdge(from, to, way);
 					}
 				}
 
@@ -122,13 +151,11 @@ public class OSMParser {
 			}
 		}
 
-		private void addEdge(Integer fromID, Integer toID, OSMWay way) {
-			int from = resolveNodeID(fromID);
-			int to = resolveNodeID(toID);
-
+		private void addEdge(int from, int to, OSMWay way) {
 			edges.get(from).add(new MapEdge(to, way));
+			numberOfEdges++;
 			if (!way.isOneway()) {
-				edges.get(to).add(new MapEdge(from, way));
+				addEdge(to, from, way);
 			}
 		}
 
