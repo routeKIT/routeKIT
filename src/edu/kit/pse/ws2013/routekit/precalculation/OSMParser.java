@@ -138,7 +138,12 @@ public class OSMParser {
 					for (int i = 0; i < wayNodes.size() - 1; i++) {
 						int from = resolveNodeID(wayNodes.get(i));
 						int to = resolveNodeID(wayNodes.get(i + 1));
-						addEdge(from, to, way);
+						if (!way.isReversedOneway()) {
+							addEdge(from, to, way);
+						}
+						if (!way.isOneway()) {
+							addEdge(to, from, way);
+						}
 					}
 				}
 
@@ -154,9 +159,6 @@ public class OSMParser {
 		private void addEdge(int from, int to, OSMWay way) {
 			edges.get(from).add(new MapEdge(to, way));
 			numberOfEdges++;
-			if (!way.isOneway()) {
-				addEdge(to, from, way);
-			}
 		}
 
 		private int resolveNodeID(Integer id) {

@@ -34,7 +34,7 @@ public class OSMWay {
 	}
 
 	/**
-	 * Determines if this way is (part of) a roundabout.
+	 * Determines whether this way is (part of) a roundabout.
 	 * 
 	 * @return {@code true} if it is a roundabout, otherwise {@code false}
 	 */
@@ -44,10 +44,10 @@ public class OSMWay {
 	}
 
 	/**
-	 * Determines if this way constitutes a one-way street.
+	 * Determines whether this way constitutes a one-way street.
 	 * 
 	 * @return {@code true} if this way is a one-way street, or {@code false} if
-	 *         it can be used in both directions
+	 *         it can also be used in the opposite direction
 	 */
 	public boolean isOneway() {
 		if (!props.containsKey("oneway")) {
@@ -61,10 +61,22 @@ public class OSMWay {
 		case "no":
 		case "false":
 		case "0":
+		case "-1":
 			return false;
 		default:
 			return isRoundabout() || getHighwayType() == HighwayType.Motorway;
 		}
+	}
+
+	/**
+	 * Determines whether this way constitutes a one-way street in reversed way
+	 * order.
+	 * 
+	 * @return {@code true} if this way is a one-way street in the opposite
+	 *         direction, or {@code false} if not
+	 */
+	public boolean isReversedOneway() {
+		return props.containsKey("oneway") && props.get("oneway").equals("-1");
 	}
 
 	/**
