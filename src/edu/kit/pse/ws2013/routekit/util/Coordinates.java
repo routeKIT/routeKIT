@@ -114,8 +114,14 @@ public class Coordinates {
 	 */
 	public static Coordinates fromSmt(float x, float y, int zoom) {
 		int limit = 1 << zoom;
-		x = (x % limit + limit) % limit;
-		y = (y % limit + limit) % limit;
+		x %= limit;
+		y %= limit;
+		if (x < 0) {
+			x = (x + limit) % limit;
+		}
+		if (y < 0) {
+			y = (y + limit) % limit;
+		}
 		float lon = (float) (x / Math.pow(2.0, zoom) * 360.0 - 180);
 		double n = Math.PI - (2.0 * Math.PI * y) / Math.pow(2.0, zoom);
 		float lat = (float) Math.toDegrees(Math.atan(Math.sinh(n)));
