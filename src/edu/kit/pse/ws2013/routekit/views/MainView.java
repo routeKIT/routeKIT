@@ -28,10 +28,13 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
+import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
+import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -69,6 +72,20 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		JPanel right = initRightPanel(routeModel);
 		contentPane.add(right, JSplitPane.RIGHT);
+
+		ProfileMapManager.getInstance().addCurrentCombinationListener(
+				new CurrentCombinationListener() {
+
+					@Override
+					public void currentCombinationChanged(
+							ProfileMapCombination newCombination) {
+						profileLabel.setText(newCombination.getProfile()
+								.getName());
+						mapLabel.setText(newCombination.getStreetMap()
+								.getName());
+						mapView.setEnabled(newCombination.isCalculated());
+					}
+				});
 
 		setContentPane(contentPane);
 		setVisible(true);
@@ -237,7 +254,9 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		buttons.add(mapButton);
-		mapLabel = new JLabel("Karlsruhe");
+		ProfileMapCombination currentCombination = ProfileMapManager
+				.getInstance().getCurrentCombination();
+		mapLabel = new JLabel(currentCombination.getStreetMap().getName());
 		buttons.add(mapLabel);
 
 		JButton profileButton = new JButton("Profil");
@@ -248,7 +267,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		buttons.add(profileButton);
-		profileLabel = new JLabel("PKW [default]");
+		profileLabel = new JLabel(currentCombination.getProfile().getName());
 		buttons.add(profileLabel);
 		buttons.setBackground(Color.WHITE);
 

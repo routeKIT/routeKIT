@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
-import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
@@ -193,32 +192,6 @@ public class MainController {
 	 */
 	public TileSource getTileSource() {
 		return null;
-	}
-
-	/**
-	 * Wählt das angegebene Profil aus.
-	 * 
-	 * @param profile
-	 *            Das aktuelle Profil.
-	 */
-	public void selectProfile(Profile profile) {
-		// TODO must set pmc – Lucas
-		if (mapManagement != null && mapManagement.getView().isVisible()) {
-			mapManagement.getView().addProfile(profile);
-		} else {
-			// MainView
-		}
-	}
-
-	/**
-	 * Wählt die angegebene Karte aus.
-	 * 
-	 * @param map
-	 *            Die aktuelle Karte.
-	 */
-	public void selectMap(StreetMap map) {
-		// TODO must set pmc – Lucas
-		mapManagement = null;
 	}
 
 	public static MainController getInstance() {

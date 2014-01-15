@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
@@ -33,6 +34,7 @@ public class ProfileMapManager {
 	private final File root;
 	private ProfileMapCombination current;
 	private final Set<ProfileMapCombination> combinations;
+	private final Set<CurrentCombinationListener> listeners = new HashSet<>();
 
 	private ProfileMapManager(File root) throws IOException {
 		this.root = root;
@@ -129,6 +131,11 @@ public class ProfileMapManager {
 		return current;
 	}
 
+	public void addCurrentCombinationListener(
+			CurrentCombinationListener listener) {
+		listeners.add(listener);
+	}
+
 	/**
 	 * Sets the current combination to the given one.
 	 * <p>
@@ -172,6 +179,9 @@ public class ProfileMapManager {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		for (CurrentCombinationListener listener : listeners) {
+			listener.currentCombinationChanged(combination);
 		}
 	}
 
