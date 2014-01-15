@@ -65,7 +65,7 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public String getDescription() {
-				return "OSM(*.osm)";
+				return "OSM (*.osm)";
 			}
 
 		});
