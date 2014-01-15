@@ -32,7 +32,7 @@ public class OSMParser {
 	/*
 	 * Maps OSM node IDs to our node indexes.
 	 */
-	private Map<Integer, Integer> nodes = new HashMap<>();
+	private Map<Long, Integer> nodes = new HashMap<>();
 
 	/*
 	 * Contains the outgoing edges for each node.
@@ -107,7 +107,7 @@ public class OSMParser {
 		private String enclosing;
 
 		private Map<String, String> wayTags;
-		private List<Integer> wayNodes;
+		private List<Long> wayNodes;
 
 		@Override
 		public void startElement(String uri, String localName, String qName,
@@ -121,7 +121,7 @@ public class OSMParser {
 				enclosing = qName;
 				break;
 			case "nd":
-				wayNodes.add(Integer.parseInt(attr.getValue("ref")));
+				wayNodes.add(Long.parseLong(attr.getValue("ref")));
 				break;
 			case "tag":
 				if (enclosing.equals("way")) {
@@ -161,7 +161,7 @@ public class OSMParser {
 			numberOfEdges++;
 		}
 
-		private int resolveNodeID(Integer id) {
+		private int resolveNodeID(Long id) {
 			if (!nodes.containsKey(id)) {
 				nodes.put(id, nodes.size());
 				edges.add(new HashSet<MapEdge>(1));
