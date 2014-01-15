@@ -240,7 +240,7 @@ public class MapView extends JPanel implements MouseListener,
 		if (!isEnabled()) {
 			return;
 		}
-		if (e.isPopupTrigger()) {
+		if (e.getButton() != MouseEvent.BUTTON1) {
 			return;
 		}
 		applyDrag(e);
