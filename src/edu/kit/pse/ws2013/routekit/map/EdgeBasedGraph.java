@@ -32,6 +32,7 @@ public class EdgeBasedGraph {
 	private int[] turns;
 	private TurnType[] turnTypes;
 	private Map<Integer, Restriction> restrictions;
+	private int[] turnsReverse;
 
 	/**
 	 * Konstruktor: Erzeugt ein neues Objekt aus dem gegebenen Adjazenzfeld.
@@ -51,6 +52,16 @@ public class EdgeBasedGraph {
 		this.turns = turns;
 		this.turnTypes = turnTypes;
 		this.restrictions = restrictions;
+		this.turnsReverse = new int[edges.length];
+		int currentEdge = 0;
+		for (int i = 0; i < turns.length; i++) {
+			while (currentEdge + 1 < edges.length
+					&& edges[currentEdge + 1] <= i) {
+				currentEdge++;
+
+			}
+			turnsReverse[i] = currentEdge;
+		}
 	}
 
 	public int[] getEdges() {
@@ -113,7 +124,7 @@ public class EdgeBasedGraph {
 	 * @return
 	 */
 	public int getStartEdge(int turn) {
-		throw new Error("Unimplemented");
+		return turnsReverse[turn];
 	}
 
 	/**
