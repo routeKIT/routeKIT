@@ -110,11 +110,17 @@ public class ProfileMapManager {
 		}
 		if (current == null) {
 			// choose any precalculation
-			this.current = this.combinations.iterator().next();
-			if (this.current == null) {
+			if (!this.combinations.isEmpty()) {
+				this.current = this.combinations.iterator().next();
+			} else {
 				// there are no precalculations
-				selectProfileAndMap(Profile.defaultCar, mapsByName.values()
-						.iterator().next());
+				if (!mapsByName.isEmpty()) {
+					selectProfileAndMap(Profile.defaultCar, mapsByName.values()
+							.iterator().next());
+				} else {
+					// TODO disallow this
+					// we’ll allow it for now for Dummies
+				}
 			}
 		}
 	}
