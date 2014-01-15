@@ -171,8 +171,8 @@ public class MapView extends JPanel implements MouseListener,
 		}
 	}
 
-	int dx = 0;
-	int dy = 0;
+	int dx = -1;
+	int dy = -1;
 	double orgX;
 	double orgY;
 
@@ -212,6 +212,8 @@ public class MapView extends JPanel implements MouseListener,
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			applyDrag(e);
 		}
+		dx = -1;
+		dy = -1;
 	}
 
 	private void doPop(MouseEvent e) {
@@ -240,7 +242,7 @@ public class MapView extends JPanel implements MouseListener,
 		if (!isEnabled()) {
 			return;
 		}
-		if (e.getButton() != MouseEvent.BUTTON1) {
+		if (dx == -1) {
 			return;
 		}
 		applyDrag(e);
