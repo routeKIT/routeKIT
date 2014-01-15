@@ -227,19 +227,22 @@ public class Graph {
 			int nEdges = edges.length;
 			raf.writeInt(nNodes);
 			raf.writeInt(nEdges);
+			final int headerLength = 2 + "routeKIT".length() + 3 + 8;
+			assert (raf.getFilePointer() == headerLength);
+			final int intsLength = nNodes * 4 + nEdges * 4;
+			final int floatsLength = nNodes * 4 + nNodes * 4;
+			final int dataLength = intsLength + floatsLength;
 			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_WRITE,
-					2 + "routeKIT".length() + 3 + 8,
-					nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4);
+					headerLength, dataLength);
 			IntBuffer ints = b.asIntBuffer();
 			ints.put(nodes, 0, nNodes);
 			ints.put(edges, 0, nEdges);
-			b.position(b.position() + 4 * nNodes + 4 * nEdges);
+			b.position(intsLength);
 			FloatBuffer floats = b.asFloatBuffer();
 			floats.put(lat, 0, nNodes);
 			floats.put(lon, 0, nNodes);
 
-			raf.seek(raf.getFilePointer()
-					+ (nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4));
+			raf.seek(headerLength + dataLength);
 
 			for (Entry<Integer, NodeProperties> entry : nodeProps.entrySet()) {
 				raf.writeInt(entry.getKey());
@@ -299,6 +302,10 @@ public class Graph {
 
 			int nNodes = raf.readInt();
 			int nEdges = raf.readInt();
+			final int headerLength = 2 + "routeKIT".length() + 3 + 8;
+			assert (raf.getFilePointer() == headerLength);
+			final int dataLength = nNodes * 4 + nEdges * 4 + nNodes * 4
+					+ nNodes * 4;
 			int[] nodes = new int[nNodes];
 			int[] edges = new int[nEdges];
 			float[] lats = new float[nNodes];
@@ -314,8 +321,7 @@ public class Graph {
 			floats.get(lats, 0, nNodes);
 			floats.get(lons, 0, nNodes);
 
-			raf.seek(raf.getFilePointer()
-					+ (nNodes * 4 + nEdges * 4 + nNodes * 4 + nNodes * 4));
+			raf.seek(headerLength + dataLength);
 
 			Map<Integer, NodeProperties> nodeProps = new HashMap<>();
 			int node;

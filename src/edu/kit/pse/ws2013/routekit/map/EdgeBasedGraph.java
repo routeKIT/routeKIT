@@ -222,22 +222,27 @@ public class EdgeBasedGraph {
 			int nTurns = turns.length;
 			raf.writeInt(nEdges);
 			raf.writeInt(nTurns);
+			final int headerLength = 2 + "routeKIT".length() + 3 + 8;
+			assert (raf.getFilePointer() == headerLength);
+			int intsLength = nEdges * 4 + nTurns * 4 + nEdges * 4;
+			int bytesLength = nTurns;
+			final int dataLength = intsLength + bytesLength;
 			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_WRITE,
-					2 + "routeKIT".length() + 3 + 8,
-					nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4);
+					headerLength, dataLength);
 			IntBuffer ints = b.asIntBuffer();
 			ints.put(edges, 0, nEdges);
 			ints.put(turns, 0, nTurns);
 			ints.put(partitions, 0, nEdges);
-			b.position(b.position() + nEdges * 4 + nTurns * 4 + nEdges * 4);
+			assert (ints.position() == intsLength / 4);
+			b.position(intsLength);
 			byte[] byteTurnTypes = new byte[nTurns];
 			for (int i = 0; i < nTurns; i++) {
 				byteTurnTypes[i] = (byte) turnTypes[i].ordinal();
 			}
 			b.put(byteTurnTypes, 0, nTurns);
+			assert (b.position() == dataLength);
 
-			raf.seek(raf.getFilePointer() + nEdges * 4 + nTurns * 4 + nEdges
-					* 4 + nTurns * 4);
+			raf.seek(headerLength + dataLength);
 
 			Map<Restriction, Set<Integer>> reverseRestrictions = new HashMap<>();
 			for (int i = 0; i < nTurns; i++) {
@@ -293,26 +298,30 @@ public class EdgeBasedGraph {
 
 			int nEdges = raf.readInt();
 			int nTurns = raf.readInt();
+			final int headerLength = 2 + "routeKIT".length() + 3 + 8;
+			assert (raf.getFilePointer() == headerLength);
+			int intsLength = nEdges * 4 + nTurns * 4 + nEdges * 4;
+			int bytesLength = nTurns;
+			final int dataLength = intsLength + bytesLength;
 			int[] edges = new int[nEdges];
 			int[] turns = new int[nTurns];
 			int[] partitions = new int[nEdges];
 			byte[] byteTurnTypes = new byte[nTurns];
 			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_ONLY,
-					2 + "routeKIT".length() + 3 + 8,
-					nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4);
+					headerLength, dataLength);
 			IntBuffer ints = b.asIntBuffer();
 			ints.get(edges, 0, nEdges);
 			ints.get(turns, 0, nTurns);
 			ints.get(partitions, 0, nEdges);
-			b.position(b.position() + nEdges * 4 + nTurns * 4 + nEdges * 4);
+			b.position(intsLength);
 			b.get(byteTurnTypes, 0, nTurns);
 			TurnType[] turnTypes = new TurnType[nTurns];
 			for (int i = 0; i < nTurns; i++) {
 				turnTypes[i] = TurnType.values()[byteTurnTypes[i]];
 			}
+			assert (b.position() == dataLength);
 
-			raf.seek(raf.getFilePointer()
-					+ (nEdges * 4 + nTurns * 4 + nEdges * 4 + nTurns * 4));
+			raf.seek(headerLength + dataLength);
 
 			Map<Integer, Restriction> restrictions = new HashMap<>();
 			int length;
