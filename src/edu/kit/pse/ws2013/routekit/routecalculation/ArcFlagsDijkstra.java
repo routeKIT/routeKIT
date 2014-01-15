@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
@@ -101,16 +102,10 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 	private Route calculateDummy(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data) {
 		List<Integer> turns = new ArrayList<Integer>();
-		turns.add(start.getEdge());
-
-		Set<Integer> eins = data.getStreetMap().getEdgeBasedGraph()
-				.getOutgoingTurns(start.getEdge());
-
-		for (Integer integer : eins) {
-			int turn = data.getStreetMap().getEdgeBasedGraph()
-					.getTargetEdge(integer);
-			turns.add(turn);
-		}
+		EdgeBasedGraph ebg = data.getStreetMap().getEdgeBasedGraph();
+		int t1 = ebg.getOutgoingTurns(start.getEdge()).iterator().next();
+		turns.add(t1);
+		turns.add(ebg.getOutgoingTurns(ebg.getTargetEdge(t1)).iterator().next());
 
 		// turns.add(data.getStreetMap().getEdgeBasedGraph().getTargetEdge(data.getStreetMap().getEdgeBasedGraph().getOutgoingTurns(start.getEdge()).iterator().next()));
 
