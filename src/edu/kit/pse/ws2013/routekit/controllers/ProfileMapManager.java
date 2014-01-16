@@ -136,6 +136,26 @@ public class ProfileMapManager {
 		listeners.add(listener);
 	}
 
+	public void save(ProfileMapCombination precalculation) {
+		if (!precalculation.isCalculated()) {
+			throw new IllegalArgumentException("Not a precalculation!");
+		}
+		// 1. save the precalculation
+		try {
+			precalculation.save(new File(new File(root, precalculation
+					.getStreetMap().getName()), precalculation.getProfile()
+					.getName()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// 2. write a new index file
+		try {
+			rewriteIndex();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Sets the current combination to the given one.
 	 * <p>
@@ -144,8 +164,8 @@ public class ProfileMapManager {
 	 * only remembered as the "current" one, and forgotten as soon as this
 	 * method is called with another combination; if it is precalculated, it’s
 	 * stored in the internal list of {@link ProfileMapCombination
-	 * ProfileMapCombinations} and saved to disk (it’s assumed that the profile
-	 * and the map are already saved).
+	 * ProfileMapCombinations} and {@link #save(ProfileMapCombination) saved} to
+	 * disk (it’s assumed that the profile and the map are already saved).
 	 * <p>
 	 * Note that you’d usually want to use
 	 * {@link #selectProfileAndMap(Profile, StreetMap)} instead of this method,
@@ -164,21 +184,7 @@ public class ProfileMapManager {
 		current = combination;
 		if (current.isCalculated()) {
 			combinations.add(combination);
-			// save to disk:
-			// 1. save the precalculation
-			try {
-				combination.save(new File(new File(root, combination
-						.getStreetMap().getName()), combination.getProfile()
-						.getName()));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			// 2. write a new index file
-			try {
-				rewriteIndex();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			save(combination);
 		}
 		for (CurrentCombinationListener listener : listeners) {
 			listener.currentCombinationChanged(combination);
