@@ -16,9 +16,13 @@ import java.util.Set;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
- * Ein Kartengraph/Straßennetz. Beachte: Dieser Graph ist nicht das Ergebnis
- * einer Vorberechnung für ein Profil und eine Karte, sondern nur für eine
- * Karte.
+ * A street map graph.
+ * 
+ * <p>
+ * Note that this graph data structure is profile-independent and, like
+ * {@link EdgeBasedGraph}, is created when a new map is imported.
+ * 
+ * @see StreetMap
  */
 public class Graph {
 	int[] nodes;
@@ -30,28 +34,26 @@ public class Graph {
 	float[] lon;
 
 	/**
-	 * Konstruktor: Erzeugt ein neues Graph-Objekt aus dem gegebenen
-	 * Adjazenzfeld.
+	 * Creates a new {@code Graph} from the given adjacency field.
 	 * 
 	 * @param nodes
-	 *            Der Knoten-Bestandteil des Adjazenzfeldes.
+	 *            the node array of the adjacency field
 	 * @param edges
-	 *            Der Kanten-Bestandteil des Adjazenzfeldes.
+	 *            the edge array of the adjacency field
 	 * @param nodeProps
-	 *            Die {@code NodeProperties} der Knoten des Graphen. Es wird
-	 *            eine {@code Map} anstelle eines Arrays verwendet, da die
-	 *            meisten Knoten keine besonderen Eigenschaften haben und daher
-	 *            das Array zum großen Teil leer wäre.
-	 * 
+	 *            the properties of the nodes (A {@code Map} of
+	 *            {@code NodeProperties} is used here as most nodes do not have
+	 *            any special properties and an array would be empty for the
+	 *            most part.)
 	 * @param edgeProps
-	 *            Die {@code EdgeProperties} der Kanten des Graphen. Hier wird
-	 *            ein Array verwendet, da jede Kante einen Namen und damit ein
-	 *            {@code EdgeProperties}-Objekt hat.
-	 * 
+	 *            the properties of the edges
 	 * @param lat
-	 *            Die geographischen Breiten der Knoten des Graphen.
+	 *            the latitudes of the nodes
 	 * @param lon
-	 *            Die geographischen Längen der Knoten des Graphen.
+	 *            the longitudes of the nodes
+	 * @throws IllegalArgumentException
+	 *             if {@code edgeProps} does not have as many elements as
+	 *             {@code edges}
 	 */
 	public Graph(int[] nodes, int[] edges,
 			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
@@ -79,44 +81,44 @@ public class Graph {
 	}
 
 	/**
-	 * Gibt die {@code NodeProperties} des angegebenen Knotens zurück.
+	 * Returns the {@code NodeProperties} of the given node.
 	 * 
 	 * @param node
-	 *            Der Knoten, dessen {@link NodeProperties} gesucht werden.
-	 * @return
+	 *            a node
+	 * @return the properties of the node, or {@code null} if none
 	 */
 	public NodeProperties getNodeProperties(int node) {
 		return nodeProps.get(node);
 	}
 
 	/**
-	 * Gibt die Koordinaten des angegebenen Knotens zurück.
+	 * Returns the coordinates of the given node.
 	 * 
 	 * @param node
-	 *            Der Knoten, dessen Koordinaten gesucht werden.
-	 * @return
+	 *            a node
+	 * @return the {@link Coordinates} of the node
 	 */
 	public Coordinates getCoordinates(int node) {
 		return new Coordinates(lat[node], lon[node]);
 	}
 
 	/**
-	 * Gibt den Startknoten der angegebenen Kante zurück.
+	 * Returns the start node of the given edge.
 	 * 
 	 * @param edge
-	 *            Die Kante, dessen Startknoten gesucht wird.
-	 * @return
+	 *            an edge
+	 * @return the start node of the edge
 	 */
 	public int getStartNode(int edge) {
 		return edgesReverse[edge];
 	}
 
 	/**
-	 * Gibt alle ausgehenden Kanten des angegebenen Knotens zurück.
+	 * Returns a set of all outgoing edges of the given node.
 	 * 
 	 * @param node
-	 *            Der Knoten, dessen ausgehende Kanten gesucht werden.
-	 * @return
+	 *            a node
+	 * @return all edges going out from this node
 	 */
 	public Set<Integer> getOutgoingEdges(int node) {
 		return new IntArraySet(nodes[node],
@@ -125,44 +127,45 @@ public class Graph {
 	}
 
 	/**
-	 * Gibt eine geometrische Datenstruktur zur angegebenen Zoomstufe zurück.
+	 * Returns a geometric data structure for fast edge search in the given zoom
+	 * level.
 	 * 
 	 * @param zoom
-	 *            Die Zoomstufe.
-	 * @return
+	 *            the zoom level
+	 * @return the {@link GraphIndex} data structure
 	 */
 	public GraphIndex getIndex(int zoom) {
 		return new GraphIndex(this, zoom);
 	}
 
 	/**
-	 * Gibt alle in den Knoten eingehende Kanten zurück.
+	 * Returns a set of all incoming edges of the given node.
 	 * 
 	 * @param node
-	 *            Der Knoten, dessen eingehende Kanten gesucht werden.
-	 * @return
+	 *            a node
+	 * @return all edges coming in at that node
 	 */
 	public Set<Integer> getIncomingEdges(int node) {
 		return null;
 	}
 
 	/**
-	 * Gibt die {@code EdgeProperties} der angegebenen Kante zurück.
+	 * Returns the {@link EdgeProperties} of the given edge.
 	 * 
 	 * @param edge
-	 *            Die Kante, deren {@link EdgeProperties} gesucht werden.
-	 * @return
+	 *            an edge
+	 * @return the properties of the edge
 	 */
 	public EdgeProperties getEdgeProperties(int edge) {
 		return edgeProps[edge];
 	}
 
 	/**
-	 * Gibt den Endknoten der angegebenen Kante zurück.
+	 * Returns the end node of the given edge.
 	 * 
 	 * @param edge
-	 *            Die Kante, dessen Endknoten gesucht wird.
-	 * @return
+	 *            an edge
+	 * @return the end node of the edge
 	 */
 	public int getTargetNode(int edge) {
 		return edges[edge];

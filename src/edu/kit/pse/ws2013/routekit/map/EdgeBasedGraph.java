@@ -16,15 +16,17 @@ import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
- * Enthält das Straßennetz als kantenbasierten Graphen. Die Knoten dieses
- * Graphen entsprechen den Kanten des zugehörigen {@link Graph}-Objekts und
- * werden daher mit {@code Edge} bezeichnet. Die Kanten dieses Graphen
- * repräsentieren Abbiegemöglichkeiten und werden mit {@code Turn} bezeichnet.
+ * An edge-based graph of the street network. The nodes of this graph are
+ * identical to to the edges of the corresponding {@link Graph} and are
+ * therefore referred to as "edges". The actual edges of this graph represent
+ * possible turns and are referred to as "turns".
  * 
- * Diese Datenstruktur ist unabhängig vom Profil und wird wie {@link Graph} bei
- * der Vorberechnung für eine Karte erstellt. Erst in Kombination mit den
- * profilspezifischen {@link Weights} kann sie zur Routenberechnung verwendet
- * werden.
+ * <p>
+ * Note that this graph data structure is profile-independent and is built after
+ * the corresponding {@link Graph} when importing a new map. Only in combination
+ * of profile-specific {@link Weights} it can be used for route calculation.
+ * 
+ * @see StreetMap
  */
 public class EdgeBasedGraph {
 	private int[] partitions;
@@ -35,16 +37,16 @@ public class EdgeBasedGraph {
 	private int[] turnsReverse;
 
 	/**
-	 * Konstruktor: Erzeugt ein neues Objekt aus dem gegebenen Adjazenzfeld.
+	 * Creates a new {@code EdgeBasedGraph} from the given adjacency field.
 	 * 
 	 * @param edges
-	 *            Das Knoten-Array (Kanten im Straßengraph) des Adjazenzfelds.
+	 *            the node array (edges in {@link Graph}) of the adjacency field
 	 * @param turns
-	 *            Das Kanten-Array (Abbiegemöglichkeiten) des Adjazenzfelds.
+	 *            the edge array (turns) of the adjacency field
 	 * @param turnTypes
-	 *            Die Typen der Abbiegemöglichkeiten.
+	 *            the types of the turns
 	 * @param restrictions
-	 *            Die Beschränkungen der Abbiegemöglichkeiten.
+	 *            the restrictions of the turns
 	 */
 	public EdgeBasedGraph(int[] edges, int[] turns, TurnType[] turnTypes,
 			Map<Integer, Restriction> restrictions) {
@@ -69,85 +71,82 @@ public class EdgeBasedGraph {
 	}
 
 	/**
-	 * Gibt die Partition zurück, in der sich die angegebene Kante (der Knoten
-	 * des kantenbasierten Graphen) befindet.
-	 * 
-	 * Ist noch keine Partitionierung gegeben, so wird immer eine
-	 * Standard-Partition zurückgegeben.
+	 * Returns the partition in which the given edge (i. e. the node in
+	 * {@link Graph}) is located.
 	 * 
 	 * @param edge
-	 *            Die Kante, deren Partition bestimmt werden soll.
-	 * @return
+	 *            an edge
+	 * @return the partition in which the edge lies, or a standard partition if
+	 *         no partitions have been set yet
 	 */
 	public int getPartition(int edge) {
 		return partitions[edge];
 	}
 
 	/**
-	 * Setzt die Partitionen des Graphen. Die {@code Edge}s des Graphen sind die
-	 * Indizes in {@code partitions}.
+	 * Sets the partitions of this graph. The indices of {@code partitions}
+	 * correspond to the edges of the graph.
 	 * 
 	 * @param partitions
-	 *            Die neuen Partitionen.
+	 *            the new partitions
 	 */
 	public void setPartitions(int[] partitions) {
 		this.partitions = partitions;
 	}
 
 	/**
-	 * Gibt die Kante zurück, auf die die angegebene Abbiegemöglichkeit führt.
+	 * Returns the edge onto which the given turn leads.
 	 * 
 	 * @param turn
-	 *            Die Abbiegemöglichkeit, deren Endkante gesucht wird.
-	 * @return
+	 *            a turn
+	 * @return the target edge of the turn
 	 */
 	public int getTargetEdge(int turn) {
 		return turns[turn];
 	}
 
 	/**
-	 * Gibt die Art des angegebenen Abbiegevorgangs zurück.
+	 * Returns the {@link TurnType} of the given turn.
 	 * 
 	 * @param turn
-	 *            Der Abbiegevorgang, dessen Art gesucht wird.
-	 * @return
+	 *            a turn
+	 * @return the type of the turn
 	 */
 	public TurnType getTurnType(int turn) {
 		return turnTypes[turn];
 	}
 
 	/**
-	 * Gibt die Kante zurück, von der die angegebene Abbiegemöglichkeit besteht.
+	 * Returns the edge from which the given turn exists.
 	 * 
 	 * @param turn
-	 *            Die Abbiegemöglichkeit, deren Anfangskante gesucht wird.
-	 * @return
+	 *            a turn
+	 * @return the start edge of the turn
 	 */
 	public int getStartEdge(int turn) {
 		return turnsReverse[turn];
 	}
 
 	/**
-	 * Bestimmt, ob der angegebene Abbiegevorgang unter dem angegeben Profil
-	 * zulässig ist.
+	 * Determines whether the use of the given turn is allowed according to the
+	 * specified profile.
 	 * 
 	 * @param turn
-	 *            Der zu betrachtende Abbiegevorgang.
+	 *            the turn in question
 	 * @param profile
-	 *            Das verwendete Profil.
-	 * @return
+	 *            the profile in use
+	 * @return {@code true} if the turn can be used, otherwise {@code false}
 	 */
 	public boolean allowsTurn(int turn, Profile profile) {
 		return restrictions.get(turn).allows(profile);
 	}
 
 	/**
-	 * Gibt alle Abbiegemöglichkeiten <b>von</b> der angegebenen Kante zurück.
+	 * Returns a set of all turns <i>from</i> the given edge.
 	 * 
 	 * @param edge
-	 *            Die Kante, deren ausgehende Abbiegemöglichkeiten gesucht
-	 *            werden.
-	 * @return
+	 *            an edge
+	 * @return all outgoing turns of the edge
 	 */
 	public Set<Integer> getOutgoingTurns(int edge) {
 		return new IntArraySet(edges[edge],
@@ -156,17 +155,21 @@ public class EdgeBasedGraph {
 	}
 
 	/**
-	 * Gibt alle Abbiegemöglichkeiten <b>auf</b> die angegebene Kante zurück.
+	 * Returns a set of all turns <i>onto</i> the given edge.
 	 * 
 	 * @param edge
-	 *            Die Kante, deren eingehende Abbiegemöglichkeiten gesucht
-	 *            werden.
-	 * @return
+	 *            an edge
+	 * @return all incoming turns of the edge
 	 */
 	public Set<Integer> getIncomingTurns(int edge) {
 		throw new Error("Unimplemented");
 	}
 
+	/**
+	 * Returns the number of turns in this graph.
+	 * 
+	 * @return the number of turns
+	 */
 	public int getNumberOfTurns() {
 		return turns.length;
 	}
