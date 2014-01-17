@@ -171,7 +171,12 @@ public class Graph {
 		return edges[edge];
 	}
 
-	public int getEdgesCount() {
+	/**
+	 * Returns the number of edges in this graph.
+	 * 
+	 * @return the number of edges
+	 */
+	public int getNumberOfEdges() {
 		return edges.length;
 	}
 

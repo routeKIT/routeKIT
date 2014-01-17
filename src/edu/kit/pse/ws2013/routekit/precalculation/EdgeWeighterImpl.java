@@ -28,7 +28,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 		EdgeBasedGraph eGraph = combination.getStreetMap().getEdgeBasedGraph();
 		Profile profile = combination.getProfile();
 		int[] weightArray = new int[eGraph.getNumberOfTurns()];
-		for (int edge = 0; edge < graph.getEdgesCount(); edge++) {
+		for (int edge = 0; edge < graph.getNumberOfEdges(); edge++) {
 			EdgeProperties currentEdgeProps = graph.getEdgeProperties(edge);
 			int startNode = graph.getStartNode(edge);
 			int targetNode = graph.getTargetNode(edge);

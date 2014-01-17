@@ -132,7 +132,7 @@ public class GraphIndex {
 
 					@Override
 					public boolean hasNext() {
-						return current < graph.getEdgesCount();
+						return current < graph.getNumberOfEdges();
 					}
 
 					@Override
@@ -150,7 +150,7 @@ public class GraphIndex {
 
 			@Override
 			public int size() {
-				return graph.getEdgesCount();
+				return graph.getNumberOfEdges();
 			}
 		}, false, graph);
 	}
