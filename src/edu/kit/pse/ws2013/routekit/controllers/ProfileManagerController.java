@@ -19,10 +19,13 @@ public class ProfileManagerController {
 	private final ProfileManagerView pmv;
 	private final Map<String, Profile> profiles; // note: contents of the map
 													// are not final at all
+	private final Set<ProfileMapCombination> combinationsAtStartup;
 	private Profile currentProfile;
 	private Profile selectedProfile; // set in saveAllChanges
 
 	public ProfileManagerController(final Window parent) {
+		combinationsAtStartup = new HashSet<>(ProfileMapManager.getInstance()
+				.getCombinations());
 		profiles = new HashMap<>();
 		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
@@ -168,6 +171,25 @@ public class ProfileManagerController {
 	 */
 	public Profile getSelectedProfile() {
 		return selectedProfile;
+	}
+
+	/**
+	 * Returns the precalculations that were deleted because a profile was
+	 * changed or deleted.
+	 * 
+	 * @return The deleted precalculations.
+	 */
+	public Set<ProfileMapCombination> getDeletedPrecalculations() {
+		final ProfilesDiff diff = diff();
+		final Set<Profile> profiles = diff.getDeletedProfiles();
+		profiles.addAll(diff.getChangedProfiles());
+		final Set<ProfileMapCombination> ret = new HashSet<>();
+		for (ProfileMapCombination combination : combinationsAtStartup) {
+			if (profiles.contains(combination.getProfile())) {
+				ret.add(combination);
+			}
+		}
+		return ret;
 	}
 
 	private ProfilesDiff diff() {
