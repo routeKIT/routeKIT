@@ -23,12 +23,16 @@ import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
  * This class provides the functionality to parse an OpenStreetMap data file.
  */
 public class OSMParser {
+	private Graph graph;
+	private EdgeBasedGraph edgeBasedGraph;
+
 	/*
 	 * Maps OSM node IDs to our node indexes.
 	 */
@@ -40,13 +44,24 @@ public class OSMParser {
 	private List<Set<MapEdge>> edges = new ArrayList<>();
 
 	private int numberOfEdges = 0;
+	private int numberOfTurns = 0;
 
 	private float lat[];
 	private float lon[];
 
+	/*
+	 * The arrays for creating the Graph.
+	 */
+	private int nodesArray[];
+	private int edgesArray[];
 	private EdgeProperties edgeProps[];
-	private int nodeArray[];
-	private int edgeArray[];
+
+	/*
+	 * The arrays for creating the EdgedBasedGraph.
+	 */
+	private TurnType types[];
+	private int edgeNodesArray[];
+	private int turnsArray[];
 
 	/**
 	 * Reads an OpenStreetMap data file and creates a {@link Graph} from it as
@@ -79,25 +94,86 @@ public class OSMParser {
 		parser.parse(file, new SecondRunHandler());
 
 		createAdjacencyField();
-		Graph graph = new Graph(nodeArray, edgeArray, null, edgeProps, lat, lon);
+		graph = new Graph(nodesArray, edgesArray, null, edgeProps, lat, lon);
 
-		return new StreetMap(graph, null);
+		buildEdgeBasedGraph();
+		edgeBasedGraph = new EdgeBasedGraph(edgeNodesArray, turnsArray, types,
+				null);
+
+		return new StreetMap(graph, edgeBasedGraph);
 	}
 
 	private void createAdjacencyField() {
-		nodeArray = new int[nodes.size()];
-		edgeArray = new int[numberOfEdges];
+		nodesArray = new int[nodes.size()];
+		edgesArray = new int[numberOfEdges];
 		edgeProps = new EdgeProperties[numberOfEdges];
 
 		int edgeCount = 0;
 		for (int node = 0; node < nodes.size(); node++) {
-			nodeArray[node] = edgeCount;
+			nodesArray[node] = edgeCount;
 			for (MapEdge edge : edges.get(node)) {
+				edge.setId(edgeCount);
+				edgesArray[edgeCount] = edge.getTargetNode();
 				edgeProps[edgeCount] = edge.getWay().getEdgeProperties();
-				edgeArray[edgeCount] = edge.getTargetNode();
+				edgeCount++;
+				countTurns(edge);
+			}
+		}
+	}
+
+	private void countTurns(MapEdge edge) {
+		numberOfTurns += edges.get(edge.getTargetNode()).size();
+		if (!edge.getWay().isOneway() && !edge.getWay().isReversedOneway()) {
+			numberOfTurns--;
+		}
+	}
+
+	private void buildEdgeBasedGraph() {
+		edgeNodesArray = new int[numberOfEdges];
+		turnsArray = new int[numberOfTurns];
+		types = new TurnType[numberOfTurns];
+
+		int edgeCount = 0;
+		int turnCount = 0;
+		for (int node = 0; node < edges.size(); node++) {
+			for (MapEdge fromEdge : edges.get(node)) {
+				edgeNodesArray[edgeCount] = turnCount;
+				for (MapEdge toEdge : edges.get(fromEdge.getTargetNode())) {
+					if (toEdge.getTargetNode() != node) {
+						turnsArray[turnCount] = toEdge.getId();
+						types[turnCount] = determineTurnType(node, fromEdge,
+								toEdge);
+						turnCount++;
+					}
+				}
 				edgeCount++;
 			}
 		}
+	}
+
+	private TurnType determineTurnType(int nodeFrom, MapEdge fromEdge,
+			MapEdge toEdge) {
+		int node = fromEdge.getTargetNode();
+		if (graph.getOutgoingEdges(node).size() == 1) {
+			return TurnType.NoTurn;
+		}
+		// TODO: missing turn types
+		float angle = graph.getCoordinates(node).angleBetween(
+				graph.getCoordinates(nodeFrom),
+				graph.getCoordinates(toEdge.getTargetNode()));
+		if (angle <= 130) {
+			return TurnType.RightTurn;
+		}
+		if (angle <= 160) {
+			return TurnType.HalfRightTurn;
+		}
+		if (angle <= 200) {
+			return TurnType.StraightOn;
+		}
+		if (angle <= 240) {
+			return TurnType.HalfLeftTurn;
+		}
+		return TurnType.LeftTurn;
 	}
 
 	/*
@@ -195,7 +271,9 @@ public class OSMParser {
 					lon[node] = Coordinates
 							.parseLongitude(attr.getValue("lon"));
 				} catch (IllegalArgumentException e) {
-					throw new SAXParseException(null, locator, e);
+					throw new SAXParseException("Node " + node
+							+ ": Coordinates invalid or unspecified", locator,
+							e);
 				}
 				// fall through
 			case "osm":

@@ -5,14 +5,16 @@ package edu.kit.pse.ws2013.routekit.precalculation;
  * temporary representation used by the {@link OSMParser}.
  */
 public class MapEdge {
-	private int targetNode;
-	private OSMWay way;
+	private final int targetNode;
+	private final OSMWay way;
+
+	private int id = -1;
 
 	/**
 	 * Creates a new object with the given attributes.
 	 * 
 	 * @param targetNode
-	 *            the OSM node identifier of the target node
+	 *            the target node
 	 * @param way
 	 *            the OSM way to which the edge belongs
 	 */
@@ -22,9 +24,9 @@ public class MapEdge {
 	}
 
 	/**
-	 * Returns the OSM node identifier of the target node.
+	 * Returns the target node of this edge.
 	 * 
-	 * @return the ID of the target node
+	 * @return the target node
 	 */
 	public int getTargetNode() {
 		return targetNode;
@@ -38,4 +40,30 @@ public class MapEdge {
 	public OSMWay getWay() {
 		return way;
 	}
+
+	/**
+	 * Returns the identifier of this edge.
+	 * 
+	 * @return the edge identifier
+	 * @throws IllegalStateException
+	 *             if the identifier has not been set yet
+	 */
+	public int getId() {
+		if (id < 0) {
+			throw new IllegalStateException();
+		}
+
+		return id;
+	}
+
+	/**
+	 * Sets the identifier of this edge.
+	 * 
+	 * @param id
+	 *            the identifier to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }
