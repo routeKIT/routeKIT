@@ -52,16 +52,16 @@ public class OSMParser {
 	/*
 	 * The arrays for creating the Graph.
 	 */
-	private int nodesArray[];
-	private int edgesArray[];
+	private int graphNodes[];
+	private int graphEdges[];
 	private EdgeProperties edgeProps[];
 
 	/*
 	 * The arrays for creating the EdgedBasedGraph.
 	 */
-	private TurnType types[];
-	private int edgeNodesArray[];
-	private int turnsArray[];
+	private int ebgEdges[];
+	private int ebgTurns[];
+	private TurnType turnTypes[];
 
 	/**
 	 * Reads an OpenStreetMap data file and creates a {@link Graph} from it as
@@ -94,26 +94,25 @@ public class OSMParser {
 		parser.parse(file, new SecondRunHandler());
 
 		createAdjacencyField();
-		graph = new Graph(nodesArray, edgesArray, null, edgeProps, lat, lon);
+		graph = new Graph(graphNodes, graphEdges, null, edgeProps, lat, lon);
 
 		buildEdgeBasedGraph();
-		edgeBasedGraph = new EdgeBasedGraph(edgeNodesArray, turnsArray, types,
-				null);
+		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes, null);
 
 		return new StreetMap(graph, edgeBasedGraph);
 	}
 
 	private void createAdjacencyField() {
-		nodesArray = new int[nodes.size()];
-		edgesArray = new int[numberOfEdges];
+		graphNodes = new int[nodes.size()];
+		graphEdges = new int[numberOfEdges];
 		edgeProps = new EdgeProperties[numberOfEdges];
 
 		int edgeCount = 0;
 		for (int node = 0; node < nodes.size(); node++) {
-			nodesArray[node] = edgeCount;
+			graphNodes[node] = edgeCount;
 			for (MapEdge edge : edges.get(node)) {
 				edge.setId(edgeCount);
-				edgesArray[edgeCount] = edge.getTargetNode();
+				graphEdges[edgeCount] = edge.getTargetNode();
 				edgeProps[edgeCount] = edge.getWay().getEdgeProperties();
 				edgeCount++;
 				countTurns(edge);
@@ -129,20 +128,20 @@ public class OSMParser {
 	}
 
 	private void buildEdgeBasedGraph() {
-		edgeNodesArray = new int[numberOfEdges];
-		turnsArray = new int[numberOfTurns];
-		types = new TurnType[numberOfTurns];
+		ebgEdges = new int[numberOfEdges];
+		ebgTurns = new int[numberOfTurns];
+		turnTypes = new TurnType[numberOfTurns];
 
 		int edgeCount = 0;
 		int turnCount = 0;
 		for (int node = 0; node < edges.size(); node++) {
 			for (MapEdge fromEdge : edges.get(node)) {
-				edgeNodesArray[edgeCount] = turnCount;
+				ebgEdges[edgeCount] = turnCount;
 				for (MapEdge toEdge : edges.get(fromEdge.getTargetNode())) {
 					if (toEdge.getTargetNode() != node) {
-						turnsArray[turnCount] = toEdge.getId();
-						types[turnCount] = determineTurnType(node, fromEdge,
-								toEdge);
+						ebgTurns[turnCount] = toEdge.getId();
+						turnTypes[turnCount] = determineTurnType(node,
+								fromEdge, toEdge);
 						turnCount++;
 					}
 				}
@@ -151,15 +150,15 @@ public class OSMParser {
 		}
 	}
 
-	private TurnType determineTurnType(int nodeFrom, MapEdge fromEdge,
+	private TurnType determineTurnType(int startNode, MapEdge fromEdge,
 			MapEdge toEdge) {
-		int node = fromEdge.getTargetNode();
-		if (graph.getOutgoingEdges(node).size() == 1) {
+		int turnNode = fromEdge.getTargetNode();
+		if (graph.getOutgoingEdges(turnNode).size() == 1) {
 			return TurnType.NoTurn;
 		}
 		// TODO: missing turn types
-		float angle = graph.getCoordinates(node).angleBetween(
-				graph.getCoordinates(nodeFrom),
+		float angle = graph.getCoordinates(turnNode).angleBetween(
+				graph.getCoordinates(startNode),
 				graph.getCoordinates(toEdge.getTargetNode()));
 		if (angle <= 130) {
 			return TurnType.RightTurn;
