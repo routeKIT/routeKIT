@@ -82,7 +82,7 @@ public class Route {
 	 * 
 	 * @return the said iterator
 	 */
-	public Iterator<Coordinates> getNodeIterator() {
+	public Iterator<Coordinates> getWaypointIterator() {
 		return new Iterator<Coordinates>() {
 			private int item = -2;
 
