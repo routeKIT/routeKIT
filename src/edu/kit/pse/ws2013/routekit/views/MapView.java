@@ -302,7 +302,7 @@ public class MapView extends JPanel implements MouseListener,
 			klick--;
 			zoom(e.getX(), e.getY(), true);
 		}
-		while (klick < 0 && zoom > 0) {
+		while (klick < 0 && zoom < 19) {
 			klick++;
 			zoom(e.getX(), e.getY(), false);
 		}
