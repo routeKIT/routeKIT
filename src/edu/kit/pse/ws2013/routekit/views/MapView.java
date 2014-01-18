@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.TexturePaint;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +16,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
+
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -74,6 +77,8 @@ public class MapView extends JPanel implements MouseListener,
 	TileSource source;
 	private RouteModel rm;
 
+	final BufferedImage flagPattern;
+
 	/**
 	 * A constructor that creates a new MapView. The specified TileSource is
 	 * used for rendering.
@@ -109,6 +114,15 @@ public class MapView extends JPanel implements MouseListener,
 		startCalc.setBackground(Color.RED);
 		startCalc.setForeground(Color.WHITE);
 		startCalc.setSize(300, 200);
+
+		flagPattern = new BufferedImage(10, 10, BufferedImage.TYPE_BYTE_BINARY);
+		final Graphics g = flagPattern.getGraphics();
+		g.setColor(Color.white);
+		g.fillRect(0, 0, 5, 5);
+		g.fillRect(5, 5, 5, 5);
+		g.setColor(Color.black);
+		g.fillRect(0, 5, 5, 5);
+		g.fillRect(5, 0, 5, 5);
 	}
 
 	JButton startCalc = new JButton("<html>Vorberechnung starten</html>");
@@ -159,7 +173,12 @@ public class MapView extends JPanel implements MouseListener,
 		}
 		c = rm.getDestination();
 		if (c != null) {
-			g.setColor(Color.GREEN);
+			if (g instanceof Graphics2D) {
+				((Graphics2D) g).setPaint(new TexturePaint(flagPattern,
+						new Rectangle2D.Float(0, 0, 10, 10)));
+			} else {
+				g.setColor(Color.GREEN);
+			}
 			drawPoint(g, c);
 		}
 		final Route r = rm.getCurrentRoute();
@@ -192,8 +211,40 @@ public class MapView extends JPanel implements MouseListener,
 		int smtX = (int) ((c.getSmtX(zoom) - x) * 256f);
 		int smtY = (int) ((c.getSmtY(zoom) - y) * 256f);
 		for (double i = Math.floor(x / it); (i * it - x) * 256 < getWidth(); i++) {
-			g.fillRect((int) (smtX + (i * it * 256) - 10), smtY - 10, 20, 20);
+			drawFlag(g, (int) (smtX + (i * it * 256)), smtY);
 		}
+	}
+
+	private static void drawFlag(Graphics g, int x, int y) {
+		// @formatter:off
+		// ===================================    –
+		// |------------flagWidth------------|    |
+		// |                                 |    |
+		// |                                 |    |
+		// |                                 |    |
+		// |                                 |    |
+		// |          |-coneWidth-|          |    |
+		// ===========             ===========    | flagHeight
+		//            \           /  |            |
+		//             \         /   |            |
+		//              \       /    |            |
+		//               \     /     | coneHeight |
+		//                \   /      |            |
+		//                 \ /       |            |
+		//                  V        –            –
+		// @formatter:on
+		final int coneWidth = 8;
+		final int coneHeight = 10;
+		final int flagWidth = 20;
+		final int flagHeight = 28;
+
+		final int coneRadius = coneWidth / 2;
+		final int halfFlagWidth = flagWidth / 2;
+		g.fillPolygon(new int[] { x, x - coneRadius, x - halfFlagWidth,
+				x - halfFlagWidth, x + halfFlagWidth, x + halfFlagWidth,
+				x + coneRadius }, new int[] { y, y - coneHeight,
+				y - coneHeight, y - flagHeight, y - flagHeight, y - coneHeight,
+				y - coneHeight }, 7);
 	}
 
 	int dx = -1;
