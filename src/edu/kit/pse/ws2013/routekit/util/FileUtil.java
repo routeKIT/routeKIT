@@ -47,4 +47,32 @@ public class FileUtil {
 			}
 		});
 	}
+
+	/**
+	 * Gets the root directory of routeKIT’s saved data (profiles, maps,
+	 * precalculations).
+	 * <ul>
+	 * <li><b>Windows:</b> {@code %APPDATA%/routeKIT}</li>
+	 * <li><b>Mac:</b> {@code $HOME/Library/Application Support/routeKIT}</li>
+	 * <li><b>Unix/Linux:</b> {@code $HOME/.config/routeKIT}</li>
+	 * </ul>
+	 * 
+	 * @throws IOException
+	 *             If the operating system is neither of the above.
+	 */
+	public static File getRootDir() throws IOException {
+		String os = System.getProperty("os.name").toUpperCase();
+		if (os.contains("WIN")) {
+			return new File(System.getenv("APPDATA"), "routeKIT");
+		} else if (os.contains("MAC")) {
+			return new File(new File(new File(System.getProperty("user.home"),
+					"Library"), "Application Support"), "routeKIT");
+		} else if (os.matches(".*N[IU]X.*")) {
+			return new File(
+					new File(System.getProperty("user.home"), ".config"),
+					"routeKIT");
+		} else {
+			throw new IOException("Unknown operating system " + os);
+		}
+	}
 }

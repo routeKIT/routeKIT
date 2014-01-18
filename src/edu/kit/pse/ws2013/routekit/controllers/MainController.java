@@ -16,6 +16,7 @@ import edu.kit.pse.ws2013.routekit.routecalculation.ArcFlagsDijkstra;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteCalculator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
+import edu.kit.pse.ws2013.routekit.util.FileUtil;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapView;
 
@@ -38,8 +39,7 @@ public class MainController {
 	private MainController() {
 		instance = this;
 		try {
-			ProfileMapManager.init(new File(new File(System
-					.getProperty("user.home")), "routeKIT"));
+			ProfileMapManager.init(FileUtil.getRootDir());
 		} catch (IOException e) {
 			return; // die
 		}

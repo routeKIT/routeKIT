@@ -71,6 +71,6 @@ public class Dummies {
 	}
 
 	public static void main(String[] args) throws IOException, SAXException {
-		createDummies(new File(System.getProperty("user.home"), "routeKIT"));
+		createDummies(FileUtil.getRootDir());
 	}
 }
