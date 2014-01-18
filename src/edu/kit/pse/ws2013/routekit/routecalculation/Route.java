@@ -13,7 +13,7 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 /**
  * A calculated route.
  */
-public class Route {
+public class Route implements Iterable<Coordinates> {
 	private ProfileMapCombination data;
 	private PointOnEdge start;
 	private PointOnEdge destination;
@@ -82,7 +82,8 @@ public class Route {
 	 * 
 	 * @return the said iterator
 	 */
-	public Iterator<Coordinates> getWaypointIterator() {
+	@Override
+	public Iterator<Coordinates> iterator() {
 		return new Iterator<Coordinates>() {
 			private int item = -2;
 

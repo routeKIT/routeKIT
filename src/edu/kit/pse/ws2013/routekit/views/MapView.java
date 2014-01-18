@@ -181,7 +181,7 @@ public class MapView extends JPanel implements MouseListener,
 
 			@Override
 			public Iterator<Coordinates> iterator() {
-				return r.getWaypointIterator();
+				return r.iterator();
 			}
 
 		}) {
