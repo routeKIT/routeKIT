@@ -17,8 +17,6 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
-import java.util.Iterator;
-
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -177,14 +175,7 @@ public class MapView extends JPanel implements MouseListener,
 		Stroke s = g2.getStroke();
 		g2.setStroke(new BasicStroke(10));
 		Coordinates last = null;
-		for (Coordinates co : new Iterable<Coordinates>() {
-
-			@Override
-			public Iterator<Coordinates> iterator() {
-				return r.iterator();
-			}
-
-		}) {
+		for (Coordinates co : r) {
 			if (last != null) {
 				g.drawLine((int) ((last.getSmtX(zoom) - x) * 256),
 						(int) ((last.getSmtY(zoom) - y) * 256),
