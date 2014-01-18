@@ -20,20 +20,48 @@ public class ProfileManager {
 
 	private final File root;
 	private final Map<Profile, File> profiles;
+	private final Map<String, Profile> profilesByName;
 
 	private ProfileManager(File root) throws FileNotFoundException, IOException {
 		this.root = root;
 		this.profiles = new HashMap<>();
+		this.profilesByName = new HashMap<>();
 		for (File f : root.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith(".profile");
 			}
 		})) {
-			profiles.put(Profile.load(f), f);
+			addProfile(Profile.load(f), f);
 		}
-		profiles.put(Profile.defaultCar, null);
-		profiles.put(Profile.defaultTruck, null);
+		addProfile(Profile.defaultCar, null);
+		addProfile(Profile.defaultTruck, null);
+	}
+
+	private void addProfile(Profile p, File f) {
+		profiles.put(p, f);
+		profilesByName.put(p.getName(), p);
+	}
+
+	private void removeProfile(Profile p) {
+		profiles.remove(p);
+		profilesByName.remove(p.getName());
+	}
+
+	/**
+	 * Deletes all precalculations ({@link ProfileMapCombination
+	 * ProfileMapCombinations} in the {@link ProfileMapManager}) with the same
+	 * profile name as {@code profile}.
+	 */
+	private void deletePrecalculations(Profile profile) {
+		final String name = profile.getName();
+		for (ProfileMapCombination precalculation : ProfileMapManager
+				.getInstance().getCombinations()) {
+			if (name.equals(precalculation.getProfile().getName())) {
+				ProfileMapManager.getInstance().deletePrecalculation(
+						precalculation);
+			}
+		}
 	}
 
 	/**
@@ -49,19 +77,17 @@ public class ProfileManager {
 			throw new IllegalArgumentException(
 					"Can’t delete a default profile!");
 		}
-		profiles.get(profile).delete();
-		for (ProfileMapCombination precalculation : ProfileMapManager
-				.getInstance().getCombinations()) {
-			if (profile.equals(precalculation.getProfile())) {
-				ProfileMapManager.getInstance().deletePrecalculation(
-						precalculation);
-			}
+		if (!profiles.containsKey(profile)) {
+			return;
 		}
-		profiles.remove(profile);
+		profiles.get(profile).delete();
+		deletePrecalculations(profile);
+		removeProfile(profile);
 	}
 
 	/**
-	 * Adds the given profile to the internal list and saves it on disk.
+	 * Adds the given profile to the internal list and saves it on disk. Any
+	 * existing precalculations for a profile of the same name are deleted.
 	 * 
 	 * @param profile
 	 *            The profile that shall be saved.
@@ -71,13 +97,20 @@ public class ProfileManager {
 		if (profile.isDefault()) {
 			throw new IllegalArgumentException("Can’t save a default profile!");
 		}
-		File f = profiles.get(profile);
+		Profile existing = profilesByName.get(profile.getName());
+		if (existing != null) {
+			if (existing.equals(profile)) {
+				return;
+			}
+			deletePrecalculations(existing);
+		}
+		File f = profiles.get(existing);
 		if (f == null) {
 			f = new File(root, profile.getName() + ".profile");
 			f.createNewFile();
 		}
 		profile.save(f);
-		profiles.put(profile, f);
+		addProfile(profile, f);
 	}
 
 	/**
@@ -107,7 +140,7 @@ public class ProfileManager {
 
 	/**
 	 * Returns the {@link ProfileManager} instance. This is only allowed if the
-	 * ProfileManager was previously {@link #init(Set) initialized}.
+	 * ProfileManager was previously {@link #init(File) initialized}.
 	 * 
 	 * @return The ProfileManager instance.
 	 * @throws IllegalStateException

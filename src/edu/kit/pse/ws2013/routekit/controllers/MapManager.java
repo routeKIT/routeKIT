@@ -19,10 +19,12 @@ public class MapManager {
 
 	private final File root;
 	private final Map<StreetMap, File> maps;
+	private final Map<String, StreetMap> mapsByName;
 
 	private MapManager(File root) {
 		this.root = root;
 		this.maps = new HashMap<>();
+		this.mapsByName = new HashMap<>();
 		if (!root.isDirectory()) {
 			throw new IllegalArgumentException(root.toString()
 					+ " is not a directory!");
@@ -30,7 +32,32 @@ public class MapManager {
 		for (String childString : root.list()) {
 			File child = new File(root, childString);
 			if (child.isDirectory()) {
-				maps.put(StreetMap.loadLazily(child), child);
+				addMap(StreetMap.loadLazily(child), child);
+			}
+		}
+	}
+
+	private void addMap(StreetMap map, File f) {
+		maps.put(map, f);
+		mapsByName.put(map.getName(), map);
+	}
+
+	private void removeMap(StreetMap map) {
+		maps.remove(map);
+		mapsByName.remove(map.getName());
+	}
+
+	/**
+	 * Deletes all precalculations ({@link ProfileMapCombination
+	 * ProfileMapCombinations} in the {@link ProfileMapManager}) with the same
+	 * map name as {@code map}.
+	 */
+	private void deletePrecalculations(StreetMap map) {
+		for (ProfileMapCombination precalculation : ProfileMapManager
+				.getInstance().getCombinations()) {
+			if (map.equals(precalculation.getStreetMap())) {
+				ProfileMapManager.getInstance().deletePrecalculation(
+						precalculation, false);
 			}
 		}
 	}
@@ -44,19 +71,16 @@ public class MapManager {
 	 *            The map that shall be deleted.
 	 */
 	public void deleteMap(StreetMap map) {
+		if (map.isDefault()) {
+			throw new IllegalArgumentException("Can’t delete a default map!");
+		}
 		try {
 			FileUtil.rmRf(maps.get(map));
 		} catch (IOException e) {
 
 		}
-		for (ProfileMapCombination precalculation : ProfileMapManager
-				.getInstance().getCombinations()) {
-			if (map.equals(precalculation.getStreetMap())) {
-				ProfileMapManager.getInstance().deletePrecalculation(
-						precalculation, false);
-			}
-		}
-		maps.remove(map);
+		deletePrecalculations(map);
+		removeMap(map);
 	}
 
 	/**
@@ -67,13 +91,17 @@ public class MapManager {
 	 * @throws IOException
 	 */
 	public void saveMap(StreetMap map) throws IOException {
-		File f = maps.get(map);
+		StreetMap existing = mapsByName.get(map.getName());
+		if (existing != null) {
+			deletePrecalculations(map);
+		}
+		File f = maps.get(existing);
 		if (f == null) {
 			f = new File(root, map.getName());
 			f.mkdir();
 		}
 		map.save(f);
-		maps.put(map, f);
+		addMap(map, f);
 	}
 
 	/**
