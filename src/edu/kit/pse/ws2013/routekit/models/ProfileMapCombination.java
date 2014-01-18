@@ -16,22 +16,22 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  */
 public class ProfileMapCombination {
 	private final StreetMap map;
-	private final Profile p;
+	private final Profile profile;
 	protected Weights weights;
-	protected ArcFlags arc;
+	protected ArcFlags arcFlags;
 	protected int calculationTime;
 
-	public ProfileMapCombination(StreetMap map, Profile p) {
+	public ProfileMapCombination(StreetMap map, Profile profile) {
 		this.map = map;
-		this.p = p;
+		this.profile = profile;
 	}
 
 	public ProfileMapCombination(StreetMap map, Profile profile,
 			Weights weights, ArcFlags arcFlags, int calculationTime) {
 		this.map = map;
-		this.p = profile;
+		this.profile = profile;
 		this.weights = weights;
-		this.arc = arcFlags;
+		this.arcFlags = arcFlags;
 		this.calculationTime = calculationTime;
 	}
 
@@ -42,7 +42,7 @@ public class ProfileMapCombination {
 	 * @return
 	 */
 	public boolean isCalculated() {
-		return weights != null && arc != null;
+		return weights != null && arcFlags != null;
 	}
 
 	public StreetMap getStreetMap() {
@@ -50,7 +50,7 @@ public class ProfileMapCombination {
 	}
 
 	public Profile getProfile() {
-		return p;
+		return profile;
 	}
 
 	public Weights getWeights() {
@@ -58,7 +58,7 @@ public class ProfileMapCombination {
 	}
 
 	public ArcFlags getArc() {
-		return arc;
+		return arcFlags;
 	}
 
 	/**
@@ -80,11 +80,11 @@ public class ProfileMapCombination {
 	 */
 	@Deprecated
 	public void setArcFlags(ArcFlags arcFlags) {
-		arc = arcFlags;
+		this.arcFlags = arcFlags;
 	}
 
 	public void setArcFlags(ArcFlags arcFlags, int calculationTime) {
-		this.arc = arcFlags;
+		this.arcFlags = arcFlags;
 		assert (calculationTime > 0);
 		this.calculationTime += calculationTime;
 	}
@@ -127,12 +127,12 @@ public class ProfileMapCombination {
 			throw new IllegalArgumentException(directory.toString()
 					+ " is not a directory!");
 		}
-		String name = saveFileName(p, map);
+		String name = saveFileName(profile, map);
 		File weightsFile = new File(directory, name + ".weights");
 		File arcFlagsFile = new File(directory, name + ".arcflags");
 		File timeFile = new File(directory, name + ".time");
 		weights.save(weightsFile);
-		arc.save(arcFlagsFile);
+		arcFlags.save(arcFlagsFile);
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(timeFile))) {
 			bw.write(Integer.toString(calculationTime) + "\n");
 		}
@@ -232,14 +232,14 @@ public class ProfileMapCombination {
 
 		@Override
 		public ArcFlags getArc() {
-			if (this.arc == null) {
+			if (this.arcFlags == null) {
 				try {
-					this.arc = ArcFlags.load(arcFlagsFile);
+					this.arcFlags = ArcFlags.load(arcFlagsFile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			return arc;
+			return arcFlags;
 		}
 	}
 }
