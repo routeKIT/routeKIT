@@ -100,13 +100,17 @@ public class ProfileMapCombination {
 		return calculationTime;
 	}
 
+	private static String saveFileName(Profile profile, StreetMap map) {
+		return map.getName() + " + " + profile.getName();
+	}
+
 	/**
 	 * Saves the {@link ProfileMapCombination} to the given directory by saving
 	 * the {@link #getWeights() Weights}, the {@link #getArc() ArcFlags} and the
 	 * {@link #getCalculationTime() calculation time} to the files
 	 * {@code &lt;name&gt;.weights}, {@code &lt;name&gt;.arcflags} and
 	 * {@code &lt;name&gt;.time} (where {@code &lt;name&gt;} is the name of the
-	 * profile + the name of the map).
+	 * map " + " the name of the profile).
 	 * 
 	 * @param directory
 	 *            The directory to which the {@link ProfileMapCombination}
@@ -123,7 +127,7 @@ public class ProfileMapCombination {
 			throw new IllegalArgumentException(directory.toString()
 					+ " is not a directory!");
 		}
-		String name = p.getName() + " " + map.getName();
+		String name = saveFileName(p, map);
 		File weightsFile = new File(directory, name + ".weights");
 		File arcFlagsFile = new File(directory, name + ".arcflags");
 		File timeFile = new File(directory, name + ".time");
@@ -140,7 +144,7 @@ public class ProfileMapCombination {
 	 * {@link #getCalculationTime() calculation time} from the files
 	 * {@code &lt;name&gt;.weights}, {@code &lt;name&gt;.arcflags} and
 	 * {@code &lt;name&gt;.time} (where {@code &lt;name&gt;} is the name of the
-	 * profile + the name of the map).
+	 * map " + " the name of the profile).
 	 * 
 	 * @param profile
 	 *            The profile.
@@ -160,7 +164,7 @@ public class ProfileMapCombination {
 			throw new IllegalArgumentException(directory.toString()
 					+ " is not a directory!");
 		}
-		String name = profile.getName() + " " + map.getName();
+		String name = saveFileName(profile, map);
 		File weightsFile = new File(directory, name + ".weights");
 		File arcFlagsFile = new File(directory, name + ".arcflags");
 		File timeFile = new File(directory, name + ".time");
@@ -189,7 +193,7 @@ public class ProfileMapCombination {
 	 */
 	public static ProfileMapCombination loadLazily(Profile profile,
 			StreetMap map, File directory) throws IOException {
-		String name = profile.getName() + " " + map.getName();
+		String name = saveFileName(profile, map);
 		File weightsFile = new File(directory, name + ".weights");
 		File arcFlagsFile = new File(directory, name + ".arcflags");
 		File timeFile = new File(directory, name + ".time");
