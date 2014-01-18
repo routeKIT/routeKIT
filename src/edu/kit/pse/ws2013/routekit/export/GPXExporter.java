@@ -5,19 +5,24 @@ import java.io.File;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 
 /**
- * Stellt die Funktionalität zum Export einer Route im GPS Exchange
- * Format-Format bereit.
+ * Provides the functionality to export a route in the GPS Exchange Format
+ * (GPX).
  */
 public class GPXExporter {
 	/**
-	 * Exportiert die Wegpunkte der {@code route} im GPS Exchange Format-Format
-	 * in die angegebene Datei.
+	 * Exports the route points of the given route in the GPS Exchange Format
+	 * (GPX) into the specified file.
 	 * 
 	 * @param route
-	 *            Die zu exportierende Route.
+	 *            the route to be exported
 	 * @param file
-	 *            Die GPS Exchange Format-Datei, die geschrieben werden soll.
+	 *            the GPX file to write into
+	 * @throws IllegalArgumentException
+	 *             if {@code route} or {@code file} is {@code null}
 	 */
 	public void exportRoute(Route route, File file) {
+		if (route == null || file == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 }
