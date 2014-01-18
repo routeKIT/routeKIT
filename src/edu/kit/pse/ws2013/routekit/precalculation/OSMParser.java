@@ -264,15 +264,19 @@ public class OSMParser {
 				Attributes attr) throws SAXException {
 			switch (qName) {
 			case "node":
-				int node = nodes.get(Integer.parseInt(attr.getValue("id")));
-				try {
-					lat[node] = Coordinates.parseLatitude(attr.getValue("lat"));
-					lon[node] = Coordinates
-							.parseLongitude(attr.getValue("lon"));
-				} catch (IllegalArgumentException e) {
-					throw new SAXParseException("Node " + node
-							+ ": Coordinates invalid or unspecified", locator,
-							e);
+				long nodeId = Long.parseLong(attr.getValue("id"));
+				if (nodes.containsKey(nodeId)) {
+					int node = nodes.get(nodeId);
+					try {
+						lat[node] = Coordinates.parseLatitude(attr
+								.getValue("lat"));
+						lon[node] = Coordinates.parseLongitude(attr
+								.getValue("lon"));
+					} catch (IllegalArgumentException e) {
+						throw new SAXParseException("Node " + node
+								+ ": Coordinates invalid or unspecified",
+								locator, e);
+					}
 				}
 				// fall through
 			case "osm":
