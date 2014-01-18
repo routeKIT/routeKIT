@@ -164,6 +164,15 @@ public class Coordinates {
 		return lat + " " + lon;
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Coordinates) {
+			return lat == ((Coordinates) other).lat
+					&& lon == ((Coordinates) other).lon;
+		}
+		return false;
+	}
+
 	/**
 	 * Parses a coordinates string as returned by {@link #toString()} back into
 	 * {@link Coordinates}.
