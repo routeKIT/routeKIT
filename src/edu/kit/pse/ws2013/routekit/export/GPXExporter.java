@@ -3,6 +3,9 @@ package edu.kit.pse.ws2013.routekit.export;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -48,6 +51,10 @@ public class GPXExporter {
 		gpx.writeStartElement("metadata");
 		gpx.writeStartElement("name");
 		gpx.writeCharacters(file.getName());
+		gpx.writeEndElement();
+		gpx.writeStartElement("time");
+		DateFormat xmlDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		gpx.writeCharacters(xmlDate.format(new Date()));
 		gpx.writeEndElement();
 		gpx.writeEndElement();
 
