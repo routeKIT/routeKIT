@@ -43,10 +43,10 @@ public class TileRenderer implements TileSource {
 		int targetNode;
 		Coordinates coordsTargetNode;
 		Coordinates coordsStartNode;
-		Coordinates leftTop = Coordinates.fromSmt(x, y, zoom);
-		Coordinates rightBottom = Coordinates.fromSmt(x + 1, y + 1, zoom);
-		Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(
-				new Coordinates(0, 0), new Coordinates(85, 180));
+		Coordinates leftTop = Coordinates.fromSmt(x, y + 1, zoom);
+		Coordinates rightBottom = Coordinates.fromSmt(x + 1, y, zoom);
+		Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(leftTop,
+				rightBottom);
 		BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics g = tile.createGraphics();
@@ -71,11 +71,8 @@ public class TileRenderer implements TileSource {
 			 * ytarget = (int) (doublerest(coordsTargetNode.getSmtY(zoom)) *
 			 * 256);
 			 */
-			if ((xstart >= 0 && xstart <= 255 && ystart >= 0 && ystart <= 255)
-					|| (xtarget >= 0 && xtarget <= 255 && ytarget >= 0 && ytarget <= 255)) {
-				g.setColor(Color.black);
-				g.drawLine(xstart, ystart, xtarget, ytarget);
-			}
+			g.setColor(Color.black);
+			g.drawLine(xstart, ystart, xtarget, ytarget);
 
 			/*
 			 * String name = getName(e); checkValue = (int)
