@@ -110,6 +110,9 @@ public class ProfileManagerController {
 					"Can’t update a default profile!");
 		}
 		profiles.put(profile.getName(), profile);
+		if (profile.getName().equals(currentProfile.getName())) {
+			currentProfile = profile;
+		}
 	}
 
 	/**
