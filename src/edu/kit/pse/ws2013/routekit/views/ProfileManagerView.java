@@ -442,7 +442,6 @@ public class ProfileManagerView extends JDialog {
 	public void setAvailableProfiles(List<Profile> profiles) {
 		listenerCheck++;
 		profilename.removeAllItems();
-		profilename.setSelectedItem(currentProfile.getName());
 		for (Profile p : profiles) {
 			profilename.addItem(p.getName());
 		}
