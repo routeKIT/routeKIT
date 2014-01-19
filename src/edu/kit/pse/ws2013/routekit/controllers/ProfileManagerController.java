@@ -31,9 +31,8 @@ public class ProfileManagerController {
 			profiles.put(p.getName(), p);
 		}
 		assert (!profiles.isEmpty());
-		// Profile p = ProfileMapManager.getInstance().getCurrentCombination()
-		// .getProfile(); // TODO re-add
-		Profile p = profiles.values().iterator().next(); // TODO remove
+		Profile p = ProfileMapManager.getInstance().getCurrentCombination()
+				.getProfile();
 		assert (p != null);
 		currentProfile = p;
 		pmv = new ProfileManagerView(parent, this, p, new ArrayList<>(
