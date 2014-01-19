@@ -6,6 +6,7 @@ import java.io.IOException;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
+import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
@@ -30,6 +31,7 @@ public class MainController {
 	private RouteModel rm = new RouteModel();
 	MainView view;
 	private RouteCalculator rc;
+	TileSource source;
 
 	/**
 	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
@@ -43,6 +45,8 @@ public class MainController {
 		} catch (IOException e) {
 			return; // die
 		}
+		source = new TileCache(new TileRenderer(ProfileMapManager.getInstance()
+				.getCurrentCombination().getStreetMap().getGraph()));
 		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
 	}
@@ -148,6 +152,13 @@ public class MainController {
 	 *            selbst gerenderte Kacheln zu verwenden.
 	 */
 	public void setUseOnlineMaps(boolean useOnlineMaps) {
+		if (useOnlineMaps) {
+			source = new TileCache(new OSMRenderer());
+		} else {
+			source = new TileCache(new TileRenderer(ProfileMapManager
+					.getInstance().getCurrentCombination().getStreetMap()
+					.getGraph()));
+		}
 	}
 
 	/**
@@ -195,7 +206,7 @@ public class MainController {
 	 * @return
 	 */
 	public TileSource getTileSource() {
-		return null;
+		return source;
 	}
 
 	public static MainController getInstance() {

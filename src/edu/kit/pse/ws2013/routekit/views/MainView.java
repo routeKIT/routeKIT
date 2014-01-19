@@ -31,8 +31,6 @@ import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
-import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
-import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
@@ -271,9 +269,13 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
-		mapView = new MapView(new TileCache(new OSMRenderer()), rm);
+		mapView = new MapView(MainController.getInstance().getTileSource(), rm);
 		right.add(mapView, BorderLayout.CENTER);
 		return right;
+	}
+
+	private void updateRenderer() {
+		mapView.setTileSource(MainController.getInstance().getTileSource());
 	}
 
 	private void initMenu() {
@@ -355,6 +357,7 @@ public class MainView extends JFrame implements RouteModelListener {
 				} else {
 					MainController.getInstance().setUseOnlineMaps(false);
 				}
+				updateRenderer();
 			}
 		});
 		admin.add(profile);

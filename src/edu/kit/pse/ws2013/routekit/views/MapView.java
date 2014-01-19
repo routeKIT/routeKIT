@@ -125,6 +125,14 @@ public class MapView extends JPanel implements MouseListener,
 		g.fillRect(5, 0, 5, 5);
 	}
 
+	public void setTileSource(TileSource source) {
+		this.source = source;
+		if (source instanceof TileCache) {
+			((TileCache) source).addTileFinishedListener(this);
+		}
+		repaint();
+	}
+
 	JButton startCalc = new JButton("<html>Vorberechnung starten</html>");
 
 	JButton in = new JButton("+");
