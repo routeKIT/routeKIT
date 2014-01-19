@@ -12,6 +12,8 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
  * A calculated route.
+ * 
+ * @see RouteCalculator
  */
 public class Route implements Iterable<Coordinates> {
 	private ProfileMapCombination data;

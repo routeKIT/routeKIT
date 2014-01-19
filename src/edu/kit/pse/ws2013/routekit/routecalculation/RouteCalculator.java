@@ -4,21 +4,22 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
- * Stellt ein Interface für einen Algorithmus zur Routenberechnung bereit.
+ * An interface for a route calculation algorithm.
+ * 
+ * @see ArcFlagsDijkstra
  */
 public interface RouteCalculator {
 	/**
-	 * Berechnet einen Weg vom Startpunkt zum Zielpunkt auf dem gegebenen
-	 * Graphen.
+	 * Calculates a route from the specified start point to the specified
+	 * destination point on the given {@link ProfileMapCombination}.
 	 * 
 	 * @param start
-	 *            Der Startpunkt für die Routenberechnung.
+	 *            the start point for the route
 	 * @param destination
-	 *            Der Zielpunkt für die Routenberechnung.
+	 *            the destination point for the route
 	 * @param data
-	 *            Der vorberechnete Graph auf dem die Routenberechnung
-	 *            durchgeführt wird.
-	 * @return
+	 *            the precalculated map data on which the route to be calculated
+	 * @return the calculated route
 	 */
 	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data);
