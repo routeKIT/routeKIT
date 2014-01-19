@@ -79,10 +79,8 @@ public class MainView extends JFrame implements RouteModelListener {
 					@Override
 					public void currentCombinationChanged(
 							ProfileMapCombination newCombination) {
-						profileLabel.setText(newCombination.getProfile()
-								.getName());
-						mapLabel.setText(newCombination.getStreetMap()
-								.getName());
+						setCurrentProfile(newCombination.getProfile());
+						setCurrentMap(newCombination.getStreetMap());
 						mapView.setEnabled(newCombination.isCalculated());
 					}
 				});
