@@ -18,7 +18,7 @@ public class Coordinates {
 	 *             if the coordinates are out of range
 	 */
 	public Coordinates(float lat, float lon) {
-		if (lat < -85 || lat > 85 || lon < -180 || lon > 180) {
+		if (lat < -86 || lat > 86 || lon <= -181 || lon >= 181) {
 			throw new IllegalArgumentException();
 		}
 

@@ -1,7 +1,10 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
@@ -14,7 +17,8 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 public class TileRenderer implements TileSource {
 	Graph graph;
 	final int space = 10;
-	int checkValue;
+	double checkValue;
+	final double pi = Math.PI;
 
 	/**
 	 * Konstruktor: Erzeugt einen neuen {@code TileRenderer}.
@@ -39,6 +43,8 @@ public class TileRenderer implements TileSource {
 	 */
 	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
+		int x1 = -1;
+		int y1 = -1;
 		int startNode;
 		int targetNode;
 		Coordinates coordsTargetNode;
@@ -49,42 +55,66 @@ public class TileRenderer implements TileSource {
 				rightBottom);
 		BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
-		Graphics g = tile.createGraphics();
+		Graphics2D g = tile.createGraphics();
 		g.setColor(Color.white);
 		g.fillRect(1, 1, 255, 255);
+		Font font = new Font(Font.SANS_SERIF, 0, 12);
 		for (Integer e : edges) {
 			startNode = graph.getStartNode(e);
 			coordsStartNode = graph.getCoordinates(startNode);
 			targetNode = graph.getTargetNode(e);
 			coordsTargetNode = graph.getCoordinates(targetNode);
-
 			int xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
 			int ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
 			int xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 			int ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
 
-			/*
-			 * int xstart = (int) (doublerest(coordsStartNode.getSmtX(zoom)) *
-			 * 256); int ystart = (int)
-			 * (doublerest(coordsStartNode.getSmtY(zoom)) * 256); int xtarget =
-			 * (int) (doublerest(coordsTargetNode.getSmtX(zoom)) * 256); int
-			 * ytarget = (int) (doublerest(coordsTargetNode.getSmtY(zoom)) *
-			 * 256);
-			 */
 			g.setColor(Color.black);
 			g.drawLine(xstart, ystart, xtarget, ytarget);
 
-			/*
-			 * String name = getName(e); checkValue = (int)
-			 * Math.ceil(Math.sqrt(Math.pow((xtarget - xstart), 2) +
-			 * Math.pow((ytarget - ystart), 2))) + 2 * space; if (name != null
-			 * && name.length() <= checkValue) { AffineTransform at =
-			 * AffineTransform.getRotateInstance(Math
-			 * .toRadians(getAngle(xstart, ystart, xtarget, ytarget)), xstart,
-			 * ystart); Graphics2D g2 = tile.createGraphics();
-			 * g2.setTransform(at); g2.setFont(new Font(Font.SANS_SERIF, 0,
-			 * 10)); g2.drawString(name, space + xstart, ystart); }
-			 */
+			if (xstart == xtarget) {
+				if (ystart < ytarget) {
+					x1 = xstart;
+					y1 = ystart;
+				}
+				if (ystart > ytarget) {
+					x1 = xtarget;
+					y1 = ytarget;
+				}
+			} else {
+				if (xstart < xtarget) {
+					x1 = xstart;
+					y1 = ystart;
+				} else {
+					x1 = xtarget;
+					y1 = ytarget;
+				}
+			}
+
+			String name = getName(e);
+			checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
+					+ Math.pow((ytarget - ystart), 2));
+			if (name != null && (x1 != -1)) {
+				Rectangle2D r = font.getStringBounds(name,
+						g.getFontRenderContext());
+				AffineTransform at = AffineTransform.getRotateInstance(
+						getAngle(xstart, ystart, xtarget, ytarget), x1, y1);
+				g.setColor(Color.BLUE);
+				AffineTransform old = g.getTransform();
+				g.setTransform(at);
+				g.setFont(font);
+				int i = 1;
+				String nNames = "";
+				while (i * (r.getWidth() + 3) - 3 + 2 * space < checkValue) {
+					i++;
+					if (!nNames.isEmpty()) {
+						nNames += " ";
+					}
+					nNames += name;
+				}
+				g.drawString(nNames, space + x1, y1);
+				g.setTransform(old);
+			}
 
 		}
 		return tile;
@@ -105,27 +135,19 @@ public class TileRenderer implements TileSource {
 
 	private double getAngle(int xstart, int ystart, int xtarget, int ytarget) {
 		if (xstart == xtarget) {
-			return 90d;
+			return (pi / 2d);
 		}
 		if (ystart == ytarget) {
 			return 0d;
 		}
 		if ((ystart > ytarget && xstart < xtarget)
 				|| (ystart < ytarget && xtarget < xstart)) {
-			return (180 - Math.toDegrees(Math.asin(Math.abs(ytarget - ystart)
-					/ checkValue)));
+			return (-Math.asin((Math.abs(ytarget - ystart) / checkValue)));
 		}
 		if ((ystart < ytarget && xstart < xtarget)
 				|| (ytarget < ystart && xtarget < xstart)) {
-			return Math.toDegrees(Math.asin((Math.abs(ytarget - ystart))
-					/ checkValue));
+			return Math.asin((Math.abs(ytarget - ystart)) / checkValue);
 		}
 		return -1;
 	}
-
-	private float doublerest(float number) {
-		int res = (int) number;
-		return (number - res);
-	}
-
 }
