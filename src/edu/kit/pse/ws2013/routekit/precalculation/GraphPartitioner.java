@@ -3,20 +3,20 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 
 /**
- * Partitioniert einen gegebenen Graphen.
+ * An interface for a graph partitioner algorithm.
  */
-public class GraphPartitioner {
+public interface GraphPartitioner {
 	/**
-	 * Teilt den Graphen in die gewünschte Anzahl an Partitionen.
+	 * Divides the given edged-based graph into the specified number of
+	 * partitions.
 	 * 
-	 * Die ermittelten Partitionen werden über
-	 * {@link EdgeBasedGraph#setPartitions} direkt gesetzt.
+	 * The partitioning is directly set using the
+	 * {@link EdgeBasedGraph#setPartitions} method.
 	 * 
 	 * @param graph
-	 *            Der zu partitionierende Graph.
+	 *            the graph to be partitioned
 	 * @param numberOfPartitions
-	 *            Die gewünschte Anzahl an Partitionen.
+	 *            the desired number of partitions
 	 */
-	public void partitionGraph(EdgeBasedGraph graph, int numberOfPartitions) {
-	}
+	public void partitionGraph(EdgeBasedGraph graph, int numberOfPartitions);
 }

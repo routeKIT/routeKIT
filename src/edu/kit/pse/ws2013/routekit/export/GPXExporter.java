@@ -31,7 +31,7 @@ public class GPXExporter {
 	 *             if any error occurs while writing into the file
 	 * @throws FileNotFoundException
 	 *             if {@code file} cannot be created or if {@code file} exists
-	 *             but cannot be opened
+	 *             but cannot be overwritten
 	 * @throws IllegalArgumentException
 	 *             if {@code route} or {@code file} is {@code null}
 	 */

@@ -8,6 +8,12 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
  * A restriction of using roads or turns with certain vehicles.
+ * 
+ * @see MultipleRestrictions
+ * @see VehicleTypeRestriction
+ * @see HeightRestriction
+ * @see WeightRestriction
+ * @see WidthRestriction
  */
 public abstract class Restriction {
 	/**
