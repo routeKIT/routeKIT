@@ -506,6 +506,37 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
 }
 
+\package{Util}{}
+{
+  \class{Coordinates}{~}
+        {\none}
+        {
+          \method{equals}[boolean]
+                 {
+                   \param{other}{Object}{Das zu vergleichende Objekt.}
+                 }
+                 {Bestimmt, ob zwei (Koordinaten-)Objekte gleich sind.}
+          \method{toString}[String]
+                 {\none}
+                 {Gibt eine String-Repräsentation der Koordinaten zurück, die von \refmethod{Coordinates}{fromString} wieder geparst werden kann.}
+          \method{fromString}[Coordinates]
+                 {
+                   \param{coords}{String}{Der Koordinaten-String.}
+                 }
+                 {(statisch) Parst einen Koordinaten-String wie er von \refmethod{Coordinates}{toString} zurückgegeben wird.}
+          \method{parseLatitude}[float]
+                 {
+                   \param{lat}{String}{Die Breitengrad-Angabe.}
+                 }
+                 {(statisch) Parst eine Breitengrad-Angabe aus einer Zeichenkette.}
+          \method{parseLongitude}[float]
+                 {
+                   \param{lon}{String}{Die Längengrad-Angabe.}
+                 }
+                 {(statisch) Parst eine Längengrad-Angabe aus einer Zeichenkette.}
+        }
+}
+
 \section{Komponententests}
 
 \section{Arbeitsplanung}
