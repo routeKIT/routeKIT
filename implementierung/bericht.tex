@@ -451,6 +451,60 @@ Prof.~Dr.~Peter~Sanders}
 \section{Einleitung}
 
 \section{Änderungen am Entwurf}
+Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
+
+\package{Precalculation}{}
+{
+  \class{OSMParser}{~}
+        {\none}
+        {
+          \method{parseOSM}
+                 {\none}
+                 {Geändert: Der Parameter \code{name} wurde entfernt. Der Name der Karte wird erst später vom \refclass{MapImporter} gesetzt.}
+        }
+  \class{OSMWay}{~}
+        {\none}
+        {
+          \method{isReversedOneway}[boolean]
+                 {\none}
+                 {Bestimmt, ob es sich um eine Einbahnstraße entgegen der Wegrichtung handelt (OSM-Tag \code{oneway=-1}).}
+        }
+  \class{MapEdge}{~}
+        {
+          \attr{targetNode}{Node}{Geändert: Speichert nun direkt den Zielknoten und nicht mehr dessen ID in der OSM-Datei. Dadurch werden unnötige Hashtabellenabfragen in \refclass{OSMParser} vermieden.}
+          \attr{Id}{Edge}{Der interne Bezeichner der Kante.}
+        }
+        {\none}
+}
+
+\package{RouteCalculator}{}
+{
+  \class{Route}{Diese Klasse implementiert nun die Schnittstelle \code{Iterable}.}
+        {\none}
+        {
+          \method{iterator}[Iterator<Coordinates>]
+                 {\none}
+                 {Gibt einen Iterator über die Koordinaten der Routenpunkte einschließlich Start- und Zielpunkt zurück. Diese Methode ersetzt \code{getNodeIterator}.}
+        }
+}
+
+\package{Map}{}
+{
+  \class{Graph}{~}
+        {\none}
+        {
+          \method{getNumberOfEdges}[int]
+                 {\none}
+                 {Gibt die Anzahl der Kanten zurück. Dies ermöglicht es, über alle Kanten zu iterieren.}
+        }
+  \class{EdgeBasedGraph}{~}
+        {\none}
+        {
+          \method{getNumberOfTurns}[int]
+                 {\none}
+                 {Gibt die Anzahl der Abbiegemöglichkeiten zurück. Dies ermöglicht es, über alle Abbiegemöglichkeiten zu iterieren.}
+        }
+}
 
 \section{Komponententests}
 
