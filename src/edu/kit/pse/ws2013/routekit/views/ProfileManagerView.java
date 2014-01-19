@@ -40,7 +40,9 @@ public class ProfileManagerView extends JDialog {
 	private JSpinner widthspinner;
 	private JSpinner weightspinner;
 	private JButton deleteButton;
-	int listenerCheck = 0;
+	private int listenerCheck = 0;
+	private Profile currentProfile;
+	private List<Profile> availableProfiles;
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -51,6 +53,8 @@ public class ProfileManagerView extends JDialog {
 	public ProfileManagerView(Window parent, ProfileManagerController pmc,
 			Profile currentProfile, List<Profile> availableProfiles) {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
+		this.currentProfile = currentProfile;
+		this.availableProfiles = availableProfiles;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
@@ -58,9 +62,9 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane(pmc, currentProfile);
+		JPanel north = initNorthPane(pmc);
 		JPanel center = initCenterPane();
-		JPanel south = initSouthPane(pmc, currentProfile);
+		JPanel south = initSouthPane(pmc);
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -72,8 +76,7 @@ public class ProfileManagerView extends JDialog {
 		setCurrentProfile(currentProfile);
 	}
 
-	private JPanel initNorthPane(final ProfileManagerController pmc,
-			final Profile currentProfile) {
+	private JPanel initNorthPane(final ProfileManagerController pmc) {
 		JPanel north = new JPanel(new FlowLayout());
 		north.setBackground(Color.WHITE);
 
@@ -89,11 +92,17 @@ public class ProfileManagerView extends JDialog {
 						return;
 					} else {
 						if (!currentProfile.isDefault()) {
-							Profile current = writeValues();
+							Profile current = writeValues(currentProfile
+									.getName());
 							pmc.saveTemporaryProfile(current);
 						}
-						pmc.changeTemporaryProfile((String) profilename
+						currentProfile = findProfile((String) profilename
 								.getSelectedItem());
+						if (currentProfile == null) {
+							throw new IllegalArgumentException(
+									"The current profile is null!");
+						}
+						pmc.changeTemporaryProfile(currentProfile.getName());
 
 					}
 				}
@@ -125,10 +134,15 @@ public class ProfileManagerView extends JDialog {
 						"Name", JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if ((result != null) && (result.length() > 0)) {
 					if (!currentProfile.isDefault()) {
-						Profile current = writeValues();
+						Profile current = writeValues(currentProfile.getName());
 						pmc.saveTemporaryProfile(current);
 					}
 					pmc.changeTemporaryProfile(result);
+					currentProfile = findProfile(result);
+					if (currentProfile == null) {
+						throw new IllegalArgumentException(
+								"The current profile is null!");
+					}
 
 				}
 			}
@@ -139,12 +153,20 @@ public class ProfileManagerView extends JDialog {
 		return north;
 	}
 
-	private Profile writeValues() {
+	private Profile findProfile(String name) {
+		for (Profile p : availableProfiles) {
+			if (p.getName().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
 
-		Profile current = new Profile((String) profilename.getSelectedItem(),
-				selectedButton(), (int) heightspinner.getValue(),
-				(int) widthspinner.getValue(), (int) weightspinner.getValue(),
-				(int) hSpeedspinner.getValue(), (int) srSpeedspinner.getValue());
+	private Profile writeValues(String currentProfileName) {
+		Profile current = new Profile(currentProfileName, selectedButton(),
+				(int) heightspinner.getValue(), (int) widthspinner.getValue(),
+				(int) weightspinner.getValue(), (int) hSpeedspinner.getValue(),
+				(int) srSpeedspinner.getValue());
 		return current;
 	}
 
@@ -161,8 +183,7 @@ public class ProfileManagerView extends JDialog {
 		return VehicleType.Motorcycle;
 	}
 
-	private JPanel initSouthPane(final ProfileManagerController pmc,
-			final Profile currentProfile) {
+	private JPanel initSouthPane(final ProfileManagerController pmc) {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
@@ -187,7 +208,7 @@ public class ProfileManagerView extends JDialog {
 								new String[] { "Ja", "Nein" }, "Nein");
 				if (showOptionDialog == JOptionPane.YES_OPTION) {
 					if (!currentProfile.isDefault()) {
-						Profile current = writeValues();
+						Profile current = writeValues(currentProfile.getName());
 						pmc.saveTemporaryProfile(current);
 					}
 					pmc.saveAllChanges();
@@ -421,9 +442,11 @@ public class ProfileManagerView extends JDialog {
 	public void setAvailableProfiles(List<Profile> profiles) {
 		listenerCheck++;
 		profilename.removeAllItems();
+		profilename.setSelectedItem(currentProfile.getName());
 		for (Profile p : profiles) {
 			profilename.addItem(p.getName());
 		}
+		availableProfiles = profiles;
 		listenerCheck--;
 	}
 }
