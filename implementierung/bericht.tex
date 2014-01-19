@@ -496,6 +496,16 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           \method{getNumberOfEdges}[int]
                  {\none}
                  {Gibt die Anzahl der Kanten zurück. Dies ermöglicht es, über alle Kanten zu iterieren.}
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert den Graphen in die angegebene Datei.}
+          \method{load}[Graph]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt einen Graphen aus der angegebenen Datei.}
         }
   \class{EdgeBasedGraph}{~}
         {\none}
@@ -503,6 +513,16 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           \method{getNumberOfTurns}[int]
                  {\none}
                  {Gibt die Anzahl der Abbiegemöglichkeiten zurück. Dies ermöglicht es, über alle Abbiegemöglichkeiten zu iterieren.}
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert den kantenbasierten Graphen in die angegebene Datei.}
+          \method{load}[EdgeBasedGraph]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt einen kantenbasierten Graphen aus der angegebenen Datei.}
         }
 }
 
