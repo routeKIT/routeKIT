@@ -28,6 +28,8 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		int startEdge = start.getEdge();
 		int destinationEdge = destination.getEdge();
 
+		// System.out.println(startEdge + " und " + destinationEdge);
+
 		List<Integer> turns = new ArrayList<Integer>();
 		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
 
@@ -53,30 +55,32 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			int u = fh.deleteMin().getValue();
 			if (u == destinationEdge) {
 				// GEFUNDEN!
+				// System.out.println("Gefunden! " + u);
 				break;
 			}
 
-			Set<Integer> eins = data.getStreetMap().getEdgeBasedGraph()
-					.getOutgoingTurns(u);
+			Set<Integer> outgoingTurns = data.getStreetMap()
+					.getEdgeBasedGraph().getOutgoingTurns(u);
 
-			for (Integer integer : eins) {
-				int edge = data.getStreetMap().getEdgeBasedGraph()
-						.getTargetEdge(integer);
+			for (Integer currentTurn : outgoingTurns) {
+				int targetEdge = data.getStreetMap().getEdgeBasedGraph()
+						.getTargetEdge(currentTurn);
 
 				// Arcflags holen
-				int arcFlag = data.getArc().getFlag(edge);
+				int arcFlag = data.getArc().getFlag(currentTurn);
 
 				int arcBit = arcFlag >> destinationPartition & 0x1;
 
 				// arcBit prüfen
 				if (arcBit != 0) {
 					int alt = distance[u]
-							+ data.getWeights().getWeight(integer);
+							+ data.getWeights().getWeight(currentTurn);
 
-					if (alt < distance[edge]) {
-						distance[edge] = alt;
-						previous[edge] = u;
-						FibonacciHeap.Entry toDecrease = fhList.get(edge);
+					if (alt < distance[targetEdge]) {
+						distance[targetEdge] = alt;
+						previous[targetEdge] = u;
+
+						FibonacciHeap.Entry toDecrease = fhList.get(targetEdge);
 						fh.decreaseKey(toDecrease, alt);
 					}
 				}
@@ -86,9 +90,21 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		// Weg rekonstruieren
 		int x = destinationEdge;
 		while (previous[x] != -1) {
-			turns.add(x);
+			Set<Integer> outgoingTurns = data.getStreetMap()
+					.getEdgeBasedGraph().getOutgoingTurns(previous[x]);
+
+			for (Integer turn : outgoingTurns) {
+				if (data.getStreetMap().getEdgeBasedGraph().getTargetEdge(turn) == x) {
+					turns.add(turn);
+					break;
+				}
+			}
+			// System.out.println(x);
+			// turns.add(x);
 			x = previous[x];
 		}
+
+		// System.out.println(x);
 
 		Route route = new Route(data, start, destination, turns);
 
