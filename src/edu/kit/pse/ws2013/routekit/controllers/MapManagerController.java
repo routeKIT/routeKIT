@@ -218,7 +218,11 @@ public class MapManagerController {
 					+ mapName + "' does not exist!");
 		}
 		currentMap = newMap;
-		mmv.setCurrentMap(currentMap, precalculations.get(currentMap));
+		Set<Profile> profiles = precalculations.get(currentMap);
+		if (profiles == null) {
+			profiles = new HashSet<>();
+		}
+		mmv.setCurrentMap(currentMap, profiles);
 	}
 
 	protected MapManagerView getView() {
