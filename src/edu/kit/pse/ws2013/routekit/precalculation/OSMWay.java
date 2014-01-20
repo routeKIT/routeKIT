@@ -86,7 +86,11 @@ public class OSMWay {
 	 * @return the highway type of this way, or {@code null} if no highway
 	 */
 	public HighwayType getHighwayType() {
-		switch (props.get("highway")) {
+		String string = props.get("highway");
+		if (string == null) {
+			return null;
+		}
+		switch (string) {
 		case "motorway":
 		case "motorway_link":
 			return HighwayType.Motorway;
