@@ -38,8 +38,8 @@ public class MapManagerController {
 		if (profilesForCurrentMap == null) {
 			profilesForCurrentMap = new HashSet<>();
 		}
-		mmv = new MapManagerView(view, this, currentMap,
-				precalculations.keySet(), profilesForCurrentMap);
+		mmv = new MapManagerView(view, this, currentMap, MapManager
+				.getInstance().getMaps(), profilesForCurrentMap);
 		mmv.setVisible(true);
 	}
 
@@ -174,7 +174,11 @@ public class MapManagerController {
 						deletedCombination.getProfile());
 			}
 			Set<Profile> profiles = precalculations.get(currentMap);
+			if (profiles == null) {
+				profiles = new HashSet<>();
+			}
 			profiles.add(addedProfile);
+			precalculations.put(currentMap, profiles);
 			mmv.setCurrentMap(currentMap, profiles);
 		}
 	}
@@ -355,8 +359,12 @@ class MapManagementDiff {
 		for (Entry<StreetMap, Set<Profile>> combinationSet : changes.entrySet()) {
 			StreetMap map = combinationSet.getKey();
 			for (Profile profile : combinationSet.getValue()) {
+				Set<Profile> profiles = precalculationsAsMap.get(map);
+				if (profiles == null) {
+					profiles = new HashSet<>();
+				}
 				if (newOrUpdatedMaps.contains(map)
-						|| !precalculationsAsMap.get(map).contains(profile)) {
+						|| !profiles.contains(profile)) {
 					newPrecalculations.add(new ProfileMapCombination(map,
 							profile));
 				}
