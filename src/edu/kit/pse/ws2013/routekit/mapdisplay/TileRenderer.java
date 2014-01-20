@@ -50,8 +50,8 @@ public class TileRenderer implements TileSource {
 		int targetNode;
 		Coordinates coordsTargetNode;
 		Coordinates coordsStartNode;
-		Coordinates leftTop = Coordinates.fromSmt(x, y + 1, zoom);
-		Coordinates rightBottom = Coordinates.fromSmt(x + 1, y, zoom);
+		Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f, zoom);
+		Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f, zoom);
 		Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(leftTop,
 				rightBottom);
 		BufferedImage tile = new BufferedImage(256, 256,
