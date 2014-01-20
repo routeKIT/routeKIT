@@ -35,6 +35,7 @@ import javax.swing.text.StyledDocument;
 
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
@@ -372,7 +373,6 @@ public class MapManagerView extends JDialog {
 		public Dialog(Window parent) {
 			super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			setSize(400, 200);
 			setLocationRelativeTo(getParent());
 			setResizable(false);
 
@@ -381,10 +381,17 @@ public class MapManagerView extends JDialog {
 			JPanel center = initDialogCenterPane();
 			JPanel south = initDialogSouthPane();
 
+			if (center == null) {
+				// no changes, don’t show the dialog
+				dispose();
+				return;
+			}
+
 			contentPane.add(center, BorderLayout.CENTER);
 			contentPane.add(south, BorderLayout.SOUTH);
 
 			setContentPane(contentPane);
+			pack();
 			setVisible(true);
 		}
 
@@ -417,18 +424,136 @@ public class MapManagerView extends JDialog {
 		private JPanel initDialogCenterPane() {
 			JPanel information = new JPanel();
 			information.setBackground(Color.WHITE);
-			JTextPane text = new JTextPane();
-			text.setText("Sie haben die folgenden Operationen ausgewählt: \n"
-					+ "Sind Sie sicher, dass Sie diese Operationen durchführen wollen?");
+			JTextPane textPane = new JTextPane();
+			StringBuilder text = new StringBuilder(
+					"Sie haben die folgenden Operationen ausgewählt:\n");
+			MapManagerController.MapManagementDiff diff = mmc.getChanges();
+			int i = 0;
+			Set<StreetMap> deletedMaps = diff.getDeletedMaps();
+			Set<? extends StreetMap> newOrUpdatedMaps = diff
+					.getNewOrUpdatedMaps();
+			Set<ProfileMapCombination> deletedPrecalculations = diff
+					.getDeletedPrecalculations();
+			Set<ProfileMapCombination> newPrecalculations = diff
+					.getNewPrecalculations();
+			if (!deletedMaps.isEmpty()) {
+				text.append(++i);
+				text.append(". Löschen der folgenden Karten:\n");
+				for (StreetMap map : deletedMaps) {
+					text.append("    • ");
+					text.append(map.getName());
+					text.append('\n');
+				}
+			}
+			if (!newOrUpdatedMaps.isEmpty()) {
+				text.append(++i);
+				text.append(". Hinzufügen oder Aktualisieren der folgenden Karten:\n");
+				for (StreetMap map : newOrUpdatedMaps) {
+					text.append("    • ");
+					text.append(map.getName());
+					text.append('\n');
+				}
+			}
+			if (!deletedPrecalculations.isEmpty()) {
+				text.append(++i);
+				text.append(". Löschen der folgenden Vorberechnungen:\n");
+				int interval = 0;
+				for (ProfileMapCombination precalculation : deletedPrecalculations) {
+					text.append("    • ");
+					text.append(precalculation.getStreetMap().getName());
+					text.append(" + ");
+					text.append(precalculation.getProfile().getName());
+					text.append('\n');
+					interval += precalculation.getCalculationTime();
+				}
+				if (interval > 0) {
+					text.append("   (diese Vorberechnungen benötigten insgesamt");
+					timeSpanString(text, interval);
+					text.append(")\n");
+				}
+			}
+			if (!newPrecalculations.isEmpty()) {
+				text.append(++i);
+				text.append(". Neu Berechnen der folgenden Vorberechnungen:\n");
+				for (ProfileMapCombination precalculation : newPrecalculations) {
+					text.append("    • ");
+					text.append(precalculation.getStreetMap().getName());
+					text.append(" + ");
+					text.append(precalculation.getProfile().getName());
+					text.append('\n');
+				}
+			}
+			if (i == 0) {
+				// diff is completely empty, dispose immediately
+				return null;
+			}
+			text.append("Sind Sie sicher, dass Sie diese Operationen durchführen wollen?");
+			textPane.setText(text.toString());
 			Font displayFont = new Font("Serif", Font.ROMAN_BASELINE, 14);
-			StyledDocument doc = text.getStyledDocument();
+			StyledDocument doc = textPane.getStyledDocument();
 			SimpleAttributeSet center = new SimpleAttributeSet();
-			StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+			StyleConstants.setAlignment(center, StyleConstants.ALIGN_LEFT);
 			doc.setParagraphAttributes(0, doc.getLength(), center, false);
-			text.setEditable(false);
-			text.setFont(displayFont);
-			information.add(text);
+			textPane.setEditable(false);
+			textPane.setFont(displayFont);
+			information.add(textPane);
 			return information;
+		}
+
+		private void timeSpanString(StringBuilder text, int interval) {
+			final short milliseconds = (short) (interval % 1000);
+			interval -= milliseconds;
+			interval /= 1000;
+			final byte seconds = (byte) (interval % 60);
+			interval -= seconds;
+			interval /= 60;
+			final byte minutes = (byte) (interval % 60);
+			interval -= minutes;
+			interval /= 60;
+			final byte hours = (byte) (interval % 24);
+			interval -= hours;
+			interval /= 24;
+			final long days = interval;
+			if (days != 0) {
+				text.append(' ');
+				text.append(days);
+				text.append(" Tag");
+				if (days != 1) {
+					text.append('e');
+				}
+			}
+			if (hours != 0) {
+				text.append(' ');
+				text.append(hours);
+				text.append(" Stunde");
+				if (hours != 1) {
+					text.append('n');
+				}
+			}
+			if (minutes != 0) {
+				text.append(' ');
+				text.append(minutes);
+				text.append(" Minute");
+				if (minutes != 1) {
+					text.append('n');
+				}
+			}
+			if (seconds != 0) {
+				text.append(' ');
+				text.append(seconds);
+				text.append(" Sekunde");
+				if (seconds != 1) {
+					text.append('n');
+				}
+			}
+			if (milliseconds != 0) {
+				text.append(' ');
+				text.append(milliseconds);
+				text.append(" Millisekunde");
+				if (milliseconds != 1) {
+					text.append('n');
+				}
+			}
 		}
 	}
 }
