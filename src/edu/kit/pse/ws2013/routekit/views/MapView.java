@@ -395,7 +395,7 @@ public class MapView extends JPanel implements MouseListener,
 		if (e.getSource() == in && zoom < 19) {
 			zoom(getWidth() / 2, getHeight() / 2, false);
 			repaint();
-		} else if (e.getSource() == out && zoom > 1) {
+		} else if (e.getSource() == out && zoom > 0) {
 			zoom(getWidth() / 2, getHeight() / 2, true);
 			repaint();
 		}
