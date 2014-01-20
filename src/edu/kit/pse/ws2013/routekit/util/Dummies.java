@@ -17,7 +17,8 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
-import edu.kit.pse.ws2013.routekit.precalculation.MapImporter;
+import edu.kit.pse.ws2013.routekit.precalculation.DummyMapImporter;
+import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
@@ -43,8 +44,8 @@ public class Dummies {
 		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 		fos.close();
 
-		StreetMap karlsruhe_big = new MapImporter()
-				.importMap(file, "Karlsruhe");
+		StreetMap karlsruhe_big = new OSMMapImporter().importMap(file,
+				"Karlsruhe");
 		MapManager.getInstance().saveMap(karlsruhe_big);
 		ProfileMapCombination karlsruheCar = new ProfileMapCombination(
 				karlsruhe_big, Profile.defaultCar);
@@ -58,7 +59,8 @@ public class Dummies {
 		new File(rootDir, "routeKIT.idx").createNewFile();
 		ProfileMapManager.init(rootDir);
 		ProfileMapCombination combination = new ProfileMapCombination(
-				new MapImporter().importMap(new File("dummy"), "Karlsruhe"),
+				new DummyMapImporter()
+						.importMap(new File("dummy"), "Karlsruhe"),
 				Profile.defaultCar);
 		int[] arc = new int[7];
 		int[] w = new int[7];

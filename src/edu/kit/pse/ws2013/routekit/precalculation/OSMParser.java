@@ -22,6 +22,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.NodeProperties;
+import edu.kit.pse.ws2013.routekit.map.Restriction;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -94,10 +96,12 @@ public class OSMParser {
 		parser.parse(file, new SecondRunHandler());
 
 		createAdjacencyField();
-		graph = new Graph(graphNodes, graphEdges, null, edgeProps, lat, lon);
+		graph = new Graph(graphNodes, graphEdges,
+				new HashMap<Integer, NodeProperties>(), edgeProps, lat, lon);
 
 		buildEdgeBasedGraph();
-		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes, null);
+		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes,
+				new HashMap<Integer, Restriction>());
 
 		return new StreetMap(graph, edgeBasedGraph);
 	}

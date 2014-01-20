@@ -56,7 +56,7 @@ public class EdgeBasedGraph {
 		this.restrictions = restrictions;
 		this.turnsReverse = new int[edges.length];
 		int currentEdge = 0;
-		for (int i = 0; i < turns.length; i++) {
+		for (int i = 0; i < turnsReverse.length; i++) {
 			while (currentEdge + 1 < edges.length
 					&& edges[currentEdge + 1] <= i) {
 				currentEdge++;
