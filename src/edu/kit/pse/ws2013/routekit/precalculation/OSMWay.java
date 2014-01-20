@@ -1,16 +1,18 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
-
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.HeightRestriction;
 import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.map.MultipleRestrictions;
 import edu.kit.pse.ws2013.routekit.map.Restriction;
+import edu.kit.pse.ws2013.routekit.map.VehicleTypeRestriction;
 import edu.kit.pse.ws2013.routekit.map.WeightRestriction;
 import edu.kit.pse.ws2013.routekit.map.WidthRestriction;
+import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 /**
  * A way in an OpenStreetMap file. This is only a helper class used by the
@@ -33,7 +35,7 @@ public class OSMWay {
 	 * Returns a {@link Restriction} object with the restriction(s) applicable
 	 * for this way.
 	 * 
-	 * @return the restriction(s) of this way, or {@code null} if none
+	 * @return the restriction(s) of this way
 	 */
 	public Restriction getRestriction() {
 		List<Restriction> restrictions = new ArrayList<>();
@@ -61,7 +63,50 @@ public class OSMWay {
 				// Ignore invalid value for the maxheight tag
 			}
 		}
-		// TODO: vehicle type restrictions missing
+
+		EnumSet<VehicleType> restrictedTypes = EnumSet
+				.noneOf(VehicleType.class);
+		for (String type : new String[] { "access", "vehicle", "motor_vehicle" }) {
+			if (tags.containsKey(type)) {
+				if (tags.get(type).equals("yes")) {
+					restrictedTypes.clear();
+				} else {
+					restrictedTypes = EnumSet.allOf(VehicleType.class);
+				}
+			}
+		}
+		if (tags.containsKey("motorcar")) {
+			if (tags.get("motorcar").equals("yes")) {
+				restrictedTypes.remove(VehicleType.Car);
+			} else {
+				restrictedTypes.add(VehicleType.Car);
+			}
+		}
+		if (tags.containsKey("motorcycle")) {
+			if (tags.get("motorcycle").equals("yes")) {
+				restrictedTypes.remove(VehicleType.Motorcycle);
+			} else {
+				restrictedTypes.add(VehicleType.Motorcycle);
+			}
+		}
+		if (tags.containsKey("hgv")) {
+			if (tags.get("hgv").equals("yes")) {
+				restrictedTypes.remove(VehicleType.Truck);
+			} else {
+				restrictedTypes.add(VehicleType.Truck);
+			}
+		}
+		if (tags.containsKey("bus")) {
+			if (tags.get("bus").equals("yes")) {
+				restrictedTypes.remove(VehicleType.Bus);
+			} else {
+				restrictedTypes.add(VehicleType.Bus);
+			}
+		}
+		for (VehicleType type : restrictedTypes) {
+			restrictions.add(VehicleTypeRestriction.getInstance(type));
+		}
+
 		return MultipleRestrictions.getInstance(restrictions);
 	}
 
