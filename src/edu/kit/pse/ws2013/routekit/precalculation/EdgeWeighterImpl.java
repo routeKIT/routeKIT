@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -36,7 +37,8 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 					graph.getCoordinates(targetNode));
 			int baseTime = Math.round(edgeLength
 					/ (currentEdgeProps.getMaxSpeed(profile) * 1000) * 3600);
-			if (graph.getNodeProperties(targetNode).isTrafficLights()) {
+			NodeProperties nodeProperties = graph.getNodeProperties(targetNode);
+			if (nodeProperties != null && nodeProperties.isTrafficLights()) {
 				baseTime += AVERAGE_TRAFFICLIGHT_WAIT_TIME;
 			}
 			for (int turn : eGraph.getOutgoingTurns(edge)) {

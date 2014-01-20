@@ -73,6 +73,6 @@ public class Dummies {
 	}
 
 	public static void main(String[] args) throws IOException, SAXException {
-		createDummies(FileUtil.getRootDir());
+		createInstall(FileUtil.getRootDir());
 	}
 }

@@ -18,7 +18,7 @@ import edu.kit.pse.ws2013.routekit.map.Restriction;
 /**
  * This class import dummy data.
  */
-public class DummyMapImporter implements MapImporter {
+public class DummyMapImporter extends MapImporter {
 	@Override
 	public StreetMap importMap(File file, String name) throws IOException,
 			SAXException {

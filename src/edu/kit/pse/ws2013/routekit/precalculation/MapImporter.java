@@ -10,7 +10,10 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 /**
  * This interface provides the functionality to import a new map.
  */
-public interface MapImporter {
+public abstract class MapImporter {
+	public MapImporter() {
+	}
+
 	/**
 	 * Imports a new map from the specified OpenStreetMap data file. The graph
 	 * data structure built by the {@link OSMParser} is partitioned using a
@@ -29,7 +32,7 @@ public interface MapImporter {
 	 *             if an error occurs during parsing the OSM file, e.g. if the
 	 *             file format is invalid
 	 */
-	public StreetMap importMap(File file, String name) throws IOException,
-			SAXException;
+	public abstract StreetMap importMap(File file, String name)
+			throws IOException, SAXException;
 
 }

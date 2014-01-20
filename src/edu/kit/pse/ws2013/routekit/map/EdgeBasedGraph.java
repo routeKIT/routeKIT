@@ -138,7 +138,8 @@ public class EdgeBasedGraph {
 	 * @return {@code true} if the turn can be used, otherwise {@code false}
 	 */
 	public boolean allowsTurn(int turn, Profile profile) {
-		return restrictions.get(turn).allows(profile);
+		Restriction restriction = restrictions.get(turn);
+		return restriction == null || restriction.allows(profile);
 	}
 
 	/**
@@ -340,5 +341,14 @@ public class EdgeBasedGraph {
 			ret.setPartitions(partitions);
 			return ret;
 		}
+	}
+
+	/**
+	 * Returns the number of street sections.
+	 * 
+	 * @return the number of street sections
+	 */
+	public int getNumberOfEdges() {
+		return edges.length;
 	}
 }
