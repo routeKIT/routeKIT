@@ -34,8 +34,12 @@ public class MapManagerController {
 		initNameMaps();
 		currentMap = ProfileMapManager.getInstance().getCurrentCombination()
 				.getStreetMap();
+		Set<Profile> profilesForCurrentMap = precalculations.get(currentMap);
+		if (profilesForCurrentMap == null) {
+			profilesForCurrentMap = new HashSet<>();
+		}
 		mmv = new MapManagerView(view, this, currentMap,
-				precalculations.keySet(), precalculations.get(currentMap));
+				precalculations.keySet(), profilesForCurrentMap);
 		mmv.setVisible(true);
 	}
 
