@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.map;
 import java.util.AbstractSet;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -166,7 +167,10 @@ public class GraphIndex {
 	 */
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
 		// TODO Dummy
-		PointOnEdge point = new PointOnEdge(0, 0.5f);
+		Random rand = new Random();
+		int random = rand.nextInt(10001);
+
+		PointOnEdge point = new PointOnEdge(random, 0.5f);
 
 		return point;
 	}
