@@ -7,6 +7,7 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für
@@ -49,8 +50,19 @@ public class TileCache implements TileSource {
 				while (waiting.size() > 100) {// too much work
 					waiting.removeLast();
 				}
+				while (prefetchWaiting.size() > 100) {// too much work
+					prefetchWaiting.removeLast();
+				}
 				try {
-					waiting.takeFirst().run();
+					if (waiting.size() == 0 && prefetchWaiting.size() > 1) {
+						prefetchWaiting.takeFirst().run();
+					} else {
+						TileJob job = waiting.pollFirst(200,
+								TimeUnit.MILLISECONDS);
+						if (job != null) {
+							job.run();
+						}
+					}
 				} catch (InterruptedException e) {
 					// its ok...
 				}
@@ -60,6 +72,7 @@ public class TileCache implements TileSource {
 
 	private boolean running = true;
 	private LinkedBlockingDeque<TileJob> waiting = new LinkedBlockingDeque<>();
+	private LinkedBlockingDeque<TileJob> prefetchWaiting = new LinkedBlockingDeque<>();
 
 	private LinkedList<TileFinishedListener> listeners = new LinkedList<>();
 	private TileSource target;
@@ -107,11 +120,31 @@ public class TileCache implements TileSource {
 		String key = key(x, y, zoom);
 		SoftReference<BufferedImage> cacheVal = map.get(key);
 		BufferedImage tile;
+		prefetchEnv(x, y, zoom);
 		if (cacheVal != null && (tile = cacheVal.get()) != null) {
 			return tile;
 		}
 		waiting.addFirst(new TileJob(x, y, zoom));
 		return this.tile;
+	}
+
+	private void prefetchEnv(int x, int y, int zoom) {
+		prefetch(x + 1, y, zoom);
+		prefetch(x - 1, y, zoom);
+		prefetch(x, y + 1, zoom);
+		prefetch(x, y - 1, zoom);
+		prefetch(x / 2, y / 2, zoom - 1);
+		prefetch(x * 2, y * 2, zoom + 1);
+		prefetch(x * 2 + 1, y * 2, zoom + 1);
+		prefetch(x * 2 + 1, y * 2 + 1, zoom + 1);
+		prefetch(x * 2, y * 2 + 1, zoom + 1);
+	}
+
+	private void prefetch(int x, int y, int zoom) {
+		SoftReference<BufferedImage> ref = map.get(key(x, y, zoom));
+		if (ref == null || ref.get() == null) {
+			prefetchWaiting.addFirst(new TileJob(x, y, zoom));
+		}
 	}
 
 	/**
