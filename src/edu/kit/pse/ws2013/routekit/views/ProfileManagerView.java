@@ -201,25 +201,35 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				int showOptionDialog = JOptionPane
-						.showOptionDialog(
-								ProfileManagerView.this,
-								"Sie speichern hiermit alle \n"
-										+ "vorgenommenen Änderungen für alle Profile.\n"
-										+ warning()
-										+ "Wollen sie die Änderungen vornehmen?",
-								"Bestätigung", JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null,
-								new String[] { "Ja", "Nein" }, "Nein");
-				if (showOptionDialog == JOptionPane.YES_OPTION) {
-					if (!currentProfile.isDefault()) {
-						Profile current = writeValues(currentProfile.getName());
-						pmc.saveTemporaryProfile(current);
+				if (pmc.getDeletionTime() != 0) {
+					int showOptionDialog = JOptionPane
+							.showOptionDialog(
+									ProfileManagerView.this,
+									"Sie speichern hiermit alle \n"
+											+ "vorgenommenen Änderungen für alle Profile.\n"
+											+ "Sie löschen "
+											+ pmc.getDeletionTime()
+											+ "Stunden an Arbeit.\n"
+											+ "Wollen sie die Änderungen vornehmen?",
+									"Bestätigung", JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null,
+									new String[] { "Ja", "Nein" }, "Nein");
+					if (showOptionDialog == JOptionPane.YES_OPTION) {
+						if (!currentProfile.isDefault()) {
+							Profile current = writeValues(currentProfile
+									.getName());
+							pmc.saveTemporaryProfile(current);
+						}
+						pmc.saveAllChanges();
+						ProfileManagerView.this.dispose();
 					}
-					pmc.saveAllChanges();
-					ProfileManagerView.this.dispose();
 				}
+				if (!currentProfile.isDefault()) {
+					Profile current = writeValues(currentProfile.getName());
+					pmc.saveTemporaryProfile(current);
+				}
+				pmc.saveAllChanges();
+				ProfileManagerView.this.dispose();
 			}
 		});
 		buttons.add(okButton);
@@ -234,13 +244,6 @@ public class ProfileManagerView extends JDialog {
 
 		south.add(buttons);
 		return south;
-	}
-
-	private String warning() {
-		if (pmc.getDeletionTime() == 0) {
-			return "";
-		}
-		return "Sie löschen " + pmc.getDeletionTime() + "Stunden an Arbeit.\n";
 	}
 
 	private JPanel initCenterPane() {
