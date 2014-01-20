@@ -50,8 +50,17 @@ public class Coordinates {
 	 * @return the distance between the two coordinates
 	 */
 	public float distanceTo(Coordinates other) {
-		// TODO: auto-generated method stub
-		return 0;
+		double toRad = Math.PI / 180;
+		double R = 6371000; // m
+		double dLat = (other.lat - lat) * toRad;
+		double dLon = (other.lon - lon) * toRad;
+		double lat1 = lat * toRad;
+		double lat2 = other.lat * toRad;
+
+		double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2)
+				* Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		return (float) (R * c);
 	}
 
 	/**
