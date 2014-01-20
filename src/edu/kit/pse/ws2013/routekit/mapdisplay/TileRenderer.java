@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.mapdisplay;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -57,7 +58,11 @@ public class TileRenderer implements TileSource {
 				BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = tile.createGraphics();
 		g.setColor(Color.white);
-		g.fillRect(1, 1, 255, 255);
+		g.fillRect(0, 0, 256, 256);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		Font font = new Font(Font.SANS_SERIF, 0, 12);
 		for (Integer e : edges) {
 			startNode = graph.getStartNode(e);
