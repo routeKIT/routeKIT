@@ -10,14 +10,13 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Verwaltet die Berechnung von Kartenkacheln und ist ein Zwischenspeicher für
- * diese. Kacheln können angefragt werden, und nachdem die (asynchrone)
- * Berechnung abgeschlossen ist, werden registrierte
- * {@link TileFinishedListener} benachrichtigt.
- * 
- * Intern werden die zwischengespeicherten Kacheln so gehalten, dass der Garbage
- * Collector sie bei Speicherknappheit verwerfen kann (etwa durch
- * {@code SoftReference}s).
+ * Manages the calculation of map tiles and caches them. Tiles can be requested,
+ * and after the (asynchronous) calculation is finished, registered
+ * {@link TileFinishedListener TileFinishedListeners} are notified.
+ * <p>
+ * Internally, cached tiles are held in a way that permits the Garbage Collector
+ * to discard them in the case of memory shortage (via {@link SoftReference
+ * SoftReferences}).
  */
 public class TileCache implements TileSource {
 	private class TileJob implements Runnable {
@@ -82,12 +81,12 @@ public class TileCache implements TileSource {
 	BufferedImage tile;
 
 	/**
-	 * Konstruktor: Erstellt einen neuen Cache für die angegebene
-	 * {@link TileSource}.
+	 * Creates a new {@link TileCache} which uses the given {@link TileSource}
+	 * for calculating tiles.
 	 * 
 	 * @param target
-	 *            Die {@code TileSource}, die die tatsächliche Berechnung
-	 *            durchführt und deren Ergebnisse zwischengespeichert werden.
+	 *            The {@link TileSource} that actually renders the tiles, and
+	 *            whose results are cached.
 	 */
 	public TileCache(TileSource target) {
 		this.target = target;
@@ -100,20 +99,24 @@ public class TileCache implements TileSource {
 	}
 
 	/**
-	 * Ist die angeforderte Kachel bereits im Zwischenspeicher vorhanden, so
-	 * wird sie direkt zurückgegeben; andernfalls wird eine Dummy-Kachel
-	 * zurückgegeben und die richtige von {@code target} angefordert, im
-	 * Zwischenspeicher gespeichert und dann zurückgegeben. Kacheln von tieferer
-	 * Zoomstufe und der Umgebung einer Kachel werden von {@code target}
-	 * angefordert und im Zwischenspeicher gespeichert.
+	 * If the requested tile is cached and available, it is returned directly;
+	 * otherwise, a “dummy” tile is returned and the correct one is in turn
+	 * requested (asynchronously) from the internal {@link TileSource}. When the
+	 * calculation is finished, the resulting tile is cached and registered
+	 * {@link TileFinishedListener TileFinishedListeners} are notified. In any
+	 * case, this method returns immediately.
+	 * <p>
+	 * Additionally, tiles surrounding the requested tile (in all 6 directions)
+	 * are also requested and cached (with lower priority), since it is likely
+	 * that they will be requested soon as well (locality of reference).
 	 * 
 	 * @param x
-	 *            Die SMT-X-Komponente.
+	 *            The SMT X component.
 	 * @param y
-	 *            Die SMT-Y-Komponente.
+	 *            The SMT Y component.
 	 * @param zoom
-	 *            Die Zoomstufe.
-	 * @return
+	 *            The zoom level.
+	 * @return Either a dummy tile or a cached tile.
 	 */
 	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
@@ -148,11 +151,12 @@ public class TileCache implements TileSource {
 	}
 
 	/**
-	 * Registriert einen {@link TileFinishedListener}, der benachrichtigt wird,
-	 * wenn eine Kachel fertig berechnet ist. Die Kachel ist Teil der Nachricht.
+	 * Registers a {@link TileFinishedListener} that is notified when
+	 * calculation of a tile has finished. The tile itself is part of the
+	 * notification.
 	 * 
 	 * @param listener
-	 *            Der Listener, der hinzugefügt werden soll.
+	 *            The listener that shall be added.
 	 */
 	public void addTileFinishedListener(TileFinishedListener listener) {
 		listeners.add(listener);
