@@ -9,6 +9,10 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.Box;
@@ -310,7 +314,14 @@ public class MapManagerView extends JDialog {
 	public void setAvailableMaps(Set<StreetMap> maps) {
 		listenerCheck++;
 		mapname.removeAllItems();
-		for (StreetMap m : maps) {
+		List<StreetMap> sortedMaps = new ArrayList<>(maps);
+		Collections.sort(sortedMaps, new Comparator<StreetMap>() {
+			@Override
+			public int compare(StreetMap o1, StreetMap o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (StreetMap m : sortedMaps) {
 			mapname.addItem(m.getName());
 		}
 		listenerCheck--;
@@ -329,7 +340,14 @@ public class MapManagerView extends JDialog {
 	public void setCurrentMap(StreetMap map, Set<Profile> profiles) {
 		listenerCheck++;
 		listenModell.clear();
-		for (Profile p : profiles) {
+		List<Profile> sortedProfiles = new ArrayList<>(profiles);
+		Collections.sort(sortedProfiles, new Comparator<Profile>() {
+			@Override
+			public int compare(Profile o1, Profile o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (Profile p : sortedProfiles) {
 			listenModell.addElement(p.getName());
 		}
 		mapname.setSelectedItem(map.getName());
@@ -344,6 +362,9 @@ public class MapManagerView extends JDialog {
 	}
 
 	public void addProfile(Profile p) {
+		// TODO either remove, or implement sorting here as well
+		// currently unused – the Controller uses setCurrentMap() instead
+		// – Lucas
 		listenModell.addElement(p.getName());
 	}
 

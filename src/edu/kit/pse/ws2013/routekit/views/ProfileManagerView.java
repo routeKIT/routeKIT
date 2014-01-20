@@ -8,7 +8,11 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -42,7 +46,7 @@ public class ProfileManagerView extends JDialog {
 	private JButton deleteButton;
 	private int listenerCheck = 0;
 	private Profile currentProfile;
-	private List<Profile> availableProfiles;
+	private Set<Profile> availableProfiles;
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -51,7 +55,7 @@ public class ProfileManagerView extends JDialog {
 	 * setVisible(true)}, i.&nbsp;e. it doesn’t block.
 	 */
 	public ProfileManagerView(Window parent, ProfileManagerController pmc,
-			Profile currentProfile, List<Profile> availableProfiles) {
+			Profile currentProfile, Set<Profile> availableProfiles) {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
 		this.currentProfile = currentProfile;
 		this.availableProfiles = availableProfiles;
@@ -440,10 +444,17 @@ public class ProfileManagerView extends JDialog {
 	 * @param profiles
 	 *            The available profiles.
 	 */
-	public void setAvailableProfiles(List<Profile> profiles) {
+	public void setAvailableProfiles(Set<Profile> profiles) {
 		listenerCheck++;
 		profilename.removeAllItems();
-		for (Profile p : profiles) {
+		List<Profile> sortedProfiles = new ArrayList<>(profiles);
+		Collections.sort(sortedProfiles, new Comparator<Profile>() {
+			@Override
+			public int compare(Profile o1, Profile o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		for (Profile p : sortedProfiles) {
 			profilename.addItem(p.getName());
 		}
 		availableProfiles = profiles;

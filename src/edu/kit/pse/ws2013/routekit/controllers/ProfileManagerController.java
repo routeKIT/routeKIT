@@ -2,7 +2,6 @@ package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.awt.Window;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -35,14 +34,14 @@ public class ProfileManagerController {
 				.getProfile();
 		assert (p != null);
 		currentProfile = p;
-		pmv = new ProfileManagerView(parent, this, p, new ArrayList<>(
+		pmv = new ProfileManagerView(parent, this, p, new HashSet<>(
 				profiles.values()));
 		pmv.setVisible(true);
 	}
 
 	private void setAvailableProfiles() {
 		assert (!profiles.isEmpty());
-		pmv.setAvailableProfiles(new ArrayList<>(profiles.values()));
+		pmv.setAvailableProfiles(new HashSet<>(profiles.values()));
 	}
 
 	/**
