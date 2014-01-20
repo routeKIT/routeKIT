@@ -81,9 +81,9 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 					weightArray[turn] = baseTime + turnTime;
 				}
 			}
-			long t2 = System.currentTimeMillis();
-			int time = (int) (t2 - t1);
-			combination.setWeights(new Weights(weightArray), time);
 		}
+		long t2 = System.currentTimeMillis();
+		int time = (int) (t2 - t1);
+		combination.setWeights(new Weights(weightArray), time);
 	}
 }
