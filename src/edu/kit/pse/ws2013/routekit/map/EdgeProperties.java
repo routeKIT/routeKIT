@@ -8,6 +8,8 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
  * This class encapsulates the properties of an edge.
+ * 
+ * @see Graph
  */
 public class EdgeProperties {
 	private final HighwayType type;
@@ -16,7 +18,7 @@ public class EdgeProperties {
 	private final int maxSpeed;
 
 	/**
-	 * Creates a new object with the given properties.
+	 * Creates a new {@code EdgeProperties} object with the given properties.
 	 * 
 	 * @param type
 	 *            the highway type
@@ -33,8 +35,7 @@ public class EdgeProperties {
 	 */
 	public EdgeProperties(HighwayType type, String name, String roadRef,
 			int maxSpeed) {
-		if (type == null || (name != null && name.isEmpty())
-				|| (roadRef != null && roadRef.isEmpty()) || maxSpeed < 0) {
+		if (type == null || maxSpeed < 0) {
 			throw new IllegalArgumentException();
 		}
 
@@ -104,10 +105,7 @@ public class EdgeProperties {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		EdgeProperties other = (EdgeProperties) obj;

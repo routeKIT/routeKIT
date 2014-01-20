@@ -6,9 +6,10 @@ import java.io.IOException;
 
 /**
  * This class encapsulates the properties of a node.
+ * 
+ * @see Graph
  */
 public class NodeProperties {
-
 	private final String junctionRef;
 	private final String junctionName;
 	private final boolean isMotorwayJunction;
@@ -18,23 +19,18 @@ public class NodeProperties {
 	 * Creates a new {@link NodeProperties} object with the given fields.
 	 * 
 	 * @param junctionRef
-	 *            The junction reference, see {@link #getJunctionRef()}
+	 *            the junction reference number, see {@link #getJunctionRef()}
 	 * @param junctionName
-	 *            The junction name, see {@link #getJunctionName()}
+	 *            the junction name, see {@link #getJunctionName()}
 	 * @param isMotorwayJunction
-	 *            If the junction is a motorway junction, see
+	 *            whether the node is a motorway junction, see
 	 *            {@link #isMotorwayJunction()}
 	 * @param isTrafficLights
-	 *            If the junction has traffic lights, see
+	 *            whether the node has traffic lights, see
 	 *            {@link #isTrafficLights()}
 	 */
 	public NodeProperties(String junctionRef, String junctionName,
 			boolean isMotorwayJunction, boolean isTrafficLights) {
-		if ((junctionRef != null && junctionRef.isEmpty())
-				|| (junctionName != null && junctionName.isEmpty())) {
-			throw new IllegalArgumentException();
-		}
-
 		this.junctionRef = junctionRef;
 		this.junctionName = junctionName;
 		this.isMotorwayJunction = isMotorwayJunction;
@@ -42,29 +38,38 @@ public class NodeProperties {
 	}
 
 	/**
-	 * Gets the reference number of the junction or {@code null} if it’s not a
-	 * junction.
+	 * Returns the reference number of the motorway junction.
+	 * 
+	 * @return the reference number of the junction, or {@code null} if it’s not
+	 *         a junction
 	 */
 	public String getJunctionRef() {
 		return junctionRef;
 	}
 
 	/**
-	 * Gets the name of the junction or {@code null} if it’s not a junction.
+	 * Returns the name of the motorway junction.
+	 * 
+	 * @return the name of the junction, or {@code null} if it’s not a junction
 	 */
 	public String getJunctionName() {
 		return junctionName;
 	}
 
 	/**
-	 * Determines if the node is a motorway junction.
+	 * Indicates whether this node is a motorway junction.
+	 * 
+	 * @return {@code true} if it is a motorway junction, otherwise
+	 *         {@code false}
 	 */
 	public boolean isMotorwayJunction() {
 		return isMotorwayJunction;
 	}
 
 	/**
-	 * Determines if the node has traffic lights.
+	 * Indicates whether this node has traffic lights.
+	 * 
+	 * @return {@code true} if there are traffic lights, {@code false} if not
 	 */
 	public boolean isTrafficLights() {
 		return isTrafficLights;
@@ -88,17 +93,12 @@ public class NodeProperties {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		NodeProperties other = (NodeProperties) obj;
-		if (isMotorwayJunction != other.isMotorwayJunction) {
-			return false;
-		}
-		if (isTrafficLights != other.isTrafficLights) {
+		if (isMotorwayJunction != other.isMotorwayJunction
+				|| isTrafficLights != other.isTrafficLights) {
 			return false;
 		}
 		if (junctionName == null) {
