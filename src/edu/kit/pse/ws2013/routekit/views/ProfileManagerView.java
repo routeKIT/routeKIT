@@ -47,6 +47,7 @@ public class ProfileManagerView extends JDialog {
 	private int listenerCheck = 0;
 	private Profile currentProfile;
 	private Set<Profile> availableProfiles;
+	private ProfileManagerController pmc;
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -59,6 +60,7 @@ public class ProfileManagerView extends JDialog {
 		super(parent, "Profilverwaltung", ModalityType.APPLICATION_MODAL);
 		this.currentProfile = currentProfile;
 		this.availableProfiles = availableProfiles;
+		this.pmc = pmc;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
@@ -66,9 +68,9 @@ public class ProfileManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane(pmc);
+		JPanel north = initNorthPane();
 		JPanel center = initCenterPane();
-		JPanel south = initSouthPane(pmc);
+		JPanel south = initSouthPane();
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -80,7 +82,7 @@ public class ProfileManagerView extends JDialog {
 		setCurrentProfile(currentProfile);
 	}
 
-	private JPanel initNorthPane(final ProfileManagerController pmc) {
+	private JPanel initNorthPane() {
 		JPanel north = new JPanel(new FlowLayout());
 		north.setBackground(Color.WHITE);
 
@@ -187,7 +189,7 @@ public class ProfileManagerView extends JDialog {
 		return VehicleType.Motorcycle;
 	}
 
-	private JPanel initSouthPane(final ProfileManagerController pmc) {
+	private JPanel initSouthPane() {
 		JPanel south = new JPanel(new GridLayout(1, 2));
 		south.setBackground(Color.WHITE);
 
@@ -205,7 +207,7 @@ public class ProfileManagerView extends JDialog {
 								ProfileManagerView.this,
 								"Sie speichern hiermit alle \n"
 										+ "vorgenommenen Änderungen für alle Profile.\n"
-										+ warning(pmc)
+										+ warning()
 										+ "Wollen sie die Änderungen vornehmen?",
 								"Bestätigung", JOptionPane.YES_NO_OPTION,
 								JOptionPane.QUESTION_MESSAGE, null,
@@ -234,7 +236,7 @@ public class ProfileManagerView extends JDialog {
 		return south;
 	}
 
-	private String warning(ProfileManagerController pmc) {
+	private String warning() {
 		if (pmc.getDeletionTime() == 0) {
 			return "";
 		}
