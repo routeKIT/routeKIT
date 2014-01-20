@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
@@ -39,7 +44,8 @@ public class MapManagerView extends JDialog {
 	private JButton importButton;
 	private JButton update;
 	private JButton delete;
-	int listenerCheck = 0;
+	private int listenerCheck = 0;
+	private MapManagerController mmc;
 
 	/**
 	 * A constructor that creates a new MapManagerView.
@@ -51,6 +57,7 @@ public class MapManagerView extends JDialog {
 			StreetMap currentMap, Set<StreetMap> maps,
 			Set<Profile> currentMapProfiles) {
 		super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
+		this.mmc = mmc;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 400);
 		setLocationRelativeTo(getParent());
@@ -72,9 +79,9 @@ public class MapManagerView extends JDialog {
 
 		JPanel contentPane = new JPanel(new BorderLayout());
 
-		JPanel north = initNorthPane(mmc);
-		JPanel center = initCenterPane(mmc);
-		JPanel south = initSouthPane(mmc);
+		JPanel north = initNorthPane();
+		JPanel center = initCenterPane();
+		JPanel south = initSouthPane();
 
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -86,7 +93,7 @@ public class MapManagerView extends JDialog {
 		setCurrentMap(currentMap, currentMapProfiles);
 	}
 
-	private JPanel initNorthPane(final MapManagerController mmc) {
+	private JPanel initNorthPane() {
 		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
 		JLabel map = new JLabel("Karte auswählen:");
@@ -112,12 +119,12 @@ public class MapManagerView extends JDialog {
 		return north;
 	}
 
-	private JPanel initCenterPane(MapManagerController mmc) {
+	private JPanel initCenterPane() {
 		JPanel center = new JPanel(new BorderLayout(10, 10));
 		center.setBackground(Color.WHITE);
 
-		JPanel buttons = initButtonsPane(mmc);
-		JPanel mapProfile = initMapProfilePane(mmc);
+		JPanel buttons = initButtonsPane();
+		JPanel mapProfile = initMapProfilePane();
 
 		center.add(buttons, BorderLayout.NORTH);
 		center.add(mapProfile, BorderLayout.CENTER);
@@ -128,7 +135,7 @@ public class MapManagerView extends JDialog {
 		return center;
 	}
 
-	private JPanel initSouthPane(final MapManagerController mmc) {
+	private JPanel initSouthPane() {
 		JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		south.setBackground(Color.WHITE);
 
@@ -137,7 +144,7 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mmc.saveAllChanges();
+				new Dialog(MapManagerView.this);
 				setVisible(false);
 			}
 		});
@@ -154,7 +161,7 @@ public class MapManagerView extends JDialog {
 		return south;
 	}
 
-	private JPanel initButtonsPane(final MapManagerController mmc) {
+	private JPanel initButtonsPane() {
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		buttons.setBackground(Color.WHITE);
 
@@ -251,10 +258,10 @@ public class MapManagerView extends JDialog {
 		return buttons;
 	}
 
-	private JPanel initMapProfilePane(MapManagerController mmc) {
+	private JPanel initMapProfilePane() {
 		JPanel mapProfile = new JPanel(new BorderLayout(10, 10));
 		mapProfile.setBackground(Color.WHITE);
-		JPanel addDelete = initAddDelete(mmc);
+		JPanel addDelete = initAddDelete();
 		listenModell = new DefaultListModel<String>();
 		profile = new JList<String>(listenModell);
 		profile.setBackground(Color.lightGray);
@@ -267,7 +274,7 @@ public class MapManagerView extends JDialog {
 		return mapProfile;
 	}
 
-	private JPanel initAddDelete(final MapManagerController mmc) {
+	private JPanel initAddDelete() {
 		JPanel addDelete = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		addDelete.setBackground(Color.WHITE);
 		JButton addProfile = new JButton("Hinzufügen");
@@ -338,5 +345,69 @@ public class MapManagerView extends JDialog {
 
 	public void addProfile(Profile p) {
 		listenModell.addElement(p.getName());
+	}
+
+	private class Dialog extends JDialog {
+		public Dialog(Window parent) {
+			super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setSize(400, 200);
+			setLocationRelativeTo(getParent());
+			setResizable(false);
+
+			JPanel contentPane = new JPanel(new BorderLayout());
+
+			JPanel center = initDialogCenterPane();
+			JPanel south = initDialogSouthPane();
+
+			contentPane.add(center, BorderLayout.CENTER);
+			contentPane.add(south, BorderLayout.SOUTH);
+
+			setContentPane(contentPane);
+			setVisible(true);
+		}
+
+		private JPanel initDialogSouthPane() {
+			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10,
+					10));
+			buttons.setBackground(Color.WHITE);
+			JButton ok = new JButton("OK");
+			ok.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					mmc.saveAllChanges();
+					dispose();
+				}
+			});
+			JButton cancel = new JButton("Abbrechen");
+			cancel.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			buttons.add(ok);
+			buttons.add(cancel);
+			return buttons;
+		}
+
+		private JPanel initDialogCenterPane() {
+			JPanel information = new JPanel();
+			information.setBackground(Color.WHITE);
+			JTextPane text = new JTextPane();
+			text.setText("Sie haben die folgenden Operationen ausgewählt: \n"
+					+ "Sind Sie sicher, dass Sie diese Operationen durchführen wollen?");
+			Font displayFont = new Font("Serif", Font.ROMAN_BASELINE, 14);
+			StyledDocument doc = text.getStyledDocument();
+			SimpleAttributeSet center = new SimpleAttributeSet();
+			StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+			doc.setParagraphAttributes(0, doc.getLength(), center, false);
+			text.setEditable(false);
+			text.setFont(displayFont);
+			information.add(text);
+			return information;
+		}
 	}
 }
