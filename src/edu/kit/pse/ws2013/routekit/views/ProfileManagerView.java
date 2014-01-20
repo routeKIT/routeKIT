@@ -383,6 +383,7 @@ public class ProfileManagerView extends JDialog {
 	 *            The new Profile.
 	 */
 	public void setCurrentProfile(Profile profile) {
+		currentProfile = profile;
 		listenerCheck++;
 		switch (profile.getVehicleType()) {
 		case Bus:
