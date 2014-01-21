@@ -66,6 +66,35 @@ public class EdgeBasedGraph {
 		}
 	}
 
+	/**
+	 * Array[edgeId] of rturns-index. index of the first turn for this edge in
+	 * {@link #rturns};
+	 */
+	private int[] redges;
+	/**
+	 * Array[rturs-index] of turnIds. The incoming turns.
+	 */
+	private int[] rturns;
+
+	private void reverseGraph() {
+		if (redges != null) {
+			return;
+		}
+		redges = new int[edges.length];
+		rturns = new int[turns.length];
+		for (int i = 0; i < turns.length; i++) {
+			redges[turns[i]]++;
+		}
+		int sum = 0;
+		for (int i = 0; i < redges.length; i++) {
+			sum += redges[i];
+			redges[i] = sum;
+		}
+		for (int i = 0; i < turns.length; i++) {
+			rturns[--redges[turns[i]]] = i;
+		}
+	}
+
 	public int[] getEdges() {
 		return edges;
 	}
@@ -163,7 +192,10 @@ public class EdgeBasedGraph {
 	 * @return all incoming turns of the edge
 	 */
 	public Set<Integer> getIncomingTurns(int edge) {
-		throw new Error("Unimplemented");
+		reverseGraph();
+		return new IntArraySet(redges[edge],
+				(edge == redges.length - 1 ? rturns.length : redges[edge + 1])
+						- redges[edge], rturns);
 	}
 
 	/**

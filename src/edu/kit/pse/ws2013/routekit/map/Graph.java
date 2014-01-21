@@ -156,7 +156,7 @@ public class Graph {
 	 * @return all edges coming in at that node
 	 */
 	public Set<Integer> getIncomingEdges(int node) {
-		return null;
+		throw new Error("Unimplemented");
 	}
 
 	/**
