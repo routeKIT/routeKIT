@@ -370,6 +370,8 @@ public class MapManagerView extends JDialog {
 	}
 
 	private class Dialog extends JDialog {
+		private JButton ok;
+
 		public Dialog(Window parent) {
 			super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -392,6 +394,21 @@ public class MapManagerView extends JDialog {
 
 			setContentPane(contentPane);
 			pack();
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						for (int sek = 5; sek >= 1; sek--) {
+							ok.setText("OK (" + sek + ")");
+							Thread.sleep(1000);
+						}
+					} catch (InterruptedException a) {
+					}
+					ok.setText("OK");
+					ok.setEnabled(true);
+				}
+			}).start();
 			setVisible(true);
 		}
 
@@ -399,7 +416,8 @@ public class MapManagerView extends JDialog {
 			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10,
 					10));
 			buttons.setBackground(Color.WHITE);
-			JButton ok = new JButton("OK");
+			ok = new JButton("OK");
+			ok.setEnabled(false);
 			ok.addActionListener(new ActionListener() {
 
 				@Override
