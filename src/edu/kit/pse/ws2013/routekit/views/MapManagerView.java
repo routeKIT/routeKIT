@@ -149,8 +149,10 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Dialog(MapManagerView.this);
-				setVisible(false);
+				if (new Dialog(MapManagerView.this).clickedOk) {
+					mmc.saveAllChanges();
+					setVisible(false);
+				}
 			}
 		});
 		south.add(okButton);
@@ -371,6 +373,7 @@ public class MapManagerView extends JDialog {
 
 	private class Dialog extends JDialog {
 		private JButton ok;
+		public boolean clickedOk = false;
 
 		public Dialog(Window parent) {
 			super(parent, "Kartenverwaltung", ModalityType.APPLICATION_MODAL);
@@ -385,6 +388,7 @@ public class MapManagerView extends JDialog {
 
 			if (center == null) {
 				// no changes, don’t show the dialog
+				clickedOk = true;
 				dispose();
 				return;
 			}
@@ -422,7 +426,7 @@ public class MapManagerView extends JDialog {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					mmc.saveAllChanges();
+					clickedOk = true;
 					dispose();
 				}
 			});
