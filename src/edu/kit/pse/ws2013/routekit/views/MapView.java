@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Stroke;
 import java.awt.TexturePaint;
 import java.awt.color.ColorSpace;
@@ -177,17 +178,12 @@ public class MapView extends JPanel implements MouseListener,
 		Coordinates c = rm.getStart();
 		if (c != null) {
 			g.setColor(Color.RED);
-			drawPoint(g, c);
+			drawPoint(g, c, false);
 		}
 		c = rm.getDestination();
 		if (c != null) {
-			if (g instanceof Graphics2D) {
-				((Graphics2D) g).setPaint(new TexturePaint(flagPattern,
-						new Rectangle2D.Float(0, 0, 10, 10)));
-			} else {
-				g.setColor(Color.GREEN);
-			}
-			drawPoint(g, c);
+			g.setColor(Color.GREEN);
+			drawPoint(g, c, true);
 		}
 		final Route r = rm.getCurrentRoute();
 		if (r != null) {
@@ -214,16 +210,24 @@ public class MapView extends JPanel implements MouseListener,
 		g2.setStroke(s);
 	}
 
-	private void drawPoint(Graphics g, Coordinates c) {
+	private void drawPoint(Graphics g, Coordinates c, final boolean checkered) {
 		int it = 1 << zoom;
 		int smtX = (int) ((c.getSmtX(zoom) - x) * 256f);
 		int smtY = (int) ((c.getSmtY(zoom) - y) * 256f);
 		for (double i = Math.floor(x / it); (i * it - x) * 256 < getWidth(); i++) {
-			drawFlag(g, (int) (smtX + (i * it * 256)), smtY);
+			int x = (int) (smtX + (i * it * 256));
+			int y = smtY;
+			g.translate(x, y);
+			if (checkered && g instanceof Graphics2D) {
+				((Graphics2D) g).setPaint(new TexturePaint(flagPattern,
+						new Rectangle2D.Float(1, -2, 10, 10)));
+			}
+			drawFlag(g);
+			g.translate(-x, -y);
 		}
 	}
 
-	private static void drawFlag(Graphics g, int x, int y) {
+	private static void drawFlag(Graphics g) {
 		// @formatter:off
 		// ===================================    –
 		// |------------flagWidth------------|    |
@@ -240,6 +244,7 @@ public class MapView extends JPanel implements MouseListener,
 		//                \   /      |            |
 		//                 \ /       |            |
 		//                  V        –            –
+		//                (0|0)
 		// @formatter:on
 		final int coneWidth = 8;
 		final int coneHeight = 10;
@@ -248,11 +253,15 @@ public class MapView extends JPanel implements MouseListener,
 
 		final int coneRadius = coneWidth / 2;
 		final int halfFlagWidth = flagWidth / 2;
-		g.fillPolygon(new int[] { x, x - coneRadius, x - halfFlagWidth,
-				x - halfFlagWidth, x + halfFlagWidth, x + halfFlagWidth,
-				x + coneRadius }, new int[] { y, y - coneHeight,
-				y - coneHeight, y - flagHeight, y - flagHeight, y - coneHeight,
-				y - coneHeight }, 7);
+		Polygon p = new Polygon(new int[] { 0, -coneRadius, -halfFlagWidth,
+				-halfFlagWidth, halfFlagWidth, halfFlagWidth, coneRadius },
+				new int[] { 0, -coneHeight, -coneHeight, -flagHeight,
+						-flagHeight, -coneHeight, -coneHeight }, 7);
+		g.fillPolygon(p);
+		Color c = g.getColor();
+		g.setColor(Color.BLACK);
+		g.drawPolygon(p);
+		g.setColor(c);
 	}
 
 	int dx = -1;
