@@ -46,12 +46,6 @@ public class TileRenderer implements TileSource {
 	 */
 	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
-		int x1 = -1;
-		int y1 = -1;
-		int startNode;
-		int targetNode;
-		Coordinates coordsTargetNode;
-		Coordinates coordsStartNode;
 		Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f, zoom);
 		Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f, zoom);
 		Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(leftTop,
@@ -66,6 +60,11 @@ public class TileRenderer implements TileSource {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		Font font = new Font(Font.SANS_SERIF, 0, 12);
+
+		int startNode;
+		int targetNode;
+		Coordinates coordsTargetNode;
+		Coordinates coordsStartNode;
 		for (Integer e : edges) {
 			startNode = graph.getStartNode(e);
 			coordsStartNode = graph.getCoordinates(startNode);
@@ -76,6 +75,16 @@ public class TileRenderer implements TileSource {
 			int xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 			int ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
 			EdgeProperties p = graph.getEdgeProperties(e);
+
+			if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
+				int tmp = xstart;
+				xstart = xtarget;
+				xtarget = tmp;
+				tmp = ystart;
+				ystart = ytarget;
+				ytarget = tmp;
+			}
+
 			if (DO_COLORFULL) {
 				g.setColor(Color.getHSBColor(p.getType().ordinal()
 						/ ((float) HighwayType.values().length), 1, 1));
@@ -84,48 +93,29 @@ public class TileRenderer implements TileSource {
 			}
 			g.drawLine(xstart, ystart, xtarget, ytarget);
 
-			if (xstart == xtarget) {
-				if (ystart < ytarget) {
-					x1 = xstart;
-					y1 = ystart;
-				}
-				if (ystart > ytarget) {
-					x1 = xtarget;
-					y1 = ytarget;
-				}
-			} else {
-				if (xstart < xtarget) {
-					x1 = xstart;
-					y1 = ystart;
-				} else {
-					x1 = xtarget;
-					y1 = ytarget;
-				}
-			}
-
 			String name = getName(e);
 			double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
 					+ Math.pow((ytarget - ystart), 2));
-			if (name != null && (x1 != -1)) {
+			if (name != null && (xstart != -1)) {
 				Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
 				AffineTransform at = AffineTransform.getRotateInstance(
 						getAngle(xstart, ystart, xtarget, ytarget, checkValue),
-						x1, y1);
+						xstart, ystart);
 				g.setColor(Color.BLUE);
 				AffineTransform old = g.getTransform();
 				g.setTransform(at);
 				g.setFont(font);
 				int i = 1;
-				String nNames = "";
+				StringBuilder nNames = new StringBuilder();
 				while (i * (r.getWidth() + 3) - 3 + 2 * space < checkValue) {
 					i++;
-					if (!nNames.isEmpty()) {
-						nNames += " ";
+					if (nNames.length() != 0) {
+						nNames.append(' ');
 					}
-					nNames += name;
+					nNames.append(name);
 				}
-				g.drawString(nNames, space + x1, y1);
+				g.drawString(nNames.toString(), space + xstart, ystart);
 				g.setTransform(old);
 			}
 
