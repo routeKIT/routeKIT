@@ -45,13 +45,13 @@ public class MapManagerController {
 
 	private void initPrecalculations() {
 		precalculations.clear();
+		for (StreetMap map : MapManager.getInstance().getMaps()) {
+			precalculations.put(map, new HashSet<Profile>());
+		}
 		for (ProfileMapCombination combination : ProfileMapManager
 				.getInstance().getCombinations()) {
 			StreetMap map = combination.getStreetMap();
 			Set<Profile> profiles = precalculations.get(map);
-			if (profiles == null) {
-				profiles = new HashSet<>();
-			}
 			profiles.add(combination.getProfile());
 			precalculations.put(map, profiles);
 		}
