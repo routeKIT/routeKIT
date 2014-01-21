@@ -2,8 +2,10 @@ package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import edu.kit.pse.ws2013.routekit.history.History;
+import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
@@ -100,11 +102,23 @@ public class MainController {
 		Coordinates start = rm.getStart();
 		Coordinates destination = rm.getDestination();
 		if (start != null && destination != null) {
-			history.addEntry(start, destination);
-			try {
-				history.save(FileUtil.getHistoryFile());
-			} catch (IOException e) {
-				e.printStackTrace();
+
+			List<HistoryEntry> entries = history.getEntries();
+			boolean saveNewEntry = true;
+			if (!entries.isEmpty()) {
+				HistoryEntry last = entries.get(entries.size() - 1);
+				if (last != null && last.getStart().equals(start)
+						&& last.getDest().equals(destination)) {
+					saveNewEntry = false;
+				}
+			}
+			if (saveNewEntry) {
+				history.addEntry(start, destination);
+				try {
+					history.save(FileUtil.getHistoryFile());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			ProfileMapCombination currentCombination = ProfileMapManager
 					.getInstance().getCurrentCombination();
@@ -146,6 +160,8 @@ public class MainController {
 			Coordinates destination) {
 		rm.setStart(start);
 		rm.setDestination(destination);
+
+		checkAndCalculate();
 	}
 
 	/**
