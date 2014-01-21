@@ -1,9 +1,9 @@
 package edu.kit.pse.ws2013.routekit.map;
 
+import java.awt.geom.Line2D;
 import java.util.AbstractSet;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Random;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -183,13 +183,39 @@ public class GraphIndex {
 	 * @return
 	 */
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
-		// TODO Dummy
-		Random rand = new Random();
-		int random = rand.nextInt(10001);
+		Coordinates left = new Coordinates(coords.getLatitude() - 0.1f,
+				coords.getLongitude() - 0.1f);
+		Coordinates right = new Coordinates(coords.getLatitude() + 0.1f,
+				coords.getLongitude() + 0.1f);
+		double nearest = Double.POSITIVE_INFINITY;
+		int emax = -1;
+		for (Integer e : getEdgesInRectangle(left, right)) {
+			Coordinates start = graph.getCoordinates(graph.getStartNode(e));
+			Coordinates end = graph.getCoordinates(graph.getTargetNode(e));
+			double l = Line2D.ptSegDistSq(start.getLatitude(),
+					start.getLongitude(), end.getLatitude(),
+					end.getLongitude(), coords.getLatitude(),
+					coords.getLongitude());
+			if (l < nearest) {
+				nearest = l;
+				emax = e;
+			}
 
-		PointOnEdge point = new PointOnEdge(random, 0.5f);
-
-		return point;
+		}
+		if (emax == -1) {
+			return null;
+		}
+		Coordinates start = graph.getCoordinates(graph.getStartNode(emax));
+		Coordinates end = graph.getCoordinates(graph.getTargetNode(emax));
+		double path = (coords.getLatitude() - start.getLatitude())
+				* (end.getLatitude() - start.getLatitude())
+				+ (coords.getLongitude() - start.getLongitude())
+				* (end.getLongitude() - start.getLongitude());
+		path /= (end.getLatitude() - start.getLatitude())
+				* (end.getLatitude() - start.getLatitude())
+				+ (end.getLongitude() - start.getLongitude())
+				* (end.getLongitude() - start.getLongitude());
+		return new PointOnEdge(emax, path < 0 ? 0 : path > 1 ? 1 : (float) path);
 	}
 
 	/**
