@@ -161,7 +161,7 @@ public class ProfileManagerController {
 	}
 
 	/**
-	 * Returns the profile that the user selected. Note that this is current
+	 * Returns the profile that the user selected. Note that this is different
 	 * from the <i>current</i> profile (which is the one that the user has
 	 * currently selected, while the view is still visible); the selected
 	 * profile is only set in {@link #saveAllChanges()}, and if that method is

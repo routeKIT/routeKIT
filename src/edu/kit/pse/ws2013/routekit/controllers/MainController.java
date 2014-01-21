@@ -7,6 +7,7 @@ import java.util.List;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
+import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.mapdisplay.OSMRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
@@ -218,6 +219,13 @@ public class MainController {
 	 */
 	public void manageMaps() {
 		mapManagement = new MapManagerController(view);
+		StreetMap selected = mapManagement.getSelectedMap();
+		if (selected != null) {
+			ProfileMapManager.getInstance().selectProfileAndMap(
+					ProfileMapManager.getInstance().getCurrentCombination()
+							.getProfile(), selected);
+			// TODO update view elements
+		}
 	}
 
 	/**

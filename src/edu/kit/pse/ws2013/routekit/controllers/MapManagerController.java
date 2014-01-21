@@ -29,6 +29,7 @@ public class MapManagerController {
 	private final Map<String, Profile> profilesByName = new HashMap<>();
 	private final Map<String, StreetMap> mapsByName = new HashMap<>();
 	private StreetMap currentMap;
+	private StreetMap selectedMap; // set in saveAllChanges
 
 	public MapManagerController(MainView view) {
 		initPrecalculations();
@@ -129,6 +130,7 @@ public class MapManagerController {
 	 */
 	public void saveAllChanges() {
 		// TODO all of this should NOT run in the UI thread
+		selectedMap = currentMap;
 		MapManager mapManager = MapManager.getInstance();
 		ProfileMapManager profileMapManager = ProfileMapManager.getInstance();
 		final MapManagementDiff diff = getChanges();
@@ -227,6 +229,20 @@ public class MapManagerController {
 
 	protected MapManagerView getView() {
 		return mmv;
+	}
+
+	/**
+	 * Returns the map that the user selected. Note that this is different from
+	 * the <i>current</i> map (which is the one that the user has currently
+	 * selected, while the view is still visible); the selected map is only set
+	 * in {@link #saveAllChanges()}, and if that method is never called
+	 * (e.&nbsp;g. because the user clicked “Cancel”), then this method returns
+	 * {@code null} to indicate that.
+	 * 
+	 * @return The map that the user selected.
+	 */
+	public StreetMap getSelectedMap() {
+		return selectedMap;
 	}
 
 	/**
