@@ -58,6 +58,10 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 				break;
 			}
 
+			if (distance[u] == Integer.MAX_VALUE) {
+				break;
+			}
+
 			Set<Integer> outgoingTurns = data.getStreetMap()
 					.getEdgeBasedGraph().getOutgoingTurns(u);
 
