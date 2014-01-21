@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.HeightRestriction;
 import edu.kit.pse.ws2013.routekit.map.HighwayType;
@@ -20,6 +21,7 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
  */
 public class OSMWay {
 	private Map<String, String> tags;
+	private int id = -1;
 
 	/**
 	 * Creates a new object from the given OSM tags.
@@ -29,6 +31,30 @@ public class OSMWay {
 	 */
 	public OSMWay(Map<String, String> tags) {
 		this.tags = tags;
+	}
+
+	/**
+	 * Returns the OSM way identifier of this way.
+	 * 
+	 * @return the ID
+	 * @throws IllegalStateException
+	 *             if the ID has not been set yet
+	 */
+	public int getId() {
+		if (id < 0) {
+			throw new IllegalStateException();
+		}
+		return id;
+	}
+
+	/**
+	 * Sets the OSM way identifier of this way.
+	 * 
+	 * @param id
+	 *            the ID to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**

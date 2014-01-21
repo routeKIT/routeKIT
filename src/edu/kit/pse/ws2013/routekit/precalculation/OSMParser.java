@@ -184,15 +184,28 @@ public class OSMParser {
 	 */
 	private class FirstRunHandler extends DefaultHandler {
 		private String enclosing;
+		private Locator locator;
 
+		private int wayId;
 		private Map<String, String> wayTags;
 		private List<Long> wayNodes;
+
+		@Override
+		public void setDocumentLocator(Locator locator) {
+			this.locator = locator;
+		}
 
 		@Override
 		public void startElement(String uri, String localName, String qName,
 				Attributes attr) throws SAXException {
 			switch (qName) {
 			case "way":
+				try {
+					wayId = Integer.parseInt(attr.getValue("id"));
+				} catch (NumberFormatException e) {
+					throw new SAXParseException("Way ID missing or invalid",
+							locator, e);
+				}
 				wayTags = new HashMap<>();
 				wayNodes = new ArrayList<>();
 				// fall through
@@ -200,11 +213,24 @@ public class OSMParser {
 				enclosing = qName;
 				break;
 			case "nd":
-				wayNodes.add(Long.parseLong(attr.getValue("ref")));
+				try {
+					wayNodes.add(Long.parseLong(attr.getValue("ref")));
+				} catch (NumberFormatException e) {
+					throw new SAXParseException("Way " + wayId
+							+ ": Invalid or missing node ID reference",
+							locator, e);
+				}
 				break;
 			case "tag":
 				if (enclosing.equals("way")) {
-					wayTags.put(attr.getValue("k"), attr.getValue("v"));
+					String key = attr.getValue("k");
+					String value = attr.getValue("v");
+					if (key == null || value == null) {
+						throw new SAXParseException("Way " + wayId
+								+ ": Invalid tag (key or value missing)",
+								locator);
+					}
+					wayTags.put(key, value);
 				}
 			}
 		}
@@ -214,6 +240,7 @@ public class OSMParser {
 			if (qName.equals("way")) {
 				OSMWay way = new OSMWay(wayTags);
 				if (way.getHighwayType() != null) {
+					way.setId(wayId);
 					for (int i = 0; i < wayNodes.size() - 1; i++) {
 						int from = resolveNodeID(wayNodes.get(i));
 						int to = resolveNodeID(wayNodes.get(i + 1));
@@ -257,6 +284,13 @@ public class OSMParser {
 		private String enclosing;
 		private Locator locator;
 
+		private long nodeId;
+
+		@Override
+		public void setDocumentLocator(Locator locator) {
+			this.locator = locator;
+		}
+
 		@Override
 		public void startDocument() {
 			lat = new float[nodes.size()];
@@ -268,7 +302,12 @@ public class OSMParser {
 				Attributes attr) throws SAXException {
 			switch (qName) {
 			case "node":
-				long nodeId = Long.parseLong(attr.getValue("id"));
+				try {
+					nodeId = Long.parseLong(attr.getValue("id"));
+				} catch (NumberFormatException e) {
+					throw new SAXParseException("Node ID missing or invalid",
+							locator, e);
+				}
 				if (nodes.containsKey(nodeId)) {
 					int node = nodes.get(nodeId);
 					try {
@@ -277,7 +316,7 @@ public class OSMParser {
 						lon[node] = Coordinates.parseLongitude(attr
 								.getValue("lon"));
 					} catch (IllegalArgumentException e) {
-						throw new SAXParseException("Node " + node
+						throw new SAXParseException("Node " + nodeId
 								+ ": Coordinates invalid or unspecified",
 								locator, e);
 					}
