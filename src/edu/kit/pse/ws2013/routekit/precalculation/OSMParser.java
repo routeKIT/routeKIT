@@ -119,15 +119,18 @@ public class OSMParser {
 				graphEdges[edgeCount] = edge.getTargetNode();
 				edgeProps[edgeCount] = edge.getWay().getEdgeProperties();
 				edgeCount++;
-				countTurns(edge);
+				countTurns(node, edge);
 			}
 		}
 	}
 
-	private void countTurns(MapEdge edge) {
+	private void countTurns(int node, MapEdge edge) {
 		numberOfTurns += edges.get(edge.getTargetNode()).size();
-		if (!edge.getWay().isOneway() && !edge.getWay().isReversedOneway()) {
-			numberOfTurns--;
+		for (MapEdge nextEdge : edges.get(edge.getTargetNode())) {
+			if (nextEdge.getTargetNode() == node) {
+				// the way back is not a valid turn
+				numberOfTurns--;
+			}
 		}
 	}
 
