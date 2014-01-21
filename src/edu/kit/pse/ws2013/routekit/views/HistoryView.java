@@ -69,13 +69,13 @@ public class HistoryView extends JDialog {
 					if (historyvar.getSelectedValue() == null) {
 						return;
 					}
+					dispose();
 					Coordinates start = historyvar.getSelectedValue()
 							.getStart();
 					Coordinates destination = historyvar.getSelectedValue()
 							.getDest();
 					MainController.getInstance().setStartAndDestinationPoint(
 							start, destination);
-					dispose();
 				}
 			}
 		});
@@ -100,13 +100,13 @@ public class HistoryView extends JDialog {
 				if (historyvar.getSelectedValue() == null) {
 					return;
 				} else {
+					dispose();
 					Coordinates start = historyvar.getSelectedValue()
 							.getStart();
 					Coordinates destination = historyvar.getSelectedValue()
 							.getDest();
 					MainController.getInstance().setStartAndDestinationPoint(
 							start, destination);
-					dispose();
 				}
 			}
 		});
