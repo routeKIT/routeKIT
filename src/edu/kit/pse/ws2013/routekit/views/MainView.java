@@ -270,6 +270,10 @@ public class MainView extends JFrame implements RouteModelListener {
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
 		mapView = new MapView(MainController.getInstance().getTileSource(), rm);
+		if (!ProfileMapManager.getInstance().getCurrentCombination()
+				.isCalculated()) {
+			mapView.setEnabled(false);
+		}
 		right.add(mapView, BorderLayout.CENTER);
 		return right;
 	}

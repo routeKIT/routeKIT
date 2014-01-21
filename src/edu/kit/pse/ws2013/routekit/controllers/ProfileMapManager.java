@@ -100,9 +100,22 @@ public class ProfileMapManager {
 			StreetMap map = mapsByName.get(mapName);
 			for (String profileName : entry.getValue()) {
 				Profile profile = profilesByName.get(profileName);
-				ProfileMapCombination combination = ProfileMapCombination.load(
-						profile, map, new File(new File(root, mapName),
-								profileName));
+				ProfileMapCombination combination;
+				try {
+					combination = ProfileMapCombination.load(profile, map,
+							new File(new File(root, mapName), profileName));
+				} catch (IOException | IllegalArgumentException e) {
+					if (current != null && current.getKey().equals(mapName)
+							&& current.getValue().equals(profileName)) {
+						// the current combination may not have been
+						// precalculated
+						combination = new ProfileMapCombination(map, profile);
+						this.current = combination;
+						continue;
+					} else {
+						throw e;
+					}
+				}
 				this.combinations.add(combination);
 				if (current != null && mapName.equals(current.getKey())
 						&& profileName.equals(current.getValue())) {
@@ -185,6 +198,12 @@ public class ProfileMapManager {
 		if (current.isCalculated()) {
 			combinations.add(combination);
 			save(combination);
+		} else {
+			try {
+				rewriteIndex();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		for (CurrentCombinationListener listener : listeners) {
 			listener.currentCombinationChanged(combination);
@@ -202,6 +221,13 @@ public class ProfileMapManager {
 			combos.add(combo);
 			combinationsByMap.put(combo.getStreetMap(), combos);
 		}
+		Set<ProfileMapCombination> currentMapCombos = combinationsByMap
+				.get(current.getStreetMap());
+		if (currentMapCombos == null) {
+			currentMapCombos = new HashSet<>();
+		}
+		currentMapCombos.add(current);
+		combinationsByMap.put(current.getStreetMap(), currentMapCombos);
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 				root, "routeKIT.idx")))) {
 			for (Entry<StreetMap, Set<ProfileMapCombination>> map : combinationsByMap
