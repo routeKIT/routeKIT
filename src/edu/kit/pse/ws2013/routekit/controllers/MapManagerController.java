@@ -12,7 +12,8 @@ import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
-import edu.kit.pse.ws2013.routekit.precalculation.DummyMapImporter;
+import edu.kit.pse.ws2013.routekit.precalculation.MapImporter;
+import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
@@ -138,7 +139,7 @@ public class MapManagerController {
 				.getDeletedPrecalculations()) {
 			profileMapManager.deletePrecalculation(precalculation);
 		}
-		DummyMapImporter importer = new DummyMapImporter();
+		MapImporter importer = new OSMMapImporter();
 		for (FutureMap map : diff.getNewOrUpdatedMaps()) {
 			try {
 				mapManager.saveMap(importer.importMap(map.getOsmFile(),
