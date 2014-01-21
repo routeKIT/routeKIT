@@ -166,14 +166,27 @@ public class MainController {
 	}
 
 	/**
-	 * Ruft in einem neuen WorkerThread {@link PreCalculator#doPrecalculation}
-	 * auf, falls keine Vorberechnung für diese Kombination aus Profil und Karte
-	 * existiert. Sperrt währenddessen die {@link MainView}.
+	 * Calls {@link PreCalculator#doPrecalculation(ProfileMapCombination)} in a
+	 * new worker thread if no precalculation for this
+	 * {@link ProfileMapCombination} exists. Locks the {@link MainView} until
+	 * calculation is finished.
 	 * 
 	 * @param combination
-	 *            Eine nicht vorberechnete Kombination aus Profil und Karte.
+	 *            The {@link ProfileMapCombination} that shall be precalculated.
 	 */
-	public void startPrecalculation(ProfileMapCombination combination) {
+	public void startPrecalculation(final ProfileMapCombination combination) {
+		if (combination.isCalculated()) {
+			return;
+		}
+		new Thread() {
+			@Override
+			public void run() {
+				new PreCalculator().doPrecalculation(combination);
+				ProfileMapManager.getInstance().save(combination);
+				// TODO unlock MainView
+			};
+		}.start();
+		// TODO lock MainView
 	}
 
 	/**

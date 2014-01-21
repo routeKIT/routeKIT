@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
+import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
@@ -115,6 +116,15 @@ public class MapView extends JPanel implements MouseListener,
 		startCalc.setBackground(Color.RED);
 		startCalc.setForeground(Color.WHITE);
 		startCalc.setSize(300, 200);
+		startCalc.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				MainController.getInstance()
+						.startPrecalculation(
+								ProfileMapManager.getInstance()
+										.getCurrentCombination());
+			}
+		});
 
 		flagPattern = new BufferedImage(10, 10, BufferedImage.TYPE_BYTE_BINARY);
 		final Graphics g = flagPattern.getGraphics();

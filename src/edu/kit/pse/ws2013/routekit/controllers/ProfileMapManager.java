@@ -167,6 +167,14 @@ public class ProfileMapManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		// 3. notify listeners if that was the current combination
+		if (precalculation.getProfile().equals(current.getProfile())
+				&& precalculation.getStreetMap().equals(current.getStreetMap())) {
+			current = precalculation;
+			for (CurrentCombinationListener listener : listeners) {
+				listener.currentCombinationChanged(precalculation);
+			}
+		}
 	}
 
 	/**
