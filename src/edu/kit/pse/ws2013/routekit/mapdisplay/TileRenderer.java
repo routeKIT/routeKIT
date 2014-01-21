@@ -1,9 +1,11 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -89,9 +91,14 @@ public class TileRenderer implements TileSource {
 				g.setColor(Color.getHSBColor(p.getType().ordinal()
 						/ ((float) HighwayType.values().length), 1, 1));
 			} else {
-				g.setColor(Color.black);
+				g.setColor(Color.BLACK);
 			}
+			Stroke oldStroke = g.getStroke();
+			g.setStroke(new BasicStroke((HighwayType.values().length - p
+					.getType().ordinal()) * 2 / (20f - zoom),
+					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 			g.drawLine(xstart, ystart, xtarget, ytarget);
+			g.setStroke(oldStroke);
 
 			String name = getName(e);
 			double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
@@ -102,7 +109,7 @@ public class TileRenderer implements TileSource {
 				AffineTransform at = AffineTransform.getRotateInstance(
 						getAngle(xstart, ystart, xtarget, ytarget, checkValue),
 						xstart, ystart);
-				g.setColor(Color.BLUE);
+				g.setColor(Color.BLACK);
 				AffineTransform old = g.getTransform();
 				g.setTransform(at);
 				g.setFont(font);
