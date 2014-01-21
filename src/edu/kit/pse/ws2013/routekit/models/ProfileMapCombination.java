@@ -100,6 +100,11 @@ public class ProfileMapCombination {
 		return calculationTime;
 	}
 
+	@Override
+	public String toString() {
+		return saveFileName(profile, map);
+	}
+
 	private static String saveFileName(Profile profile, StreetMap map) {
 		return map.getName() + " + " + profile.getName();
 	}
