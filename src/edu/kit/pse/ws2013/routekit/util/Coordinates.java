@@ -76,8 +76,8 @@ public class Coordinates {
 	 * @return the wanted coordinates
 	 */
 	public Coordinates goIntoDirection(Coordinates to, float position) {
-		// TODO: auto-generated method stub
-		return to;
+		return new Coordinates(lat + (to.getLatitude() - lat) * position, lon
+				+ (to.getLongitude() - lon) * position);
 
 	}
 
