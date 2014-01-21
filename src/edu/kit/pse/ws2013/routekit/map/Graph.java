@@ -32,6 +32,7 @@ public class Graph {
 	EdgeProperties[] edgeProps;
 	float[] lat;
 	float[] lon;
+	GraphIndex[] indices;
 
 	/**
 	 * Creates a new {@code Graph} from the given adjacency field.
@@ -78,6 +79,9 @@ public class Graph {
 			}
 			edgesReverse[i] = currentNode;
 		}
+		indices = new GraphIndex[] { new GraphIndex(this, HighwayType.Primary),
+				new GraphIndex(this, HighwayType.Tertiary),
+				new GraphIndex(this, HighwayType.Residential) };
 	}
 
 	/**
@@ -135,7 +139,13 @@ public class Graph {
 	 * @return the {@link GraphIndex} data structure
 	 */
 	public GraphIndex getIndex(int zoom) {
-		return new GraphIndex(this, zoom);
+		if (zoom > 12) {
+			return indices[2];
+		}
+		if (zoom > 7) {
+			return indices[1];
+		}
+		return indices[0];
 	}
 
 	/**

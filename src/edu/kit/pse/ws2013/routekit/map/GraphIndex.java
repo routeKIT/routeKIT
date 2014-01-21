@@ -119,26 +119,43 @@ public class GraphIndex {
 	 * 
 	 * @param graph
 	 *            Ein Graph.
-	 * @param zoom
-	 *            Die Zoomstufe.
+	 * @param maxType
+	 *            the maximal {@link HighwayType} to include.
 	 */
-	public GraphIndex(final Graph graph, int zoom) {
+	public GraphIndex(final Graph graph, final HighwayType maxType) {
 		this.graph = graph;
 		root = new Node(new AbstractSet<Integer>() {
 
 			@Override
 			public Iterator<Integer> iterator() {
 				return new Iterator<Integer>() {
-					int current = 0;
+					int current = -1;
+					boolean eaten = true;
+
+					private void nextValid() {
+						if (eaten) {
+							eaten = false;
+							while (++current < graph.getNumberOfEdges()) {
+								EdgeProperties props = graph.getEdgeProperties(current);
+								if (props.getType().ordinal() <= maxType
+										.ordinal()) {
+									return;
+								}
+							}
+						}
+					}
 
 					@Override
 					public boolean hasNext() {
+						nextValid();
 						return current < graph.getNumberOfEdges();
 					}
 
 					@Override
 					public Integer next() {
-						return current++;
+						nextValid();
+						eaten = true;
+						return current;
 					}
 
 					@Override
