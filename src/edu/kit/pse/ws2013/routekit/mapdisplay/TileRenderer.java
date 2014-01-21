@@ -31,7 +31,7 @@ public class TileRenderer implements TileSource {
 	 * @param graph
 	 *            Ein Adjazenzfeld.
 	 */
-	public TileRenderer(Graph graph) {
+	public TileRenderer(final Graph graph) {
 		this.graph = graph;
 	}
 
@@ -47,27 +47,29 @@ public class TileRenderer implements TileSource {
 	 * @return
 	 */
 	@Override
-	public BufferedImage renderTile(int x, int y, int zoom) {
-		Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f, zoom);
-		Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f, zoom);
-		Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(leftTop,
-				rightBottom);
-		BufferedImage tile = new BufferedImage(256, 256,
+	public BufferedImage renderTile(final int x, final int y, final int zoom) {
+		final Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f,
+				zoom);
+		final Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f,
+				zoom);
+		final Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(
+				leftTop, rightBottom);
+		final BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = tile.createGraphics();
+		final Graphics2D g = tile.createGraphics();
 		g.setColor(Color.white);
 		g.fillRect(0, 0, 256, 256);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		Font font = new Font(Font.SANS_SERIF, 0, 12);
+		final Font font = new Font(Font.SANS_SERIF, 0, 12);
 
 		int startNode;
 		int targetNode;
 		Coordinates coordsTargetNode;
 		Coordinates coordsStartNode;
-		for (Integer e : edges) {
+		for (final Integer e : edges) {
 			startNode = graph.getStartNode(e);
 			coordsStartNode = graph.getCoordinates(startNode);
 			targetNode = graph.getTargetNode(e);
@@ -76,7 +78,7 @@ public class TileRenderer implements TileSource {
 			int ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
 			int xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 			int ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
-			EdgeProperties p = graph.getEdgeProperties(e);
+			final EdgeProperties p = graph.getEdgeProperties(e);
 
 			if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
 				int tmp = xstart;
@@ -93,28 +95,28 @@ public class TileRenderer implements TileSource {
 			} else {
 				g.setColor(Color.BLACK);
 			}
-			Stroke oldStroke = g.getStroke();
+			final Stroke oldStroke = g.getStroke();
 			g.setStroke(new BasicStroke((HighwayType.values().length - p
 					.getType().ordinal()) * 2 / (20f - zoom),
 					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 			g.drawLine(xstart, ystart, xtarget, ytarget);
 			g.setStroke(oldStroke);
 
-			String name = getName(e);
-			double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
+			final String name = getName(e);
+			final double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
 					+ Math.pow((ytarget - ystart), 2));
 			if (name != null && (xstart != -1)) {
-				Rectangle2D r = font.getStringBounds(name,
+				final Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
-				AffineTransform at = AffineTransform.getRotateInstance(
+				final AffineTransform at = AffineTransform.getRotateInstance(
 						getAngle(xstart, ystart, xtarget, ytarget, checkValue),
 						xstart, ystart);
 				g.setColor(Color.BLACK);
-				AffineTransform old = g.getTransform();
+				final AffineTransform old = g.getTransform();
 				g.setTransform(at);
 				g.setFont(font);
 				int i = 1;
-				StringBuilder nNames = new StringBuilder();
+				final StringBuilder nNames = new StringBuilder();
 				while (i * (r.getWidth() + 3) - 3 + 2 * space < checkValue) {
 					i++;
 					if (nNames.length() != 0) {
@@ -130,9 +132,9 @@ public class TileRenderer implements TileSource {
 		return tile;
 	}
 
-	private String getName(int edge) {
-		String name = graph.getEdgeProperties(edge).getName();
-		String number = graph.getEdgeProperties(edge).getRoadRef();
+	private String getName(final int edge) {
+		final String name = graph.getEdgeProperties(edge).getName();
+		final String number = graph.getEdgeProperties(edge).getRoadRef();
 		if (name == null && number == null) {
 			return null;
 		}
@@ -143,8 +145,8 @@ public class TileRenderer implements TileSource {
 		}
 	}
 
-	private double getAngle(int xstart, int ystart, int xtarget, int ytarget,
-			double checkValue) {
+	private double getAngle(final int xstart, final int ystart,
+			final int xtarget, final int ytarget, final double checkValue) {
 		if (xstart == xtarget) {
 			return (Math.PI / 2d);
 		}
