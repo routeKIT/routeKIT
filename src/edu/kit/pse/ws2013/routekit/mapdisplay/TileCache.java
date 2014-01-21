@@ -32,6 +32,9 @@ public class TileCache implements TileSource {
 
 		@Override
 		public void run() {
+			if (zoom < 0 || zoom > 19) {
+				return;
+			}
 			String key = key(x, y, zoom);
 			if (map.containsKey(key) && map.get(key).get() != null) {
 				return;
@@ -136,11 +139,15 @@ public class TileCache implements TileSource {
 		prefetch(x - 1, y, zoom);
 		prefetch(x, y + 1, zoom);
 		prefetch(x, y - 1, zoom);
-		prefetch(x / 2, y / 2, zoom - 1);
-		prefetch(x * 2, y * 2, zoom + 1);
-		prefetch(x * 2 + 1, y * 2, zoom + 1);
-		prefetch(x * 2 + 1, y * 2 + 1, zoom + 1);
-		prefetch(x * 2, y * 2 + 1, zoom + 1);
+		if (zoom > 0) {
+			prefetch(x / 2, y / 2, zoom - 1);
+		}
+		if (zoom < 19) {
+			prefetch(x * 2, y * 2, zoom + 1);
+			prefetch(x * 2 + 1, y * 2, zoom + 1);
+			prefetch(x * 2 + 1, y * 2 + 1, zoom + 1);
+			prefetch(x * 2, y * 2 + 1, zoom + 1);
+		}
 	}
 
 	private void prefetch(int x, int y, int zoom) {
