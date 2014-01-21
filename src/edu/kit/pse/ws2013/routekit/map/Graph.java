@@ -125,9 +125,9 @@ public class Graph {
 	 * @return all edges going out from this node
 	 */
 	public Set<Integer> getOutgoingEdges(int node) {
-		return new IntArraySet(nodes[node],
+		return new IntIntervalSet(nodes[node],
 				(node == nodes.length - 1 ? edges.length : nodes[node + 1])
-						- nodes[node], edges);
+						- nodes[node]);
 	}
 
 	/**

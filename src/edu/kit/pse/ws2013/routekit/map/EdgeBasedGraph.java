@@ -54,7 +54,7 @@ public class EdgeBasedGraph {
 		this.turns = turns;
 		this.turnTypes = turnTypes;
 		this.restrictions = restrictions;
-		this.turnsReverse = new int[edges.length];
+		this.turnsReverse = new int[turns.length];
 		int currentEdge = 0;
 		for (int i = 0; i < turnsReverse.length; i++) {
 			while (currentEdge + 1 < edges.length
@@ -150,9 +150,9 @@ public class EdgeBasedGraph {
 	 * @return all outgoing turns of the edge
 	 */
 	public Set<Integer> getOutgoingTurns(int edge) {
-		return new IntArraySet(edges[edge],
+		return new IntIntervalSet(edges[edge],
 				(edge == edges.length - 1 ? turns.length : edges[edge + 1])
-						- edges[edge], turns);
+						- edges[edge]);
 	}
 
 	/**
