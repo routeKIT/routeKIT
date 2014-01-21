@@ -9,7 +9,9 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -17,9 +19,9 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  */
 public class TileRenderer implements TileSource {
 	Graph graph;
-	final int space = 10;
-	double checkValue;
-	final double pi = Math.PI;
+	private static final int space = 10;
+
+	private static final boolean DO_COLORFULL = true;
 
 	/**
 	 * Konstruktor: Erzeugt einen neuen {@code TileRenderer}.
@@ -73,8 +75,13 @@ public class TileRenderer implements TileSource {
 			int ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
 			int xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 			int ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
-
-			g.setColor(Color.black);
+			EdgeProperties p = graph.getEdgeProperties(e);
+			if (DO_COLORFULL) {
+				g.setColor(Color.getHSBColor(p.getType().ordinal()
+						/ ((float) HighwayType.values().length), 1, 1));
+			} else {
+				g.setColor(Color.black);
+			}
 			g.drawLine(xstart, ystart, xtarget, ytarget);
 
 			if (xstart == xtarget) {
@@ -97,13 +104,14 @@ public class TileRenderer implements TileSource {
 			}
 
 			String name = getName(e);
-			checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
+			double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
 					+ Math.pow((ytarget - ystart), 2));
 			if (name != null && (x1 != -1)) {
 				Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
 				AffineTransform at = AffineTransform.getRotateInstance(
-						getAngle(xstart, ystart, xtarget, ytarget), x1, y1);
+						getAngle(xstart, ystart, xtarget, ytarget, checkValue),
+						x1, y1);
 				g.setColor(Color.BLUE);
 				AffineTransform old = g.getTransform();
 				g.setTransform(at);
@@ -138,9 +146,10 @@ public class TileRenderer implements TileSource {
 		}
 	}
 
-	private double getAngle(int xstart, int ystart, int xtarget, int ytarget) {
+	private double getAngle(int xstart, int ystart, int xtarget, int ytarget,
+			double checkValue) {
 		if (xstart == xtarget) {
-			return (pi / 2d);
+			return (Math.PI / 2d);
 		}
 		if (ystart == ytarget) {
 			return 0d;
