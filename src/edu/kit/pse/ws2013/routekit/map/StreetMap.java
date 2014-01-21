@@ -49,6 +49,11 @@ public class StreetMap {
 		this.name = name; // TODO do we need this? I don’t think so – Lucas
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	/**
 	 * Saves the map to the given directory by saving the {@link #getGraph()
 	 * Graph} and the {@link #getEdgeBasedGraph() edge-based graph} to the files

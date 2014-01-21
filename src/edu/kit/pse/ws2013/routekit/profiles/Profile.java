@@ -121,6 +121,11 @@ public class Profile implements Cloneable {
 				speedHighway, speedRoad);
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	/**
 	 * Saves the profile to the specified file using the Java {@link Properties}
 	 * format.
