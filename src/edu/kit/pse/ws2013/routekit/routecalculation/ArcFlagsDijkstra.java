@@ -1,8 +1,7 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,7 +29,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 		// System.out.println(startEdge + " und " + destinationEdge);
 
-		List<Integer> turns = new ArrayList<Integer>();
+		LinkedList<Integer> turns = new LinkedList<Integer>();
 		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
 
 		// Partition der Zielkante
@@ -95,7 +94,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 			for (Integer turn : outgoingTurns) {
 				if (data.getStreetMap().getEdgeBasedGraph().getTargetEdge(turn) == x) {
-					turns.add(turn);
+					turns.addFirst(turn);
 					break;
 				}
 			}
@@ -103,7 +102,6 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			// turns.add(x);
 			x = previous[x];
 		}
-
 		// System.out.println(x);
 
 		Route route = new Route(data, start, destination, turns);
