@@ -29,6 +29,7 @@ import edu.kit.pse.ws2013.routekit.views.MapView;
 public class MainController {
 	private static MainController instance;
 	private RouteModel rm = new RouteModel();
+	private final History history;
 	MainView view;
 	private RouteCalculator rc;
 	TileSource source;
@@ -43,8 +44,17 @@ public class MainController {
 		try {
 			ProfileMapManager.init(FileUtil.getRootDir());
 		} catch (IOException e) {
-			return; // die
+			// die
+			history = null;
+			return;
 		}
+		History _history; // because history is final
+		try {
+			_history = History.load(FileUtil.getHistoryFile());
+		} catch (IOException e) {
+			_history = new History();
+		}
+		history = _history;
 		source = new TileCache(new TileRenderer(ProfileMapManager.getInstance()
 				.getCurrentCombination().getStreetMap().getGraph()));
 		view = new MainView(rm);
@@ -87,15 +97,22 @@ public class MainController {
 	 * Ruft bei bedarf die Routenberechnung auf.
 	 */
 	private void checkAndCalculate() {
-		if (rm.getStart() != null && rm.getDestination() != null) {
+		Coordinates start = rm.getStart();
+		Coordinates destination = rm.getDestination();
+		if (start != null && destination != null) {
+			history.addEntry(start, destination);
+			try {
+				history.save(FileUtil.getHistoryFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			ProfileMapCombination currentCombination = ProfileMapManager
 					.getInstance().getCurrentCombination();
 			GraphIndex index = currentCombination.getStreetMap().getGraph()
 					.getIndex(18);
 			// TODO Unblock
-			Route r = rc.calculateRoute(
-					index.findNearestPointOnEdge(rm.getStart()),
-					index.findNearestPointOnEdge(rm.getDestination()),
+			Route r = rc.calculateRoute(index.findNearestPointOnEdge(start),
+					index.findNearestPointOnEdge(destination),
 					currentCombination);
 			rm.setCurrentRoute(r);
 		}
@@ -207,6 +224,17 @@ public class MainController {
 	 */
 	public TileSource getTileSource() {
 		return source;
+	}
+
+	/**
+	 * Gets the history.
+	 * <p>
+	 * (Please don’t modify it.)
+	 * 
+	 * @return The history.
+	 */
+	public History getHistory() {
+		return history;
 	}
 
 	public static MainController getInstance() {

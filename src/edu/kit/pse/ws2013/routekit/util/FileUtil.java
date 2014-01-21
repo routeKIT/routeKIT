@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
+import edu.kit.pse.ws2013.routekit.history.History;
+
 public class FileUtil {
 	/**
 	 * Recursively deletes a directory.
@@ -74,5 +76,12 @@ public class FileUtil {
 		} else {
 			throw new IOException("Unknown operating system " + os);
 		}
+	}
+
+	/**
+	 * Gets the file in which routeKIT’s {@link History} should be saved.
+	 */
+	public static File getHistoryFile() throws IOException {
+		return new File(getRootDir(), "routeKIT.history");
 	}
 }

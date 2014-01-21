@@ -29,7 +29,6 @@ import javax.swing.JTextField;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
-import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
@@ -98,7 +97,8 @@ public class MainView extends JFrame implements RouteModelListener {
 		historyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new HistoryView(new History(), MainView.this);
+				new HistoryView(MainController.getInstance().getHistory(),
+						MainView.this);
 			}
 		});
 		controls.add(hist, BorderLayout.SOUTH);
@@ -286,7 +286,8 @@ public class MainView extends JFrame implements RouteModelListener {
 		history.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new HistoryView(new History(), MainView.this);
+				new HistoryView(MainController.getInstance().getHistory(),
+						MainView.this);
 			}
 		});
 		JMenuItem about = new JMenuItem("Über...");
