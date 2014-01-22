@@ -1,5 +1,6 @@
 package edu.kit.pse.ws2013.routekit.models;
 
+import java.io.Closeable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -138,6 +139,40 @@ public class ProgressReporter {
 	public void nextTask(String name) {
 		popTask();
 		pushTask(name);
+	}
+
+	/**
+	 * Start a new task with the given name and end it when the returned object
+	 * is {@link CloseableTask#close() closed}.
+	 * <p>
+	 * This is a convenience method, intended for use in try-with-resources
+	 * statements.
+	 * <p>
+	 * For ending the task, the {@link #popTask(String)} variant is used, which
+	 * means that when you use this method in a try-with-resources statement,
+	 * exceptions thrown in sub-tasks do not disrupt progress reporting.
+	 * 
+	 * @param name
+	 *            The name of the new task.
+	 * @return A {@link CloseableTask} whose {@link Closeable#close() close()}
+	 *         method closes the task again.
+	 */
+	public CloseableTask openTask(final String name) {
+		pushTask(name);
+		return new CloseableTask(name);
+	}
+
+	public class CloseableTask implements AutoCloseable {
+		private final String name;
+
+		private CloseableTask(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public void close() {
+			popTask(name);
+		}
 	}
 
 	/**

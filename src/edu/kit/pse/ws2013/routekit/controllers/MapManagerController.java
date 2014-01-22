@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter.CloseableTask;
 import edu.kit.pse.ws2013.routekit.precalculation.MapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
@@ -174,39 +175,30 @@ public class MapManagerController {
 				reporter.pushTask("Importiere und speichere Karten");
 				reporter.setSubTasks(diff.getNewOrUpdatedMaps().size());
 				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
-					reporter.pushTask("Importiere und speichere Karte '"
-							+ map.getName() + "'");
-					reporter.setSubTasks(new float[] { .9f, .1f });
-					try {
-						reporter.pushTask("Importiere Karte '" + map.getName()
-								+ "'");
+					try (CloseableTask task = reporter
+							.openTask("Importiere und speichere Karte '"
+									+ map.getName() + "'")) {
+						reporter.setSubTasks(new float[] { .9f, .1f });
 						StreetMap importedMap;
-						try {
+						try (CloseableTask task2 = reporter
+								.openTask("Importiere Karte '" + map.getName()
+										+ "'")) {
 							importedMap = importer.importMap(map.getOsmFile(),
 									map.getName(), reporter);
 						} catch (IOException | SAXException e) {
 							// TODO View should display this error
 							e.printStackTrace();
 							continue;
-						} finally {
-							reporter.popTask("Importiere Karte '"
-									+ map.getName() + "'");
 						}
-						try {
-							reporter.pushTask("Speichere Karte '"
-									+ importedMap.getName() + "'");
+						try (CloseableTask task3 = reporter
+								.openTask("Speichere Karte '"
+										+ importedMap.getName() + "'")) {
 							mapManager.saveMap(importedMap);
 						} catch (IOException e) {
 							// TODO View should display this error
 							e.printStackTrace();
 							continue;
-						} finally {
-							reporter.popTask("Speichere Karte '"
-									+ importedMap.getName() + "'");
 						}
-					} finally {
-						reporter.popTask("Importiere und speichere Karte '"
-								+ map.getName() + "'");
 					}
 				}
 				reporter.popTask();
