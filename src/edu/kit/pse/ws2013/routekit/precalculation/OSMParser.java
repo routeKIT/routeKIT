@@ -87,7 +87,7 @@ public class OSMParser {
 			throw new IllegalArgumentException();
 		}
 
-		reporter.setSubTasks(new float[] { .2f, .2f, .3f, .3f });
+		reporter.setSubTasks(new float[] { .35f, .4f, .05f, .15f, .025f, .025f });
 
 		SAXParser parser = null;
 		try {
@@ -96,22 +96,23 @@ public class OSMParser {
 			e.printStackTrace();
 		}
 
-		reporter.pushTask("Erster Durchlauf");
+		reporter.pushTask("Lese Kanten");
 		parser.parse(file, new FirstRunHandler());
-		reporter.nextTask("Zweiter Durchlauf");
+		reporter.nextTask("Lese Koordinaten, Straßeneigenschaften, Beschränkungen");
 		parser.parse(file, new SecondRunHandler());
 
 		reporter.nextTask("Baue Adjazenzfelder auf");
 		createAdjacencyField();
-		reporter.popTask();
+		reporter.nextTask("Baue Graph auf");
 		graph = new Graph(graphNodes, graphEdges,
 				new HashMap<Integer, NodeProperties>(), edgeProps, lat, lon);
 
-		reporter.pushTask("Baue kantenbasierten Graph auf");
+		reporter.nextTask("Baue Adjazenzfelder für kantenbasierten Graph auf");
 		buildEdgeBasedGraph();
-		reporter.popTask();
+		reporter.nextTask("Baue kantenbasierten Graph auf");
 		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes,
 				new HashMap<Integer, Restriction>());
+		reporter.popTask();
 
 		return new StreetMap(graph, edgeBasedGraph);
 	}
