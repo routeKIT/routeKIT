@@ -80,7 +80,7 @@ public class TileCache implements TileSource {
 	private TileSource target;
 	private HashMap<String, SoftReference<BufferedImage>> map = new HashMap<>();
 
-	private Worker worker;
+	private Worker[] workers;
 	BufferedImage tile;
 
 	/**
@@ -93,8 +93,12 @@ public class TileCache implements TileSource {
 	 */
 	public TileCache(TileSource target) {
 		this.target = target;
-		worker = new Worker();
-		worker.start();
+		int workerCount = Runtime.getRuntime().availableProcessors();
+		workers = new Worker[workerCount];
+		for (int i = 0; i < workerCount; i++) {
+			workers[i] = new Worker();
+			workers[i].start();
+		}
 		tile = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
 		Graphics g = tile.createGraphics();
 		g.setColor(Color.gray);
@@ -185,7 +189,9 @@ public class TileCache implements TileSource {
 	 */
 	public void stop() {
 		running = false;
-		worker.interrupt();
+		for (int i = 0; i < workers.length; i++) {
+			workers[i].interrupt();
+		}
 	}
 
 	/**
@@ -196,6 +202,8 @@ public class TileCache implements TileSource {
 	 */
 	public void waitForStop() throws InterruptedException {
 		stop();
-		worker.join();
+		for (int i = 0; i < workers.length; i++) {
+			workers[i].join();
+		}
 	}
 }
