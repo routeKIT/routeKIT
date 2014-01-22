@@ -8,6 +8,9 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,6 +51,20 @@ public class ProfileManagerView extends JDialog {
 	private Profile currentProfile;
 	private Set<Profile> availableProfiles;
 	private ProfileManagerController pmc;
+	private final KeyListener escEnterListener = new KeyAdapter() {
+		@Override
+		public void keyPressed(java.awt.event.KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ENTER:
+				ok();
+				break;
+
+			case KeyEvent.VK_ESCAPE:
+				cancel();
+				break;
+			}
+		};
+	};
 
 	/**
 	 * A constructor that creates a new ProfileManagerView.
@@ -75,6 +92,8 @@ public class ProfileManagerView extends JDialog {
 		contentPane.add(north, BorderLayout.NORTH);
 		contentPane.add(south, BorderLayout.SOUTH);
 		contentPane.add(center, BorderLayout.CENTER);
+
+		addKeyListener(escEnterListener);
 
 		setContentPane(contentPane);
 
@@ -114,6 +133,7 @@ public class ProfileManagerView extends JDialog {
 				}
 			}
 		});
+		profilename.addKeyListener(escEnterListener);
 
 		profilename.setMinimumSize(new Dimension(250, 26));
 		profilename.setPreferredSize(new Dimension(250, 26));
@@ -209,35 +229,26 @@ public class ProfileManagerView extends JDialog {
 											+ "vorgenommenen Änderungen für alle Profile.\n"
 											+ "Sie löschen "
 											+ pmc.getDeletionTime()
+											// TODO that’s ms, not h
 											+ "Stunden an Arbeit.\n"
 											+ "Wollen sie die Änderungen vornehmen?",
 									"Bestätigung", JOptionPane.YES_NO_OPTION,
 									JOptionPane.QUESTION_MESSAGE, null,
 									new String[] { "Ja", "Nein" }, "Nein");
-					if (showOptionDialog == JOptionPane.YES_OPTION) {
-						if (!currentProfile.isDefault()) {
-							Profile current = writeValues(currentProfile
-									.getName());
-							pmc.saveTemporaryProfile(current);
-						}
-						pmc.saveAllChanges();
-						ProfileManagerView.this.dispose();
+					if (showOptionDialog != JOptionPane.YES_OPTION) {
+						return;
 					}
 				}
-				if (!currentProfile.isDefault()) {
-					Profile current = writeValues(currentProfile.getName());
-					pmc.saveTemporaryProfile(current);
-				}
-				pmc.saveAllChanges();
-				ProfileManagerView.this.dispose();
+				ok();
 			}
 		});
+		okButton.addKeyListener(escEnterListener);
 		buttons.add(okButton);
 		JButton cancel = new JButton("Abbrechen");
 		cancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				cancel();
 			}
 		});
 		buttons.add(cancel);
@@ -252,6 +263,9 @@ public class ProfileManagerView extends JDialog {
 		JPanel type = innerTypePane();
 		JPanel dimensions = innerDimentionsPane();
 		JPanel velocity = innerVelocityPane();
+		type.addKeyListener(escEnterListener);
+		dimensions.addKeyListener(escEnterListener);
+		velocity.addKeyListener(escEnterListener);
 
 		center.add(type, BorderLayout.NORTH);
 		center.add(dimensions, BorderLayout.CENTER);
@@ -295,6 +309,9 @@ public class ProfileManagerView extends JDialog {
 		JPanel height = innerHeightPane();
 		JPanel width = innerWidthPane();
 		JPanel weight = innerWeightPane();
+		height.addKeyListener(escEnterListener);
+		width.addKeyListener(escEnterListener);
+		weight.addKeyListener(escEnterListener);
 
 		dimentions.add(height);
 		dimentions.add(width);
@@ -307,6 +324,8 @@ public class ProfileManagerView extends JDialog {
 		velocity.setBackground(Color.WHITE);
 		JPanel highway = innerHighwayPane();
 		JPanel secondaryRoad = innerSecondaryRoadPane();
+		highway.addKeyListener(escEnterListener);
+		secondaryRoad.addKeyListener(escEnterListener);
 
 		velocity.add(highway);
 		velocity.add(secondaryRoad);
@@ -321,6 +340,7 @@ public class ProfileManagerView extends JDialog {
 				"Durchschnittsgeschwindigkeit auf der Autobahn:");
 		hSpeedspinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
 		hSpeedspinner.setPreferredSize(new Dimension(50, 20));
+		hSpeedspinner.addKeyListener(escEnterListener);
 		JLabel kmPerh = new JLabel("km/h");
 		highway.add(highwaySpeed);
 		highway.add(hSpeedspinner);
@@ -336,6 +356,7 @@ public class ProfileManagerView extends JDialog {
 				"Durchschnittsgeschwindigkeit auf der Landstraße:");
 		srSpeedspinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
 		srSpeedspinner.setPreferredSize(new Dimension(50, 20));
+		srSpeedspinner.addKeyListener(escEnterListener);
 		JLabel kmPerh = new JLabel("km/h");
 		secondaryRoad.add(secondaryRoadSpeed);
 		secondaryRoad.add(srSpeedspinner);
@@ -349,6 +370,7 @@ public class ProfileManagerView extends JDialog {
 		JLabel vehicleHeight = new JLabel("Höhe des Fahrzeugs:");
 		heightspinner = new JSpinner(new SpinnerNumberModel(100, 0, 400, 10));
 		heightspinner.setPreferredSize(new Dimension(50, 20));
+		heightspinner.addKeyListener(escEnterListener);
 		JLabel cm = new JLabel("cm");
 		height.add(vehicleHeight);
 		height.add(heightspinner);
@@ -362,6 +384,7 @@ public class ProfileManagerView extends JDialog {
 		JLabel vehicleWidth = new JLabel("Breite des Fahrzeugs:");
 		widthspinner = new JSpinner(new SpinnerNumberModel(150, 0, 300, 10));
 		widthspinner.setPreferredSize(new Dimension(50, 20));
+		widthspinner.addKeyListener(escEnterListener);
 		JLabel cm = new JLabel("cm");
 		width.add(vehicleWidth);
 		width.add(widthspinner);
@@ -376,6 +399,7 @@ public class ProfileManagerView extends JDialog {
 		weightspinner = new JSpinner(
 				new SpinnerNumberModel(1500, 0, 50000, 100));
 		weightspinner.setPreferredSize(new Dimension(70, 20));
+		weightspinner.addKeyListener(escEnterListener);
 		JLabel kg = new JLabel("kg");
 		weight.add(vehicleWeight);
 		weight.add(weightspinner);
@@ -464,5 +488,18 @@ public class ProfileManagerView extends JDialog {
 		}
 		availableProfiles = profiles;
 		listenerCheck--;
+	}
+
+	private void ok() {
+		if (!currentProfile.isDefault()) {
+			Profile current = writeValues(currentProfile.getName());
+			pmc.saveTemporaryProfile(current);
+		}
+		pmc.saveAllChanges();
+		ProfileManagerView.this.dispose();
+	}
+
+	private void cancel() {
+		dispose();
 	}
 }
