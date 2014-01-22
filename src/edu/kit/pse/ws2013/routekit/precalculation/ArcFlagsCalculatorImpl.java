@@ -13,6 +13,7 @@ import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
+import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
 
 /**
  * A working {@link ArcFlagsCalculator}.
@@ -85,7 +86,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		int[] distance = new int[edges.length];
 		int[] next = new int[edges.length];
 		FibonacciHeap fh = new FibonacciHeap();
-		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
+		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
 		int edgePartition = edgeBasedGraph.getPartition(edge);
 		distance[edge] = 0;
 		next[edge] = -1;
@@ -117,7 +118,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 						distance[startEdge] = newDistance;
 						next[startEdge] = currentEdge;
 
-						FibonacciHeap.Entry toDecrease = fhList.get(startEdge);
+						FibonacciHeapEntry toDecrease = fhList.get(startEdge);
 						fh.decreaseKey(toDecrease, newDistance);
 					}
 				}
