@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.ProfileManagerView;
 
@@ -117,26 +118,59 @@ public class ProfileManagerController {
 	/**
 	 * Executes all requested changes – the adding, changing and deleting of
 	 * profiles. For changed profiles, all precalculations are deleted.
+	 * <p>
+	 * The given {@link ProgressReporter} should already have the task
+	 * "Saving changes" or something similar pushed onto it. This method will
+	 * then push and pop sub-tasks.
+	 * <p>
+	 * The changes are executed asynchronously in a new worker thread, and after
+	 * all changes have been executed, an additional task is popped off the
+	 * reporter that this method did not push (the task "Saving changes",
+	 * mentioned earlier). This way, the caller may be notified when the changes
+	 * are done.
 	 * 
+	 * @param reporter
+	 *            The {@link ProgressReporter} to report progress to.
 	 * @see ProfileManager#saveProfile(Profile)
 	 * @see ProfileManager#deleteProfile(Profile)
 	 */
-	public void saveAllChanges() {
-		final ProfilesDiff diff = diff();
-		final ProfileManager manager = ProfileManager.getInstance();
-		for (final Profile deleted : diff.getDeletedProfiles()) {
-			manager.deleteProfile(deleted);
-		}
-		for (final Profile changed : diff.getChangedProfiles()) {
-			try {
-				manager.saveProfile(changed);
-			} catch (IOException e) {
-				// TODO throw to the view instead, which could then show an info
-				// box
-				e.printStackTrace();
+	public void saveAllChanges(final ProgressReporter reporter) {
+		new Thread() {
+			@Override
+			public void run() {
+				selectedProfile = currentProfile;
+				reporter.setSubTasks(new float[] { .1f, .4f, .5f });
+				reporter.pushTask("Ermittle Änderungen");
+				final ProfilesDiff diff = diff();
+				reporter.popTask();
+				final ProfileManager manager = ProfileManager.getInstance();
+				reporter.pushTask("Lösche Profile");
+				reporter.setSubTasks(diff.getDeletedProfiles().size());
+				for (final Profile deleted : diff.getDeletedProfiles()) {
+					reporter.pushTask("Lösche Profil '" + deleted.getName()
+							+ "'");
+					manager.deleteProfile(deleted);
+					reporter.popTask();
+				}
+				reporter.popTask();
+				reporter.pushTask("Speichere Profile");
+				reporter.setSubTasks(diff.getChangedProfiles().size());
+				for (final Profile changed : diff.getChangedProfiles()) {
+					try {
+						reporter.pushTask("Speichere Profil '"
+								+ changed.getName() + "'");
+						manager.saveProfile(changed);
+						reporter.popTask();
+					} catch (IOException e) {
+						// TODO throw to the view instead, which could then show
+						// an infobox
+						e.printStackTrace();
+					}
+				}
+				reporter.popTask();
+				reporter.popTask(); // pop root task
 			}
-		}
-		selectedProfile = currentProfile;
+		}.start();
 	}
 
 	/**
