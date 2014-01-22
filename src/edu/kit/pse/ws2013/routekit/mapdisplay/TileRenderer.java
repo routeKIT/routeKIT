@@ -20,7 +20,17 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * Eine {@link TileSource}, die die Kacheln selbst berechnet.
  */
 public class TileRenderer implements TileSource {
-	Graph graph;
+	private Graph graph;
+	private int xstart;
+	private int ystart;
+	private int xtarget;
+	private int ytarget;
+	int startNode;
+	int targetNode;
+	Coordinates coordsTargetNode;
+	Coordinates coordsStartNode;
+	EdgeProperties p;
+	float width;
 	private static final int space = 10;
 
 	private static final boolean DO_COLORFULL = true;
@@ -65,30 +75,17 @@ public class TileRenderer implements TileSource {
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		final Font font = new Font(Font.SANS_SERIF, 0, 12);
 
-		int startNode;
-		int targetNode;
-		Coordinates coordsTargetNode;
-		Coordinates coordsStartNode;
 		for (final Integer e : edges) {
-			startNode = graph.getStartNode(e);
-			coordsStartNode = graph.getCoordinates(startNode);
-			targetNode = graph.getTargetNode(e);
-			coordsTargetNode = graph.getCoordinates(targetNode);
-			int xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
-			int ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
-			int xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
-			int ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
-			final EdgeProperties p = graph.getEdgeProperties(e);
+			setCoordinates(e, zoom, x, y);
+			g.setColor(Color.BLACK);
+			g.setStroke(new BasicStroke(width + 4, BasicStroke.CAP_ROUND,
+					BasicStroke.JOIN_ROUND));
+			g.drawLine(xstart, ystart, xtarget, ytarget);
+		}
 
-			if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
-				int tmp = xstart;
-				xstart = xtarget;
-				xtarget = tmp;
-				tmp = ystart;
-				ystart = ytarget;
-				ytarget = tmp;
-			}
-
+		// Straße malen
+		for (final Integer e : edges) {
+			setCoordinates(e, zoom, x, y);
 			if (DO_COLORFULL) {
 				g.setColor(Color.getHSBColor(p.getType().ordinal()
 						/ ((float) HighwayType.values().length), 1, 1));
@@ -96,12 +93,14 @@ public class TileRenderer implements TileSource {
 				g.setColor(Color.BLACK);
 			}
 			final Stroke oldStroke = g.getStroke();
-			g.setStroke(new BasicStroke((HighwayType.values().length - p
-					.getType().ordinal()) * 2 / (20f - zoom),
-					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND,
+					BasicStroke.JOIN_ROUND));
 			g.drawLine(xstart, ystart, xtarget, ytarget);
 			g.setStroke(oldStroke);
-
+		}
+		// Name der Straße muss über allen Straßen sein
+		for (final Integer e : edges) {
+			setCoordinates(e, zoom, x, y);
 			final String name = getName(e);
 			final double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
 					+ Math.pow((ytarget - ystart), 2));
@@ -124,12 +123,36 @@ public class TileRenderer implements TileSource {
 					}
 					nNames.append(name);
 				}
-				g.drawString(nNames.toString(), space + xstart, ystart);
+				g.drawString(nNames.toString(), space + xstart, ystart
+						+ (int) (width / 2f));
 				g.setTransform(old);
 			}
-
 		}
 		return tile;
+	}
+
+	// Setzt die Start/Ziel Coordinaten richtig
+	private void setCoordinates(int edge, int zoom, int x, int y) {
+		startNode = graph.getStartNode(edge);
+		coordsStartNode = graph.getCoordinates(startNode);
+		targetNode = graph.getTargetNode(edge);
+		coordsTargetNode = graph.getCoordinates(targetNode);
+		xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
+		ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
+		xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
+		ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
+		p = graph.getEdgeProperties(edge);
+		width = (HighwayType.values().length - p.getType().ordinal()) * 6
+				/ (20f - zoom);
+
+		if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
+			int tmp = xstart;
+			xstart = xtarget;
+			xtarget = tmp;
+			tmp = ystart;
+			ystart = ytarget;
+			ytarget = tmp;
+		}
 	}
 
 	private String getName(final int edge) {
