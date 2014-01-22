@@ -9,6 +9,7 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
@@ -21,16 +22,59 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  */
 public class TileRenderer implements TileSource {
 	private Graph graph;
-	private int xstart;
-	private int ystart;
-	private int xtarget;
-	private int ytarget;
-	int startNode;
-	int targetNode;
-	Coordinates coordsTargetNode;
-	Coordinates coordsStartNode;
-	EdgeProperties p;
-	float width;
+
+	class EdgeIterator {
+		private int xstart;
+		private int ystart;
+		private int xtarget;
+		private int ytarget;
+		EdgeProperties p;
+		int edge;
+		Iterator<Integer> edges;
+		private int zoom;
+		private int x;
+		private int y;
+
+		public EdgeIterator(Iterator<Integer> edges, int zoom, int x, int y) {
+			this.edges = edges;
+			this.zoom = zoom;
+			this.x = x;
+			this.y = y;
+		}
+
+		public boolean next() {
+			if (!edges.hasNext()) {
+				return false;
+			}
+			edge = edges.next();
+			extractCoordinates();
+			return true;
+		}
+
+		// Setzt die Start/Ziel Coordinaten richtig
+		private void extractCoordinates() {
+			int startNode = graph.getStartNode(edge);
+			int targetNode = graph.getTargetNode(edge);
+			Coordinates coordsTargetNode = graph.getCoordinates(targetNode);
+			Coordinates coordsStartNode = graph.getCoordinates(startNode);
+			xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
+			ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
+			xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
+			ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
+			p = graph.getEdgeProperties(edge);
+
+			if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
+				int tmp = xstart;
+				xstart = xtarget;
+				xtarget = tmp;
+				tmp = ystart;
+				ystart = ytarget;
+				ytarget = tmp;
+			}
+		}
+
+	}
+
 	private static final int space = 10;
 
 	private static final boolean DO_COLORFULL = true;
@@ -58,12 +102,8 @@ public class TileRenderer implements TileSource {
 	 */
 	@Override
 	public BufferedImage renderTile(final int x, final int y, final int zoom) {
-		final Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f,
-				zoom);
-		final Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f,
-				zoom);
-		final Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(
-				leftTop, rightBottom);
+		final Set<Integer> edges = getEdgesOnTile(x, y, zoom);
+
 		final BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g = tile.createGraphics();
@@ -73,104 +113,88 @@ public class TileRenderer implements TileSource {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		final Font font = new Font(Font.SANS_SERIF, 0, 12);
+		final Stroke oldStroke = g.getStroke();
 		// Rand malen
-		for (final Integer e : edges) {
-			setCoordinates(e, zoom, x, y);
-			switch (p.getType()) {
-			case Motorway:
-				g.setColor(new Color(223, 26, 61));
-				break;
-			case Trunk:
-				g.setColor(new Color(248, 168, 3));
-				break;
-			case Primary:
-				g.setColor(new Color(44, 201, 16));
-				break;
-			case Secondary:
-				g.setColor(new Color(39, 177, 133));
-				break;
-			case Tertiary:
-				g.setColor(new Color(19, 52, 140));
-				break;
-			case Unclassified:
-				g.setColor(new Color(16, 43, 112));
-				break;
-			case Residential:
-				g.setColor(new Color(113, 15, 105));
-				break;
-			default:
-				break;
-			}
-			g.setStroke(new BasicStroke(width + 4, BasicStroke.CAP_ROUND,
-					BasicStroke.JOIN_ROUND));
-			g.drawLine(xstart, ystart, xtarget, ytarget);
+		EdgeIterator it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		while (it.next()) {
+			g.setColor(getMainStreetColor(it.p.getType(), true));
+			g.setStroke(new BasicStroke(getStreetWidth(zoom, it.p) + 4,
+					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g.drawLine(it.xstart, it.ystart, it.xtarget, it.ytarget);
 		}
 
 		// Straße malen
-		for (final Integer e : edges) {
-			setCoordinates(e, zoom, x, y);
-			if (DO_COLORFULL) {
-				g.setColor(Color.getHSBColor(p.getType().ordinal()
-						/ ((float) HighwayType.values().length), 1, 1));
-			} else {
-				g.setColor(Color.BLACK);
-			}
-			final Stroke oldStroke = g.getStroke();
-			g.setStroke(new BasicStroke(width, BasicStroke.CAP_ROUND,
-					BasicStroke.JOIN_ROUND));
-			g.drawLine(xstart, ystart, xtarget, ytarget);
-			g.setStroke(oldStroke);
-		}
+		it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		while (it.next()) {
+			g.setColor(getMainStreetColor(it.p.getType(), false));
+			g.setStroke(new BasicStroke(getStreetWidth(zoom, it.p),
+					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g.drawLine(it.xstart, it.ystart, it.xtarget, it.ytarget);
+		}//
+
+		g.setStroke(oldStroke);
+
 		// Name der Straße muss über allen Straßen sein
-		for (final Integer e : edges) {
-			setCoordinates(e, zoom, x, y);
-			final String name = getName(e);
-			final double checkValue = Math.sqrt(Math.pow((xtarget - xstart), 2)
-					+ Math.pow((ytarget - ystart), 2));
-			if (name != null && (xstart != -1)) {
+		final Font font = new Font(Font.SANS_SERIF, 0, 12);
+		g.setColor(Color.BLACK);
+		g.setFont(font);
+		it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		while (it.next()) {
+			final String name = getName(it.edge);
+			final double streetLength = Math.sqrt(Math.pow(
+					(it.xtarget - it.xstart), 2)
+					+ Math.pow((it.ytarget - it.ystart), 2));
+			if (name != null && (it.xstart != -1)) {
 				final Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
 				final AffineTransform at = AffineTransform.getRotateInstance(
-						getAngle(xstart, ystart, xtarget, ytarget, checkValue),
-						xstart, ystart);
-				g.setColor(Color.BLACK);
+						getAngle(it.xstart, it.ystart, it.xtarget, it.ytarget,
+								streetLength), it.xstart, it.ystart);
 				final AffineTransform old = g.getTransform();
 				g.setTransform(at);
-				g.setFont(font);
 				int i = 1;
 				final StringBuilder nNames = new StringBuilder();
-				while (i * (r.getWidth() + 3) - 3 + 2 * space < checkValue) {
+				while (i * (r.getWidth() + 3) - 3 + 2 * space < streetLength) {
 					i++;
 					if (nNames.length() != 0) {
 						nNames.append(' ');
 					}
 					nNames.append(name);
 				}
-				if (zoom == 19) {
-					g.drawString(nNames.toString(), space + xstart, ystart
-							+ (int) (width / 4f));
-				} else {
-					g.drawString(nNames.toString(), space + xstart, ystart
-							+ (int) (width / 2f));
-				}
+
+				g.drawString(nNames.toString(), space + it.xstart,
+						(int) (it.ystart - r.getY() / 2 - r.getY() - r
+								.getHeight()));
 				g.setTransform(old);
 			}
 		}
 		return tile;
 	}
 
-	// Setzt die Start/Ziel Coordinaten richtig
-	private void setCoordinates(int edge, int zoom, int x, int y) {
-		startNode = graph.getStartNode(edge);
-		coordsStartNode = graph.getCoordinates(startNode);
-		targetNode = graph.getTargetNode(edge);
-		coordsTargetNode = graph.getCoordinates(targetNode);
-		xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
-		ystart = (int) ((coordsStartNode.getSmtY(zoom) - y) * 256);
-		xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
-		ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
-		p = graph.getEdgeProperties(edge);
+	private Set<Integer> getEdgesOnTile(final int x, final int y, final int zoom) {
+		final Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f,
+				zoom);
+		final Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f,
+				zoom);
+		final Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(
+				leftTop, rightBottom);
+		return edges;
+	}
+
+	private Color getMainStreetColor(HighwayType type, boolean border) {
+		Color col;
+		if (DO_COLORFULL) {
+			col = Color.getHSBColor(
+					type.ordinal() / ((float) HighwayType.values().length), 1,
+					border ? 0.5f : 1);
+		} else {
+			col = Color.BLACK;
+		}
+		return col;
+	}
+
+	private float getStreetWidth(int zoom, EdgeProperties p) {
+		float width;
 		if (p.getType() != HighwayType.Tertiary
 				&& p.getType() != HighwayType.Unclassified
 				&& p.getType() != HighwayType.Residential) {
@@ -180,15 +204,7 @@ public class TileRenderer implements TileSource {
 			width = (HighwayType.values().length - HighwayType.Secondary
 					.ordinal()) * 6 / (20f - zoom);
 		}
-
-		if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
-			int tmp = xstart;
-			xstart = xtarget;
-			xtarget = tmp;
-			tmp = ystart;
-			ystart = ytarget;
-			ytarget = tmp;
-		}
+		return width;
 	}
 
 	private String getName(final int edge) {
