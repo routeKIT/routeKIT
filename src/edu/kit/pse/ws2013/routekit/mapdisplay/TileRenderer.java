@@ -74,10 +74,34 @@ public class TileRenderer implements TileSource {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		final Font font = new Font(Font.SANS_SERIF, 0, 12);
-
+		// Rand malen
 		for (final Integer e : edges) {
 			setCoordinates(e, zoom, x, y);
-			g.setColor(Color.BLACK);
+			switch (p.getType()) {
+			case Motorway:
+				g.setColor(new Color(223, 26, 61));
+				break;
+			case Trunk:
+				g.setColor(new Color(248, 168, 3));
+				break;
+			case Primary:
+				g.setColor(new Color(44, 201, 16));
+				break;
+			case Secondary:
+				g.setColor(new Color(39, 177, 133));
+				break;
+			case Tertiary:
+				g.setColor(new Color(19, 52, 140));
+				break;
+			case Unclassified:
+				g.setColor(new Color(16, 43, 112));
+				break;
+			case Residential:
+				g.setColor(new Color(113, 15, 105));
+				break;
+			default:
+				break;
+			}
 			g.setStroke(new BasicStroke(width + 4, BasicStroke.CAP_ROUND,
 					BasicStroke.JOIN_ROUND));
 			g.drawLine(xstart, ystart, xtarget, ytarget);
