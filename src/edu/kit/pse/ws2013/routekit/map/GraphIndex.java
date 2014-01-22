@@ -2,9 +2,11 @@ package edu.kit.pse.ws2013.routekit.map;
 
 import java.awt.geom.Line2D;
 import java.util.AbstractSet;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
@@ -230,9 +232,20 @@ public class GraphIndex {
 	 */
 	public Set<Integer> getEdgesInRectangle(Coordinates leftTop,
 			Coordinates rightBottom) {
-		HashSet<Integer> ints = new HashSet<>();
+		Set<Integer> ints = new TreeSet<>(new Comparator<Integer>() {
+
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				int a = Integer.compare(graph.getEdgeProperties(o1).getType()
+						.ordinal(), graph.getEdgeProperties(o2).getType()
+						.ordinal());
+				if (a != 0) {
+					return -a;
+				}
+				return o1.compareTo(o2);
+			}
+		});
 		root.addAll(graph, leftTop, rightBottom, ints);
 		return ints;
 	}
-
 }
