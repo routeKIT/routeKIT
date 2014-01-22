@@ -119,7 +119,7 @@ public class ProfileManagerController {
 	 * Executes all requested changes – the adding, changing and deleting of
 	 * profiles. For changed profiles, all precalculations are deleted.
 	 * <p>
-	 * The given {@link ProgressReporter} should already the task
+	 * The given {@link ProgressReporter} should already have the task
 	 * "Saving changes" or something similar pushed onto it. This method will
 	 * then push and pop sub-tasks.
 	 * <p>
@@ -138,6 +138,7 @@ public class ProfileManagerController {
 		new Thread() {
 			@Override
 			public void run() {
+				selectedProfile = currentProfile;
 				reporter.setSubTasks(new float[] { .1f, .4f, .5f });
 				reporter.pushTask("Determining changes");
 				final ProfilesDiff diff = diff();
@@ -167,7 +168,6 @@ public class ProfileManagerController {
 					}
 				}
 				reporter.popTask();
-				selectedProfile = currentProfile;
 				reporter.popTask(); // pop root task
 			}
 		}.start();

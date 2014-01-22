@@ -36,6 +36,7 @@ import javax.swing.text.StyledDocument;
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 /**
@@ -150,8 +151,13 @@ public class MapManagerView extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (new Dialog(MapManagerView.this).clickedOk) {
-					mmc.saveAllChanges();
-					setVisible(false);
+					ProgressDialog p = new ProgressDialog(MapManagerView.this);
+					ProgressReporter reporter = new ProgressReporter();
+					reporter.addProgressListener(p);
+					reporter.pushTask("Saving changes");
+					mmc.saveAllChanges(reporter);
+					p.setVisible(true);
+					MapManagerView.this.dispose();
 				}
 			}
 		});

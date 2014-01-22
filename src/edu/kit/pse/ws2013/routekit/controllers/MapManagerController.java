@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.precalculation.MapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
@@ -127,35 +128,128 @@ public class MapManagerController {
 	 * <li>deletes removed precalculations</li>
 	 * <li>performs requested precalculations</li>
 	 * </ul>
+	 * <p>
+	 * The given {@link ProgressReporter} should already have the task
+	 * "Saving changes" or something similar pushed onto it. This method will
+	 * then push and pop sub-tasks.
+	 * <p>
+	 * The changes are executed asynchronously in a new worker thread, and after
+	 * all changes have been executed, an additional task is popped off the
+	 * reporter that this method did not push (tha task "Saving changes", as
+	 * mentioned earlier). This way, the caller may be notified when the changes
+	 * are done.
+	 * 
+	 * @param reporter
+	 *            The {@link ProgressReporter} to report progress to.
 	 */
-	public void saveAllChanges() {
-		// TODO all of this should NOT run in the UI thread
-		selectedMap = currentMap;
-		MapManager mapManager = MapManager.getInstance();
-		ProfileMapManager profileMapManager = ProfileMapManager.getInstance();
-		final MapManagementDiff diff = getChanges();
-		for (StreetMap map : diff.getDeletedMaps()) {
-			mapManager.deleteMap(map);
-		}
-		for (ProfileMapCombination precalculation : diff
-				.getDeletedPrecalculations()) {
-			profileMapManager.deletePrecalculation(precalculation);
-		}
-		MapImporter importer = new OSMMapImporter();
-		for (FutureMap map : diff.getNewOrUpdatedMaps()) {
-			try {
-				mapManager.saveMap(importer.importMap(map.getOsmFile(),
-						map.getName()));
-			} catch (IOException | SAXException e) {
-				// TODO View should display this error
-				e.printStackTrace();
+	public void saveAllChanges(final ProgressReporter reporter) {
+		new Thread() {
+			@Override
+			public void run() {
+				selectedMap = currentMap;
+				reporter.setSubTasks(new float[] { .01f, .04f, .05f, .3f, .6f });
+				MapManager mapManager = MapManager.getInstance();
+				ProfileMapManager profileMapManager = ProfileMapManager
+						.getInstance();
+				reporter.pushTask("Determining changes");
+				final MapManagementDiff diff = getChanges();
+				reporter.popTask();
+				reporter.pushTask("Deleting maps");
+				reporter.setSubTasks(diff.getDeletedMaps().size());
+				for (StreetMap map : diff.getDeletedMaps()) {
+					reporter.pushTask("Deleting map '" + map.getName() + "'");
+					mapManager.deleteMap(map);
+					reporter.popTask();
+				}
+				reporter.popTask();
+				reporter.pushTask("Deleting precalculations");
+				reporter.setSubTasks(diff.getDeletedPrecalculations().size());
+				for (ProfileMapCombination precalculation : diff
+						.getDeletedPrecalculations()) {
+					reporter.pushTask("Deleting precalculation '"
+							+ precalculation + "'");
+					profileMapManager.deletePrecalculation(precalculation);
+					reporter.popTask();
+				}
+				reporter.popTask();
+				MapImporter importer = new OSMMapImporter();
+				reporter.pushTask("Importing and saving maps");
+				reporter.setSubTasks(diff.getNewOrUpdatedMaps().size());
+				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
+					reporter.pushTask("Importing and saving map '"
+							+ map.getName() + "'");
+					reporter.setSubTasks(new float[] { .9f, .1f });
+					try {
+						reporter.pushTask("Importing map '" + map.getName()
+								+ "'");
+						StreetMap importedMap;
+						try {
+							importedMap = importer.importMap(map.getOsmFile(),
+									map.getName());
+						} catch (IOException | SAXException e) {
+							// TODO View should display this error
+							e.printStackTrace();
+							continue;
+						} finally {
+							reporter.popTask("Importing map '" + map.getName()
+									+ "'");
+						}
+						try {
+							reporter.pushTask("Saving map '"
+									+ importedMap.getName() + "'");
+							mapManager.saveMap(importedMap);
+						} catch (IOException e) {
+							// TODO View should display this error
+							e.printStackTrace();
+							continue;
+						} finally {
+							reporter.popTask("Saving map '"
+									+ importedMap.getName() + "'");
+						}
+					} finally {
+						reporter.popTask("Importing and saving map '"
+								+ map.getName() + "'");
+					}
+				}
+				reporter.popTask();
+				PreCalculator calculator = new PreCalculator();
+				reporter.pushTask("Performing precalculations");
+				reporter.setSubTasks(diff.getNewPrecalculations().size());
+				for (ProfileMapCombination combination : diff
+						.getNewPrecalculations()) {
+					reporter.pushTask("Precalculating and saving '"
+							+ combination.toString() + "'");
+					reporter.setSubTasks(new float[] { .95f, .05f });
+					try {
+						reporter.pushTask("Precalculating '" + combination
+								+ "'");
+						try {
+							calculator.doPrecalculation(combination);
+						} catch (Exception e) {
+							e.printStackTrace();
+							continue;
+						} finally {
+							reporter.popTask("Precalculating '" + combination
+									+ "'");
+						}
+						reporter.pushTask("Saving '" + combination + "'");
+						try {
+							profileMapManager.save(combination);
+						} catch (Exception e) {
+							e.printStackTrace();
+							continue;
+						} finally {
+							reporter.popTask("Saving '" + combination + "'");
+						}
+					} finally {
+						reporter.popTask("Precalculating and saving '"
+								+ combination.toString() + "'");
+					}
+				}
+				reporter.popTask();
+				reporter.popTask(); // pop root task
 			}
-		}
-		PreCalculator calculator = new PreCalculator();
-		for (ProfileMapCombination combination : diff.getNewPrecalculations()) {
-			calculator.doPrecalculation(combination);
-			profileMapManager.save(combination);
-		}
+		}.start();
 	}
 
 	/**
