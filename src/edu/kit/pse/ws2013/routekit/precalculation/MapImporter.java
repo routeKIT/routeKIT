@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 /**
  * This interface provides the functionality to import a new map.
@@ -23,6 +24,8 @@ public abstract class MapImporter {
 	 *            the OSM file from which the map data is to be imported
 	 * @param name
 	 *            the name of the new {@link StreetMap}
+	 * @param reporter
+	 *            the {@link ProgressReporter} to report progress to
 	 * @return the imported {@link StreetMap}
 	 * @throws IllegalArgumentException
 	 *             if {@code file} is {@code null}
@@ -32,7 +35,7 @@ public abstract class MapImporter {
 	 *             if an error occurs during parsing the OSM file, e.g. if the
 	 *             file format is invalid
 	 */
-	public abstract StreetMap importMap(File file, String name)
-			throws IOException, SAXException;
+	public abstract StreetMap importMap(File file, String name,
+			ProgressReporter reporter) throws IOException, SAXException;
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+
 import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
@@ -14,14 +15,15 @@ import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.map.Restriction;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 /**
  * This class import dummy data.
  */
 public class DummyMapImporter extends MapImporter {
 	@Override
-	public StreetMap importMap(File file, String name) throws IOException,
-			SAXException {
+	public StreetMap importMap(File file, String name, ProgressReporter reporter)
+			throws IOException, SAXException {
 		if (file == null) {
 			throw new IllegalArgumentException();
 		}

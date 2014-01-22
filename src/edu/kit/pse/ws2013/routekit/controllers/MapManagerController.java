@@ -185,7 +185,7 @@ public class MapManagerController {
 						StreetMap importedMap;
 						try {
 							importedMap = importer.importMap(map.getOsmFile(),
-									map.getName());
+									map.getName(), reporter);
 						} catch (IOException | SAXException e) {
 							// TODO View should display this error
 							e.printStackTrace();

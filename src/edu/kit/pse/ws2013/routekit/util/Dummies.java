@@ -45,7 +45,7 @@ public class Dummies {
 		fos.close();
 
 		StreetMap karlsruhe_big = new OSMMapImporter().importMap(file,
-				"Karlsruhe");
+				"Karlsruhe", new DummyProgressReporter());
 		MapManager.getInstance().saveMap(karlsruhe_big);
 		ProfileMapCombination karlsruheCar = new ProfileMapCombination(
 				karlsruhe_big, Profile.defaultCar);
@@ -59,8 +59,8 @@ public class Dummies {
 		new File(rootDir, "routeKIT.idx").createNewFile();
 		ProfileMapManager.init(rootDir);
 		ProfileMapCombination combination = new ProfileMapCombination(
-				new DummyMapImporter()
-						.importMap(new File("dummy"), "Karlsruhe"),
+				new DummyMapImporter().importMap(new File("dummy"),
+						"Karlsruhe", new DummyProgressReporter()),
 				Profile.defaultCar);
 		int[] arc = new int[7];
 		int[] w = new int[7];

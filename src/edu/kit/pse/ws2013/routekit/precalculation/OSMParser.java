@@ -26,6 +26,7 @@ import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.map.Restriction;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.map.TurnType;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -80,10 +81,13 @@ public class OSMParser {
 	 * @throws SAXException
 	 *             TODO
 	 */
-	public StreetMap parseOSM(File file) throws SAXException, IOException {
+	public StreetMap parseOSM(File file, ProgressReporter reporter)
+			throws SAXException, IOException {
 		if (file == null) {
 			throw new IllegalArgumentException();
 		}
+
+		reporter.setSubTasks(new float[] { .2f, .2f, .3f, .3f });
 
 		SAXParser parser = null;
 		try {
@@ -92,14 +96,22 @@ public class OSMParser {
 			e.printStackTrace();
 		}
 
+		reporter.pushTask("Erster Durchlauf");
 		parser.parse(file, new FirstRunHandler());
+		reporter.popTask();
+		reporter.pushTask("Zweiter Durchlauf");
 		parser.parse(file, new SecondRunHandler());
+		reporter.popTask();
 
+		reporter.pushTask("Baue Adjazenzfelder auf");
 		createAdjacencyField();
+		reporter.popTask();
 		graph = new Graph(graphNodes, graphEdges,
 				new HashMap<Integer, NodeProperties>(), edgeProps, lat, lon);
 
+		reporter.pushTask("Baue kantenbasierten Graph auf");
 		buildEdgeBasedGraph();
+		reporter.popTask();
 		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes,
 				new HashMap<Integer, Restriction>());
 
