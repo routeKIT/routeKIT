@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FibonacciHeap {
-	private Entry min = null;
+	private FibonacciHeapEntry min = null;
 	private int size = 0;
 
 	public boolean isEmpty() {
@@ -14,100 +14,102 @@ public class FibonacciHeap {
 		return false;
 	}
 
-	public Entry add(int value, int priority) {
-		Entry newEntry = new Entry(value, priority);
+	public FibonacciHeapEntry add(int value, int priority) {
+		FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
 		min = merge(min, newEntry);
 		size++;
 
 		return newEntry;
 	}
 
-	public Entry deleteMin() {
+	public FibonacciHeapEntry deleteMin() {
 		if (isEmpty()) {
 			return null;
 		}
 
-		Entry minEntry = min;
+		FibonacciHeapEntry minEntry = min;
 
-		if (min.next == min) {
+		if (min.getNext() == min) {
 			min = null;
 		} else {
-			min.prev.next = min.next;
-			min.next.prev = min.prev;
-			min = min.next;
+			min.getPrev().setNext(min.getNext());
+			min.getNext().setPrev(min.getPrev());
+
+			min = min.getNext();
 		}
 
 		size--;
 
-		if (minEntry.child != null) {
-			Entry currentEntry = minEntry.child;
+		if (minEntry.getChild() != null) {
+			FibonacciHeapEntry currentEntry = minEntry.getChild();
 			do {
-				currentEntry.parent = null;
-				currentEntry = currentEntry.next;
-			} while (currentEntry != minEntry.child);
+				currentEntry.setParent(null);
+				currentEntry = currentEntry.getNext();
+			} while (currentEntry != minEntry.getChild());
 		}
 
-		min = merge(min, minEntry.child);
+		min = merge(min, minEntry.getChild());
 
 		if (min == null) {
 			// System.out.println("A");
 			return minEntry;
 		}
 
-		List<Entry> table = new ArrayList<Entry>();
-		List<Entry> queue = new ArrayList<Entry>();
+		List<FibonacciHeapEntry> table = new ArrayList<FibonacciHeapEntry>();
+		List<FibonacciHeapEntry> queue = new ArrayList<FibonacciHeapEntry>();
 
-		for (Entry currentEntry = min; queue.isEmpty()
-				|| queue.get(0) != currentEntry; currentEntry = currentEntry.next) {
+		for (FibonacciHeapEntry currentEntry = min; queue.isEmpty()
+				|| queue.get(0) != currentEntry; currentEntry = currentEntry
+				.getNext()) {
 			queue.add(currentEntry);
 		}
 
-		for (Entry currentEntry : queue) {
+		for (FibonacciHeapEntry currentEntry : queue) {
 			while (true) {
-				while (currentEntry.degree >= table.size()) {
+				while (currentEntry.getDegree() >= table.size()) {
 					table.add(null);
 				}
 
-				if (table.get(currentEntry.degree) == null) {
-					table.set(currentEntry.degree, currentEntry);
+				if (table.get(currentEntry.getDegree()) == null) {
+					table.set(currentEntry.getDegree(), currentEntry);
 					break;
 				}
 
-				Entry other = table.get(currentEntry.degree);
-				table.set(currentEntry.degree, null);
+				FibonacciHeapEntry other = table.get(currentEntry.getDegree());
+				table.set(currentEntry.getDegree(), null);
 
-				Entry currentMin;
-				if (other.priority < currentEntry.priority) {
+				FibonacciHeapEntry currentMin;
+				if (other.getPriority() < currentEntry.getPriority()) {
 					currentMin = other;
 				} else {
 					currentMin = currentEntry;
 				}
 
-				Entry currentMax;
+				FibonacciHeapEntry currentMax;
 				if (currentMin == other) {
 					currentMax = currentEntry;
 				} else {
 					currentMax = other;
 				}
 
-				currentMax.next.prev = currentMax.prev;
-				currentMax.prev.next = currentMax.next;
+				currentMax.getNext().setPrev(currentMax.getPrev());
+				currentMax.getPrev().setNext(currentMax.getNext());
 
-				currentMax.next = currentMax;
-				currentMax.prev = currentMax;
+				currentMax.setNext(currentMax);
+				currentMax.setPrev(currentMax);
 
-				currentMin.child = merge(currentMin.child, currentMax);
+				currentMin.setChild(merge(currentMin.getChild(), currentMax));
 
-				currentMax.parent = currentMin;
+				currentMax.setParent(currentMin);
 
-				currentMax.marked = false;
+				currentMax.setMarked(false);
 
-				currentMin.degree++;
+				currentMin.increaseDegree();
 
 				currentEntry = currentMin;
 			}
 
-			if (currentEntry.priority <= min.priority) {
+			if (currentEntry.getPriority() <= min.getPriority()) {
 				min = currentEntry;
 			}
 		}
@@ -115,19 +117,21 @@ public class FibonacciHeap {
 		return minEntry;
 	}
 
-	public void decreaseKey(Entry entry, int newPriority) {
-		entry.priority = newPriority;
+	public void decreaseKey(FibonacciHeapEntry entry, int newPriority) {
+		entry.setPriority(newPriority);
 
-		if (entry.parent != null && entry.priority <= entry.parent.priority) {
+		if (entry.getParent() != null
+				&& entry.getPriority() <= entry.getParent().getPriority()) {
 			cut(entry);
 		}
 
-		if (entry.priority <= min.priority) {
+		if (entry.getPriority() <= min.getPriority()) {
 			min = entry;
 		}
 	}
 
-	public Entry merge(Entry one, Entry two) {
+	public FibonacciHeapEntry merge(FibonacciHeapEntry one,
+			FibonacciHeapEntry two) {
 		if (one == null && two == null) {
 			return null;
 		} else if (one != null && two == null) {
@@ -135,14 +139,14 @@ public class FibonacciHeap {
 		} else if (one == null && two != null) {
 			return two;
 		} else {
-			Entry oneNext = one.next;
+			FibonacciHeapEntry oneNext = one.getNext();
 
-			one.next = two.next;
-			one.next.prev = one;
-			two.next = oneNext;
-			two.next.prev = two;
+			one.setNext(two.getNext());
+			one.getNext().setPrev(one);
+			two.setNext(oneNext);
+			two.getNext().setPrev(two);
 
-			if (one.priority < two.priority) {
+			if (one.getPriority() < two.getPriority()) {
 				return one;
 			} else {
 				return two;
@@ -150,68 +154,39 @@ public class FibonacciHeap {
 		}
 	}
 
-	private void cut(Entry entry) {
-		entry.marked = false;
+	private void cut(FibonacciHeapEntry entry) {
+		entry.setMarked(false);
 
-		if (entry.parent == null) {
+		if (entry.getParent() == null) {
 			return;
 		}
 
-		if (entry.next != entry) {
-			entry.next.prev = entry.prev;
-			entry.prev.next = entry.next;
+		if (entry.getNext() != entry) {
+			entry.getNext().setPrev(entry.getPrev());
+			entry.getPrev().setNext(entry.getNext());
 		}
 
-		if (entry.parent.child == entry) {
-			if (entry.next != entry) {
-				entry.parent.child = entry.next;
+		if (entry.getParent().getChild() == entry) {
+			if (entry.getNext() != entry) {
+				entry.getParent().setChild(entry.getNext());
 			} else {
-				entry.parent.child = null;
+				entry.getParent().setChild(null);
 			}
 		}
 
-		entry.parent.degree--;
+		entry.getParent().decreaseDegree();
 
-		entry.prev = entry;
-		entry.next = entry;
+		entry.setPrev(entry);
+		entry.setNext(entry);
 
 		merge(min, entry);
 
-		if (entry.parent.marked) {
-			cut(entry.parent);
+		if (entry.getParent().isMarked()) {
+			cut(entry.getParent());
 		} else {
-			entry.parent.marked = true;
+			entry.getParent().setMarked(true);
 		}
 
-		entry.parent = null;
-	}
-
-	// Klasse für einen Eintrag
-	public class Entry {
-		private int degree = 0;
-		private boolean marked = false;
-
-		private Entry parent;
-		private Entry child;
-		private Entry next;
-		private Entry prev;
-
-		private int value;
-		private int priority;
-
-		private Entry(int value, int priority) {
-			this.value = value;
-			this.priority = priority;
-			this.next = this;
-			this.prev = this;
-		}
-
-		public int getValue() {
-			return value;
-		}
-
-		public int getPriority() {
-			return priority;
-		}
+		entry.setParent(null);
 	}
 }

@@ -30,7 +30,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		// System.out.println(startEdge + " und " + destinationEdge);
 
 		LinkedList<Integer> turns = new LinkedList<Integer>();
-		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
+		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
 
 		// Partition der Zielkante
 		int destinationPartition = data.getStreetMap().getEdgeBasedGraph()
@@ -83,7 +83,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 						distance[targetEdge] = alt;
 						previous[targetEdge] = u;
 
-						FibonacciHeap.Entry toDecrease = fhList.get(targetEdge);
+						FibonacciHeapEntry toDecrease = fhList.get(targetEdge);
 						fh.decreaseKey(toDecrease, alt);
 					}
 				}
