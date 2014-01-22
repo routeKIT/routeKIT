@@ -29,6 +29,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import edu.kit.pse.ws2013.routekit.controllers.ProfileManagerController;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
@@ -495,7 +496,12 @@ public class ProfileManagerView extends JDialog {
 			Profile current = writeValues(currentProfile.getName());
 			pmc.saveTemporaryProfile(current);
 		}
-		pmc.saveAllChanges();
+		ProgressDialog p = new ProgressDialog(ProfileManagerView.this);
+		ProgressReporter reporter = new ProgressReporter();
+		reporter.addProgressListener(p);
+		reporter.pushTask("Saving changes");
+		pmc.saveAllChanges(reporter);
+		p.setVisible(true);
 		ProfileManagerView.this.dispose();
 	}
 
