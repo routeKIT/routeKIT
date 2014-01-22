@@ -56,14 +56,14 @@ public class TileCache implements TileSource {
 					prefetchWaiting.removeLast();
 				}
 				try {
-					if (waiting.size() == 0 && prefetchWaiting.size() > 1) {
-						prefetchWaiting.takeFirst().run();
-					} else {
-						TileJob job = waiting.pollFirst(200,
-								TimeUnit.MILLISECONDS);
-						if (job != null) {
-							job.run();
-						}
+					// returns null if empty
+					TileJob job = waiting.pollFirst(200, TimeUnit.MILLISECONDS);
+					if (job == null) {
+						// immediately returns null if empty
+						job = prefetchWaiting.pollFirst();
+					}
+					if (job != null) {
+						job.run();
 					}
 				} catch (InterruptedException e) {
 					// its ok...
@@ -130,11 +130,12 @@ public class TileCache implements TileSource {
 		String key = key(x, y, zoom);
 		SoftReference<BufferedImage> cacheVal = map.get(key);
 		BufferedImage tile;
-		prefetchEnv(x, y, zoom);
 		if (cacheVal != null && (tile = cacheVal.get()) != null) {
+			prefetchEnv(x, y, zoom);
 			return tile;
 		}
 		waiting.addFirst(new TileJob(x, y, zoom));
+		prefetchEnv(x, y, zoom);
 		return this.tile;
 	}
 
