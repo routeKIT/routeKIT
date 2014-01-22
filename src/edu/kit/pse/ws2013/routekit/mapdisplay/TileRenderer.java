@@ -147,8 +147,13 @@ public class TileRenderer implements TileSource {
 					}
 					nNames.append(name);
 				}
-				g.drawString(nNames.toString(), space + xstart, ystart
-						+ (int) (width / 2f));
+				if (zoom == 19) {
+					g.drawString(nNames.toString(), space + xstart, ystart
+							+ (int) (width / 4f));
+				} else {
+					g.drawString(nNames.toString(), space + xstart, ystart
+							+ (int) (width / 2f));
+				}
 				g.setTransform(old);
 			}
 		}
@@ -166,8 +171,15 @@ public class TileRenderer implements TileSource {
 		xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 		ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
 		p = graph.getEdgeProperties(edge);
-		width = (HighwayType.values().length - p.getType().ordinal()) * 6
-				/ (20f - zoom);
+		if (p.getType() != HighwayType.Tertiary
+				&& p.getType() != HighwayType.Unclassified
+				&& p.getType() != HighwayType.Residential) {
+			width = (HighwayType.values().length - p.getType().ordinal()) * 6
+					/ (20f - zoom);
+		} else {
+			width = (HighwayType.values().length - HighwayType.Secondary
+					.ordinal()) * 6 / (20f - zoom);
+		}
 
 		if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
 			int tmp = xstart;
