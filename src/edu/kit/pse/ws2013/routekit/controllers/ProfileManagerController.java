@@ -152,8 +152,7 @@ public class ProfileManagerController {
 					manager.deleteProfile(deleted);
 					reporter.popTask();
 				}
-				reporter.popTask();
-				reporter.pushTask("Speichere Profile");
+				reporter.nextTask("Speichere Profile");
 				reporter.setSubTasks(diff.getChangedProfiles().size());
 				for (final Profile changed : diff.getChangedProfiles()) {
 					try {

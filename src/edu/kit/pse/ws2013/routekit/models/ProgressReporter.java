@@ -101,6 +101,26 @@ public class ProgressReporter {
 	}
 
 	/**
+	 * End the current task and begin a new task with the specified name.
+	 * <p>
+	 * This is a convenience method, equivalent to calling
+	 * 
+	 * <pre>
+	 * {@code
+	 * popTask();
+	 * pushTask(name);
+	 * }
+	 * </pre>
+	 * 
+	 * @param name
+	 *            The name of the new task.
+	 */
+	public void nextTask(String name) {
+		popTask();
+		pushTask(name);
+	}
+
+	/**
 	 * Add a {@link ProgressListener} to this reporter.
 	 * 
 	 * @param listener

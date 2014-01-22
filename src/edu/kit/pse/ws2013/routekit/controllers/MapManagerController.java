@@ -153,16 +153,14 @@ public class MapManagerController {
 						.getInstance();
 				reporter.pushTask("Ermittle Änderungen");
 				final MapManagementDiff diff = getChanges();
-				reporter.popTask();
-				reporter.pushTask("Lösche Karten");
+				reporter.nextTask("Lösche Karten");
 				reporter.setSubTasks(diff.getDeletedMaps().size());
 				for (StreetMap map : diff.getDeletedMaps()) {
 					reporter.pushTask("Lösche Karte '" + map.getName() + "'");
 					mapManager.deleteMap(map);
 					reporter.popTask();
 				}
-				reporter.popTask();
-				reporter.pushTask("Lösche Vorberechnungen");
+				reporter.nextTask("Lösche Vorberechnungen");
 				reporter.setSubTasks(diff.getDeletedPrecalculations().size());
 				for (ProfileMapCombination precalculation : diff
 						.getDeletedPrecalculations()) {

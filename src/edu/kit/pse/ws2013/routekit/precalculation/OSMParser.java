@@ -98,12 +98,10 @@ public class OSMParser {
 
 		reporter.pushTask("Erster Durchlauf");
 		parser.parse(file, new FirstRunHandler());
-		reporter.popTask();
-		reporter.pushTask("Zweiter Durchlauf");
+		reporter.nextTask("Zweiter Durchlauf");
 		parser.parse(file, new SecondRunHandler());
-		reporter.popTask();
 
-		reporter.pushTask("Baue Adjazenzfelder auf");
+		reporter.nextTask("Baue Adjazenzfelder auf");
 		createAdjacencyField();
 		reporter.popTask();
 		graph = new Graph(graphNodes, graphEdges,
