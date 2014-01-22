@@ -72,18 +72,38 @@ public class ProgressReporter {
 	/**
 	 * End the current task, verifying its name.
 	 * <p>
-	 * If the name of the current task doesn’t match the given name, an
-	 * {@link AssertionError} is thrown.
+	 * If there are unpopped tasks on top of a task with the given name, they
+	 * are popped as well. This can be used for error recovery: if you call this
+	 * method from a {@code finally} block, progress reporting will not be
+	 * disrupted even if some sub-task throws an exception.
+	 * <p>
+	 * If no task with the given name exists, an {@link AssertionError} is
+	 * thrown.
 	 * 
 	 * @param name
 	 *            The expected name of the task to end.
 	 * @throws AssertionError
-	 *             If the name doesn’t match.
+	 *             If no task with the given name exists.
 	 * @see #popTask()
 	 */
 	public void popTask(String name) {
-		assert (taskStack.getLast().name == name);
-		popTask();
+		boolean hasTask = false;
+		for (Task task : taskStack) {
+			if (task.name.equals(name)) {
+				hasTask = true;
+				break;
+			}
+		}
+		if (!hasTask) {
+			throw new AssertionError();
+		}
+		boolean poppedTask = false;
+		while (!poppedTask) {
+			if (taskStack.getLast().name.equals(name)) {
+				poppedTask = true;
+			}
+			popTask();
+		}
 	}
 
 	/**
