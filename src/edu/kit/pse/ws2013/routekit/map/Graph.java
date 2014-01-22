@@ -153,7 +153,7 @@ public class Graph {
 	 * @return the {@link GraphIndex} data structure
 	 */
 	public GraphIndex getIndex(int zoom) {
-		if (zoom > 12) {
+		if (zoom > 13) {
 			return indices[2];
 		}
 		if (zoom > 7) {
