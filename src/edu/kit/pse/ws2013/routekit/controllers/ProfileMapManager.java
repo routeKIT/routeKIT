@@ -315,7 +315,7 @@ public class ProfileMapManager {
 	 * @param deleteFromDisk
 	 *            If {@code true}, delete from disk as well. You usually want to
 	 *            do this; the only case where you don’t need this is if you’re
-	 *            deleting a precalculation because you’re deleting it’s
+	 *            deleting a precalculation because you’re deleting its
 	 *            {@link StreetMap}, in which case the recursive delete of the
 	 *            Map’s folder will delete all precalculations as well.
 	 */
