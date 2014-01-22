@@ -1,30 +1,51 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.Weights;
+import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
 
+/**
+ * A working {@link ArcFlagsCalculator}.
+ * 
+ * @author Fabian Hafner
+ * @version 1.0
+ * 
+ */
 public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 
 	private int[] flagsArray;
+	private Graph graph;
+	private EdgeBasedGraph edgeBasedGraph;
+	private Weights weights;
 
 	@Override
 	public void calculateArcFlags(ProfileMapCombination combination) {
 		long t1 = System.currentTimeMillis();
-		Graph graph = combination.getStreetMap().getGraph();
-		EdgeBasedGraph edgeBasedGraph = combination.getStreetMap()
-				.getEdgeBasedGraph();
+		graph = combination.getStreetMap().getGraph();
+		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
+		weights = combination.getWeights();
+		if (weights == null) {
+			throw new IllegalArgumentException(
+					"The given ProfileMapCombination hasn't been weighted yet.");
+		}
 		flagsArray = new int[edgeBasedGraph.getNumberOfTurns()];
 		for (int i = 0; i < flagsArray.length; i++) {
 			flagsArray[i] = 0x0;
 		}
-		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>();
+		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(32);
+		for (int i = 0; i < partitions.size(); i++) {
+			partitions.add(new HashSet<Integer>());
+		}
 		for (int i = 0; i < graph.getNumberOfEdges(); i++) {
 			partitions.get(edgeBasedGraph.getPartition(i)).add(i);
 		}
@@ -52,13 +73,83 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
 	}
 
+	/**
+	 * Builds the reverse shortest paths tree starting from the given edge using
+	 * a reverse Dijkstra and then sets arc flags accordingly.
+	 * 
+	 * @param edge
+	 *            the start edge of the shortest paths tree
+	 */
 	private void buildReverseShortestPathsTreeAndSetArcFlags(Integer edge) {
-		// TODO reverse Dijkstra that doesn't search for a specific edge, but
-		// builds the entire shortest paths tree and then sets arc flags
-		// accordingly
+		int[] edges = edgeBasedGraph.getEdges();
+		int[] distance = new int[edges.length];
+		int[] next = new int[edges.length];
+		FibonacciHeap fh = new FibonacciHeap();
+		Map<Integer, FibonacciHeap.Entry> fhList = new HashMap<Integer, FibonacciHeap.Entry>();
+		int edgePartition = edgeBasedGraph.getPartition(edge);
+		distance[edge] = 0;
+		next[edge] = -1;
+		for (int i = 0; i < edges.length; i++) {
+			if (i != edge) {
+				distance[i] = Integer.MAX_VALUE;
+				next[i] = -1;
+			}
+			fhList.put(i, fh.add(i, distance[i]));
+		}
+		while (!fh.isEmpty()) {
+			int currentEdge = fh.deleteMin().getValue();
+			if (distance[currentEdge] == Integer.MAX_VALUE) {
+				break;
+			}
+			Set<Integer> incomingTurns = edgeBasedGraph
+					.getIncomingTurns(currentEdge);
+			for (Integer currentTurn : incomingTurns) {
+				int startEdge = edgeBasedGraph.getStartEdge(currentTurn);
+				int startPartition = edgeBasedGraph.getPartition(startEdge);
+				int endEdge = edgeBasedGraph.getTargetEdge(currentTurn);
+				int endPartition = edgeBasedGraph.getPartition(endEdge);
+
+				if (!(startPartition == edgePartition && startPartition == endPartition)) {
+					int newDistance = distance[currentEdge]
+							+ weights.getWeight(currentTurn);
+
+					if (newDistance < distance[startEdge]) {
+						distance[startEdge] = newDistance;
+						next[startEdge] = currentEdge;
+
+						FibonacciHeap.Entry toDecrease = fhList.get(startEdge);
+						fh.decreaseKey(toDecrease, newDistance);
+					}
+				}
+			}
+		}
+		for (int currentEdge = 0; currentEdge < next.length; currentEdge++) {
+			int nextEdge = next[currentEdge];
+			if (nextEdge != -1) {
+				for (Integer turn : edgeBasedGraph
+						.getOutgoingTurns(currentEdge)) {
+					if (edgeBasedGraph.getTargetEdge(turn) == nextEdge) {
+						setFlag(turn, edgePartition);
+						break;
+					}
+				}
+			}
+		}
 	}
 
+	/**
+	 * Sets the given turn's arc flag for the given partition to 1.
+	 * 
+	 * @param turn
+	 *            the turn
+	 * @param partition
+	 *            the partition
+	 */
 	private void setFlag(int turn, int partition) {
+		if (partition < 0 || partition >= 32) {
+			throw new IllegalArgumentException(partition
+					+ " isn't a valid partition. Valid partitions: 0 - 31");
+		}
 		flagsArray[turn] |= 0x1 << partition;
 	}
 

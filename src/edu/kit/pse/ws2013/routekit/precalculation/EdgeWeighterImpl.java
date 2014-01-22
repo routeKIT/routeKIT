@@ -25,6 +25,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 	@Override
 	public void weightEdges(ProfileMapCombination combination) {
 		long t1 = System.currentTimeMillis();
+		combination.setArcFlags(null, 0);
 		Graph graph = combination.getStreetMap().getGraph();
 		EdgeBasedGraph eGraph = combination.getStreetMap().getEdgeBasedGraph();
 		Profile profile = combination.getProfile();

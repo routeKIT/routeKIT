@@ -1,18 +1,24 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
+import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 
 /**
- * Berechnet Arc-Flags für einen partitionierten, gewichteten Graphen.
+ * Calculates the {@link ArcFlags} of the partitioned, weighted
+ * {@link EdgeBasedGraph} in a {@link ProfileMapCombination}.
+ * 
+ * @author Fabian Hafner
+ * @version 1.0
+ * 
  */
 public interface ArcFlagsCalculator {
 	/**
-	 * Berechnet die Arc-Flags für die angegebene Kombination und setzt die
-	 * {@link ArcFlags} von {@code combination} entsprechend.
+	 * Calculates and sets the {@link ArcFlags} of the given weighted
+	 * {@link ProfileMapCombination}.
 	 * 
 	 * @param combination
-	 *            Die Kombination aus Profil und Karte.
+	 *            a weighted {@link ProfileMapCombination}
 	 */
 	public void calculateArcFlags(ProfileMapCombination combination);
 }
