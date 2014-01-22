@@ -14,6 +14,15 @@ public class FibonacciHeap {
 		return false;
 	}
 
+	/**
+	 * Gibt die Größe des Heaps zurück. Nützlich fürs Debugging.
+	 * 
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
 	public FibonacciHeapEntry add(int value, int priority) {
 		FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
 		min = merge(min, newEntry);
