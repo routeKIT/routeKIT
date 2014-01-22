@@ -68,19 +68,29 @@ public class TestGraph {
 	@Test
 	public void testGetOutgoing() {
 		Integer[] data = g.getOutgoingEdges(0).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 1, 2, 3 }, data);
+		assertArrayEquals(new Integer[] { 0, 1, 2 }, data);
 		data = g.getOutgoingEdges(1).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 0, 2, 3 }, data);
+		assertArrayEquals(new Integer[] { 3, 4, 5 }, data);
 		data = g.getOutgoingEdges(2).toArray(new Integer[0]);
 		assertArrayEquals(new Integer[] {}, data);
 		data = g.getOutgoingEdges(3).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 0, 1, 2 }, data);
+		assertArrayEquals(new Integer[] { 6, 7, 8 }, data);
 	}
 
 	@Ignore
 	@Test
 	public void testGetEdgeProperties() {
 		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetCorresponding() {
+		int[] nodes = new int[] { 0, 3, 6, 6 };
+		int[] edges = new int[] { 1, 2, 3, 0, 2, 3, 0, 1, 2 };
+		int[] corres = new int[] { 3, -1, 6, 0, -1, 7, 2, 5, -1 };
+		for (int i = 0; i < corres.length; i++) {
+			assertEquals("index: " + i, corres[i], g.getCorrespondingEdge(i));
+		}
 	}
 
 	@Test
@@ -91,14 +101,8 @@ public class TestGraph {
 		assertEquals(1, loaded.getTargetNode(0));
 		assertEquals(2, loaded.getTargetNode(1));
 		assertEquals(3, loaded.getTargetNode(2));
-		Integer[] data = loaded.getOutgoingEdges(0).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 1, 2, 3 }, data);
-		data = loaded.getOutgoingEdges(1).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 0, 2, 3 }, data);
-		data = loaded.getOutgoingEdges(2).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] {}, data);
-		data = loaded.getOutgoingEdges(3).toArray(new Integer[0]);
-		assertArrayEquals(new Integer[] { 0, 1, 2 }, data);
+		g = loaded;
+		testGetOutgoing();
 
 		// TODO test lats, lons, {Node,Edge}Properties
 	}

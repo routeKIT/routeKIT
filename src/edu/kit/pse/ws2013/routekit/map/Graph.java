@@ -33,6 +33,7 @@ public class Graph {
 	float[] lat;
 	float[] lon;
 	GraphIndex[] indices;
+	int[] correspondingEdges;
 
 	/**
 	 * Creates a new {@code Graph} from the given adjacency field.
@@ -78,6 +79,19 @@ public class Graph {
 
 			}
 			edgesReverse[i] = currentNode;
+		}
+		correspondingEdges = new int[edges.length];
+		for (int i = 0; i < edges.length; i++) {
+			int target = edges[i];
+			int limit = (target == nodes.length - 1 ? edges.length
+					: nodes[target + 1]);
+			correspondingEdges[i] = -1;
+			for (int j = nodes[target]; j < limit; j++) {
+				if (getTargetNode(j) == getStartNode(i)) {
+					correspondingEdges[i] = j;
+					break;
+				}
+			}
 		}
 		indices = new GraphIndex[] { new GraphIndex(this, HighwayType.Primary),
 				new GraphIndex(this, HighwayType.Tertiary),
@@ -157,6 +171,17 @@ public class Graph {
 	 */
 	public Set<Integer> getIncomingEdges(int node) {
 		throw new Error("Unimplemented");
+	}
+
+	/**
+	 * Returns the edge in the opposite direction, or -1 if it doesn't exist.
+	 * 
+	 * @param edge
+	 *            to search for
+	 * @return the corresponding edge
+	 */
+	public int getCorrespondingEdge(int edge) {
+		return correspondingEdges[edge];
 	}
 
 	/**
