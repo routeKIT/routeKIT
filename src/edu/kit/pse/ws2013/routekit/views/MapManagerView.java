@@ -154,7 +154,7 @@ public class MapManagerView extends JDialog {
 					ProgressDialog p = new ProgressDialog(MapManagerView.this);
 					ProgressReporter reporter = new ProgressReporter();
 					reporter.addProgressListener(p);
-					reporter.pushTask("Saving changes");
+					reporter.pushTask("Speichere Änderungen");
 					mmc.saveAllChanges(reporter);
 					p.setVisible(true);
 					MapManagerView.this.dispose();

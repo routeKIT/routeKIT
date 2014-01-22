@@ -140,24 +140,24 @@ public class ProfileManagerController {
 			public void run() {
 				selectedProfile = currentProfile;
 				reporter.setSubTasks(new float[] { .1f, .4f, .5f });
-				reporter.pushTask("Determining changes");
+				reporter.pushTask("Ermittle Änderungen");
 				final ProfilesDiff diff = diff();
 				reporter.popTask();
 				final ProfileManager manager = ProfileManager.getInstance();
-				reporter.pushTask("Deleting profiles");
+				reporter.pushTask("Lösche Profile");
 				reporter.setSubTasks(diff.getDeletedProfiles().size());
 				for (final Profile deleted : diff.getDeletedProfiles()) {
-					reporter.pushTask("Deleting profile '" + deleted.getName()
+					reporter.pushTask("Lösche Profil '" + deleted.getName()
 							+ "'");
 					manager.deleteProfile(deleted);
 					reporter.popTask();
 				}
 				reporter.popTask();
-				reporter.pushTask("Saving profiles");
+				reporter.pushTask("Speichere Profile");
 				reporter.setSubTasks(diff.getChangedProfiles().size());
 				for (final Profile changed : diff.getChangedProfiles()) {
 					try {
-						reporter.pushTask("Saving profile '"
+						reporter.pushTask("Speichere Profil '"
 								+ changed.getName() + "'");
 						manager.saveProfile(changed);
 						reporter.popTask();

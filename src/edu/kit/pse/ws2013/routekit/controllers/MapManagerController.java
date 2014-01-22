@@ -151,36 +151,36 @@ public class MapManagerController {
 				MapManager mapManager = MapManager.getInstance();
 				ProfileMapManager profileMapManager = ProfileMapManager
 						.getInstance();
-				reporter.pushTask("Determining changes");
+				reporter.pushTask("Ermittle Änderungen");
 				final MapManagementDiff diff = getChanges();
 				reporter.popTask();
-				reporter.pushTask("Deleting maps");
+				reporter.pushTask("Lösche Karten");
 				reporter.setSubTasks(diff.getDeletedMaps().size());
 				for (StreetMap map : diff.getDeletedMaps()) {
-					reporter.pushTask("Deleting map '" + map.getName() + "'");
+					reporter.pushTask("Lösche Karte '" + map.getName() + "'");
 					mapManager.deleteMap(map);
 					reporter.popTask();
 				}
 				reporter.popTask();
-				reporter.pushTask("Deleting precalculations");
+				reporter.pushTask("Lösche Vorberechnungen");
 				reporter.setSubTasks(diff.getDeletedPrecalculations().size());
 				for (ProfileMapCombination precalculation : diff
 						.getDeletedPrecalculations()) {
-					reporter.pushTask("Deleting precalculation '"
-							+ precalculation + "'");
+					reporter.pushTask("Lösche Vorberechnung '" + precalculation
+							+ "'");
 					profileMapManager.deletePrecalculation(precalculation);
 					reporter.popTask();
 				}
 				reporter.popTask();
 				MapImporter importer = new OSMMapImporter();
-				reporter.pushTask("Importing and saving maps");
+				reporter.pushTask("Importiere und speichere Karten");
 				reporter.setSubTasks(diff.getNewOrUpdatedMaps().size());
 				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
-					reporter.pushTask("Importing and saving map '"
+					reporter.pushTask("Importiere und speichere Karte '"
 							+ map.getName() + "'");
 					reporter.setSubTasks(new float[] { .9f, .1f });
 					try {
-						reporter.pushTask("Importing map '" + map.getName()
+						reporter.pushTask("Importiere Karte '" + map.getName()
 								+ "'");
 						StreetMap importedMap;
 						try {
@@ -191,11 +191,11 @@ public class MapManagerController {
 							e.printStackTrace();
 							continue;
 						} finally {
-							reporter.popTask("Importing map '" + map.getName()
-									+ "'");
+							reporter.popTask("Importiere Karte '"
+									+ map.getName() + "'");
 						}
 						try {
-							reporter.pushTask("Saving map '"
+							reporter.pushTask("Speichere Karte '"
 									+ importedMap.getName() + "'");
 							mapManager.saveMap(importedMap);
 						} catch (IOException e) {
@@ -203,46 +203,46 @@ public class MapManagerController {
 							e.printStackTrace();
 							continue;
 						} finally {
-							reporter.popTask("Saving map '"
+							reporter.popTask("Speichere Karte '"
 									+ importedMap.getName() + "'");
 						}
 					} finally {
-						reporter.popTask("Importing and saving map '"
+						reporter.popTask("Importiere und speichere Karte '"
 								+ map.getName() + "'");
 					}
 				}
 				reporter.popTask();
 				PreCalculator calculator = new PreCalculator();
-				reporter.pushTask("Performing precalculations");
+				reporter.pushTask("Führe Vorberechnungen durch");
 				reporter.setSubTasks(diff.getNewPrecalculations().size());
 				for (ProfileMapCombination combination : diff
 						.getNewPrecalculations()) {
-					reporter.pushTask("Precalculating and saving '"
+					reporter.pushTask("Führe Vorberechnung durch und speichere '"
 							+ combination.toString() + "'");
 					reporter.setSubTasks(new float[] { .95f, .05f });
 					try {
-						reporter.pushTask("Precalculating '" + combination
-								+ "'");
+						reporter.pushTask("Führe Vorberechnung durch für '"
+								+ combination + "'");
 						try {
 							calculator.doPrecalculation(combination);
 						} catch (Exception e) {
 							e.printStackTrace();
 							continue;
 						} finally {
-							reporter.popTask("Precalculating '" + combination
-									+ "'");
+							reporter.popTask("Führe Vorberechnung durch für '"
+									+ combination + "'");
 						}
-						reporter.pushTask("Saving '" + combination + "'");
+						reporter.pushTask("Speichere '" + combination + "'");
 						try {
 							profileMapManager.save(combination);
 						} catch (Exception e) {
 							e.printStackTrace();
 							continue;
 						} finally {
-							reporter.popTask("Saving '" + combination + "'");
+							reporter.popTask("Speichere '" + combination + "'");
 						}
 					} finally {
-						reporter.popTask("Precalculating and saving '"
+						reporter.popTask("Führe Vorberechnung durch und speichere '"
 								+ combination.toString() + "'");
 					}
 				}

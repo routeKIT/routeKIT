@@ -499,7 +499,7 @@ public class ProfileManagerView extends JDialog {
 		ProgressDialog p = new ProgressDialog(ProfileManagerView.this);
 		ProgressReporter reporter = new ProgressReporter();
 		reporter.addProgressListener(p);
-		reporter.pushTask("Saving changes");
+		reporter.pushTask("Speichere Änderungen");
 		pmc.saveAllChanges(reporter);
 		p.setVisible(true);
 		ProfileManagerView.this.dispose();
