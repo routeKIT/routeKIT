@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -44,7 +41,7 @@ public class OSMParser {
 	/*
 	 * Contains the outgoing edges for each node.
 	 */
-	private List<Set<MapEdge>> edges = new ArrayList<>();
+	private List<List<MapEdge>> edges = new ArrayList<>();
 
 	private int numberOfEdges = 0;
 	private int numberOfTurns = 0;
@@ -284,7 +281,7 @@ public class OSMParser {
 		private int resolveNodeID(Long id) {
 			if (!nodes.containsKey(id)) {
 				nodes.put(id, nodes.size());
-				edges.add(new HashSet<MapEdge>(1));
+				edges.add(new ArrayList<MapEdge>(1));
 			}
 			return nodes.get(id);
 		}
