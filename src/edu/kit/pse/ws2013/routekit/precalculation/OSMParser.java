@@ -171,7 +171,20 @@ public class OSMParser {
 		if (graph.getOutgoingEdges(turnNode).size() == 1) {
 			return TurnType.NoTurn;
 		}
-		// TODO: missing turn types
+
+		if (graph.getNodeProperties(turnNode).isMotorwayJunction()) {
+			return TurnType.MotorwayJunction;
+		}
+
+		if (fromEdge.getWay().isRoundabout()) {
+			if (toEdge.getWay().isRoundabout()) {
+				return TurnType.RoundaboutNoExit;
+			}
+			return TurnType.RoundaboutExit;
+		} else if (toEdge.getWay().isRoundabout()) {
+			return TurnType.RoundaboutEntry;
+		}
+
 		float angle = graph.getCoordinates(turnNode).angleBetween(
 				graph.getCoordinates(startNode),
 				graph.getCoordinates(toEdge.getTargetNode()));
