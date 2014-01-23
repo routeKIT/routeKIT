@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.TexturePaint;
 import java.awt.color.ColorSpace;
@@ -205,20 +206,24 @@ public class MapView extends JPanel implements MouseListener,
 	}
 
 	private void drawRoute(Graphics g, final Route r) {
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(0, 0, 0, 192));
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		Stroke s = g2.getStroke();
-		g2.setStroke(new BasicStroke(10));
-		Coordinates last = null;
+		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND,
+				BasicStroke.JOIN_ROUND));
+		int[] xPoints = new int[r.getTurns().size() + 2];
+		int[] yPoints = new int[xPoints.length];
+		int i = 0;
 		for (Coordinates co : r) {
-			if (last != null) {
-				g.drawLine((int) ((last.getSmtX(zoom) - x) * 256),
-						(int) ((last.getSmtY(zoom) - y) * 256),
-						(int) ((co.getSmtX(zoom) - x) * 256),
-						(int) ((co.getSmtY(zoom) - y) * 256));
-			}
-			last = co;
+			xPoints[i] = (int) ((co.getSmtX(zoom) - x) * 256);
+			yPoints[i] = (int) ((co.getSmtY(zoom) - y) * 256);
+			i++;
 		}
+		g.drawPolyline(xPoints, yPoints, xPoints.length);
 		g2.setStroke(s);
 	}
 
