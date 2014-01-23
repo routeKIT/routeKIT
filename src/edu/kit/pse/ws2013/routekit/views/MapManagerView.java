@@ -421,6 +421,7 @@ public class MapManagerView extends JDialog {
 					ok.setEnabled(true);
 				}
 			}).start();
+			setLocationRelativeTo(parent);
 			setVisible(true);
 		}
 
