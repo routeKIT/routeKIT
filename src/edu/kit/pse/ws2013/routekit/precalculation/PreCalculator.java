@@ -1,12 +1,10 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
-import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
-import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 /**
- * Führt die Vorberechnung für eine Kombination aus {@link Profile Profil} und
- * {@link StreetMap Karte} durch.
+ * Executes the precalculation for a given {@link ProfileMapCombination}.
  */
 public class PreCalculator {
 	EdgeWeighter weighter;
@@ -18,18 +16,23 @@ public class PreCalculator {
 	}
 
 	/**
-	 * Führt die Vorberechnung für die gegebene Kombination aus {@link Profile
-	 * Profil} und {@link StreetMap Karte} durch. Dabei werden ein
-	 * {@link EdgeWeighter} und ein {@link ArcFlagsCalculator} aufgerufen. Die
-	 * benötigte Zeit wird in {@code calculationTime} gespeichert.
+	 * Executes the precalculation for the given {@link ProfileMapCombination}
+	 * using an {@link EdgeWeighter} and an {@link ArcFlagsCalculator}.
 	 * 
 	 * @param comb
-	 *            Die Kombination aus {@link Profile Profil} und
-	 *            {@link StreetMap Karte}, für die die Vorberechnung
-	 *            durchgeführt werden soll.
+	 *            The {@link ProfileMapCombination} for which the precalculation
+	 *            shall be executed.
+	 * @param reporter
+	 *            The {@link ProgressReporter} to which progress shall be
+	 *            reported.
 	 */
-	public void doPrecalculation(ProfileMapCombination comb) {
+	public void doPrecalculation(ProfileMapCombination comb,
+			ProgressReporter reporter) {
+		reporter.setSubTasks(new float[] { .2f, .8f });
+		reporter.pushTask("Berechne Kantengewichte");
 		weighter.weightEdges(comb);
+		reporter.nextTask("Berechne Arc-Flags");
 		calulator.calculateArcFlags(comb);
+		reporter.popTask();
 	}
 }

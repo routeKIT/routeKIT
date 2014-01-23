@@ -49,7 +49,8 @@ public class Dummies {
 		MapManager.getInstance().saveMap(karlsruhe_big);
 		ProfileMapCombination karlsruheCar = new ProfileMapCombination(
 				karlsruhe_big, Profile.defaultCar);
-		new PreCalculator().doPrecalculation(karlsruheCar);
+		new PreCalculator().doPrecalculation(karlsruheCar,
+				new DummyProgressReporter());
 		ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
 	}
 

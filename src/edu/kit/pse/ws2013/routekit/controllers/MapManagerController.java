@@ -136,7 +136,7 @@ public class MapManagerController {
 	 * <p>
 	 * The changes are executed asynchronously in a new worker thread, and after
 	 * all changes have been executed, an additional task is popped off the
-	 * reporter that this method did not push (tha task "Saving changes", as
+	 * reporter that this method did not push (the task "Saving changes", as
 	 * mentioned earlier). This way, the caller may be notified when the changes
 	 * are done.
 	 * 
@@ -214,7 +214,7 @@ public class MapManagerController {
 						reporter.pushTask("Führe Vorberechnung durch für '"
 								+ combination + "'");
 						try {
-							calculator.doPrecalculation(combination);
+							calculator.doPrecalculation(combination, reporter);
 						} catch (Exception e) {
 							e.printStackTrace();
 							continue;

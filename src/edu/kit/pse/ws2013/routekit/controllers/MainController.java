@@ -17,6 +17,7 @@ import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileRenderer;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -169,26 +170,41 @@ public class MainController {
 
 	/**
 	 * Calls {@link PreCalculator#doPrecalculation(ProfileMapCombination)} in a
-	 * new worker thread if no precalculation for this
-	 * {@link ProfileMapCombination} exists. Locks the {@link MainView} until
-	 * calculation is finished.
+	 * new worker thread if no precalculation for the current
+	 * {@link ProfileMapCombination} exists.
+	 * <p>
+	 * The given {@link ProgressReporter} should already have the task
+	 * "Precalculating and saving" or something similar pushed onto it. This
+	 * method will then push and pop sub-tasks.
+	 * <p>
+	 * The changes are executed asynchronously in a new worker thread, and after
+	 * all changes have been executed, an additional task is popped off the
+	 * reporter that this method did not push (the task
+	 * "Precalculating and saving", as mentioned earlier). This way, the caller
+	 * may be notified when the changes are done.
 	 * 
-	 * @param combination
-	 *            The {@link ProfileMapCombination} that shall be precalculated.
+	 * @param reporter
+	 *            The {@link ProgressReporter} to which progress shall be
+	 *            reported.
 	 */
-	public void startPrecalculation(final ProfileMapCombination combination) {
-		if (combination.isCalculated()) {
-			return;
-		}
+	public void startPrecalculation(final ProgressReporter reporter) {
 		new Thread() {
 			@Override
 			public void run() {
-				new PreCalculator().doPrecalculation(combination);
-				ProfileMapManager.getInstance().save(combination);
-				// TODO unlock MainView
+				ProfileMapCombination combination = ProfileMapManager
+						.getInstance().getCurrentCombination();
+				if (!combination.isCalculated()) {
+					reporter.setSubTasks(new float[] { .95f, .05f });
+					reporter.pushTask("Führe Vorberechnung durch für '"
+							+ combination + "'");
+					new PreCalculator().doPrecalculation(combination, reporter);
+					reporter.nextTask("Speichere '" + combination + "'");
+					ProfileMapManager.getInstance().save(combination);
+					reporter.popTask();
+				}
+				reporter.popTask();
 			};
 		}.start();
-		// TODO lock MainView
 	}
 
 	/**

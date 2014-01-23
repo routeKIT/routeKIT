@@ -2,6 +2,7 @@ package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,6 +11,7 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.TexturePaint;
+import java.awt.Window;
 import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +30,10 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
-import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
@@ -122,10 +124,16 @@ public class MapView extends JPanel implements MouseListener,
 		startCalc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				MainController.getInstance()
-						.startPrecalculation(
-								ProfileMapManager.getInstance()
-										.getCurrentCombination());
+				Container parentWindow = MapView.this.getParent();
+				while (!(parentWindow instanceof Window)) {
+					parentWindow = parentWindow.getParent();
+				}
+				ProgressDialog p = new ProgressDialog((Window) parentWindow);
+				ProgressReporter reporter = new ProgressReporter();
+				reporter.addProgressListener(p);
+				reporter.pushTask("Speichere Änderungen");
+				MainController.getInstance().startPrecalculation(reporter);
+				p.setVisible(true);
 			}
 		});
 
