@@ -284,6 +284,8 @@ public class MapView extends JPanel implements MouseListener,
 	private void applyDrag(MouseEvent e) {
 		x = orgX - (e.getX() - dx) / 256f;
 		y = orgY - (e.getY() - dy) / 256f;
+		int limit = 1 << zoom;
+		x = (x % limit + limit) % limit;
 		repaint();
 	}
 
@@ -351,8 +353,6 @@ public class MapView extends JPanel implements MouseListener,
 			return;
 		}
 		applyDrag(e);
-		int limit = 1 << zoom;
-		x = (x % limit + limit) % limit;
 	}
 
 	@Override
@@ -395,6 +395,9 @@ public class MapView extends JPanel implements MouseListener,
 		}
 		y = yZ - yp / 256f;
 		x = xZ - xp / 256f;
+		int limit = 1 << zoom;
+		x = (x % limit + limit) % limit;
+
 	}
 
 	@Override
