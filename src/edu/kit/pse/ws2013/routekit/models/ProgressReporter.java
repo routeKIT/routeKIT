@@ -8,6 +8,17 @@ import java.util.Set;
 
 /**
  * Reports progress to attached {@link ProgressListener listeners}.
+ * <p>
+ * The progress of a task can be determined in one of two ways:
+ * <ul>
+ * <li><em>Subtask-based:</em> You can {@link #setSubTasks(float[]) tell} a task
+ * in advance how many sub-tasks will be {@link #pushTask(String) pushed} onto
+ * and {@link #popTask() popped} off of it, and how their individual progress
+ * should be weighted.</li>
+ * <li><em>Progress-based:</em> Alternatively, you can directly {@link
+ * setProgress(float) set} its progress.</li>
+ * </ul>
+ * These approaches may not be combined.
  * 
  * @author Lucas Werkmeister
  */
@@ -25,9 +36,11 @@ public class ProgressReporter {
 	 * Begin a new task with the specified name.
 	 * <p>
 	 * A call to {@link #setSubTasks(float[])} should usually occur directly
-	 * after a call to this method; the two methods have been separated because
-	 * this method is usually called before entering a subroutine while only the
-	 * subroutine can know about its subtasks (which are internal by nature).
+	 * after a call to this method unless you want to
+	 * {@link #setProgress(float) set the progress directly}; the two methods
+	 * are separate because this method is usually called before entering a
+	 * subroutine while only the subroutine can know about its subtasks (which
+	 * are internal by nature).
 	 * 
 	 * @param name
 	 *            The name of the task.
@@ -48,12 +61,21 @@ public class ProgressReporter {
 	 * <p>
 	 * This should be called directly after a call to {@link #pushTask(String)};
 	 * for rationale see there.
+	 * <p>
+	 * This is only permitted if the progress hasn’t been set directly; see the
+	 * class documentation for more information.
 	 * 
 	 * @param weights
 	 *            The weights of the subtasks, which should all be in range
 	 *            [0,1] and sum up to 1 (but this is not checked).
+	 * @throws IllegalStateException
+	 *             If progress has been set.
 	 */
 	public void setSubTasks(float[] weights) {
+		if (taskStack.getLast().progress != -1) {
+			throw new IllegalStateException(
+					"Can’t set subtasks of a task with direct progress!");
+		}
 		taskStack.getLast().setSubTasks(weights);
 	}
 
@@ -186,6 +208,26 @@ public class ProgressReporter {
 	}
 
 	/**
+	 * Sets the progress of the current task.
+	 * <p>
+	 * This is only permitted if no subtasks have been set; see the class
+	 * documentation for more information.
+	 * 
+	 * @param progress
+	 *            The progress.
+	 * @throws IllegalStateException
+	 *             If subtasks have been set.
+	 */
+	public void setProgress(float progress) {
+		if (!taskStack.getLast().subTasks.isEmpty()) {
+			throw new IllegalStateException(
+					"Can’t set the progress of a task with subtasks!");
+		}
+		taskStack.getLast().progress = progress;
+		reportProgress();
+	}
+
+	/**
 	 * Gets the current progress.
 	 * 
 	 * @return The current progress.
@@ -246,6 +288,7 @@ public class ProgressReporter {
 		private float[] weights;
 		private final LinkedList<Task> subTasks = new LinkedList<>();
 		private boolean finished = false;
+		private float progress = -1;
 
 		public Task(String name) {
 			this.name = name;
@@ -265,6 +308,9 @@ public class ProgressReporter {
 		public float getProgress() {
 			if (finished) {
 				return 1f;
+			}
+			if (subTasks.isEmpty()) {
+				return progress;
 			}
 			float progress = 0f;
 			int i = 0;
