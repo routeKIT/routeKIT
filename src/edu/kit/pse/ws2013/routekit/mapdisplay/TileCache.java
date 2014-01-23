@@ -127,6 +127,9 @@ public class TileCache implements TileSource {
 	 */
 	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
+		final int bitmask = (1 << zoom) - 1;
+		x &= bitmask;
+		y &= bitmask;
 		String key = key(x, y, zoom);
 		SoftReference<BufferedImage> cacheVal = map.get(key);
 		BufferedImage tile;
@@ -156,6 +159,9 @@ public class TileCache implements TileSource {
 	}
 
 	private void prefetch(int x, int y, int zoom) {
+		final int bitmask = (1 << zoom) - 1;
+		x &= bitmask;
+		y &= bitmask;
 		SoftReference<BufferedImage> ref = map.get(key(x, y, zoom));
 		if (ref == null || ref.get() == null) {
 			prefetchWaiting.addFirst(new TileJob(x, y, zoom));
