@@ -37,6 +37,7 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
  * Displays the window of the profile management on the screen.
  */
 public class ProfileManagerView extends JDialog {
+	private static final long serialVersionUID = 1L;
 	private JComboBox<String> profilename;
 	private JRadioButton bus;
 	private JRadioButton motorcycle;

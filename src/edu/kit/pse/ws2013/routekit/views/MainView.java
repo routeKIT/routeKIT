@@ -41,6 +41,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * Displays the main window on the screen.
  */
 public class MainView extends JFrame implements RouteModelListener {
+	private static final long serialVersionUID = 1L;
 	final float maxcoordinate = Float.MAX_VALUE;
 	JTextField startField;
 	JTextField targetField;
@@ -144,9 +145,10 @@ public class MainView extends JFrame implements RouteModelListener {
 				"sdfsdfsd", "dsdfsd", "sdf" });
 		left.add(routeDescription, BorderLayout.CENTER);
 		routeDescription.setCellRenderer(new DefaultListCellRenderer() {
+			private static final long serialVersionUID = 1L;
 
 			@Override
-			public Component getListCellRendererComponent(JList list,
+			public Component getListCellRendererComponent(JList<?> list,
 					Object value, int index, boolean isSelected,
 					boolean cellHasFocus) {
 				super.getListCellRendererComponent(list, value, index, false,

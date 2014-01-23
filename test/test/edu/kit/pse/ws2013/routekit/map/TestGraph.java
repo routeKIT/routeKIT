@@ -85,8 +85,6 @@ public class TestGraph {
 
 	@Test
 	public void testGetCorresponding() {
-		int[] nodes = new int[] { 0, 3, 6, 6 };
-		int[] edges = new int[] { 1, 2, 3, 0, 2, 3, 0, 1, 2 };
 		int[] corres = new int[] { 3, -1, 6, 0, -1, 7, 2, 5, -1 };
 		for (int i = 0; i < corres.length; i++) {
 			assertEquals("index: " + i, corres[i], g.getCorrespondingEdge(i));

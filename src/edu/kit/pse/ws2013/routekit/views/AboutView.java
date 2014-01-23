@@ -19,6 +19,8 @@ import javax.swing.text.StyledDocument;
  * Shows the window with information about routeKIT on the screen.
  */
 public class AboutView extends JDialog {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * A constructor that creates a new "About"-window.
 	 */

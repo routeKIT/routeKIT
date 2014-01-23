@@ -43,6 +43,7 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
  * Displays the window of the map management on the screen.
  */
 public class MapManagerView extends JDialog {
+	private static final long serialVersionUID = 1L;
 	private JComboBox<Object> mapname;
 	private DefaultListModel<String> listenModell;
 	private JList<String> profile;
@@ -378,6 +379,7 @@ public class MapManagerView extends JDialog {
 	}
 
 	private class Dialog extends JDialog {
+		private static final long serialVersionUID = 1L;
 		private JButton ok;
 		public boolean clickedOk = false;
 

@@ -29,6 +29,7 @@ import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
  * @author Lucas Werkmeister
  */
 public class ProgressDialog extends JDialog implements ProgressListener {
+	private static final long serialVersionUID = 1L;
 	private final JProgressBar bar;
 
 	public ProgressDialog(Window owner) {

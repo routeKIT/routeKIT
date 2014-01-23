@@ -27,6 +27,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * Shows the window with the History on the screen.
  */
 public class HistoryView extends JDialog {
+	private static final long serialVersionUID = 1L;
 	JList<HistoryEntry> historyvar;
 
 	/**

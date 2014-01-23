@@ -44,11 +44,13 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 public class MapView extends JPanel implements MouseListener,
 		MouseMotionListener, MouseWheelListener, TileFinishedListener,
 		RouteModelListener, ActionListener {
+	private static final long serialVersionUID = 1L;
 	double x = 34297.855;
 	double y = 22501.84;
 	int zoom = 16;
 
 	class ContextMenu extends JPopupMenu {
+		private static final long serialVersionUID = 1L;
 		JMenuItem start;
 		JMenuItem target;
 
