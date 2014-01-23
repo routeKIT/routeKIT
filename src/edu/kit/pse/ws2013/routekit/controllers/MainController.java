@@ -1,9 +1,13 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.xml.stream.XMLStreamException;
+
+import edu.kit.pse.ws2013.routekit.export.GPXExporter;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
@@ -242,15 +246,24 @@ public class MainController {
 	}
 
 	/**
-	 * Speichert die aktuelle Route im GPS Exchange Format-Format in die
-	 * angegebene Datei. Ist keine aktuelle Route verfügbar (z. B. da noch keine
-	 * Vorberechnung vorliegt), so wird eine {@code IllegalStateException}
-	 * geworfen.
+	 * Saves the current {@link Route} in the GPS Exchange Format into the given
+	 * file. If there is no current route, an {@link IllegalStateException} is
+	 * thrown.
 	 * 
 	 * @param target
-	 *            Die Datei, in die die Route gespeichert werden soll.
+	 *            The file into which the route shall be exported.
 	 */
 	public void exportGPX(File target) {
+		Route route = rm.getCurrentRoute();
+		if (route == null) {
+			throw new IllegalStateException("No current route to export!");
+		}
+		try {
+			new GPXExporter().exportRoute(route, target);
+		} catch (FileNotFoundException | XMLStreamException e) {
+			// TODO the view should display this error
+			e.printStackTrace();
+		}
 	}
 
 	/**
