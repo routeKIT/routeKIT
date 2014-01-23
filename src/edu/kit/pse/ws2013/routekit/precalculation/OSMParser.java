@@ -55,6 +55,7 @@ public class OSMParser {
 	private int graphNodes[];
 	private int graphEdges[];
 	private EdgeProperties edgeProps[];
+	private Map<Integer, NodeProperties> nodeProps = new HashMap<>();
 
 	/*
 	 * The arrays for creating the EdgedBasedGraph.
@@ -101,8 +102,8 @@ public class OSMParser {
 		reporter.nextTask("Baue Adjazenzfelder auf");
 		createAdjacencyField();
 		reporter.nextTask("Baue Graph auf");
-		graph = new Graph(graphNodes, graphEdges,
-				new HashMap<Integer, NodeProperties>(), edgeProps, lat, lon);
+		graph = new Graph(graphNodes, graphEdges, nodeProps, edgeProps, lat,
+				lon);
 
 		reporter.nextTask("Baue Adjazenzfelder für kantenbasierten Graph auf");
 		buildEdgeBasedGraph();
@@ -276,8 +277,6 @@ public class OSMParser {
 						}
 					}
 				}
-
-				// These lists have done their job now, throw them away
 				wayTags = null;
 				wayNodes = null;
 			}
@@ -309,6 +308,7 @@ public class OSMParser {
 		private Locator locator;
 
 		private long nodeId;
+		private Map<String, String> nodeTags;
 
 		@Override
 		public void setDocumentLocator(Locator locator) {
@@ -344,20 +344,40 @@ public class OSMParser {
 								+ ": Coordinates invalid or unspecified",
 								locator, e);
 					}
+					nodeTags = new HashMap<>();
 				}
 				// fall through
 			case "osm":
 				enclosing = qName;
 				break;
 			case "tag":
-				if (enclosing.equals("node")) {
-					// TODO: create NodeProperties
+				if (enclosing.equals("node") && nodes.containsKey(nodeId)) {
+					String key = attr.getValue("k");
+					String value = attr.getValue("v");
+					if (key == null || value == null) {
+						throw new SAXParseException("Node " + nodeId
+								+ ": Invalid tag (key or value missing)",
+								locator);
+					}
+					nodeTags.put(key, value);
 				}
 			}
 		}
 
 		@Override
 		public void endElement(String uri, String localName, String qName) {
+			if (qName.equals("node") && nodes.containsKey(nodeId)) {
+				boolean isJunction = nodeTags.containsKey("highway")
+						&& nodeTags.get("highway").equals("motorway_junction");
+				boolean isTrafficLights = nodeTags.containsKey("highway")
+						&& nodeTags.get("highway").equals("traffic_signals");
+				if (isJunction || isTrafficLights) {
+					nodeProps.put(nodes.get(nodeId), new NodeProperties(
+							nodeTags.get("ref"), nodeTags.get("name"),
+							isJunction, isTrafficLights));
+				}
+				nodeTags = null;
+			}
 			if (qName.equals(enclosing)) {
 				enclosing = qName.equals("osm") ? null : "osm";
 			}
