@@ -57,10 +57,11 @@ public class TileCache implements TileSource {
 				}
 				try {
 					// returns null if empty
-					TileJob job = waiting.pollFirst(200, TimeUnit.MILLISECONDS);
+					TileJob job = waiting.pollFirst();
 					if (job == null) {
 						// immediately returns null if empty
-						job = prefetchWaiting.pollFirst();
+						job = prefetchWaiting.pollFirst(200,
+								TimeUnit.MILLISECONDS);
 					}
 					if (job != null) {
 						job.run();
