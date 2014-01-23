@@ -135,7 +135,8 @@ public class TileRenderer implements TileSource {
 			final double streetLength = Math.sqrt(Math.pow(
 					(it.xtarget - it.xstart), 2)
 					+ Math.pow((it.ytarget - it.ystart), 2));
-			if (name != null && (it.xstart != -1)) {
+			if (name != null && (it.xstart != -1)
+					&& getStreetWidth(zoom, it.p) > 7) {
 				final Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
 				final AffineTransform at = AffineTransform.getRotateInstance(
@@ -155,7 +156,7 @@ public class TileRenderer implements TileSource {
 
 				g.drawString(nNames.toString(), space + it.xstart,
 						(int) (it.ystart - r.getY() / 2 - r.getY() - r
-								.getHeight()));
+								.getHeight()) + 1);
 				g.setTransform(old);
 			}
 		}
@@ -190,10 +191,9 @@ public class TileRenderer implements TileSource {
 				&& p.getType() != HighwayType.Unclassified
 				&& p.getType() != HighwayType.Residential) {
 			width = (HighwayType.values().length - p.getType().ordinal()) * 6
-					/ (20f - zoom);
+					/ (20f - zoom) + 2;
 		} else {
-			width = (HighwayType.values().length - HighwayType.Secondary
-					.ordinal()) * 6 / (20f - zoom);
+			width = Math.max(28 - (20 - zoom) * 5, 1);
 		}
 		return width;
 	}
