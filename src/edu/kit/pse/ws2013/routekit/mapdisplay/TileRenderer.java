@@ -18,7 +18,7 @@ import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
- * Eine {@link TileSource}, die die Kacheln selbst berechnet.
+ * A {@link TileSource} that renders tiles itself.
  */
 public class TileRenderer implements TileSource {
 	private Graph graph;
@@ -51,7 +51,9 @@ public class TileRenderer implements TileSource {
 			return true;
 		}
 
-		// Setzt die Start/Ziel Coordinaten richtig
+		/**
+		 * Sets start and target coordinates
+		 */
 		private void extractCoordinates() {
 			int startNode = graph.getStartNode(edge);
 			int targetNode = graph.getTargetNode(edge);
@@ -80,26 +82,15 @@ public class TileRenderer implements TileSource {
 	private static final boolean DO_COLORFULL = true;
 
 	/**
-	 * Konstruktor: Erzeugt einen neuen {@code TileRenderer}.
+	 * Creates a new {@link TileRenderer} for the given graph.
 	 * 
 	 * @param graph
-	 *            Ein Adjazenzfeld.
+	 *            The {@link Graph} to render.
 	 */
 	public TileRenderer(final Graph graph) {
 		this.graph = graph;
 	}
 
-	/**
-	 * Berechnet die angegebene Kachel und gibt sie zurück.
-	 * 
-	 * @param x
-	 *            siehe {@code x}
-	 * @param y
-	 *            siehe {@code y}
-	 * @param zoom
-	 *            siehe {@code zoom}
-	 * @return
-	 */
 	@Override
 	public BufferedImage renderTile(final int x, final int y, final int zoom) {
 		final Set<Integer> edges = getEdgesOnTile(x, y, zoom);
@@ -114,7 +105,7 @@ public class TileRenderer implements TileSource {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		final Stroke oldStroke = g.getStroke();
-		// Rand malen
+		// Draw border
 		EdgeIterator it = new EdgeIterator(edges.iterator(), zoom, x, y);
 		while (it.next()) {
 			g.setColor(getMainStreetColor(it.p.getType(), true));
@@ -123,7 +114,7 @@ public class TileRenderer implements TileSource {
 			g.drawLine(it.xstart, it.ystart, it.xtarget, it.ytarget);
 		}
 
-		// Straße malen
+		// Draw street
 		it = new EdgeIterator(edges.iterator(), zoom, x, y);
 		while (it.next()) {
 			g.setColor(getMainStreetColor(it.p.getType(), false));
@@ -134,7 +125,7 @@ public class TileRenderer implements TileSource {
 
 		g.setStroke(oldStroke);
 
-		// Name der Straße muss über allen Straßen sein
+		// Draw name of street – must be above all streets
 		final Font font = new Font(Font.SANS_SERIF, 0, 12);
 		g.setColor(Color.BLACK);
 		g.setFont(font);

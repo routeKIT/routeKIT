@@ -8,20 +8,20 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
- * Eine {@link TileSource}, die die OSM-Kachel vom OpenStreetMap-Server
- * herunterlädt.
+ * A {@link TileSource} that downloads the tiles from the OpenStreetMap servers.
  */
 public class OSMRenderer implements TileSource {
 	/**
-	 * Lädt die angegebene Kachel herunter und gibt sie zurück.
+	 * Downloads the given tile and returns it.
 	 * 
 	 * @param x
-	 *            siehe {@code x}
+	 *            The SMT X coordinate of the requested tile.
 	 * @param y
-	 *            siehe {@code y}
+	 *            The SMT Y coordinate of the requested tile.
 	 * @param zoom
-	 *            siehe {@code zoom}
-	 * @return
+	 *            The zoom of the requested tile.
+	 * @param tile
+	 *            The downloaded tile.
 	 */
 	@Override
 	public BufferedImage renderTile(int x, int y, int zoom) {
@@ -29,6 +29,7 @@ public class OSMRenderer implements TileSource {
 			return null;
 		}
 		try {
+			// TODO we’re not allowed to hardcode this URL!
 			URL url = new URL("http://c.tile.openstreetmap.org/" + zoom + "/"
 					+ x + "/" + y + ".png");
 			HttpURLConnection huc = ((HttpURLConnection) url.openConnection());

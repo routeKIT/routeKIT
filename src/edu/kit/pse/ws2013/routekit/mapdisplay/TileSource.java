@@ -3,20 +3,20 @@ package edu.kit.pse.ws2013.routekit.mapdisplay;
 import java.awt.image.BufferedImage;
 
 /**
- * Abstrakte Klasse, die ein Interface für das (synchrone) Rendern von
- * Kartenkacheln definiert.
+ * Interface for (synchronous) rendering of a Slippy Map Tile.
  */
 public interface TileSource {
 	/**
-	 * Berechnet die angegebene Kachel und gibt sie zurück.
+	 * Calculates the given tile and returns it.
 	 * 
 	 * @param x
-	 *            siehe {@code x}
+	 *            The SMT X coordinate of the requested tile.
 	 * @param y
-	 *            siehe {@code y}
+	 *            The SMT Y coordinate of the requested tile.
 	 * @param zoom
-	 *            siehe {@code zoom}
-	 * @return
+	 *            The zoom of the requested tile.
+	 * @param tile
+	 *            The calculated tile.
 	 */
 	public BufferedImage renderTile(int x, int y, int zoom);
 }

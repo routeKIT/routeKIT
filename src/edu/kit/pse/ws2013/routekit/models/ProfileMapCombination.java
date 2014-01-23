@@ -36,10 +36,12 @@ public class ProfileMapCombination {
 	}
 
 	/**
-	 * Gibt {@code true} zurück, wenn für eine Kombination aus Profil und Karte
-	 * eine Vorberechnung der Gewichte und der Arc-Flags existiert.
+	 * Returns if there is a precalculation for this
+	 * {@link ProfileMapCombination}, that is, if there are {@link Weights} and
+	 * {@link ArcFlags}.
 	 * 
-	 * @return
+	 * @return {@code true} if there is a precalculation, {@code false}
+	 *         otherwise.
 	 */
 	public boolean isCalculated() {
 		return weights != null && arcFlags != null;

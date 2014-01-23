@@ -1,25 +1,25 @@
 package edu.kit.pse.ws2013.routekit.mapdisplay;
 
+import java.awt.Component;
 import java.awt.image.BufferedImage;
 
 /**
- * Wird benachrichtigt, wenn die Berechnung einer Kartenkachel abgeschlossen
- * ist.
+ * Gets notified when calculation of a map tile finishes.
  */
 public interface TileFinishedListener {
 	/**
-	 * Wird vom {@link TileCache} aufgerufen, wenn die Berechnung einer Kachel
-	 * abgeschlossen ist. Die übliche Aktion ist, ein {@code repaint} der
-	 * Kartenansicht im Graphical User Interface auszulösen.
+	 * Called by the {@link TileCache} when the calculation of a tile finishes.
+	 * The typical action is to trigger a {@link Component#repaint() repaint} of
+	 * the Graphical User Interface.
 	 * 
 	 * @param x
-	 *            siehe {@code x}
+	 *            The SMT X coordinate of the finished tile.
 	 * @param y
-	 *            siehe {@code y}
+	 *            The SMT Y coordinate of the finished tile.
 	 * @param zoom
-	 *            siehe {@code zoom}
+	 *            The zoom of the finished tile.
 	 * @param tile
-	 *            Die berechnete Kachel.
+	 *            The calculated tile.
 	 */
 	public void tileFinished(int x, int y, int zoom, BufferedImage tile);
 }
