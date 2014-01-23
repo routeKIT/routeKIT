@@ -182,6 +182,15 @@ public class Coordinates {
 		return false;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(lat);
+		result = prime * result + Float.floatToIntBits(lon);
+		return result;
+	}
+
 	/**
 	 * Parses a coordinates string as returned by {@link #toString()} back into
 	 * {@link Coordinates}.
