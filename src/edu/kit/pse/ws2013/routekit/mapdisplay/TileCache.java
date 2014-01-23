@@ -188,6 +188,10 @@ public class TileCache implements TileSource {
 		}
 	}
 
+	public TileSource getTarget() {
+		return target;
+	}
+
 	private static String key(int x, int y, int zoom) {
 		return x + "/" + y + "/" + zoom;
 	}

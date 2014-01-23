@@ -39,7 +39,7 @@ public class MainController {
 	private final History history;
 	MainView view;
 	private RouteCalculator rc;
-	TileSource source;
+	private boolean useOnlineMaps = false;
 
 	/**
 	 * Konstruktor: Erstellt den Controller, lädt Profil, die Namen der Karte
@@ -62,8 +62,6 @@ public class MainController {
 			_history = new History();
 		}
 		history = _history;
-		source = new TileCache(new TileRenderer(ProfileMapManager.getInstance()
-				.getCurrentCombination().getStreetMap().getGraph()));
 		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
 	}
@@ -203,13 +201,7 @@ public class MainController {
 	 *            selbst gerenderte Kacheln zu verwenden.
 	 */
 	public void setUseOnlineMaps(boolean useOnlineMaps) {
-		if (useOnlineMaps) {
-			source = new TileCache(new OSMRenderer());
-		} else {
-			source = new TileCache(new TileRenderer(ProfileMapManager
-					.getInstance().getCurrentCombination().getStreetMap()
-					.getGraph()));
-		}
+		this.useOnlineMaps = useOnlineMaps;
 	}
 
 	/**
@@ -273,7 +265,13 @@ public class MainController {
 	 * @return
 	 */
 	public TileSource getTileSource() {
-		return source;
+		if (useOnlineMaps) {
+			return new TileCache(new OSMRenderer());
+		} else {
+			return new TileCache(new TileRenderer(ProfileMapManager
+					.getInstance().getCurrentCombination().getStreetMap()
+					.getGraph()));
+		}
 	}
 
 	/**

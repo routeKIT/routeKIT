@@ -80,6 +80,8 @@ public class MainView extends JFrame implements RouteModelListener {
 						setCurrentProfile(newCombination.getProfile());
 						setCurrentMap(newCombination.getStreetMap());
 						mapView.setEnabled(newCombination.isCalculated());
+						mapView.setTileSource(MainController.getInstance()
+								.getTileSource());
 					}
 				});
 
