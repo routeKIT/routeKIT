@@ -46,16 +46,16 @@ public class OSMParser {
 	private int numberOfEdges = 0;
 	private int numberOfTurns = 0;
 
-	private float lat[];
-	private float lon[];
-
 	/*
 	 * The arrays for creating the Graph.
 	 */
 	private int graphNodes[];
 	private int graphEdges[];
 	private EdgeProperties edgeProps[];
-	private Map<Integer, NodeProperties> nodeProps = new HashMap<>();
+
+	private float lat[];
+	private float lon[];
+	private Map<Integer, NodeProperties> nodeProps;
 
 	/*
 	 * The arrays for creating the EdgedBasedGraph.
@@ -319,6 +319,7 @@ public class OSMParser {
 		public void startDocument() {
 			lat = new float[nodes.size()];
 			lon = new float[nodes.size()];
+			nodeProps = new HashMap<>();
 		}
 
 		@Override
