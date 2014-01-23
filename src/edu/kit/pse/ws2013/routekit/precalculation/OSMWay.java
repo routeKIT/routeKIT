@@ -20,7 +20,8 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
  * {@link OSMParser}.
  */
 public class OSMWay {
-	private Map<String, String> tags;
+	private final Map<String, String> tags;
+	private EdgeProperties props = null;
 	private int id = -1;
 
 	/**
@@ -225,6 +226,13 @@ public class OSMWay {
 	 * @return the said properties object
 	 */
 	public EdgeProperties getEdgeProperties() {
+		if (props == null) {
+			props = createEdgeProperties();
+		}
+		return props;
+	}
+
+	private EdgeProperties createEdgeProperties() {
 		int maxSpeed;
 		try {
 			maxSpeed = Math.max(Integer.parseInt(tags.get("maxspeed")), 0);
