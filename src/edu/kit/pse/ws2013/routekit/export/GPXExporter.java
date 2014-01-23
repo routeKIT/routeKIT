@@ -60,10 +60,9 @@ public class GPXExporter {
 
 		gpx.writeStartElement("rte");
 		for (Coordinates coords : route) {
-			gpx.writeStartElement("rtept");
+			gpx.writeEmptyElement("rtept");
 			gpx.writeAttribute("lat", Float.toString(coords.getLatitude()));
 			gpx.writeAttribute("lon", Float.toString(coords.getLongitude()));
-			gpx.writeEndElement();
 		}
 		gpx.writeEndElement();
 
