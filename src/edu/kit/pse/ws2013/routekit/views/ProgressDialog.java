@@ -2,11 +2,17 @@ package edu.kit.pse.ws2013.routekit.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Window;
+import java.util.AbstractMap;
+import java.util.ConcurrentModificationException;
+import java.util.LinkedList;
+import java.util.Map.Entry;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 import edu.kit.pse.ws2013.routekit.models.ProgressListener;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
@@ -31,6 +37,9 @@ import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 public class ProgressDialog extends JDialog implements ProgressListener {
 	private static final long serialVersionUID = 1L;
 	private final JProgressBar bar;
+	private final JTextArea text;
+	private final LinkedList<Entry<String, Long>> tasks = new LinkedList<>();
+	private boolean closed = false;
 
 	public ProgressDialog(Window owner) {
 		super(owner);
@@ -39,10 +48,56 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		bar = new JProgressBar();
 		bar.setStringPainted(true);
 		bar.setPreferredSize(new Dimension(500, 25));
-		p.add(bar);
+		p.add(bar, BorderLayout.CENTER);
+		text = new JTextArea(10, 50);
+		text.setEditable(false);
+		p.add(text, BorderLayout.SOUTH);
 		setContentPane(p);
 		pack();
 		setLocationRelativeTo(owner);
+		new Thread() {
+			@Override
+			public void run() {
+				do {
+					repaint();
+					try {
+						sleep(1000);
+					} catch (InterruptedException e) {
+						// don’t care
+					}
+				} while (!closed);
+			};
+		}.start();
+	}
+
+	@Override
+	public void update(Graphics g) {
+		paint(g);
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		String indent = "";
+		long currentTime = System.currentTimeMillis();
+		text.setText(null);
+		try {
+			for (Entry<String, Long> task : tasks) {
+				text.append(indent);
+				indent += " ";
+				text.append(task.getKey());
+				int elapsed = (int) ((currentTime - task.getValue()) / 1000);
+				if (elapsed > 0) {
+					text.append(" (");
+					text.append(Integer.toString(elapsed));
+					text.append("s)");
+				}
+				text.append("\n");
+			}
+		} catch (ConcurrentModificationException e) {
+			// don’t care
+			repaint();
+		}
+		super.paint(g);
 	}
 
 	@Override
@@ -53,6 +108,9 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void beginTask(String name) {
 		bar.setString(name);
+		tasks.addLast(new AbstractMap.SimpleEntry<>(name, System
+				.currentTimeMillis()));
+		repaint();
 	}
 
 	@Override
@@ -64,6 +122,8 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void endTask(String name) {
 		bar.setString(name);
+		tasks.removeLast();
+		repaint();
 	}
 
 	@Override
@@ -71,5 +131,11 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		bar.setString(name);
 		setVisible(false);
 		dispose();
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		closed = !b;
+		super.setVisible(b);
 	}
 }
