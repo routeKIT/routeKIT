@@ -5,6 +5,7 @@ import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
@@ -23,14 +24,18 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 	private final static int AVERAGE_TURN_TIME_MOTORWAY_JUNCTION = 7;
 
 	@Override
-	public void weightEdges(ProfileMapCombination combination) {
+	public void weightEdges(ProfileMapCombination combination,
+			ProgressReporter reporter) {
 		long t1 = System.currentTimeMillis();
 		combination.setArcFlags(null, 0);
-		Graph graph = combination.getStreetMap().getGraph();
-		EdgeBasedGraph eGraph = combination.getStreetMap().getEdgeBasedGraph();
-		Profile profile = combination.getProfile();
-		int[] weightArray = new int[eGraph.getNumberOfTurns()];
-		for (int edge = 0; edge < graph.getNumberOfEdges(); edge++) {
+		final Graph graph = combination.getStreetMap().getGraph();
+		final EdgeBasedGraph eGraph = combination.getStreetMap()
+				.getEdgeBasedGraph();
+		final Profile profile = combination.getProfile();
+		final int[] weightArray = new int[eGraph.getNumberOfTurns()];
+		final int numberOfEdges = graph.getNumberOfEdges();
+		final int mask = 2 << 10; // report progress every 1024 edges
+		for (int edge = 0; edge < numberOfEdges; edge++) {
 			EdgeProperties currentEdgeProps = graph.getEdgeProperties(edge);
 			int startNode = graph.getStartNode(edge);
 			int targetNode = graph.getTargetNode(edge);
@@ -83,6 +88,9 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 					}
 					weightArray[turn] = baseTime + turnTime;
 				}
+			}
+			if ((edge & mask) != 0) {
+				reporter.setProgress((float) edge / numberOfEdges);
 			}
 		}
 		long t2 = System.currentTimeMillis();

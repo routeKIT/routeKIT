@@ -30,7 +30,7 @@ public class PreCalculator {
 			ProgressReporter reporter) {
 		reporter.setSubTasks(new float[] { .2f, .8f });
 		reporter.pushTask("Berechne Kantengewichte");
-		weighter.weightEdges(comb);
+		weighter.weightEdges(comb, reporter);
 		reporter.nextTask("Berechne Arc-Flags");
 		calulator.calculateArcFlags(comb);
 		reporter.popTask();

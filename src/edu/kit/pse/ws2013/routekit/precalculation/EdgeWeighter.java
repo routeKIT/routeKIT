@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 
 /**
@@ -25,6 +26,9 @@ public interface EdgeWeighter {
 	 * 
 	 * @param combination
 	 *            a {@link ProfileMapCombination}
+	 * @param reporter
+	 *            The {@link ProgressReporter} to report progress to.
 	 */
-	public void weightEdges(ProfileMapCombination combination);
+	public void weightEdges(ProfileMapCombination combination,
+			ProgressReporter reporter);
 }
