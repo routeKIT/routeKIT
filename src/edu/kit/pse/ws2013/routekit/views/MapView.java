@@ -187,6 +187,10 @@ public class MapView extends JPanel implements MouseListener,
 
 			return;
 		}
+		final Route r = rm.getCurrentRoute();
+		if (r != null) {
+			drawRoute(g, r);
+		}
 		Coordinates c = rm.getStart();
 		if (c != null) {
 			g.setColor(Color.RED);
@@ -196,10 +200,6 @@ public class MapView extends JPanel implements MouseListener,
 		if (c != null) {
 			g.setColor(Color.GREEN);
 			drawPoint(g, c, true);
-		}
-		final Route r = rm.getCurrentRoute();
-		if (r != null) {
-			drawRoute(g, r);
 		}
 		super.paintComponents(g);
 	}
