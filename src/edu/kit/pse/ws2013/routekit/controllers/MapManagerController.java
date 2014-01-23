@@ -285,6 +285,10 @@ public class MapManagerController {
 	 */
 	public void importMap(String name, File file) {
 		currentMap = new FutureMap(name, file);
+		StreetMap previousMap = mapsByName.get(name);
+		if (previousMap != null) {
+			precalculations.remove(previousMap);
+		}
 		mapsByName.put(name, currentMap);
 		precalculations.put(currentMap, new HashSet<Profile>());
 		mmv.setAvailableMaps(precalculations.keySet());
