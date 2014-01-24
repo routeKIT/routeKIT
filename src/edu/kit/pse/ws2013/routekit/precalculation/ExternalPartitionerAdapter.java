@@ -21,7 +21,11 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 			throws IOException {
 		String fileName = System.getProperty("java.io.tmpdir") + "/graph";
 		writeGraphFile(fileName);
-		// TODO: invoke METIS
+
+		String[] cmd = { "kmetis", fileName,
+				Integer.toString(numberOfPartitions) };
+		Runtime.getRuntime().exec(cmd);
+
 		readPartitionFile(fileName + ".part."
 				+ String.valueOf(numberOfPartitions));
 	}
