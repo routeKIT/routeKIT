@@ -2,8 +2,10 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 
@@ -25,19 +27,34 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 	}
 
 	private void writeGraphFile(String fileName) throws IOException {
-		PrintWriter writer = new PrintWriter(fileName);
-		writer.print(graph.getNumberOfEdges());
-		writer.print(' ');
-		writer.println(graph.getNumberOfTurns());
+		StringBuilder output = new StringBuilder();
+		output.append(graph.getNumberOfEdges()).append(' ');
+		int turnNumberPosition = output.length();
+		output.append(System.lineSeparator());
+
+		int numberOfTurns = 0;
 		for (int edge = 0; edge < graph.getNumberOfEdges(); edge++) {
-			StringBuilder line = new StringBuilder();
+			// Convert directed to undirected turns (graph edges)
+			Set<Integer> edges = new HashSet<>();
 			for (int turn : graph.getOutgoingTurns(edge)) {
-				line.append(graph.getTargetEdge(turn));
-				line.append(' ');
+				edges.add(graph.getTargetEdge(turn));
 			}
-			line.deleteCharAt(line.length() - 1);
-			writer.println(line);
+			for (int turn : graph.getIncomingTurns(edge)) {
+				edges.add(graph.getStartEdge(turn));
+			}
+			numberOfTurns += edges.size();
+
+			for (int targetEdge : edges) {
+				output.append(targetEdge).append(' ');
+			}
+			output.deleteCharAt(output.length() - 1); // remove trailing space
+			output.append(System.lineSeparator());
 		}
+
+		output.insert(turnNumberPosition, numberOfTurns);
+
+		FileWriter writer = new FileWriter(fileName);
+		writer.append(output);
 		writer.close();
 	}
 
