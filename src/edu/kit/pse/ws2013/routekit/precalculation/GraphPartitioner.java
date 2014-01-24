@@ -1,5 +1,7 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
+import java.io.IOException;
+
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 
 /**
@@ -17,6 +19,9 @@ public interface GraphPartitioner {
 	 *            the graph to be partitioned
 	 * @param numberOfPartitions
 	 *            the desired number of partitions
+	 * @throws IOException
+	 *             if any I/O error occurs
 	 */
-	public void partitionGraph(EdgeBasedGraph graph, int numberOfPartitions);
+	public void partitionGraph(EdgeBasedGraph graph, int numberOfPartitions)
+			throws IOException;
 }
