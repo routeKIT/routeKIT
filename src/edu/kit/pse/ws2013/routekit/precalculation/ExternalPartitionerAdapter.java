@@ -23,7 +23,7 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 		String fileName = System.getProperty("java.io.tmpdir") + "/graph";
 		writeGraphFile(fileName);
 
-		String[] cmd = { "kmetis", fileName,
+		String[] cmd = { "gpmetis", fileName,
 				Integer.toString(numberOfPartitions) };
 		Runtime.getRuntime().exec(cmd);
 
@@ -50,9 +50,12 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 			numberOfTurns += edges.size();
 
 			for (int targetEdge : edges) {
-				output.append(targetEdge).append(' ');
+				output.append(targetEdge + 1).append(' ');
 			}
-			output.deleteCharAt(output.length() - 1); // remove trailing space
+			if (!edges.isEmpty()) {
+				// Remove trailing space
+				output.deleteCharAt(output.length() - 1);
+			}
 			output.append(System.lineSeparator());
 		}
 
