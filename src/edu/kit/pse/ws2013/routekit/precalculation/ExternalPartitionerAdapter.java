@@ -19,6 +19,7 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 	@Override
 	public void partitionGraph(EdgeBasedGraph graph, int numberOfPartitions)
 			throws IOException {
+		this.graph = graph;
 		String fileName = System.getProperty("java.io.tmpdir") + "/graph";
 		writeGraphFile(fileName);
 
@@ -27,7 +28,7 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 		Runtime.getRuntime().exec(cmd);
 
 		readPartitionFile(fileName + ".part."
-				+ String.valueOf(numberOfPartitions));
+				+ String.valueOf(numberOfPartitions) + "parts");
 	}
 
 	private void writeGraphFile(String fileName) throws IOException {
@@ -55,7 +56,7 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 			output.append(System.lineSeparator());
 		}
 
-		output.insert(turnNumberPosition, numberOfTurns);
+		output.insert(turnNumberPosition, numberOfTurns / 2);
 
 		FileWriter writer = new FileWriter(fileName);
 		writer.append(output);
