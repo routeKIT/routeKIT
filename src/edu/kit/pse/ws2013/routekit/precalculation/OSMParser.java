@@ -173,7 +173,8 @@ public class OSMParser {
 			return TurnType.NoTurn;
 		}
 
-		if (graph.getNodeProperties(turnNode).isMotorwayJunction()) {
+		NodeProperties nodeProps = graph.getNodeProperties(turnNode);
+		if (nodeProps != null && nodeProps.isMotorwayJunction()) {
 			return TurnType.MotorwayJunction;
 		}
 
