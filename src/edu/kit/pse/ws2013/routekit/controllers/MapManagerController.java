@@ -167,7 +167,10 @@ public class MapManagerController {
 						.getDeletedPrecalculations()) {
 					reporter.pushTask("Lösche Vorberechnung '" + precalculation
 							+ "'");
-					profileMapManager.deletePrecalculation(precalculation);
+					profileMapManager.deletePrecalculation(
+							precalculation,
+							!diff.getDeletedMaps().contains(
+									precalculation.getStreetMap()));
 					reporter.popTask();
 				}
 				reporter.popTask();
