@@ -93,9 +93,40 @@ public class Graph {
 				}
 			}
 		}
-		indices = new GraphIndex[] { new GraphIndex(this, HighwayType.Primary),
-				new GraphIndex(this, HighwayType.Tertiary),
-				new GraphIndex(this, HighwayType.Residential) };
+		initIndices();
+	}
+
+	private void initIndices() {
+		Thread[] threads = new Thread[3];
+		indices = new GraphIndex[3];
+		threads[0] = new Thread() {
+			@Override
+			public void run() {
+				indices[0] = new GraphIndex(Graph.this, HighwayType.Primary);
+			}
+		};
+		threads[1] = new Thread() {
+			@Override
+			public void run() {
+				indices[1] = new GraphIndex(Graph.this, HighwayType.Tertiary);
+			}
+		};
+		threads[2] = new Thread() {
+			@Override
+			public void run() {
+				indices[2] = new GraphIndex(Graph.this, HighwayType.Residential);
+			}
+		};
+		for (Thread t : threads) {
+			t.start();
+		}
+		for (Thread t : threads) {
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

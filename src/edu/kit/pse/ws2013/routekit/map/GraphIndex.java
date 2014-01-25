@@ -126,6 +126,8 @@ public class GraphIndex {
 	 */
 	public GraphIndex(final Graph graph, final HighwayType maxType) {
 		this.graph = graph;
+		final int numberOfEdges = graph.getNumberOfEdges();
+		final int maxTypeInt = maxType.ordinal();
 		root = new Node(new AbstractSet<Integer>() {
 
 			@Override
@@ -137,10 +139,9 @@ public class GraphIndex {
 					private void nextValid() {
 						if (eaten) {
 							eaten = false;
-							while (++current < graph.getNumberOfEdges()) {
+							while (++current < numberOfEdges) {
 								EdgeProperties props = graph.getEdgeProperties(current);
-								if (props.getType().ordinal() <= maxType
-										.ordinal()) {
+								if (props.getType().ordinal() <= maxTypeInt) {
 									return;
 								}
 							}
@@ -150,7 +151,7 @@ public class GraphIndex {
 					@Override
 					public boolean hasNext() {
 						nextValid();
-						return current < graph.getNumberOfEdges();
+						return current < numberOfEdges;
 					}
 
 					@Override
@@ -170,7 +171,7 @@ public class GraphIndex {
 
 			@Override
 			public int size() {
-				return graph.getNumberOfEdges();
+				return numberOfEdges;
 			}
 		}, false, graph);
 	}
