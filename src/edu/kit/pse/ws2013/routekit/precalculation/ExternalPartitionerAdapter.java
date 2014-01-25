@@ -25,10 +25,14 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 
 		String[] cmd = { "gpmetis", fileName,
 				Integer.toString(numberOfPartitions) };
-		Runtime.getRuntime().exec(cmd);
+		try {
+			Runtime.getRuntime().exec(cmd).waitFor();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 		readPartitionFile(fileName + ".part."
-				+ String.valueOf(numberOfPartitions) + "parts");
+				+ String.valueOf(numberOfPartitions));
 	}
 
 	private void writeGraphFile(String fileName) throws IOException {
