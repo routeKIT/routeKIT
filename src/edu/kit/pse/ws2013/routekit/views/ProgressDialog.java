@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import edu.kit.pse.ws2013.routekit.models.ProgressListener;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
@@ -130,7 +131,13 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	public void finishRoot(String name) {
 		bar.setString(name);
 		setVisible(false);
-		dispose();
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				// must be called on the event thread
+				dispose();
+			}
+		});
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		super("routeKIT");
 		this.routeModel = routeModel;
 		routeModel.addRouteListener(this);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(1000, 700);
 
 		initMenu();

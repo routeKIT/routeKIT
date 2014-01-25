@@ -46,6 +46,12 @@ public class TileCache implements TileSource {
 	}
 
 	private class Worker extends Thread {
+
+		public Worker(String name) {
+			super(name);
+			setDaemon(true);
+		}
+
 		@Override
 		public void run() {
 			while (running) {
@@ -97,7 +103,7 @@ public class TileCache implements TileSource {
 		int workerCount = Runtime.getRuntime().availableProcessors();
 		workers = new Worker[workerCount];
 		for (int i = 0; i < workerCount; i++) {
-			workers[i] = new Worker();
+			workers[i] = new Worker("TileCache Worker " + i);
 			workers[i].start();
 		}
 		tile = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
