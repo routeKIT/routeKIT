@@ -43,8 +43,9 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		for (int i = 0; i < flagsArray.length; i++) {
 			flagsArray[i] = 0x0;
 		}
-		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(32);
-		for (int i = 0; i < partitions.size(); i++) {
+		final int nPartitions = 32;
+		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(nPartitions);
+		for (int i = 0; i < nPartitions; i++) {
 			partitions.add(new HashSet<Integer>());
 		}
 		for (int i = 0; i < graph.getNumberOfEdges(); i++) {
