@@ -112,6 +112,15 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		setContentPane(contentPane);
 		setVisible(true);
+		if (!ProfileMapManager.getInstance().getCurrentCombination()
+				.isCalculated()) {
+			mapView.setEnabled(false);
+			enableButtons(false);
+			textMessage("Für diese Kombination aus Karte und"
+					+ " Profil existiert keine Vorberechnung. Sie können "
+					+ "entweder jetzt eine Vorberechnung starten (Roter Knopf) "
+					+ "oder ein anderes Profil bzw. eine andere Karte auswählen.");
+		}
 	}
 
 	private void enableButtons(boolean value) {
@@ -318,10 +327,6 @@ public class MainView extends JFrame implements RouteModelListener {
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
 		mapView = new MapView(MainController.getInstance().getTileSource(), rm);
-		if (!ProfileMapManager.getInstance().getCurrentCombination()
-				.isCalculated()) {
-			mapView.setEnabled(false);
-		}
 		right.add(mapView, BorderLayout.CENTER);
 		return right;
 	}
