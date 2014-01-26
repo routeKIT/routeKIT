@@ -155,6 +155,7 @@ public class ProfileMapManager {
 		}
 		// 1. save the precalculation
 		try {
+			combinations.add(precalculation);
 			precalculation.save(new File(new File(root, precalculation
 					.getStreetMap().getName()), precalculation.getProfile()
 					.getName()));
@@ -167,10 +168,14 @@ public class ProfileMapManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// 3. notify listeners if that was the current combination
+		// 3. special case if that was the current combination
 		if (precalculation.getProfile().equals(current.getProfile())
 				&& precalculation.getStreetMap().equals(current.getStreetMap())) {
+			// 3.1 remove the old one from combinations
+			combinations.remove(current);
+			// 3.2 update current
 			current = precalculation;
+			// 3.3 notify listeners
 			for (CurrentCombinationListener listener : listeners) {
 				listener.currentCombinationChanged(precalculation);
 			}
