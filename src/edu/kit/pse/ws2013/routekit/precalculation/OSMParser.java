@@ -133,42 +133,49 @@ public class OSMParser {
 				graphEdges[edgeCount] = edge.getTargetNode();
 				edgeProps[edgeCount] = edge.getWay().getEdgeProperties();
 				edgeCount++;
-				countTurns(node, edge);
-			}
-		}
-	}
-
-	private void countTurns(int node, MapEdge edge) {
-		numberOfTurns += edges.get(edge.getTargetNode()).size();
-		for (MapEdge nextEdge : edges.get(edge.getTargetNode())) {
-			if (nextEdge.getTargetNode() == node) {
-				// the way back is not a valid turn
-				numberOfTurns--;
 			}
 		}
 	}
 
 	private void buildEdgeBasedGraph() {
 		ebgEdges = new int[numberOfEdges];
-		ebgTurns = new int[numberOfTurns];
-		turnTypes = new TurnType[numberOfTurns];
+		List<Integer> turns = new ArrayList<>(2 * numberOfEdges);
+		List<TurnType> types = new ArrayList<>(2 * numberOfEdges);
 
 		int edgeCount = 0;
-		int turnCount = 0;
 		for (int node = 0; node < edges.size(); node++) {
 			for (MapEdge fromEdge : edges.get(node)) {
-				ebgEdges[edgeCount] = turnCount;
+				ebgEdges[edgeCount] = numberOfTurns;
+				TurnRestriction restr = findTurnRestriction(fromEdge);
 				for (MapEdge toEdge : edges.get(fromEdge.getTargetNode())) {
-					if (toEdge.getTargetNode() != node) {
-						ebgTurns[turnCount] = toEdge.getId();
-						turnTypes[turnCount] = determineTurnType(node,
-								fromEdge, toEdge);
-						turnCount++;
+					if (toEdge.getTargetNode() != node
+							&& (restr == null || restr.allowsTo(toEdge))) {
+						turns.add(toEdge.getId());
+						types.add(determineTurnType(node, fromEdge, toEdge));
+						numberOfTurns++;
 					}
 				}
 				edgeCount++;
 			}
 		}
+
+		turnTypes = types.toArray(new TurnType[0]);
+		ebgTurns = new int[numberOfTurns];
+		for (int i = 0; i < ebgTurns.length; i++) {
+			ebgTurns[i] = turns.get(i);
+		}
+	}
+
+	private TurnRestriction findTurnRestriction(MapEdge fromEdge) {
+		int turnNode = fromEdge.getTargetNode();
+		if (turnRestrictions.containsKey(turnNode)) {
+			for (TurnRestriction r : turnRestrictions.get(turnNode)) {
+				if (r.getFrom() == fromEdge.getWay().getId()) {
+					return r;
+				}
+			}
+		}
+		return null;
 	}
 
 	private TurnType determineTurnType(int startNode, MapEdge fromEdge,

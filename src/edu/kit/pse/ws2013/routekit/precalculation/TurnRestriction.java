@@ -61,4 +61,17 @@ public class TurnRestriction {
 	public boolean isOnlyAllowedTurn() {
 		return onlyAllowedTurn;
 	}
+
+	/**
+	 * Determines whether this restriction allows turning into the given edge.
+	 * 
+	 * @param to
+	 *            the edge
+	 * @return {@code true} if turning into {@code edge} is allowed, otherwise
+	 *         {@code false}
+	 */
+	public boolean allowsTo(MapEdge to) {
+		return (onlyAllowedTurn && this.to == to)
+				|| (!onlyAllowedTurn && this.to != to);
+	}
 }

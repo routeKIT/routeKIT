@@ -479,6 +479,19 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           \attr{Id}{Edge}{Der interne Bezeichner der Kante.}
         }
         {\none}
+        
+  \class{TurnRestriction}{~}
+        {
+          \attr{from}{int}{Die OSM-Way-ID des Wegs, von dem die Abbiegebeschränkung definiert ist.}
+          \attr{to}{MapEdge}{Die Kante, auf die die Abbiegebeschränkung definiert ist.}
+        }
+        {
+          \method{allowsTo}[boolean]
+                 {
+                   \param{to}{MapEdge}{Die Kante, auf die abgebogen werden soll.}
+                 }
+                 {Gibt an, ob diese Abbiegebeschränkung das Abbiegen auf die angegebene Kante erlaubt oder nicht.}
+        }
 }
 
 \package{RouteCalculator}{}
