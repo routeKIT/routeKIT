@@ -161,9 +161,8 @@ public class ProfileManagerController {
 						manager.saveProfile(changed);
 						reporter.popTask();
 					} catch (IOException e) {
-						// TODO throw to the view instead, which could then show
-						// an infobox
-						e.printStackTrace();
+						MainController.getInstance().view.textMessage(e
+								.getMessage());
 					}
 				}
 				reporter.popTask();

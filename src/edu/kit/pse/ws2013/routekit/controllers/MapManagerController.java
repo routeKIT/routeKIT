@@ -189,8 +189,8 @@ public class MapManagerController {
 							importedMap = importer.importMap(map.getOsmFile(),
 									map.getName(), reporter);
 						} catch (IOException | SAXException e) {
-							// TODO View should display this error
-							e.printStackTrace();
+							MainController.getInstance().view.textMessage(e
+									.getMessage());
 							continue;
 						}
 						try (CloseableTask task3 = reporter
@@ -198,8 +198,8 @@ public class MapManagerController {
 										+ importedMap.getName() + "'")) {
 							mapManager.saveMap(importedMap);
 						} catch (IOException e) {
-							// TODO View should display this error
-							e.printStackTrace();
+							MainController.getInstance().view.textMessage(e
+									.getMessage());
 							continue;
 						}
 					}

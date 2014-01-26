@@ -109,6 +109,10 @@ public class ProfileMapManager {
 							&& current.getValue().equals(profileName)) {
 						// the current combination may not have been
 						// precalculated
+						if (map == null) {
+							// skip
+							continue;
+						}
 						combination = new ProfileMapCombination(map, profile);
 						this.current = combination;
 						continue;
@@ -123,7 +127,7 @@ public class ProfileMapManager {
 				}
 			}
 		}
-		if (current == null) {
+		if (current == null || this.current == null) {
 			// choose any precalculation
 			if (!this.combinations.isEmpty()) {
 				this.current = this.combinations.iterator().next();
