@@ -55,7 +55,7 @@
   \subsection{Paket #1}\label{\@packagelabel{#1}}
   #2
   \begin{description}
-    #3%
+   #3%
   \end{description}
 }
 % Argumente:
@@ -456,6 +456,194 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Änderungen am Entwurf}
 Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
+
+\package{Controllers}{
+  Es wurden drei neue Klassen eingeführt: \reftype{ProfileManager}, \reftype{MapManager} und \reftype{ProfileMapManager}, die jeweils alle dem Programm bekannten \glspl{profil}, \glspl{karte} und \glspl{vorberechnung} halten und sie speichern und laden.
+}
+{
+  \class{ProfileManager}
+        {
+          Der \code{ProfileManager} verwaltet alle \glspl{profil}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{profil}.
+        }
+        {\none}
+        {
+          \method{init}
+                 {
+                   \param{rootDirectory}{File}{siehe \refparam{ProfileMapManager}{init}{rootDirectory}.}
+                 }
+                 {
+                   (statisch) Initialisiert den \code{ProfileManager}, indem alle in \refparam{ProfileManager}{init}{rootDirectory} liegenden \code{.profile}-Dateien \refmethod{Profile}{load}[geladen] werden.
+                   Darf nur einmal aufgerufen werden.
+                 }
+          \method{getInstance}
+                 {\none}
+                 {
+                   (statisch) Gibt die \code{ProfileManager}-Instanz zurück.
+                   \refmethod{ProfileManager}{init} muss zuvor aufgerufen worden sein.
+
+                   Für die Diskussion des \gls{einzelstueck}-Entwurfsmusters siehe \refmethod{ProfileMapManager}{init}.
+                 }
+          \method{getProfiles}[Set<Profile>]
+                 {\none}
+                 {
+                   Gibt alle dem \code{ProfileManager} bekannten \glspl{profil} zurück.
+                 }
+          \method{saveProfile}
+                 {
+                   \param{profile}{Profile}{Das Profil, das gespeichert werden soll.}
+                 }
+                 {
+                   Speichert \refparam{ProfileManager}{saveProfile}{profile} in der internen Liste an Profilen (siehe \refmethod{ProfileManager}{getProfiles}) und auf der Festplatte.
+                   Alle bereits vorhandenen \glspl{vorberechnung} für ein Profil mit dem gleichen Namen werden gelöscht.
+                 }
+          \method{deleteProfile}
+                 {
+                   \param{profile}{Profile}{Das Profil, das gelöscht werden soll.}
+                 }
+                 {
+                   Entfernt \refparam{ProfileManager}{deleteProfile}{profile} aus der internen Liste an Profilen (siehe \refmethod{ProfileManager}{getProfiles}) und löscht das Profil sowie alle seine Vorberechnungen von der Festplatte.
+                 }
+        }
+  \class{MapManager}
+        {
+          Der \code{MapManager} verwaltet alle \glspl{karte}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{karte}.
+        }
+        {\none}
+        {
+          \method{init}
+                 {
+                   \param{rootDirectory}{File}{siehe \refparam{ProfileMapManager}{init}{rootDirectory}}
+                 }
+                 {
+                   (statisch) Initialisiert den \code{MapManager}, indem alle in \refparam{MapManager}{init}{rootDirectory} liegenden Ordner \refmethod{StreetMap}{load}[geladen] werden.
+                   Darf nur einmal aufgerufen werden.
+                 }
+          \method{getInstance}
+                 {\none}
+                 {
+                   (statisch) Gibt die \code{MapManager}-Instanz zurück.
+                   \refmethod{ProfileManager}{init} muss zuvor aufgerufen worden sein.
+                   
+                   Für die Diskussion des \gls{einzelstueck}-Entwurfsmusters siehe \refmethod{ProfileMapManager}{init}.
+                 }
+          \method{getMaps}[Set<StreetMap>]
+                 {\none}
+                 {
+                   Gibt alle dem \code{MapManager} bekannten \glspl{karte} zurück.
+                 }
+          \method{saveMap}
+                 {
+                   \param{map}{StreetMap}{Die Karte, die gespeichert werden soll.}
+                 }
+                 {
+                   Speichert \refparam{MapManager}{saveMap}{map} in der internen Liste an Karten (siehe \refmethod{MapManager}{getMaps}) und auf der Festplatte.
+                   Alle bereits vorhandenen \glspl{vorberechnung} für eine Karte mit dem gleichen Namen werden gelöscht.
+                 }
+          \method{deleteMap}
+                 {
+                   \param{map}{StreetMap}{Die Karte, die gelöscht werden soll.}
+                 }
+                 {
+                   Entfernt \refparam{MapManager}{deleteMap}{map} aus der internen Liste an Karten (siehe \refmethod{MapManager}{getMaps}) und löscht die Karte sowie alle ihre Vorberechnungen von der Festplatte.
+                 }
+        }
+  \class{ProfileMapManager}
+        {
+          Der \code{ProfileMapManager} verwaltet alle \glspl{vorberechnung}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{vorberechnung}.
+          Außerdem kennt er die aktuell ausgewählte \reftype{ProfileMapCombination} (die nicht zwangsläufig vorberechnet ist).
+        }
+        {\none}
+        {
+          \method{init}[ProfileMapCombination]
+                 {
+                   \param{rootDirectory}{File}{Das Verzeichnis, in dem die Daten dieser \routeKIT-Installation liegen.}
+                 }
+                 {
+                   (statisch) Initialisiert den \code{ProfileMapManager}, indem der \reftype{ProfileManager} und der \reftype{MapManager} initialisiert werden und eine Index-Datei (\code{routeKIT.idx}) gelesen wird, die alle Vorberechnungen auflistet und die aktuelle \reftype{ProfileMapCombination} angibt.
+                   
+                   Der Rückgabewert ist die aktuelle \reftype{ProfileMapCombination}.
+                 }
+          \method{getInstance}
+                 {\none}
+                 {
+                   (statisch) Gibt die \code{ProfileMapManager}-Instanz zurück.
+                   \refmethod{ProfileMapManager}{init} muss zuvor aufgerufen worden sein.
+                   
+                   
+                   Es handelt sich hierbei um eine Variante des \gls{einzelstueck}-Entwurfsmusters:
+                   \refmethod{ProfileMapManager}{init} wird normalerweise durch \refmethod{ProfileMapManager}{getInstance} implizit durchgeführt, wenn noch keine Instanz vorhanden ist.
+                   Hier wurden die beiden Methoden getrennt, da es sich bei \refmethod{ProfileMapManager}{init} um eine verhältnismäßig teure Operation handelt (beinhaltet Festplattenaktivität), die nicht beliebig beim ersten Aufruf von \refmethod{ProfileMapManager}{getInstance} stattfinden sollte, sondern nur an einer bestimmten Stelle während des Programmstarts.
+                 }
+          \method{getPrecalculations}[Set<ProfileMapCombination>]
+                 {\none}
+                 {
+                   Gibt alle dem \code{ProfileMapManager} bekannten \glspl{vorberechnung} zurück.
+                 }
+          \method{getCurrentCombination}[ProfileMapCombination]
+                 {\none}
+                 {
+                   Gibt die aktuell ausgewählte \reftype{ProfileMapCombination} zurück.
+                   Diese muss nicht unbedingt ein Element aus \refmethod{ProfileMapManager}{getPrecalculations} sein, da sie möglicherweise nicht vorberechnet ist.
+                 }
+          \method{addCurrentCombinationListener}
+                 {
+                   \param{listener}{CurrentCombinationListener}{Der Listener, der benachrichtigt werden soll.}
+                 }
+                 {
+                   Registriert einen \reftype{CurrentCombinationListener}, der bei Änderungen der aktuellen \reftype{ProfileMapCombination} benachrichtigt werden soll.
+                 }
+          \method{selectProfileAndMap}[ProfileMapCombination]
+                 {
+                   \param{profile}{Profile}{Das aktuelle \gls{profil}.}
+                   \param{map}{StreetMap}{Die aktuelle \gls{karte}.}
+                 }
+                 {
+                   Wählt das angegebene Profil und die angegebene Karte aus.
+                   Existiert eine \gls{vorberechnung} für dieses Profil und diese Karte, so wird sie verwendet, ansonsten wird eine neue \reftype{ProfileMapCombination} erstellt.
+                   
+                   Gibt die ausgewählte \reftype{ProfileMapCombination} zurück.
+                 }
+          \method{getPrecalculation}[ProfileMapCombination]
+                 {
+                   \param{profile}{Profile}{Das aktuelle \gls{profil}.}
+                   \param{map}{StreetMap}{Die aktuelle \gls{karte}.}
+                 }
+                 {
+                   Sucht nach einer Vorberechnung für dieses Profil und diese Karte und gibt sie zurück, ansonsten wird \code{null} zurückgegeben.
+                 }
+          \method{setCurrentCombination}
+                 {
+                   \param{combination}{ProfileMapCombination}{Die ausgewählte \reftype{ProfileMapCombination}.}
+                 }
+                 {
+                   Setzt die angegebene \reftype{ProfileMapCombination} als aktuelle Kombination.
+                   Ist sie vorberechnet, so wird sie gespeichert und eine neue Index-Datei wird geschrieben.
+                   Außerdem werden registrierte \reftype{CurrentCombinationListener} benachrichtigt.
+                 }
+          \method{savePrecalculation}
+                 {
+                   \param{precalculation}{ProfileMapCombination}{Die \reftype{ProfileMapCombination}, die gespeichert werden soll.}
+                 }
+                 {
+                   Speichert die angegebene Vorberechnung in der internen Liste und auf der Festplatte.
+                   Dies ist nur zulässig, wenn es sich dabei überhaupt um eine Vorberechnung handelt (und nicht etwa um eine \reftype{ProfileMapCombination} ohne Vorberechnung).
+                   Schreibt eine neue Index-Datei.
+                 }
+          \method{deletePrecalculation}
+                 {
+                   \param{precalculation}{ProfileMapCombination}{Die \reftype{ProfileMapCombination}, die gelöscht werden soll.}
+                   \param{deleteFromDisk}{boolean}{\emph{optional}: Wenn \code{false}, wird die \gls{vorberechnung} nicht von der Festplatte gelöscht.}
+                 }
+                 {
+                   Löscht die angegeben Vorberechnung aus der internen Liste und, falls nicht anders angegeben, von der Festplatte.
+                   Dies ist nur zulässig, wenn es sich dabei überhaupt um eine Vorberechnung handelt (und nicht etwa um eine \reftype{ProfileMapCombination} ohne Vorberechnung).
+                   Schreibt eine neue Index-Datei.
+                   
+                   Die zweite Variante ist nur dann sinnvoll, wenn alle \glspl{vorberechnung} einer \gls{karte} zusammen mit der Karte gelöscht werden sollen;
+                   da sie in Unterordnern der Karte gespeichert sind, würden sie durch das Löschen des Karten-Ordners ohnehin gelöscht.
+                 }
+        }
+}
 
 \package{Precalculation}{}
 {
