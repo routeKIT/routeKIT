@@ -329,11 +329,14 @@ public class ProfileMapManager {
 			throw new IllegalArgumentException("Unknown precalculation!");
 		}
 		combinations.remove(precalculation);
-		try {
-			FileUtil.rmRf(new File(new File(root, precalculation.getStreetMap()
-					.getName()), precalculation.getProfile().getName()));
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if (deleteFromDisk) {
+			try {
+				FileUtil.rmRf(new File(new File(root, precalculation
+						.getStreetMap().getName()), precalculation.getProfile()
+						.getName()));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		try {
 			rewriteIndex();
