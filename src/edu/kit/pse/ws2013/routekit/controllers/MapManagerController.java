@@ -199,6 +199,7 @@ public class MapManagerController {
 				 * Maps FutureMaps to actual imported StreetMaps.
 				 */
 				Map<StreetMap, StreetMap> importedMaps = new HashMap<>();
+				Set<StreetMap> failedMaps = new HashSet<>();
 				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
 					try (CloseableTask task = reporter
 							.openTask("Importiere und speichere Karte '"
@@ -213,6 +214,7 @@ public class MapManagerController {
 						} catch (IOException | SAXException e) {
 							MainController.getInstance().view.textMessage(e
 									.getMessage());
+							failedMaps.add(map);
 							continue;
 						}
 						try (CloseableTask task3 = reporter
@@ -222,6 +224,7 @@ public class MapManagerController {
 						} catch (IOException e) {
 							MainController.getInstance().view.textMessage(e
 									.getMessage());
+							failedMaps.add(map);
 							continue;
 						}
 						importedMaps.put(map, importedMap);
@@ -236,6 +239,9 @@ public class MapManagerController {
 				reporter.setSubTasks(diff.getNewPrecalculations().size());
 				for (ProfileMapCombination combination : diff
 						.getNewPrecalculations()) {
+					if (failedMaps.contains(combination.getStreetMap())) {
+						continue;
+					}
 					reporter.pushTask("Führe Vorberechnung durch und speichere '"
 							+ combination.toString() + "'");
 					reporter.setSubTasks(new float[] { .95f, .05f });
