@@ -57,7 +57,7 @@ public class ProfileManager {
 	private void deletePrecalculations(Profile profile) {
 		final String name = profile.getName();
 		for (ProfileMapCombination precalculation : new HashSet<>(
-				ProfileMapManager.getInstance().getCombinations())) {
+				ProfileMapManager.getInstance().getPrecalculations())) {
 			if (name.equals(precalculation.getProfile().getName())) {
 				ProfileMapManager.getInstance().deletePrecalculation(
 						precalculation);

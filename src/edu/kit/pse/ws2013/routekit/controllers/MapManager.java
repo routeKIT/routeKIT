@@ -55,7 +55,7 @@ public class MapManager {
 	 */
 	private void deletePrecalculations(StreetMap map) {
 		for (ProfileMapCombination precalculation : new HashSet<>(
-				ProfileMapManager.getInstance().getCombinations())) {
+				ProfileMapManager.getInstance().getPrecalculations())) {
 			if (map.equals(precalculation.getStreetMap())) {
 				ProfileMapManager.getInstance().deletePrecalculation(
 						precalculation, false);

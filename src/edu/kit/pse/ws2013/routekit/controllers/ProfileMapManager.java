@@ -33,7 +33,7 @@ public class ProfileMapManager {
 
 	private final File root;
 	private ProfileMapCombination current;
-	private final Set<ProfileMapCombination> combinations;
+	private final Set<ProfileMapCombination> precalculations;
 	private final Set<CurrentCombinationListener> listeners = new HashSet<>();
 
 	private ProfileMapManager(File root) throws IOException {
@@ -94,7 +94,7 @@ public class ProfileMapManager {
 		for (StreetMap m : MapManager.getInstance().getMaps()) {
 			mapsByName.put(m.getName(), m);
 		}
-		this.combinations = new HashSet<>();
+		this.precalculations = new HashSet<>();
 		for (Entry<String, Set<String>> entry : combinations.entrySet()) {
 			String mapName = entry.getKey();
 			StreetMap map = mapsByName.get(mapName);
@@ -120,7 +120,7 @@ public class ProfileMapManager {
 						throw e;
 					}
 				}
-				this.combinations.add(combination);
+				this.precalculations.add(combination);
 				if (current != null && mapName.equals(current.getKey())
 						&& profileName.equals(current.getValue())) {
 					this.current = combination;
@@ -129,8 +129,8 @@ public class ProfileMapManager {
 		}
 		if (current == null || this.current == null) {
 			// choose any precalculation
-			if (!this.combinations.isEmpty()) {
-				this.current = this.combinations.iterator().next();
+			if (!this.precalculations.isEmpty()) {
+				this.current = this.precalculations.iterator().next();
 			} else {
 				// there are no precalculations
 				if (!mapsByName.isEmpty()) {
@@ -153,13 +153,13 @@ public class ProfileMapManager {
 		listeners.add(listener);
 	}
 
-	public void save(ProfileMapCombination precalculation) {
+	public void savePrecalculation(ProfileMapCombination precalculation) {
 		if (!precalculation.isCalculated()) {
 			throw new IllegalArgumentException("Not a precalculation!");
 		}
 		// 1. save the precalculation
 		try {
-			combinations.add(precalculation);
+			precalculations.add(precalculation);
 			precalculation.save(new File(new File(root, precalculation
 					.getStreetMap().getName()), precalculation.getProfile()
 					.getName()));
@@ -177,7 +177,7 @@ public class ProfileMapManager {
 				&& precalculation.getStreetMap().equals(current.getStreetMap())) {
 			// 3.1 remove the old one from combinations
 			if (current != precalculation) {
-				combinations.remove(current);
+				precalculations.remove(current);
 			}
 			// 3.2 update current
 			current = precalculation;
@@ -196,7 +196,7 @@ public class ProfileMapManager {
 	 * only remembered as the "current" one, and forgotten as soon as this
 	 * method is called with another combination; if it is precalculated, it’s
 	 * stored in the internal list of {@link ProfileMapCombination
-	 * ProfileMapCombinations} and {@link #save(ProfileMapCombination) saved} to
+	 * ProfileMapCombinations} and {@link #savePrecalculation(ProfileMapCombination) saved} to
 	 * disk (it’s assumed that the profile and the map are already saved).
 	 * <p>
 	 * Note that you’d usually want to use
@@ -215,8 +215,8 @@ public class ProfileMapManager {
 		}
 		current = combination;
 		if (current.isCalculated()) {
-			combinations.add(combination);
-			save(combination);
+			precalculations.add(combination);
+			savePrecalculation(combination);
 		} else {
 			try {
 				rewriteIndex();
@@ -231,7 +231,7 @@ public class ProfileMapManager {
 
 	private void rewriteIndex() throws IOException {
 		Map<StreetMap, Set<ProfileMapCombination>> combinationsByMap = new HashMap<>();
-		for (ProfileMapCombination combo : combinations) {
+		for (ProfileMapCombination combo : precalculations) {
 			Set<ProfileMapCombination> combos = combinationsByMap.get(combo
 					.getStreetMap());
 			if (combos == null) {
@@ -280,7 +280,7 @@ public class ProfileMapManager {
 	 */
 	public ProfileMapCombination getPrecalculation(Profile profile,
 			StreetMap map) {
-		for (ProfileMapCombination combination : combinations) {
+		for (ProfileMapCombination combination : precalculations) {
 			if (combination.getProfile().equals(profile)
 					&& combination.getStreetMap().equals(map)) {
 				return combination;
@@ -321,7 +321,7 @@ public class ProfileMapManager {
 	 * 
 	 * @param precalculation
 	 *            The precalculation. (This must be an actual precalculation –
-	 *            i.&nbsp;e. an element of {@link #getCombinations()} – and not
+	 *            i.&nbsp;e. an element of {@link #getPrecalculations()} – and not
 	 *            just any {@link ProfileMapCombination}.)
 	 * @param deleteFromDisk
 	 *            If {@code true}, delete from disk as well. You usually want to
@@ -336,10 +336,10 @@ public class ProfileMapManager {
 			throw new IllegalArgumentException(
 					"Can’t delete a not precalculated ProfileMapCombination!");
 		}
-		if (!combinations.contains(precalculation)) {
+		if (!precalculations.contains(precalculation)) {
 			throw new IllegalArgumentException("Unknown precalculation!");
 		}
-		combinations.remove(precalculation);
+		precalculations.remove(precalculation);
 		if (deleteFromDisk) {
 			try {
 				FileUtil.rmRf(new File(new File(root, precalculation
@@ -367,8 +367,8 @@ public class ProfileMapManager {
 		deletePrecalculation(precalculation, true);
 	}
 
-	public Set<ProfileMapCombination> getCombinations() {
-		return Collections.unmodifiableSet(combinations);
+	public Set<ProfileMapCombination> getPrecalculations() {
+		return Collections.unmodifiableSet(precalculations);
 	}
 
 	public static ProfileMapCombination init(File rootDirectory)

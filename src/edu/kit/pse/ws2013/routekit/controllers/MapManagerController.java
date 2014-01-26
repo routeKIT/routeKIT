@@ -53,7 +53,7 @@ public class MapManagerController {
 			precalculations.put(map, new HashSet<Profile>());
 		}
 		for (ProfileMapCombination combination : ProfileMapManager
-				.getInstance().getCombinations()) {
+				.getInstance().getPrecalculations()) {
 			StreetMap map = combination.getStreetMap();
 			Set<Profile> profiles = precalculations.get(map);
 			profiles.add(combination.getProfile());
@@ -227,7 +227,7 @@ public class MapManagerController {
 						}
 						reporter.pushTask("Speichere '" + combination + "'");
 						try {
-							profileMapManager.save(combination);
+							profileMapManager.savePrecalculation(combination);
 						} catch (Exception e) {
 							e.printStackTrace();
 							continue;
@@ -346,7 +346,7 @@ public class MapManagerController {
 		MapManager mapManager = MapManager.getInstance();
 		ProfileMapManager profileMapManager = ProfileMapManager.getInstance();
 		return MapManagementDiff.diff(mapManager.getMaps(),
-				profileMapManager.getCombinations(), precalculations);
+				profileMapManager.getPrecalculations(), precalculations);
 	}
 
 	public static class MapManagementDiff {

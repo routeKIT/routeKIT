@@ -197,7 +197,7 @@ public class MainController {
 							+ combination + "'");
 					new PreCalculator().doPrecalculation(combination, reporter);
 					reporter.nextTask("Speichere '" + combination + "'");
-					ProfileMapManager.getInstance().save(combination);
+					ProfileMapManager.getInstance().savePrecalculation(combination);
 					reporter.popTask();
 				}
 				reporter.popTask();

@@ -25,7 +25,7 @@ public class ProfileManagerController {
 
 	public ProfileManagerController(final Window parent) {
 		combinationsAtStartup = new HashSet<>(ProfileMapManager.getInstance()
-				.getCombinations());
+				.getPrecalculations());
 		profiles = new HashMap<>();
 		for (final Profile p : ProfileManager.getInstance().getProfiles()) {
 			profiles.put(p.getName(), p);
@@ -183,7 +183,7 @@ public class ProfileManagerController {
 		final Set<Profile> deletedProfiles = diff.getDeletedProfiles();
 		int time = 0;
 		for (final ProfileMapCombination pmc : ProfileMapManager.getInstance()
-				.getCombinations()) {
+				.getPrecalculations()) {
 			final Profile p = pmc.getProfile();
 			if (changedProfiles.contains(p) || deletedProfiles.contains(p)) {
 				time += pmc.getCalculationTime();
