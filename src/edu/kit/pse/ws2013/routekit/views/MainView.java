@@ -13,6 +13,7 @@ import java.awt.event.FocusEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -35,6 +36,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -50,6 +52,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	JFileChooser fileChooser = new JFileChooser();
 	private RouteModel routeModel;
 	private MapView mapView;
+	private JList<String> routeDescription;
 
 	/**
 	 * A constructor that creates a new MainView.
@@ -82,6 +85,21 @@ public class MainView extends JFrame implements RouteModelListener {
 						mapView.setEnabled(newCombination.isCalculated());
 						mapView.setTileSource(MainController.getInstance()
 								.getTileSource());
+						if (!newCombination.isCalculated()) {
+							textMessage("Für diese Kombination aus Karte und"
+									+ " Profil existiert keine Vorberechnung. Sie können "
+									+ "entweder jetzt eine Vorberechnung starten (Roter Knopf) "
+									+ "oder ein anderes Profil bzw. eine andere Karte auswählen.");
+						} else {
+							if (targetField.getBackground() == Color.RED
+									|| startField.getBackground() == Color.RED) {
+								textMessage("Falsche Koordinaten wurden eingegeben."
+										+ " Bitte halten Sie sich an das Format: \"Breitengrad Längengrad\","
+										+ " die jeweils der Form [+-]?[0-9]+.[0-9]* sein sollen.");
+							} else {
+								textMessage("");
+							}
+						}
 					}
 				});
 
@@ -124,6 +142,7 @@ public class MainView extends JFrame implements RouteModelListener {
 						&& targetField.getText().equals("")) {
 					startField.setBackground(Color.WHITE);
 					targetField.setBackground(Color.WHITE);
+					textMessage("");
 				}
 				if (!startField.getBackground().equals(
 						targetField.getBackground())) {
@@ -143,8 +162,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		});
 
 		left.add(controls, BorderLayout.NORTH);
-		final JList<String> routeDescription = new JList<String>(new String[] {
-				"sdfsdfsd", "dsdfsd", "sdf" });
+		routeDescription = new JList<String>(new DefaultListModel<String>());
 		left.add(routeDescription, BorderLayout.CENTER);
 		routeDescription.setCellRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
@@ -194,6 +212,9 @@ public class MainView extends JFrame implements RouteModelListener {
 			@Override
 			public void focusGained(FocusEvent e) {
 				startField.setBackground(Color.WHITE);
+				if (targetField.getBackground() == Color.WHITE) {
+					textMessage("");
+				}
 			}
 		});
 
@@ -218,6 +239,9 @@ public class MainView extends JFrame implements RouteModelListener {
 			@Override
 			public void focusGained(FocusEvent e) {
 				targetField.setBackground(Color.WHITE);
+				if (startField.getBackground() == Color.WHITE) {
+					textMessage("");
+				}
 			}
 		});
 
@@ -238,7 +262,9 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		} catch (IllegalArgumentException e) {
 			textfield.setBackground(Color.RED);
-			// TODO show e.getMessage() in "route instructions" area
+			textMessage("Falsche Koordinaten wurden eingegeben."
+					+ " Bitte halten Sie sich an das Format: \"Breitengrad Längengrad\","
+					+ " die jeweils der Form [+-]?[0-9]+.[0-9]* sein sollen.");
 			return;
 		}
 	}
@@ -404,15 +430,38 @@ public class MainView extends JFrame implements RouteModelListener {
 	public void routeModelChanged() {
 		Coordinates start = routeModel.getStart();
 		Coordinates destination = routeModel.getDestination();
+		RouteDescription description = routeModel.getCurrentDescription();
 		if (start != null) {
+			startField.setBackground(Color.WHITE);
 			startField
 					.setText(start.getLatitude() + " " + start.getLongitude());
 		}
 		if (destination != null) {
+			targetField.setBackground(Color.WHITE);
 			targetField.setText(destination.getLatitude() + " "
 					+ destination.getLongitude());
 		}
-		;
+		if (start != null && destination != null) {
+			textMessage("");
+		}
+		if (description != null) {
+			textMessage(description.toString());
+		}
 
+	}
+
+	public void textMessage(String str) {
+		int i = 0;
+		int iPrev = 0;
+		int width = routeDescription.getWidth() / 7;
+		DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
+				.getModel();
+		listModel.clear();
+		while (i + width < str.length()
+				&& (i = str.lastIndexOf(" ", i + width)) != -1) {
+			listModel.addElement(str.substring(iPrev, i));
+			iPrev = i + 1; // + 1 for skipping the space
+		}
+		listModel.addElement(str.substring(iPrev));
 	}
 }
