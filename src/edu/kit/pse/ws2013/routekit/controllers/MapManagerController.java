@@ -195,6 +195,10 @@ public class MapManagerController {
 				MapImporter importer = new OSMMapImporter();
 				reporter.pushTask("Importiere und speichere Karten");
 				reporter.setSubTasks(diff.getNewOrUpdatedMaps().size());
+				/**
+				 * Maps FutureMaps to actual imported StreetMaps.
+				 */
+				Map<StreetMap, StreetMap> importedMaps = new HashMap<>();
 				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
 					try (CloseableTask task = reporter
 							.openTask("Importiere und speichere Karte '"
@@ -220,6 +224,10 @@ public class MapManagerController {
 									.getMessage());
 							continue;
 						}
+						importedMaps.put(map, importedMap);
+						if (selectedMap.getName().equals(map.getName())) {
+							selectedMap = importedMap;
+						}
 					}
 				}
 				reporter.popTask();
@@ -231,6 +239,11 @@ public class MapManagerController {
 					reporter.pushTask("Führe Vorberechnung durch und speichere '"
 							+ combination.toString() + "'");
 					reporter.setSubTasks(new float[] { .95f, .05f });
+					if (importedMaps.containsKey(combination.getStreetMap())) {
+						combination = new ProfileMapCombination(
+								importedMaps.get(combination.getStreetMap()),
+								combination.getProfile());
+					}
 					try {
 						reporter.pushTask("Führe Vorberechnung durch für '"
 								+ combination + "'");
