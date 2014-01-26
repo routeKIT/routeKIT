@@ -464,7 +464,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
           \method{parseOSM}
                  {\none}
-                 {Geändert: Der Parameter \code{name} wurde entfernt. Der Name der Karte wird erst später vom \refclass{MapImporter} gesetzt.}
+                 {Geändert: Der Parameter \code{name} wurde entfernt. Der Name der Karte wird erst später vom \reftype{MapImporter} gesetzt.}
         }
   \class{OSMWay}{~}
         {\none}
@@ -475,7 +475,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{MapEdge}{~}
         {
-          \attr{targetNode}{Node}{Geändert: Speichert nun direkt den Zielknoten und nicht mehr dessen ID in der OSM-Datei. Dadurch werden unnötige Hashtabellenabfragen in \refclass{OSMParser} vermieden.}
+          \attr{targetNode}{Node}{Geändert: Speichert nun direkt den Zielknoten und nicht mehr dessen ID in der OSM-Datei. Dadurch werden unnötige Hashtabellenabfragen in \reftype{OSMParser} vermieden.}
           \attr{Id}{Edge}{Der interne Bezeichner der Kante.}
         }
         {\none}
@@ -492,8 +492,54 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
 }
 
+\package{Models}{}
+{
+  \class{Weights}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert die \reftype{Weights} in die angegebene Datei.}
+          \method{load}[Weights]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt \reftype{Weights} aus der angegebenen Datei.}
+        }
+  \class{ArcFlags}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert die \reftype{ArcFlags} in die angegebene Datei.}
+          \method{load}[ArcFlags]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt \reftype{ArcFlags} aus der angegebenen Datei.}
+        }
+}
+
 \package{Map}{}
 {
+  \class{StreetMap}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert die Karte in den angegebenen Ordner.}
+          \method{load}[StreetMap]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt eine Karte aus dem angegebenen Ordner.}
+        }
   \class{Graph}{~}
         {\none}
         {
@@ -527,6 +573,56 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    \param{file}{File}{Die Datei, aus der gelesen werden soll.}
                  }
                  {(statisch) Lädt einen kantenbasierten Graphen aus der angegebenen Datei.}
+        }
+  \class{NodeProperties}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert die \reftype{NodeProperties} in die angegebene Datei.}
+          \method{load}[NodeProperties]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt \reftype{NodeProperties} aus der angegebenen Datei.}
+        }
+  \class{EdgeProperties}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {Speichert die \reftype{EdgeProperties} in die angegebene Datei.}
+          \method{load}[EdgeProperties]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {(statisch) Lädt \reftype{EdgeProperties} aus der angegebenen Datei.}
+        }
+  \class{Restriction}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{file}{File}{Die Datei, in die geschrieben werden soll.}
+                 }
+                 {
+                   Speichert die \reftype{Restriction}s in die angegebene Datei.
+                   
+                   Dazu wird zunächst der Typ der Restriction geschrieben und dann die Methode \code{saveInternal} aufgerufen, welche die einzelnen Unterklassen überschreiben.
+                 }
+          \method{load}[Restriction]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {
+                   (statisch) Lädt \reftype{Restriction}s aus der angegebenen Datei.
+                   
+                   Dazu wird zunächst der Typ der Restriction gelesen und dann die Methode \code{loadInternal} aufgerufen, welche die einzelnen Unterklassen definieren.
+                 }
         }
 }
 
