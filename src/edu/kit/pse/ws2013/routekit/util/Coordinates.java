@@ -37,8 +37,20 @@ public class Coordinates {
 	 * @return that angle
 	 */
 	public float angleBetween(Coordinates coords1, Coordinates coords2) {
-		// TODO: auto-generated method stub
-		return 0;
+		return (float) Math.IEEEremainder(getBearing(this, coords2)
+				- getBearing(coords1, this), 360) + 180;
+
+	}
+
+	private static double getBearing(Coordinates c1, Coordinates c2) {
+		double lat1 = Math.toRadians(c1.lat);
+		double lat2 = Math.toRadians(c2.lat);
+		double lon1 = Math.toRadians(c1.lon);
+		double lon2 = Math.toRadians(c2.lon);
+		double y = Math.sin(lon2 - lon1) * Math.cos(lat2);
+		double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1)
+				* Math.cos(lon2) * Math.cos(lon2 - lon1);
+		return Math.toDegrees(Math.atan2(y, x));
 	}
 
 	/**
