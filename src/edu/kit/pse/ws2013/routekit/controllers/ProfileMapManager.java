@@ -172,7 +172,9 @@ public class ProfileMapManager {
 		if (precalculation.getProfile().equals(current.getProfile())
 				&& precalculation.getStreetMap().equals(current.getStreetMap())) {
 			// 3.1 remove the old one from combinations
-			combinations.remove(current);
+			if (current != precalculation) {
+				combinations.remove(current);
+			}
 			// 3.2 update current
 			current = precalculation;
 			// 3.3 notify listeners
