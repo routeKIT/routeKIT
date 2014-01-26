@@ -39,6 +39,7 @@ public class MainController {
 	MainView view;
 	private RouteCalculator rc;
 	private boolean useOnlineMaps = false;
+	private TileCache cache = null;
 
 	/**
 	 * Creates the controller, initializes the {@link MapManager},
@@ -197,7 +198,8 @@ public class MainController {
 							+ combination + "'");
 					new PreCalculator().doPrecalculation(combination, reporter);
 					reporter.nextTask("Speichere '" + combination + "'");
-					ProfileMapManager.getInstance().savePrecalculation(combination);
+					ProfileMapManager.getInstance().savePrecalculation(
+							combination);
 					reporter.popTask();
 				}
 				reporter.popTask();
@@ -279,10 +281,13 @@ public class MainController {
 	 * @return A {@link TileSource} for rendering tiles.
 	 */
 	public TileSource getTileSource() {
+		if (cache != null) {
+			cache.stop();
+		}
 		if (useOnlineMaps) {
-			return new TileCache(new OSMRenderer());
+			return cache = new TileCache(new OSMRenderer());
 		} else {
-			return new TileCache(new TileRenderer(ProfileMapManager
+			return cache = new TileCache(new TileRenderer(ProfileMapManager
 					.getInstance().getCurrentCombination().getStreetMap()
 					.getGraph()));
 		}
