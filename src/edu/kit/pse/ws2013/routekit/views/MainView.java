@@ -45,14 +45,19 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 public class MainView extends JFrame implements RouteModelListener {
 	private static final long serialVersionUID = 1L;
 	final float maxcoordinate = Float.MAX_VALUE;
-	JTextField startField;
-	JTextField targetField;
+	private JTextField startField;
+	private JTextField targetField;
 	private JLabel mapLabel;
 	private JLabel profileLabel;
-	JFileChooser fileChooser = new JFileChooser();
+	private JFileChooser fileChooser = new JFileChooser();
 	private RouteModel routeModel;
 	private MapView mapView;
 	private JList<String> routeDescription;
+	private JButton historyButton;
+	private JButton swapButton;
+	private JMenuItem history;
+	private JMenuItem html;
+	private JMenuItem gpx;
 
 	/**
 	 * A constructor that creates a new MainView.
@@ -86,11 +91,13 @@ public class MainView extends JFrame implements RouteModelListener {
 						mapView.setTileSource(MainController.getInstance()
 								.getTileSource());
 						if (!newCombination.isCalculated()) {
+							enableButtons(false);
 							textMessage("Für diese Kombination aus Karte und"
 									+ " Profil existiert keine Vorberechnung. Sie können "
 									+ "entweder jetzt eine Vorberechnung starten (Roter Knopf) "
 									+ "oder ein anderes Profil bzw. eine andere Karte auswählen.");
 						} else {
+							enableButtons(true);
 							if (targetField.getBackground() == Color.RED
 									|| startField.getBackground() == Color.RED) {
 								textMessage("Falsche Koordinaten wurden eingegeben."
@@ -107,13 +114,24 @@ public class MainView extends JFrame implements RouteModelListener {
 		setVisible(true);
 	}
 
+	private void enableButtons(boolean value) {
+		startField.setEnabled(value);
+		targetField.setEnabled(value);
+		historyButton.setEnabled(value);
+		swapButton.setEnabled(value);
+		history.setEnabled(value);
+		html.setEnabled(value);
+		gpx.setEnabled(value);
+
+	}
+
 	private JPanel initLeftPane(final RouteModel routeModel) {
 		JPanel left = new JPanel(new BorderLayout());
 		left.setMinimumSize(new Dimension(260, 100));
 
 		JPanel controls = new JPanel(new BorderLayout());
 		JPanel hist = new JPanel();
-		JButton historyButton = new JButton("Verlauf");
+		historyButton = new JButton("Verlauf");
 		hist.add(historyButton);
 		historyButton.addActionListener(new ActionListener() {
 			@Override
@@ -125,13 +143,13 @@ public class MainView extends JFrame implements RouteModelListener {
 		controls.add(hist, BorderLayout.SOUTH);
 
 		JPanel swap = new JPanel();
-		JButton swapKnopf = new JButton(new ImageIcon(
-				MainView.class.getResource("Knopf.png")));
-		swapKnopf.setMargin(new Insets(0, 0, 0, 0));
-		swap.add(swapKnopf);
+		swapButton = new JButton(new ImageIcon(
+				MainView.class.getResource("swap.png")));
+		swapButton.setMargin(new Insets(0, 0, 0, 0));
+		swap.add(swapButton);
 		controls.add(swap, BorderLayout.WEST);
 		controls.add(initCoordEntry(), BorderLayout.CENTER);
-		swapKnopf.addActionListener(new ActionListener() {
+		swapButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -316,7 +334,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		JMenuBar menu = new JMenuBar();
 		JMenu routeKIT = new JMenu("routeKIT");
 
-		JMenuItem history = new JMenuItem("Verlauf...");
+		history = new JMenuItem("Verlauf...");
 		history.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -345,7 +363,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		routeKIT.add(exit);
 
 		JMenu export = new JMenu("Export");
-		JMenuItem html = new JMenuItem("HTML...");
+		html = new JMenuItem("HTML...");
 		html.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -354,7 +372,7 @@ public class MainView extends JFrame implements RouteModelListener {
 						fileChooser.getSelectedFile());
 			}
 		});
-		JMenuItem gpx = new JMenuItem("GPX...");
+		gpx = new JMenuItem("GPX...");
 		gpx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
