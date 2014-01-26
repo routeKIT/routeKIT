@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,8 +54,8 @@ public class MapManager {
 	 * map name as {@code map}.
 	 */
 	private void deletePrecalculations(StreetMap map) {
-		for (ProfileMapCombination precalculation : ProfileMapManager
-				.getInstance().getCombinations()) {
+		for (ProfileMapCombination precalculation : new HashSet<>(
+				ProfileMapManager.getInstance().getCombinations())) {
 			if (map.equals(precalculation.getStreetMap())) {
 				ProfileMapManager.getInstance().deletePrecalculation(
 						precalculation, false);

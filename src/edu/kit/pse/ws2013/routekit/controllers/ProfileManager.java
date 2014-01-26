@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,8 +56,8 @@ public class ProfileManager {
 	 */
 	private void deletePrecalculations(Profile profile) {
 		final String name = profile.getName();
-		for (ProfileMapCombination precalculation : ProfileMapManager
-				.getInstance().getCombinations()) {
+		for (ProfileMapCombination precalculation : new HashSet<>(
+				ProfileMapManager.getInstance().getCombinations())) {
 			if (name.equals(precalculation.getProfile().getName())) {
 				ProfileMapManager.getInstance().deletePrecalculation(
 						precalculation);
