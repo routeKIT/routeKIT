@@ -25,6 +25,12 @@ import edu.kit.pse.ws2013.routekit.views.MapManagerView;
  * The controller for the {@link MapManagerView}.
  */
 public class MapManagerController {
+
+	final static float FACTOR_DELETE_PRECALCULATION = 1;
+	final static float FACTOR_DELETE_MAP = 1;
+	final static float FACTOR_IMPORT_MAP = 100;
+	final static float FACTOR_PERFORM_PRECALCULATION = 500;
+
 	MapManagerView mmv;
 
 	private final Map<StreetMap, Set<Profile>> precalculations = new HashMap<>();
@@ -148,20 +154,25 @@ public class MapManagerController {
 			@Override
 			public void run() {
 				selectedMap = currentMap;
-				reporter.setSubTasks(new float[] { .01f, .04f, .05f, .3f, .6f });
 				MapManager mapManager = MapManager.getInstance();
 				ProfileMapManager profileMapManager = ProfileMapManager
 						.getInstance();
-				reporter.pushTask("Ermittle Änderungen");
 				final MapManagementDiff diff = getChanges();
-				reporter.nextTask("Lösche Karten");
-				reporter.setSubTasks(diff.getDeletedMaps().size());
-				for (StreetMap map : diff.getDeletedMaps()) {
-					reporter.pushTask("Lösche Karte '" + map.getName() + "'");
-					mapManager.deleteMap(map);
-					reporter.popTask();
-				}
-				reporter.nextTask("Lösche Vorberechnungen");
+				final float delPrecalcWeight = diff.getDeletedPrecalculations()
+						.size() * FACTOR_DELETE_PRECALCULATION;
+				final float delMapWeight = diff.getDeletedMaps().size()
+						* FACTOR_DELETE_MAP;
+				final float importWeight = diff.getNewOrUpdatedMaps().size()
+						* FACTOR_IMPORT_MAP;
+				final float precalcWeight = diff.getNewPrecalculations().size()
+						* FACTOR_PERFORM_PRECALCULATION;
+				final float totalWeight = delPrecalcWeight + delMapWeight
+						+ importWeight + precalcWeight;
+				reporter.setSubTasks(new float[] {
+						delPrecalcWeight / totalWeight,
+						delMapWeight / totalWeight, importWeight / totalWeight,
+						precalcWeight / totalWeight });
+				reporter.pushTask("Lösche Vorberechnungen");
 				reporter.setSubTasks(diff.getDeletedPrecalculations().size());
 				for (ProfileMapCombination precalculation : diff
 						.getDeletedPrecalculations()) {
@@ -171,6 +182,13 @@ public class MapManagerController {
 							precalculation,
 							!diff.getDeletedMaps().contains(
 									precalculation.getStreetMap()));
+					reporter.popTask();
+				}
+				reporter.nextTask("Lösche Karten");
+				reporter.setSubTasks(diff.getDeletedMaps().size());
+				for (StreetMap map : diff.getDeletedMaps()) {
+					reporter.pushTask("Lösche Karte '" + map.getName() + "'");
+					mapManager.deleteMap(map);
 					reporter.popTask();
 				}
 				reporter.popTask();
