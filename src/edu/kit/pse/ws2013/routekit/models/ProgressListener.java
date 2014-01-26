@@ -17,6 +17,9 @@ public interface ProgressListener {
 
 	/**
 	 * Called when each task starts.
+	 * <p>
+	 * For the root task, this is called <em>after</em>
+	 * {@link #startRoot(String)}.
 	 * 
 	 * @param name
 	 *            The name of the task.
@@ -25,6 +28,9 @@ public interface ProgressListener {
 
 	/**
 	 * Called when the progress changed.
+	 * <p>
+	 * When a subtask finishes, this is called <em>after</em>
+	 * {@link #endTask(String)}.
 	 * 
 	 * @param progress
 	 *            The current total progress.
@@ -35,6 +41,9 @@ public interface ProgressListener {
 
 	/**
 	 * Called when each task ends.
+	 * <p>
+	 * For the root task, this is called <em>before</em>
+	 * {@link #finishRoot(String)}.
 	 * 
 	 * @param name
 	 *            The name of the task.

@@ -522,6 +522,139 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                  }
                  {(statisch) Lädt \reftype{ArcFlags} aus der angegebenen Datei.}
         }
+  \class{ProgressReporter}
+        {
+          Neue Klasse, um den Fortschritt bei verschiedenen Aktionen, etwa der Vorberechnung, dem Benutzer anzeigen zu können.
+          
+          Der \reftype{ProgressReporter} ist Aufgaben-basiert: Es gibt eine „Basis“-Aufgabe, die in verschiedene Teilaufgaben unterteilt wird, welche wieder in unterschiedliche Teilaufgaben unterteilt wird und so weiter.
+          Für Aufgaben ohne Teilaufgaben kann dann der Fortschritt auch direkt gesetzt werden.
+        }
+        {\none}
+        {
+          \method{pushTask}
+                 {
+                   \param{name}{String}{Der Name der Aufgabe.}
+                 }
+                 {Beginnt eine neue (Teil-)Aufgabe mit dem angegeben Namen.}
+          \method{setSubTasks}
+                 {
+                   \param{weights}{float[]}{Die Gewichte der Teilaufgaben, jeweils im Intervall $[0,1]$.}
+                   \item[] \emph{oder}
+                   \param{count}{int}{Die Anzahl der Teilaufgaben.}
+                 }
+                 {
+                   Legt fest, wie viele Teilaufgaben die aktuelle Aufgabe hat und wie sie gewichtet werden sollen.
+                   In der zweiten Variante wird nur die Anzahl der Teilaufgaben festgelegt und sie werden als gleich gewichtet angenommen (jeweils Gewicht $\frac{1}{\refparam{ProgressReporter}{setSubTasks}{count}}$).
+                 }
+          \method{popTask}
+                 {
+                   \param{name}{String}{\emph{optional}: Der Name der Aufgabe, die entfernt werden soll.}
+                 }
+                 {
+                   Beendet die Aufgabe mit dem angegebenen Namen und ihre Teilaufgaben, wenn \refparam{ProgressReporter}{popTask}{name} gegeben ist, sonst die aktuelle Aufgabe.
+                   
+                   Die Variante mit \refparam{ProgressReporter}{popTask}{name} erlaubt es, sich von Fehlern in Teilaufgaben zu erholen:
+                   Wenn eine Aufgabe Exceptions in ihren Teilaufgaben abfängt, kann sie durch Angabe von \refparam{ProgressReporter}{popTask}{name} auch die Teilaufgaben beenden, die wegen der Exception nicht von den Teilaufgaben selbst beendet werden konnten.
+                 }
+          \method{nextTask}
+                 {
+                   \param{name}{String}{Der Name der neuen Aufgabe.}
+                 }
+                 {
+                   Abkürzung für \code{\refmethod{ProgressReporter}{popTask}(); \refmethod{ProgressReporter}{pushTask}(name);}.
+                 }
+          \method{openTask}[CloseableTask]
+                 {
+                   \param{name}{String}{Der Name der Aufgabe.}
+                 }
+                 {
+                   Beginnt eine neue (Teil-)Aufgabe mit dem angegebenen Namen und gibt eine \reftype{CloseableTask} zurück, die in einem try-with-resources Statement verwendet werden kann, um die Aufgabe auf jeden Fall abzuschließen, selbst wenn eine Teilaufgabe eine Exception wirft.
+                 }
+          \method{addProgressListener}
+                 {
+                   \param{listener}{ProgressListener}{Der \reftype{ProgressListener}, der bei Fortschritten benachrichtigt werden soll.}
+                 }
+                 {
+                   Registriert einen \reftype{ProgressListener}, der bei Fortschritten benachrichtigt wird.
+                 }
+          \method{setProgress}
+                 {
+                   \param{progress}{float}{Der aktuelle Fortschritt.}
+                 }
+                 {
+                   Setzt den Fortschritt der aktuellen Aufgabe direkt.
+                   Darf nicht für Aufgaben verwendet werden, die Teilaufgaben haben (siehe \refmethod{ProgressReporter}{setSubTasks}).
+                 }
+          \method{getProgress}
+                 {\none}
+                 {
+                   Gibt den aktuellen Gesamtfortschritt zurück.
+                 }
+          \method{getCurrentTask}
+                 {\none}
+                 {
+                   Gibt den Namen der aktuellen Aufgabe zurück.
+                 }
+        }
+  \class{CloseableTask}
+        {
+          Hilfsklasse für \refmethod{ProgressReporter}{openTask}.
+          Implementiert \code{AutoCloseable}, kann also in try-with-resources Statements verwendet werden.
+        }
+        {\none}
+        {
+          \method{close}
+                 {\none}
+                 {
+                   Beendet die Aufgabe, die mit dem zugehörigen \refmethod{ProgressReporter}{openTask} begonnen wurde.
+                 }
+        }
+  \class{ProgressListener}
+        {
+          Interface, um bei Änderungen den Fortschritts in \reftype{ProgressReporter} benachrichtigt zu werden.
+        }
+        {\none}
+        {
+          \method{startRoot}
+                 {
+                   \param{name}{String}{Der Name der Basisaufgabe.}
+                 }
+                 {
+                   Wird aufgerufen, wenn die Basisaufgabe des \reftype{ProgressReporter}s begonnen wird (erster Aufruf von \refmethod{ProgressReporter}{pushTask}).
+                 }
+          \method{beginTask}
+                 {
+                   \param{name}{String}{Der Name der (Teil-)Aufgabe.}
+                 }
+                 {
+                   Wird aufgerufen, wenn eine neue (Teil-)Aufgabe begonnen wird (Aufruf von \refmethod{ProgressReporter}{pushTask} oder \refmethod{ProgressReporter}{nextTask}).
+                   Für die Basisaufgabe wird diese Methode \emph{nach} \refmethod{ProgressListener}{startRoot} aufgerufen.
+                 }
+          \method{progress}
+                 {
+                   \param{progress}{float}{Der aktuelle Gesamtfortschritt.}
+                   \param{name}{String}{Der Name der aktuellen (Teil)-Aufgabe.}
+                 }
+                 {
+                   Wird aufgerufen, wenn sich der Fortschritt ändert.
+                   Bei Beenden einer Aufgabe wird diese Methode \emph{nach} \refmethod{ProgressListener}{endTask} aufgerufen.
+                 }
+          \method{endTask}
+                 {
+                   \param{name}{String}{Der Name der beendeten (Teil)-Aufgabe.}
+                 }
+                 {
+                   Wird aufgerufen, wenn eine (Teil-)Aufgabe beendet wird (Aufruf von \refmethod{ProgressReporter}{popTask} oder \refmethod{ProgressReporter}{nextTask}).
+                   Für die Basisaufgabe wird diese Methode \emph{vor} \refmethod{ProgressListener}{finishRoot} aufgerufen.
+                 }
+          \method{finishRoot}
+                 {
+                   \param{name}{String}{Der Name der beendeten Basisaufgabe.}
+                 }
+                 {
+                   Wird aufgerufen, wenn die Basisaufgabe des \reftype{ProgressReporter}s beendet wird.
+                 }
+        }
 }
 
 \package{Map}{}
