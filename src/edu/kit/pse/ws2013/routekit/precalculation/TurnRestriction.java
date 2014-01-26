@@ -5,7 +5,7 @@ package edu.kit.pse.ws2013.routekit.precalculation;
  * representation used by the {@link OSMParser}.
  */
 public class TurnRestriction {
-	private final MapEdge from;
+	private final int from;
 	private final MapEdge to;
 	private final boolean onlyAllowedTurn;
 
@@ -13,17 +13,17 @@ public class TurnRestriction {
 	 * Creates a new object with the given attributes.
 	 * 
 	 * @param from
-	 *            the edge from which a turn is restricted
+	 *            the ID of the OSM way from which a turn is restricted
 	 * @param to
 	 *            the edge to which a turn is restricted
 	 * @param onlyAllowedTurn
 	 *            whether it is the only allowed turn rather than a forbidden
 	 *            turn
 	 * @throws IllegalArgumentException
-	 *             if {@code from} or {@code to} is {@code null}
+	 *             if {@code to} is {@code null}
 	 */
-	public TurnRestriction(MapEdge from, MapEdge to, boolean onlyAllowedTurn) {
-		if (from == null || to == null) {
+	public TurnRestriction(int from, MapEdge to, boolean onlyAllowedTurn) {
+		if (to == null) {
 			throw new IllegalArgumentException();
 		}
 
@@ -33,11 +33,12 @@ public class TurnRestriction {
 	}
 
 	/**
-	 * Returns the edge from which this turn restriction is defined.
+	 * Returns the identifier of the OSM way from which this turn restriction is
+	 * defined.
 	 * 
-	 * @return that edge
+	 * @return that OSM way identifier
 	 */
-	public MapEdge getFrom() {
+	public int getFrom() {
 		return from;
 	}
 

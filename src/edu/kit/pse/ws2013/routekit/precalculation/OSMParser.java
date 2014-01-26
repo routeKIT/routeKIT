@@ -43,6 +43,11 @@ public class OSMParser {
 	 */
 	private List<List<MapEdge>> edges = new ArrayList<>();
 
+	/*
+	 * Contains for each node the turn restrictions via that node.
+	 */
+	private Map<Integer, List<TurnRestriction>> turnRestrictions = new HashMap<>();
+
 	private int numberOfEdges = 0;
 	private int numberOfTurns = 0;
 
@@ -309,7 +314,11 @@ public class OSMParser {
 		private Locator locator;
 
 		private long nodeId;
-		private Map<String, String> nodeTags;
+		private Map<String, String> tags;
+
+		private int relationFromWay;
+		private long relationViaNode;
+		private int relationToWay;
 
 		@Override
 		public void setDocumentLocator(Locator locator) {
@@ -346,22 +355,69 @@ public class OSMParser {
 								+ ": Coordinates invalid or unspecified",
 								locator, e);
 					}
-					nodeTags = new HashMap<>();
+					tags = new HashMap<>();
 				}
 				// fall through
 			case "osm":
 				enclosing = qName;
 				break;
+			case "relation":
+				enclosing = "relation";
+				tags = new HashMap<>();
+				relationFromWay = Integer.MIN_VALUE;
+				relationViaNode = Long.MIN_VALUE;
+				relationToWay = Integer.MIN_VALUE;
+				break;
+			case "member":
+				if (enclosing.equals("relation")) {
+					parseRelationMember(attr.getValue("type"),
+							attr.getValue("role"), attr.getValue("ref"));
+				}
 			case "tag":
-				if (enclosing.equals("node") && nodes.containsKey(nodeId)) {
+				if (enclosing.equals("node") && nodes.containsKey(nodeId)
+						|| enclosing.equals("relation")) {
 					String key = attr.getValue("k");
 					String value = attr.getValue("v");
 					if (key == null || value == null) {
-						throw new SAXParseException("Node " + nodeId
-								+ ": Invalid tag (key or value missing)",
+						throw new SAXParseException(
+								(enclosing.equals("node")) ? ("Node " + nodeId)
+										: "Relation"
+												+ ": Invalid tag (key or value missing)",
 								locator);
 					}
-					nodeTags.put(key, value);
+					tags.put(key, value);
+				}
+			}
+		}
+
+		private void parseRelationMember(String type, String role, String ref)
+				throws SAXParseException {
+			switch (type) {
+			case "way":
+				int way;
+				try {
+					way = Integer.parseInt(ref);
+				} catch (NumberFormatException e) {
+					throw new SAXParseException(
+							"Relation: Invalid or missing way ID member reference",
+							locator, e);
+				}
+				switch (role) {
+				case "from":
+					relationFromWay = way;
+					break;
+				case "to":
+					relationToWay = way;
+				}
+			case "node":
+				if (role != null && role.equals("via")) {
+					try {
+						relationViaNode = Long.parseLong(ref);
+					} catch (NumberFormatException e) {
+						throw new SAXParseException(
+								"Relation: Invalid or missing node ID member reference",
+								locator, e);
+					}
 				}
 			}
 		}
@@ -369,16 +425,50 @@ public class OSMParser {
 		@Override
 		public void endElement(String uri, String localName, String qName) {
 			if (qName.equals("node") && nodes.containsKey(nodeId)) {
-				boolean isJunction = nodeTags.containsKey("highway")
-						&& nodeTags.get("highway").equals("motorway_junction");
-				boolean isTrafficLights = nodeTags.containsKey("highway")
-						&& nodeTags.get("highway").equals("traffic_signals");
+				boolean isJunction = tags.containsKey("highway")
+						&& tags.get("highway").equals("motorway_junction");
+				boolean isTrafficLights = tags.containsKey("highway")
+						&& tags.get("highway").equals("traffic_signals");
 				if (isJunction || isTrafficLights) {
-					nodeProps.put(nodes.get(nodeId), new NodeProperties(
-							nodeTags.get("ref"), nodeTags.get("name"),
-							isJunction, isTrafficLights));
+					nodeProps.put(
+							nodes.get(nodeId),
+							new NodeProperties(tags.get("ref"), tags
+									.get("name"), isJunction, isTrafficLights));
 				}
-				nodeTags = null;
+				tags = null;
+			}
+			if (qName.equals("relation")) {
+				if (tags.containsKey("type")
+						&& tags.get("type").equals("restriction")
+						&& tags.containsKey("restriction")
+						&& relationFromWay != Integer.MIN_VALUE
+						&& relationToWay != Integer.MIN_VALUE
+						&& nodes.containsKey(relationViaNode)) {
+					int node = nodes.get(relationViaNode);
+					MapEdge toEdge = null;
+					for (MapEdge edge : edges.get(node)) {
+						if (edge.getWay().getId() == relationToWay) {
+							toEdge = edge;
+							break;
+						}
+					}
+
+					if (toEdge != null) {
+						boolean onlyTurn = tags.get("restriction").startsWith(
+								"only_");
+						if (onlyTurn
+								|| tags.get("restriction").startsWith("no_")) {
+							if (!turnRestrictions.containsKey(node)) {
+								turnRestrictions.put(node,
+										new ArrayList<TurnRestriction>(1));
+							}
+							turnRestrictions.get(node).add(
+									new TurnRestriction(relationFromWay,
+											toEdge, onlyTurn));
+						}
+					}
+				}
+				tags = null;
 			}
 			if (qName.equals(enclosing)) {
 				enclosing = qName.equals("osm") ? null : "osm";
