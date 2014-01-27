@@ -9,9 +9,9 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
- * Verwendet Dijkstra’s Algorithmus, um die schnellste Route zwischen Start- und
- * Zielpunkt für die aktuelle Kombination aus Karte und Profil zu berechnen.
- * Durch Arc-Flags wird die Berechnung beschleunigt.
+ * Uses Dijkstra’s Algorithm to determine the fastest route between start and
+ * destination point for the current {@link ProfileMapCombination}. The
+ * calculation is sped up by usage of Arc-Flags.
  */
 public class ArcFlagsDijkstra implements RouteCalculator {
 
@@ -27,16 +27,14 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		int startEdge = start.getEdge();
 		int destinationEdge = destination.getEdge();
 
-		// System.out.println(startEdge + " und " + destinationEdge);
-
 		LinkedList<Integer> turns = new LinkedList<Integer>();
 		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
 
-		// Partition der Zielkante
+		// destination edge’s partition
 		int destinationPartition = data.getStreetMap().getEdgeBasedGraph()
 				.getPartition(destinationEdge);
 
-		// Initialisierung
+		// initialization
 		distance[startEdge] = 0;
 		previous[startEdge] = -1;
 
@@ -49,12 +47,11 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			fhList.put(i, fh.add(i, distance[i]));
 		}
 
-		// Berechnung
+		// calculation
 		while (!fh.isEmpty()) {
 			int u = fh.deleteMin().getValue();
 			if (u == destinationEdge) {
-				// GEFUNDEN!
-				// System.out.println("Gefunden! " + u);
+				// found it!
 				break;
 			}
 
@@ -69,12 +66,12 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 				int targetEdge = data.getStreetMap().getEdgeBasedGraph()
 						.getTargetEdge(currentTurn);
 
-				// Arcflags holen
+				// fetch Arc-Flags
 				int arcFlag = data.getArc().getFlag(currentTurn);
 
 				int arcBit = arcFlag >> destinationPartition & 0x1;
 
-				// arcBit prüfen
+				// check arc bit
 				if (arcBit != 0) {
 					int alt = distance[u]
 							+ data.getWeights().getWeight(currentTurn);
@@ -90,7 +87,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			}
 		}
 
-		// Weg rekonstruieren
+		// reconstruct way
 		int x = destinationEdge;
 		while (previous[x] != -1) {
 			Set<Integer> outgoingTurns = data.getStreetMap()
@@ -102,11 +99,8 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 					break;
 				}
 			}
-			// System.out.println(x);
-			// turns.add(x);
 			x = previous[x];
 		}
-		// System.out.println(x);
 
 		Route route = new Route(data, start, destination, turns);
 

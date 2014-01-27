@@ -11,33 +11,33 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 
 /**
- * Enthält die Arc-Flags für den vorberechneten Graphen.
+ * Stores Arc-Flags for a precalculated graph.
  */
 public class ArcFlags {
 
 	/**
-	 * Die Arc-Flags des Graphen (als long-Bitvektoren). Partition entspricht
-	 * dem niedrigsten Bit.
+	 * The Arc-Flags of the graph (as int bit vectors). The initial partition
+	 * (0<sup>th</sup> partition) corresponds to the least-significant bit.
 	 */
 	private int[] flags;
 
 	/**
-	 * Erstellt ein neues ArcFlags-Objekt mit den übergebenen Arc-Flags.
+	 * Creates a new {@link ArcFlags} object with the given Arc-Flags.
 	 * 
 	 * @param flags
-	 *            Die Arc-Flags.
+	 *            The Arc-Flags.
 	 */
 	public ArcFlags(int[] flags) {
 		this.flags = flags;
 	}
 
 	/**
-	 * Gibt die Arc-Flags des angegebenen Abbiegevorgangs zurück. Partition
-	 * entspricht dem niedrigsten Bit.
+	 * Returns the Arc-Flags of the given turn. The initial partition
+	 * (0<sup>th</sup> partition) corresponds to the least-significant bit.
 	 * 
 	 * @param turn
-	 *            Die Nummer des Abbiegevorgangs.
-	 * @return Die Flags
+	 *            The ID of the turn.
+	 * @return The Arc-Flags for the turn.
 	 */
 	public int getFlag(int turn) {
 		return flags[turn];

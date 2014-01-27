@@ -1,11 +1,11 @@
 package edu.kit.pse.ws2013.routekit.models;
 
 /**
- * Wird bei Änderungen am {@link RouteModel} informiert.
+ * Listens for changes in the {@link RouteModel}.
  */
 public interface RouteModelListener {
 	/**
-	 * Wird bei jeder Änderung am {@link RouteModel} aufgerufen.
+	 * Called for each change in the {@link RouteModel}.
 	 */
 	public void routeModelChanged();
 }

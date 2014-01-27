@@ -12,8 +12,8 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
- * Eine geometrische Datenstruktur zum schnellen Auffinden von Kanten innerhalb
- * eines Kartenausschnitts.
+ * A geometrical data structure to quickly find all edges in a certain section
+ * of the map.
  */
 public class GraphIndex {
 	private Graph graph;
@@ -116,13 +116,13 @@ public class GraphIndex {
 	}
 
 	/**
-	 * Konstruktor: Erzeugt die Datenstruktur für den gegebenen Graph und die
-	 * angegebene Zoomstufe.
+	 * Constructs the data structure for the given {@link Graph} and maximum
+	 * {@link HighwayType}.
 	 * 
 	 * @param graph
-	 *            Ein Graph.
+	 *            The graph.
 	 * @param maxType
-	 *            the maximal {@link HighwayType} to include.
+	 *            The maximum {@link HighwayType} to include.
 	 */
 	public GraphIndex(final Graph graph, final HighwayType maxType) {
 		this.graph = graph;
@@ -179,11 +179,11 @@ public class GraphIndex {
 	Node root;
 
 	/**
-	 * Sucht zu gegebenen Koordinaten den nächsten Punkt auf einer Kante.
+	 * Finds the nearest point on an edge of the map.
 	 * 
 	 * @param coords
-	 *            Die Koordinaten eines Punktes.
-	 * @return
+	 *            The coordinates of the point.
+	 * @return The nearest point on an edge (edge + part of the edge)
 	 */
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
 		Coordinates left = new Coordinates(coords.getLatitude() - 0.1f,
@@ -222,14 +222,13 @@ public class GraphIndex {
 	}
 
 	/**
-	 * Bestimmt alle Kanten innerhalb eines rechteckigen Kartenausschnitts, der
-	 * durch {@code leftTop} und {@code rightBottom} festgelegt ist.
+	 * Determines all edges within a rectangular section of the graph.
 	 * 
 	 * @param leftTop
-	 *            Die Koordinaten der linken oberen Ecke des Ausschnitts.
+	 *            The coordinates of the upper left corner of the section.
 	 * @param rightBottom
-	 *            Die Koordinaten der rechten unteren Ecke des Ausschnitts.
-	 * @return
+	 *            The coordinates of the lower right corner of the section.
+	 * @return A {@link Set} of all edges within the given section.
 	 */
 	public Set<Integer> getEdgesInRectangle(Coordinates leftTop,
 			Coordinates rightBottom) {

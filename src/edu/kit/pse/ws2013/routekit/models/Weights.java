@@ -11,30 +11,30 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 
 /**
- * Enthält die Kantengewichte für den vorberechneten Graphen.
+ * Stores edge weights for a precalculated graph.
  */
 public class Weights {
 	/**
-	 * Die Gewichte der Abbiegevorgänge.
+	 * The weights of the turns.
 	 */
 	private int[] weights;
 
 	/**
-	 * Erstellt ein neues Weights-Objekt mit den übergebenen Kantengewichten.
+	 * Creates a new {@link Weights} object with the given weights.
 	 * 
 	 * @param weights
-	 *            Die Kantengewichte.
+	 *            The weights.
 	 */
 	public Weights(int[] weights) {
 		this.weights = weights;
 	}
 
 	/**
-	 * Gibt das zum Abbiegevorgang gehörende Gewicht zurück.
+	 * Returns the weight of the given turn.
 	 * 
 	 * @param turn
-	 *            Die Nummer eines Abbiegevorgang.
-	 * @return Das Kantengwicht des Abbiegevorgangs.
+	 *            The ID of the turn.
+	 * @return The weight of the turn.
 	 */
 	public int getWeight(int turn) {
 		return weights[turn];

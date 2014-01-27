@@ -7,10 +7,9 @@ import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
- * Stellt die aktuellen Start- und Zielpunkte, sowie die aktuell berechnete
- * Route dar. Die Getter liefern dabei immer den aktuellen Zustand (auch
- * {@code null} möglich). Die Setter ändern den Wert und informieren eventuelle
- * {@link RouteListener}.
+ * Stores the current start and destination point as well as the current route.
+ * The getters return {@code null} if no such element is currently available;
+ * the setters notify registered {@link RouteModelListener}.
  */
 public class RouteModel {
 
@@ -63,11 +62,11 @@ public class RouteModel {
 	}
 
 	/**
-	 * Fügt einen RouteListener dem Modell hinzu, damit er über Änderungen an
-	 * Route, Start oder Ziel informiert wird
+	 * Registers a {@link RouteModelListener} that is notified when the start or
+	 * destination point or the current route changes.
 	 * 
 	 * @param listener
-	 *            Der neue Listener, der über Änderungen informiert werden will.
+	 *            The new listener that shall be notified of changes.
 	 */
 	public void addRouteListener(RouteModelListener listener) {
 		listeners.add(listener);
