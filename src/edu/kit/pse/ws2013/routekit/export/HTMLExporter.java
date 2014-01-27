@@ -19,20 +19,30 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
- * Exports a {@link RouteDescription} into an HTML document.
+ * Provides the functionality to export a {@link RouteDescription} into an HTML
+ * document.
  */
 public class HTMLExporter {
 
 	/**
-	 * Exports the given {@link RouteDescription} into an HTML document at the
-	 * given file.
+	 * Exports the given {@link RouteDescription} into an HTML document into the
+	 * specified file.
 	 * 
 	 * @param routeDesc
-	 *            The {@link RouteDescription} to export.
+	 *            the {@link RouteDescription} to be exported
 	 * @param file
-	 *            The file where the HTML document should be saved.
+	 *            the file where the HTML document should be written
+	 * @throws IOException
+	 *             if any I/O error occurs
+	 * @throws IllegalArgumentException
+	 *             if {@code routeDesc} or {@code file} is {@code null}
 	 */
-	public void exportRouteDescription(RouteDescription routeDesc, File file) {
+	public void exportRouteDescription(RouteDescription routeDesc, File file)
+			throws IOException {
+		if (routeDesc == null || file == null) {
+			throw new IllegalArgumentException();
+		}
+
 		try (OutputStream outputStream = new FileOutputStream(file);
 				Writer writer = new OutputStreamWriter(outputStream)) {
 			XMLStreamWriter html = XMLOutputFactory.newInstance()
@@ -88,7 +98,7 @@ public class HTMLExporter {
 			html.writeEndDocument();
 
 			html.close();
-		} catch (XMLStreamException | IOException e) {
+		} catch (XMLStreamException e) {
 			// TODO
 			e.printStackTrace();
 		}

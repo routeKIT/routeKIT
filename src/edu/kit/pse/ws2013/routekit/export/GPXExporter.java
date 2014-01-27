@@ -15,8 +15,8 @@ import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
- * Provides the functionality to export a route in the GPS Exchange Format
- * (GPX).
+ * Provides the functionality to export a {@link Route} in the GPS Exchange
+ * Format (GPX).
  */
 public class GPXExporter {
 	/**
@@ -24,7 +24,7 @@ public class GPXExporter {
 	 * (GPX) into the specified file.
 	 * 
 	 * @param route
-	 *            the route to be exported
+	 *            the {@link Route} to be exported
 	 * @param file
 	 *            the GPX file to be written
 	 * @throws XMLStreamException
