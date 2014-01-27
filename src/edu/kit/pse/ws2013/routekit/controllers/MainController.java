@@ -36,7 +36,10 @@ import edu.kit.pse.ws2013.routekit.views.MainView;
  * until routeKIT exits.
  */
 public class MainController {
+	private final GPXExporter gpxExporter = new GPXExporter();
+	private final HTMLExporter htmlExporter = new HTMLExporter();
 	private static MainController instance;
+	private final ProfileMapManager profileMapManager;
 	private RouteModel rm = new RouteModel();
 	private final History history;
 	MainView view;
@@ -57,8 +60,10 @@ public class MainController {
 		} catch (IOException e) {
 			// die
 			history = null;
+			profileMapManager = null;
 			return;
 		}
+		profileMapManager = ProfileMapManager.getInstance();
 		History _history; // because history is final
 		try {
 			_history = History.load(FileUtil.getHistoryFile());
@@ -66,9 +71,9 @@ public class MainController {
 			_history = new History();
 		}
 		history = _history;
-		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
 		rdg = new RouteDescriptionGenerator();
+		view = new MainView(rm);
 	}
 
 	/**
@@ -127,8 +132,8 @@ public class MainController {
 					e.printStackTrace();
 				}
 			}
-			ProfileMapCombination currentCombination = ProfileMapManager
-					.getInstance().getCurrentCombination();
+			ProfileMapCombination currentCombination = profileMapManager
+					.getCurrentCombination();
 			GraphIndex index = currentCombination.getStreetMap().getGraph()
 					.getIndex(18);
 			// TODO Unblock
@@ -156,10 +161,9 @@ public class MainController {
 		if (route == null) {
 			throw new IllegalStateException("No current route to export!");
 		}
-		RouteDescription description = new RouteDescriptionGenerator()
-				.generateRouteDescription(route);
+		RouteDescription description = rdg.generateRouteDescription(route);
 		try {
-			new HTMLExporter().exportRouteDescription(description, target);
+			htmlExporter.exportRouteDescription(description, target);
 		} catch (IOException e) {
 			view.textMessage("Beim Export der Routenbeschreibung ist ein Fehler aufgetreten!\n"
 					+ e.getMessage());
@@ -208,16 +212,15 @@ public class MainController {
 		new Thread() {
 			@Override
 			public void run() {
-				ProfileMapCombination combination = ProfileMapManager
-						.getInstance().getCurrentCombination();
+				ProfileMapCombination combination = profileMapManager
+						.getCurrentCombination();
 				if (!combination.isCalculated()) {
 					reporter.setSubTasks(new float[] { .95f, .05f });
 					reporter.pushTask("Führe Vorberechnung durch für '"
 							+ combination + "'");
 					new PreCalculator().doPrecalculation(combination, reporter);
 					reporter.nextTask("Speichere '" + combination + "'");
-					ProfileMapManager.getInstance().savePrecalculation(
-							combination);
+					profileMapManager.savePrecalculation(combination);
 					reporter.popTask();
 				}
 				reporter.popTask();
@@ -247,10 +250,8 @@ public class MainController {
 		ProfileManagerController c = new ProfileManagerController(view);
 		Profile selected = c.getSelectedProfile();
 		if (selected != null) {
-			ProfileMapManager.getInstance().selectProfileAndMap(
-					selected,
-					ProfileMapManager.getInstance().getCurrentCombination()
-							.getStreetMap());
+			profileMapManager.selectProfileAndMap(selected, profileMapManager
+					.getCurrentCombination().getStreetMap());
 			// TODO update view elements etc.
 		}
 	}
@@ -265,9 +266,8 @@ public class MainController {
 		mapManagement = new MapManagerController(view);
 		StreetMap selected = mapManagement.getSelectedMap();
 		if (selected != null) {
-			ProfileMapManager.getInstance().selectProfileAndMap(
-					ProfileMapManager.getInstance().getCurrentCombination()
-							.getProfile(), selected);
+			profileMapManager.selectProfileAndMap(profileMapManager
+					.getCurrentCombination().getProfile(), selected);
 			// TODO update view elements
 		}
 	}
@@ -286,7 +286,7 @@ public class MainController {
 			throw new IllegalStateException("No current route to export!");
 		}
 		try {
-			new GPXExporter().exportRoute(route, target);
+			gpxExporter.exportRoute(route, target);
 		} catch (FileNotFoundException | XMLStreamException e) {
 			// TODO the view should display this error
 			e.printStackTrace();
@@ -305,9 +305,8 @@ public class MainController {
 		if (useOnlineMaps) {
 			return cache = new TileCache(new OSMRenderer());
 		} else {
-			return cache = new TileCache(new TileRenderer(ProfileMapManager
-					.getInstance().getCurrentCombination().getStreetMap()
-					.getGraph()));
+			return cache = new TileCache(new TileRenderer(profileMapManager
+					.getCurrentCombination().getStreetMap().getGraph()));
 		}
 	}
 
