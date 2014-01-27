@@ -3,10 +3,18 @@ package edu.kit.pse.ws2013.routekit.routecalculation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The priority queue for {@link ArcFlagsDijkstra}.
+ */
 public class FibonacciHeap {
 	private FibonacciHeapEntry min = null;
 	private int size = 0;
 
+	/**
+	 * Check if the heap is empty.
+	 * 
+	 * @return true if the heap is empty, otherwise false
+	 */
 	public boolean isEmpty() {
 		if (min == null) {
 			return true;
@@ -15,7 +23,7 @@ public class FibonacciHeap {
 	}
 
 	/**
-	 * Gibt die Größe des Heaps zurück. Nützlich fürs Debugging.
+	 * Returns the size of the heap.
 	 * 
 	 * @return the size
 	 */
@@ -23,6 +31,15 @@ public class FibonacciHeap {
 		return size;
 	}
 
+	/**
+	 * Add an entry to the Heap.
+	 * 
+	 * @param value
+	 *            the value of the entry
+	 * @param priority
+	 *            the priority of the entry
+	 * @return the new entry
+	 */
 	public FibonacciHeapEntry add(int value, int priority) {
 		FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
 		min = merge(min, newEntry);
@@ -31,6 +48,11 @@ public class FibonacciHeap {
 		return newEntry;
 	}
 
+	/**
+	 * Removes the minimal element of the Heap.
+	 * 
+	 * @return the removed element
+	 */
 	public FibonacciHeapEntry deleteMin() {
 		if (isEmpty()) {
 			return null;
@@ -64,6 +86,7 @@ public class FibonacciHeap {
 			return minEntry;
 		}
 
+		// Consolidate
 		List<FibonacciHeapEntry> table = new ArrayList<FibonacciHeapEntry>();
 		List<FibonacciHeapEntry> queue = new ArrayList<FibonacciHeapEntry>();
 
@@ -126,26 +149,46 @@ public class FibonacciHeap {
 		return minEntry;
 	}
 
+	/**
+	 * Decreases the key of an entry.
+	 * 
+	 * @param entry
+	 *            the entry
+	 * @param newPriority
+	 *            the new priority
+	 */
 	public void decreaseKey(FibonacciHeapEntry entry, int newPriority) {
+		// set the new priority
 		entry.setPriority(newPriority);
 
+		// cut the element if the heap property is broken
 		if (entry.getParent() != null
 				&& entry.getPriority() <= entry.getParent().getPriority()) {
 			cut(entry);
 		}
 
+		// the entry has the smalles priority
 		if (entry.getPriority() <= min.getPriority()) {
 			min = entry;
 		}
 	}
 
+	/**
+	 * Merges two heap entries.
+	 * 
+	 * @param one
+	 *            entry one to merge
+	 * @param two
+	 *            entry two to merge
+	 * @return the merged entry
+	 */
 	public FibonacciHeapEntry merge(FibonacciHeapEntry one,
 			FibonacciHeapEntry two) {
 		if (one == null && two == null) {
 			return null;
 		} else if (one != null && two == null) {
 			return one;
-		} else if (one == null && two != null) {
+		} else if (two != null && one == null) {
 			return two;
 		} else {
 			FibonacciHeapEntry oneNext = one.getNext();
@@ -163,6 +206,12 @@ public class FibonacciHeap {
 		}
 	}
 
+	/**
+	 * Cuts the given entry and recursively repeats it if the parent is marked.
+	 * 
+	 * @param entry
+	 *            the entry to cut
+	 */
 	private void cut(FibonacciHeapEntry entry) {
 		entry.setMarked(false);
 
