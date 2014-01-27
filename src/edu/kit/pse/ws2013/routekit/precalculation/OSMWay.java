@@ -68,7 +68,18 @@ public class OSMWay {
 		List<Restriction> restrictions = new ArrayList<>();
 		if (tags.containsKey("maxweight")) {
 			try {
-				int maxWeight = (int) Float.parseFloat(tags.get("maxweight")) * 1000;
+				String[] parts = tags.get("maxweight").split(" ");
+				int multiplier;
+				if (parts.length <= 1 || "t".equals(parts[1])) {
+					multiplier = 1000;
+				} else if ("kg".equals(parts[1])) {
+					multiplier = 1;
+				} else {
+					// will be caught
+					throw new NumberFormatException("Unknown weight unit "
+							+ parts[1]);
+				}
+				int maxWeight = (int) (Float.parseFloat(parts[0]) * multiplier);
 				restrictions.add(WeightRestriction.getInstance(maxWeight));
 			} catch (NumberFormatException e) {
 				// Ignore invalid value for the maxweight tag
@@ -76,7 +87,16 @@ public class OSMWay {
 		}
 		if (tags.containsKey("maxwidth")) {
 			try {
-				int maxWidth = (int) Float.parseFloat(tags.get("maxwidth")) * 100;
+				String[] parts = tags.get("maxwidth").split(" ");
+				int multiplier;
+				if (parts.length <= 1 || "m".equals(parts[1])) {
+					multiplier = 1;
+				} else {
+					// will be caught
+					throw new NumberFormatException("Unknown weight unit "
+							+ parts[1]);
+				}
+				int maxWidth = (int) (Float.parseFloat(parts[0]) * multiplier);
 				restrictions.add(WidthRestriction.getInstance(maxWidth));
 			} catch (NumberFormatException e) {
 				// Ignore invalid value for the maxwidth tag
@@ -84,7 +104,16 @@ public class OSMWay {
 		}
 		if (tags.containsKey("maxheight")) {
 			try {
-				int maxHeight = (int) Float.parseFloat(tags.get("maxheight")) * 100;
+				String[] parts = tags.get("maxheight").split(" ");
+				int multiplier;
+				if (parts.length <= 1 || "m".equals(parts[1])) {
+					multiplier = 1;
+				} else {
+					// will be caught
+					throw new NumberFormatException("Unknown height unit "
+							+ parts[1]);
+				}
+				int maxHeight = (int) (Float.parseFloat(parts[0]) * multiplier);
 				restrictions.add(HeightRestriction.getInstance(maxHeight));
 			} catch (NumberFormatException e) {
 				// Ignore invalid value for the maxheight tag
