@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.stream.XMLStreamException;
 
 import edu.kit.pse.ws2013.routekit.export.GPXExporter;
+import edu.kit.pse.ws2013.routekit.export.HTMLExporter;
 import edu.kit.pse.ws2013.routekit.history.History;
 import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
@@ -24,6 +25,8 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.routecalculation.ArcFlagsDijkstra;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteCalculator;
+import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
+import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescriptionGenerator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 import edu.kit.pse.ws2013.routekit.views.MainView;
@@ -144,8 +147,13 @@ public class MainController {
 	 *            The file into which the description shall be saved.
 	 */
 	public void exportHTML(File target) {
-		// TODO implement
-		throw new NoSuchMethodError();
+		Route route = rm.getCurrentRoute();
+		if (route == null) {
+			throw new IllegalStateException("No current route to export!");
+		}
+		RouteDescription description = new RouteDescriptionGenerator()
+				.generateRouteDescription(route);
+		new HTMLExporter().exportRouteDescription(description, target);
 	}
 
 	/**
