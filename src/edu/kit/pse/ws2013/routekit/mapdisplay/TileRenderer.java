@@ -69,14 +69,11 @@ public class TileRenderer implements TileSource {
 			ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
 			p = graph.getEdgeProperties(edge);
 
-			if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget) {
-				int tmp = xstart;
-				xstart = xtarget;
-				xtarget = tmp;
-				tmp = ystart;
-				ystart = ytarget;
-				ytarget = tmp;
-			}
+			/*
+			 * if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget)
+			 * { int tmp = xstart; xstart = xtarget; xtarget = tmp; tmp =
+			 * ystart; ystart = ytarget; ytarget = tmp; }
+			 */
 		}
 
 	}
@@ -141,12 +138,44 @@ public class TileRenderer implements TileSource {
 					+ Math.pow((it.ytarget - it.ystart), 2));
 			if (name != null && (it.xstart != -1)
 					&& getStreetWidth(zoom, it.p) > 7) {
+				final AffineTransform old = g.getTransform();
+
 				final Rectangle2D r = font.getStringBounds(name,
 						g.getFontRenderContext());
+				double angle = getAngle(it.xstart, it.ystart, it.xtarget,
+						it.ytarget, streetLength);
+
+				// Pfeil <-
+				if (zoom > 15 && streetLength > 40) {
+					if (graph.getCorrespondingEdge(it.edge) == -1) {
+						g.setColor(Color.WHITE);
+						double angle2 = angle;
+						if (it.xtarget > it.xstart
+								|| (it.xstart == it.xtarget && it.ystart < it.ytarget)) {
+							angle2 -= Math.PI;
+						}
+						AffineTransform rotateInstance = AffineTransform
+								.getRotateInstance(angle2, it.xstart, it.ystart);
+						rotateInstance.translate(15 + it.xstart, it.ystart);
+						g.setTransform(rotateInstance);
+						drawArrow(zoom, g);
+						g.setColor(Color.BLACK);
+
+					}
+				}
+
+				int xstart;
+				int ystart;
+				if (it.xstart < it.xtarget
+						|| (it.xstart == it.xtarget && it.ystart < it.ytarget)) {
+					xstart = it.xstart;
+					ystart = it.ystart;
+				} else {
+					xstart = it.xtarget;
+					ystart = it.ytarget;
+				}
 				final AffineTransform at = AffineTransform.getRotateInstance(
-						getAngle(it.xstart, it.ystart, it.xtarget, it.ytarget,
-								streetLength), it.xstart, it.ystart);
-				final AffineTransform old = g.getTransform();
+						angle, xstart, ystart);
 				g.setTransform(at);
 				int i = 1;
 				final StringBuilder nNames = new StringBuilder();
@@ -157,52 +186,43 @@ public class TileRenderer implements TileSource {
 					}
 					nNames.append(name);
 				}
-				g.drawString(nNames.toString(), space + it.xstart,
-						(int) (it.ystart - r.getY() / 2 - r.getY() - r
-								.getHeight()) + 1);
-				// Pfeil <-
-				if (zoom > 15) {
-					if (graph.getCorrespondingEdge(it.edge) == -1) {
-						BasicStroke pen = new BasicStroke(2F,
-								BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);
-						Polygon p = new Polygon();
-						double peakLength = 0.4;
-						double tailThickness = 0.1;
+				g.drawString(nNames.toString(), space + xstart, (int) (ystart
+						- r.getY() / 2 - r.getY() - r.getHeight()) + 1);
+				g.setTransform(old);
 
-						double length = 10 + (zoom - 15) * 10 / 4;
-						double height = 4 + (zoom - 15) * 3 / 4;
-
-						int ycenter = (it.ystart - (int) height / 2);
-						p.addPoint(it.xstart, (int) height / 2 + ycenter);
-						p.addPoint((int) (length * peakLength) + it.xstart,
-								ycenter);
-						p.addPoint(
-								(int) (length * peakLength) + it.xstart,
-								(int) (ycenter + (height - (height * tailThickness)) / 2));
-						p.addPoint(
-								(int) (length) + it.xstart,
-								(int) (ycenter + (height - (height * tailThickness)) / 2));
-						p.addPoint((int) (length) + it.xstart,
-								(int) (ycenter
-										+ (height - (height * tailThickness))
-										/ 2 + (height * tailThickness)));
-						p.addPoint((int) (length * peakLength) + it.xstart,
-								(int) (ycenter
-										+ (height - (height * tailThickness))
-										/ 2 + (height * tailThickness)));
-						p.addPoint((int) (it.xstart + length * peakLength),
-								(int) height + ycenter);
-
-						g.setStroke(pen);
-						g.fillPolygon(p);
-						g.drawPolygon(p);
-
-						g.setTransform(old);
-					}
-				}
 			}
 		}
 		return tile;
+	}
+
+	private void drawArrow(final int zoom, final Graphics2D g) {
+		BasicStroke pen = new BasicStroke(2F, BasicStroke.CAP_ROUND,
+				BasicStroke.JOIN_MITER);
+		Polygon p = new Polygon();
+		double peakLength = 0.4;
+		double tailThickness = 0.1;
+
+		double length = 10 + (zoom - 15) * 10 / 4;
+		double height = 4 + (zoom - 15) * 3 / 4;
+
+		int ycenter = -(int) height / 2;
+		p.addPoint(0, (int) height / 2 + ycenter);
+		p.addPoint((int) (length * peakLength), ycenter);
+		p.addPoint((int) (length * peakLength),
+				(int) (ycenter + (height - (height * tailThickness)) / 2));
+		p.addPoint((int) (length),
+				(int) (ycenter + (height - (height * tailThickness)) / 2));
+		p.addPoint(
+				(int) (length),
+				(int) (ycenter + (height - (height * tailThickness)) / 2 + (height * tailThickness)));
+		p.addPoint(
+				(int) (length * peakLength),
+				(int) (ycenter + (height - (height * tailThickness)) / 2 + (height * tailThickness)));
+		p.addPoint((int) (length * peakLength), (int) height + ycenter);
+
+		g.setStroke(pen);
+		g.fillPolygon(p);
+		g.drawPolygon(p);
 	}
 
 	private Set<Integer> getEdgesOnTile(final int x, final int y, final int zoom) {
