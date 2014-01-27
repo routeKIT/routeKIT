@@ -68,6 +68,7 @@ public class OSMParser {
 	private int ebgEdges[];
 	private int ebgTurns[];
 	private TurnType turnTypes[];
+	private Map<Integer, Restriction> restrictions;
 
 	/**
 	 * Reads an OpenStreetMap data file and creates a {@link Graph} from it as
@@ -82,7 +83,8 @@ public class OSMParser {
 	 * @throws IOException
 	 *             if any I/O error occurs
 	 * @throws SAXException
-	 *             TODO
+	 *             if an error occurs during parsing the OSM file, e.g. if the
+	 *             file format is invalid
 	 */
 	public StreetMap parseOSM(File file, ProgressReporter reporter)
 			throws SAXException, IOException {
@@ -114,7 +116,7 @@ public class OSMParser {
 		buildEdgeBasedGraph();
 		reporter.nextTask("Baue kantenbasierten Graph auf");
 		edgeBasedGraph = new EdgeBasedGraph(ebgEdges, ebgTurns, turnTypes,
-				new HashMap<Integer, Restriction>());
+				restrictions);
 		reporter.popTask();
 
 		return new StreetMap(graph, edgeBasedGraph);
@@ -141,17 +143,22 @@ public class OSMParser {
 		ebgEdges = new int[numberOfEdges];
 		List<Integer> turns = new ArrayList<>(2 * numberOfEdges);
 		List<TurnType> types = new ArrayList<>(2 * numberOfEdges);
+		restrictions = new HashMap<>();
 
 		int edgeCount = 0;
 		for (int node = 0; node < edges.size(); node++) {
 			for (MapEdge fromEdge : edges.get(node)) {
 				ebgEdges[edgeCount] = numberOfTurns;
-				TurnRestriction restr = findTurnRestriction(fromEdge);
+				TurnRestriction tr = findTurnRestriction(fromEdge);
 				for (MapEdge toEdge : edges.get(fromEdge.getTargetNode())) {
 					if (toEdge.getTargetNode() != node
-							&& (restr == null || restr.allowsTo(toEdge))) {
+							&& (tr == null || tr.allowsTo(toEdge))) {
 						turns.add(toEdge.getId());
 						types.add(determineTurnType(node, fromEdge, toEdge));
+						Restriction restr = toEdge.getWay().getRestriction();
+						if (restr != null) {
+							restrictions.put(numberOfTurns, restr);
+						}
 						numberOfTurns++;
 					}
 				}

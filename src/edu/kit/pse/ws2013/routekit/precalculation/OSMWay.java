@@ -62,7 +62,7 @@ public class OSMWay {
 	 * Returns a {@link Restriction} object with the restriction(s) applicable
 	 * for this way.
 	 * 
-	 * @return the restriction(s) of this way
+	 * @return the restriction(s) of this way, or {@code null} if none
 	 */
 	public Restriction getRestriction() {
 		List<Restriction> restrictions = new ArrayList<>();
@@ -134,6 +134,9 @@ public class OSMWay {
 			restrictions.add(VehicleTypeRestriction.getInstance(type));
 		}
 
+		if (restrictions.isEmpty()) {
+			return null;
+		}
 		return MultipleRestrictions.getInstance(restrictions);
 	}
 
