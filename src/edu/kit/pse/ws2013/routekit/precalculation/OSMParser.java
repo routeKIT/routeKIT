@@ -380,6 +380,7 @@ public class OSMParser {
 					parseRelationMember(attr.getValue("type"),
 							attr.getValue("role"), attr.getValue("ref"));
 				}
+				break;
 			case "tag":
 				if (enclosing.equals("node") && nodes.containsKey(nodeId)
 						|| enclosing.equals("relation")) {

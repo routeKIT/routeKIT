@@ -87,7 +87,7 @@ public class ProfileMapCombination {
 
 	public void setArcFlags(ArcFlags arcFlags, int calculationTime) {
 		this.arcFlags = arcFlags;
-		assert (calculationTime > 0);
+		assert (calculationTime >= 0);
 		this.calculationTime += calculationTime;
 	}
 
