@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.lang.ref.SoftReference;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
@@ -36,11 +38,11 @@ public class TileCache implements TileSource {
 				return;
 			}
 			String key = key(x, y, zoom);
-			if (map.containsKey(key) && map.get(key).get() != null) {
+			if (cache.containsKey(key) && cache.get(key).get() != null) {
 				return;
 			}
 			BufferedImage result = target.renderTile(x, y, zoom);
-			map.put(key, new SoftReference<BufferedImage>(result));
+			cache.put(key, new SoftReference<BufferedImage>(result));
 			fireListeners(x, y, zoom, result);
 		}
 	}
@@ -85,7 +87,8 @@ public class TileCache implements TileSource {
 
 	private LinkedList<TileFinishedListener> listeners = new LinkedList<>();
 	private TileSource target;
-	private HashMap<String, SoftReference<BufferedImage>> map = new HashMap<>();
+	private Map<String, SoftReference<BufferedImage>> cache = Collections
+			.synchronizedMap(new HashMap<String, SoftReference<BufferedImage>>());
 
 	private Worker[] workers;
 	BufferedImage tile;
@@ -138,7 +141,7 @@ public class TileCache implements TileSource {
 		x &= bitmask;
 		y &= bitmask;
 		String key = key(x, y, zoom);
-		SoftReference<BufferedImage> cacheVal = map.get(key);
+		SoftReference<BufferedImage> cacheVal = cache.get(key);
 		BufferedImage tile;
 		if (cacheVal != null && (tile = cacheVal.get()) != null) {
 			prefetchEnv(x, y, zoom);
@@ -169,7 +172,7 @@ public class TileCache implements TileSource {
 		final int bitmask = (1 << zoom) - 1;
 		x &= bitmask;
 		y &= bitmask;
-		SoftReference<BufferedImage> ref = map.get(key(x, y, zoom));
+		SoftReference<BufferedImage> ref = cache.get(key(x, y, zoom));
 		if (ref == null || ref.get() == null) {
 			prefetchWaiting.addFirst(new TileJob(x, y, zoom));
 		}
