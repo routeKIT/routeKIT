@@ -86,6 +86,8 @@ public class HTMLExporter {
 
 			html.writeEndElement(); // html
 			html.writeEndDocument();
+
+			outputStream.close();
 		} catch (TransformerFactoryConfigurationError | IOException
 				| XMLStreamException | FactoryConfigurationError e) {
 			// TODO
