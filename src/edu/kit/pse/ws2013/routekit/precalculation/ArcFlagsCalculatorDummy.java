@@ -2,11 +2,13 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 public class ArcFlagsCalculatorDummy implements ArcFlagsCalculator {
 
 	@Override
-	public void calculateArcFlags(ProfileMapCombination combination) {
+	public void calculateArcFlags(ProfileMapCombination combination,
+			ProgressReporter reporter) {
 		long t1 = System.currentTimeMillis();
 		int[] flagsArray = new int[combination.getStreetMap()
 				.getEdgeBasedGraph().getNumberOfTurns()];
@@ -16,6 +18,7 @@ public class ArcFlagsCalculatorDummy implements ArcFlagsCalculator {
 		long t2 = System.currentTimeMillis();
 		int time = (int) (t2 - t1);
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
+		reporter.setProgress(1);
 	}
 
 }

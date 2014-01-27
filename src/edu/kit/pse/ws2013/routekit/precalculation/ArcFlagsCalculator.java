@@ -3,6 +3,7 @@ package edu.kit.pse.ws2013.routekit.precalculation;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 /**
  * Calculates the {@link ArcFlags} of the partitioned, weighted
@@ -19,6 +20,9 @@ public interface ArcFlagsCalculator {
 	 * 
 	 * @param combination
 	 *            a weighted {@link ProfileMapCombination}
+	 * @param reporter
+	 *            The {@link ProgressReporter} to report progress to.
 	 */
-	public void calculateArcFlags(ProfileMapCombination combination);
+	public void calculateArcFlags(ProfileMapCombination combination,
+			ProgressReporter reporter);
 }

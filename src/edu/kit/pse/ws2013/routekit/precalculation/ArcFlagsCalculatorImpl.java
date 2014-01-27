@@ -11,6 +11,7 @@ import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
 import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
@@ -30,7 +31,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	private Weights weights;
 
 	@Override
-	public void calculateArcFlags(ProfileMapCombination combination) {
+	public void calculateArcFlags(ProfileMapCombination combination,
+			ProgressReporter reporter) {
 		long t1 = System.currentTimeMillis();
 		graph = combination.getStreetMap().getGraph();
 		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
@@ -44,6 +46,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 			flagsArray[i] = 0x0;
 		}
 		final int nPartitions = 32;
+		reporter.setSubTasks(new float[] { .1f, .9f });
+		reporter.pushTask("Partitionen vorbereiten...");
 		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(nPartitions);
 		for (int i = 0; i < nPartitions; i++) {
 			partitions.add(new HashSet<Integer>());
@@ -51,6 +55,9 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		for (int i = 0; i < graph.getNumberOfEdges(); i++) {
 			partitions.get(edgeBasedGraph.getPartition(i)).add(i);
 		}
+		reporter.popTask();
+		reporter.pushTask("Kürzeste-Pfade-Bäume zu den Schnittkanten der Partitionen aufbauen...");
+		int i = 1;
 		for (int currentPartition = 0; currentPartition < partitions.size(); currentPartition++) {
 			Set<Integer> edgesWithTurnsToOtherPartitions = new HashSet<Integer>();
 			for (Integer edge : partitions.get(currentPartition)) {
@@ -69,7 +76,10 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 			for (Integer edge : edgesWithTurnsToOtherPartitions) {
 				buildReverseShortestPathsTreeAndSetArcFlags(edge);
 			}
+			reporter.setProgress(i / nPartitions);
+			i++;
 		}
+		reporter.popTask();
 		long t2 = System.currentTimeMillis();
 		int time = (int) (t2 - t1);
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
