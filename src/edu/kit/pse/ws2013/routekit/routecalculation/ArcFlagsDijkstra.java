@@ -38,8 +38,13 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		distance[startEdge] = 0;
 		previous[startEdge] = -1;
 
+		distance[data.getStreetMap().getGraph().getCorrespondingEdge(startEdge)] = 0;
+		previous[data.getStreetMap().getGraph().getCorrespondingEdge(startEdge)] = -1;
+
 		for (int i = 0; i < graph.length; i++) {
-			if (i != startEdge) {
+			if (i != startEdge
+					&& i != data.getStreetMap().getGraph()
+							.getCorrespondingEdge(startEdge)) {
 				distance[i] = Integer.MAX_VALUE;
 				previous[i] = -1;
 			}
@@ -50,7 +55,9 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		// calculation
 		while (!fh.isEmpty()) {
 			int u = fh.deleteMin().getValue();
-			if (u == destinationEdge) {
+			if (u == destinationEdge
+					|| u == data.getStreetMap().getGraph()
+							.getCorrespondingEdge(destinationEdge)) {
 				// found it!
 				break;
 			}
@@ -105,5 +112,12 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		Route route = new Route(data, start, destination, turns);
 
 		return route;
+	}
+
+	private int findOtherTurn(PointOnEdge edge, ProfileMapCombination data) {
+		int otherEdge = data.getStreetMap().getGraph()
+				.getCorrespondingEdge(edge.getEdge());
+
+		return 0;
 	}
 }
