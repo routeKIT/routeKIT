@@ -43,7 +43,8 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	private boolean closed = false;
 
 	public ProgressDialog(Window owner) {
-		super(owner);
+		super(owner, "Berechne...");
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setModal(true);
 		JPanel p = new JPanel(new BorderLayout());
 		bar = new JProgressBar();
@@ -56,9 +57,10 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		setContentPane(p);
 		pack();
 		setLocationRelativeTo(owner);
-		new Thread() {
+		new Thread("ProgressDialog Refresh Thread") {
 			@Override
 			public void run() {
+				setPriority(MIN_PRIORITY);
 				do {
 					repaint();
 					try {
@@ -109,6 +111,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void beginTask(String name) {
 		bar.setString(name);
+		setTitle(name + "...");
 		tasks.addLast(new AbstractMap.SimpleEntry<>(name, System
 				.currentTimeMillis()));
 		repaint();
@@ -118,6 +121,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	public void progress(float progress, String name) {
 		bar.setValue((int) (progress * 100));
 		bar.setString(name);
+		setTitle(name + "... " + ((int) progress * 100) + "%");
 	}
 
 	@Override

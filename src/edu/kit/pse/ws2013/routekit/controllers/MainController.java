@@ -209,7 +209,7 @@ public class MainController {
 	 *            reported.
 	 */
 	public void startPrecalculation(final ProgressReporter reporter) {
-		new Thread() {
+		new Thread("MainController Precalculation Thread") {
 			@Override
 			public void run() {
 				ProfileMapCombination combination = profileMapManager

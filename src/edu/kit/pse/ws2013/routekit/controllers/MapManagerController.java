@@ -150,7 +150,7 @@ public class MapManagerController {
 	 *            The {@link ProgressReporter} to report progress to.
 	 */
 	public void saveAllChanges(final ProgressReporter reporter) {
-		new Thread() {
+		new Thread("MapManagerController Worker Thread") {
 			@Override
 			public void run() {
 				selectedMap = currentMap;
