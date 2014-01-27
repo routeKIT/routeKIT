@@ -158,7 +158,12 @@ public class MainController {
 		}
 		RouteDescription description = new RouteDescriptionGenerator()
 				.generateRouteDescription(route);
-		new HTMLExporter().exportRouteDescription(description, target);
+		try {
+			new HTMLExporter().exportRouteDescription(description, target);
+		} catch (IOException e) {
+			view.textMessage("Beim Export der Routenbeschreibung ist ein Fehler aufgetreten!\n"
+					+ e.getMessage());
+		}
 	}
 
 	/**
