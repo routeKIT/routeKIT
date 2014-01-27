@@ -253,8 +253,9 @@ public class MapManagerView extends JDialog {
 						myPanel, "Eingabe Pfad", JOptionPane.OK_CANCEL_OPTION);
 				if (result == JOptionPane.OK_OPTION) {
 					if (!pathUpdate.getText().equals("")) {
+						File newfile = new File(pathUpdate.getText());
 						mmc.importMap((String) mapname.getSelectedItem(),
-								fileChooser.getSelectedFile());
+								newfile);
 					}
 				}
 			}
