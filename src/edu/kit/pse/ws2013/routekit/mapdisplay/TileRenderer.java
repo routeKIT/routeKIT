@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
@@ -43,10 +44,13 @@ public class TileRenderer implements TileSource {
 		}
 
 		public boolean next() {
-			if (!edges.hasNext()) {
-				return false;
-			}
-			edge = edges.next();
+			do {
+				if (!edges.hasNext()) {
+					return false;
+				}
+
+				edge = edges.next();
+			} while (graph.getCorrespondingEdge(edge) > edge);
 			extractCoordinates();
 			return true;
 		}
@@ -121,7 +125,7 @@ public class TileRenderer implements TileSource {
 			g.setStroke(new BasicStroke(getStreetWidth(zoom, it.p),
 					BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 			g.drawLine(it.xstart, it.ystart, it.xtarget, it.ytarget);
-		}//
+		}
 
 		g.setStroke(oldStroke);
 
@@ -153,11 +157,49 @@ public class TileRenderer implements TileSource {
 					}
 					nNames.append(name);
 				}
-
 				g.drawString(nNames.toString(), space + it.xstart,
 						(int) (it.ystart - r.getY() / 2 - r.getY() - r
 								.getHeight()) + 1);
-				g.setTransform(old);
+				// Pfeil <-
+				if (zoom > 15) {
+					if (graph.getCorrespondingEdge(it.edge) == -1) {
+						BasicStroke pen = new BasicStroke(2F,
+								BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);
+						Polygon p = new Polygon();
+						double peakLength = 0.4;
+						double tailThickness = 0.1;
+
+						double length = 20; // zoom
+						double height = 10; // breite der straße
+
+						int ycenter = (it.ystart - (int) height / 2);
+						p.addPoint(it.xstart, (int) height / 2 + ycenter);
+						p.addPoint((int) (length * peakLength) + it.xstart,
+								ycenter);
+						p.addPoint(
+								(int) (length * peakLength) + it.xstart,
+								(int) (ycenter + (height - (height * tailThickness)) / 2));
+						p.addPoint(
+								(int) (length) + it.xstart,
+								(int) (ycenter + (height - (height * tailThickness)) / 2));
+						p.addPoint((int) (length) + it.xstart,
+								(int) (ycenter
+										+ (height - (height * tailThickness))
+										/ 2 + (height * tailThickness)));
+						p.addPoint((int) (length * peakLength) + it.xstart,
+								(int) (ycenter
+										+ (height - (height * tailThickness))
+										/ 2 + (height * tailThickness)));
+						p.addPoint((int) (it.xstart + length * peakLength),
+								(int) height + ycenter);
+
+						g.setStroke(pen);
+						g.fillPolygon(p);
+						g.drawPolygon(p);
+
+						g.setTransform(old);
+					}
+				}
 			}
 		}
 		return tile;
