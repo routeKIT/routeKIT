@@ -21,7 +21,7 @@ public class OSMMapImporter extends MapImporter {
 		reporter.popTask();
 		stm.setName(name);
 		reporter.pushTask("Partitioniere Graph");
-		part.partitionGraph(stm.getEdgeBasedGraph(), 1);
+		part.partitionGraph(stm.getEdgeBasedGraph(), 32);
 		reporter.popTask();
 		return stm;
 	}
