@@ -12,7 +12,7 @@ public class PreCalculator {
 
 	public PreCalculator() {
 		weighter = new EdgeWeighterImpl();
-		calulator = new ArcFlagsCalculatorDummy();
+		calulator = new ArcFlagsCalculatorImpl();
 	}
 
 	/**

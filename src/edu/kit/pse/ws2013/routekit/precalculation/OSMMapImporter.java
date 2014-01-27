@@ -10,7 +10,7 @@ import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 public class OSMMapImporter extends MapImporter {
 	OSMParser parser = new OSMParser();
-	GraphPartitioner part = new DummyGraphPartitioner();
+	GraphPartitioner part = new ExternalPartitionerAdapter();
 
 	@Override
 	public StreetMap importMap(File file, String name, ProgressReporter reporter)
