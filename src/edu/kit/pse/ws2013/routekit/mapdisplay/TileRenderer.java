@@ -150,8 +150,8 @@ public class TileRenderer implements TileSource {
 					if (graph.getCorrespondingEdge(it.edge) == -1) {
 						g.setColor(Color.WHITE);
 						double angle2 = angle;
-						if (it.xtarget > it.xstart
-								|| (it.xstart == it.xtarget && it.ystart < it.ytarget)) {
+						if (it.xtarget < it.xstart
+								|| (it.xstart == it.xtarget && it.ystart > it.ytarget)) {
 							angle2 -= Math.PI;
 						}
 						AffineTransform rotateInstance = AffineTransform
@@ -206,19 +206,23 @@ public class TileRenderer implements TileSource {
 		double height = 4 + (zoom - 15) * 3 / 4;
 
 		int ycenter = -(int) height / 2;
-		p.addPoint(0, (int) height / 2 + ycenter);
-		p.addPoint((int) (length * peakLength), ycenter);
+
 		p.addPoint((int) (length * peakLength),
 				(int) (ycenter + (height - (height * tailThickness)) / 2));
 		p.addPoint((int) (length),
 				(int) (ycenter + (height - (height * tailThickness)) / 2));
+
+		p.addPoint((int) (length), ycenter);
+		p.addPoint((int) ((length) + (length * peakLength)), (int) height / 2
+				+ ycenter);
+		p.addPoint((int) (length), (int) height + ycenter);
+
 		p.addPoint(
 				(int) (length),
 				(int) (ycenter + (height - (height * tailThickness)) / 2 + (height * tailThickness)));
 		p.addPoint(
 				(int) (length * peakLength),
 				(int) (ycenter + (height - (height * tailThickness)) / 2 + (height * tailThickness)));
-		p.addPoint((int) (length * peakLength), (int) height + ycenter);
 
 		g.setStroke(pen);
 		g.fillPolygon(p);
