@@ -23,7 +23,10 @@ Thumbs.db
 # UMLet
 Umlet
 
-#UMLet Differ
+# UMLet Differ
 UmletDiffer.jar
 
 /bin
+
+# Binaries
+*.exe

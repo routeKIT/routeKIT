@@ -109,6 +109,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		}
 		while (!fh.isEmpty()) {
 			int currentEdge = fh.deleteMin().getValue();
+			fhList.remove(currentEdge);
 			if (distance[currentEdge] == Integer.MAX_VALUE) {
 				break;
 			}
@@ -120,7 +121,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 				int endEdge = edgeBasedGraph.getTargetEdge(currentTurn);
 				int endPartition = edgeBasedGraph.getPartition(endEdge);
 
-				if (!(startPartition == edgePartition && startPartition == endPartition)) {
+				if (fhList.containsKey(startEdge)
+						&& !(startPartition == edgePartition && startPartition == endPartition)) {
 					int newDistance = distance[currentEdge]
 							+ weights.getWeight(currentTurn);
 
