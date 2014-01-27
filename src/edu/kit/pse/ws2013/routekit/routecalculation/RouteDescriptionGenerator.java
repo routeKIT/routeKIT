@@ -83,7 +83,7 @@ public class RouteDescriptionGenerator {
 				} else {
 					instr.append(roundaboutExit).append('.');
 				}
-				instr.append("Ausfahrt nehmen");
+				instr.append(" Ausfahrt nehmen");
 				break;
 			default:
 				break;

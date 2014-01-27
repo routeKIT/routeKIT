@@ -25,6 +25,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
@@ -193,7 +194,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		left.add(controls, BorderLayout.NORTH);
 		routeDescription = new JList<String>(new DefaultListModel<String>());
-		left.add(routeDescription, BorderLayout.CENTER);
+		left.add(new JScrollPane(routeDescription), BorderLayout.CENTER);
 		routeDescription.setCellRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
 
