@@ -69,7 +69,8 @@ public class History {
 	 */
 	public void save(File file) throws IOException {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-			for (HistoryEntry entry : entries) {
+			for (HistoryEntry entry : entries.subList(
+					Math.max(entries.size() - 100, 0), entries.size())) {
 				writer.write(entry.toString());
 				writer.newLine();
 			}
