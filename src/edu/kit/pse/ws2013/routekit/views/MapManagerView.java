@@ -410,8 +410,16 @@ public class MapManagerView extends JDialog {
 
 				@Override
 				public void run() {
+					final int timeout;
+					if (java.lang.management.ManagementFactory
+							.getRuntimeMXBean().getInputArguments().toString()
+							.indexOf("jdwp") >= 0) {
+						timeout = 0;
+					} else {
+						timeout = 5;
+					}
 					try {
-						for (int sek = 5; sek >= 1; sek--) {
+						for (int sek = timeout; sek >= 1; sek--) {
 							ok.setText("OK (" + sek + ")");
 							Thread.sleep(1000);
 						}
