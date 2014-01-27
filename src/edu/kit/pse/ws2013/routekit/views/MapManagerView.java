@@ -406,7 +406,7 @@ public class MapManagerView extends JDialog {
 
 			setContentPane(contentPane);
 			pack();
-			new Thread(new Runnable() {
+			new Thread("MapManagerView Button Timeout Thread") {
 
 				@Override
 				public void run() {
@@ -428,7 +428,7 @@ public class MapManagerView extends JDialog {
 					ok.setText("OK");
 					ok.setEnabled(true);
 				}
-			}).start();
+			}.start();
 			setLocationRelativeTo(parent);
 			setVisible(true);
 		}
