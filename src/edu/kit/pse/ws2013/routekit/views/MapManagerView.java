@@ -216,8 +216,8 @@ public class MapManagerView extends JDialog {
 				if (result == JOptionPane.OK_OPTION) {
 					if (!path.getText().equals("")
 							&& !name.getText().equals("")) {
-						mmc.importMap(name.getText(),
-								fileChooser.getSelectedFile());
+						File newfile = new File(path.getText());
+						mmc.importMap(name.getText(), newfile);
 					}
 				}
 			}
