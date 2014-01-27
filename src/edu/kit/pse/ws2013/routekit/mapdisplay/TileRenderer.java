@@ -68,12 +68,6 @@ public class TileRenderer implements TileSource {
 			xtarget = (int) ((coordsTargetNode.getSmtX(zoom) - x) * 256);
 			ytarget = (int) ((coordsTargetNode.getSmtY(zoom) - y) * 256);
 			p = graph.getEdgeProperties(edge);
-
-			/*
-			 * if ((xstart == xtarget && ystart > ytarget) || xstart > xtarget)
-			 * { int tmp = xstart; xstart = xtarget; xtarget = tmp; tmp =
-			 * ystart; ystart = ytarget; ytarget = tmp; }
-			 */
 		}
 
 	}
@@ -177,17 +171,12 @@ public class TileRenderer implements TileSource {
 				final AffineTransform at = AffineTransform.getRotateInstance(
 						angle, xstart, ystart);
 				g.setTransform(at);
-				int i = 1;
-				final StringBuilder nNames = new StringBuilder();
-				while (i * (r.getWidth() + 3) - 3 + 2 * space < streetLength) {
-					i++;
-					if (nNames.length() != 0) {
-						nNames.append(' ');
-					}
-					nNames.append(name);
+				if (r.getWidth() + 5 * space < streetLength) {
+					g.drawString(name, (int) (xstart + streetLength / 2 - r
+							.getWidth() / 2),
+							(int) (ystart - r.getY() / 2 - r.getY() - r
+									.getHeight()) + 1);
 				}
-				g.drawString(nNames.toString(), space + xstart, (int) (ystart
-						- r.getY() / 2 - r.getY() - r.getHeight()) + 1);
 				g.setTransform(old);
 
 			}
