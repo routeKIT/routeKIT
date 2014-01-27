@@ -55,8 +55,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		for (int i = 0; i < graph.getNumberOfEdges(); i++) {
 			partitions.get(edgeBasedGraph.getPartition(i)).add(i);
 		}
-		reporter.popTask();
-		reporter.pushTask("Kürzeste-Pfade-Bäume zu den Schnittkanten der Partitionen aufbauen...");
+		reporter.nextTask("Kürzeste-Pfade-Bäume zu den Schnittkanten der Partitionen aufbauen...");
 		int i = 1;
 		for (int currentPartition = 0; currentPartition < partitions.size(); currentPartition++) {
 			Set<Integer> edgesWithTurnsToOtherPartitions = new HashSet<Integer>();
@@ -76,7 +75,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 			for (Integer edge : edgesWithTurnsToOtherPartitions) {
 				buildReverseShortestPathsTreeAndSetArcFlags(edge);
 			}
-			reporter.setProgress(i / nPartitions);
+			reporter.setProgress(i / (float) nPartitions);
 			i++;
 		}
 		reporter.popTask();

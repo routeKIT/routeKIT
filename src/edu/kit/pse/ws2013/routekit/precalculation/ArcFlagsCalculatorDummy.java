@@ -18,7 +18,6 @@ public class ArcFlagsCalculatorDummy implements ArcFlagsCalculator {
 		long t2 = System.currentTimeMillis();
 		int time = (int) (t2 - t1);
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
-		reporter.setProgress(1);
 	}
 
 }
