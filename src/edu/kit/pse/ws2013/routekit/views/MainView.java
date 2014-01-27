@@ -37,6 +37,7 @@ import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
+import edu.kit.pse.ws2013.routekit.routecalculation.TurnInstruction;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -477,7 +478,12 @@ public class MainView extends JFrame implements RouteModelListener {
 			textMessage("");
 		}
 		if (description != null) {
-			textMessage(description.toString());
+			DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
+					.getModel();
+			listModel.clear();
+			for (TurnInstruction instruction : description.getInstructions()) {
+				listModel.addElement(instruction.toString());
+			}
 		}
 
 	}
