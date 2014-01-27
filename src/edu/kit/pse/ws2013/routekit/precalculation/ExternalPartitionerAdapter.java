@@ -29,6 +29,10 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 			Runtime.getRuntime().exec(cmd).waitFor();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			System.err.println("Falling back to “dummy” partitions...");
+			new DummyGraphPartitioner().partitionGraph(graph,
+					numberOfPartitions);
+			return;
 		}
 
 		readPartitionFile(fileName + ".part."
