@@ -76,7 +76,7 @@ public class OSMWay {
 		}
 		if (tags.containsKey("maxwidth")) {
 			try {
-				int maxWidth = (int) Float.parseFloat(tags.get("maxweight")) * 100;
+				int maxWidth = (int) Float.parseFloat(tags.get("maxwidth")) * 100;
 				restrictions.add(WidthRestriction.getInstance(maxWidth));
 			} catch (NumberFormatException e) {
 				// Ignore invalid value for the maxwidth tag
