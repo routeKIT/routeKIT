@@ -112,6 +112,8 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		setContentPane(contentPane);
 		setVisible(true);
+		html.setEnabled(false);
+		gpx.setEnabled(false);
 		if (!ProfileMapManager.getInstance().getCurrentCombination()
 				.isCalculated()) {
 			mapView.setEnabled(false);
@@ -454,6 +456,13 @@ public class MainView extends JFrame implements RouteModelListener {
 		Coordinates start = routeModel.getStart();
 		Coordinates destination = routeModel.getDestination();
 		RouteDescription description = routeModel.getCurrentDescription();
+		if (routeModel.getCurrentRoute() == null) {
+			html.setEnabled(false);
+			gpx.setEnabled(false);
+		} else {
+			html.setEnabled(true);
+			gpx.setEnabled(true);
+		}
 		if (start != null) {
 			startField.setBackground(Color.WHITE);
 			startField
