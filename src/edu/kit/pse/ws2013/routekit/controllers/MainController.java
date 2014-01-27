@@ -41,6 +41,7 @@ public class MainController {
 	private final History history;
 	MainView view;
 	private RouteCalculator rc;
+	private RouteDescriptionGenerator rdg;
 	private boolean useOnlineMaps = false;
 	private TileCache cache = null;
 
@@ -67,6 +68,7 @@ public class MainController {
 		history = _history;
 		view = new MainView(rm);
 		rc = new ArcFlagsDijkstra();
+		rdg = new RouteDescriptionGenerator();
 	}
 
 	/**
@@ -134,6 +136,9 @@ public class MainController {
 					index.findNearestPointOnEdge(destination),
 					currentCombination);
 			rm.setCurrentRoute(r);
+
+			RouteDescription rd = rdg.generateRouteDescription(r);
+			rm.setCurrentDescription(rd);
 		}
 	}
 
@@ -223,7 +228,7 @@ public class MainController {
 	 * @param useOnlineMaps
 	 *            {@code true} to use OSM tiles,
 	 *            {@code false) to use our own tiles.
-	 *
+	 * 
 	 */
 	public void setUseOnlineMaps(boolean useOnlineMaps) {
 		this.useOnlineMaps = useOnlineMaps;
