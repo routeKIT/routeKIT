@@ -169,8 +169,8 @@ public class TileRenderer implements TileSource {
 						double peakLength = 0.4;
 						double tailThickness = 0.1;
 
-						double length = 20; // zoom
-						double height = 10; // breite der straße
+						double length = 10 + (zoom - 15) * 10 / 4;
+						double height = 4 + (zoom - 15) * 3 / 4;
 
 						int ycenter = (it.ystart - (int) height / 2);
 						p.addPoint(it.xstart, (int) height / 2 + ycenter);
