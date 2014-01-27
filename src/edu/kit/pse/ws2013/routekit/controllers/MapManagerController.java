@@ -214,6 +214,7 @@ public class MapManagerController {
 						} catch (IOException | SAXException e) {
 							MainController.getInstance().view.textMessage(e
 									.getMessage());
+							e.printStackTrace();
 							failedMaps.add(map);
 							continue;
 						}
@@ -224,6 +225,7 @@ public class MapManagerController {
 						} catch (IOException e) {
 							MainController.getInstance().view.textMessage(e
 									.getMessage());
+							e.printStackTrace();
 							failedMaps.add(map);
 							continue;
 						}
