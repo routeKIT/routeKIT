@@ -417,6 +417,7 @@ public class OSMParser {
 				case "to":
 					relationToWay = way;
 				}
+				break;
 			case "node":
 				if (role != null && role.equals("via")) {
 					try {
