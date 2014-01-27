@@ -3,13 +3,13 @@ package edu.kit.pse.ws2013.routekit.export;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 
-import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
@@ -33,12 +33,12 @@ public class HTMLExporter {
 	 *            The file where the HTML document should be saved.
 	 */
 	public void exportRouteDescription(RouteDescription routeDesc, File file) {
-		try {
-			FileOutputStream outputStream = new FileOutputStream(file);
+		try (OutputStream outputStream = new FileOutputStream(file);
+				Writer writer = new OutputStreamWriter(outputStream)) {
 			XMLStreamWriter html = XMLOutputFactory.newInstance()
 					.createXMLStreamWriter(outputStream, "utf-8");
 			html.writeStartDocument();
-			new OutputStreamWriter(outputStream).write("<!DOCTYPE html>");
+			writer.write("<!DOCTYPE html>");
 			html.writeStartElement("html");
 
 			html.writeStartElement("head");
@@ -87,9 +87,8 @@ public class HTMLExporter {
 			html.writeEndElement(); // html
 			html.writeEndDocument();
 
-			outputStream.close();
-		} catch (TransformerFactoryConfigurationError | IOException
-				| XMLStreamException | FactoryConfigurationError e) {
+			html.close();
+		} catch (XMLStreamException | IOException e) {
 			// TODO
 			e.printStackTrace();
 		}
