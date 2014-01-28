@@ -3,6 +3,8 @@ package edu.kit.pse.ws2013.routekit.map;
 import java.io.File;
 import java.io.IOException;
 
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
+
 /**
  * A street map.
  */
@@ -47,6 +49,23 @@ public class StreetMap {
 
 	public void setName(String name) {
 		this.name = name; // TODO do we need this? I don’t think so – Lucas
+	}
+
+	/**
+	 * Ensures that this {@link StreetMap} is completely loaded. This is a noop
+	 * for normal maps.
+	 * 
+	 * @param reporter
+	 *            A {@link ProgressReporter} to report loading progress to.
+	 * @see #loadLazily(File)
+	 */
+	public void ensureLoaded(ProgressReporter reporter) {
+		reporter.setSubTasks(new float[] { .7f, .3f });
+		reporter.pushTask("Lade Graphen");
+		getGraph();
+		reporter.nextTask("Lade kantenbasierten Graphen");
+		getEdgeBasedGraph();
+		reporter.popTask();
 	}
 
 	@Override

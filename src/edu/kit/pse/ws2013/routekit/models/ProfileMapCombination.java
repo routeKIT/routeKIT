@@ -102,6 +102,25 @@ public class ProfileMapCombination {
 		return calculationTime;
 	}
 
+	/**
+	 * Ensures that this {@link ProfileMapCombination} / precalculation is
+	 * completely loaded. This is a noop for normal combinations.
+	 * 
+	 * @param reporter
+	 *            A {@link ProgressReporter} to report loading progress to.
+	 * @see #loadLazily(Profile, StreetMap, File)
+	 */
+	public void ensureLoaded(ProgressReporter reporter) {
+		reporter.setSubTasks(new float[] { .5f, .25f, .25f });
+		reporter.pushTask("Lade Karte");
+		map.ensureLoaded(reporter);
+		reporter.nextTask("Lade Kantengewichte");
+		getWeights();
+		reporter.nextTask("Lade Arc-Flags");
+		getArc();
+		reporter.popTask();
+	}
+
 	@Override
 	public String toString() {
 		return saveFileName(profile, map);
