@@ -214,7 +214,7 @@ public class MapView extends JPanel implements MouseListener,
 	}
 
 	private void drawRoute(Graphics g, final Route r) {
-		g.setColor(new Color(0, 0, 0, 192));
+		g.setColor(new Color(255, 0, 0, 192));
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);

@@ -93,7 +93,7 @@ public class TileRenderer implements TileSource {
 		final BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g = tile.createGraphics();
-		g.setColor(Color.white);
+		g.setColor(new Color(210, 210, 210));
 		g.fillRect(0, 0, 256, 256);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -232,8 +232,8 @@ public class TileRenderer implements TileSource {
 		Color col;
 		if (DO_COLORFULL) {
 			col = Color.getHSBColor(
-					type.ordinal() / ((float) HighwayType.values().length), 1,
-					border ? 0.5f : 1);
+					type.ordinal() / ((float) HighwayType.values().length),
+					0.2f, border ? 0.7f : 1f);
 		} else {
 			col = Color.BLACK;
 		}
