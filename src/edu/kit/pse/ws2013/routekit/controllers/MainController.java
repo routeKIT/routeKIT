@@ -122,8 +122,8 @@ public class MainController {
 	 * starts route calculation.
 	 */
 	private void checkAndCalculate() {
-		Coordinates start = rm.getStart();
-		Coordinates destination = rm.getDestination();
+		final Coordinates start = rm.getStart();
+		final Coordinates destination = rm.getDestination();
 		if (start != null && destination != null) {
 
 			List<HistoryEntry> entries = history.getEntries();
@@ -143,18 +143,24 @@ public class MainController {
 					e.printStackTrace();
 				}
 			}
-			ProfileMapCombination currentCombination = profileMapManager
-					.getCurrentCombination();
-			GraphIndex index = currentCombination.getStreetMap().getGraph()
-					.getIndex(18);
-			// TODO Unblock
-			Route r = rc.calculateRoute(index.findNearestPointOnEdge(start),
-					index.findNearestPointOnEdge(destination),
-					currentCombination);
-			rm.setCurrentRoute(r);
+			new Thread("Route calc") {
+				@Override
+				public void run() {
+					ProfileMapCombination currentCombination = profileMapManager
+							.getCurrentCombination();
+					GraphIndex index = currentCombination.getStreetMap()
+							.getGraph().getIndex(18);
+					Route r = rc.calculateRoute(
+							index.findNearestPointOnEdge(start),
+							index.findNearestPointOnEdge(destination),
+							currentCombination);
+					rm.setCurrentRoute(r);
 
-			RouteDescription rd = rdg.generateRouteDescription(r);
-			rm.setCurrentDescription(rd);
+					RouteDescription rd = rdg.generateRouteDescription(r);
+					rm.setCurrentDescription(rd);
+
+				}
+			}.start();
 		}
 	}
 
