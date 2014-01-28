@@ -27,6 +27,8 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		int startEdge = start.getEdge();
 		int destinationEdge = destination.getEdge();
 
+		boolean otherDestination = false;
+
 		LinkedList<Integer> turns = new LinkedList<Integer>();
 		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
 
@@ -60,10 +62,14 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		while (!fh.isEmpty()) {
 			int u = fh.deleteMin().getValue();
 			fhList.remove(u);
-			if (u == destinationEdge
-					|| u == data.getStreetMap().getGraph()
-							.getCorrespondingEdge(destinationEdge)) {
+			if (u == destinationEdge) {
 				// found it!
+				break;
+			}
+			if (u == data.getStreetMap().getGraph()
+					.getCorrespondingEdge(destinationEdge)) {
+				// found it!
+				otherDestination = true;
 				break;
 			}
 
@@ -101,7 +107,13 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		}
 
 		// reconstruct way
-		int x = destinationEdge;
+		int x;
+		if (otherDestination) {
+			x = data.getStreetMap().getGraph()
+					.getCorrespondingEdge(destinationEdge);
+		} else {
+			x = destinationEdge;
+		}
 		while (previous[x] != -1) {
 			Set<Integer> outgoingTurns = data.getStreetMap()
 					.getEdgeBasedGraph().getOutgoingTurns(previous[x]);
