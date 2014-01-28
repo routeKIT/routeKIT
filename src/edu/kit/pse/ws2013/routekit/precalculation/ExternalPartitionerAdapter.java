@@ -27,12 +27,18 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 				Integer.toString(numberOfPartitions) };
 		try {
 			Runtime.getRuntime().exec(cmd).waitFor();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			System.err.println("Falling back to “dummy” partitions...");
-			new DummyGraphPartitioner().partitionGraph(graph,
-					numberOfPartitions);
-			return;
+		} catch (IOException | InterruptedException e) {
+			cmd[0] = "kmetis";
+			try {
+				Runtime.getRuntime().exec(cmd).waitFor();
+			} catch (IOException | InterruptedException f) {
+				e.printStackTrace();
+				f.printStackTrace();
+				System.err.println("Falling back to “dummy” partitions...");
+				new DummyGraphPartitioner().partitionGraph(graph,
+						numberOfPartitions);
+				return;
+			}
 		}
 
 		readPartitionFile(fileName + ".part."
