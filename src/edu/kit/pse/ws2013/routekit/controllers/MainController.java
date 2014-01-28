@@ -251,8 +251,8 @@ public class MainController {
 	 * tiles, {@link TileRenderer}.
 	 * 
 	 * @param useOnlineMaps
-	 *            {@code true} to use OSM tiles,
-	 *            {@code false) to use our own tiles.
+	 *            {@code true} to use OSM tiles, {@code false} to use our own
+	 *            tiles.
 	 * 
 	 */
 	public void setUseOnlineMaps(boolean useOnlineMaps) {
