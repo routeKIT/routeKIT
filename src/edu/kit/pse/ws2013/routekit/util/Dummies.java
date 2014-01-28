@@ -28,7 +28,7 @@ public class Dummies {
 			SAXException {
 		rootDir.mkdir();
 		new File(rootDir, "routeKIT.idx").createNewFile();
-		ProfileMapManager.init(rootDir);
+		ProfileMapManager.init(rootDir, new DummyProgressReporter());
 
 		URL url = new URL(
 				"http://algo2.iti.kit.edu/documents/PSE_WS1314/karlsruhe_big.osm");
@@ -58,7 +58,7 @@ public class Dummies {
 			SAXException {
 		rootDir.mkdir();
 		new File(rootDir, "routeKIT.idx").createNewFile();
-		ProfileMapManager.init(rootDir);
+		ProfileMapManager.init(rootDir, new DummyProgressReporter());
 		ProfileMapCombination combination = new ProfileMapCombination(
 				new DummyMapImporter().importMap(new File("dummy"),
 						"Karlsruhe", new DummyProgressReporter()),

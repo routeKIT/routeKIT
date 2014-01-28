@@ -17,6 +17,7 @@ import java.util.Set;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
@@ -196,8 +197,9 @@ public class ProfileMapManager {
 	 * only remembered as the "current" one, and forgotten as soon as this
 	 * method is called with another combination; if it is precalculated, it’s
 	 * stored in the internal list of {@link ProfileMapCombination
-	 * ProfileMapCombinations} and {@link #savePrecalculation(ProfileMapCombination) saved} to
-	 * disk (it’s assumed that the profile and the map are already saved).
+	 * ProfileMapCombinations} and
+	 * {@link #savePrecalculation(ProfileMapCombination) saved} to disk (it’s
+	 * assumed that the profile and the map are already saved).
 	 * <p>
 	 * Note that you’d usually want to use
 	 * {@link #selectProfileAndMap(Profile, StreetMap)} instead of this method,
@@ -321,8 +323,8 @@ public class ProfileMapManager {
 	 * 
 	 * @param precalculation
 	 *            The precalculation. (This must be an actual precalculation –
-	 *            i.&nbsp;e. an element of {@link #getPrecalculations()} – and not
-	 *            just any {@link ProfileMapCombination}.)
+	 *            i.&nbsp;e. an element of {@link #getPrecalculations()} – and
+	 *            not just any {@link ProfileMapCombination}.)
 	 * @param deleteFromDisk
 	 *            If {@code true}, delete from disk as well. You usually want to
 	 *            do this; the only case where you don’t need this is if you’re
@@ -371,8 +373,8 @@ public class ProfileMapManager {
 		return Collections.unmodifiableSet(precalculations);
 	}
 
-	public static ProfileMapCombination init(File rootDirectory)
-			throws IOException {
+	public static ProfileMapCombination init(File rootDirectory,
+			ProgressReporter pr) throws IOException {
 		if (!rootDirectory.exists()) {
 			initFirstStart(rootDirectory);
 		} else if (!rootDirectory.isDirectory()) {
@@ -385,6 +387,9 @@ public class ProfileMapManager {
 		ProfileManager.init(rootDirectory);
 		MapManager.init(rootDirectory);
 		instance = new ProfileMapManager(rootDirectory);
+		if (pr != null) {
+			instance.current.ensureLoaded(pr);
+		}
 		return instance.getCurrentCombination();
 	}
 

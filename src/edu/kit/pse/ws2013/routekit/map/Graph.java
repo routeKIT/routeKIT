@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -355,12 +356,16 @@ public class Graph {
 	 * 
 	 * @param file
 	 *            The file.
+	 * @param reporter
 	 * @return A {@link Graph} loaded from {@code file}.
 	 * @throws IOException
 	 *             If an I/O error occurs.
 	 */
-	public static Graph load(File file) throws IOException {
+	public static Graph load(File file, ProgressReporter reporter)
+			throws IOException {
+		reporter.setSubTasks(new float[] { 0.7f, 0.3f });
 		try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+			reporter.pushTask("Lese Datei");
 			if (!raf.readUTF().equals("routeKIT")) {
 				throw new IOException("Wrong magic!");
 			}
@@ -406,14 +411,22 @@ public class Graph {
 
 			EdgeProperties[] edgeProps = new EdgeProperties[nEdges];
 			int length;
+			int totalRead = 0;
 			while ((length = raf.readInt()) != 0) {
 				EdgeProperties props = EdgeProperties.load(raf);
+				totalRead += length;
+				reporter.setProgress(((float) totalRead) / nEdges);
 				while (length-- > 0) {
 					edgeProps[raf.readInt()] = props;
 				}
 			}
+			reporter.popTask("Lese Datei");
+			reporter.pushTask("Baue Graphstruktur");
 
-			return new Graph(nodes, edges, nodeProps, edgeProps, lats, lons);
+			Graph graph = new Graph(nodes, edges, nodeProps, edgeProps, lats,
+					lons);
+			reporter.popTask();
+			return graph;
 		}
 	}
 }

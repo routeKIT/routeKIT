@@ -17,6 +17,7 @@ import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.map.NodeProperties;
+import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 
 public class TestGraph {
 	public static final double EPSILON = 0.00001;
@@ -95,7 +96,7 @@ public class TestGraph {
 	public void testSaveLoad() throws IOException {
 		File f = File.createTempFile("routeKit_testGraph_", ".graph");
 		g.save(f);
-		Graph loaded = Graph.load(f);
+		Graph loaded = Graph.load(f, new DummyProgressReporter());
 		assertEquals(1, loaded.getTargetNode(0));
 		assertEquals(2, loaded.getTargetNode(1));
 		assertEquals(3, loaded.getTargetNode(2));

@@ -30,6 +30,7 @@ import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescriptionGenerator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 import edu.kit.pse.ws2013.routekit.views.MainView;
+import edu.kit.pse.ws2013.routekit.views.ProgressDialog;
 
 /**
  * routeKIT’s main Controller. Manages the program execution and remains alive
@@ -52,17 +53,24 @@ public class MainController {
 	 * Creates the controller, initializes the {@link MapManager},
 	 * {@link ProfileManager} and {@link ProfileMapManager} and then creates the
 	 * {@link MainView}.
+	 * 
+	 * @param pr
+	 *            the starter
 	 */
-	private MainController() {
+	private MainController(ProgressReporter pr) {
+		pr.pushTask("starte routeKit");
+		pr.setSubTasks(new float[] { 0.95f, 0.05f });
 		instance = this;
+		pr.pushTask("Lade Daten");
 		try {
-			ProfileMapManager.init(FileUtil.getRootDir());
+			ProfileMapManager.init(FileUtil.getRootDir(), pr);
 		} catch (IOException e) {
 			// die
 			history = null;
 			profileMapManager = null;
 			return;
 		}
+		pr.popTask("Lade Daten");
 		profileMapManager = ProfileMapManager.getInstance();
 		History _history; // because history is final
 		try {
@@ -73,7 +81,10 @@ public class MainController {
 		history = _history;
 		rc = new ArcFlagsDijkstra();
 		rdg = new RouteDescriptionGenerator();
+		pr.pushTask("Lade Ansicht");
 		view = new MainView(rm);
+		pr.popTask();
+		pr.popTask();
 	}
 
 	/**
@@ -323,7 +334,7 @@ public class MainController {
 
 	public static MainController getInstance() {
 		if (instance == null) {
-			new MainController();
+			throw new Error("hey");
 		}
 		return instance;
 	}
@@ -335,7 +346,16 @@ public class MainController {
 	 *            Command line arguments (currently unused).
 	 */
 	public static void main(String[] args) {
+		final ProgressDialog pd = new ProgressDialog(null);
+		new Thread("Upstart") {
+			@Override
+			public void run() {
+				ProgressReporter pr = new ProgressReporter();
+				pr.addProgressListener(pd);
+				instance = new MainController(pr);
+			}
+		}.start();
+		pd.setVisible(true);
 		// TODO maybe use args?
-		instance = new MainController();
 	}
 }

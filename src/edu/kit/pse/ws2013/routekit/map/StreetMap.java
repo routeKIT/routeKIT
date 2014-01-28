@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
+import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 
 /**
  * A street map.
@@ -60,7 +61,7 @@ public class StreetMap {
 	 * @see #loadLazily(File)
 	 */
 	public void ensureLoaded(ProgressReporter reporter) {
-		reporter.setSubTasks(new float[] { .7f, .3f });
+		reporter.setSubTasks(new float[] { .9f, .1f });
 		reporter.pushTask("Lade Graphen");
 		getGraph();
 		reporter.nextTask("Lade kantenbasierten Graphen");
@@ -108,7 +109,7 @@ public class StreetMap {
 	 */
 	public static StreetMap load(File directory) throws IOException {
 		Graph graph = Graph.load(new File(directory, directory.getName()
-				+ ".graph"));
+				+ ".graph"), new DummyProgressReporter());
 		EdgeBasedGraph egraph = EdgeBasedGraph.load(new File(directory,
 				directory.getName() + ".egraph"));
 		StreetMap ret = new StreetMap(graph, egraph);
@@ -147,7 +148,8 @@ public class StreetMap {
 		public Graph getGraph() {
 			if (this.graph == null) {
 				try {
-					this.graph = Graph.load(graphFile);
+					this.graph = Graph.load(graphFile,
+							new DummyProgressReporter());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -165,6 +167,20 @@ public class StreetMap {
 				}
 			}
 			return edgeBasedGraph;
+		}
+
+		@Override
+		public void ensureLoaded(ProgressReporter reporter) {
+			reporter.setSubTasks(new float[] { .9f, .1f });
+			reporter.pushTask("Lade Graphen");
+			try {
+				this.graph = Graph.load(graphFile, reporter);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			reporter.nextTask("Lade kantenbasierten Graphen");
+			getEdgeBasedGraph();
+			reporter.popTask();
 		}
 	}
 }
