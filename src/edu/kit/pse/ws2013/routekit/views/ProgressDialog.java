@@ -134,11 +134,11 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void finishRoot(String name) {
 		bar.setString(name);
-		setVisible(false);
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				// must be called on the event thread
+				setVisible(false);
 				dispose();
 			}
 		});

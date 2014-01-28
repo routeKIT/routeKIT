@@ -113,7 +113,6 @@ public class MainView extends JFrame implements RouteModelListener {
 				});
 
 		setContentPane(contentPane);
-		setVisible(true);
 		html.setEnabled(false);
 		gpx.setEnabled(false);
 		if (!ProfileMapManager.getInstance().getCurrentCombination()

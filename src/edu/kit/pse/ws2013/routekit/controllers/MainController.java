@@ -362,6 +362,7 @@ public class MainController {
 			}
 		}.start();
 		pd.setVisible(true);
+		instance.view.setVisible(true);
 		// TODO maybe use args?
 	}
 }
