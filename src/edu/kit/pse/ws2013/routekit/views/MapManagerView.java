@@ -70,11 +70,11 @@ public class MapManagerView extends JDialog {
 		setLocationRelativeTo(getParent());
 		setResizable(false);
 
-		fileChooser.addChoosableFileFilter(new FileFilter() {
+		fileChooser.setFileFilter(new FileFilter() {
 
 			@Override
 			public boolean accept(File f) {
-				return f.getName().endsWith(".osm");
+				return f.isDirectory() || f.getName().endsWith(".osm");
 			}
 
 			@Override
