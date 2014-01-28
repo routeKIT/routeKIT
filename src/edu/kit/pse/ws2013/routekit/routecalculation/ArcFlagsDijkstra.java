@@ -59,6 +59,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		// calculation
 		while (!fh.isEmpty()) {
 			int u = fh.deleteMin().getValue();
+			fhList.remove(u);
 			if (u == destinationEdge
 					|| u == data.getStreetMap().getGraph()
 							.getCorrespondingEdge(destinationEdge)) {
@@ -77,22 +78,23 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 				int targetEdge = data.getStreetMap().getEdgeBasedGraph()
 						.getTargetEdge(currentTurn);
 
-				// fetch Arc-Flags
-				int arcFlag = data.getArc().getFlag(currentTurn);
+				if (fhList.containsKey(targetEdge)) {
+					// fetch Arc-Flags
+					int arcFlag = data.getArc().getFlag(currentTurn);
+					int arcBit = (arcFlag >> destinationPartition) & 0x1;
+					// check arc bit
+					if (arcBit != 0) {
+						int alt = distance[u]
+								+ data.getWeights().getWeight(currentTurn);
 
-				int arcBit = arcFlag >> destinationPartition & 0x1;
+						if (alt < distance[targetEdge]) {
+							distance[targetEdge] = alt;
+							previous[targetEdge] = u;
 
-				// check arc bit
-				if (arcBit != 0) {
-					int alt = distance[u]
-							+ data.getWeights().getWeight(currentTurn);
-
-					if (alt < distance[targetEdge]) {
-						distance[targetEdge] = alt;
-						previous[targetEdge] = u;
-
-						FibonacciHeapEntry toDecrease = fhList.get(targetEdge);
-						fh.decreaseKey(toDecrease, alt);
+							FibonacciHeapEntry toDecrease = fhList
+									.get(targetEdge);
+							fh.decreaseKey(toDecrease, alt);
+						}
 					}
 				}
 			}
