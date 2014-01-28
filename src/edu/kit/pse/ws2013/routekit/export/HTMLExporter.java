@@ -12,6 +12,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.StreetMap;
+import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
 import edu.kit.pse.ws2013.routekit.routecalculation.TurnInstruction;
@@ -68,7 +70,8 @@ public class HTMLExporter {
 
 			html.writeStartElement("h2");
 			Route route = routeDesc.getRoute();
-			Graph graph = route.getData().getStreetMap().getGraph();
+			StreetMap streetMap = route.getData().getStreetMap();
+			Graph graph = streetMap.getGraph();
 			PointOnEdge startPoint = route.getStart();
 			int startEdge = startPoint.getEdge();
 			Coordinates start = graph.getCoordinates(
@@ -87,6 +90,11 @@ public class HTMLExporter {
 			html.writeStartElement("ol");
 			for (TurnInstruction instruction : routeDesc.getInstructions()) {
 				html.writeStartElement("li");
+				int turn = instruction.getTurn();
+				TurnType type = streetMap.getEdgeBasedGraph().getTurnType(turn);
+				String clazz = type.name().toLowerCase().replace('_', '-');
+				html.writeAttribute("class", clazz);
+				html.writeAttribute("id", "turn-" + Integer.toString(turn));
 				html.writeCharacters(instruction.toString());
 				html.writeEndElement();
 			}
