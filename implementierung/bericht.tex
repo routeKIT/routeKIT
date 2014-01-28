@@ -647,6 +647,42 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 
 \package{Precalculation}{}
 {
+\class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
+  {\none}
+        {
+	\method{calculateArcFlags}
+		{
+			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+		}
+		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+        }
+\class{ArcFlagsCalculatorImpl}{Geändert: Erstzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+  {\none}
+        {
+	\method{calculateArcFlags}
+		{
+			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+		}
+		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+        }
+\class{EdgeWeighter}{Geändert: Ein Interface für die Berechnung der Kantengewichte.}
+  {\none}
+        {
+	\method{weightEdges}
+		{
+			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+		}
+		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
+        }
+\class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+  {\none}
+        {
+	\method{calculateArcFlags}
+		{
+			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+		}
+		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
+        }
   \class{OSMParser}{~}
         {\none}
         {
