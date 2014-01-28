@@ -458,13 +458,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
 \package{Controllers}{
-  Es wurden drei neue Klassen eingeführt: \reftype{ProfileManager}, \reftype{MapManager} und \reftype{ProfileMapManager}, die jeweils alle dem Programm bekannten \glspl{profil}, \glspl{karte} und \glspl{vorberechnung} halten und sie speichern und laden.
+  Es wurde eine neue Klasse \reftype{ProfileMapManager} eingeführt, die alle dem Programm bekannten \glspl{vorberechnung} halten und sie speichern und laden.
 }
 {
-  \class{ProfileManager}
-        {
-          Der \code{ProfileManager} verwaltet alle \glspl{profil}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{profil}.
-        }
+  \class{ProfileManager}{~}
         {\none}
         {
           \method{init}
@@ -483,31 +480,8 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 
                    Für die Diskussion des \gls{einzelstueck}-Entwurfsmusters siehe \refmethod{ProfileMapManager}{init}.
                  }
-          \method{getProfiles}[Set<Profile>]
-                 {\none}
-                 {
-                   Gibt alle dem \code{ProfileManager} bekannten \glspl{profil} zurück.
-                 }
-          \method{saveProfile}
-                 {
-                   \param{profile}{Profile}{Das Profil, das gespeichert werden soll.}
-                 }
-                 {
-                   Speichert \refparam{ProfileManager}{saveProfile}{profile} in der internen Liste an Profilen (siehe \refmethod{ProfileManager}{getProfiles}) und auf der Festplatte.
-                   Alle bereits vorhandenen \glspl{vorberechnung} für ein Profil mit dem gleichen Namen werden gelöscht.
-                 }
-          \method{deleteProfile}
-                 {
-                   \param{profile}{Profile}{Das Profil, das gelöscht werden soll.}
-                 }
-                 {
-                   Entfernt \refparam{ProfileManager}{deleteProfile}{profile} aus der internen Liste an Profilen (siehe \refmethod{ProfileManager}{getProfiles}) und löscht das Profil sowie alle seine Vorberechnungen von der Festplatte.
-                 }
         }
-  \class{MapManager}
-        {
-          Der \code{MapManager} verwaltet alle \glspl{karte}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{karte}.
-        }
+  \class{MapManager}{~}
         {\none}
         {
           \method{init}
@@ -525,26 +499,6 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    \refmethod{ProfileManager}{init} muss zuvor aufgerufen worden sein.
                    
                    Für die Diskussion des \gls{einzelstueck}-Entwurfsmusters siehe \refmethod{ProfileMapManager}{init}.
-                 }
-          \method{getMaps}[Set<StreetMap>]
-                 {\none}
-                 {
-                   Gibt alle dem \code{MapManager} bekannten \glspl{karte} zurück.
-                 }
-          \method{saveMap}
-                 {
-                   \param{map}{StreetMap}{Die Karte, die gespeichert werden soll.}
-                 }
-                 {
-                   Speichert \refparam{MapManager}{saveMap}{map} in der internen Liste an Karten (siehe \refmethod{MapManager}{getMaps}) und auf der Festplatte.
-                   Alle bereits vorhandenen \glspl{vorberechnung} für eine Karte mit dem gleichen Namen werden gelöscht.
-                 }
-          \method{deleteMap}
-                 {
-                   \param{map}{StreetMap}{Die Karte, die gelöscht werden soll.}
-                 }
-                 {
-                   Entfernt \refparam{MapManager}{deleteMap}{map} aus der internen Liste an Karten (siehe \refmethod{MapManager}{getMaps}) und löscht die Karte sowie alle ihre Vorberechnungen von der Festplatte.
                  }
         }
   \class{ProfileMapManager}
@@ -650,15 +604,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 		{\none}
 		{Neu: Gibt eine Instance des \reftype{MainControllers} zurück, da der er ein Einzelstück ist.}
 	}
-\class{MapManager}{~}
-{\none}
-	{
-	   \method{getInstance}
-		{\none}
-		{Neu: Gibt eine Instance des \reftype{MapManager} zurück, da der er ein Einzelstück ist.}
-	}
 }
-
 \package{Precalculation}{}
 {
 \class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
