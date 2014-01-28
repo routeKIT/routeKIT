@@ -103,8 +103,9 @@ public class ProfileMapManager {
 				Profile profile = profilesByName.get(profileName);
 				ProfileMapCombination combination;
 				try {
-					combination = ProfileMapCombination.load(profile, map,
-							new File(new File(root, mapName), profileName));
+					combination = ProfileMapCombination
+							.loadLazily(profile, map, new File(new File(root,
+									mapName), profileName));
 				} catch (IOException | IllegalArgumentException e) {
 					if (current != null && current.getKey().equals(mapName)
 							&& current.getValue().equals(profileName)) {
@@ -125,6 +126,9 @@ public class ProfileMapManager {
 				if (current != null && mapName.equals(current.getKey())
 						&& profileName.equals(current.getValue())) {
 					this.current = combination;
+					// un-lazy
+					combination.getWeights();
+					combination.getArcFlags();
 				}
 			}
 		}
