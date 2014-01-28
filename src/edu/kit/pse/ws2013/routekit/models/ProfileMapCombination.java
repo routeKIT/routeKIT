@@ -111,7 +111,7 @@ public class ProfileMapCombination {
 	 * @see #loadLazily(Profile, StreetMap, File)
 	 */
 	public void ensureLoaded(ProgressReporter reporter) {
-		reporter.setSubTasks(new float[] { .8f, .1f, .1f });
+		reporter.setSubTasks(new float[] { .9f, .05f, .05f });
 		reporter.pushTask("Lade Karte");
 		map.ensureLoaded(reporter);
 		reporter.nextTask("Lade Kantengewichte");

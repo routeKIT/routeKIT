@@ -58,8 +58,8 @@ public class MainController {
 	 *            the starter
 	 */
 	private MainController(ProgressReporter pr) {
-		pr.pushTask("starte routeKit");
-		pr.setSubTasks(new float[] { 0.95f, 0.05f });
+		pr.pushTask("Starte routeKIT");
+		pr.setSubTasks(new float[] { 0.99f, 0.01f });
 		instance = this;
 		pr.pushTask("Lade Daten");
 		try {
