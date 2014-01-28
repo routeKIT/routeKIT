@@ -104,7 +104,7 @@ public class RouteDescriptionGenerator {
 		return new RouteDescription(route, instructions);
 	}
 
-	private CharSequence displayName(String name, String ref) {
+	private static CharSequence displayName(String name, String ref) {
 		if (name != null && ref != null) {
 			return new StringBuilder(name).append(" (").append(ref).append(")");
 		}

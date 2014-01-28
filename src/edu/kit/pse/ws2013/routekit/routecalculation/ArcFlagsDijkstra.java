@@ -86,7 +86,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 				if (fhList.containsKey(targetEdge)) {
 					// fetch Arc-Flags
-					int arcFlag = data.getArc().getFlag(currentTurn);
+					int arcFlag = data.getArcFlags().getFlag(currentTurn);
 					int arcBit = (arcFlag >> destinationPartition) & 0x1;
 					// check arc bit
 					if (arcBit != 0) {

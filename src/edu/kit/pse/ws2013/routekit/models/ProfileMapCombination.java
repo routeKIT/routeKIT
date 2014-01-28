@@ -21,15 +21,38 @@ public class ProfileMapCombination {
 	protected ArcFlags arcFlags;
 	protected int calculationTime;
 
+	/**
+	 * Creates a new {@code ProfileMapCombination} of the given street map and
+	 * profile without a precalculation.
+	 * 
+	 * @param map
+	 *            the {@link StreetMap}
+	 * @param profile
+	 *            the {@link Profile}
+	 */
 	public ProfileMapCombination(StreetMap map, Profile profile) {
 		this.map = map;
 		this.profile = profile;
 	}
 
+	/**
+	 * Creates a new {@code ProfileMapCombination} of the given street map and
+	 * profile with a precalculation.
+	 * 
+	 * @param map
+	 *            the {@link StreetMap}
+	 * @param profile
+	 *            the {@link Profile}
+	 * @param weights
+	 *            the calculated {@link Weights}
+	 * @param arcFlags
+	 *            the calculated {@link ArcFlags}
+	 * @param calculationTime
+	 *            the time needed for the precalculation
+	 */
 	public ProfileMapCombination(StreetMap map, Profile profile,
 			Weights weights, ArcFlags arcFlags, int calculationTime) {
-		this.map = map;
-		this.profile = profile;
+		this(map, profile);
 		this.weights = weights;
 		this.arcFlags = arcFlags;
 		this.calculationTime = calculationTime;
@@ -47,19 +70,50 @@ public class ProfileMapCombination {
 		return weights != null && arcFlags != null;
 	}
 
+	/**
+	 * Returns the {@link StreetMap} belonging to this combination.
+	 * 
+	 * @return the street map
+	 */
 	public StreetMap getStreetMap() {
 		return map;
 	}
 
+	/**
+	 * Returns the {@link Profile} belonging to this combination.
+	 * 
+	 * @return the profile
+	 */
 	public Profile getProfile() {
 		return profile;
 	}
 
+	/**
+	 * Returns the edge weights calculated for this
+	 * {@code ProfileMapCombination}.
+	 * 
+	 * @return the {@link Weights}
+	 * @throws IllegalStateException
+	 *             if the weights have not been calculated yet
+	 */
 	public Weights getWeights() {
+		if (weights == null) {
+			throw new IllegalStateException();
+		}
 		return weights;
 	}
 
-	public ArcFlags getArc() {
+	/**
+	 * Returns the {@link ArcFlags} calculated for this combination.
+	 * 
+	 * @return the arc flags
+	 * @throws IllegalStateException
+	 *             if there is no precalculation for this combination
+	 */
+	public ArcFlags getArcFlags() {
+		if (!isCalculated()) {
+			throw new IllegalStateException();
+		}
 		return arcFlags;
 	}
 
@@ -71,6 +125,14 @@ public class ProfileMapCombination {
 		this.weights = weights;
 	}
 
+	/**
+	 * Sets the edge weights for this {@code ProfileMapCombination}.
+	 * 
+	 * @param weights
+	 *            the calculated {@link Weights}
+	 * @param calculationTime
+	 *            the time needed for calculating the weights
+	 */
 	public void setWeights(Weights weights, int calculationTime) {
 		this.weights = weights;
 		assert (calculationTime > 0);
@@ -85,6 +147,14 @@ public class ProfileMapCombination {
 		this.arcFlags = arcFlags;
 	}
 
+	/**
+	 * Sets the {@link ArcFlags} for this combination.
+	 * 
+	 * @param arcFlags
+	 *            the calculated {@link ArcFlags}
+	 * @param calculationTime
+	 *            the time needed for calculating the flags
+	 */
 	public void setArcFlags(ArcFlags arcFlags, int calculationTime) {
 		this.arcFlags = arcFlags;
 		assert (calculationTime >= 0);
@@ -117,7 +187,7 @@ public class ProfileMapCombination {
 		reporter.nextTask("Lade Kantengewichte");
 		getWeights();
 		reporter.nextTask("Lade Arc-Flags");
-		getArc();
+		getArcFlags();
 		reporter.popTask();
 	}
 
@@ -132,8 +202,8 @@ public class ProfileMapCombination {
 
 	/**
 	 * Saves the {@link ProfileMapCombination} to the given directory by saving
-	 * the {@link #getWeights() Weights}, the {@link #getArc() ArcFlags} and the
-	 * {@link #getCalculationTime() calculation time} to the files
+	 * the {@link #getWeights() Weights}, the {@link #getArcFlags() ArcFlags}
+	 * and the {@link #getCalculationTime() calculation time} to the files
 	 * {@code &lt;name&gt;.weights}, {@code &lt;name&gt;.arcflags} and
 	 * {@code &lt;name&gt;.time} (where {@code &lt;name&gt;} is the name of the
 	 * map " + " the name of the profile).
@@ -166,8 +236,8 @@ public class ProfileMapCombination {
 
 	/**
 	 * Loads a {@link ProfileMapCombination} from the given directory by loading
-	 * the {@link #getWeights() Weights}, the {@link #getArc() ArcFlags} and the
-	 * {@link #getCalculationTime() calculation time} from the files
+	 * the {@link #getWeights() Weights}, the {@link #getArcFlags() ArcFlags}
+	 * and the {@link #getCalculationTime() calculation time} from the files
 	 * {@code &lt;name&gt;.weights}, {@code &lt;name&gt;.arcflags} and
 	 * {@code &lt;name&gt;.time} (where {@code &lt;name&gt;} is the name of the
 	 * map " + " the name of the profile).
@@ -257,7 +327,7 @@ public class ProfileMapCombination {
 		}
 
 		@Override
-		public ArcFlags getArc() {
+		public ArcFlags getArcFlags() {
 			if (this.arcFlags == null) {
 				try {
 					this.arcFlags = ArcFlags.load(arcFlagsFile);

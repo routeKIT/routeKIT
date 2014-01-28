@@ -15,6 +15,20 @@ public class StreetMap {
 	protected EdgeBasedGraph edgeBasedGraph;
 
 	/**
+	 * Creates a new {@code StreetMap} object from the given {@link Graph} and
+	 * {@link EdgeBasedGraph}.
+	 * 
+	 * @param graph
+	 *            the map graph
+	 * @param edgeBasedGraph
+	 *            the edge-based graph
+	 */
+	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
+		this.graph = graph;
+		this.edgeBasedGraph = edgeBasedGraph;
+	}
+
+	/**
 	 * Determines if this is a default map.
 	 * 
 	 * @return {@code true} if the map is a default map, else {@code false}.
@@ -24,32 +38,40 @@ public class StreetMap {
 	}
 
 	/**
-	 * Creates a new map object from the given graphs.
+	 * Returns the {@link EdgeBasedGraph} of this street map.
 	 * 
-	 * @param graph
-	 *            The map graph.
-	 * @param edgeBasedGraph
-	 *            The edge-based graph.
+	 * @return the edge-based graph
 	 */
-	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
-		this.graph = graph;
-		this.edgeBasedGraph = edgeBasedGraph;
-	}
-
 	public EdgeBasedGraph getEdgeBasedGraph() {
 		return edgeBasedGraph;
 	}
 
+	/**
+	 * Returns the {@link Graph} of this street map.
+	 * 
+	 * @return the graph
+	 */
 	public Graph getGraph() {
 		return graph;
 	}
 
+	/**
+	 * Returns the name of this map.
+	 * 
+	 * @return the name, or {@code null} if it has not been set yet
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name of this map.
+	 * 
+	 * @param name
+	 *            the name to be set
+	 */
 	public void setName(String name) {
-		this.name = name; // TODO do we need this? I don’t think so – Lucas
+		this.name = name;
 	}
 
 	/**

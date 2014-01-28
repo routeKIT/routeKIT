@@ -37,10 +37,6 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		graph = combination.getStreetMap().getGraph();
 		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
 		weights = combination.getWeights();
-		if (weights == null) {
-			throw new IllegalArgumentException(
-					"The given ProfileMapCombination hasn't been weighted yet.");
-		}
 		flagsArray = new int[edgeBasedGraph.getNumberOfTurns()];
 		for (int i = 0; i < flagsArray.length; i++) {
 			flagsArray[i] = 0x0;
