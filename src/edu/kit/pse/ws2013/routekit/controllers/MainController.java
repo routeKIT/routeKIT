@@ -125,7 +125,6 @@ public class MainController {
 		final Coordinates start = rm.getStart();
 		final Coordinates destination = rm.getDestination();
 		if (start != null && destination != null) {
-
 			List<HistoryEntry> entries = history.getEntries();
 			boolean saveNewEntry = true;
 			if (!entries.isEmpty()) {

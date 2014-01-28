@@ -40,19 +40,40 @@ public class RouteModel {
 		fireListeners();
 	}
 
+	/**
+	 * Sets the current {@link Route}, and also invalidates the current
+	 * {@link RouteDescription}.
+	 * 
+	 * @param currentRoute
+	 *            The new current {@link Route}.
+	 */
 	public void setCurrentRoute(Route currentRoute) {
 		this.currentRoute = currentRoute;
-		fireListeners();
+		setCurrentDescription(null);
 	}
 
+	/**
+	 * Sets the current destination point, and also invalidates the current
+	 * {@link Route}.
+	 * 
+	 * @param destination
+	 *            The new destination point.
+	 */
 	public void setDestination(Coordinates destination) {
 		this.destination = destination;
-		fireListeners();
+		setCurrentRoute(null);
 	}
 
+	/**
+	 * Sets the current start point, and also invalidates the current
+	 * {@link Route}.
+	 * 
+	 * @param start
+	 *            The new start point.
+	 */
 	public void setStart(Coordinates start) {
 		this.start = start;
-		fireListeners();
+		setCurrentRoute(null);
 	}
 
 	private void fireListeners() {
