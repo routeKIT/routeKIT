@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
@@ -456,7 +457,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	public void routeModelChanged() {
 		Coordinates start = routeModel.getStart();
 		Coordinates destination = routeModel.getDestination();
-		RouteDescription description = routeModel.getCurrentDescription();
+		final RouteDescription description = routeModel.getCurrentDescription();
 		if (routeModel.getCurrentRoute() == null) {
 			html.setEnabled(false);
 			gpx.setEnabled(false);
@@ -478,13 +479,19 @@ public class MainView extends JFrame implements RouteModelListener {
 			textMessage("");
 		}
 		if (description != null) {
-			DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
-					.getModel();
-			listModel.clear();
-			for (TurnInstruction instruction : description.getInstructions()) {
-				listModel.addElement(instruction.toString());
-			}
-			listModel.addElement("Sie haben Ihr Ziel erreicht.");
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
+							.getModel();
+					listModel.clear();
+					for (TurnInstruction instruction : description
+							.getInstructions()) {
+						listModel.addElement(instruction.toString());
+					}
+					listModel.addElement("Sie haben Ihr Ziel erreicht.");
+				}
+			});
 		}
 
 	}
