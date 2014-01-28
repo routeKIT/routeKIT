@@ -96,6 +96,7 @@ public class RouteDescriptionGenerator {
 				if (target != null) {
 					instr.append(" auf ").append(target);
 				}
+				instr.append('.');
 				instructions.add(new TurnInstruction(turn, instr.toString()));
 			}
 		}
