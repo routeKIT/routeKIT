@@ -41,6 +41,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	private final JTextArea text;
 	private final LinkedList<Entry<String, Long>> tasks = new LinkedList<>();
 	private boolean closed = false;
+	private float progress;
 
 	public ProgressDialog(Window owner) {
 		super(owner, "Berechne...");
@@ -111,14 +112,14 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void beginTask(String name) {
 		bar.setString(name);
-		setTitle(name + "...");
+		setTitle(name + "..." + (int) (progress * 100) + "%");
 		tasks.addLast(new AbstractMap.SimpleEntry<>(name, System
 				.currentTimeMillis()));
-		repaint();
 	}
 
 	@Override
 	public void progress(float progress, String name) {
+		this.progress = progress;
 		bar.setValue((int) (progress * 100));
 		bar.setString(name);
 		setTitle(name + "... " + ((int) progress * 100) + "%");
@@ -128,7 +129,6 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	public void endTask(String name) {
 		bar.setString(name);
 		tasks.removeLast();
-		repaint();
 	}
 
 	@Override
