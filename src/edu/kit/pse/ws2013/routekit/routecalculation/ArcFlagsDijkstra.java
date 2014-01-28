@@ -108,9 +108,13 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 		// reconstruct way
 		int x;
+		int newStartEdge = start.getEdge();
+		int newDestinationEdge = destination.getEdge();
+
 		if (otherDestination) {
 			x = data.getStreetMap().getGraph()
 					.getCorrespondingEdge(destinationEdge);
+			newDestinationEdge = x;
 		} else {
 			x = destinationEdge;
 		}
@@ -127,7 +131,14 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			x = previous[x];
 		}
 
-		Route route = new Route(data, start, destination, turns);
+		newStartEdge = x;
+
+		PointOnEdge newStart = new PointOnEdge(newStartEdge,
+				start.getPosition());
+		PointOnEdge newDestination = new PointOnEdge(newDestinationEdge,
+				destination.getPosition());
+
+		Route route = new Route(data, newStart, newDestination, turns);
 
 		return route;
 	}
