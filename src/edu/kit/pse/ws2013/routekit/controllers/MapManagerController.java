@@ -328,11 +328,15 @@ public class MapManagerController {
 	public void importMap(String name, File file) {
 		currentMap = new FutureMap(name, file);
 		StreetMap previousMap = mapsByName.get(name);
-		if (previousMap != null) {
+		Set<Profile> profiles;
+		if (previousMap == null) {
+			profiles = new HashSet<>();
+		} else {
+			profiles = precalculations.get(previousMap);
 			precalculations.remove(previousMap);
 		}
 		mapsByName.put(name, currentMap);
-		precalculations.put(currentMap, new HashSet<Profile>());
+		precalculations.put(currentMap, profiles);
 		mmv.setAvailableMaps(precalculations.keySet());
 		mmv.setCurrentMap(currentMap, precalculations.get(currentMap));
 	}
