@@ -11,17 +11,17 @@ import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 public class EdgeWeighterImpl implements EdgeWeighter {
 
-	private final static int AVERAGE_TRAFFICLIGHT_WAIT_TIME = 60;
-	private final static int AVERAGE_TURN_TIME_RIGHT = 3;
-	private final static int AVERAGE_TURN_TIME_LEFT = 5;
-	private final static int AVERAGE_TURN_TIME_HALFRIGHT = 1;
-	private final static int AVERAGE_TURN_TIME_HALFLEFT = 2;
+	private final static int AVERAGE_TRAFFICLIGHT_WAIT_TIME = 10000;
+	private final static int AVERAGE_TURN_TIME_RIGHT = 3000;
+	private final static int AVERAGE_TURN_TIME_LEFT = 5000;
+	private final static int AVERAGE_TURN_TIME_HALFRIGHT = 1000;
+	private final static int AVERAGE_TURN_TIME_HALFLEFT = 2000;
 	private final static int AVERAGE_TURN_TIME_STRAIGHT = 0;
 	private final static int AVERAGE_TURN_TIME_NO_TURN = 0;
-	private final static int AVERAGE_TURN_TIME_ROUNDABOUT_ENTRY = 5;
-	private final static int AVERAGE_TURN_TIME_ROUNDABOUT_EXIT = 3;
+	private final static int AVERAGE_TURN_TIME_ROUNDABOUT_ENTRY = 5000;
+	private final static int AVERAGE_TURN_TIME_ROUNDABOUT_EXIT = 3000;
 	private final static int AVERAGE_TURN_TIME_ROUNDABOUT_NO_EXIT = 0;
-	private final static int AVERAGE_TURN_TIME_MOTORWAY_JUNCTION = 7;
+	private final static int AVERAGE_TURN_TIME_MOTORWAY_JUNCTION = 7000;
 
 	@Override
 	public void weightEdges(ProfileMapCombination combination,
@@ -42,7 +42,8 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 			float edgeLength = graph.getCoordinates(startNode).distanceTo(
 					graph.getCoordinates(targetNode));
 			int baseTime = Math.round(edgeLength
-					/ (currentEdgeProps.getMaxSpeed(profile) * 1000) * 3600);
+					/ ((float) currentEdgeProps.getMaxSpeed(profile) * 1000)
+					* 3600000);
 			NodeProperties nodeProperties = graph.getNodeProperties(targetNode);
 			if (nodeProperties != null && nodeProperties.isTrafficLights()) {
 				baseTime += AVERAGE_TRAFFICLIGHT_WAIT_TIME;
@@ -50,6 +51,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 			for (int turn : eGraph.getOutgoingTurns(edge)) {
 				if (!eGraph.allowsTurn(turn, profile)) {
 					weightArray[turn] = Integer.MAX_VALUE;
+					System.out.println("MaxValue: " + turn);
 				} else {
 					int turnTime = 0;
 					switch (eGraph.getTurnType(turn)) {
@@ -87,6 +89,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 						turnTime = 0;
 					}
 					weightArray[turn] = baseTime + turnTime;
+					System.out.println(weightArray[turn] + ": " + turn);
 				}
 			}
 			if ((edge & mask) != 0) {
