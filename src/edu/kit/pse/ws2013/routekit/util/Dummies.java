@@ -31,14 +31,8 @@ public class Dummies {
 		ProfileMapManager.init(rootDir, new DummyProgressReporter());
 
 		URL url = new URL(
-				"http://algo2.iti.kit.edu/documents/PSE_WS1314/karlsruhe_big.osm");
-		URLConnection c = url.openConnection();
-		String userpass = "pse_ws1314:pse_student_ws1314";
-		String base64 = javax.xml.bind.DatatypeConverter
-				.printBase64Binary(userpass.getBytes());
-		String basicAuth = "Basic " + base64;
-		c.setRequestProperty("Authorization", basicAuth);
-		ReadableByteChannel rbc = Channels.newChannel(c.getInputStream());
+				"http://download.geofabrik.de/europe/germany/baden-wuerttemberg/karlsruhe-regbez-latest.osm.bz2");
+		ReadableByteChannel rbc = Channels.newChannel(url.openConnection().getInputStream());
 		File file = File.createTempFile("routeKIT_map_", ".osm");
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
