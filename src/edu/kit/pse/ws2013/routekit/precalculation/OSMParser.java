@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -188,7 +190,12 @@ public class OSMParser {
 	private TurnType determineTurnType(int startNode, MapEdge fromEdge,
 			MapEdge toEdge) {
 		int turnNode = fromEdge.getTargetNode();
-		if (graph.getOutgoingEdges(turnNode).size() == 1) {
+
+		// No real turn if there are no other outgoing edges except backwards
+		Set<Integer> outgoingEdges = graph.getOutgoingEdges(turnNode);
+		if (outgoingEdges.size() == 1
+				|| (outgoingEdges.size() == 2 && outgoingEdges
+						.contains(startNode))) {
 			return TurnType.NoTurn;
 		}
 
