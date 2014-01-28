@@ -485,6 +485,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			for (TurnInstruction instruction : description.getInstructions()) {
 				listModel.addElement(instruction.toString());
 			}
+			listModel.addElement("Sie haben Ihr Ziel erreicht.");
 		}
 
 	}
