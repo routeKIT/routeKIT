@@ -38,6 +38,7 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.TimeUtil;
 
 /**
  * Displays the window of the map management on the screen.
@@ -508,7 +509,7 @@ public class MapManagerView extends JDialog {
 				}
 				if (interval > 0) {
 					text.append("   (diese Vorberechnungen benötigten insgesamt");
-					timeSpanString(text, interval);
+					TimeUtil.timeSpanString(text, interval);
 					text.append(")\n");
 				}
 			}
@@ -538,62 +539,6 @@ public class MapManagerView extends JDialog {
 			textPane.setFont(displayFont);
 			information.add(textPane);
 			return information;
-		}
-
-		private void timeSpanString(StringBuilder text, int interval) {
-			final short milliseconds = (short) (interval % 1000);
-			interval -= milliseconds;
-			interval /= 1000;
-			final byte seconds = (byte) (interval % 60);
-			interval -= seconds;
-			interval /= 60;
-			final byte minutes = (byte) (interval % 60);
-			interval -= minutes;
-			interval /= 60;
-			final byte hours = (byte) (interval % 24);
-			interval -= hours;
-			interval /= 24;
-			final long days = interval;
-			if (days != 0) {
-				text.append(' ');
-				text.append(days);
-				text.append(" Tag");
-				if (days != 1) {
-					text.append('e');
-				}
-			}
-			if (hours != 0) {
-				text.append(' ');
-				text.append(hours);
-				text.append(" Stunde");
-				if (hours != 1) {
-					text.append('n');
-				}
-			}
-			if (minutes != 0) {
-				text.append(' ');
-				text.append(minutes);
-				text.append(" Minute");
-				if (minutes != 1) {
-					text.append('n');
-				}
-			}
-			if (seconds != 0) {
-				text.append(' ');
-				text.append(seconds);
-				text.append(" Sekunde");
-				if (seconds != 1) {
-					text.append('n');
-				}
-			}
-			if (milliseconds != 0) {
-				text.append(' ');
-				text.append(milliseconds);
-				text.append(" Millisekunde");
-				if (milliseconds != 1) {
-					text.append('n');
-				}
-			}
 		}
 	}
 }
