@@ -168,11 +168,11 @@ public class MapView extends JPanel implements MouseListener,
 	 *            The Java Graphics, on which the map is drawn.
 	 */
 	@Override
-	public void paint(Graphics g) {
+	public void paint(Graphics graphics) {
 		in.setLocation(getWidth() - in.getWidth() - 10, 10);
 		out.setLocation(getWidth() - out.getWidth() - 10, 20 + in.getHeight());
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		graphics.setColor(Color.WHITE);
+		graphics.fillRect(0, 0, getWidth(), getHeight());
 		for (int i = (int) Math.floor(x); (i - x) * 256 < getWidth(); i++) {
 			for (int j = (int) Math.floor(y); (j - y) * 256 < getHeight(); j++) {
 				if (j < 0 || j >= 1 << zoom) {
@@ -185,32 +185,32 @@ public class MapView extends JPanel implements MouseListener,
 					ColorConvertOp op = new ColorConvertOp(cs, null);
 					tile = op.filter(tile, null);
 				}
-				g.drawImage(tile, (int) ((i - x) * 256), (int) ((j - y) * 256),
-						null);
+				graphics.drawImage(tile, (int) ((i - x) * 256),
+						(int) ((j - y) * 256), null);
 			}
 		}
 		if (!isEnabled()) {
 			startCalc.setBounds((getWidth() - 300) / 2,
 					(getHeight() - 200) / 2, 300, 200);
-			super.paintComponents(g);
+			super.paintComponents(graphics);
 
 			return;
 		}
 		final Route r = rm.getCurrentRoute();
 		if (r != null) {
-			drawRoute(g, r);
+			drawRoute(graphics, r);
 		}
 		Coordinates c = rm.getStart();
 		if (c != null) {
-			g.setColor(Color.RED);
-			drawPoint(g, c, false);
+			graphics.setColor(Color.RED);
+			drawPoint(graphics, c, false);
 		}
 		c = rm.getDestination();
 		if (c != null) {
-			g.setColor(Color.GREEN);
-			drawPoint(g, c, true);
+			graphics.setColor(Color.GREEN);
+			drawPoint(graphics, c, true);
 		}
-		super.paintComponents(g);
+		super.paintComponents(graphics);
 	}
 
 	private void drawRoute(Graphics g, final Route r) {
