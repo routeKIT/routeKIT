@@ -156,9 +156,11 @@
 % 1. Typ (Klasse oder Enum)
 % 2. (optional) Text – default: Typ
 \NewDocumentCommand{\reftype}{mO{#1}}{%
+  \def\@reftype@tmp@text{\code{#2}}%
   \ifhaslabel{\@typelabel{#1}}{% if the label exists...
-    \hyperref[\@typelabel{#1}]{\code{#2}}}{% then reference it...
-    \code{#2}}\xspace% else just print the text.
+    \hyperref[\@typelabel{#1}]{\@reftype@tmp@text}}{% then reference it...
+    \@reftype@tmp@text}% else just print the text.
+  \let\@reftype@tmp@text=\undefined%
 }
 % DEPRECATED
 \NewDocumentCommand{\refclass}{mO{#1}}{%
@@ -170,7 +172,7 @@
 % 2. Attribut
 % 3. (optional) Text – default: Attribut innerhalb der Klasse, sonst Klasse.Attribut
 \NewDocumentCommand{\refattr}{mmO{__DEFAULT__}}{%
-  \hyperref[\@attrlabel{#1}{#2}]{\code{%
+  \def\@refattr@tmp@text{\code{%
       \ifthenelse{\equal{#3}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           #2% we’re inside the same class, only use the attribute name
@@ -179,14 +181,18 @@
         }%
       }{%
         #3%
-  }}}\xspace%
+  }}\xspace}
+  \ifhaslabel{\@attrlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@attrlabel{#1}{#2}]{\@refattr@tmp@text}}{% the reference it...
+    \@refattr@tmp@text}% else just print the text.
+  \let\@refattr@tmp@text=\undefined%
 }
 % Argumente:
 % 1. Klasse
 % 2. Methode
 % 3. (optional) Text – default: Methode innerhalb der Klasse, sonst Klasse.Methode
 \NewDocumentCommand{\refmethod}{mmO{__DEFAULT__}}{%
-  \hyperref[\@methodlabel{#1}{#2}]{\code{%
+  \def\@refmethod@tmp@text{\code{%
       \ifthenelse{\equal{#3}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           #2% we’re inside the same class, only use the method name
@@ -195,7 +201,11 @@
         }%
       }{%
         #3%
-  }}}\xspace%
+    }}\xspace}%
+  \ifhaslabel{\@methodlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@methodlabel{#1}{#2}]{\@refmethod@tmp@text}}{% then reference it...
+    \@refmethod@tmp@text}% else just print the text.
+  \let\@refmethod@tmp@text=\undefined%
 }
 % Argumente:
 % 1. Klasse
@@ -203,7 +213,7 @@
 % 3. Parameter
 % 4. (optional) Text – default: Parameter innerhalb der Methode, sonst Methode.Parameter innerhalb der Klasse, sonst Klasse.Methode.Parameter
 \NewDocumentCommand{\refparam}{mmmO{__DEFAULT__}}{%
-  \hyperref[\@paramlabel{#1}{#2}{#3}]{\code{%
+  \def\@refparam@tmp@text{\code{%
       \ifthenelse{\equal{#4}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentclass}{#1}}{%
           \ifthenelse{\equal{\currentmethod}{#2}}{%
@@ -214,14 +224,18 @@
           #1.#2.#3%
       }}{%
         #4%
-  }}}\xspace%
+  }}\xspace}%
+  \ifhaslabel{\@paramlabel{#1}{#2}{#3}}{% if the label exists...
+    \hyperref[\@paramlabel{#1}{#2}{#3}]{\@refparam@tmp@text}}{% then reference it...
+      \@refparam@tmp@text}% else just print the text.
+  \let\@refparam@tmp@text=\undefined%
 }
 % Argumente:
 % 1. Enum
 % 2. Konstante
 % 3. (optional) Text – default: Konstante innerhalb der Enum, sonst Enum.Konstante
 \NewDocumentCommand{\refconstant}{mmO{__DEFAULT__}}{%
-  \hyperref[\@constantlabel{#1}{#2}]{\code{%
+  \def\@refconstant@tmp@text{\code{%
       \ifthenelse{\equal{#3}{__DEFAULT__}}{%
         \ifthenelse{\equal{\currentenum}{#1}}{%
           #2% we’re inside the same enum, only use the constant name
@@ -230,7 +244,11 @@
         }%
       }{%
         #3%
-  }}}\xspace%
+  }}\xspace}%
+  \ifhaslabel{\@constantlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@constantlabel{#1}{#2}]{\@refconstant@tmp@text}}{% then reference it...
+    \@refconstant@tmp@text}% else just print the text.
+  \let\@refconstant@tmp@text=\undefined%
 }
 
 
