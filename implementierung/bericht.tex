@@ -597,8 +597,40 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    da sie in Unterordnern der Karte gespeichert sind, würden sie durch das Löschen des Karten-Ordners ohnehin gelöscht.
                  }
         }
-\class{MainController}{~}
-{\none}
+  \class{MapManagerController.MapManagementDiff}
+        {
+          Innere Klasse von \reftype{MapManagerController}, welche die Änderungen, die der Benutzer getätigt hat, kapselt.
+          Sie war ursprünglich nur für den internen Gebrauch in \refmethod{MapManagerController}{saveAllChanges} gedacht, wird jetzt aber auch der \reftype{MapManagerView} zugänglich gemacht, welche das Ergebnis im „Bestätigen“-Dialog verwendet und anzeigt.
+          
+          Die analoge Klasse \reftype{ProfileManagerController.ProfilesDiff} ist weiterhin \code{private}, da sie außerhalb des \reftype{ProfileManagerController}s nicht benötigt wird.
+        }
+        {\none}
+        {
+          \method{getNewOrUpdatedMaps}[Set<FutureMap>]
+                 {\none}
+                 {
+                   Alle Karten, die importiert oder aktualisiert wurden, also neu importiert werden müssen.
+                   
+                   (\code{FutureMap} ist eine interne Klasse, die nur den vom Benutzer angegebenen Dateinamen hält.)
+                 }
+          \method{getDeletedMaps}[Set<StreetMap>]
+                 {\none}
+                 {
+                   Alle Karten, die gelöscht werden müssen (auch die alten Versionen von aktualisierten Karten).
+                 }
+          \method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
+                 {\none}
+                 {
+                   Alle Vorberechnungen, die gelöscht werden müssen (weil ihre Karten aktualisiert oder gelöscht wurden, oder weil die Vorberechnung explizit gelöscht wurde).
+                 }
+          \method{getNewPrecalculations}[Set<ProfileMapCombination>]
+                 {\none}
+                 {
+                   Alle Vorberechnungen, die durchgeführt werden müssen (neue und solche mit aktualisierter Karte).
+                 }
+        }
+  \class{MainController}{~}
+        {\none}
 	{
 	   \method{getInstance}[MainController]
 		{\none}
