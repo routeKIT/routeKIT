@@ -649,64 +649,64 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{MainController}{~}
         {\none}
-	{
+        {
           \method{getInstance}[MainController]
                  {\none}
                  {(statisch) Gibt die Instanz des \reftype{MainControllers} zurück, der ein \gls{einzelstueck} ist.}
           \method{getHistory}[History]
-		 {\none}
-		 {Gibt den Verlauf zurück.}
-	}
+                 {\none}
+                 {Gibt den Verlauf zurück.}
+        }
   \class{ProfileManagerController}{~}
         {\none}
-	{\method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
-	  {\none}
-	  {Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
-	}
+        {\method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
+          {\none}
+          {Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
+        }
   \class{MapManagerController}{~}
         {\none}
-	{\method{getChanges}[MapManagementDiff]
-	  {\none}
-	  {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
-	}
+        {\method{getChanges}[MapManagementDiff]
+          {\none}
+          {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
+        }
 }
 \package{Precalculation}{}
 {
   \class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
         {\none}
         {
-	  \method{calculateArcFlags}
-		 {
-		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
-		 }
-		 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+          \method{calculateArcFlags}
+                 {
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                 }
+                 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
   \class{ArcFlagsCalculatorImpl}{Geändert: Erstzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
         {\none}
         {
-	  \method{calculateArcFlags}
-		 {
-		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
-		 }
-		 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+          \method{calculateArcFlags}
+                 {
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                 }
+                 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
   \class{EdgeWeighter}{Geändert: Ein Interface für die Berechnung der Kantengewichte.}
         {\none}
         {
-	  \method{weightEdges}
-		 {
-		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
-		 }
-		 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
+          \method{weightEdges}
+                 {
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                 }
+                 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
   \class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
         {\none}
         {
-	  \method{calculateArcFlags}
-		 {
-		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
-		 }
-		 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
+          \method{calculateArcFlags}
+                 {
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                 }
+                 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
   \class{OSMParser}{~}
         {\none}
@@ -938,9 +938,9 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
   \class{Graph}{~}
         {\none}
         {
-	\method{getCorrespondingEdge}[int]
-	{\param{edge}{int}{Eine ID der Kante.}}
-	{Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
+        \method{getCorrespondingEdge}[int]
+        {\param{edge}{int}{Eine ID der Kante.}}
+        {Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
           \method{getNumberOfEdges}[int]
                  {\none}
                  {Gibt die Anzahl der Kanten zurück. Dies ermöglicht es, über alle Kanten zu iterieren.}
@@ -1025,12 +1025,12 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 }
 \package{Views}{}
 {
-\class{MainView}{~}
-{\none}
-{\method{textMessage}
-	{\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
-	{Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
-}
+  \class{MainView}{~}
+        {\none}
+        {\method{textMessage}
+          {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
+          {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
+        }
 }
 \package{Util}{}
 {
