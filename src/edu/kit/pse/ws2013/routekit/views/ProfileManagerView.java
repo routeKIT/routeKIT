@@ -32,6 +32,7 @@ import edu.kit.pse.ws2013.routekit.controllers.ProfileManagerController;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
+import edu.kit.pse.ws2013.routekit.util.TimeUtil;
 
 /**
  * Displays the window of the profile management on the screen.
@@ -227,20 +228,20 @@ public class ProfileManagerView extends JDialog {
 					Profile current = writeValues(currentProfile.getName());
 					pmc.saveTemporaryProfile(current);
 				}
-				if (pmc.getDeletionTime() != 0) {
-					int showOptionDialog = JOptionPane
-							.showOptionDialog(
-									ProfileManagerView.this,
-									"Sie speichern hiermit alle \n"
-											+ "vorgenommenen Änderungen für alle Profile.\n"
-											+ "Sie löschen "
-											+ pmc.getDeletionTime()
-											// TODO that’s ms, not h
-											+ "Stunden an Arbeit.\n"
-											+ "Wollen sie die Änderungen vornehmen?",
-									"Bestätigung", JOptionPane.YES_NO_OPTION,
-									JOptionPane.QUESTION_MESSAGE, null,
-									new String[] { "Ja", "Nein" }, "Nein");
+				int time;
+				if ((time = pmc.getDeletionTime()) != 0) {
+					StringBuilder text = new StringBuilder();
+					text.append("Sie speichern hiermit alle\n");
+					text.append("vorgenommenen Änderungen für alle Profile.\n");
+					text.append("Sie löschen ");
+					TimeUtil.timeSpanString(text, time);
+					text.append(" an Arbeit.\n");
+					text.append("Wollen Sie die Änderungen vornehmen?");
+					int showOptionDialog = JOptionPane.showOptionDialog(
+							ProfileManagerView.this, text.toString(),
+							"Bestätigung", JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, new String[] {
+									"Ja", "Nein" }, "Nein");
 					if (showOptionDialog != JOptionPane.YES_OPTION) {
 						return;
 					}
