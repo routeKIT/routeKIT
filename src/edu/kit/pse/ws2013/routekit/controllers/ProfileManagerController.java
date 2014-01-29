@@ -181,11 +181,16 @@ public class ProfileManagerController {
 		final ProfilesDiff diff = diff();
 		final Set<Profile> changedProfiles = diff.getChangedProfiles();
 		final Set<Profile> deletedProfiles = diff.getDeletedProfiles();
+		final Set<String> changedProfileNames = new HashSet<>();
+		for (Profile p : changedProfiles) {
+			changedProfileNames.add(p.getName());
+		}
 		int time = 0;
 		for (final ProfileMapCombination pmc : ProfileMapManager.getInstance()
 				.getPrecalculations()) {
 			final Profile p = pmc.getProfile();
-			if (changedProfiles.contains(p) || deletedProfiles.contains(p)) {
+			if (changedProfileNames.contains(p.getName())
+					|| deletedProfiles.contains(p)) {
 				time += pmc.getCalculationTime();
 			}
 		}

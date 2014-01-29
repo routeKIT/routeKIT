@@ -223,6 +223,10 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (!currentProfile.isDefault()) {
+					Profile current = writeValues(currentProfile.getName());
+					pmc.saveTemporaryProfile(current);
+				}
 				if (pmc.getDeletionTime() != 0) {
 					int showOptionDialog = JOptionPane
 							.showOptionDialog(
