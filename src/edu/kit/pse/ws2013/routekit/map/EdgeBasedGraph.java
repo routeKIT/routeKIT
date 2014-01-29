@@ -32,23 +32,11 @@ public class EdgeBasedGraph {
 	private int[] partitions;
 	private int[] edges;
 	private int[] turns;
-	private TurnType[] turnTypes;
+	private byte[] turnTypes;
 	private Map<Integer, Restriction> restrictions;
 	private int[] turnsReverse;
 
-	/**
-	 * Creates a new {@code EdgeBasedGraph} from the given adjacency field.
-	 * 
-	 * @param edges
-	 *            the node array (edges in {@link Graph}) of the adjacency field
-	 * @param turns
-	 *            the edge array (turns) of the adjacency field
-	 * @param turnTypes
-	 *            the types of the turns
-	 * @param restrictions
-	 *            the restrictions of the turns
-	 */
-	public EdgeBasedGraph(int[] edges, int[] turns, TurnType[] turnTypes,
+	private EdgeBasedGraph(int[] edges, int[] turns, byte[] turnTypes,
 			Map<Integer, Restriction> restrictions) {
 		this.edges = edges;
 		this.turns = turns;
@@ -64,6 +52,31 @@ public class EdgeBasedGraph {
 			}
 			turnsReverse[i] = currentEdge;
 		}
+	}
+
+	/**
+	 * Creates a new {@code EdgeBasedGraph} from the given adjacency field.
+	 * 
+	 * @param edges
+	 *            the node array (edges in {@link Graph}) of the adjacency field
+	 * @param turns
+	 *            the edge array (turns) of the adjacency field
+	 * @param turnTypes
+	 *            the types of the turns
+	 * @param restrictions
+	 *            the restrictions of the turns
+	 */
+	public EdgeBasedGraph(int[] edges, int[] turns, TurnType[] turnTypes,
+			Map<Integer, Restriction> restrictions) {
+		this(edges, turns, turnTypesToBytes(turnTypes), restrictions);
+	}
+
+	private static byte[] turnTypesToBytes(TurnType[] turnTypes) {
+		byte[] byteTurnTypes = new byte[turnTypes.length];
+		for (int i = 0; i < turnTypes.length; i++) {
+			byteTurnTypes[i] = (byte) turnTypes[i].ordinal();
+		}
+		return byteTurnTypes;
 	}
 
 	/**
@@ -142,7 +155,7 @@ public class EdgeBasedGraph {
 	 * @return the type of the turn
 	 */
 	public TurnType getTurnType(int turn) {
-		return turnTypes[turn];
+		return TurnType.values()[turnTypes[turn]];
 	}
 
 	/**
@@ -271,11 +284,7 @@ public class EdgeBasedGraph {
 			ints.put(partitions, 0, nEdges);
 			assert (ints.position() == intsLength / 4);
 			b.position(intsLength);
-			byte[] byteTurnTypes = new byte[nTurns];
-			for (int i = 0; i < nTurns; i++) {
-				byteTurnTypes[i] = (byte) turnTypes[i].ordinal();
-			}
-			b.put(byteTurnTypes, 0, nTurns);
+			b.put(turnTypes, 0, nTurns);
 			assert (b.position() == dataLength);
 
 			raf.seek(headerLength + dataLength);
@@ -342,7 +351,7 @@ public class EdgeBasedGraph {
 			int[] edges = new int[nEdges];
 			int[] turns = new int[nTurns];
 			int[] partitions = new int[nEdges];
-			byte[] byteTurnTypes = new byte[nTurns];
+			byte[] turnTypes = new byte[nTurns];
 			MappedByteBuffer b = raf.getChannel().map(MapMode.READ_ONLY,
 					headerLength, dataLength);
 			IntBuffer ints = b.asIntBuffer();
@@ -350,11 +359,7 @@ public class EdgeBasedGraph {
 			ints.get(turns, 0, nTurns);
 			ints.get(partitions, 0, nEdges);
 			b.position(intsLength);
-			b.get(byteTurnTypes, 0, nTurns);
-			TurnType[] turnTypes = new TurnType[nTurns];
-			for (int i = 0; i < nTurns; i++) {
-				turnTypes[i] = TurnType.values()[byteTurnTypes[i]];
-			}
+			b.get(turnTypes, 0, nTurns);
 			assert (b.position() == dataLength);
 
 			raf.seek(headerLength + dataLength);
