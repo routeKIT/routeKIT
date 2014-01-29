@@ -413,7 +413,7 @@ public class MapManagerController {
 		 */
 		private final Set<ProfileMapCombination> newPrecalculations;
 
-		public MapManagementDiff(Set<FutureMap> newOrUpdatedMaps,
+		private MapManagementDiff(Set<FutureMap> newOrUpdatedMaps,
 				Set<StreetMap> deletedMaps,
 				Set<ProfileMapCombination> deletedPrecalculations,
 				Set<ProfileMapCombination> newPrecalculations) {
