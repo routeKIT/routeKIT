@@ -2,12 +2,13 @@ package edu.kit.pse.ws2013.routekit.util;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Arrays;
+import java.util.Properties;
 
 import org.xml.sax.SAXException;
 
@@ -32,7 +33,8 @@ public class Dummies {
 
 		URL url = new URL(
 				"http://download.geofabrik.de/europe/germany/baden-wuerttemberg/karlsruhe-regbez-latest.osm.bz2");
-		ReadableByteChannel rbc = Channels.newChannel(url.openConnection().getInputStream());
+		ReadableByteChannel rbc = Channels.newChannel(url.openConnection()
+				.getInputStream());
 		File file = File.createTempFile("routeKIT_map_", ".osm");
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
@@ -41,6 +43,12 @@ public class Dummies {
 		StreetMap karlsruhe_big = new OSMMapImporter().importMap(file,
 				"Karlsruhe", new DummyProgressReporter());
 		MapManager.getInstance().saveMap(karlsruhe_big);
+		Properties p = new Properties();
+		p.setProperty("default", "true");
+		try (FileWriter writer = new FileWriter(new File(new File(rootDir,
+				"Karlsruhe"), "Karlsruhe.properties"))) {
+			p.store(writer, null);
+		}
 		ProfileMapCombination karlsruheCar = new ProfileMapCombination(
 				karlsruhe_big, Profile.defaultCar);
 		new PreCalculator().doPrecalculation(karlsruheCar,

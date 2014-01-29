@@ -1,7 +1,10 @@
 package edu.kit.pse.ws2013.routekit.map;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Properties;
 
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
@@ -13,6 +16,7 @@ public class StreetMap {
 	protected String name;
 	protected Graph graph;
 	protected EdgeBasedGraph edgeBasedGraph;
+	private final boolean isDefault;
 
 	/**
 	 * Creates a new {@code StreetMap} object from the given {@link Graph} and
@@ -24,8 +28,14 @@ public class StreetMap {
 	 *            the edge-based graph
 	 */
 	public StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph) {
+		this(graph, edgeBasedGraph, false);
+	}
+
+	private StreetMap(Graph graph, EdgeBasedGraph edgeBasedGraph,
+			boolean isDefault) {
 		this.graph = graph;
 		this.edgeBasedGraph = edgeBasedGraph;
+		this.isDefault = isDefault;
 	}
 
 	/**
@@ -34,7 +44,7 @@ public class StreetMap {
 	 * @return {@code true} if the map is a default map, else {@code false}.
 	 */
 	public boolean isDefault() {
-		return false;
+		return isDefault;
 	}
 
 	/**
@@ -112,6 +122,12 @@ public class StreetMap {
 			throw new IllegalArgumentException(directory.toString()
 					+ " is not a directory!");
 		}
+		Properties p = new Properties();
+		p.setProperty("default", Boolean.toString(isDefault()));
+		try (FileWriter writer = new FileWriter(new File(directory,
+				directory.getName() + ".properties"))) {
+			p.store(writer, null);
+		}
 		graph.save(new File(directory, directory.getName() + ".graph"));
 		edgeBasedGraph
 				.save(new File(directory, directory.getName() + ".egraph"));
@@ -130,11 +146,19 @@ public class StreetMap {
 	 *             If the files can’t be read.
 	 */
 	public static StreetMap load(File directory) throws IOException {
+		Properties p = new Properties();
+		try (FileReader reader = new FileReader(new File(directory,
+				directory.getName() + ".properties"))) {
+			p.load(reader);
+		} catch (IOException e) {
+			// ignore, defaults to false
+		}
 		Graph graph = Graph.load(new File(directory, directory.getName()
 				+ ".graph"), new DummyProgressReporter());
 		EdgeBasedGraph egraph = EdgeBasedGraph.load(new File(directory,
 				directory.getName() + ".egraph"));
-		StreetMap ret = new StreetMap(graph, egraph);
+		StreetMap ret = new StreetMap(graph, egraph, Boolean.parseBoolean(p
+				.getProperty("default", "false")));
 		ret.setName(directory.getName());
 		return ret;
 	}
@@ -150,17 +174,26 @@ public class StreetMap {
 	 *         {@link EdgeBasedGraph} lazily.
 	 */
 	public static StreetMap loadLazily(File directory) {
+		Properties p = new Properties();
+		try (FileReader reader = new FileReader(new File(directory,
+				directory.getName() + ".properties"))) {
+			p.load(reader);
+		} catch (IOException e) {
+			// ignore, defaults to false
+		}
 		return new LazyStreetMap(directory.getName(), new File(directory,
 				directory.getName() + ".graph"), new File(directory,
-				directory.getName() + ".egraph"));
+				directory.getName() + ".egraph"), Boolean.parseBoolean(p
+				.getProperty("default", "false")));
 	}
 
 	private static class LazyStreetMap extends StreetMap {
 		private final File graphFile;
 		private final File egraphFile;
 
-		public LazyStreetMap(String name, File graphFile, File egraphFile) {
-			super(null, null);
+		public LazyStreetMap(String name, File graphFile, File egraphFile,
+				boolean isDefault) {
+			super(null, null, isDefault);
 			this.name = name;
 			this.graphFile = graphFile;
 			this.egraphFile = egraphFile;
