@@ -104,6 +104,10 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		super.paint(g);
 	}
 
+	private void updateTitle(String name) {
+		setTitle(name + "... " + (int) (progress * 100) + "%");
+	}
+
 	@Override
 	public void startRoot(String name) {
 		bar.setString(name);
@@ -112,7 +116,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	@Override
 	public void beginTask(String name) {
 		bar.setString(name);
-		setTitle(name + "..." + (int) (progress * 100) + "%");
+		updateTitle(name);
 		tasks.addLast(new AbstractMap.SimpleEntry<>(name, System
 				.currentTimeMillis()));
 	}
@@ -122,7 +126,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		this.progress = progress;
 		bar.setValue((int) (progress * 100));
 		bar.setString(name);
-		setTitle(name + "... " + ((int) progress * 100) + "%");
+		updateTitle(name);
 	}
 
 	@Override
