@@ -26,7 +26,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 	@Override
 	public void weightEdges(ProfileMapCombination combination,
 			ProgressReporter reporter) {
-		long t1 = System.currentTimeMillis();
+		final long t1 = System.currentTimeMillis();
 		combination.setArcFlags(null, 0);
 		final Graph graph = combination.getStreetMap().getGraph();
 		final EdgeBasedGraph eGraph = combination.getStreetMap()
@@ -36,11 +36,12 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 		final int numberOfEdges = graph.getNumberOfEdges();
 		final int mask = 2 << 10; // report progress every 1024 edges
 		for (int edge = 0; edge < numberOfEdges; edge++) {
-			EdgeProperties currentEdgeProps = graph.getEdgeProperties(edge);
-			int startNode = graph.getStartNode(edge);
-			int targetNode = graph.getTargetNode(edge);
-			float edgeLength = graph.getCoordinates(startNode).distanceTo(
-					graph.getCoordinates(targetNode));
+			final EdgeProperties currentEdgeProps = graph
+					.getEdgeProperties(edge);
+			final int startNode = graph.getStartNode(edge);
+			final int targetNode = graph.getTargetNode(edge);
+			final float edgeLength = graph.getCoordinates(startNode)
+					.distanceTo(graph.getCoordinates(targetNode));
 			int baseTime = Math.round(edgeLength
 					/ ((float) currentEdgeProps.getMaxSpeed(profile) * 1000)
 					* 3600000);
@@ -51,7 +52,6 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 			for (int turn : eGraph.getOutgoingTurns(edge)) {
 				if (!eGraph.allowsTurn(turn, profile)) {
 					weightArray[turn] = Integer.MAX_VALUE;
-					System.out.println("MaxValue: " + turn);
 				} else {
 					int turnTime = 0;
 					switch (eGraph.getTurnType(turn)) {
@@ -88,8 +88,7 @@ public class EdgeWeighterImpl implements EdgeWeighter {
 					default:
 						turnTime = 0;
 					}
-					weightArray[turn] = baseTime + turnTime;
-					System.out.println(weightArray[turn] + ": " + turn);
+					weightArray[turn] = Math.max(baseTime + turnTime, 1);
 				}
 			}
 			if ((edge & mask) != 0) {
