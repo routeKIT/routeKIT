@@ -657,56 +657,56 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 		{\none}
 		{Gibt den Verlauf zurück.}
 	}
-\class{ProfileManagerController}{~}
-{\none}
+  \class{ProfileManagerController}{~}
+        {\none}
 	{\method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
-		{\none}
-		{Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
+	  {\none}
+	  {Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
 	}
-\class{MapManagerController}{~}
-{\none}
+  \class{MapManagerController}{~}
+        {\none}
 	{\method{getChanges}[MapManagementDiff]
-		{\none}
-		{Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
+	  {\none}
+	  {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
 	}
 }
 \package{Precalculation}{}
 {
-\class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
-  {\none}
+  \class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
+        {\none}
         {
-	\method{calculateArcFlags}
-		{
-			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
-		}
-		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+	  \method{calculateArcFlags}
+		 {
+		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+		 }
+		 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
-\class{ArcFlagsCalculatorImpl}{Geändert: Erstzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
-  {\none}
+  \class{ArcFlagsCalculatorImpl}{Geändert: Erstzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+        {\none}
         {
-	\method{calculateArcFlags}
-		{
-			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
-		}
-		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+	  \method{calculateArcFlags}
+		 {
+		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+		 }
+		 {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
-\class{EdgeWeighter}{Geändert: Ein Interface für die Berechnung der Kantengewichte.}
-  {\none}
+  \class{EdgeWeighter}{Geändert: Ein Interface für die Berechnung der Kantengewichte.}
+        {\none}
         {
-	\method{weightEdges}
-		{
-			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
-		}
-		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
+	  \method{weightEdges}
+		 {
+		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+		 }
+		 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
-\class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
-  {\none}
+  \class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+        {\none}
         {
-	\method{calculateArcFlags}
-		{
-			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
-		}
-		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
+	  \method{calculateArcFlags}
+		 {
+		   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+		 }
+		 {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
   \class{OSMParser}{~}
         {\none}
