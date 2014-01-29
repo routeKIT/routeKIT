@@ -391,7 +391,10 @@ public class ProfileMapManager {
 		ProfileManager.init(rootDirectory);
 		MapManager.init(rootDirectory);
 		instance = new ProfileMapManager(rootDirectory);
-		if (pr != null) {
+		if (pr != null
+		// if current is a regular ProfileMapCombination,
+		// it has no precalculation and we shouldn’t try to load it
+				&& instance.current.getClass() != ProfileMapCombination.class) {
 			instance.current.ensureLoaded(pr);
 		}
 		return instance.getCurrentCombination();
