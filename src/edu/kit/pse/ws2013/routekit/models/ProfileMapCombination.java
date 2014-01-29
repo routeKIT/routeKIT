@@ -315,6 +315,14 @@ public class ProfileMapCombination {
 		}
 
 		@Override
+		public boolean isCalculated() {
+			// un-lazy
+			getWeights();
+			getArcFlags();
+			return super.isCalculated();
+		}
+
+		@Override
 		public Weights getWeights() {
 			if (this.weights == null) {
 				try {
