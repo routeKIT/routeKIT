@@ -17,19 +17,38 @@ import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
 import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
 
 /**
- * A working {@link ArcFlagsCalculator}.
+ * A working {@link ArcFlagsCalculator} using multiple threads.
  * 
  * @author Fabian Hafner
  * @version 1.0
  * 
  */
-public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
+public class ArcFlagsCalculatorParallel implements ArcFlagsCalculator {
 
 	private int[] flagsArray;
 	private Graph graph;
 	private EdgeBasedGraph edgeBasedGraph;
 	private Weights weights;
 	private final int nPartitions = 32;
+	private int currentlyCalculatedPartition;
+	private ProgressReporter reporter;
+	private List<Set<Integer>> partitions;
+	private int numberOfThreads;
+
+	private class Worker extends Thread {
+
+		private int startPartition;
+
+		public Worker(int startPartition) {
+			this.startPartition = startPartition;
+		}
+
+		@Override
+		public void run() {
+			calculateFlagsOfPartitions(startPartition);
+		}
+
+	}
 
 	@Override
 	public void calculateArcFlags(ProfileMapCombination combination,
@@ -42,9 +61,10 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		for (int i = 0; i < flagsArray.length; i++) {
 			flagsArray[i] = 0x0;
 		}
+		this.reporter = reporter;
+		partitions = new ArrayList<Set<Integer>>(nPartitions);
 		reporter.setSubTasks(new float[] { .1f, .9f });
 		reporter.pushTask("Bereite Partitionen vor");
-		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(nPartitions);
 		for (int i = 0; i < nPartitions; i++) {
 			partitions.add(new HashSet<Integer>());
 		}
@@ -52,8 +72,31 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 			partitions.get(edgeBasedGraph.getPartition(i)).add(i);
 		}
 		reporter.nextTask("Baue Kürzeste-Pfade-Bäume zu den Schnittkanten der Partitionen auf");
-		int i = 1;
-		for (int currentPartition = 0; currentPartition < partitions.size(); currentPartition++) {
+		currentlyCalculatedPartition = 1;
+		edgeBasedGraph.getIncomingTurns(1);
+		numberOfThreads = Math.max(
+				Runtime.getRuntime().availableProcessors() / 2, 1);
+		Worker[] workers = new Worker[numberOfThreads];
+		for (int i = 0; i < workers.length; i++) {
+			workers[i] = new Worker(i);
+			workers[i].start();
+		}
+		try {
+			for (int i = 0; i < workers.length; i++) {
+				workers[i].join();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		reporter.popTask();
+		long t2 = System.currentTimeMillis();
+		int time = (int) (t2 - t1);
+		combination.setArcFlags(new ArcFlags(flagsArray), time);
+	}
+
+	private void calculateFlagsOfPartitions(int startPartition) {
+		for (int currentPartition = startPartition; currentPartition < partitions
+				.size(); currentPartition += numberOfThreads) {
 			Set<Integer> edgesWithTurnsToOtherPartitions = new HashSet<Integer>();
 			for (Integer edge : partitions.get(currentPartition)) {
 				Set<Integer> incomingTurns = edgeBasedGraph
@@ -71,13 +114,12 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 			for (Integer edge : edgesWithTurnsToOtherPartitions) {
 				buildReverseShortestPathsTreeAndSetArcFlags(edge);
 			}
-			reporter.setProgress(i / (float) nPartitions);
-			i++;
+			synchronized (reporter) {
+				reporter.setProgress(currentlyCalculatedPartition
+						/ (float) nPartitions);
+				currentlyCalculatedPartition++;
+			}
 		}
-		reporter.popTask();
-		long t2 = System.currentTimeMillis();
-		int time = (int) (t2 - t1);
-		combination.setArcFlags(new ArcFlags(flagsArray), time);
 	}
 
 	/**
@@ -154,7 +196,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	 * @param partition
 	 *            the partition
 	 */
-	private void setFlag(int turn, int partition) {
+	synchronized private void setFlag(int turn, int partition) {
 		if (partition < 0 || partition >= 32) {
 			throw new IllegalArgumentException(partition
 					+ " isn't a valid partition. Valid partitions: 0 - 31");
