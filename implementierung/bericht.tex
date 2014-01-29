@@ -472,7 +472,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    (statisch) Initialisiert den \code{ProfileManager}, indem alle in \refparam{ProfileManager}{init}{rootDirectory} liegenden \code{.profile}-Dateien \refmethod{Profile}{load}[geladen] werden.
                    Darf nur einmal aufgerufen werden.
                  }
-          \method{getInstance}
+          \method{getInstance}[ProfileManager]
                  {\none}
                  {
                    (statisch) Gibt die \code{ProfileManager}-Instanz zurück.
@@ -492,7 +492,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    (statisch) Initialisiert den \code{MapManager}, indem alle in \refparam{MapManager}{init}{rootDirectory} liegenden Ordner \refmethod{StreetMap}{load}[geladen] werden.
                    Darf nur einmal aufgerufen werden.
                  }
-          \method{getInstance}
+          \method{getInstance}[MapManager]
                  {\none}
                  {
                    (statisch) Gibt die \code{MapManager}-Instanz zurück.
@@ -517,7 +517,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    
                    Der Rückgabewert ist die aktuelle \reftype{ProfileMapCombination}.
                  }
-          \method{getInstance}
+          \method{getInstance}[ProfileMapManager]
                  {\none}
                  {
                    (statisch) Gibt die \code{ProfileMapManager}-Instanz zurück.
@@ -600,15 +600,24 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 \class{MainController}{~}
 {\none}
 	{
-	   \method{getInstance}
+	   \method{getInstance}[MainController]
 		{\none}
 		{Gibt eine Instance des \reftype{MainControllers} zurück, da der er ein Einzelstück ist.}
+	   \method{getHistory}[History]
+		{\none}
+		{Gibt den Verlauf zurück.}
 	}
 \class{ProfileManagerController}{~}
 {\none}
-	{\method{getDeletedPrecalculations}
+	{\method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
 		{\none}
 		{Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
+	}
+\class{MapManagerController}{~}
+{\none}
+	{\method{getChanges}[MapManagementDiff]
+		{\none}
+		{Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
 	}
 }
 \package{Precalculation}{}
@@ -618,7 +627,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
 	\method{calculateArcFlags}
 		{
-			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
 		}
 		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
@@ -627,7 +636,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
 	\method{calculateArcFlags}
 		{
-			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
 		}
 		{Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
@@ -636,7 +645,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
 	\method{weightEdges}
 		{
-			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
 		}
 		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
@@ -645,7 +654,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
 	\method{calculateArcFlags}
 		{
-			\param{reporter}{ProgressReporter}{Neu: Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+			\param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
 		}
 		{Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
@@ -788,12 +797,12 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    Setzt den Fortschritt der aktuellen Aufgabe direkt.
                    Darf nicht für Aufgaben verwendet werden, die Teilaufgaben haben (siehe \refmethod{ProgressReporter}{setSubTasks}).
                  }
-          \method{getProgress}
+          \method{getProgress}[float]
                  {\none}
                  {
                    Gibt den aktuellen Gesamtfortschritt zurück.
                  }
-          \method{getCurrentTask}
+          \method{getCurrentTask}[String]
                  {\none}
                  {
                    Gibt den Namen der aktuellen Aufgabe zurück.
@@ -879,6 +888,9 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
   \class{Graph}{~}
         {\none}
         {
+	\method{getCorrespondingEdge}[int]
+	{\param{edge}{int}{Eine ID der Kante.}}
+	{Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
           \method{getNumberOfEdges}[int]
                  {\none}
                  {Gibt die Anzahl der Kanten zurück. Dies ermöglicht es, über alle Kanten zu iterieren.}
@@ -961,7 +973,6 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                  }
         }
 }
-
 \package{Util}{}
 {
   \class{Coordinates}{~}
