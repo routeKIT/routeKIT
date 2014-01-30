@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-19" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
+<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2014-01-11" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
     <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="52" order="0"/>
-        <field id="tpd4" name="Anfang" width="23" order="1"/>
+        <field id="tpd4" name="Anfang" width="24" order="1"/>
         <field id="tpd5" name="Ende" width="23" order="2"/>
     </view>
     <view id="resource-table">
@@ -51,7 +51,7 @@ Profile.load(:File)]]></notes>
         <task id="75" name="GUI Fehler fixen" color="#00ff00" meeting="false" start="2014-01-03" duration="25" complete="0" expand="true"/>
         <task id="31" name="Renderer" color="#33ff00" meeting="false" start="2014-01-13" duration="9" complete="0" expand="true"/>
         <task id="79" name="Renderer verschönern" color="#00ff00" meeting="false" start="2014-01-24" duration="5" complete="0" expand="true"/>
-        <task id="28" name="MapView" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-12" duration="4" complete="0" expand="true"/>
+        <task id="28" name="MapView" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-12" duration="7" complete="0" expand="true"/>
         <task id="39" name="History + IO" color="#0000ff" meeting="false" start="2013-12-22" duration="7" complete="0" expand="true"/>
         <task id="40" name="Karten-IO" color="#0000ff" meeting="false" start="2014-01-10" duration="11" complete="0" expand="true"/>
         <task id="72" name="Progress Reporting" color="#0300ff" meeting="false" start="2014-01-22" duration="2" complete="0" expand="true"/>
@@ -60,6 +60,8 @@ Profile.load(:File)]]></notes>
 MapManagerController]]></notes>
         </task>
         <task id="42" name="MainController" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-08" duration="9" complete="0" expand="true"/>
+        <task id="83" name="Generellen debugging/fixing" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-20" duration="9" complete="0" expand="true"/>
+        <task id="93" name="Entwurf changes tracken" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-17" duration="6" complete="0" expand="true"/>
         <task id="44" name="ProfileMapCombination" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-27" duration="4" complete="0" expand="true"/>
         <task id="43" name="RouteModel" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-22" duration="2" complete="0" expand="true"/>
         <task id="82" name="OSM-Renderer" color="#ffffff" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2013-12-26" duration="1" complete="0" expand="true"/>
@@ -100,6 +102,8 @@ MapManagerController]]></notes>
         <allocation task-id="42" resource-id="9" function="2" responsible="true" load="100.0"/>
         <allocation task-id="44" resource-id="9" function="2" responsible="true" load="100.0"/>
         <allocation task-id="43" resource-id="9" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="83" resource-id="9" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="93" resource-id="9" function="2" responsible="true" load="50.0"/>
         <allocation task-id="52" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="53" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="55" resource-id="10" function="2" responsible="true" load="100.0"/>
@@ -133,9 +137,9 @@ MapManagerController]]></notes>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="198" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="89" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="88" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="203" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="94" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="93" visible="true"/>
     </taskdisplaycolumns>
     <previous/>
     <roles roleset-name="Default"/>
