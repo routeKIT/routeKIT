@@ -195,7 +195,7 @@ public class OSMParser {
 		Set<Integer> outgoingEdges = graph.getOutgoingEdges(turnNode);
 		if (outgoingEdges.size() == 1
 				|| (outgoingEdges.size() == 2 && outgoingEdges
-						.contains(startNode))) {
+						.contains(fromEdge.getId()))) {
 			return TurnType.NoTurn;
 		}
 
