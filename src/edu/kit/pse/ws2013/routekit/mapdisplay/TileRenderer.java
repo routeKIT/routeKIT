@@ -28,7 +28,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  */
 public class TileRenderer implements TileSource {
 	private Graph graph;
-	// 0=OFF, 1=ARC, 2=WEIGHT, 3=MAX_SPEED
+	// 0=OFF, 1=ARC, 2=WEIGHT, 3=MAX_SPEED, 4=ID
 	public static final int DEBUG_VIS = 0;
 
 	class EdgeIterator {
@@ -154,6 +154,8 @@ public class TileRenderer implements TileSource {
 				if (DEBUG_VIS == 1) {
 					debugData = Integer.toHexString(debugAF.getFlag(debugEbg
 							.getOutgoingTurns(it.edge).iterator().next()));
+				} else if (DEBUG_VIS == 2) {
+					debugData = Integer.toString(it.edge);
 				} else {
 					debugData = Integer.toString(DEBUG_VIS == 2 ? debugWeights
 							.getWeight(it.edge) : graph.getEdgeProperties(
