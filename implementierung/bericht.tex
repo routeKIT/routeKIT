@@ -1074,7 +1074,10 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
 {
   \class{MainView}{~}
         {\none}
-        {\method{textMessage}
+        { \method{currentCombinationChanged}
+	{\param{newCombination}{ProfileMapCombination}{Die neue Kombination aus Profil und Karte.}}
+	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMesage} die Meldung für den Benutzer aus.}
+	\method{textMessage}
           {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
           {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
         }
