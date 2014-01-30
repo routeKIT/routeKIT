@@ -13,9 +13,14 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
+import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.HighwayType;
+import edu.kit.pse.ws2013.routekit.models.ArcFlags;
+import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 /**
@@ -23,6 +28,8 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  */
 public class TileRenderer implements TileSource {
 	private Graph graph;
+	// 0=OFF, 1=ARC, 2=WEIGHT, 3=MAX_SPEED
+	public static final int DEBUG_VIS = 0;
 
 	class EdgeIterator {
 		private int xstart;
@@ -88,6 +95,17 @@ public class TileRenderer implements TileSource {
 
 	@Override
 	public BufferedImage renderTile(final int x, final int y, final int zoom) {
+		ProfileMapCombination debugCurrent;
+		EdgeBasedGraph debugEbg;
+		Weights debugWeights;
+		ArcFlags debugAF;
+		if (DEBUG_VIS != 0) {
+			debugCurrent = ProfileMapManager.getInstance()
+					.getCurrentCombination();
+			debugEbg = debugCurrent.getStreetMap().getEdgeBasedGraph();
+			debugWeights = debugCurrent.getWeights();
+			debugAF = debugCurrent.getArcFlags();
+		}
 		final Set<Integer> edges = getEdgesOnTile(x, y, zoom);
 
 		final BufferedImage tile = new BufferedImage(256, 256,
@@ -130,6 +148,20 @@ public class TileRenderer implements TileSource {
 			final double streetLength = Math.sqrt(Math.pow(
 					(it.xtarget - it.xstart), 2)
 					+ Math.pow((it.ytarget - it.ystart), 2));
+
+			if (DEBUG_VIS != 0) {
+				String debugData;
+				if (DEBUG_VIS == 1) {
+					debugData = Integer.toHexString(debugAF.getFlag(debugEbg
+							.getOutgoingTurns(it.edge).iterator().next()));
+				} else {
+					debugData = Integer.toString(DEBUG_VIS == 2 ? debugWeights
+							.getWeight(it.edge) : graph.getEdgeProperties(
+							it.edge).getMaxSpeed(debugCurrent.getProfile()));
+				}
+				g.drawString(debugData, (it.xstart + it.xtarget) / 2,
+						(it.ystart + it.ytarget) / 2);
+			}
 			if (name != null && (it.xstart != -1)
 					&& getStreetWidth(zoom, it.p) > 7) {
 				final AffineTransform old = g.getTransform();
