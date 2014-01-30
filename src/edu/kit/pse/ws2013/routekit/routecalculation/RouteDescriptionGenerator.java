@@ -6,6 +6,7 @@ import java.util.List;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 
 /**
@@ -40,6 +41,14 @@ public class RouteDescriptionGenerator {
 			StringBuilder instr = null;
 			switch (edgeBasedGraph.getTurnType(turn)) {
 			case StraightOn:
+				HighwayType typeFrom = graph.getEdgeProperties(
+						edgeBasedGraph.getStartEdge(turn)).getType();
+				HighwayType typeTo = graph.getEdgeProperties(
+						edgeBasedGraph.getTargetEdge(turn)).getType();
+				if (typeFrom == typeTo) {
+					// Only mention "go straight on" if highway type differs
+					break;
+				}
 				instr = new StringBuilder("Geradeaus weiterfahren");
 				break;
 			case RightTurn:
