@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2014-01-08" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PSE" company="KIT" webLink="http://algo2.iti.kit.edu/2241.php" view-date="2013-12-31" view-index="0" gantt-divider-location="394" resource-divider-location="322" version="2.0" locale="de">
     <description><![CDATA[Implementierungsphase]]></description>
-    <view zooming-state="default:3" id="gantt-chart">
+    <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Vorgang" width="52" order="0"/>
         <field id="tpd4" name="Anfang" width="23" order="1"/>
         <field id="tpd5" name="Ende" width="23" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Ressource" width="50" order="0"/>
-        <field id="1" name="Rolle" width="49" order="1"/>
+        <field id="1" name="Rolle" width="50" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -66,8 +67,10 @@ MapManagerController]]></notes>
         <task id="58" name="ArcFlags" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="53" name="EdgeWeighter (Dummy)" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
         <task id="55" name="ArcFlagsCalculator (Dummy)" color="#ff0000" meeting="false" start="2013-12-22" duration="1" complete="0" expand="true"/>
-        <task id="56" name="EdgeWeighter" color="#ff0000" meeting="false" start="2014-01-04" duration="9" complete="0" expand="true"/>
-        <task id="57" name="ArcFlagsCalculator" color="#ff0000" meeting="false" start="2014-01-13" duration="10" complete="0" expand="true"/>
+        <task id="56" name="EdgeWeighterImpl" color="#ff0000" meeting="false" start="2014-01-04" duration="9" complete="0" expand="true"/>
+        <task id="57" name="ArcFlagsCalculatorImpl" color="#ff0000" meeting="false" start="2014-01-15" duration="7" complete="0" expand="true"/>
+        <task id="73" name="ArcFlagsCalculatorImpl Bugfix" color="#ff0000" meeting="false" start="2014-01-24" duration="4" complete="0" expand="true"/>
+        <task id="72" name="ArcFlagsCalculatorParallel" color="#ff0000" meeting="false" start="2014-01-27" duration="2" complete="0" expand="true"/>
         <task id="60" name="RouteCalculator / ArcFlagsDijkstra" color="#66ccff" meeting="false" start="2014-01-04" duration="12" complete="0" expand="true"/>
         <task id="71" name="Route" color="#66ccff" meeting="false" start="2013-12-27" duration="3" complete="0" expand="true"/>
     </tasks>
@@ -103,6 +106,7 @@ MapManagerController]]></notes>
         <allocation task-id="57" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="58" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="59" resource-id="10" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="72" resource-id="10" function="2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="11" function="2" responsible="true" load="80.0"/>
         <allocation task-id="22" resource-id="11" function="2" responsible="true" load="95.0"/>
         <allocation task-id="28" resource-id="11" function="2" responsible="true" load="80.0"/>
@@ -129,7 +133,7 @@ MapManagerController]]></notes>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="207" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="206" visible="true"/>
         <displaycolumn property-id="tpd4" order="1" width="92" visible="true"/>
         <displaycolumn property-id="tpd5" order="2" width="92" visible="true"/>
     </taskdisplaycolumns>
