@@ -358,6 +358,19 @@ public class MainController {
 	 *            Command line arguments (currently unused).
 	 */
 	public static void main(String[] args) {
+		if (args.length != 0) {
+			if (args.length != 3) {
+				System.err.println("Usage: java .... "
+						+ MainController.class.getName()
+						+ " <mapPath> <mapName> <profileName>");
+				System.err
+						.println("Example: java .... "
+								+ MainController.class.getName()
+								+ " reg_bez_ka.osm \"Regierungsbezirk KA\" \"PKW (Standard)\"");
+			}
+			return;
+		}
+
 		final ProgressDialog pd = new ProgressDialog(null);
 		new Thread("Upstart") {
 			@Override
@@ -369,6 +382,5 @@ public class MainController {
 		}.start();
 		pd.setVisible(true);
 		instance.view.setVisible(true);
-		// TODO maybe use args?
 	}
 }
