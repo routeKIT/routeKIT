@@ -186,10 +186,7 @@ public class OSMWay {
 	 *         it can also be used in the opposite direction
 	 */
 	public boolean isOneway() {
-		if (!tags.containsKey("oneway")) {
-			return false;
-		}
-		switch (tags.get("oneway").toLowerCase()) {
+		switch (tags.get("oneway")) {
 		case "yes":
 		case "true":
 		case "1":
