@@ -674,32 +674,53 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
         }
 }
-\package{Precalculation}{}
+\package{Precalculation}{
+Die Klassen \reftype{ArkFlagCalculator} und \reftype{EdgeWeighter} wurden zu Interfaces, die von den neuen Klassen \reftype{ArcFlagCalculatorImpl}, \reftype{ArcFlagCalculatorParallel} und \reftype{EdgeWeighterImpl} implementiert werden.
+Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
+}
 {
+  \class{PreCalculator}{Führt die Vorberechnung für die angegebene Kombination aus.}
+         {\none}
+         {
+           \method{doPrecaculation}
+                  {
+                    \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                  }
+                  {Führt die Vorberechnung für die angegebene Kombination durch.}
+         }
   \class{ArcFlagsCalculator}{Geändert: Ein Interface für die Berechnung der \gls{arc}}
         {\none}
         {
           \method{calculateArcFlags}
                  {
-                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                  }
                  {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
-  \class{ArcFlagsCalculatorImpl}{Geändert: Erstzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+  \class{ArcFlagsCalculatorImpl}{Geändert: Ersetzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
         {\none}
         {
           \method{calculateArcFlags}
                  {
-                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                  }
                  {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
+  \class{ArcFlagsCalculatorParallel}{Neue Klasse. Verwendet im Gegensatz zu \reftype{ArcFlagsCalculatorImpl} mehrere parallel laufende Threads, um die Vorberechnung zu beschleunigen. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+          {\none}
+          {
+            \method{calculateArcFlags}
+                   {
+                     \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                   }
+                   {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
+          }
   \class{EdgeWeighter}{Geändert: Ein Interface für die Berechnung der Kantengewichte.}
         {\none}
         {
           \method{weightEdges}
                  {
-                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
@@ -708,7 +729,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {
           \method{weightEdges}
                  {
-                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
