@@ -29,6 +29,7 @@ import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescriptionGenerator;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
+import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.ProgressDialog;
 
@@ -149,10 +150,16 @@ public class MainController {
 							.getCurrentCombination();
 					GraphIndex index = currentCombination.getStreetMap()
 							.getGraph().getIndex(18);
-					Route r = rc.calculateRoute(
-							index.findNearestPointOnEdge(start),
-							index.findNearestPointOnEdge(destination),
-							currentCombination);
+					PointOnEdge startPointOnEdge = index
+							.findNearestPointOnEdge(start);
+					PointOnEdge destinationPointOnEdge = index
+							.findNearestPointOnEdge(destination);
+					if (startPointOnEdge == null
+							|| destinationPointOnEdge == null) {
+						return;
+					}
+					Route r = rc.calculateRoute(startPointOnEdge,
+							destinationPointOnEdge, currentCombination);
 					rm.setCurrentRoute(r);
 
 					RouteDescription rd = rdg.generateRouteDescription(r);
