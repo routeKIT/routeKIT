@@ -108,8 +108,11 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 					// check arc bit
 					if (arcBit != 0 || correspondingArcBit != 0) {
-						int alt = distance[u]
-								+ data.getWeights().getWeight(currentTurn);
+						int weight = data.getWeights().getWeight(currentTurn);
+						if (weight == Integer.MAX_VALUE) {
+							continue;
+						}
+						int alt = distance[u] + weight;
 
 						if (alt < distance[targetEdge]) {
 							distance[targetEdge] = alt;
