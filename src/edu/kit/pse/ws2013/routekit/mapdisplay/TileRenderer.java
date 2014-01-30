@@ -142,7 +142,7 @@ public class TileRenderer implements TileSource {
 				// Pfeil <-
 				if (zoom > 15 && streetLength > 40) {
 					if (graph.getCorrespondingEdge(it.edge) == -1) {
-						g.setColor(Color.WHITE);
+						g.setColor(Color.LIGHT_GRAY);
 						double angle2 = angle;
 						if (it.xtarget < it.xstart
 								|| (it.xstart == it.xtarget && it.ystart > it.ytarget)) {
