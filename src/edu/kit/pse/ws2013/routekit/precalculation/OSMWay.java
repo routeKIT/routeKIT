@@ -186,19 +186,20 @@ public class OSMWay {
 	 *         it can also be used in the opposite direction
 	 */
 	public boolean isOneway() {
-		switch (tags.get("oneway")) {
-		case "yes":
-		case "true":
-		case "1":
-			return true;
-		case "no":
-		case "false":
-		case "0":
-		case "-1":
-			return false;
-		default:
-			return isRoundabout() || getHighwayType() == HighwayType.Motorway;
+		if (tags.containsKey("oneway")) {
+			switch (tags.get("oneway").toLowerCase()) {
+			case "yes":
+			case "true":
+			case "1":
+				return true;
+			case "no":
+			case "false":
+			case "0":
+			case "-1":
+				return false;
+			}
 		}
+		return isRoundabout() || getHighwayType() == HighwayType.Motorway;
 	}
 
 	/**
