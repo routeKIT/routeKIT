@@ -108,10 +108,6 @@ public class EdgeBasedGraph {
 		}
 	}
 
-	public int[] getEdges() {
-		return edges;
-	}
-
 	/**
 	 * Returns the partition in which the given edge (i. e. the node in
 	 * {@link Graph}) is located.

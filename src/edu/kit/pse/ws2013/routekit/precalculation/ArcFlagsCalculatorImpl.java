@@ -88,15 +88,15 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	 *            the start edge of the shortest paths tree
 	 */
 	private void buildReverseShortestPathsTreeAndSetArcFlags(Integer edge) {
-		int[] edges = edgeBasedGraph.getEdges();
-		int[] distance = new int[edges.length];
-		int[] next = new int[edges.length];
+		int edgeCount = edgeBasedGraph.getNumberOfEdges();
+		int[] distance = new int[edgeCount];
+		int[] next = new int[edgeCount];
 		FibonacciHeap fh = new FibonacciHeap();
 		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
 		int edgePartition = edgeBasedGraph.getPartition(edge);
 		distance[edge] = 0;
 		next[edge] = -1;
-		for (int i = 0; i < edges.length; i++) {
+		for (int i = 0; i < edgeCount; i++) {
 			if (i != edge) {
 				distance[i] = Integer.MAX_VALUE;
 				next[i] = -1;

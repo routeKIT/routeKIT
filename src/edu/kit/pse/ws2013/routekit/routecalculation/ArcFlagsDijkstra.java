@@ -18,10 +18,10 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 	@Override
 	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
 			ProfileMapCombination data) {
-
-		int[] graph = data.getStreetMap().getEdgeBasedGraph().getEdges();
-		int[] distance = new int[graph.length];
-		int[] previous = new int[graph.length];
+		int edgeCount = data.getStreetMap().getEdgeBasedGraph()
+				.getNumberOfEdges();
+		int[] distance = new int[edgeCount];
+		int[] previous = new int[edgeCount];
 		FibonacciHeap fh = new FibonacciHeap();
 
 		int startEdge = start.getEdge();
@@ -58,7 +58,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 					.getCorrespondingEdge(startEdge)] = -1;
 		}
 
-		for (int i = 0; i < graph.length; i++) {
+		for (int i = 0; i < edgeCount; i++) {
 			if (i != startEdge
 					&& i != data.getStreetMap().getGraph()
 							.getCorrespondingEdge(startEdge)) {
