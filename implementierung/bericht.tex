@@ -703,10 +703,10 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
-  \class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+  \class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{EdgeWeighter}}
         {\none}
         {
-          \method{calculateArcFlags}
+          \method{weightEdges}
                  {
                    \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
                  }
@@ -1055,10 +1055,18 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
   \class{Coordinates}{~}
         {\none}
         {
-          \method{toString}[String]
+	\method{goIntoDirection}[Coordinates]
+	       {
+		\param{to}{Coordinates}{Gibt die Richtung an, in die gegangen wird}
+		\param{position}{float}{Ein Wert zwischen 0 und 1, der angibt wie weit in diese Richtung gegangen wird.}
+	       }
+	       {Berechnet die Koordinaten des Punkts mit der angegebenen Position auf einer
+Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype{PointOnEdge} zu bestimmen.}
+
+          	\method{toString}[String]
                  {\none}
                  {Gibt eine String-Repräsentation der Koordinaten zurück, die von \refmethod{Coordinates}{fromString} wieder geparst werden kann.}
-          \method{fromString}[Coordinates]
+          	\method{fromString}[Coordinates]
                  {
                    \param{coords}{String}{Der Koordinaten-String.}
                  }
