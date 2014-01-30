@@ -25,23 +25,17 @@ import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
  */
 public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 
-	private int[] flagsArray;
-	private Graph graph;
-	private EdgeBasedGraph edgeBasedGraph;
-	private Weights weights;
-	private final int nPartitions = 32;
+	protected int[] flagsArray;
+	protected Graph graph;
+	protected EdgeBasedGraph edgeBasedGraph;
+	protected Weights weights;
+	protected final int nPartitions = 32;
 
 	@Override
 	public void calculateArcFlags(ProfileMapCombination combination,
 			ProgressReporter reporter) {
 		long t1 = System.currentTimeMillis();
-		graph = combination.getStreetMap().getGraph();
-		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
-		weights = combination.getWeights();
-		flagsArray = new int[edgeBasedGraph.getNumberOfTurns()];
-		for (int i = 0; i < flagsArray.length; i++) {
-			flagsArray[i] = 0x0;
-		}
+		initData(combination);
 		reporter.setSubTasks(new float[] { .1f, .9f });
 		reporter.pushTask("Bereite Partitionen vor");
 		List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(nPartitions);
@@ -80,6 +74,16 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
 	}
 
+	protected void initData(ProfileMapCombination combination) {
+		graph = combination.getStreetMap().getGraph();
+		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
+		weights = combination.getWeights();
+		flagsArray = new int[edgeBasedGraph.getNumberOfTurns()];
+		for (int i = 0; i < flagsArray.length; i++) {
+			flagsArray[i] = 0x0;
+		}
+	}
+
 	/**
 	 * Builds the reverse shortest paths tree starting from the given edge using
 	 * a reverse Dijkstra and then sets arc flags accordingly.
@@ -87,7 +91,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	 * @param edge
 	 *            the start edge of the shortest paths tree
 	 */
-	private void buildReverseShortestPathsTreeAndSetArcFlags(Integer edge) {
+	protected void buildReverseShortestPathsTreeAndSetArcFlags(Integer edge) {
 		int edgeCount = edgeBasedGraph.getNumberOfEdges();
 		int[] distance = new int[edgeCount];
 		int[] next = new int[edgeCount];
@@ -119,8 +123,11 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 
 				if (fhList.containsKey(startEdge)
 						&& !(startPartition == edgePartition && startPartition == endPartition)) {
-					int newDistance = distance[currentEdge]
-							+ weights.getWeight(currentTurn);
+					int weight = weights.getWeight(currentTurn);
+					if (weight == Integer.MAX_VALUE) {
+						continue;
+					}
+					int newDistance = distance[currentEdge] + weight;
 
 					if (newDistance < distance[startEdge]) {
 						distance[startEdge] = newDistance;

@@ -1,20 +1,13 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
-import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
-import edu.kit.pse.ws2013.routekit.models.Weights;
-import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
-import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
 
 /**
  * A working {@link ArcFlagsCalculator} using multiple threads.
@@ -23,13 +16,8 @@ import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
  * @version 1.0
  * 
  */
-public class ArcFlagsCalculatorParallel implements ArcFlagsCalculator {
+public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 
-	private int[] flagsArray;
-	private Graph graph;
-	private EdgeBasedGraph edgeBasedGraph;
-	private Weights weights;
-	private final int nPartitions = 32;
 	private int currentlyCalculatedPartition;
 	private ProgressReporter reporter;
 	private List<Set<Integer>> partitions;
@@ -118,72 +106,6 @@ public class ArcFlagsCalculatorParallel implements ArcFlagsCalculator {
 				reporter.setProgress(currentlyCalculatedPartition
 						/ (float) nPartitions);
 				currentlyCalculatedPartition++;
-			}
-		}
-	}
-
-	/**
-	 * Builds the reverse shortest paths tree starting from the given edge using
-	 * a reverse Dijkstra and then sets arc flags accordingly.
-	 * 
-	 * @param edge
-	 *            the start edge of the shortest paths tree
-	 */
-	private void buildReverseShortestPathsTreeAndSetArcFlags(Integer edge) {
-		int edgeCount = edgeBasedGraph.getNumberOfEdges();
-		int[] distance = new int[edgeCount];
-		int[] next = new int[edgeCount];
-		FibonacciHeap fh = new FibonacciHeap();
-		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
-		int edgePartition = edgeBasedGraph.getPartition(edge);
-		distance[edge] = 0;
-		next[edge] = -1;
-		for (int i = 0; i < edgeCount; i++) {
-			if (i != edge) {
-				distance[i] = Integer.MAX_VALUE;
-				next[i] = -1;
-			}
-			fhList.put(i, fh.add(i, distance[i]));
-		}
-		while (!fh.isEmpty()) {
-			int currentEdge = fh.deleteMin().getValue();
-			fhList.remove(currentEdge);
-			if (distance[currentEdge] == Integer.MAX_VALUE) {
-				break;
-			}
-			Set<Integer> incomingTurns = edgeBasedGraph
-					.getIncomingTurns(currentEdge);
-			for (Integer currentTurn : incomingTurns) {
-				int startEdge = edgeBasedGraph.getStartEdge(currentTurn);
-				int startPartition = edgeBasedGraph.getPartition(startEdge);
-				int endEdge = edgeBasedGraph.getTargetEdge(currentTurn);
-				int endPartition = edgeBasedGraph.getPartition(endEdge);
-
-				if (fhList.containsKey(startEdge)
-						&& !(startPartition == edgePartition && startPartition == endPartition)) {
-					int newDistance = distance[currentEdge]
-							+ weights.getWeight(currentTurn);
-
-					if (newDistance < distance[startEdge]) {
-						distance[startEdge] = newDistance;
-						next[startEdge] = currentEdge;
-
-						FibonacciHeapEntry toDecrease = fhList.get(startEdge);
-						fh.decreaseKey(toDecrease, newDistance);
-					}
-				}
-			}
-		}
-		for (int currentEdge = 0; currentEdge < next.length; currentEdge++) {
-			int nextEdge = next[currentEdge];
-			if (nextEdge != -1) {
-				for (Integer turn : edgeBasedGraph
-						.getOutgoingTurns(currentEdge)) {
-					if (edgeBasedGraph.getTargetEdge(turn) == nextEdge) {
-						setFlag(turn, edgePartition);
-						break;
-					}
-				}
 			}
 		}
 	}
