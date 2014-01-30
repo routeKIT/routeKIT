@@ -948,6 +948,22 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                    Wird aufgerufen, wenn die Basisaufgabe des \reftype{ProgressReporter}s beendet wird.
                  }
         }
+  \class{CurrentCombinationListener}
+        {
+          Neues Interface, um benachrichtigt zu werden, wenn sich die aktuelle \reftype{ProfileMapCombination} (gehalten vom \reftype{ProfileMapManager}) ändert.
+          
+          Die \reftype{MainView} registriert einen anonymen \reftype{CurrentCombinationListener}, um die \reftype{MapView} zu de- oder aktivieren und gegebenenfalls eine Nachricht anzuzeigen, dass eine Vorberechnung durchgeführt werden muss.
+        }
+        {\none}
+        {
+          \method{currentCombinationChanged}
+                 {
+                   \param{newCombination}{ProfileMapCombination}{Die neue aktuelle ProfileMapCombination.}
+                 }
+                 {
+                   Wird aufgerufen, wenn sich die aktuelle \reftype{ProfileMapCombination} ändert, etwa durch Aufruf von \refmethod{ProfileMapManager}{setCurrentCombination}.
+                 }
+        }
 }
 
 \package{Map}{}
@@ -1108,6 +1124,54 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
                    \param{lon}{String}{Die Längengrad-Angabe.}
                  }
                  {(statisch) Parst eine Längengrad-Angabe aus einer Zeichenkette.}
+        }
+  \class{FileUtil}
+        {
+          Neue Klasse, die verschiedene statische Methoden enthält, welche etwas mit Dateien oder Dateisystemen zu tun haben.
+        }
+        {\none}
+        {
+          \method{rmRf}
+                 {
+                   \param{directory}{File}{Das Verzeichnis, das gelöscht werden soll.}
+                 }
+                 {
+                   (statisch) Löscht ein Verzeichnis rekursiv.
+                   Wird verwendet von \refmethod{MapManager}{deleteMap} und \refmethod{ProfileMapManager}{deletePrecalculation}.
+                 }
+          \method{getRootDir}[File]
+                 {\none}
+                 {
+                   (statisch) Gibt das Ursprungsverzeichnis der \routeKIT-Installation zurück.
+                   Dieses Verzeichnis enthält alle Karten, Profile und Vorberechnungen.
+                   \begin{description}
+                   \item[Windows] \code{\%APPDATA\%\textbackslash{}routeKIT}
+                   \item[Mac] \code{\$HOME/Library/Application Support/routeKIT}
+                   \item[Unix/Linux] \code{\$HOME/.config/routeKIT}
+                   \end{description}
+                 }
+          \method{getHistoryFile}[File]
+                 {\none}
+                 {
+                   Gibt die Datei zurück, in der der Verlauf (siehe \reftype{History}) gespeichert wird:
+                   \code{routeKIT.history} in \refmethod{FileUtil}{getRootDir}.
+                 }
+        }
+  \class{TimeUtil}
+        {
+          Neue Klasse, die eine Methode enthält, welche etwas mit Zeit zu tun hat.
+        }
+        {\none}
+        {
+          \method{timeSpanString}
+                 {
+                   \param{text}{StringBuilder}{Der \reftype{StringBuilder}, an den die Zeitspanne angehängt werden soll.}
+                   \param{interval}{int}{Die Zeitspanne in Millisekunden.}
+                 }
+                 {
+                   Wandelt eine Zeitspanne in Text um und hängt sie an \refparam{TimeUtil}{timeSpanString}{text} an.
+                   Wird verwendet von \reftype{ProfileManagerView} und \reftype{MapManagerView}.
+                 }
         }
 }
 
