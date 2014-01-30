@@ -651,6 +651,9 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
   \class{MainController}{~}
         {\none}
         {
+	\method{MainController}
+	{\param{pr}{ProgressReporter}{Wird zum Anzeigen des Fortschritts beim Start des Programms gebraucht.}}
+	{~}
           \method{getInstance}[MainController]
                  {\none}
                  {(statisch) Gibt die Instanz des \reftype{MainControllers} zurück, der ein \gls{einzelstueck} ist.}
@@ -1032,6 +1035,20 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
           {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
         }
+}
+\package{History}{}
+{
+  \class{HistoryEntry}{~}
+	{\none}
+	{
+	   \method{fromString}[HistoryEntry]
+	         {\param{s}{String}{Ein Text, der zu einem \reftype{HistoryEntry} erhalten kann.}}
+	         {Gibt einen aus dem String generierten \reftype{HistoryEntry} zurück.}
+	   \method{toString}[String]
+	         {\none}
+	         {Gibt einen aus dem \reftype{HistoryEntry} generierten Text in Form eines Strings zurück.}
+	}
+	
 }
 \package{Util}{}
 {
