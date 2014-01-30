@@ -280,7 +280,9 @@ public class OSMWay {
 		if (ref != null && ref.isEmpty()) {
 			ref = null;
 		}
-
+		if (maxSpeed == 0 && getHighwayType() == HighwayType.Residential) {
+			maxSpeed = 50;
+		}
 		return new EdgeProperties(getHighwayType(), name, ref, maxSpeed);
 	}
 }
