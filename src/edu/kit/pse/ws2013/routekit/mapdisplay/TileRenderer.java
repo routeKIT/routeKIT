@@ -151,15 +151,17 @@ public class TileRenderer implements TileSource {
 
 			if (DEBUG_VIS != 0) {
 				String debugData;
+				int tturn = debugEbg.getOutgoingTurns(it.edge).iterator()
+						.next();
 				if (DEBUG_VIS == 1) {
-					debugData = Integer.toHexString(debugAF.getFlag(debugEbg
-							.getOutgoingTurns(it.edge).iterator().next()));
+					debugData = Integer.toHexString(debugAF.getFlag(tturn));
 				} else if (DEBUG_VIS == 4) {
 					debugData = Integer.toString(it.edge);
 				} else {// 2,3
-					debugData = Integer.toString(DEBUG_VIS == 2 ? debugWeights
-							.getWeight(it.edge) : graph.getEdgeProperties(
-							it.edge).getMaxSpeed(debugCurrent.getProfile()));
+					debugData =  Integer.toString(DEBUG_VIS == 2 ? debugWeights
+									.getWeight(tturn) : graph
+									.getEdgeProperties(it.edge).getMaxSpeed(
+											debugCurrent.getProfile()));
 				}
 				g.drawString(debugData, (it.xstart + it.xtarget) / 2,
 						(it.ystart + it.ytarget) / 2);
