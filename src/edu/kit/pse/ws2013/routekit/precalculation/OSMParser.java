@@ -194,8 +194,8 @@ public class OSMParser {
 		// No real turn if there are no other outgoing edges except backwards
 		Set<Integer> outgoingEdges = graph.getOutgoingEdges(turnNode);
 		if (outgoingEdges.size() == 1
-				|| (outgoingEdges.size() == 2 && outgoingEdges
-						.contains(fromEdge.getId()))) {
+				|| (outgoingEdges.size() == 2 && !fromEdge.getWay().isOneway() && !fromEdge
+						.getWay().isReversedOneway())) {
 			return TurnType.NoTurn;
 		}
 
