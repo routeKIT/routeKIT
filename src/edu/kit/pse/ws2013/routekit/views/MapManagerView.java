@@ -373,13 +373,6 @@ public class MapManagerView extends JDialog {
 		listenerCheck--;
 	}
 
-	public void addProfile(Profile p) {
-		// TODO either remove, or implement sorting here as well
-		// currently unused – the Controller uses setCurrentMap() instead
-		// – Lucas
-		listenModell.addElement(p.getName());
-	}
-
 	private class Dialog extends JDialog {
 		private static final long serialVersionUID = 1L;
 		private JButton ok;
