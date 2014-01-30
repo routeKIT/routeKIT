@@ -154,9 +154,9 @@ public class TileRenderer implements TileSource {
 				if (DEBUG_VIS == 1) {
 					debugData = Integer.toHexString(debugAF.getFlag(debugEbg
 							.getOutgoingTurns(it.edge).iterator().next()));
-				} else if (DEBUG_VIS == 2) {
+				} else if (DEBUG_VIS == 4) {
 					debugData = Integer.toString(it.edge);
-				} else {
+				} else {// 2,3
 					debugData = Integer.toString(DEBUG_VIS == 2 ? debugWeights
 							.getWeight(it.edge) : graph.getEdgeProperties(
 							it.edge).getMaxSpeed(debugCurrent.getProfile()));
