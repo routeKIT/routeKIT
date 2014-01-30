@@ -35,6 +35,17 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		// destination edge’s partition
 		int destinationPartition = data.getStreetMap().getEdgeBasedGraph()
 				.getPartition(destinationEdge);
+		int destinationCorrespondingPartition = -1;
+
+		if (data.getStreetMap().getGraph()
+				.getCorrespondingEdge(destinationEdge) != -1) {
+			destinationCorrespondingPartition = data
+					.getStreetMap()
+					.getEdgeBasedGraph()
+					.getPartition(
+							data.getStreetMap().getGraph()
+									.getCorrespondingEdge(destinationEdge));
+		}
 
 		// initialization
 		distance[startEdge] = 0;
@@ -88,8 +99,15 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 					// fetch Arc-Flags
 					int arcFlag = data.getArcFlags().getFlag(currentTurn);
 					int arcBit = (arcFlag >> destinationPartition) & 0x1;
+
+					int correspondingArcBit = 0;
+					if (data.getStreetMap().getGraph()
+							.getCorrespondingEdge(destinationEdge) != -1) {
+						correspondingArcBit = (arcFlag >> destinationCorrespondingPartition) & 0x1;
+					}
+
 					// check arc bit
-					if (arcBit != 0) {
+					if (arcBit != 0 || correspondingArcBit != 0) {
 						int alt = distance[u]
 								+ data.getWeights().getWeight(currentTurn);
 
