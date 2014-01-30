@@ -30,7 +30,7 @@ public class GraphIndex {
 				|| (lat ? to.getLatitude() : to.getLongitude()) >= threshhold;
 	}
 
-	public class Node {
+	private class Node {
 		Node left;
 		Node right;
 		float threshhold;
