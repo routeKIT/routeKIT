@@ -39,9 +39,9 @@
         <task id="32" name="Partitionierung" color="#8cb6ce" meeting="false" start="2014-01-22" duration="3" complete="0" expand="true"/>
         <task id="7" name="GPX-Export" color="#8cb6ce" meeting="false" start="2014-01-18" duration="2" complete="0" expand="true"/>
         <task id="8" name="Wegbeschreibung" color="#8cb6ce" meeting="false" start="2014-01-20" duration="3" complete="0" expand="true">
-            <depend id="14" type="2" difference="0" hardness="Strong"/>
+            <depend id="14" type="2" difference="0" hardness="Rubber"/>
         </task>
-        <task id="14" name="HTML-Export" color="#8cb6ce" meeting="false" start="2014-01-23" duration="1" complete="0" expand="true"/>
+        <task id="14" name="HTML-Export" color="#0000ff" meeting="false" start="2014-01-27" duration="2" complete="0" expand="true"/>
         <task id="15" name="Profil-IO" color="#0000ff" meeting="false" start="2013-12-21" duration="2" complete="0" expand="true">
             <notes><![CDATA[Profile.save(:File)
 Profile.load(:File)]]></notes>
@@ -51,9 +51,10 @@ Profile.load(:File)]]></notes>
         <task id="29" name="Renderer (Dummy)" color="#33ff00" meeting="false" start="2014-01-04" duration="4" complete="0" expand="true"/>
         <task id="31" name="Renderer" color="#33ff00" meeting="false" start="2014-01-08" duration="12" complete="0" expand="true"/>
         <task id="28" name="MapView" color="#33ff00" shape="1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" meeting="false" start="2014-01-14" duration="9" complete="0" expand="true"/>
-        <task id="39" name="History + IO" color="#0000ff" meeting="false" start="2013-12-22" duration="8" complete="0" expand="true"/>
-        <task id="40" name="Karten-IO" color="#0000ff" meeting="false" start="2014-01-06" duration="7" complete="0" expand="true"/>
-        <task id="41" name="ManagerController" color="#0000ff" meeting="false" start="2014-01-10" duration="7" complete="0" expand="true">
+        <task id="39" name="History + IO" color="#0000ff" meeting="false" start="2013-12-22" duration="7" complete="0" expand="true"/>
+        <task id="40" name="Karten-IO" color="#0000ff" meeting="false" start="2014-01-10" duration="11" complete="0" expand="true"/>
+        <task id="72" name="Progress Reporting" color="#0300ff" meeting="false" start="2014-01-22" duration="2" complete="0" expand="true"/>
+        <task id="41" name="ManagerController" color="#0000ff" meeting="false" start="2014-01-06" duration="9" complete="0" expand="true">
             <notes><![CDATA[ProfileManagerController
 MapManagerController]]></notes>
         </task>
@@ -82,12 +83,13 @@ MapManagerController]]></notes>
         <allocation task-id="4" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="7" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="8" resource-id="7" function="1" responsible="true" load="100.0"/>
-        <allocation task-id="14" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="32" resource-id="7" function="1" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="39" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="40" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="41" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="72" resource-id="8" function="2" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="8" function="2" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="9" function="2" responsible="false" load="20.0"/>
         <allocation task-id="28" resource-id="9" function="2" responsible="false" load="20.0"/>
         <allocation task-id="22" resource-id="9" function="2" responsible="false" load="5.0"/>
