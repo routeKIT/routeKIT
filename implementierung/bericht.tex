@@ -648,6 +648,14 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
           \method{getHistory}[History]
                  {\none}
                  {Gibt den Verlauf zurück.}
+          \method{startPrecalculation}
+                 {
+                   \param{reporter}{ProgressReporter}
+                         {
+                           Geändert: Der Parameter \code{combination} fällt weg; stattdessen wird immer die aktuelle \reftype{ProfileMapCombination} berechnet.
+                           \refparam{MainController}{startPrecalculation}{reporter} wird über den Fortschritt der Vorberechnung informiert.
+                         }
+                 }{~}
         }
   \class{ProfileManagerController}{~}
         {\none}
@@ -668,7 +676,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {\none}
         {
           \method{MapManagerController}
-	         {
+                 {
                    \param{view}{MainView}{Das Hauptfenster der Anwendung.}
                  }
 	         {~}
@@ -683,12 +691,23 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    Gibt die \gls{karte} zurück, die der Benutzer ausgewählt hat.
                    Wenn der Dialog noch nicht oder durch „Abbrechen“ geschlossen wurde, wird \code{null} zurückgegeben.
                  }
-	\method{changeMap}
-	{\param{mapName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Map} übergeben. Die GUI verwaltet nur die Namen der Karten.}}
-          {~}
-	\method{removeProfile}
-	{\param{profileName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Profile} übergeben.  Die GUI verwaltet nur die Namen der Profile.}}
-	{~}
+          \method{changeMap}
+                 {
+                   \param{mapName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Map} übergeben. Die GUI verwaltet nur die Namen der Karten.}
+                 }
+                 {~}
+          \method{addProfile}
+                 {\none}
+                 {
+                   Geändert: Die GUI übergibt nicht mehr das Profil als Parameter, stattdessen öffnet der \reftype{MapManagerController} selbst die Profilverwaltung, in welcher der Benutzer dann ein Profil auswählen kann.
+                   In der Profilverwaltung können auch Profile und damit Vorberechnungen gelöscht werden, und diese Änderungen müssen dann auch in der \reftype{MapManagerView} wieder übernommen werden.
+                   Diese Änderungen zu verfolgen, ist nicht Aufgabe der View, sondern des Controllers.
+                 }
+          \method{removeProfile}
+                 {
+                   \param{profileName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Profile} übergeben.  Die GUI verwaltet nur die Namen der Profile.}
+                 }
+                 {~}
         }
    \class{MapManagerController.MapManagementDiff}
           { 
