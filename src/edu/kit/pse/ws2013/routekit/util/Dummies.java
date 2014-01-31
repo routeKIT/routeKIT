@@ -9,6 +9,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import org.xml.sax.SAXException;
 
@@ -75,7 +77,33 @@ public class Dummies {
 		ProfileMapManager.getInstance().setCurrentCombination(combination);
 	}
 
+	private static void extractTo(File target) {
+		try {
+			URL u = new URL("http://felix.dogcraft.de/routeKIT.zip");
+			ZipInputStream zis = new ZipInputStream(u.openStream());
+			ZipEntry ze;
+			byte[] buf = new byte[4096];
+			while ((ze = zis.getNextEntry()) != null) {
+				int len = 0;
+				File f = new File(target, ze.getName());
+				if (ze.isDirectory()) {
+					f.mkdirs();
+					continue;
+				}
+				FileOutputStream fos = new FileOutputStream(f);
+				while ((len = zis.read(buf)) > 0) {
+					fos.write(buf, 0, len);
+				}
+				fos.close();
+				System.out.println(ze.getName());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) throws IOException, SAXException {
-		createInstall(FileUtil.getRootDir());
+		// createInstall(FileUtil.getRootDir());
+		Dummies.extractTo(new File("out"));
 	}
 }
