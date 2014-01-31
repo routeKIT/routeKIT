@@ -190,30 +190,34 @@ public class OSMParser {
 	private TurnType determineTurnType(int startNode, MapEdge fromEdge,
 			MapEdge toEdge) {
 		int turnNode = fromEdge.getTargetNode();
+		OSMWay fromWay = fromEdge.getWay();
+		OSMWay toWay = toEdge.getWay();
+
+		if (!fromWay.isRoundabout() && toWay.isRoundabout()) {
+			return TurnType.RoundaboutEntry;
+		}
 
 		// No real turn if there are no other outgoing edges except backwards
 		Set<Integer> outgoingEdges = graph.getOutgoingEdges(turnNode);
 		if (outgoingEdges.size() == 1
-				|| (outgoingEdges.size() == 2 && !fromEdge.getWay().isOneway() && !fromEdge
-						.getWay().isReversedOneway())) {
+				|| (outgoingEdges.size() == 2 && !fromWay.isOneway() && !fromWay
+						.isReversedOneway())) {
 			return TurnType.NoTurn;
+		}
+
+		if (fromWay.isRoundabout()) {
+			if (toWay.isRoundabout()) {
+				return TurnType.RoundaboutNoExit;
+			}
+			return TurnType.RoundaboutExit;
 		}
 
 		NodeProperties nodeProps = graph.getNodeProperties(turnNode);
 		if (nodeProps != null && nodeProps.isMotorwayJunction()) {
-			if (toEdge.getWay().isHighwayLink()) {
+			if (toWay.isHighwayLink()) {
 				return TurnType.MotorwayJunction;
 			}
 			return TurnType.StraightOn;
-		}
-
-		if (fromEdge.getWay().isRoundabout()) {
-			if (toEdge.getWay().isRoundabout()) {
-				return TurnType.RoundaboutNoExit;
-			}
-			return TurnType.RoundaboutExit;
-		} else if (toEdge.getWay().isRoundabout()) {
-			return TurnType.RoundaboutEntry;
 		}
 
 		float angle = graph.getCoordinates(turnNode).angleBetween(
