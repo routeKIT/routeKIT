@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The priority queue for {@link ArcFlagsDijkstra}.
+ * The priority queue for {@link ArcFlagsDijkstra} and the precalculation.
  */
 public class FibonacciHeap {
 	private FibonacciHeapEntry min = null;
@@ -38,7 +38,8 @@ public class FibonacciHeap {
 	 * @return the new entry
 	 */
 	public FibonacciHeapEntry add(final int value, final int priority) {
-		final FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
+		final FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value,
+				priority);
 		min = merge(min, newEntry);
 		size++;
 
@@ -156,7 +157,8 @@ public class FibonacciHeap {
 	 * @param newPriority
 	 *            the new priority
 	 */
-	public void decreaseKey(final FibonacciHeapEntry entry, final int newPriority) {
+	public void decreaseKey(final FibonacciHeapEntry entry,
+			final int newPriority) {
 		// set the new priority
 		entry.setPriority(newPriority);
 
@@ -181,7 +183,7 @@ public class FibonacciHeap {
 	 *            entry two to merge
 	 * @return the merged entry
 	 */
-	public FibonacciHeapEntry merge(final FibonacciHeapEntry one,
+	private FibonacciHeapEntry merge(final FibonacciHeapEntry one,
 			final FibonacciHeapEntry two) {
 		if (one == null && two == null) {
 			return null;

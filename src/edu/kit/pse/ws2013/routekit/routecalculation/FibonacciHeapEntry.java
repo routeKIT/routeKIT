@@ -12,7 +12,15 @@ public class FibonacciHeapEntry {
 	private int value;
 	private int priority;
 
-	FibonacciHeapEntry(int value, int priority) {
+	/**
+	 * Konstruktor für FibonacciHeapEntry
+	 * 
+	 * @param value
+	 *            Wer des Eintrags
+	 * @param priority
+	 *            Priorität des Eintrags
+	 */
+	public FibonacciHeapEntry(int value, int priority) {
 		this.value = value;
 		this.priority = priority;
 		this.next = this;
