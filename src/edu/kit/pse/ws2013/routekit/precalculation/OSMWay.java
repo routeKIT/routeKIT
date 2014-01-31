@@ -250,6 +250,18 @@ public class OSMWay {
 	}
 
 	/**
+	 * Determines whether this way is a highway link.
+	 * 
+	 * @return {@code true} if it is a link, {@code false} otherwise
+	 */
+	public boolean isHighwayLink() {
+		if (!tags.containsKey("highway")) {
+			return false;
+		}
+		return tags.get("highway").endsWith("_link");
+	}
+
+	/**
 	 * Returns an {@link EdgeProperties} object containing the properties of
 	 * this way.
 	 * 
