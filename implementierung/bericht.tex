@@ -787,8 +787,23 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  {Gibt einen Iterator über die Koordinaten der Routenpunkte einschließlich Start- und Zielpunkt zurück. Diese Methode ersetzt \code{getNodeIterator}.}
         }
   \class{FibonacciHeapEntry}{Neue Klasse. Stellt einen Eintrag des \reftype{FibonacciHeap} dar.}
-        {\none}
         {
+          \attr{degree}{int}{Der Grad eines Eintrags.}
+          \attr{marked}{boolean}{Legt fest, ob ein Eintrag markiert wurde.}
+          \attr{parent}{FibonacciHeapEntry}{Der Eltern-Eintrag zur diesem Eintrag.}
+          \attr{child}{FibonacciHeapEntry}{Der Kind-Eintrag zur diesem Eintrag.}
+          \attr{next}{FibonacciHeapEntry}{Der nächste Eintrag.}
+          \attr{prev}{FibonacciHeapEntry}{Der vorherige Eintrag.}
+          \attr{value}{int}{Speichert den Wert des Eintrags.}
+          \attr{priority}{int}{Speichert die Priorität des Eintrags.}
+        }
+        {
+          \method{FibonacciHeapEntry}
+                 {
+                 	\param{value}{int}{Der Wert für den neuen Eintrag.}
+                 	\param{priority}{int}{Die Priorität für den neuen Eintrag.}
+                 }
+                 {Konstruktor für eine FibonacciHeapEntry.}
           \method{increaseDegree}
                  {\none}
                  {Erhöht den Grad des Eintrags um eins.}
