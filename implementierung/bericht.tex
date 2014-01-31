@@ -1472,6 +1472,44 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
                    Wird verwendet von \reftype{ProfileManagerView} und \reftype{MapManagerView}.
                  }
         }
+  \class{Dummies}
+        {
+          Neue Klasse. Enthält drei Methoden, die eine \routeKIT-Installation erstellen, welche mehr oder weniger nützlich ist.
+        }
+        {\none}
+        {
+          \method{createDummies}
+                 {
+                   \param{rootDir}{File}{Das Wurzelverzeichnis der \routeKIT-Installation.}
+                 }
+                 {
+                   Erstellt eine Dummy-Karte (fast leer) mit einer Dummy-Vorberechnung (Arc-Flags alle gesetzt).
+                   Die älteste der drei Methoden, und jetzt nur noch nützlich, wenn man schnell irgendeine Vorberechnung braucht.
+                 }
+          \method{createInstall}
+                 {
+                   \param{rootDir}{File}{Das Wurzelverzeichnis der \routeKIT-Installation.}
+                 }
+                 {
+                   Lädt eine Karte des Regierungsbezirks Karlsruhe von \code{geofabrik.de} herunter und führt mit dieser Karte eine Vorberechnung für das Profil „PKW (Standard)“ durch.
+                   Dies erstellt eine vollständige und vollwertige Installation, kann allerdings eine Weile dauern.
+                 }
+          \method{downloadInstall}
+                 {
+                   \param{rootDir}{File}{Das Wurzelverzeichnis der \routeKIT-Installation.}
+                 }
+                 {
+                   Lädt eine komplette, gezippte Installation von \code{dogcraft.de} herunter und extrahiert sie in \refparam{Dummies}{downloadInstall}{rootDir}.
+                   Die Installation enthält eine Karte des Regierungsbezirks Karlsruhe sowie eine Karte von Baden-Württemberg, jeweils mit einer Vorberechnung für das Profil „PKW (Standard)“.
+                 }
+          \method{main}
+                 {
+                   \param{args}{String[]}{Wird ignoriert.}
+                 }
+                 {
+                   Startet \refmethod{Dummies}{downloadInstall}.
+                 }
+        }
 }
 
 \section{Komponententests}

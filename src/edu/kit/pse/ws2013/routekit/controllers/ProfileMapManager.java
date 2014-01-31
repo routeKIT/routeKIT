@@ -383,7 +383,7 @@ public class ProfileMapManager {
 		if (!rootDirectory.exists()) {
 			// initFirstStart(rootDirectory);
 			rootDirectory.mkdir();
-			Dummies.extractTo(rootDirectory);
+			Dummies.downloadInstall(rootDirectory);
 		} else if (!rootDirectory.isDirectory()) {
 			throw new IllegalArgumentException(rootDirectory.toString()
 					+ " is not a directory!");

@@ -26,8 +26,19 @@ import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
+/**
+ * Contains three methods which create a more or less useful routeKIT
+ * installation.
+ */
 public class Dummies {
-
+	/**
+	 * Creates a full-fledged installation by downloading a map of the
+	 * governmental district of Karlsruhe from {@code geofabrik.de} and
+	 * executing a precalculation for {@link Profile#defaultCar}.
+	 * 
+	 * @param rootDir
+	 *            The root directory of the routeKIT installation.
+	 */
 	public static void createInstall(File rootDir) throws IOException,
 			SAXException {
 		rootDir.mkdir();
@@ -59,6 +70,14 @@ public class Dummies {
 		ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
 	}
 
+	/**
+	 * Creates a dummy installation with an almost-empty map and complete
+	 * (i.&nbsp;e., useless) arc flags.
+	 * 
+	 * @param rootDir
+	 *            The root directory of the routeKIT installation.
+	 * @see DummyMapImporter
+	 */
 	public static void createDummies(File rootDir) throws IOException,
 			SAXException {
 		rootDir.mkdir();
@@ -78,7 +97,14 @@ public class Dummies {
 		ProfileMapManager.getInstance().setCurrentCombination(combination);
 	}
 
-	public static void extractTo(File target) {
+	/**
+	 * Downloads a complete routeKIT installation from {@code dogcraft.de} and
+	 * extracts it to {@code rootDir}.
+	 * 
+	 * @param rootDir
+	 *            The root directory of the routeKIT installation.
+	 */
+	public static void downloadInstall(File rootDir) {
 		try {
 			URL u = new URL("http://felix.dogcraft.de/routeKIT.zip");
 			try (ZipInputStream zis = new ZipInputStream(u.openStream())) {
@@ -88,7 +114,7 @@ public class Dummies {
 					int len = 0;
 					String name = ze.getName();
 					String sub = name.substring(name.indexOf("/") + 1);
-					File f = new File(target, sub);
+					File f = new File(rootDir, sub);
 					if (ze.isDirectory()) {
 						f.mkdirs();
 						continue;
@@ -107,8 +133,14 @@ public class Dummies {
 		}
 	}
 
+	/**
+	 * Runs {@link #downloadInstall(File)}.
+	 * 
+	 * @param args
+	 *            Ignored.
+	 */
 	public static void main(String[] args) throws IOException, SAXException {
 		// createInstall(FileUtil.getRootDir());
-		Dummies.extractTo(new File("out"));
+		Dummies.downloadInstall(new File("out"));
 	}
 }
