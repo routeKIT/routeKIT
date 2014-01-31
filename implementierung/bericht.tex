@@ -1266,14 +1266,14 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
                  {(statisch) Lädt einen Graphen aus der angegebenen Datei.}
         }
-  \class{IntArraySet}{Neue Klasse. Ist ein \code{java.util.Set<Integer>} das aus einem Interval eines int-arrays}
+  \class{IntArraySet}{Neue Klasse. Ist ein \code{java.util.Set<Integer>} das die Integers aus einem Interval eines int-arrays darstellt.}
         {\none}
         {
         \method{IntArraySet}
-        {\param{base}{int}{Eine ID der Kante.}
-        \param{count}{int}{Eine ID der Kante.}
-        \param{data}{int[]}{Eine ID der Kante.}}
-        {Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
+        {\param{base}{int}{Der Index des ersten Elements}
+        \param{count}{int}{Die Anzahl der Elemente}
+        \param{data}{int[]}{Die zugrundeliegenden Daten}}
+        {Erzeugt ein neues Set. Die Daten werden nicht kopiert sondern direkt wiedergegeben.}
         }
   \class{GraphIndex}{~}
         {\none}
