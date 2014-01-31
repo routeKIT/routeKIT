@@ -4,6 +4,10 @@ import java.util.AbstractCollection;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * Is a set of all integers from a fixed interval.
+ * 
+ */
 public class IntIntervalSet extends AbstractCollection<Integer> implements
 		Set<Integer> {
 	public class IntArrayIterator implements Iterator<Integer> {
@@ -29,6 +33,14 @@ public class IntIntervalSet extends AbstractCollection<Integer> implements
 	int base;
 	int count;
 
+	/**
+	 * Creates a new IntIntervalSet.
+	 * 
+	 * @param base
+	 *            the first number in this set.
+	 * @param count
+	 *            the number of numbers in this set ({@link #size()}
+	 */
 	public IntIntervalSet(int base, int count) {
 		this.base = base;
 		this.count = count;

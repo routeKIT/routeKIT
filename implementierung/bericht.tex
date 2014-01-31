@@ -1217,6 +1217,23 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
                  {(statisch) Lädt einen Graphen aus der angegebenen Datei.}
         }
+  \class{IntArraySet}{Neue Klasse. Ist ein \code{java.util.Set<Integer>} das aus einem Interval eines int-arrays}
+        {\none}
+        {
+        \method{IntArraySet}
+        {\param{base}{int}{Eine ID der Kante.}
+        \param{count}{int}{Eine ID der Kante.}
+        \param{data}{int[]}{Eine ID der Kante.}}
+        {Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
+        }
+  \class{GraphIndex}{~}
+        {\none}
+        {
+        \method{GraphIndex}
+        {\param{maxType}{int}{Der Index, des letzten StreetTypes, der noch angezeigt werden soll.}}
+        {Der Graph entscheidet welche Indices gebaut werden sollen und bei welchen 
+        Zoomlevel welche Straßen verschwinden, sodass derselbe Index mehrfach benutzen kann.}
+        }\textit{}
   \class{EdgeBasedGraph}{~}
         {\none}
         {
