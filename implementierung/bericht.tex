@@ -636,38 +636,6 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    da sie in Unterordnern der Karte gespeichert sind, würden sie durch das Löschen des Karten-Ordners ohnehin gelöscht.
                  }
         }
-  \class{MapManagerController.MapManagementDiff}
-        { 
-         Neue Klasse. Innere Klasse von \reftype{MapManagerController}, welche die Änderungen, die der Benutzer getätigt hat, kapselt.
-          Sie war ursprünglich nur für den internen Gebrauch in \refmethod{MapManagerController}{saveAllChanges} gedacht, wird jetzt aber auch der \reftype{MapManagerView} zugänglich gemacht, welche das Ergebnis im „Bestätigen“-Dialog verwendet und anzeigt.
-          
-          Die analoge Klasse \reftype{ProfileManagerController.ProfilesDiff} ist weiterhin \code{private}, da sie außerhalb des \reftype{ProfileManagerController}s nicht benötigt wird.
-        }
-        {\none}
-        {
-          \method{getNewOrUpdatedMaps}[Set<FutureMap>]
-                 {\none}
-                 {
-                   Alle Karten, die importiert oder aktualisiert wurden, also neu importiert werden müssen.
-                   
-                   (\code{FutureMap} ist eine interne Klasse, die nur den vom Benutzer angegebenen Dateinamen hält.)
-                 }
-          \method{getDeletedMaps}[Set<StreetMap>]
-                 {\none}
-                 {
-                   Alle Karten, die gelöscht werden müssen (auch die alten Versionen von aktualisierten Karten).
-                 }
-          \method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
-                 {\none}
-                 {
-                   Alle Vorberechnungen, die gelöscht werden müssen (weil ihre Karten aktualisiert oder gelöscht wurden, oder weil die Vorberechnung explizit gelöscht wurde).
-                 }
-          \method{getNewPrecalculations}[Set<ProfileMapCombination>]
-                 {\none}
-                 {
-                   Alle Vorberechnungen, die durchgeführt werden müssen (neue und solche mit aktualisierter Karte).
-                 }
-        }
   \class{MainController}{~}
         {\none}
         {
@@ -722,6 +690,38 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 	{\param{profileName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Profile} übergeben.  Die GUI verwaltet nur die Namen der Profile.}}
 	{~}
         }
+   \class{MapManagerController.MapManagementDiff}
+          { 
+           Neue Klasse. Innere Klasse von \reftype{MapManagerController}, welche die Änderungen, die der Benutzer getätigt hat, kapselt.
+            Sie war ursprünglich nur für den internen Gebrauch in \refmethod{MapManagerController}{saveAllChanges} gedacht, wird jetzt aber auch der \reftype{MapManagerView} zugänglich gemacht, welche das Ergebnis im „Bestätigen“-Dialog verwendet und anzeigt.
+            
+            Die analoge Klasse \reftype{ProfileManagerController.ProfilesDiff} ist weiterhin \code{private}, da sie außerhalb des \reftype{ProfileManagerController}s nicht benötigt wird.
+          }
+          {\none}
+          {
+            \method{getNewOrUpdatedMaps}[Set<FutureMap>]
+                   {\none}
+                   {
+                     Alle Karten, die importiert oder aktualisiert wurden, also neu importiert werden müssen.
+                     
+                     (\code{FutureMap} ist eine interne Klasse, die nur den vom Benutzer angegebenen Dateinamen hält.)
+                   }
+            \method{getDeletedMaps}[Set<StreetMap>]
+                   {\none}
+                   {
+                     Alle Karten, die gelöscht werden müssen (auch die alten Versionen von aktualisierten Karten).
+                   }
+            \method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
+                   {\none}
+                   {
+                     Alle Vorberechnungen, die gelöscht werden müssen (weil ihre Karten aktualisiert oder gelöscht wurden, oder weil die Vorberechnung explizit gelöscht wurde).
+                   }
+            \method{getNewPrecalculations}[Set<ProfileMapCombination>]
+                   {\none}
+                   {
+                     Alle Vorberechnungen, die durchgeführt werden müssen (neue und solche mit aktualisierter Karte).
+                   }
+          }
   \class{CLI}
         {
           Neue Klasse. Kapselt das \gls{cli}. Implementiert \reftype{ProgressListener}.
@@ -853,31 +853,6 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  {\none}
                  {Gibt einen Iterator über die Koordinaten der Routenpunkte einschließlich Start- und Zielpunkt zurück. Diese Methode ersetzt \code{getNodeIterator}.}
         }
-  \class{FibonacciHeapEntry}{Neue Klasse. Stellt einen Eintrag des \reftype{FibonacciHeap} dar.}
-        {
-          \attr{degree}{int}{Der Grad eines Eintrags.}
-          \attr{marked}{boolean}{Legt fest, ob ein Eintrag markiert wurde.}
-          \attr{parent}{FibonacciHeapEntry}{Der Eltern-Eintrag zur diesem Eintrag.}
-          \attr{child}{FibonacciHeapEntry}{Der Kind-Eintrag zur diesem Eintrag.}
-          \attr{next}{FibonacciHeapEntry}{Der nächste Eintrag.}
-          \attr{prev}{FibonacciHeapEntry}{Der vorherige Eintrag.}
-          \attr{value}{int}{Speichert den Wert des Eintrags.}
-          \attr{priority}{int}{Speichert die Priorität des Eintrags.}
-        }
-        {
-          \method{FibonacciHeapEntry}
-                 {
-                 	\param{value}{int}{Der Wert für den neuen Eintrag.}
-                 	\param{priority}{int}{Die Priorität für den neuen Eintrag.}
-                 }
-                 {Konstruktor für eine FibonacciHeapEntry.}
-          \method{increaseDegree}
-                 {\none}
-                 {Erhöht den Grad des Eintrags um eins.}
-          \method{decreaseDegree}
-                 {\none}
-                 {Verringert den Grad des Eintrags um eins.}
-        }
   \class{FibonacciHeap}{Neue Klasse. Diese Klasse stellt einen Fibonacci-Heap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
         {\none}
         {
@@ -903,8 +878,48 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
                  {Aktualisiert die Priorität eines gegebenen Eintrags.}
         }
+  \class{FibonacciHeapEntry}{Neue Klasse. Stellt einen Eintrag des \reftype{FibonacciHeap} dar.}
+        {
+          \attr{degree}{int}{Der Grad eines Eintrags.}
+          \attr{marked}{boolean}{Legt fest, ob ein Eintrag markiert wurde.}
+          \attr{parent}{FibonacciHeapEntry}{Der Eltern-Eintrag zur diesem Eintrag.}
+          \attr{child}{FibonacciHeapEntry}{Der Kind-Eintrag zur diesem Eintrag.}
+          \attr{next}{FibonacciHeapEntry}{Der nächste Eintrag.}
+          \attr{prev}{FibonacciHeapEntry}{Der vorherige Eintrag.}
+          \attr{value}{int}{Speichert den Wert des Eintrags.}
+          \attr{priority}{int}{Speichert die Priorität des Eintrags.}
+        }
+        {
+          \method{FibonacciHeapEntry}
+                 {
+                 	\param{value}{int}{Der Wert für den neuen Eintrag.}
+                 	\param{priority}{int}{Die Priorität für den neuen Eintrag.}
+                 }
+                 {Konstruktor für eine FibonacciHeapEntry.}
+          \method{increaseDegree}
+                 {\none}
+                 {Erhöht den Grad des Eintrags um eins.}
+          \method{decreaseDegree}
+                 {\none}
+                 {Verringert den Grad des Eintrags um eins.}
+        }
 }
-
+\package{MapDisplay}{}
+{\class{TileCache}{~}
+	{\none}
+	{
+	\method{stop}
+		{\none}
+		{
+		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten.
+		}
+	\method{waitForStop}
+		{\none}
+		{
+		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten und wartet, bis alle threads gestorben sind.
+		}
+	}
+}
 \package{Models}{}
 {
   \class{ProfileMapCombination}{~}
@@ -1135,21 +1150,55 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
         }
 }
-\package{MapDisplay}{}
-{\class{TileCache}{~}
+\package{Views}{Alle Views außer der \reftype{MapView} haben im Konstruktor einen neuen Parameter \code{Window parent}, der ein \code{Frame}, aus dem dieser Dialog geöffnet, wird darstellt.}
+{
+  \class{MainView}{~}
+        {\none}
+        {\method{currentCombinationChanged}
+	{\param{newCombination}{ProfileMapCombination}{Die neue Kombination aus Profil und Karte.}}
+	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMessage} die Meldung für den Benutzer aus.}
+	\method{textMessage}
+          {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
+          {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
+        }
+\class{MapManagerView}{~}
 	{\none}
+	{\method{MapManagerView}
 	{
-	\method{stop}
-		{\none}
-		{
-		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten.
-		}
-	\method{waitForStop}
-		{\none}
-		{
-		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten und wartet, bis alle threads gestorben sind.
-		}
+		\param{mmc}{MapManagerController}{Ein \reftype{MapManagerController} der für die \reftype{MapManagerView} verantwortlich ist solange sie offen ist.}
+		\param{parent}{Window}{Ein \code{Frame}, aus dem dieser Dialog geöffnet wird.}
+		\param{currentMap}{StreetMap}{Die aktuell ausgewählte Karte.}
+		\param{maps}{Set<StreetMap>}{Alle Karten, die importiert wurden. Der Benutzer kann in der Kartenverwaltung aus diesen Karten wählen.}
+		\param{currentMapProfiles}{Set<Profile>}{Alle Profile, für die eine Vorberechnung für die aktuell ausgewählte Karte existiert.}
 	}
+	{Konstruktor, der eine neue \reftype{MapManagerView} erzeugt.}
+	}
+\class{ProfileManagerView}{~}
+	{\none}
+	{\method{ProfileManagerView}
+	{
+		\param{parent}{Window}{Ein \code{Frame}, aus dem dieser Dialog geöffnet wird.}
+		\param{pmc}{ProfileManagerController}{Ein \reftype{ProfileManagerController}, der für die \reftype{ProfileManagerView} verantwortlich ist, solange sie offen ist.}
+		\param{currentProfile}{Profile}{Das aktuell ausgewählte Profil.}
+		\param{availableProfiles}{Set<Profile>}{Alle erstellten Profile.}
+	}
+	{Konstruktor, der eine neue \reftype{ProfileManagerView} erzeugt.}
+	}
+\class{MapView}{~}
+	{\none}
+	{\method{MapView}
+	{\param{source}{TileSource}{Eine Renderer, der die Kacheln für die Darstellung der Karte liefert.}}
+	{~}
+	}
+  \class{ProgressDialog}
+        {
+          Neue Klasse. Ein \reftype{ProgressListener}, der den aktuellen Fortschritt und die aktuellen Aufgaben in einem Dialog anzeigt.
+          Bei \refmethod{ProgressListener}{finishRoot} wird der Dialog unsichtbar gemacht (\code{setVisible(false)}).
+        }
+        {\none}
+        {
+          \item Keine außer geerbten und privaten Methoden.
+        }
 }
 \package{Profiles}{~}
 {
@@ -1202,7 +1251,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         {
         \method{getCorrespondingEdge}[int]
         {\param{edge}{int}{Eine ID der Kante.}}
-        {Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn es nicht vorhanden ist (Erkennung der Einbahnstraßen). }
+        {Gibt die Kante in entgegengesetzter Richtung, oder -1, wenn sie nicht vorhanden ist (Erkennen von Einbahnstraßen). }
           \method{getNumberOfEdges}[int]
                  {\none}
                  {Gibt die Anzahl der Kanten zurück. Dies ermöglicht es, über alle Kanten zu iterieren.}
@@ -1230,8 +1279,8 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         {\none}
         {
         \method{GraphIndex}
-        {\param{maxType}{int}{Der Index, des letzten StreetTypes, der noch angezeigt werden soll.}}
-        {Der Graph entscheidet welche Indices gebaut werden sollen und bei welchen 
+        {\param{maxType}{int}{Der Index des letzten StreetTypes, der noch angezeigt werden soll.}}
+        {Der Graph entscheidet, welche Indices gebaut werden sollen und bei welchen 
         Zoomlevel welche Straßen verschwinden, sodass derselbe Index mehrfach benutzen kann.}
         }\textit{}
   \class{EdgeBasedGraph}{~}
@@ -1310,56 +1359,6 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
         }
 }
-\package{Views}{Alle Views außer der \reftype{MapView} haben im Konstruktor einen neuen Parameter \code{Window parent} der ein \code{Frame} aus dem dieser Dialog geöffnet wird darstellt.}
-{
-  \class{MainView}{~}
-        {\none}
-        {\method{currentCombinationChanged}
-	{\param{newCombination}{ProfileMapCombination}{Die neue Kombination aus Profil und Karte.}}
-	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMessage} die Meldung für den Benutzer aus.}
-	\method{textMessage}
-          {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
-          {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
-        }
-\class{MapManagerView}{~}
-	{\none}
-	{\method{MapManagerView}
-	{
-		\param{mmc}{MapManagerController}{Ein \reftype{MapManagerController} der für die \reftype{MapManagerView} verantwortlich ist solange sie offen ist.}
-		\param{parent}{Window}{Ein \code{Frame} aus dem dieser Dialog geöffnet wird.}
-		\param{currentMap}{StreetMap}{Die aktuell ausgewählte Karte.}
-		\param{maps}{Set<StreetMap>}{Alle Karten, die importiert wurden. Der Benutzer kann in der Kartenverwaltung aus diesen Karten wählen.}
-		\param{currentMapProfiles}{Set<Profile>}{Alle Profile, für die eine Vorberechnung für die aktuell ausgewählte Karte existiert.}
-	}
-	{Konstruktor der eine neue \reftype{MapManagerView} erzeugt.}
-	}
-\class{ProfileManagerView}{~}
-	{\none}
-	{\method{ProfileManagerView}
-	{
-		\param{parent}{Window}{Ein \code{Frame} aus dem dieser Dialog geöffnet wird.}
-		\param{pmc}{ProfileManagerController}{Ein \reftype{ProfileManagerController} der für die \reftype{ProfileManagerView} verantwortlich ist solange sie offen ist.}
-		\param{currentProfile}{Profile}{Das aktuell ausgewählte Profil.}
-		\param{availableProfiles}{Set<Profile>}{Alle erstellten Profile.}
-	}
-	{Konstruktor der eine neue \reftype{ProfileManagerView} erzeugt.}
-	}
-\class{MapView}{~}
-	{\none}
-	{\method{MapView}
-	{\param{source}{TileSource}{Eine Renderer, der die Kacheln für die Darstellung der Karte liefert.}}
-	{~}
-	}
-  \class{ProgressDialog}
-        {
-          Neue Klasse. Ein \reftype{ProgressListener}, der den aktuellen Fortschritt und die aktuellen Aufgaben in einem Dialog anzeigt.
-          Bei \refmethod{ProgressListener}{finishRoot} wird der Dialog unsichtbar gemacht (\code{setVisible(false)}).
-        }
-        {\none}
-        {
-          \item Keine außer geerbten und privaten Methoden.
-        }
-}
 \package{History}{}
 {
   \class{HistoryEntry}{~}
@@ -1394,7 +1393,7 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
                  {
                    \param{coords}{String}{Der Koordinaten-String.}
                  }
-                 {(statisch) Parst einen Koordinaten-String wie er von \refmethod{Coordinates}{toString} zurückgegeben wird.}
+                 {(statisch) Parst einen Koordinaten-String, wie er von \refmethod{Coordinates}{toString} zurückgegeben wird.}
           \method{parseLatitude}[float]
                  {
                    \param{lat}{String}{Die Breitengrad-Angabe.}
@@ -1408,7 +1407,7 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
         }
   \class{FileUtil}
         {
-          Neue Klasse. Erhält verschiedene statische Methoden, welche etwas mit Dateien oder Dateisystemen zu tun haben.
+          Neue Klasse. Erhält verschiedene statische Methoden, die Dateien und Pfade behandeln.
         }
         {\none}
         {
@@ -1440,7 +1439,7 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
         }
   \class{TimeUtil}
         {
-          Neue Klasse. Enthält eine Methode, welche etwas mit Zeit zu tun hat.
+          Neue Klasse. Enthält Methoden zur Zeitumrechnung.
         }
         {\none}
         {
