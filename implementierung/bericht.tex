@@ -786,6 +786,43 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  {\none}
                  {Gibt einen Iterator über die Koordinaten der Routenpunkte einschließlich Start- und Zielpunkt zurück. Diese Methode ersetzt \code{getNodeIterator}.}
         }
+  \class{FibonacciHeapEntry}{Neue Klasse. Stellt einen Eintrag des \reftype{FibonacciHeap} dar.}
+        {\none}
+        {
+          \method{increaseDegree}
+                 {\none}
+                 {Erhöht den Grad des Eintrags um eins.}
+        }
+        {
+          \method{decreaseDegree}
+                 {\none}
+                 {Verringert den Grad des Eintrags um eins.}
+        }
+  \class{FibonacciHeap}{Diese Klasse stellt einen FibonacciHeap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
+        {\none}
+        {
+          \method{isEmpty}[boolean]
+                 {\none}
+                 {Prüft ob der Fibonacci-Heap leer ist und gibt das Ergebnis als boolean zurück.}
+          \method{getSize}[int]
+                 {\none}
+                 {Gibt die Anzahl der Elemente, die sich gerade im FibonacciHeap befinden, zurück. Sehr nützlich z.B. für Testfälle.}
+          \method{add}[FibonacciHeapEntry]
+                 {
+                 	\param{value}{int}{Der Wert für den neuen Eintrag.}
+                 	\param{priority}{int}{Die Priorität für den neuen Eintrag.}
+                 }
+                 {Fügt einen neuen Eintrag mit dem gegebenen Wert und der Priorität in den FibonacciHeap ein und gibt das neu eingefügte Element zurück.}
+          \method{deleteMin}[FibonacciHeapEntry]
+                 {\none}
+                 {Entfernt das Element mit der niedrigsten Priorität aus dem FibonacciHeap und gibt es zurück.}
+          \method{decreaseKey}
+                 {
+                 	\param{entry}{FibonacciHeapEntry}{Der Eintrag, welcher aktualisiert werden soll.}
+                 	\param{newPriority}{int}{Die neue Priorität für den Eintrag.}
+                 }
+                 {Aktualisiert die Priorität eines gegebenen FibonacciHeap-Eintrags.}
+        }
 }
 
 \package{Models}{}
