@@ -479,8 +479,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
 \subsection{(ohne Paket)}
 \begin{description}
   \class{routeKIT}
-        {
-          Diese neue Klasse existiert ausschließlich, um den kurzen Aufruf
+        {Neue Klasse. Existiert ausschließlich, um den kurzen Aufruf
           \code{java routeKIT}
           zu ermöglichen.
         }
@@ -542,7 +541,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{ProfileMapManager}
         {
-          Der \code{ProfileMapManager} verwaltet alle \glspl{vorberechnung}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{vorberechnung}.
+          Neue Klasse. Der \code{ProfileMapManager} verwaltet alle \glspl{vorberechnung}: er lädt sie beim Programmstart von der Festplatte, löscht sie auf Anfrage, speichert sie und hält eine Liste aller \glspl{vorberechnung}.
           Außerdem kennt er die aktuell ausgewählte \reftype{ProfileMapCombination} (die nicht zwangsläufig vorberechnet ist).
         }
         {\none}
@@ -638,8 +637,8 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                  }
         }
   \class{MapManagerController.MapManagementDiff}
-        {
-          Innere Klasse von \reftype{MapManagerController}, welche die Änderungen, die der Benutzer getätigt hat, kapselt.
+        { 
+         Neue Klasse. Innere Klasse von \reftype{MapManagerController}, welche die Änderungen, die der Benutzer getätigt hat, kapselt.
           Sie war ursprünglich nur für den internen Gebrauch in \refmethod{MapManagerController}{saveAllChanges} gedacht, wird jetzt aber auch der \reftype{MapManagerView} zugänglich gemacht, welche das Ergebnis im „Bestätigen“-Dialog verwendet und anzeigt.
           
           Die analoge Klasse \reftype{ProfileManagerController.ProfilesDiff} ist weiterhin \code{private}, da sie außerhalb des \reftype{ProfileManagerController}s nicht benötigt wird.
@@ -725,7 +724,7 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{CLI}
         {
-          Neue Klasse, die das \gls{cli} kapselt. Implementiert \reftype{ProgressListener}.
+          Neue Klasse. Kapselt das \gls{cli}. Implementiert \reftype{ProgressListener}.
         }
         {\none}
         {
@@ -750,7 +749,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
          {
            \method{doPrecalculation}
                   {
-                    \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                    \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                   }
                   {Führt die Vorberechnung für die angegebene Kombination durch.}
          }
@@ -759,16 +758,16 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         {
           \method{calculateArcFlags}
                  {
-                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                  }
                  {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
-  \class{ArcFlagsCalculatorImpl}{Geändert: Ersetzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
+  \class{ArcFlagsCalculatorImpl}{Neue Klasse. Ersetzt die Klasse \code{ArcFlagsCalculator} aus dem Entwurf. Implementiert das Interface \reftype{ArcFlagsCalculator}}
         {\none}
         {
           \method{calculateArcFlags}
                  {
-                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                  }
                  {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
         }
@@ -777,7 +776,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
           {
             \method{calculateArcFlags}
                    {
-                     \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
+                     \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der \gls{arc}-Berechnung gebraucht.}
                    }
                    {Berechnet die \gls{arc} für die angegebene Kombination und setzt sie entsprechend.}
           }
@@ -786,16 +785,16 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         {
           \method{weightEdges}
                  {
-                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
-  \class{EdgeWeighterImpl}{Geändert: Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{EdgeWeighter}}
+  \class{EdgeWeighterImpl}{Neue Klasse. Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{EdgeWeighter}}
         {\none}
         {
           \method{weightEdges}
                  {
-                   \param{reporter}{ProgressReporter}{Neuer Parameter. Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
+                   \param{reporter}{ProgressReporter}{Wird zum Anzeigen des Fortschritts bei der Gewichte-Berechnung gebraucht.}
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
@@ -833,8 +832,10 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         }
         {
           \method{TurnRestriction}
-                 {\none}
-                 {Geänderter Konstruktor: Parameter \code{from} und \code{to} (die Werte der gleichnamigen Attribute) hinzugefügt.}
+                 {\param{from}{int}{Die ID des OSM Wegs von dem ein Abbiegevorgang beschränkt ist.}
+		\param{to}{MapEdge}{Eine Kante auf die ein Abbiegevorgang beschränkt ist.}
+		}
+                 {~}
           \method{allowsTo}[boolean]
                  {
                    \param{to}{MapEdge}{Die Kante, auf die abgebogen werden soll.}
@@ -877,7 +878,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  {\none}
                  {Verringert den Grad des Eintrags um eins.}
         }
-  \class{FibonacciHeap}{Diese Klasse stellt einen Fibonacci-Heap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
+  \class{FibonacciHeap}{Neue Klasse. Diese Klasse stellt einen Fibonacci-Heap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
         {\none}
         {
           \method{isEmpty}[boolean]
@@ -971,7 +972,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         }
   \class{ProgressReporter}
         {
-          Neue Klasse, um den Fortschritt bei verschiedenen Aktionen, etwa der Vorberechnung, dem Benutzer anzeigen zu können.
+          Neue Klasse. Dient zur Anzeige vom Fortschritt bei verschiedenen Aktionen, etwa der Vorberechnung, dem Benutzer.
           
           Der \reftype{ProgressReporter} ist Aufgaben-basiert: Es gibt eine „Basis“-Aufgabe, die in verschiedene Teilaufgaben unterteilt wird, welche wieder in unterschiedliche Teilaufgaben unterteilt wird und so weiter.
           Für Aufgaben ohne Teilaufgaben kann dann der Fortschritt auch direkt gesetzt werden.
@@ -1058,7 +1059,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         }
   \class{ProgressListener}
         {
-          Interface, um bei Änderungen den Fortschritts in \reftype{ProgressReporter} benachrichtigt zu werden.
+          Neues Interface. Wird benötigt um bei Änderungen den Fortschritts in \reftype{ProgressReporter} benachrichtigt zu werden.
         }
         {\none}
         {
@@ -1104,7 +1105,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         }
   \class{CurrentCombinationListener}
         {
-          Neues Interface, um benachrichtigt zu werden, wenn sich die aktuelle \reftype{ProfileMapCombination} (gehalten vom \reftype{ProfileMapManager}) ändert.
+          Neues Interface. Dient der Benachrichtigung bei Änderung der aktuellen \reftype{ProfileMapCombination} (gehalten vom \reftype{ProfileMapManager}).
           
           Die \reftype{MainView} registriert einen anonymen \reftype{CurrentCombinationListener}, um die \reftype{MapView} zu de- oder aktivieren und gegebenenfalls eine Nachricht anzuzeigen, dass eine Vorberechnung durchgeführt werden muss.
         }
@@ -1158,7 +1159,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
           \method{clone}[Profile]
                  {\none}
                  {
-                   Neue Methode, um eine Kopie eines Profils zu erstellen, welche nicht als Standardprofil gekennzeichnet ist.
+                   Erstellt eine Kopie eines Profils, welche nicht als Standardprofil gekennzeichnet ist.
                  }
         }
 }
@@ -1334,7 +1335,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
 	}
   \class{ProgressDialog}
         {
-          Neue Klasse: Ein \reftype{ProgressListener}, der den aktuellen Fortschritt und die aktuellen Aufgaben in einem Dialog anzeigt.
+          Neue Klasse. Ein \reftype{ProgressListener}, der den aktuellen Fortschritt und die aktuellen Aufgaben in einem Dialog anzeigt.
           Bei \refmethod{ProgressListener}{finishRoot} wird der Dialog unsichtbar gemacht (\code{setVisible(false)}).
         }
         {\none}
@@ -1390,7 +1391,7 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
         }
   \class{FileUtil}
         {
-          Neue Klasse, die verschiedene statische Methoden enthält, welche etwas mit Dateien oder Dateisystemen zu tun haben.
+          Neue Klasse. Erhält verschiedene statische Methoden, welche etwas mit Dateien oder Dateisystemen zu tun haben.
         }
         {\none}
         {
@@ -1422,7 +1423,7 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
         }
   \class{TimeUtil}
         {
-          Neue Klasse, die eine Methode enthält, welche etwas mit Zeit zu tun hat.
+          Neue Klasse. Enthält eine Methode, welche etwas mit Zeit zu tun hat.
         }
         {\none}
         {
