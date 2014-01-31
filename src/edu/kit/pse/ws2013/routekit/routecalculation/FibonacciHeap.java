@@ -16,10 +16,7 @@ public class FibonacciHeap {
 	 * @return true if the heap is empty, otherwise false
 	 */
 	public boolean isEmpty() {
-		if (min == null) {
-			return true;
-		}
-		return false;
+		return min == null;
 	}
 
 	/**
@@ -40,8 +37,8 @@ public class FibonacciHeap {
 	 *            the priority of the entry
 	 * @return the new entry
 	 */
-	public FibonacciHeapEntry add(int value, int priority) {
-		FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
+	public FibonacciHeapEntry add(final int value, final int priority) {
+		final FibonacciHeapEntry newEntry = new FibonacciHeapEntry(value, priority);
 		min = merge(min, newEntry);
 		size++;
 
@@ -58,7 +55,7 @@ public class FibonacciHeap {
 			return null;
 		}
 
-		FibonacciHeapEntry minEntry = min;
+		final FibonacciHeapEntry minEntry = min;
 
 		if (min.getNext() == min) {
 			min = null;
@@ -71,12 +68,13 @@ public class FibonacciHeap {
 
 		size--;
 
-		if (minEntry.getChild() != null) {
-			FibonacciHeapEntry currentEntry = minEntry.getChild();
+		final FibonacciHeapEntry child = minEntry.getChild();
+		if (child != null) {
+			FibonacciHeapEntry currentEntry = child;
 			do {
 				currentEntry.setParent(null);
 				currentEntry = currentEntry.getNext();
-			} while (currentEntry != minEntry.getChild());
+			} while (currentEntry != child);
 		}
 
 		min = merge(min, minEntry.getChild());
@@ -87,8 +85,8 @@ public class FibonacciHeap {
 		}
 
 		// Consolidate
-		List<FibonacciHeapEntry> table = new ArrayList<FibonacciHeapEntry>();
-		List<FibonacciHeapEntry> queue = new ArrayList<FibonacciHeapEntry>();
+		final List<FibonacciHeapEntry> table = new ArrayList<FibonacciHeapEntry>();
+		final List<FibonacciHeapEntry> queue = new ArrayList<FibonacciHeapEntry>();
 
 		for (FibonacciHeapEntry currentEntry = min; queue.isEmpty()
 				|| queue.get(0) != currentEntry; currentEntry = currentEntry
@@ -98,17 +96,18 @@ public class FibonacciHeap {
 
 		for (FibonacciHeapEntry currentEntry : queue) {
 			while (true) {
-				while (currentEntry.getDegree() >= table.size()) {
+				final int currentEntryDegree = currentEntry.getDegree();
+				while (currentEntryDegree >= table.size()) {
 					table.add(null);
 				}
 
-				if (table.get(currentEntry.getDegree()) == null) {
-					table.set(currentEntry.getDegree(), currentEntry);
+				final FibonacciHeapEntry other = table.get(currentEntryDegree);
+				if (other == null) {
+					table.set(currentEntryDegree, currentEntry);
 					break;
 				}
 
-				FibonacciHeapEntry other = table.get(currentEntry.getDegree());
-				table.set(currentEntry.getDegree(), null);
+				table.set(currentEntryDegree, null);
 
 				FibonacciHeapEntry currentMin;
 				if (other.getPriority() < currentEntry.getPriority()) {
@@ -157,7 +156,7 @@ public class FibonacciHeap {
 	 * @param newPriority
 	 *            the new priority
 	 */
-	public void decreaseKey(FibonacciHeapEntry entry, int newPriority) {
+	public void decreaseKey(final FibonacciHeapEntry entry, final int newPriority) {
 		// set the new priority
 		entry.setPriority(newPriority);
 
@@ -182,8 +181,8 @@ public class FibonacciHeap {
 	 *            entry two to merge
 	 * @return the merged entry
 	 */
-	public FibonacciHeapEntry merge(FibonacciHeapEntry one,
-			FibonacciHeapEntry two) {
+	public FibonacciHeapEntry merge(final FibonacciHeapEntry one,
+			final FibonacciHeapEntry two) {
 		if (one == null && two == null) {
 			return null;
 		} else if (one != null && two == null) {
@@ -191,7 +190,7 @@ public class FibonacciHeap {
 		} else if (two != null && one == null) {
 			return two;
 		} else {
-			FibonacciHeapEntry oneNext = one.getNext();
+			final FibonacciHeapEntry oneNext = one.getNext();
 
 			one.setNext(two.getNext());
 			one.getNext().setPrev(one);
@@ -212,7 +211,7 @@ public class FibonacciHeap {
 	 * @param entry
 	 *            the entry to cut
 	 */
-	private void cut(FibonacciHeapEntry entry) {
+	private void cut(final FibonacciHeapEntry entry) {
 		entry.setMarked(false);
 
 		if (entry.getParent() == null) {

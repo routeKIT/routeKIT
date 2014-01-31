@@ -25,9 +25,9 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 
 	private class Worker extends Thread {
 
-		private int startPartition;
+		private final int startPartition;
 
-		public Worker(int startPartition) {
+		public Worker(final int startPartition) {
 			this.startPartition = startPartition;
 		}
 
@@ -39,16 +39,13 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 	}
 
 	@Override
-	public void calculateArcFlags(ProfileMapCombination combination,
-			ProgressReporter reporter) {
-		long t1 = System.currentTimeMillis();
+	public void calculateArcFlags(final ProfileMapCombination combination,
+			final ProgressReporter reporter) {
+		final long t1 = System.currentTimeMillis();
 		graph = combination.getStreetMap().getGraph();
 		edgeBasedGraph = combination.getStreetMap().getEdgeBasedGraph();
 		weights = combination.getWeights();
 		flagsArray = new int[edgeBasedGraph.getNumberOfTurns()];
-		for (int i = 0; i < flagsArray.length; i++) {
-			flagsArray[i] = 0x0;
-		}
 		this.reporter = reporter;
 		partitions = new ArrayList<Set<Integer>>(nPartitions);
 		reporter.setSubTasks(new float[] { .1f, .9f });
@@ -64,7 +61,7 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 		edgeBasedGraph.getIncomingTurns(1);
 		numberOfThreads = Math.max(
 				Runtime.getRuntime().availableProcessors() / 2, 1);
-		Worker[] workers = new Worker[numberOfThreads];
+		final Worker[] workers = new Worker[numberOfThreads];
 		for (int i = 0; i < workers.length; i++) {
 			workers[i] = new Worker(i);
 			workers[i].start();
@@ -73,34 +70,41 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 			for (int i = 0; i < workers.length; i++) {
 				workers[i].join();
 			}
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 		reporter.popTask();
-		long t2 = System.currentTimeMillis();
-		int time = (int) (t2 - t1);
+		final long t2 = System.currentTimeMillis();
+		final int time = (int) (t2 - t1);
 		combination.setArcFlags(new ArcFlags(flagsArray), time);
 	}
 
-	private void calculateFlagsOfPartitions(int startPartition) {
+	private void calculateFlagsOfPartitions(final int startPartition) {
 		for (int currentPartition = startPartition; currentPartition < partitions
 				.size(); currentPartition += numberOfThreads) {
-			Set<Integer> edgesWithTurnsToOtherPartitions = new HashSet<Integer>();
-			for (Integer edge : partitions.get(currentPartition)) {
-				Set<Integer> incomingTurns = edgeBasedGraph
+			final int[] flagsArray = new int[this.flagsArray.length];
+			final Set<Integer> edgesWithTurnsToOtherPartitions = new HashSet<Integer>();
+			for (final Integer edge : partitions.get(currentPartition)) {
+				final Set<Integer> incomingTurns = edgeBasedGraph
 						.getIncomingTurns(edge);
-				for (Integer turn : incomingTurns) {
-					int startEdgePartition = edgeBasedGraph
+				for (final Integer turn : incomingTurns) {
+					final int startEdgePartition = edgeBasedGraph
 							.getPartition(edgeBasedGraph.getStartEdge(turn));
 					if (startEdgePartition == currentPartition) {
-						setFlag(turn, currentPartition);
+						setFlag(turn, currentPartition, flagsArray);
 					} else {
 						edgesWithTurnsToOtherPartitions.add(edge);
 					}
 				}
 			}
-			for (Integer edge : edgesWithTurnsToOtherPartitions) {
-				buildReverseShortestPathsTreeAndSetArcFlags(edge);
+			for (final Integer edge : edgesWithTurnsToOtherPartitions) {
+				buildReverseShortestPathsTreeAndSetArcFlags(edge, flagsArray);
+			}
+			synchronized (this.flagsArray) {
+				// write back flags
+				for (int i = 0; i < flagsArray.length; i++) {
+					this.flagsArray[i] |= flagsArray[i];
+				}
 			}
 			synchronized (reporter) {
 				reporter.setProgress(currentlyCalculatedPartition
@@ -109,21 +113,4 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 			}
 		}
 	}
-
-	/**
-	 * Sets the given turn's arc flag for the given partition to 1.
-	 * 
-	 * @param turn
-	 *            the turn
-	 * @param partition
-	 *            the partition
-	 */
-	synchronized private void setFlag(int turn, int partition) {
-		if (partition < 0 || partition >= 32) {
-			throw new IllegalArgumentException(partition
-					+ " isn't a valid partition. Valid partitions: 0 - 31");
-		}
-		flagsArray[turn] |= 0x1 << partition;
-	}
-
 }
