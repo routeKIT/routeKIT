@@ -684,19 +684,38 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{ProfileManagerController}{~}
         {\none}
-        {\method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
-          {\none}
-          {Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.}
+        {
+          \method{getDeletedPrecalculations}[Set<ProfileMapCombination>]
+                 {\none}
+                 {
+                   Gibt alle zu löschenden \glspl{vorberechnung} zurück, damit sie dem Benutzer vor dem Löschen angezeigt werden.
+                 }
+          \method{getSelectedProfile}[Profile]
+                 {\none}
+                 {
+                   Gibt das \gls{profil} zurück, das der Benutzer ausgewählt hat.
+                   Wenn der Dialog noch nicht oder durch „Abbrechen“ geschlossen wurde, wird \code{null} zurückgegeben.
+                 }
         }
   \class{MapManagerController}{~}
         {\none}
-        { \method{MapManagerController}
-	{\param{view}{MainView}{Das Hauptfenster der Anwendung.}}
-	{~}
-	
-	\method{getChanges}[MapManagementDiff]
-          {\none}
-          {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
+        {
+          \method{MapManagerController}
+	         {
+                   \param{view}{MainView}{Das Hauptfenster der Anwendung.}
+                 }
+	         {~}
+          \method{getChanges}[MapManagementDiff]
+                 {\none}
+                 {
+                   Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.
+                 }
+          \method{getSelectedMap}[StreetMap]
+                 {\none}
+                 {
+                   Gibt die \gls{karte} zurück, die der Benutzer ausgewählt hat.
+                   Wenn der Dialog noch nicht oder durch „Abbrechen“ geschlossen wurde, wird \code{null} zurückgegeben.
+                 }
         }
   \class{CLI}
         {
