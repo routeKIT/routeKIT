@@ -51,8 +51,7 @@ public class CLI implements ProgressListener {
 			Set<Profile> pf = ProfileManager.getInstance().getProfiles();
 			Profile p = null;
 			for (Profile profile : pf) {
-				if (profile.getName().equals(profile)) {
-					System.out.println(profile.getName());
+				if (profile.getName().equals(profileName)) {
 					p = profile;
 					break;
 				}
