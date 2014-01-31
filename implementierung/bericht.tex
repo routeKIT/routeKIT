@@ -429,6 +429,7 @@
 \newacronym{gui}{GUI}{Graphical User Interface}
 \newacronym{gpx}{GPX}{GPS Exchange Format}
 \newacronym{mvc}{MVC}{Model View Controller}
+\newacronym{cli}{CLI}{Command Line Interface}
 
 
 
@@ -474,6 +475,26 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Änderungen am Entwurf}
 Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
+
+\subsection{(ohne Paket)}
+\begin{description}
+  \class{routeKIT}
+        {
+          Diese neue Klasse existiert ausschließlich, um den kurzen Aufruf
+          \code{java routeKIT}
+          zu ermöglichen.
+        }
+        {\none}
+        {
+          \method{main}
+                 {
+                   \param{args}{String[]}{Kommandozeilenargumente.}
+                 }
+                 {
+                   Leitet weiter auf \refmethod{MainController}{main}.
+                 }
+        }
+\end{description}
 
 \package{Controllers}{
   Es wurde eine neue Klasse \reftype{ProfileMapManager} eingeführt, die alle dem Programm bekannten \glspl{vorberechnung} halten und sie speichern und laden.
@@ -672,6 +693,22 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         {\method{getChanges}[MapManagementDiff]
           {\none}
           {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
+        }
+  \class{CLI}
+        {
+          Neue Klasse, die das \gls{cli} kapselt. Implementiert \reftype{ProgressListener}.
+        }
+        {\none}
+        {
+          \method{doImport}
+                 {
+                   \param{mapPath}{String}{Der Pfad zur Kartendatei, die importiert werden soll.}
+                   \param{mapName}{String}{Der Name der Karte, die importiert werden soll.}
+                   \param{profileName}{String}{Der Name des Profils, für das auf der importierten Karte eine Vorberechnung durchgeführt werden soll.}
+                 }
+                 {
+                   Importiert eine Karte und führt anschließend eine Vorberechnung für diese Karte durch.
+                 }
         }
 }
 \package{Precalculation}{
@@ -1266,6 +1303,15 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
 	{\param{source}{TileSource}{Eine Renderer, der die Kacheln für die Darstellung der Karte liefert.}}
 	{~}
 	}
+  \class{ProgressDialog}
+        {
+          Neue Klasse: Ein \reftype{ProgressListener}, der den aktuellen Fortschritt und die aktuellen Aufgaben in einem Dialog anzeigt.
+          Bei \refmethod{ProgressListener}{finishRoot} wird der Dialog unsichtbar gemacht (\code{setVisible(false)}).
+        }
+        {\none}
+        {
+          \item Keine außer geerbten und privaten Methoden.
+        }
 }
 \package{History}{}
 {
