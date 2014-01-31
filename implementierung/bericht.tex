@@ -787,6 +787,41 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
 
 \package{Models}{}
 {
+  \class{ProfileMapCombination}{~}
+        {\none}
+        {
+          \method{save}
+                 {
+                   \param{directory}{File}{Der Ordner, in den geschrieben werden soll.}
+                 }
+                 {
+                   Speichert die Vorberechnung in den angegebenen Ordner.
+                 }
+          \method{load}[ProfileMapCombination]
+                 {
+                   \param{directory}{File}{Der Ordner, aus dem geladen werden soll.}
+                 }
+                 {
+                   (statisch) Lädt eine Vorberechnung aus dem angegebenen Ordner.
+                 }
+          \method{loadLazily}[ProfileMapCombination]
+                 {
+                   \param{directory}{File}{Der Ordner, aus dem geladen werden soll.}
+                 }
+                 {
+                   (statisch) Gibt eine \reftype{ProfileMapCombination} zurück, die erst beim ersten Zugriff auf \refmethod{ProfileMapCombination}{getWeights} bzw. \refmethod{ProfileMapCombination}{getArcFlags} diese auch aus dem angegebenen Ordner lädt.
+                   Diese Methode wird verwendet, um die Startzeit des Programms zu verbessern:
+                   Die Information, welche Vorberechnungen existieren, soll zwar jederzeit verfügbar sein, allerdings werden nicht alle Vorberechnungen sofort benötigt.
+                 }
+          \method{ensureLoaded}
+                 {
+                   \param{reporter}{ProgressReporter}{Der \reftype{ProgressReporter}, dem der Ladefortschritt gemeldet werden soll.}
+                 }
+                 {
+                   Nach Aufruf dieser Methode ist garantiert, dass auch eine Vorberechnung, welche mittels \refmethod{ProfileMapCombination}{loadLazily} geladen wurde, vollständig geladen ist.
+                   Spätere Aufrufe von \refmethod{ProfileMapCombination}{getWeights} bzw. \refmethod{ProfileMapCombination}{getArcFlags} sind dann garantiert schnell.
+                 }
+        }
   \class{Weights}{~}
         {\none}
         {
@@ -966,6 +1001,19 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         }
 }
 
+\package{Models}{~}
+{
+  \class{Profile}{~}
+        {\none}
+        {
+          \method{clone}[Profile]
+                 {\none}
+                 {
+                   Neue Methode, um eine Kopie eines Profils zu erstellen, welche nicht als Standardprofil gekennzeichnet ist.
+                 }
+        }
+}
+
 \package{Map}{}
 {
   \class{StreetMap}{~}
@@ -981,6 +1029,23 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                    \param{file}{File}{Die Datei, aus der gelesen werden soll.}
                  }
                  {(statisch) Lädt eine Karte aus dem angegebenen Ordner.}
+          \method{loadLazily}[StreetMap]
+                 {
+                   \param{file}{File}{Die Datei, aus der gelesen werden soll.}
+                 }
+                 {
+                   (statisch) Gibt eine \reftype{StreetMap} zurück, die erst beim ersten Zugriff auf \refmethod{StreetMap}{getGraph} bzw. \refmethod{StreetMap}{getEdgeBasedGraph} diese auch aus dem angegebenen Ordner lädt.
+                   Diese Methode wird verwendet, um die Startzeit des Programms zu verbessern:
+                   Die Information, welche Karten vorliegen, soll zwar jederzeit verfügbar sein, allerdings werden nicht alle Karten sofort benötigt.
+                 }
+          \method{ensureLoaded}
+                 {
+                   \param{reporter}{ProgressReporter}{Der \reftype{ProgressReporter}, dem der Ladefortschritt gemeldet werden soll.}
+                 }
+                 {
+                   Nach Aufruf dieser Methode ist garantiert, dass auch eine Karte, welche mittels \refmethod{StreetMap}{loadLazily} geladen wurde, vollständig geladen ist.
+                   Spätere Aufrufe von \refmethod{StreetMap}{getGraph} bzw. \refmethod{StreetMap}{getEdgeBasedGraph} sind dann garantiert schnell.
+                 }
         }
   \class{Graph}{~}
         {\none}
