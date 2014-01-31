@@ -47,6 +47,15 @@
                {#2}%
 }
 
+\newcommand{\bug}[3]{%
+  \begin{description}
+  \item[Symptom] #1
+  \item[Ursache] #2
+  \item[Lösungsidee] #3
+  \end{description}
+}
+
+
 % Argumente:
 % 1. Name
 % 2. Beschreibung
@@ -1520,11 +1529,21 @@ Die automatisierten Komponententests wurden zum größten Teil noch nicht währe
 \section{Programmfehler}
 Im folgendem Abschnitt werden die gefundenen und nicht behobenen Fehler im Programm aufgelistet, sowie gefundene Lösungsansätze für deren Behebung. 
 \begin{enumerate}
-\item Für große Karten ist das Rendern der Kacheln zu langsam. Eine mögliche Lösung wäre es, einen Vergröberunsalgorithmus zu realisieren.
-\item Lange Wartezeit beim Start der Anwendung. Mögliche Lösung wäre es, sämtliche Graph-Indizes abzuspeichern und danach zu laden. Dadurch werden sie nicht mehr jedes Mal dynamisch aufgebaut.
-\item Jede Karte wird zunächst auf bestimmte Koordinaten in Karlsruhe zentriert.
-\item Die Nachricht „Sie haben ihr Ziel erreicht.“ wird bei jeder Wegbeschreibung ausgegeben, auch wenn keine Route gefunden wurde.
-\item Die Nachricht „Es wurde keine Route gefunden.“ wird niemals ausgeben.
+\item \bug{Für große Karten ist das Rendern der Kacheln zu langsam.}
+{Es existieren zu viele Kanten auf einer Kachel}
+{Einen Vergröberunsalgorithmus realisieren}
+\item \bug{Die Anwendung braucht lang zum Starten.}
+{\code{GraphIndex}e und Navigationsarrays im Graphen werden beim Starten neu aufgebaut}
+{Mehr Daten auf die Festplatte schreiben und beim /tart laden.}
+\item \bug{Die Ansicht ist nich dem Wechseln der Karte möglicherweise nicht über Kanten.}
+{Die neuen Kanten sind in einer anderen geografischen Region.}
+{Einen Kartenmittelpunkt bestimmen und die Karte dort zentrieren.}
+\item \bug{Nachricht „Sie haben ihr Ziel erreicht.“ wird bei jeder Wegbeschreibung ausgegeben.}
+{das steht so im Programmcode, es ist keine Bedingung vorhanden.}
+{Verfeinerung des Codes.}
+\item \bug{ Nachricht „Es wurde keine Route gefunden.“ wird niemals ausgeben.}
+{Noch nicht im Code vorgesehen.}
+{Spezialfall implementieren}
 \end{enumerate}
 
 \section{Arbeitsplanung}
