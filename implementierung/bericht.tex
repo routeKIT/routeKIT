@@ -1070,17 +1070,46 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
         }
 }
-\package{Views}{}
+\package{Views}{Alle Views außer der \reftype{MapView} haben im Konstruktor einen neuen Parameter \code{Window parent} der ein \code{Frame} aus dem dieser Dialog geöffnet wird darstellt.}
 {
   \class{MainView}{~}
         {\none}
-        { \method{currentCombinationChanged}
+        {\method{currentCombinationChanged}
 	{\param{newCombination}{ProfileMapCombination}{Die neue Kombination aus Profil und Karte.}}
 	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMesage} die Meldung für den Benutzer aus.}
 	\method{textMessage}
           {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
           {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
         }
+\class{MapManagerView}{~}
+	{\none}
+	{\method{MapManagerView}
+	{
+		\param{mmc}{MapManagerController}{Ein \reftype{MapManagerController} der für die \reftype{MapManagerView} verantwortlich ist solange sie offen ist.}
+		\param{parent}{Window}{Ein \code{Frame} aus dem dieser Dialog geöffnet wird.}
+		\param{currentMap}{StreetMap}{Die aktuell ausgewählte Karte.}
+		\param{maps}{Set<StreetMap>}{Alle Karten, die importiert wuden. Der Benutzer kann in der Kartenverwaltung aus diesen Karten wählen.}
+		\param{currentMapProfiles}{Set<Profile>}{Alle Profile, für die eine Vorberechnung für die aktuell ausgewälte Karte exestiert.}
+	}
+	{Konstruktor der eine neue \reftype{MapManagerView} erzeugt.}
+	}
+\class{ProfileManagerView}{~}
+	{\none}
+	{\method{ProfileManagerView}
+	{
+		\param{parent}{Window}{Ein \code{Frame} aus dem dieser Dialog geöffnet wird.}
+		\param{pmc}{ProfileManagerController}{Ein \reftype{ProfileManagerController} der für die \reftype{ProfileManagerView} verantwortlich ist solange sie offen ist.}
+		\param{currentProfile}{Profile}{Das aktuell ausgewählte Profil.}
+		\param{availableProfiles}{Set<Profile>}{Alle erstellten Profile.}
+	}
+	{Konstruktor der eine neue \reftype{ProfileManagerView} erzeugt.}
+	}
+\class{MapView}{~}
+	{\none}
+	{\method{MapView}
+	{\param{source}{TileSource}{Eine Renderer, der die Kacheln für die Darstellung der Karte liefert.}}
+	{~}
+	}
 }
 \package{History}{}
 {
