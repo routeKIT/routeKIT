@@ -690,7 +690,11 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
         }
   \class{MapManagerController}{~}
         {\none}
-        {\method{getChanges}[MapManagementDiff]
+        { \method{MapManagerController}
+	{\param{view}{MainView}{Das Hauptfenster der Anwendung.}}
+	{~}
+	
+	\method{getChanges}[MapManagementDiff]
           {\none}
           {Gibt alle Änderungen zurück, die der Benutzer bis jetzt vorgenommen hat, aber die noch nicht bestätigt wurden.}
         }
