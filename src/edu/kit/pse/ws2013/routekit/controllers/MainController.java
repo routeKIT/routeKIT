@@ -370,6 +370,7 @@ public class MainController {
 				return;
 			}
 			new CLI().doImport(args[0], args[1], args[2]);
+			return;
 		}
 
 		final ProgressDialog pd = new ProgressDialog(null);
