@@ -1038,7 +1038,22 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
         }
 }
-
+\package{MapDisplay}{}
+{\class{TileCache}{~}
+	{\none}
+	{
+	\method{stop}
+		{\none}
+		{
+		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten.
+		}
+	\method{waitForStop}
+		{\none}
+		{
+		Bewirkt, das dieser aktuelle \reftype{TeileCache} aufhört Anfragen zu bearbeiten und wartet, bis alle threads gestorben sind.
+		}
+	}
+}
 \package{Profiles}{~}
 {
   \class{Profile}{~}
