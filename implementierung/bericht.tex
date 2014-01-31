@@ -48,11 +48,12 @@
 }
 
 \newcommand{\bug}[3]{%
-  \begin{description}
-  \item[Symptom] #1
-  \item[Ursache] #2
-  \item[Lösungsidee] #3
-  \end{description}
+  \item
+    \begin{description}
+    \item[Symptom] #1
+    \item[Ursache] #2
+    \item[Lösungsidee] #3
+    \end{description}
 }
 
 
@@ -1529,22 +1530,22 @@ Die automatisierten Komponententests wurden zum größten Teil noch nicht währe
 \section{Programmfehler}
 Im folgendem Abschnitt werden die gefundenen und nicht behobenen Fehler im Programm aufgelistet, sowie gefundene Lösungsansätze für deren Behebung. 
 \begin{enumerate}
-\item \bug{Für große Karten ist das Rendern der Kacheln zu langsam.}
+\bug{Für große Karten ist das Rendern der Kacheln zu langsam.}
 {Es existieren zu viele Kanten auf einer Kachel.}
 {Einen Vergröberunsalgorithmus realisieren.}
-\item \bug{Die Anwendung braucht lange zum Starten.}
+\bug{Die Anwendung braucht lange zum Starten.}
 {\code{GraphIndex}e und Navigationsarrays im Graphen werden beim Starten neu aufgebaut.}
 {Mehr Daten auf die Festplatte schreiben und beim Start laden.}
-\item \bug{Nach dem Wechseln der Karte sind möglicherweise keine Kanten sichtbar.}
+\bug{Nach dem Wechseln der Karte sind möglicherweise keine Kanten sichtbar.}
 {Die neuen Kanten sind in einer anderen geografischen Region.}
 {Einen Kartenmittelpunkt bestimmen und die Karte dort zentrieren.}
-\item \bug{Nachricht „Sie haben ihr Ziel erreicht.“ wird bei jeder Wegbeschreibung ausgegeben.}
+\bug{Nachricht „Sie haben ihr Ziel erreicht.“ wird bei jeder Wegbeschreibung ausgegeben.}
 {Im Programmcode ist keine Bedingung vorhanden, die Nachricht nur bei existierender Beschreibung auszugeben.}
 {Verfeinerung des Codes.}
-\item \bug{Nachricht „Es wurde keine Route gefunden.“ wird niemals ausgeben.}
+\bug{Nachricht „Es wurde keine Route gefunden.“ wird niemals ausgeben.}
 {Noch nicht im Code vorgesehen.}
 {Spezialfall implementieren.}
-\item \bug{Es ist möglich, so weit herauszuzoomen, dass die Karte nicht mehr sichtbar ist.}
+\bug{Es ist möglich, so weit herauszuzoomen, dass die Karte nicht mehr sichtbar ist.}
 {Die Zoomstufe wird nur statisch auf $[0,19]$ eingeschränkt.}
 {Die Zoomstufe abhängig von der Größe der Karte einschränken.}
 \end{enumerate}
