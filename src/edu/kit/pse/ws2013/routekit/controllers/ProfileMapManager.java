@@ -19,6 +19,7 @@ import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.Dummies;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
@@ -380,7 +381,9 @@ public class ProfileMapManager {
 	public static ProfileMapCombination init(File rootDirectory,
 			ProgressReporter pr) throws IOException {
 		if (!rootDirectory.exists()) {
-			initFirstStart(rootDirectory);
+			// initFirstStart(rootDirectory);
+			rootDirectory.mkdir();
+			Dummies.extractTo(rootDirectory);
 		} else if (!rootDirectory.isDirectory()) {
 			throw new IllegalArgumentException(rootDirectory.toString()
 					+ " is not a directory!");

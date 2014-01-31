@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -77,28 +78,32 @@ public class Dummies {
 		ProfileMapManager.getInstance().setCurrentCombination(combination);
 	}
 
-	private static void extractTo(File target) {
+	public static void extractTo(File target) {
 		try {
 			URL u = new URL("http://felix.dogcraft.de/routeKIT.zip");
-			ZipInputStream zis = new ZipInputStream(u.openStream());
-			ZipEntry ze;
-			byte[] buf = new byte[4096];
-			while ((ze = zis.getNextEntry()) != null) {
-				int len = 0;
-				File f = new File(target, ze.getName());
-				if (ze.isDirectory()) {
-					f.mkdirs();
-					continue;
+			try (ZipInputStream zis = new ZipInputStream(u.openStream())) {
+				ZipEntry ze;
+				byte[] buf = new byte[4096];
+				while ((ze = zis.getNextEntry()) != null) {
+					int len = 0;
+					String name = ze.getName();
+					String sub = name.substring(name.indexOf("/") + 1);
+					File f = new File(target, sub);
+					if (ze.isDirectory()) {
+						f.mkdirs();
+						continue;
+					}
+					try (FileOutputStream fos = new FileOutputStream(f)) {
+						while ((len = zis.read(buf)) > 0) {
+							fos.write(buf, 0, len);
+						}
+					}
 				}
-				FileOutputStream fos = new FileOutputStream(f);
-				while ((len = zis.read(buf)) > 0) {
-					fos.write(buf, 0, len);
-				}
-				fos.close();
-				System.out.println(ze.getName());
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (MalformedURLException e1) {
+			// this doesn’t happen
 		}
 	}
 
