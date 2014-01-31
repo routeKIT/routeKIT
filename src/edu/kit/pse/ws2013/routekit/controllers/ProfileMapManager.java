@@ -3,9 +3,12 @@ package edu.kit.pse.ws2013.routekit.controllers;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,6 +34,8 @@ import edu.kit.pse.ws2013.routekit.util.FileUtil;
  */
 public class ProfileMapManager {
 
+	private static final Charset INDEX_FILE_CHARSET = Charset.forName("UTF-8");
+
 	private static ProfileMapManager instance = null;
 
 	private final File root;
@@ -47,7 +52,8 @@ public class ProfileMapManager {
 		final File indexFile = new File(root, "routeKIT.idx");
 		Map<String, Set<String>> combinations = new HashMap<>();
 		Entry<String, String> current = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(indexFile))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(
+				new FileInputStream(indexFile), INDEX_FILE_CHARSET))) {
 			String currentMap = null;
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -254,8 +260,9 @@ public class ProfileMapManager {
 		}
 		currentMapCombos.add(current);
 		combinationsByMap.put(current.getStreetMap(), currentMapCombos);
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-				root, "routeKIT.idx")))) {
+		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(new File(root, "routeKIT.idx")),
+				INDEX_FILE_CHARSET))) {
 			for (Entry<StreetMap, Set<ProfileMapCombination>> map : combinationsByMap
 					.entrySet()) {
 				bw.write(map.getKey().getName());
