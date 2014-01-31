@@ -1090,6 +1090,14 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
   \class{NodeProperties}{~}
         {\none}
         {
+          \method{NodeProperties}
+                 {
+                   \param{junctionRef}{String}{Die Nummer der Anschlussstelle.}
+                   \param{junctionName}{String}{Der Name der Anschlussstelle.}
+                   \param{isMotorwayJunction}{boolean}{Gibt an, ob der Knoten eine Schnellstraßen- oder Autobahnanschlussstelle ist.}
+                   \param{isTrafficLights}{boolean}{Gibt an, ob es sich bei dem Knoten um eine Ampelkreuzung handelt.}
+                 }
+                 {Konstruktor: Erzeugt ein neues Objekt mit den gegebenen Eigenschaften.}
           \method{save}
                  {
                    \param{file}{File}{Die Datei, in die geschrieben werden soll.}
