@@ -389,7 +389,7 @@
 }
 \newglossaryentry{beobachter}{
   name={Beobachter},
-  description={Ein \gls{entwurfsmuster}, das bei Änderung des Zustands eines Objektes alle abhängenden Objekte banachrichtigt}
+  description={Ein \gls{entwurfsmuster}, das bei Änderung des Zustands eines Objektes alle abhängenden Objekte benachrichtigt}
 }
 \newglossaryentry{einzelstueck}{
   name={Einzelstück},
@@ -789,7 +789,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  }
                  {Versieht den kantenbasierten Graphen mit Kantengewichten.}
         }
-  \class{EdgeWeighterImpl}{Neue Klasse. Erstzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{EdgeWeighter}}
+  \class{EdgeWeighterImpl}{Neue Klasse. Ersetzt die Klasse \code{EdgeWeighter} aus dem Entwurf. Implementiert das Interface \reftype{EdgeWeighter}}
         {\none}
         {
           \method{weightEdges}
@@ -1316,7 +1316,7 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
         {\none}
         {\method{currentCombinationChanged}
 	{\param{newCombination}{ProfileMapCombination}{Die neue Kombination aus Profil und Karte.}}
-	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMesage} die Meldung für den Benutzer aus.}
+	{Setzt in alle dafür vorgesehenen Felder den aktuellen Profil- und Kartennamen. Blockiert die \reftype{MapView}, falls es keine Vorberechnung für die aktuelle Kombination gibt und gibt durch \code{textMessage} die Meldung für den Benutzer aus.}
 	\method{textMessage}
           {\param{str}{String}{Der auf den Bildschirm auszugebende Text.}}
           {Gibt Fehlermeldungen für den Benutzer auf den Bildschirm aus.}
@@ -1328,8 +1328,8 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
 		\param{mmc}{MapManagerController}{Ein \reftype{MapManagerController} der für die \reftype{MapManagerView} verantwortlich ist solange sie offen ist.}
 		\param{parent}{Window}{Ein \code{Frame} aus dem dieser Dialog geöffnet wird.}
 		\param{currentMap}{StreetMap}{Die aktuell ausgewählte Karte.}
-		\param{maps}{Set<StreetMap>}{Alle Karten, die importiert wuden. Der Benutzer kann in der Kartenverwaltung aus diesen Karten wählen.}
-		\param{currentMapProfiles}{Set<Profile>}{Alle Profile, für die eine Vorberechnung für die aktuell ausgewälte Karte exestiert.}
+		\param{maps}{Set<StreetMap>}{Alle Karten, die importiert wurden. Der Benutzer kann in der Kartenverwaltung aus diesen Karten wählen.}
+		\param{currentMapProfiles}{Set<Profile>}{Alle Profile, für die eine Vorberechnung für die aktuell ausgewählte Karte existiert.}
 	}
 	{Konstruktor der eine neue \reftype{MapManagerView} erzeugt.}
 	}
