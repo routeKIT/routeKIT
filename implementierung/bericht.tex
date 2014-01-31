@@ -716,6 +716,12 @@ Im Folgenden sind die gegenüber dem ursprünglichen Entwurf geänderten und neu
                    Gibt die \gls{karte} zurück, die der Benutzer ausgewählt hat.
                    Wenn der Dialog noch nicht oder durch „Abbrechen“ geschlossen wurde, wird \code{null} zurückgegeben.
                  }
+	\method{changeMap}
+	{\param{mapName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Map} übergeben. Die GUI verwaltet nur die Namen der Karten.}}
+          {~}
+	\method{removeProfile}
+	{\param{profileName}{String}{Geändert: Die GUI kann keine Objekte vom Typ \code{Profile} übergeben.  Die GUI verwaltet nur die Namen der Profile.}}
+	{~}
         }
   \class{CLI}
         {
