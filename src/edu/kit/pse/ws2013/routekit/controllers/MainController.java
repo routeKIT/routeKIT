@@ -367,8 +367,9 @@ public class MainController {
 						.println("Example: java .... "
 								+ MainController.class.getName()
 								+ " reg_bez_ka.osm \"Regierungsbezirk KA\" \"PKW (Standard)\"");
+				return;
 			}
-			return;
+			new CLI().doImport(args[0], args[1], args[2]);
 		}
 
 		final ProgressDialog pd = new ProgressDialog(null);
