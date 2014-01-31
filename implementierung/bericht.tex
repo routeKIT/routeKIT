@@ -796,30 +796,30 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                  {\none}
                  {Verringert den Grad des Eintrags um eins.}
         }
-  \class{FibonacciHeap}{Diese Klasse stellt einen FibonacciHeap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
+  \class{FibonacciHeap}{Diese Klasse stellt einen Fibonacci-Heap dar, der vom \code{ArcFlagsDijkstra} und der Vorberechnung genutzt wird.}
         {\none}
         {
           \method{isEmpty}[boolean]
                  {\none}
-                 {Prüft ob der Fibonacci-Heap leer ist und gibt das Ergebnis als boolean zurück.}
+                 {Prüft, ob der Fibonacci-Heap leer ist.}
           \method{getSize}[int]
                  {\none}
-                 {Gibt die Anzahl der Elemente, die sich gerade im FibonacciHeap befinden, zurück. Sehr nützlich z.B. für Testfälle.}
+                 {Gibt die Anzahl der Elemente, die sich gerade im Fibonacci-Heap befinden, zurück. Sehr nützlich z.\,B. für Testfälle.}
           \method{add}[FibonacciHeapEntry]
                  {
                  	\param{value}{int}{Der Wert für den neuen Eintrag.}
                  	\param{priority}{int}{Die Priorität für den neuen Eintrag.}
                  }
-                 {Fügt einen neuen Eintrag mit dem gegebenen Wert und der Priorität in den FibonacciHeap ein und gibt das neu eingefügte Element zurück.}
+                 {Fügt einen neuen Eintrag mit dem gegebenen Wert und der Priorität in den Fibonacci-Heap ein und gibt das neu eingefügte Element zurück.}
           \method{deleteMin}[FibonacciHeapEntry]
                  {\none}
-                 {Entfernt das Element mit der niedrigsten Priorität aus dem FibonacciHeap und gibt es zurück.}
+                 {Entfernt das Element mit der niedrigsten Priorität aus dem Fibonacci-Heap und gibt es zurück.}
           \method{decreaseKey}
                  {
                  	\param{entry}{FibonacciHeapEntry}{Der Eintrag, welcher aktualisiert werden soll.}
                  	\param{newPriority}{int}{Die neue Priorität für den Eintrag.}
                  }
-                 {Aktualisiert die Priorität eines gegebenen FibonacciHeap-Eintrags.}
+                 {Aktualisiert die Priorität eines gegebenen Eintrags.}
         }
 }
 
@@ -1321,7 +1321,18 @@ Linie. Dieses Verfahren kann verwendet werden, um die Koordinaten eines \reftype
 \section{Komponententests}
 
 \section{Arbeitsplanung}
-
+\begin{figure}[h]
+\centering
+\vspace{-2.5cm}\includegraphics[angle=90,scale=0.4]{zeitplan}
+\caption{Ursprünglicher Zeitplan der Implementierungsphase}
+\label{fig:zeitplan}
+\end{figure}
+\begin{figure}[h]
+\centering
+\vspace{-2.25cm}\includegraphics[angle=90,scale=0.4]{zeitplan_final}
+\caption{Tatsächlicher Arbeitsablauf der Implementierungsphase}
+\label{fig:zeitplan}
+\end{figure}
 
 \makeatletter
 \newglossarystyle{myAltlist}{
