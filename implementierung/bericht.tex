@@ -1037,6 +1037,21 @@ Vielen Klassen wird nun ein \reftype{ProgressReporter} als Parameter übergeben.
                    Wird aufgerufen, wenn sich die aktuelle \reftype{ProfileMapCombination} ändert, etwa durch Aufruf von \refmethod{ProfileMapManager}{setCurrentCombination}.
                  }
         }
+  \class{RouteModel}
+        {
+          Das \code{RouteModel} implementiert nun \reftype{CurrentCombinationListener}, um die Route zu löschen, wenn die aktuelle \reftype{ProfileMapCombination} sich ändert.
+        }
+        {\none}
+        {
+          \method{currentCombinationChanged}
+                 {
+                   \param{newCombination}{ProfileMapCombination}{Wird ignoriert.}
+                 }
+                 {
+                   Setzt Start- und Zielpunkt sowie die Route und ihre Beschreibung auf \code{null} und benachrichtigt dann registrierte \reftype{RouteModelListener}.
+                   Siehe auch \refmethod{CurrentCombinationListener}{currentCombinationChanged}.
+                 }
+        }
 }
 \package{MapDisplay}{}
 {\class{TileCache}{~}

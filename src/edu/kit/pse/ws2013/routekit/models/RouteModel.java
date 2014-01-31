@@ -11,7 +11,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
  * The getters return {@code null} if no such element is currently available;
  * the setters notify registered {@link RouteModelListener}.
  */
-public class RouteModel {
+public class RouteModel implements CurrentCombinationListener {
 
 	private LinkedList<RouteModelListener> listeners = new LinkedList<>();
 	private RouteDescription currentDescription;
@@ -91,5 +91,11 @@ public class RouteModel {
 	 */
 	public void addRouteListener(RouteModelListener listener) {
 		listeners.add(listener);
+	}
+
+	@Override
+	public void currentCombinationChanged(ProfileMapCombination newCombination) {
+		this.start = null; // don’t use the setter to avoid firing event twice
+		setDestination(null);
 	}
 }

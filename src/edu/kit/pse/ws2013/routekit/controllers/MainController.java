@@ -73,6 +73,7 @@ public class MainController {
 		}
 		pr.popTask("Lade Daten");
 		profileMapManager = ProfileMapManager.getInstance();
+		profileMapManager.addCurrentCombinationListener(rm);
 		History _history; // because history is final
 		try {
 			_history = History.load(FileUtil.getHistoryFile());
