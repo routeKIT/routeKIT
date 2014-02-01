@@ -489,7 +489,11 @@ public class MainView extends JFrame implements RouteModelListener {
 							.getInstructions()) {
 						listModel.addElement(instruction.toString());
 					}
-					listModel.addElement("Sie haben Ihr Ziel erreicht.");
+					if (description.getInstructions().isEmpty()) {
+						listModel.addElement("Keine Route gefunden.");
+					} else {
+						listModel.addElement("Sie haben Ihr Ziel erreicht.");
+					}
 				}
 			});
 		}
