@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
@@ -100,19 +102,19 @@ public class Graph {
 	private void initIndices() {
 		Thread[] threads = new Thread[3];
 		indices = new GraphIndex[3];
-		threads[0] = new Thread() {
+		threads[0] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
 				indices[0] = new GraphIndex(Graph.this, HighwayType.Primary);
 			}
 		};
-		threads[1] = new Thread() {
+		threads[1] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
 				indices[1] = new GraphIndex(Graph.this, HighwayType.Tertiary);
 			}
 		};
-		threads[2] = new Thread() {
+		threads[2] = new Thread("L0 Graph-Index") {
 			@Override
 			public void run() {
 				indices[2] = new GraphIndex(Graph.this, HighwayType.Residential);
@@ -126,6 +128,20 @@ public class Graph {
 				t.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+		}
+		// check if we got all the indices
+		for (int i = 0; i < indices.length; i++) {
+			if (indices[i] == null) {
+				// this thread crashed (e. g. OOM), let’s try again
+				// this time, synchronously – only one index at a time
+				try {
+					threads[i].run();
+				} catch (OutOfMemoryError e) {
+					JOptionPane.showMessageDialog(null,
+							"Nicht genug Arbeitsspeicher!");
+					System.exit(1);
+				}
 			}
 		}
 	}
