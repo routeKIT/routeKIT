@@ -155,9 +155,11 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		newStartEdge = x;
 
 		PointOnEdge newStart = new PointOnEdge(newStartEdge,
-				start.getPosition());
+				(newStartEdge != startEdge) ? (1 - start.getPosition())
+						: start.getPosition());
 		PointOnEdge newDestination = new PointOnEdge(newDestinationEdge,
-				destination.getPosition());
+				(newDestinationEdge != destinationEdge) ? (1 - destination
+						.getPosition()) : destination.getPosition());
 
 		Route route = new Route(data, newStart, newDestination, turns);
 
