@@ -17,6 +17,7 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
  */
 public class GraphIndex {
 	private Graph graph;
+	private GraphView view;
 
 	private static boolean isSmaller(boolean lat, float threshhold,
 			Coordinates from, Coordinates to) {
@@ -37,7 +38,7 @@ public class GraphIndex {
 		Set<Integer> contents;
 		private boolean splitLat;
 
-		public Node(Set<Integer> contents, boolean splitLat, Graph g) {
+		public Node(Set<Integer> contents, boolean splitLat) {
 			if (contents.size() < 50) {
 				this.contents = contents;
 			} else {
@@ -48,8 +49,10 @@ public class GraphIndex {
 				if (splitLat) {
 					for (Integer integer : contents) {
 						int edge = integer;
-						Coordinates a = g.getCoordinates(g.getStartNode(edge));
-						Coordinates b = g.getCoordinates(g.getTargetNode(edge));
+						Coordinates a = graph.getCoordinates(view
+								.getStartNode(edge));
+						Coordinates b = graph.getCoordinates(view
+								.getTargetNode(edge));
 						float f1 = a.getLatitude();
 						float f2 = b.getLatitude();
 						sum += f1 + f2;
@@ -57,10 +60,11 @@ public class GraphIndex {
 				} else {
 					for (Integer integer : contents) {
 						int edge = integer;
-						float f1 = g.getCoordinates(g.getStartNode(edge))
+						float f1 = graph
+								.getCoordinates(view.getStartNode(edge))
 								.getLongitude();
-						float f2 = g.getCoordinates(g.getTargetNode(edge))
-								.getLongitude();
+						float f2 = graph.getCoordinates(
+								view.getTargetNode(edge)).getLongitude();
 						sum += f1 + f2;
 					}
 				}
@@ -68,8 +72,10 @@ public class GraphIndex {
 				threshhold = sum;
 				for (Integer integer : contents) {
 					int edge = integer;
-					Coordinates f1 = g.getCoordinates(g.getStartNode(edge));
-					Coordinates f2 = g.getCoordinates(g.getTargetNode(edge));
+					Coordinates f1 = graph.getCoordinates(view
+							.getStartNode(edge));
+					Coordinates f2 = graph.getCoordinates(view
+							.getTargetNode(edge));
 					if (isSmaller(splitLat, sum, f1, f2)) {
 						low.add(edge);
 					}
@@ -77,8 +83,8 @@ public class GraphIndex {
 						high.add(edge);
 					}
 				}
-				left = new Node(low, !splitLat, g);
-				right = new Node(high, !splitLat, g);
+				left = new Node(low, !splitLat);
+				right = new Node(high, !splitLat);
 			}
 		}
 
@@ -86,10 +92,12 @@ public class GraphIndex {
 				Coordinates rightBottom, Set<Integer> target) {
 			if (contents != null) {
 				// TODO is more efficient possible
+
 				for (Integer edg : contents) {
 					int edge = edg;
-					Coordinates from = g.getCoordinates(g.getStartNode(edge));
-					Coordinates to = g.getCoordinates(g.getTargetNode(edge));
+					Coordinates from = g
+							.getCoordinates(view.getStartNode(edge));
+					Coordinates to = g.getCoordinates(view.getTargetNode(edge));
 					float minA = Math.min(from.getLatitude(), to.getLatitude());
 					float minO = Math.min(from.getLongitude(),
 							to.getLongitude());
@@ -103,7 +111,7 @@ public class GraphIndex {
 						target.add(edg);
 					}
 				}
-				// target.addAll(contents);
+
 			} else {
 				if (isSmaller(splitLat, threshhold, leftTop, rightBottom)) {
 					left.addAll(g, leftTop, rightBottom, target);
@@ -124,9 +132,10 @@ public class GraphIndex {
 	 * @param maxType
 	 *            The maximum {@link HighwayType} to include.
 	 */
-	public GraphIndex(final Graph graph, final HighwayType maxType) {
+	public GraphIndex(final Graph graph, HighwayType maxType, GraphView view) {
 		this.graph = graph;
-		final int numberOfEdges = graph.getNumberOfEdges();
+		this.view = view;
+		final int numberOfEdges = view.getNumberOfEdges();
 		final int maxTypeInt = maxType.ordinal();
 		root = new Node(new AbstractSet<Integer>() {
 
@@ -173,7 +182,7 @@ public class GraphIndex {
 			public int size() {
 				return numberOfEdges;
 			}
-		}, false, graph);
+		}, false);
 	}
 
 	Node root;
@@ -247,5 +256,9 @@ public class GraphIndex {
 		});
 		root.addAll(graph, leftTop, rightBottom, ints);
 		return ints;
+	}
+
+	public GraphView getView() {
+		return view;
 	}
 }

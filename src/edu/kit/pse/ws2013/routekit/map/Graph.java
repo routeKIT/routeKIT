@@ -105,19 +105,25 @@ public class Graph {
 		threads[0] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
-				indices[0] = new GraphIndex(Graph.this, HighwayType.Primary);
+				indices[0] = new GraphIndex(Graph.this,
+						HighwayType.Residential, new ReducedGraphView(
+								Graph.this, HighwayType.Primary, 10));
 			}
 		};
 		threads[1] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
-				indices[1] = new GraphIndex(Graph.this, HighwayType.Tertiary);
+				indices[1] = new GraphIndex(Graph.this,
+						HighwayType.Residential, new ReducedGraphView(
+								Graph.this, HighwayType.Tertiary, 13));
 			}
 		};
 		threads[2] = new Thread("L0 Graph-Index") {
 			@Override
 			public void run() {
-				indices[2] = new GraphIndex(Graph.this, HighwayType.Residential);
+				indices[2] = new GraphIndex(Graph.this,
+						HighwayType.Residential, new IdentityGraphView(
+								Graph.this));
 			}
 		};
 		for (Thread t : threads) {
@@ -204,7 +210,7 @@ public class Graph {
 		if (zoom > 13) {
 			return indices[2];
 		}
-		if (zoom > 7) {
+		if (zoom > 10) {
 			return indices[1];
 		}
 		return indices[0];
@@ -261,6 +267,15 @@ public class Graph {
 	 */
 	public int getNumberOfEdges() {
 		return edges.length;
+	}
+
+	/**
+	 * Returns the number of nodes in this graph.
+	 * 
+	 * @return the number of nodes
+	 */
+	public int getNumberOfNodes() {
+		return nodes.length;
 	}
 
 	/**
