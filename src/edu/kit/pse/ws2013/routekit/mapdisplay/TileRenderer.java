@@ -17,7 +17,10 @@ import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.GraphIndex;
+import edu.kit.pse.ws2013.routekit.map.GraphView;
 import edu.kit.pse.ws2013.routekit.map.HighwayType;
+import edu.kit.pse.ws2013.routekit.map.IdentityGraphView;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
@@ -42,32 +45,39 @@ public class TileRenderer implements TileSource {
 		private int zoom;
 		private int x;
 		private int y;
+		private GraphView view;
 
-		public EdgeIterator(Iterator<Integer> edges, int zoom, int x, int y) {
+		public EdgeIterator(Iterator<Integer> edges, int zoom, int x, int y,
+				GraphIndex index) {
 			this.edges = edges;
 			this.zoom = zoom;
 			this.x = x;
 			this.y = y;
+			this.view = index.getView();
 		}
 
 		public boolean next() {
+			int edg;
 			do {
 				if (!edges.hasNext()) {
 					return false;
 				}
 
-				edge = edges.next();
-			} while (graph.getCorrespondingEdge(edge) > edge);
-			extractCoordinates();
+				edg = edges.next();
+			} while (view instanceof IdentityGraphView
+					&& graph.getCorrespondingEdge(view.translate(edg)) > view
+							.translate(edg));
+			extractCoordinates(edg);
 			return true;
 		}
 
 		/**
 		 * Sets start and target coordinates
 		 */
-		private void extractCoordinates() {
-			int startNode = graph.getStartNode(edge);
-			int targetNode = graph.getTargetNode(edge);
+		private void extractCoordinates(int edgeV) {
+			int startNode = view.getStartNode(edgeV);
+			int targetNode = view.getTargetNode(edgeV);
+			this.edge = view.translate(edgeV);
 			Coordinates coordsTargetNode = graph.getCoordinates(targetNode);
 			Coordinates coordsStartNode = graph.getCoordinates(startNode);
 			xstart = (int) ((coordsStartNode.getSmtX(zoom) - x) * 256);
@@ -106,7 +116,9 @@ public class TileRenderer implements TileSource {
 			debugWeights = debugCurrent.getWeights();
 			debugAF = debugCurrent.getArcFlags();
 		}
-		final Set<Integer> edges = getEdgesOnTile(x, y, zoom);
+		GraphIndex index = graph.getIndex(zoom);
+
+		final Set<Integer> edges = getEdgesOnTile(x, y, zoom, index);
 
 		final BufferedImage tile = new BufferedImage(256, 256,
 				BufferedImage.TYPE_INT_RGB);
@@ -119,7 +131,7 @@ public class TileRenderer implements TileSource {
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		final Stroke oldStroke = g.getStroke();
 		// Draw border
-		EdgeIterator it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		EdgeIterator it = new EdgeIterator(edges.iterator(), zoom, x, y, index);
 		while (it.next()) {
 			g.setColor(getMainStreetColor(it.p.getType(), true));
 			g.setStroke(new BasicStroke(getStreetWidth(zoom, it.p) + 4,
@@ -128,7 +140,7 @@ public class TileRenderer implements TileSource {
 		}
 
 		// Draw street
-		it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		it = new EdgeIterator(edges.iterator(), zoom, x, y, index);
 		while (it.next()) {
 			g.setColor(getMainStreetColor(it.p.getType(), false));
 			g.setStroke(new BasicStroke(getStreetWidth(zoom, it.p),
@@ -142,7 +154,7 @@ public class TileRenderer implements TileSource {
 		final Font font = new Font(Font.SANS_SERIF, 0, 12);
 		g.setColor(Color.BLACK);
 		g.setFont(font);
-		it = new EdgeIterator(edges.iterator(), zoom, x, y);
+		it = new EdgeIterator(edges.iterator(), zoom, x, y, index);
 		while (it.next()) {
 			final String name = getName(it.edge);
 			final double streetLength = Math.sqrt(Math.pow(
@@ -158,10 +170,10 @@ public class TileRenderer implements TileSource {
 				} else if (DEBUG_VIS == 4) {
 					debugData = Integer.toString(it.edge);
 				} else {// 2,3
-					debugData =  Integer.toString(DEBUG_VIS == 2 ? debugWeights
-									.getWeight(tturn) : graph
-									.getEdgeProperties(it.edge).getMaxSpeed(
-											debugCurrent.getProfile()));
+					debugData = Integer.toString(DEBUG_VIS == 2 ? debugWeights
+							.getWeight(tturn) : graph
+							.getEdgeProperties(it.edge).getMaxSpeed(
+									debugCurrent.getProfile()));
 				}
 				g.drawString(debugData, (it.xstart + it.xtarget) / 2,
 						(it.ystart + it.ytarget) / 2);
@@ -254,13 +266,14 @@ public class TileRenderer implements TileSource {
 		g.drawPolygon(p);
 	}
 
-	private Set<Integer> getEdgesOnTile(final int x, final int y, final int zoom) {
+	private Set<Integer> getEdgesOnTile(final int x, final int y,
+			final int zoom, GraphIndex index) {
 		final Coordinates leftTop = Coordinates.fromSmt(x - 0.1f, y + 1.1f,
 				zoom);
 		final Coordinates rightBottom = Coordinates.fromSmt(x + 1.1f, y - 0.1f,
 				zoom);
-		final Set<Integer> edges = graph.getIndex(zoom).getEdgesInRectangle(
-				leftTop, rightBottom);
+		final Set<Integer> edges = index.getEdgesInRectangle(leftTop,
+				rightBottom);
 		return edges;
 	}
 
