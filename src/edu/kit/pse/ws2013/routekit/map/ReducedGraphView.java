@@ -13,7 +13,6 @@ public class ReducedGraphView implements GraphView {
 	int edgepos = 0;
 
 	public ReducedGraphView(Graph g, HighwayType maxType, int zoom) {
-		System.out.println("start reducing");
 		int maxTypeId = maxType.ordinal();
 		startnodes = new int[g.getNumberOfEdges()];
 		endnodes = new int[g.getNumberOfEdges()];
@@ -123,9 +122,6 @@ public class ReducedGraphView implements GraphView {
 		out = new int[edgepos];
 		System.arraycopy(mapping, 0, out, 0, edgepos);
 		mapping = out;
-		System.out.println("end reducing");
-		System.out.println("from: " + g.getNumberOfEdges());
-		System.out.println("to: " + edgepos);
 	}
 
 	private void addEdge(int start, int end, int org) {
