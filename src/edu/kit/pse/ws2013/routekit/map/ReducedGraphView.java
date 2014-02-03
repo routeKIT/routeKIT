@@ -12,7 +12,7 @@ public class ReducedGraphView implements GraphView {
 	int[] mapping;
 	int edgepos = 0;
 
-	public ReducedGraphView(Graph g, HighwayType maxType) {
+	public ReducedGraphView(Graph g, HighwayType maxType, int zoom) {
 		System.out.println("start reducing");
 		int maxTypeId = maxType.ordinal();
 		startnodes = new int[g.getNumberOfEdges()];
@@ -103,7 +103,7 @@ public class ReducedGraphView implements GraphView {
 					done[rev] = true;
 				}
 				boolean[] usedWay = new boolean[wp];
-				douglasPeuker(currentWay, 0, wp, g, usedWay);
+				douglasPeuker(currentWay, 0, wp, g, usedWay, zoom);
 				int prev = currentWayid[0];
 				for (int j = 1; j < wp; j++) {
 					if (usedWay[j]) {
@@ -136,25 +136,25 @@ public class ReducedGraphView implements GraphView {
 	}
 
 	private void douglasPeuker(Coordinates[] currentWay, int startIdx,
-			int endIdx, Graph g, boolean[] used) {
+			int endIdx, Graph g, boolean[] used, int zoom) {
 		Coordinates start = currentWay[startIdx];
 		Coordinates end = currentWay[endIdx - 1];
 		double maxdist = -1;
 		int maxidx = -1;
 		for (int j = startIdx + 1; j < endIdx - 1; j++) {
 			Coordinates c = currentWay[j];
-			double dist = Line2D.ptLineDistSq(start.getLatitude(),
-					start.getLongitude(), end.getLatitude(),
-					end.getLongitude(), c.getLatitude(), c.getLongitude());
+			double dist = Line2D.ptLineDistSq(start.getSmtX(zoom),
+					start.getSmtY(zoom), end.getSmtX(zoom), end.getSmtY(zoom),
+					c.getSmtX(zoom), c.getSmtY(zoom));
 			if (dist > maxdist) {
 				maxdist = dist;
 				maxidx = j;
 			}
 		}
-		if (maxdist > 0.000001) {//
-			douglasPeuker(currentWay, startIdx, maxidx, g, used);
+		if (maxdist > 5f / 256f / 256f) {//
+			douglasPeuker(currentWay, startIdx, maxidx, g, used, zoom);
 			used[maxidx] = true;
-			douglasPeuker(currentWay, maxidx, endIdx, g, used);
+			douglasPeuker(currentWay, maxidx, endIdx, g, used, zoom);
 		} else {
 			used[startIdx] = true;
 			used[endIdx - 1] = true;
@@ -169,7 +169,7 @@ public class ReducedGraphView implements GraphView {
 				new EdgeProperties[] { ep, ep, ep, ep, ep, ep, ep },
 				new float[] { 0, 1, 0.5f, 0, 0, 0 }, new float[] { 0, 1, 2, 3,
 						4, 5 });
-		new ReducedGraphView(g, HighwayType.Residential);
+		new ReducedGraphView(g, HighwayType.Residential, 10);
 	}
 
 	@Override

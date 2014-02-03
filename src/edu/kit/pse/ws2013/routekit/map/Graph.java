@@ -107,7 +107,7 @@ public class Graph {
 			public void run() {
 				indices[0] = new GraphIndex(Graph.this,
 						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Primary));
+								Graph.this, HighwayType.Primary, 10));
 			}
 		};
 		threads[1] = new Thread("L1 Graph-Index") {
@@ -115,7 +115,7 @@ public class Graph {
 			public void run() {
 				indices[1] = new GraphIndex(Graph.this,
 						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Tertiary));
+								Graph.this, HighwayType.Tertiary, 13));
 			}
 		};
 		threads[2] = new Thread("L0 Graph-Index") {
