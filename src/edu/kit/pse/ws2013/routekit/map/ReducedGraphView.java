@@ -26,7 +26,8 @@ public class ReducedGraphView implements GraphView {
 
 		for (int i = 0; i < g.getNumberOfEdges(); i++) {
 			int correspondingEdge = g.getCorrespondingEdge(i);
-			if (g.getEdgeProperties(i).getType().ordinal() > maxTypeId) {
+			if (g.getEdgeProperties(i).getType().ordinal() > maxTypeId
+					|| hide[i]) {
 				hide[i] = true;
 				if (correspondingEdge != -1) {
 					hide[correspondingEdge] = true;
