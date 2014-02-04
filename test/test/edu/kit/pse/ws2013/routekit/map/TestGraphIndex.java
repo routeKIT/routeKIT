@@ -1,5 +1,6 @@
 package test.edu.kit.pse.ws2013.routekit.map;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.junit.Test;
 import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.GraphIndex;
+import edu.kit.pse.ws2013.routekit.map.HighwayType;
 import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
@@ -29,9 +31,11 @@ public class TestGraphIndex {
 				lon[i * 20 + j * 2 + 1] = j * 2 + 1;
 			}
 		}
+		EdgeProperties[] edgeProps = new EdgeProperties[edges.length];
+		Arrays.fill(edgeProps, new EdgeProperties(HighwayType.Unclassified,
+				"Test", null, 50));
 		Graph g = new Graph(nodes, edges,
-				new HashMap<Integer, NodeProperties>(),
-				new EdgeProperties[edges.length], lat, lon);
+				new HashMap<Integer, NodeProperties>(), edgeProps, lat, lon);
 		GraphIndex i = g.getIndex(0);
 		Set<Integer> set = i.getEdgesInRectangle(new Coordinates(3.5f, 4.5f),
 				new Coordinates(4.5f, 5.5f));
