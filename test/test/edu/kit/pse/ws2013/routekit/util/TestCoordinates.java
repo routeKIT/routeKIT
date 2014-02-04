@@ -85,7 +85,7 @@ public class TestCoordinates {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testFromStringFail_latBarelyNotDisplayable() {
-		Coordinates.fromString("85.00000000000000000000000001 42");
+		Coordinates.fromString("85.0000000000000000000000000001 42");
 	}
 
 	@Test(expected = IllegalArgumentException.class)

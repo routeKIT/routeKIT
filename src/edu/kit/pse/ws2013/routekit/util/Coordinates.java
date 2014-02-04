@@ -249,7 +249,7 @@ public class Coordinates {
 			throw new IllegalArgumentException("Can’t parse latitude!", e);
 		}
 		if (lat < -85 || lat > 85
-				|| (Math.abs(lat) == 85 && s.matches("-?85(.0+)?"))) {
+				|| (Math.abs(lat) == 85 && !s.matches("-?85(.0+)?"))) {
 			throw new IllegalArgumentException(
 					"Latitude must be in range [-85°,85°]!");
 		}
@@ -273,7 +273,7 @@ public class Coordinates {
 			throw new IllegalArgumentException("Can’t parse longitude!", e);
 		}
 		if (lon < -180 || lon > 180
-				|| (Math.abs(lon) == 180 && s.matches("-?180(.0+)?"))) {
+				|| (Math.abs(lon) == 180 && !s.matches("-?180(.0+)?"))) {
 			throw new IllegalArgumentException(
 					"Longitude must be in range [-180°,180°]!");
 		}
