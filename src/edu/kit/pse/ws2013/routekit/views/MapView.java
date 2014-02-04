@@ -304,7 +304,12 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		if (e.getClickCount() % 2 == 0 && !e.isConsumed()) {
+			e.consume();
+			mouseWheelMoved(new MouseWheelEvent(this, 0,
+					System.currentTimeMillis(), 0, e.getX(), e.getY(), 2,
+					false, 0, 1, -1));
+		}
 	}
 
 	@Override
