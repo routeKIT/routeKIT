@@ -296,9 +296,22 @@ public class MainController {
 		mapManagement = new MapManagerController(view);
 		StreetMap selected = mapManagement.getSelectedMap();
 		if (selected != null) {
-			profileMapManager.selectProfileAndMap(profileMapManager
-					.getCurrentCombination().getProfile(), selected);
-			// TODO update view elements
+			final ProfileMapCombination newCombination = profileMapManager
+					.getPrecalculation(profileMapManager
+							.getCurrentCombination().getProfile(), selected);
+			ProgressDialog p = new ProgressDialog(view);
+			final ProgressReporter reporter = new ProgressReporter();
+			reporter.addProgressListener(p);
+			reporter.pushTask("Lade ausgewählte Karte und Vorberechnung");
+			new Thread("Load map + precalculation") {
+				@Override
+				public void run() {
+					newCombination.ensureLoaded(reporter);
+					reporter.popTask();
+				};
+			}.start();
+			p.setVisible(true);
+			profileMapManager.setCurrentCombination(newCombination);
 		}
 	}
 
