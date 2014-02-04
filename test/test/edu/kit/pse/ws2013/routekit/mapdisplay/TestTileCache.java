@@ -7,74 +7,76 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
-import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 
 public class TestTileCache {
-	class WaitingSource implements TileSource {
-
+	class DummySource implements TileSource {
 		@Override
 		public BufferedImage renderTile(int x, int y, int zoom) {
-			synchronized (TestTileCache.this) {
-				return new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
-			}
-		}
-
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	Throwable failed = null;
-
-	@Test
-	public void test() throws Throwable {
-		final TileCache tc = new TileCache(new WaitingSource());
-		tc.addTileFinishedListener(new TileFinishedListener() {
-			int last = -1;
-
-			@Override
-			public void tileFinished(int x, int y, int zoom, BufferedImage tile) {
-				try {
-					if (last == -1) {
-						assertEquals(0, x);
-						last = 120;
-					} else if (last > 20) {
-						last--;
-						assertEquals(last, x);
-					}
-					assertEquals(tile, tc.renderTile(x, y, zoom));
-				} catch (Throwable t) {
-					failed = t;
-				}
-			}
-		});
-		synchronized (this) {
-			assertNull(tc.renderTile(0, 0, 19));
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			for (int i = 1; i < 120; i++) {
-				assertNull(tc.renderTile(i, 0, 19));
-			}
-		}
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertNotNull(tc.renderTile(0, 0, 19));
-		assertNull(tc.renderTile(1, 0, 19));
-		assertNull(tc.renderTile(2, 0, 19));
-		assertNull(tc.renderTile(3, 0, 19));
-		assertNotNull(tc.renderTile(50, 0, 19));
-		tc.waitForStop();
-		if (failed != null) {
-			throw failed;
+			return new BufferedImage(256, 256, BufferedImage.TYPE_4BYTE_ABGR);
 		}
 	}
 
+	TileCache tc = null;
+	BufferedImage dummy = null;
+
+	@Before
+	public void setUp() throws Exception {
+		tc = new TileCache(new DummySource());
+		dummy = tc.renderTile(0, 0, 1);
+	}
+
+	private void assertDummy(BufferedImage image) {
+		assertEquals(dummy, image);
+	}
+
+	private void assertNotDummy(BufferedImage image) {
+		assertNotEquals(dummy, image);
+	}
+
+	@Test
+	public void testCaching() throws InterruptedException {
+		assertDummy(tc.renderTile(0, 0, 1));
+		Thread.sleep(100);
+		assertNotDummy(tc.renderTile(0, 0, 1));
+	}
+
+	@Test
+	public void testPrefetch() throws InterruptedException {
+		assertDummy(tc.renderTile(0, 0, 5));
+		assertDummy(tc.renderTile(0, 1, 5));
+		assertDummy(tc.renderTile(1, 0, 5));
+		assertDummy(tc.renderTile(0, -1, 5));
+		assertDummy(tc.renderTile(-1, 0, 5));
+		assertDummy(tc.renderTile(0, 0, 4));
+		assertDummy(tc.renderTile(0, 0, 6));
+		Thread.sleep(100);
+		assertNotDummy(tc.renderTile(0, 0, 5));
+		assertNotDummy(tc.renderTile(0, 1, 5));
+		assertNotDummy(tc.renderTile(1, 0, 5));
+		assertNotDummy(tc.renderTile(0, -1, 5));
+		assertNotDummy(tc.renderTile(-1, 0, 5));
+		assertNotDummy(tc.renderTile(0, 0, 4));
+		assertNotDummy(tc.renderTile(0, 0, 6));
+	}
+
+	@Test
+	public void testThrowAway() throws InterruptedException {
+		assertDummy(tc.renderTile(0, 0, 10));
+		Thread.sleep(50);
+		assertNotDummy(tc.renderTile(0, 0, 10));
+		for (int x = 0; x < 50; x++) {
+			for (int y = 0; y < 50; y++) {
+				tc.renderTile(x, y, 9);
+				Thread.sleep(1);
+			}
+		}
+		System.gc();
+		assertDummy(tc.renderTile(0, 0, 10));
+	}
 }
