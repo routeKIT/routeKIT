@@ -60,9 +60,9 @@ public class MainController {
 	 */
 	private MainController(ProgressReporter pr) {
 		pr.pushTask("Starte routeKIT");
-		pr.setSubTasks(new float[] { 0.99f, 0.01f });
+		pr.setSubTasks(new float[] { .01f, 0.98f, 0.01f });
 		instance = this;
-		pr.pushTask("Lade Daten");
+		pr.pushTask("Lese Index");
 		try {
 			ProfileMapManager.init(FileUtil.getRootDir(), pr);
 		} catch (IOException e) {
@@ -71,8 +71,14 @@ public class MainController {
 			profileMapManager = null;
 			return;
 		}
-		pr.popTask("Lade Daten");
+		pr.popTask("Lese Index");
 		profileMapManager = ProfileMapManager.getInstance();
+		pr.pushTask("Lade zuletzt verwendete Karte und Vorberechnung");
+		if (profileMapManager.getCurrentCombination().getClass() != ProfileMapCombination.class) {
+			profileMapManager.getCurrentCombination().ensureLoaded(pr);
+		}
+		pr.popTask();
+
 		profileMapManager.addCurrentCombinationListener(rm);
 		History _history; // because history is final
 		try {
