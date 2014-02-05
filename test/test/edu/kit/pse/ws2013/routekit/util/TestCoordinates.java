@@ -1,10 +1,7 @@
 package test.edu.kit.pse.ws2013.routekit.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
@@ -35,10 +32,15 @@ public class TestCoordinates {
 				equator1.angleBetween(northPole, northPole), 360), EPSILON);
 	}
 
-	@Ignore
 	@Test
 	public void testDistanceTo() {
-		fail("Not yet implemented");
+		Coordinates statueOfLiberty = new Coordinates(40.68923f, -74.04447f);
+		Coordinates brandenburgGate = new Coordinates(52.516389f, 13.377778f);
+		Coordinates christRedeemer = new Coordinates(-22.951586f, -43.210747f);
+		assertEquals(0, statueOfLiberty.distanceTo(statueOfLiberty), 0);
+		assertEquals(6387680, statueOfLiberty.distanceTo(brandenburgGate), 10);
+		assertEquals(10013140, brandenburgGate.distanceTo(christRedeemer), 10);
+		assertEquals(7761340, christRedeemer.distanceTo(statueOfLiberty), 10);
 	}
 
 	@Test
