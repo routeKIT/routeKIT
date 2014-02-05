@@ -55,8 +55,8 @@ public class ReducedGraphView implements GraphView {
 			}
 		}
 		boolean[] done = new boolean[g.getNumberOfEdges()];
-		Coordinates[] currentWay = new Coordinates[1024 * 1024 * 128];
-		int[] currentWayid = new int[1024 * 1024 * 128];
+		Coordinates[] currentWay = new Coordinates[1024 * 4];
+		int[] currentWayid = new int[currentWay.length];
 		for (int i = 0; i < keep.length; i++) {
 			if (!keep[i]) {
 				continue;
