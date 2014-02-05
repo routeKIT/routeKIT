@@ -20,13 +20,14 @@ public class ReducedGraphView implements GraphView {
 		int[] degree = new int[g.getNumberOfNodes()];
 		int[] outdegree = new int[g.getNumberOfNodes()];
 		int[] indegree = new int[g.getNumberOfNodes()];
+		int[] type = new int[g.getNumberOfNodes()];
 		boolean[] keep = new boolean[g.getNumberOfNodes()];
 		boolean[] hide = new boolean[g.getNumberOfEdges()];
 
 		for (int i = 0; i < g.getNumberOfEdges(); i++) {
 			int correspondingEdge = g.getCorrespondingEdge(i);
-			if (g.getEdgeProperties(i).getType().ordinal() > maxTypeId
-					|| hide[i]) {
+			int t = g.getEdgeProperties(i).getType().ordinal();
+			if (t > maxTypeId || hide[i]) {
 				hide[i] = true;
 				if (correspondingEdge != -1) {
 					hide[correspondingEdge] = true;
@@ -36,6 +37,16 @@ public class ReducedGraphView implements GraphView {
 			if (correspondingEdge < i) { // uniqe or not existent
 				int start = g.getStartNode(i);
 				int end = g.getTargetNode(i);
+				if (type[start] != 0 && type[start] != t) {
+					degree[start] += 3;// no!
+				} else {
+					type[start] = t;
+				}
+				if (type[end] != 0 && type[end] != t) {
+					degree[end] += 3;// no!
+				} else {
+					type[end] = t;
+				}
 				outdegree[start]++;
 				indegree[end]++;
 				if (correspondingEdge != -1) {
