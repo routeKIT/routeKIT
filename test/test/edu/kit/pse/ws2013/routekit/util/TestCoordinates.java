@@ -16,10 +16,23 @@ public class TestCoordinates {
 	public void setUp() throws Exception {
 	}
 
-	@Ignore
 	@Test
 	public void testAngleBetween() {
-		fail("Not yet implemented");
+		Coordinates equator1 = new Coordinates(0, 0);
+		Coordinates equator2 = new Coordinates(0, 120);
+		Coordinates equator3 = new Coordinates(0, -120);
+		Coordinates northPole = new Coordinates(90, 0);
+		Coordinates southPole = new Coordinates(-90, 0);
+		Coordinates greenwich = new Coordinates(51.477778f, 0);
+		assertEquals(180, equator1.angleBetween(equator2, equator3), EPSILON);
+		assertEquals(180, equator1.angleBetween(northPole, southPole), EPSILON);
+		assertEquals(270, equator1.angleBetween(northPole, equator2), EPSILON);
+		assertEquals(90, equator1.angleBetween(northPole, equator3), EPSILON);
+		assertEquals(0, equator1.angleBetween(equator2, equator2), EPSILON);
+		assertEquals(0, Math.IEEEremainder(
+				equator1.angleBetween(greenwich, greenwich), 360), EPSILON);
+		assertEquals(0, Math.IEEEremainder(
+				equator1.angleBetween(northPole, northPole), 360), EPSILON);
 	}
 
 	@Ignore
