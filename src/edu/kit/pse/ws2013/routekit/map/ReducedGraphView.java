@@ -70,7 +70,7 @@ public class ReducedGraphView implements GraphView {
 				// done[edge] = true;
 				if (keep[target]) {
 					addEdge(i, target, edge);
-					break;
+					continue;
 				}
 				currentWayid[wp] = i;
 				currentWay[wp++] = g.getCoordinates(i);
