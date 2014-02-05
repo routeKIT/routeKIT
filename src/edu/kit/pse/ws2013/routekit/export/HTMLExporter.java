@@ -51,6 +51,7 @@ public class HTMLExporter {
 					.createXMLStreamWriter(outputStream, "utf-8");
 			html.writeStartDocument();
 			writer.write("<!DOCTYPE html>");
+			writer.flush();
 			html.writeStartElement("html");
 
 			html.writeStartElement("head");
