@@ -25,15 +25,7 @@ public class TestGraph {
 
 	@Before
 	public void setUp() throws Exception {
-		int[] nodes = new int[] { 0, 3, 6, 6 };
-		int[] edges = new int[] { 1, 2, 3, 0, 2, 3, 0, 1, 2 };
-		HashMap<Integer, NodeProperties> nodeProps = new HashMap<>();
-		EdgeProperties[] edgeProps = new EdgeProperties[edges.length];
-		Arrays.fill(edgeProps, new EdgeProperties(HighwayType.Tertiary,
-				"Bogus Str.", null, 30));
-		float[] lat = new float[] { 0, 0, 1, 1 };
-		float[] lon = new float[] { 0, 1, 0, 1 };
-		g = new Graph(nodes, edges, nodeProps, edgeProps, lat, lon);
+		g = new TestDummies().getGraph();
 	}
 
 	@Ignore
