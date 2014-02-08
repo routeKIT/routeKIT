@@ -90,10 +90,16 @@ public class MapManager {
 	 * @param map
 	 *            The map that shall be saved.
 	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 *             If the map name is {@link #checkMapName(String) invalid}.
 	 */
 	public void saveMap(StreetMap map) throws IOException {
 		StreetMap existing = mapsByName.get(map.getName());
-		if (existing != null) {
+		if (existing == null) {
+			if (!checkMapName(map.getName())) {
+				throw new IllegalArgumentException("Invalid map name!");
+			}
+		} else {
 			deletePrecalculations(map);
 		}
 		File f = maps.get(existing);
@@ -112,6 +118,27 @@ public class MapManager {
 	 */
 	public Set<StreetMap> getMaps() {
 		return maps.keySet();
+	}
+
+	/**
+	 * Returns {@code true} iff the given name is a valid name for a new map.
+	 * 
+	 * @param name
+	 *            The map name.
+	 * @return {@code true} if {@code name} can be used as the name of a new
+	 *         map, {@code false} otherwise.
+	 * @see FileUtil#checkMapName(String)
+	 */
+	public boolean checkMapName(String name) {
+		if (!FileUtil.checkMapName(name)) {
+			return false;
+		}
+		for (String s : mapsByName.keySet()) {
+			if (name.equalsIgnoreCase(s)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

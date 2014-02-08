@@ -211,16 +211,29 @@ public class MapManagerView extends JDialog {
 				myPanel.add(new JLabel("Name der Karte:"));
 				myPanel.add(name);
 
-				int result = JOptionPane.showConfirmDialog(MapManagerView.this,
-						myPanel, "Eingabe Pfad und Name",
-						JOptionPane.OK_CANCEL_OPTION);
-				if (result == JOptionPane.OK_OPTION) {
-					if (!path.getText().equals("")
-							&& !name.getText().equals("")) {
+				do {
+					int result = JOptionPane.showConfirmDialog(
+							MapManagerView.this, myPanel,
+							"Eingabe Pfad und Name",
+							JOptionPane.OK_CANCEL_OPTION);
+					if (result != JOptionPane.OK_OPTION
+							|| path.getText().isEmpty()
+							|| name.getText().isEmpty()) {
+						return;
+					}
+					try {
 						File newfile = new File(path.getText());
 						mmc.importMap(name.getText(), newfile);
+						break;
+					} catch (IllegalArgumentException ex) {
+						JOptionPane
+								.showMessageDialog(
+										MapManagerView.this,
+										"Ungültiger Name – bitte geben Sie einen anderen Namen ein.",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
+						continue;
 					}
-				}
+				} while (true);
 			}
 		});
 		buttons.add(importButton);

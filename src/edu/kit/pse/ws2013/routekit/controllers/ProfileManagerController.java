@@ -55,10 +55,16 @@ public class ProfileManagerController {
 	 * 
 	 * @param name
 	 *            The name of the new profile.
+	 * @throws IllegalArgumentException
+	 *             If the profile name is
+	 *             {@link ProfileManager#checkProfileName(String) invalid}.
 	 */
 	public void changeTemporaryProfile(final String name) {
 		Profile p = profiles.get(name);
 		if (p == null) {
+			if (!ProfileManager.getInstance().checkProfileName(name)) {
+				throw new IllegalArgumentException("Invalid profile name!");
+			}
 			p = currentProfile.clone();
 			p.setName(name);
 			profiles.put(name, p);
@@ -99,6 +105,8 @@ public class ProfileManagerController {
 	 * 
 	 * @param profile
 	 *            The temporary profile with the currently entered values.
+	 * @throws IllegalArgumentException
+	 *             If the profile is a {@link Profile#isDefault()} profile.
 	 */
 	public void saveTemporaryProfile(final Profile profile) {
 		Profile p = profiles.get(profile.getName());

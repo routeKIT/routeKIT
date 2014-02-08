@@ -11,6 +11,7 @@ import java.util.Set;
 
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
  * Manages the profiles and saves/loads them to/from disk.
@@ -93,13 +94,21 @@ public class ProfileManager {
 	 * @param profile
 	 *            The profile that shall be saved.
 	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 *             If the profile name is {@link #checkProfileName(String)
+	 *             invalid} or if the profile is a {@link Profile#isDefault()
+	 *             default} profile.
 	 */
 	public void saveProfile(Profile profile) throws IOException {
 		if (profile.isDefault()) {
 			throw new IllegalArgumentException("Can’t save a default profile!");
 		}
 		Profile existing = profilesByName.get(profile.getName());
-		if (existing != null) {
+		if (existing == null) {
+			if (!checkProfileName(profile.getName())) {
+				throw new IllegalArgumentException("Invalid profile name!");
+			}
+		} else {
 			if (existing.equals(profile)) {
 				return;
 			}
@@ -121,6 +130,28 @@ public class ProfileManager {
 	 */
 	public Set<Profile> getProfiles() {
 		return profiles.keySet();
+	}
+
+	/**
+	 * Returns {@code true} iff the given name is a valid name for a new
+	 * profile.
+	 * 
+	 * @param name
+	 *            The profile name.
+	 * @return {@code true} if {@code name} can be used as the name of a new
+	 *         profile, {@code false} otherwise.
+	 * @see FileUtil#checkProfileName(String)
+	 */
+	public boolean checkProfileName(String name) {
+		if (!FileUtil.checkProfileName(name)) {
+			return false;
+		}
+		for (String s : profilesByName.keySet()) {
+			if (name.equalsIgnoreCase(s)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

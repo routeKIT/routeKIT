@@ -97,7 +97,7 @@ public class FileUtil {
 	// @formatter:on
 
 	/**
-	 * Returns true iff the given name is a legal map name.
+	 * Returns {@code true} iff the given name is a valid map name.
 	 * <p>
 	 * Note that this only checks the general validity of the name; you should
 	 * also verify that there is no other map whose name differs only in casing
@@ -114,7 +114,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * Returns true iff the given name is a legal profile name.
+	 * Returns {@code true} iff the given name is a valid profile name.
 	 * <p>
 	 * Note that this only checks the general validity of the name; you should
 	 * also verify that there is no other profile whose name differs only in

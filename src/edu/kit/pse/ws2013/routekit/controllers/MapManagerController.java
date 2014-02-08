@@ -324,8 +324,14 @@ public class MapManagerController {
 	 *            The name of the new map.
 	 * @param file
 	 *            The file from which it should be loaded (later).
+	 * @throws IllegalArgumentException
+	 *             If the map name is {@link MapManager#checkMapName(String)
+	 *             invalid}.
 	 */
 	public void importMap(String name, File file) {
+		if (!MapManager.getInstance().checkMapName(name)) {
+			throw new IllegalArgumentException("Invalid map name!");
+		}
 		currentMap = new FutureMap(name, file);
 		StreetMap previousMap = mapsByName.get(name);
 		Set<Profile> profiles;

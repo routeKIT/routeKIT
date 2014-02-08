@@ -157,23 +157,36 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String result = (String) JOptionPane.showInputDialog(
-						ProfileManagerView.this,
-						"Geben Sie einen Namen für das neue Profil ein:",
-						"Name", JOptionPane.QUESTION_MESSAGE, null, null, null);
-				if ((result != null) && (result.length() > 0)) {
+				do {
+					String result = (String) JOptionPane.showInputDialog(
+							ProfileManagerView.this,
+							"Geben Sie einen Namen für das neue Profil ein:",
+							"Name", JOptionPane.QUESTION_MESSAGE, null, null,
+							null);
+					if (result == null || result.isEmpty()) {
+						return;
+					}
 					if (!currentProfile.isDefault()) {
 						Profile current = writeValues(currentProfile.getName());
 						pmc.saveTemporaryProfile(current);
 					}
-					pmc.changeTemporaryProfile(result);
-					currentProfile = findProfile(result);
-					if (currentProfile == null) {
-						throw new IllegalArgumentException(
-								"The current profile is null!");
+					try {
+						pmc.changeTemporaryProfile(result);
+						currentProfile = findProfile(result);
+						if (currentProfile == null) {
+							throw new IllegalArgumentException(
+									"The current profile is null!");
+						}
+						break;
+					} catch (IllegalArgumentException ex) {
+						JOptionPane
+								.showMessageDialog(
+										ProfileManagerView.this,
+										"Ungültiger Name – bitte geben Sie einen anderen Namen ein.",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
+						continue;
 					}
-
-				}
+				} while (true);
 			}
 
 		});
