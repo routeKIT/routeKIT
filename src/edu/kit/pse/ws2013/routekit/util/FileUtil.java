@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.regex.Pattern;
 
 import edu.kit.pse.ws2013.routekit.history.History;
 
@@ -83,5 +84,48 @@ public class FileUtil {
 	 */
 	public static File getHistoryFile() throws IOException {
 		return new File(getRootDir(), "routeKIT.history");
+	}
+
+	// @formatter:off – uses bad indentation
+	private static Pattern illegalNames = Pattern.compile(
+			// relics from the past
+			"^CON(\\..*)?$|^PRN(\\..*)?$|^AUX(\\..*)?$|^CLOCK\\$(\\..*)?$|^NUL(\\..*)?$|^COM\\d(\\..*)?$|^LPT\\d(\\..*)?$|"
+			// other Windows forbidden characters: <>:"/\|?* and 0-31
+			+ "<|>|:|\"|/|\\\\|\\||\\?|\\*|[\0-\31]|"
+			// forbidden everywhere: ., .., <empty>
+			+ "^\\.?\\.?$", Pattern.CASE_INSENSITIVE);
+	// @formatter:on
+
+	/**
+	 * Returns true iff the given name is a legal map name.
+	 * <p>
+	 * Note that this only checks the general validity of the name; you should
+	 * also verify that there is no other map whose name differs only in casing
+	 * ("MyMap" vs "mymap").
+	 * 
+	 * @param name
+	 *            The map name.
+	 * @return {@code true} if {@code name} can be used as a map name,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean checkMapName(String name) {
+		return !name.startsWith("\t") && !name.contains(" + ")
+				&& !illegalNames.matcher(name).find();
+	}
+
+	/**
+	 * Returns true iff the given name is a legal profile name.
+	 * <p>
+	 * Note that this only checks the general validity of the name; you should
+	 * also verify that there is no other profile whose name differs only in
+	 * casing ("MyProfile" vs "myprofile").
+	 * 
+	 * @param name
+	 *            The profile name.
+	 * @return {@code true} if {@code name} can be used as a profile name,
+	 *         {@code false} otherwise.
+	 */
+	public static boolean checkProfileName(String name) {
+		return !name.startsWith(" *") && !illegalNames.matcher(name).find();
 	}
 }
