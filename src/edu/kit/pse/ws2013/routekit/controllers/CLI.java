@@ -1,75 +1,232 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
-
-import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressListener;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
-import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
-import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
- * Is the user interface and {@link ProgressListener} for commandline
+ * Is the user interface and {@link ProgressListener} for command line
  * interaction.
- * 
  */
-public class CLI implements ProgressListener {
+public class CLI implements ProgressListener, Runnable {
+	protected final ManagementActions actions;
 
-	/**
-	 * Does the full import+precalculation. Progress output on commandline.
-	 * 
-	 * @param mapPath
-	 *            path to map
-	 * @param mapName
-	 *            name of map
-	 * @param profileName
-	 *            name of profile to calculate for
-	 */
-	public void doImport(String mapPath, String mapName, String profileName) {
-		try {
-			ProgressReporter r = new ProgressReporter();
-			r.addProgressListener(this);
-			r.pushTask("arbeite");
-			r.setSubTasks(3);
-			r.pushTask("starte");
-			ProfileMapManager.init(FileUtil.getRootDir(), r);
-			OSMMapImporter im = new OSMMapImporter();
-			r.popTask();
-			r.pushTask("import");
-			StreetMap sm = im.importMap(new File(mapPath), mapName, r);
-			MapManager.getInstance().saveMap(sm);
-			r.popTask();
-
-			PreCalculator pc = new PreCalculator();
-			Set<Profile> pf = ProfileManager.getInstance().getProfiles();
-			Profile p = null;
-			for (Profile profile : pf) {
-				if (profile.getName().equals(profileName)) {
-					p = profile;
-					break;
+	public CLI(String[] args) {
+		final Set<FutureMap> newOrUpdatedMaps = new HashSet<>();
+		final Set<StreetMap> deletedMaps = new HashSet<>();
+		final Set<ProfileMapCombination> deletedPrecalculations = new HashSet<>();
+		final Set<ProfileMapCombination> newPrecalculations = new HashSet<>();
+		final MapManager mapManager = MapManager.getInstance();
+		final ProfileManager profileManager = ProfileManager.getInstance();
+		final ProfileMapManager profileMapManager = ProfileMapManager
+				.getInstance();
+		for (int i = 0; i < args.length; i++) {
+			final String arg = args[i];
+			switch (arg) {
+			case "-h":
+			case "--help":
+			case "--usage":
+			case "--version": {
+				if (arg.equalsIgnoreCase("--version")) {
+					System.out.println("routeKIT version 1.0.0");
+				} else {
+					for (String line : new String[] {
+							"routeKIT: Programm zur Routenplanung und -berechnung.",
+							"",
+							"Optionen:",
+							"",
+							"  --help",
+							"  --usage",
+							"      Gibt diesen Hilfetext aus.",
+							"  --version",
+							"      Gibt die Version von routeKIT aus.",
+							"  --import <Name> <Datei>",
+							"  --import-map <Name> <Datei>",
+							"      Importiert eine Karte aus einer OSM-Datei.",
+							"  --update <Name> <Datei>",
+							"  --update-map <Name> <Datei>",
+							"      Aktualisiert eine Karte aus einer OSM-Datei.",
+							"  --delete-map <Name>",
+							"      Löscht eine Karte.",
+							"  --delete-precalculation <Kartenname> <Profilname>",
+							"      Löscht eine Vorberechnung.",
+							"  --precalculate <Kartenname> <Profilname>",
+							"      Führt eine Vorberechnung durch." }) {
+						System.out.println(line);
+					}
 				}
-			}
-			if (p == null) {
-				System.err
-						.println("Profile \"" + profileName + "\" not found.");
+				actions = ManagementActions.noActions;
 				return;
 			}
-			ProfileMapCombination comb = new ProfileMapCombination(sm, p);
-			r.pushTask("precalc");
-			pc.doPrecalculation(comb, r);
-			r.popTask();
-			ProfileMapManager.getInstance().savePrecalculation(comb);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
+			case "--import":
+			case "--import-map":
+			case "--update":
+			case "--update-map": {
+				if (args.length < i + 2) {
+					System.err.println("Nicht genug Argumente für Option "
+							+ arg + "!");
+					actions = ManagementActions.noActions;
+					return;
+				}
+				String name = args[++i];
+				String file = args[++i];
+				if (!FileUtil.checkMapName(name)) {
+					System.err.println("Ungültiger Kartenname: " + name);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				if (arg.startsWith("--import")
+						&& !mapManager.checkMapName(name)) {
+					System.err.println("Kartenname bereits vergeben: " + name);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				StreetMap existingMap = null;
+				for (StreetMap map : mapManager.getMaps()) {
+					if (map.getName().equals(name)) {
+						existingMap = map;
+						break;
+					}
+				}
+				if (arg.startsWith("--update") && existingMap == null) {
+					System.err.println("Keine Karte mit diesem Namen: " + name);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				newOrUpdatedMaps.add(new FutureMap(name, new File(file)));
+				break;
+			}
+			case "--delete-map": {
+				if (args.length < i + 1) {
+					System.err.println("Nicht genug Argumente für Option "
+							+ arg + "!");
+					actions = ManagementActions.noActions;
+					return;
+				}
+				String name = args[++i];
+				StreetMap deletedMap = null;
+				for (StreetMap map : mapManager.getMaps()) {
+					if (map.getName().equals(name)) {
+						deletedMap = map;
+						break;
+					}
+				}
+				if (deletedMap == null) {
+					System.err.println("Keine Karte mit diesem Namen: " + name);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				deletedMaps.add(deletedMap);
+				break;
+			}
+			case "--delete-precalculation": {
+				if (args.length < i + 2) {
+					System.err.println("Nicht genug Argumente für Option "
+							+ arg + "!");
+					actions = ManagementActions.noActions;
+					return;
+				}
+				String mapName = args[++i];
+				String profileName = args[++i];
+				StreetMap map = null;
+				for (StreetMap existingMap : mapManager.getMaps()) {
+					if (existingMap.getName().equals(mapName)) {
+						map = existingMap;
+						break;
+					}
+				}
+				if (map == null) {
+					System.err.println("Keine Karte mit diesem Namen: "
+							+ mapName);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				Profile profile = null;
+				for (Profile existingProfile : profileManager.getProfiles()) {
+					if (existingProfile.getName().equals(profileName)) {
+						profile = existingProfile;
+						break;
+					}
+				}
+				if (profile == null) {
+					System.err.println("Kein Profil mit diesem Namen: "
+							+ profileName);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				ProfileMapCombination combination = profileMapManager
+						.getPrecalculation(profile, map);
+				if (combination == null) {
+					System.err
+							.println("Keine Vorberechnung für diese Kombination: "
+									+ mapName + " + " + profileName);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				deletedPrecalculations.add(combination);
+				break;
+			}
+			case "--precalculate": {
+				if (args.length < i + 2) {
+					System.err.println("Nicht genug Argumente für Option "
+							+ arg + "!");
+					actions = ManagementActions.noActions;
+					return;
+				}
+				String mapName = args[++i];
+				String profileName = args[++i];
+				StreetMap map = null;
+				for (StreetMap existingMap : mapManager.getMaps()) {
+					if (existingMap.getName().equals(mapName)) {
+						map = existingMap;
+						break;
+					}
+				}
+				if (map == null) {
+					System.err.println("Keine Karte mit diesem Namen: "
+							+ mapName);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				Profile profile = null;
+				for (Profile existingProfile : profileManager.getProfiles()) {
+					if (existingProfile.getName().equals(profileName)) {
+						profile = existingProfile;
+						break;
+					}
+				}
+				if (profile == null) {
+					System.err.println("Kein Profil mit diesem Namen: "
+							+ profileName);
+					actions = ManagementActions.noActions;
+					return;
+				}
+				ProfileMapCombination combination = profileMapManager
+						.getPrecalculation(profile, map);
+				if (combination != null) {
+					deletedPrecalculations.add(combination);
+				}
+				newPrecalculations.add(new ProfileMapCombination(map, profile));
+				break;
+			}
+			}
+		}
+		actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
+				deletedPrecalculations, newPrecalculations);
+	}
+
+	@Override
+	public void run() {
+		if (actions != ManagementActions.noActions) {
+			actions.execute(null, new ProgressReporter(this,
+					"Führe Änderungen aus"));
 		}
 	}
 

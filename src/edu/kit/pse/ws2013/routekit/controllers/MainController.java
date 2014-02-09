@@ -391,17 +391,12 @@ public class MainController {
 	 */
 	public static void main(String[] args) {
 		if (args.length != 0) {
-			if (args.length != 3) {
-				System.err.println("Usage: java .... "
-						+ MainController.class.getName()
-						+ " <mapPath> <mapName> <profileName>");
-				System.err
-						.println("Example: java .... "
-								+ MainController.class.getName()
-								+ " reg_bez_ka.osm \"Regierungsbezirk KA\" \"PKW (Standard)\"");
-				return;
+			try {
+				ProfileMapManager.init(FileUtil.getRootDir(), null);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			new CLI().doImport(args[0], args[1], args[2]);
+			new CLI(args).run();
 			return;
 		}
 
