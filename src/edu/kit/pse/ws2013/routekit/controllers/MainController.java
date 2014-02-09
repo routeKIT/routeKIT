@@ -151,6 +151,10 @@ public class MainController {
 				}
 			}
 			new Thread("Route calc") {
+				{
+					setDaemon(true);
+				}
+
 				@Override
 				public void run() {
 					ProfileMapCombination currentCombination = profileMapManager
