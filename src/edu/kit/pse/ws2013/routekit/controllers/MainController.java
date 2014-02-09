@@ -173,7 +173,8 @@ public class MainController {
 							destinationPointOnEdge, currentCombination);
 					rm.setCurrentRoute(r);
 
-					RouteDescription rd = rdg.generateRouteDescription(r);
+					RouteDescription rd = r == null ? null : rdg
+							.generateRouteDescription(r);
 					rm.setCurrentDescription(rd);
 
 				}

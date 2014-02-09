@@ -143,7 +143,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		}
 		if (!foundRoute) {
 			// no route found
-			// TODO return null?
+			return null;
 		} else {
 			while (x != startEdge && x != startCorrespondingEdge) {
 				final Set<Integer> outgoingTurns = edgeBasedGraph

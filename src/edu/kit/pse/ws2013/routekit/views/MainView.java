@@ -478,25 +478,23 @@ public class MainView extends JFrame implements RouteModelListener {
 		if (start != null && destination != null) {
 			textMessage("");
 		}
-		if (description != null) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
-							.getModel();
-					listModel.clear();
-					for (TurnInstruction instruction : description
-							.getInstructions()) {
-						listModel.addElement(instruction.toString());
-					}
-					if (description.getInstructions().isEmpty()) {
-						listModel.addElement("Keine Route gefunden.");
-					} else {
-						listModel.addElement("Sie haben Ihr Ziel erreicht.");
-					}
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
+						.getModel();
+				listModel.clear();
+				if (description == null) {
+					listModel.addElement("Keine Route gefunden.");
+					return;
 				}
-			});
-		}
+				for (TurnInstruction instruction : description
+						.getInstructions()) {
+					listModel.addElement(instruction.toString());
+				}
+				listModel.addElement("Sie haben Ihr Ziel erreicht.");
+			}
+		});
 
 	}
 
