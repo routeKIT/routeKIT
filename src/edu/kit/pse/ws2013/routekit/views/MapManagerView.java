@@ -33,6 +33,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import edu.kit.pse.ws2013.routekit.controllers.ManagementActions;
 import edu.kit.pse.ws2013.routekit.controllers.MapManagerController;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
@@ -474,7 +475,7 @@ public class MapManagerView extends JDialog {
 			JTextPane textPane = new JTextPane();
 			StringBuilder text = new StringBuilder(
 					"Sie haben die folgenden Operationen ausgewählt:\n");
-			MapManagerController.MapManagementDiff diff = mmc.getChanges();
+			ManagementActions diff = mmc.getChanges();
 			int i = 0;
 			Set<StreetMap> deletedMaps = diff.getDeletedMaps();
 			Set<? extends StreetMap> newOrUpdatedMaps = diff

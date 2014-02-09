@@ -1,22 +1,15 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-
-import org.xml.sax.SAXException;
+import java.util.Map.Entry;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
-import edu.kit.pse.ws2013.routekit.models.ProgressReporter.CloseableTask;
-import edu.kit.pse.ws2013.routekit.precalculation.MapImporter;
-import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
-import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
@@ -25,11 +18,6 @@ import edu.kit.pse.ws2013.routekit.views.MapManagerView;
  * The controller for the {@link MapManagerView}.
  */
 public class MapManagerController {
-
-	final static float FACTOR_DELETE_PRECALCULATION = 1;
-	final static float FACTOR_DELETE_MAP = 1;
-	final static float FACTOR_IMPORT_MAP = 100;
-	final static float FACTOR_PERFORM_PRECALCULATION = 500;
 
 	MapManagerView mmv;
 
@@ -153,132 +141,8 @@ public class MapManagerController {
 		new Thread("MapManagerController Worker Thread") {
 			@Override
 			public void run() {
-				selectedMap = currentMap;
-				MapManager mapManager = MapManager.getInstance();
-				ProfileMapManager profileMapManager = ProfileMapManager
-						.getInstance();
-				final MapManagementDiff diff = getChanges();
-				final float delPrecalcWeight = diff.getDeletedPrecalculations()
-						.size() * FACTOR_DELETE_PRECALCULATION;
-				final float delMapWeight = diff.getDeletedMaps().size()
-						* FACTOR_DELETE_MAP;
-				final float importWeight = diff.getNewOrUpdatedMaps().size()
-						* FACTOR_IMPORT_MAP;
-				final float precalcWeight = diff.getNewPrecalculations().size()
-						* FACTOR_PERFORM_PRECALCULATION;
-				final float totalWeight = delPrecalcWeight + delMapWeight
-						+ importWeight + precalcWeight;
-				reporter.setSubTasks(new float[] {
-						delPrecalcWeight / totalWeight,
-						delMapWeight / totalWeight, importWeight / totalWeight,
-						precalcWeight / totalWeight });
-				reporter.pushTask("Lösche Vorberechnungen");
-				reporter.setSubTasks(diff.getDeletedPrecalculations().size());
-				for (ProfileMapCombination precalculation : diff
-						.getDeletedPrecalculations()) {
-					reporter.pushTask("Lösche Vorberechnung '" + precalculation
-							+ "'");
-					profileMapManager.deletePrecalculation(
-							precalculation,
-							!diff.getDeletedMaps().contains(
-									precalculation.getStreetMap()));
-					reporter.popTask();
-				}
-				reporter.nextTask("Lösche Karten");
-				reporter.setSubTasks(diff.getDeletedMaps().size());
-				for (StreetMap map : diff.getDeletedMaps()) {
-					reporter.pushTask("Lösche Karte '" + map.getName() + "'");
-					mapManager.deleteMap(map);
-					reporter.popTask();
-				}
-				reporter.popTask();
-				MapImporter importer = new OSMMapImporter();
-				reporter.pushTask("Importiere und speichere Karten");
-				reporter.setSubTasks(diff.getNewOrUpdatedMaps().size());
-				/**
-				 * Maps FutureMaps to actual imported StreetMaps.
-				 */
-				Map<StreetMap, StreetMap> importedMaps = new HashMap<>();
-				Set<StreetMap> failedMaps = new HashSet<>();
-				for (FutureMap map : diff.getNewOrUpdatedMaps()) {
-					try (CloseableTask task = reporter
-							.openTask("Importiere und speichere Karte '"
-									+ map.getName() + "'")) {
-						reporter.setSubTasks(new float[] { .9f, .1f });
-						StreetMap importedMap;
-						try (CloseableTask task2 = reporter
-								.openTask("Importiere Karte '" + map.getName()
-										+ "'")) {
-							importedMap = importer.importMap(map.getOsmFile(),
-									map.getName(), reporter);
-						} catch (IOException | SAXException e) {
-							MainController.getInstance().view.textMessage(e
-									.getMessage());
-							e.printStackTrace();
-							failedMaps.add(map);
-							continue;
-						}
-						try (CloseableTask task3 = reporter
-								.openTask("Speichere Karte '"
-										+ importedMap.getName() + "'")) {
-							mapManager.saveMap(importedMap);
-						} catch (IOException e) {
-							MainController.getInstance().view.textMessage(e
-									.getMessage());
-							e.printStackTrace();
-							failedMaps.add(map);
-							continue;
-						}
-						importedMaps.put(map, importedMap);
-						if (selectedMap.getName().equals(map.getName())) {
-							selectedMap = importedMap;
-						}
-					}
-				}
-				reporter.popTask();
-				PreCalculator calculator = new PreCalculator();
-				reporter.pushTask("Führe Vorberechnungen durch");
-				reporter.setSubTasks(diff.getNewPrecalculations().size());
-				for (ProfileMapCombination combination : diff
-						.getNewPrecalculations()) {
-					if (failedMaps.contains(combination.getStreetMap())) {
-						continue;
-					}
-					reporter.pushTask("Führe Vorberechnung durch und speichere '"
-							+ combination.toString() + "'");
-					reporter.setSubTasks(new float[] { .95f, .05f });
-					if (importedMaps.containsKey(combination.getStreetMap())) {
-						combination = new ProfileMapCombination(
-								importedMaps.get(combination.getStreetMap()),
-								combination.getProfile());
-					}
-					try {
-						reporter.pushTask("Führe Vorberechnung durch für '"
-								+ combination + "'");
-						try {
-							calculator.doPrecalculation(combination, reporter);
-						} catch (Exception e) {
-							e.printStackTrace();
-							continue;
-						} finally {
-							reporter.popTask("Führe Vorberechnung durch für '"
-									+ combination + "'");
-						}
-						reporter.pushTask("Speichere '" + combination + "'");
-						try {
-							profileMapManager.savePrecalculation(combination);
-						} catch (Exception e) {
-							e.printStackTrace();
-							continue;
-						} finally {
-							reporter.popTask("Speichere '" + combination + "'");
-						}
-					} finally {
-						reporter.popTask("Führe Vorberechnung durch und speichere '"
-								+ combination.toString() + "'");
-					}
-				}
-				reporter.popTask();
+				final ManagementActions changes = getChanges();
+				selectedMap = changes.execute(currentMap, reporter);
 				reporter.popTask(); // pop root task
 			}
 		}.start();
@@ -391,145 +255,78 @@ public class MapManagerController {
 	 * 
 	 * @return All changes.
 	 */
-	public MapManagementDiff getChanges() {
+	public ManagementActions getChanges() {
 		MapManager mapManager = MapManager.getInstance();
 		ProfileMapManager profileMapManager = ProfileMapManager.getInstance();
-		return MapManagementDiff.diff(mapManager.getMaps(),
+		return mapManagementDiff(mapManager.getMaps(),
 				profileMapManager.getPrecalculations(), precalculations);
 	}
 
-	public static class MapManagementDiff {
-		/**
-		 * Maps that need to be imported.
-		 */
-		private final Set<FutureMap> newOrUpdatedMaps;
-		/**
-		 * Maps that need to be deleted.
-		 * <p>
-		 * (Does <i>not</i> contain updated maps – if you want to know which
-		 * precalculations to delete, use {@link #deletedPrecalculations}.)
-		 */
-		private final Set<StreetMap> deletedMaps;
-		/**
-		 * Precalculations that need to be deleted.
-		 */
-		private final Set<ProfileMapCombination> deletedPrecalculations;
-		/**
-		 * Precalculations that need to be performed.
-		 */
-		private final Set<ProfileMapCombination> newPrecalculations;
+	private static ManagementActions mapManagementDiff(Set<StreetMap> maps,
+			Set<ProfileMapCombination> precalculations,
+			Map<StreetMap, Set<Profile>> changes) {
+		final Set<FutureMap> newOrUpdatedMaps;
+		final Set<StreetMap> deletedMaps;
+		final Set<ProfileMapCombination> deletedPrecalculations;
+		final Set<ProfileMapCombination> newPrecalculations;
 
-		private MapManagementDiff(Set<FutureMap> newOrUpdatedMaps,
-				Set<StreetMap> deletedMaps,
-				Set<ProfileMapCombination> deletedPrecalculations,
-				Set<ProfileMapCombination> newPrecalculations) {
-			this.newOrUpdatedMaps = newOrUpdatedMaps;
-			this.deletedMaps = deletedMaps;
-			this.deletedPrecalculations = deletedPrecalculations;
-			this.newPrecalculations = newPrecalculations;
-		}
-
-		/**
-		 * @return Maps that need to be imported.
-		 */
-		public Set<FutureMap> getNewOrUpdatedMaps() {
-			return newOrUpdatedMaps;
-		}
-
-		/**
-		 * @return Maps that need to be deleted.
-		 *         <p>
-		 *         (Does <i>not</i> contain updated maps – if you want to know
-		 *         which precalculations to delete, use
-		 *         {@link #deletedPrecalculations}.
-		 */
-		public Set<StreetMap> getDeletedMaps() {
-			return deletedMaps;
-		}
-
-		/**
-		 * @return Precalculations that need to be deleted.
-		 */
-		public Set<ProfileMapCombination> getDeletedPrecalculations() {
-			return deletedPrecalculations;
-		}
-
-		/**
-		 * @return Precalculations that need to be performed.
-		 */
-		public Set<ProfileMapCombination> getNewPrecalculations() {
-			return newPrecalculations;
-		}
-
-		static MapManagementDiff diff(Set<StreetMap> maps,
-				Set<ProfileMapCombination> precalculations,
-				Map<StreetMap, Set<Profile>> changes) {
-			final Set<FutureMap> newOrUpdatedMaps;
-			final Set<StreetMap> deletedMaps;
-			final Set<ProfileMapCombination> deletedPrecalculations;
-			final Set<ProfileMapCombination> newPrecalculations;
-
-			deletedMaps = new HashSet<>();
-			for (StreetMap map : maps) {
-				if (!changes.containsKey(map)) {
-					deletedMaps.add(map);
-				}
+		deletedMaps = new HashSet<>();
+		for (StreetMap map : maps) {
+			if (!changes.containsKey(map)) {
+				deletedMaps.add(map);
 			}
+		}
 
-			newOrUpdatedMaps = new HashSet<>();
-			final Map<String, StreetMap> mapsByName = new HashMap<>();
-			for (StreetMap map : maps) {
-				mapsByName.put(map.getName(), map);
+		newOrUpdatedMaps = new HashSet<>();
+		final Map<String, StreetMap> mapsByName = new HashMap<>();
+		for (StreetMap map : maps) {
+			mapsByName.put(map.getName(), map);
+		}
+		for (StreetMap map : changes.keySet()) {
+			StreetMap existing = mapsByName.get(map.getName());
+			if (existing == null || map != existing) {
+				assert (map instanceof FutureMap);
+				newOrUpdatedMaps.add((FutureMap) map);
 			}
-			for (StreetMap map : changes.keySet()) {
-				StreetMap existing = mapsByName.get(map.getName());
-				if (existing == null || map != existing) {
-					assert (map instanceof FutureMap);
-					newOrUpdatedMaps.add((FutureMap) map);
-				}
-			}
+		}
 
-			deletedPrecalculations = new HashSet<>();
-			for (ProfileMapCombination precalculation : precalculations) {
-				StreetMap map = precalculation.getStreetMap();
-				if (deletedMaps.contains(map)
-						|| newOrUpdatedMaps.contains(map)
-						|| !changes.get(map).contains(
-								precalculation.getProfile())) {
-					deletedPrecalculations.add(precalculation);
-				}
+		deletedPrecalculations = new HashSet<>();
+		for (ProfileMapCombination precalculation : precalculations) {
+			StreetMap map = precalculation.getStreetMap();
+			if (deletedMaps.contains(map) || newOrUpdatedMaps.contains(map)
+					|| !changes.get(map).contains(precalculation.getProfile())) {
+				deletedPrecalculations.add(precalculation);
 			}
+		}
 
-			newPrecalculations = new HashSet<>();
-			final Map<StreetMap, Set<Profile>> precalculationsAsMap = new HashMap<>();
-			for (ProfileMapCombination precalculation : precalculations) {
-				StreetMap map = precalculation.getStreetMap();
+		newPrecalculations = new HashSet<>();
+		final Map<StreetMap, Set<Profile>> precalculationsAsMap = new HashMap<>();
+		for (ProfileMapCombination precalculation : precalculations) {
+			StreetMap map = precalculation.getStreetMap();
+			Set<Profile> profiles = precalculationsAsMap.get(map);
+			if (profiles == null) {
+				profiles = new HashSet<>();
+			}
+			profiles.add(precalculation.getProfile());
+			precalculationsAsMap.put(map, profiles);
+		}
+		for (Entry<StreetMap, Set<Profile>> combinationSet : changes.entrySet()) {
+			StreetMap map = combinationSet.getKey();
+			for (Profile profile : combinationSet.getValue()) {
 				Set<Profile> profiles = precalculationsAsMap.get(map);
 				if (profiles == null) {
 					profiles = new HashSet<>();
 				}
-				profiles.add(precalculation.getProfile());
-				precalculationsAsMap.put(map, profiles);
-			}
-			for (Entry<StreetMap, Set<Profile>> combinationSet : changes
-					.entrySet()) {
-				StreetMap map = combinationSet.getKey();
-				for (Profile profile : combinationSet.getValue()) {
-					Set<Profile> profiles = precalculationsAsMap.get(map);
-					if (profiles == null) {
-						profiles = new HashSet<>();
-					}
-					if (newOrUpdatedMaps.contains(map)
-							|| !profiles.contains(profile)) {
-						newPrecalculations.add(new ProfileMapCombination(map,
-								profile));
-					}
+				if (newOrUpdatedMaps.contains(map)
+						|| !profiles.contains(profile)) {
+					newPrecalculations.add(new ProfileMapCombination(map,
+							profile));
 				}
 			}
-
-			return new MapManagementDiff(newOrUpdatedMaps, deletedMaps,
-					deletedPrecalculations, newPrecalculations);
 		}
+
+		return new ManagementActions(newOrUpdatedMaps, deletedMaps,
+				deletedPrecalculations, newPrecalculations);
 	}
 }
 
