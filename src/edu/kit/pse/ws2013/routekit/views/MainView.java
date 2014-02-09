@@ -344,6 +344,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		JMenu routeKIT = new JMenu("routeKIT");
 
 		history = new JMenuItem("Verlauf...");
+		history.setMnemonic('v');
 		history.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -352,6 +353,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		JMenuItem about = new JMenuItem("Über...");
+		about.setMnemonic('e');
 		about.addActionListener(new ActionListener() {
 
 			@Override
@@ -360,6 +362,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		JMenuItem exit = new JMenuItem("Beenden");
+		exit.setMnemonic('b');
 		exit.addActionListener(new ActionListener() {
 
 			@Override
@@ -373,6 +376,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		JMenu export = new JMenu("Export");
 		html = new JMenuItem("HTML...");
+		html.setMnemonic('h');
 		html.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -382,6 +386,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		gpx = new JMenuItem("GPX...");
+		gpx.setMnemonic('g');
 		gpx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -395,6 +400,7 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		JMenu admin = new JMenu("Verwaltung");
 		JMenuItem profile = new JMenuItem("Profil...");
+		profile.setMnemonic('p');
 		profile.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -402,6 +408,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		JMenuItem map = new JMenuItem("Karte...");
+		map.setMnemonic('k');
 		map.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -409,6 +416,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			}
 		});
 		JCheckBoxMenuItem osm = new JCheckBoxMenuItem("OSM-Renderer verwenden");
+		osm.setMnemonic('o');
 		osm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -429,6 +437,9 @@ public class MainView extends JFrame implements RouteModelListener {
 		menu.add(routeKIT);
 		menu.add(export);
 		menu.add(admin);
+		routeKIT.setMnemonic('r');
+		export.setMnemonic('e');
+		admin.setMnemonic('v');
 
 		setJMenuBar(menu);
 	}
