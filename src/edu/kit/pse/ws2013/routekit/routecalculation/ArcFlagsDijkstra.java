@@ -66,6 +66,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			fhList.put(startCorrespondingEdge,
 					fh.add(startCorrespondingEdge, 1));
 		}
+		boolean foundRoute = false;
 
 		// calculation
 		while (!fh.isEmpty()) {
@@ -74,15 +75,13 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 			ignore.add(u);
 			if (u == destinationEdge) {
 				// found it!
+				foundRoute = true;
 				break;
 			}
 			if (u == destinationCorrespondingEdge) {
 				// found it!
 				otherDestination = true;
-				break;
-			}
-
-			if (distance[u] == 0) {
+				foundRoute = true;
 				break;
 			}
 
@@ -142,7 +141,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		} else {
 			x = destinationEdge;
 		}
-		if (previous[x] == 0 && previous[0] == 0) {
+		if (!foundRoute) {
 			// no route found
 			// TODO return null?
 		} else {
