@@ -1,11 +1,17 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
+import edu.kit.pse.ws2013.routekit.map.Graph;
+import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 
 /**
@@ -16,69 +22,65 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 public class ArcFlagsDijkstra implements RouteCalculator {
 
 	@Override
-	public Route calculateRoute(PointOnEdge start, PointOnEdge destination,
-			ProfileMapCombination data) {
-		int edgeCount = data.getStreetMap().getEdgeBasedGraph()
-				.getNumberOfEdges();
-		int[] distance = new int[edgeCount];
-		int[] previous = new int[edgeCount];
-		FibonacciHeap fh = new FibonacciHeap();
+	public Route calculateRoute(final PointOnEdge start,
+			final PointOnEdge destination, final ProfileMapCombination data) {
+		final StreetMap streetMap = data.getStreetMap();
+		final Graph graph = streetMap.getGraph();
+		final EdgeBasedGraph edgeBasedGraph = streetMap.getEdgeBasedGraph();
+		final Weights weights = data.getWeights();
+		final int edgeCount = edgeBasedGraph.getNumberOfEdges();
+		final int[] distance = new int[edgeCount];
+		final int[] previous = new int[edgeCount];
+		final FibonacciHeap fh = new FibonacciHeap();
 
-		int startEdge = start.getEdge();
-		int destinationEdge = destination.getEdge();
+		final int startEdge = start.getEdge();
+		final int destinationEdge = destination.getEdge();
+		final int startCorrespondingEdge = graph
+				.getCorrespondingEdge(startEdge);
+		final int destinationCorrespondingEdge = graph
+				.getCorrespondingEdge(destinationEdge);
 
 		boolean otherDestination = false;
 
-		LinkedList<Integer> turns = new LinkedList<Integer>();
-		Map<Integer, FibonacciHeapEntry> fhList = new HashMap<Integer, FibonacciHeapEntry>();
+		final LinkedList<Integer> turns = new LinkedList<>();
+		final Map<Integer, FibonacciHeapEntry> fhList = new HashMap<>();
+		final Set<Integer> ignore = new HashSet<>();
 
 		// destination edge’s partition
-		int destinationPartition = data.getStreetMap().getEdgeBasedGraph()
+		final int destinationPartition = edgeBasedGraph
 				.getPartition(destinationEdge);
-		int destinationCorrespondingPartition = -1;
+		final int destinationCorrespondingPartition;
 
-		if (data.getStreetMap().getGraph()
-				.getCorrespondingEdge(destinationEdge) != -1) {
-			destinationCorrespondingPartition = data
-					.getStreetMap()
-					.getEdgeBasedGraph()
-					.getPartition(
-							data.getStreetMap().getGraph()
-									.getCorrespondingEdge(destinationEdge));
+		if (destinationCorrespondingEdge != -1) {
+			destinationCorrespondingPartition = edgeBasedGraph
+					.getPartition(destinationCorrespondingEdge);
+		} else {
+			destinationCorrespondingPartition = -1;
 		}
 
 		// initialization
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		Arrays.fill(previous, -1);
+
 		distance[startEdge] = 0;
-		previous[startEdge] = -1;
+		fhList.put(startEdge, fh.add(startEdge, 0));
 
-		if (data.getStreetMap().getGraph().getCorrespondingEdge(startEdge) != -1) {
-			distance[data.getStreetMap().getGraph()
-					.getCorrespondingEdge(startEdge)] = 0;
-			previous[data.getStreetMap().getGraph()
-					.getCorrespondingEdge(startEdge)] = -1;
-		}
-
-		for (int i = 0; i < edgeCount; i++) {
-			if (i != startEdge
-					&& i != data.getStreetMap().getGraph()
-							.getCorrespondingEdge(startEdge)) {
-				distance[i] = Integer.MAX_VALUE;
-				previous[i] = -1;
-			}
-
-			fhList.put(i, fh.add(i, distance[i]));
+		if (startCorrespondingEdge != -1) {
+			distance[startCorrespondingEdge] = 0;
+			fhList.put(startCorrespondingEdge,
+					fh.add(startCorrespondingEdge, 0));
 		}
 
 		// calculation
 		while (!fh.isEmpty()) {
-			int u = fh.deleteMin().getValue();
+			final int u = fh.deleteMin().getValue();
 			fhList.remove(u);
+			ignore.add(u);
 			if (u == destinationEdge) {
 				// found it!
 				break;
 			}
-			if (u == data.getStreetMap().getGraph()
-					.getCorrespondingEdge(destinationEdge)) {
+			if (u == destinationCorrespondingEdge) {
 				// found it!
 				otherDestination = true;
 				break;
@@ -88,39 +90,44 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 				break;
 			}
 
-			Set<Integer> outgoingTurns = data.getStreetMap()
-					.getEdgeBasedGraph().getOutgoingTurns(u);
+			final Set<Integer> outgoingTurns = edgeBasedGraph
+					.getOutgoingTurns(u);
 
-			for (Integer currentTurn : outgoingTurns) {
-				int targetEdge = data.getStreetMap().getEdgeBasedGraph()
+			for (final Integer currentTurn : outgoingTurns) {
+				final int targetEdge = edgeBasedGraph
 						.getTargetEdge(currentTurn);
 
-				if (fhList.containsKey(targetEdge)) {
+				if (!ignore.contains(targetEdge)) {
 					// fetch Arc-Flags
-					int arcFlag = data.getArcFlags().getFlag(currentTurn);
-					int arcBit = (arcFlag >> destinationPartition) & 0x1;
+					final int arcFlag = data.getArcFlags().getFlag(currentTurn);
+					final int arcBit = (arcFlag >> destinationPartition) & 0x1;
 
-					int correspondingArcBit = 0;
-					if (data.getStreetMap().getGraph()
-							.getCorrespondingEdge(destinationEdge) != -1) {
+					final int correspondingArcBit;
+					if (destinationCorrespondingEdge != -1) {
 						correspondingArcBit = (arcFlag >> destinationCorrespondingPartition) & 0x1;
+					} else {
+						correspondingArcBit = 0;
 					}
 
 					// check arc bit
 					if (arcBit != 0 || correspondingArcBit != 0) {
-						int weight = data.getWeights().getWeight(currentTurn);
+						final int weight = weights.getWeight(currentTurn);
 						if (weight == Integer.MAX_VALUE) {
 							continue;
 						}
-						int alt = distance[u] + weight;
+						final int alt = distance[u] + weight;
 
 						if (alt < distance[targetEdge]) {
 							distance[targetEdge] = alt;
 							previous[targetEdge] = u;
 
-							FibonacciHeapEntry toDecrease = fhList
+							final FibonacciHeapEntry toDecrease = fhList
 									.get(targetEdge);
-							fh.decreaseKey(toDecrease, alt);
+							if (toDecrease == null) {
+								fhList.put(targetEdge, fh.add(targetEdge, alt));
+							} else {
+								fh.decreaseKey(toDecrease, alt);
+							}
 						}
 					}
 				}
@@ -133,18 +140,17 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		int newDestinationEdge = destination.getEdge();
 
 		if (otherDestination) {
-			x = data.getStreetMap().getGraph()
-					.getCorrespondingEdge(destinationEdge);
+			x = destinationCorrespondingEdge;
 			newDestinationEdge = x;
 		} else {
 			x = destinationEdge;
 		}
 		while (previous[x] != -1) {
-			Set<Integer> outgoingTurns = data.getStreetMap()
-					.getEdgeBasedGraph().getOutgoingTurns(previous[x]);
+			final Set<Integer> outgoingTurns = edgeBasedGraph
+					.getOutgoingTurns(previous[x]);
 
-			for (Integer turn : outgoingTurns) {
-				if (data.getStreetMap().getEdgeBasedGraph().getTargetEdge(turn) == x) {
+			for (final Integer turn : outgoingTurns) {
+				if (edgeBasedGraph.getTargetEdge(turn) == x) {
 					turns.addFirst(turn);
 					break;
 				}
@@ -154,14 +160,14 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 		newStartEdge = x;
 
-		PointOnEdge newStart = new PointOnEdge(newStartEdge,
+		final PointOnEdge newStart = new PointOnEdge(newStartEdge,
 				(newStartEdge != startEdge) ? (1 - start.getPosition())
 						: start.getPosition());
-		PointOnEdge newDestination = new PointOnEdge(newDestinationEdge,
+		final PointOnEdge newDestination = new PointOnEdge(newDestinationEdge,
 				(newDestinationEdge != destinationEdge) ? (1 - destination
 						.getPosition()) : destination.getPosition());
 
-		Route route = new Route(data, newStart, newDestination, turns);
+		final Route route = new Route(data, newStart, newDestination, turns);
 
 		return route;
 	}
