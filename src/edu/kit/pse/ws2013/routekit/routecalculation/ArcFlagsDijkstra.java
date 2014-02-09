@@ -1,6 +1,5 @@
 package edu.kit.pse.ws2013.routekit.routecalculation;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -59,15 +58,13 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		}
 
 		// initialization
-		Arrays.fill(distance, Integer.MAX_VALUE);
-
-		distance[startEdge] = 0;
-		fhList.put(startEdge, fh.add(startEdge, 0));
+		distance[startEdge] = 1;
+		fhList.put(startEdge, fh.add(startEdge, 1));
 
 		if (startCorrespondingEdge != -1) {
-			distance[startCorrespondingEdge] = 0;
+			distance[startCorrespondingEdge] = 1;
 			fhList.put(startCorrespondingEdge,
-					fh.add(startCorrespondingEdge, 0));
+					fh.add(startCorrespondingEdge, 1));
 		}
 
 		// calculation
@@ -85,7 +82,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 				break;
 			}
 
-			if (distance[u] == Integer.MAX_VALUE) {
+			if (distance[u] == 0) {
 				break;
 			}
 
@@ -116,7 +113,8 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 						}
 						final int alt = distance[u] + weight;
 
-						if (alt < distance[targetEdge]) {
+						if (alt < distance[targetEdge]
+								|| distance[targetEdge] == 0) {
 							distance[targetEdge] = alt;
 							previous[targetEdge] = u;
 
