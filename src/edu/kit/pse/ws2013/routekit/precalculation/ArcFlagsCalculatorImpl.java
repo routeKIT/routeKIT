@@ -1,6 +1,7 @@
 package edu.kit.pse.ws2013.routekit.precalculation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 		initData(combination);
 		reporter.setSubTasks(new float[] { .1f, .9f });
 		reporter.pushTask("Bereite Partitionen vor");
-		final List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(nPartitions);
+		final List<Set<Integer>> partitions = new ArrayList<Set<Integer>>(
+				nPartitions);
 		for (int i = 0; i < nPartitions; i++) {
 			partitions.add(new HashSet<Integer>());
 		}
@@ -86,23 +88,21 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	 * @param edge
 	 *            the start edge of the shortest paths tree
 	 */
-	protected void buildReverseShortestPathsTreeAndSetArcFlags(final Integer edge,
-			final int[] flagsArray) {
+	protected void buildReverseShortestPathsTreeAndSetArcFlags(
+			final Integer edge, final int[] flagsArray) {
 		final int edgeCount = edgeBasedGraph.getNumberOfEdges();
 		final int[] distance = new int[edgeCount];
 		final int[] next = new int[edgeCount];
 		final FibonacciHeap fh = new FibonacciHeap();
 		final FibonacciHeapEntry[] fhList = new FibonacciHeapEntry[edgeCount];
 		final int edgePartition = edgeBasedGraph.getPartition(edge);
+
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		Arrays.fill(next, -1);
+
 		distance[edge] = 0;
-		next[edge] = -1;
-		for (int i = 0; i < edgeCount; i++) {
-			if (i != edge) {
-				distance[i] = Integer.MAX_VALUE;
-				next[i] = -1;
-			}
-			fhList[i] = fh.add(i, distance[i]);
-		}
+		fhList[edge] = fh.add(edge, 0);
+
 		while (!fh.isEmpty()) {
 			final int currentEdge = fh.deleteMin().getValue();
 			fhList[currentEdge] = null;
@@ -113,7 +113,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 					.getIncomingTurns(currentEdge);
 			for (final Integer currentTurn : incomingTurns) {
 				final int startEdge = edgeBasedGraph.getStartEdge(currentTurn);
-				final int startPartition = edgeBasedGraph.getPartition(startEdge);
+				final int startPartition = edgeBasedGraph
+						.getPartition(startEdge);
 				final int endEdge = edgeBasedGraph.getTargetEdge(currentTurn);
 				final int endPartition = edgeBasedGraph.getPartition(endEdge);
 
@@ -130,7 +131,12 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 						next[startEdge] = currentEdge;
 
 						final FibonacciHeapEntry toDecrease = fhList[startEdge];
-						fh.decreaseKey(toDecrease, newDistance);
+
+						if (toDecrease == null) {
+							fhList[startEdge] = fh.add(startEdge, newDistance);
+						} else {
+							fh.decreaseKey(toDecrease, newDistance);
+						}
 					}
 				}
 			}
@@ -157,7 +163,8 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 	 * @param partition
 	 *            the partition
 	 */
-	protected void setFlag(final int turn, final int partition, final int[] flagsArray) {
+	protected void setFlag(final int turn, final int partition,
+			final int[] flagsArray) {
 		flagsArray[turn] |= 0x1 << partition;
 	}
 
