@@ -33,6 +33,30 @@ public class ProgressReporter {
 	}
 
 	/**
+	 * Creates a new {@link ProgressReporter} with the specified listener and
+	 * root task.
+	 * <p>
+	 * This is a convenience constructor to allow the creation of a usable
+	 * {@link ProgressReporter} in one line:
+	 * 
+	 * <pre>
+	 * {@code
+	 * doSomeAction(new ProgressReporter(listener, "Do Action"));
+	 * }
+	 * </pre>
+	 * 
+	 * @param listener
+	 *            A {@link ProgressListener} that will be notified about
+	 *            progress.
+	 * @see #addProgressListener(ProgressListener)
+	 */
+	public ProgressReporter(ProgressListener listener, String rootTask) {
+		this();
+		addProgressListener(listener);
+		pushTask(rootTask);
+	}
+
+	/**
 	 * Begin a new task with the specified name.
 	 * <p>
 	 * A call to {@link #setSubTasks(float[])} should usually occur directly
