@@ -181,14 +181,7 @@ public class ProfileMapCombination {
 	 * @see #loadLazily(Profile, StreetMap, File)
 	 */
 	public void ensureLoaded(ProgressReporter reporter) {
-		reporter.setSubTasks(new float[] { .9f, .05f, .05f });
-		reporter.pushTask("Lade Karte");
 		map.ensureLoaded(reporter);
-		reporter.nextTask("Lade Kantengewichte");
-		getWeights();
-		reporter.nextTask("Lade Arc-Flags");
-		getArcFlags();
-		reporter.popTask();
 	}
 
 	@Override
@@ -344,6 +337,18 @@ public class ProfileMapCombination {
 				}
 			}
 			return arcFlags;
+		}
+
+		@Override
+		public void ensureLoaded(ProgressReporter reporter) {
+			reporter.setSubTasks(new float[] { .9f, .05f, .05f });
+			reporter.pushTask("Lade Karte");
+			super.ensureLoaded(reporter);
+			reporter.nextTask("Lade Kantengewichte");
+			getWeights();
+			reporter.nextTask("Lade Arc-Flags");
+			getArcFlags();
+			reporter.popTask();
 		}
 	}
 }

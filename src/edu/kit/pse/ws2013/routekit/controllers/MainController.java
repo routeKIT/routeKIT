@@ -280,8 +280,8 @@ public class MainController {
 		ProfileManagerController c = new ProfileManagerController(view);
 		Profile selected = c.getSelectedProfile();
 		if (selected != null) {
-			profileMapManager.selectProfileAndMap(selected, profileMapManager
-					.getCurrentCombination().getStreetMap());
+			load(selected, profileMapManager.getCurrentCombination()
+					.getStreetMap());
 			// TODO update view elements etc.
 		}
 	}
@@ -296,23 +296,31 @@ public class MainController {
 		mapManagement = new MapManagerController(view);
 		StreetMap selected = mapManagement.getSelectedMap();
 		if (selected != null) {
-			final ProfileMapCombination newCombination = profileMapManager
-					.getPrecalculation(profileMapManager
-							.getCurrentCombination().getProfile(), selected);
-			ProgressDialog p = new ProgressDialog(view);
-			final ProgressReporter reporter = new ProgressReporter();
-			reporter.addProgressListener(p);
-			reporter.pushTask("Lade ausgewählte Karte und Vorberechnung");
-			new Thread("Load map + precalculation") {
-				@Override
-				public void run() {
-					newCombination.ensureLoaded(reporter);
-					reporter.popTask();
-				};
-			}.start();
-			p.setVisible(true);
-			profileMapManager.setCurrentCombination(newCombination);
+			load(profileMapManager.getCurrentCombination().getProfile(),
+					selected);
 		}
+	}
+
+	private void load(Profile profile, StreetMap map) {
+		ProfileMapCombination newCombination = profileMapManager
+				.getPrecalculation(profile, map);
+		if (newCombination == null) {
+			newCombination = new ProfileMapCombination(map, profile);
+		}
+		final ProfileMapCombination theNewCombination = newCombination;
+		ProgressDialog p = new ProgressDialog(view);
+		final ProgressReporter reporter = new ProgressReporter();
+		reporter.addProgressListener(p);
+		reporter.pushTask("Lade ausgewählte Karte und Vorberechnung");
+		new Thread("Load map + precalculation") {
+			@Override
+			public void run() {
+				theNewCombination.ensureLoaded(reporter);
+				reporter.popTask();
+			};
+		}.start();
+		p.setVisible(true);
+		profileMapManager.setCurrentCombination(newCombination);
 	}
 
 	/**
