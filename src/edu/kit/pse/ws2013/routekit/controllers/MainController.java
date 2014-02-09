@@ -396,7 +396,7 @@ public class MainController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			new CLI(args).run();
+			new TerminalCLI(args).run();
 			return;
 		}
 
