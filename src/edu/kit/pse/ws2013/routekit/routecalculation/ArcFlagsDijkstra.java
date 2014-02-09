@@ -60,7 +60,6 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 		// initialization
 		Arrays.fill(distance, Integer.MAX_VALUE);
-		Arrays.fill(previous, -1);
 
 		distance[startEdge] = 0;
 		fhList.put(startEdge, fh.add(startEdge, 0));
@@ -145,17 +144,22 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 		} else {
 			x = destinationEdge;
 		}
-		while (previous[x] != -1) {
-			final Set<Integer> outgoingTurns = edgeBasedGraph
-					.getOutgoingTurns(previous[x]);
+		if (previous[x] == 0 && previous[0] == 0) {
+			// no route found
+			// TODO return null?
+		} else {
+			while (x != startEdge && x != startCorrespondingEdge) {
+				final Set<Integer> outgoingTurns = edgeBasedGraph
+						.getOutgoingTurns(previous[x]);
 
-			for (final Integer turn : outgoingTurns) {
-				if (edgeBasedGraph.getTargetEdge(turn) == x) {
-					turns.addFirst(turn);
-					break;
+				for (final Integer turn : outgoingTurns) {
+					if (edgeBasedGraph.getTargetEdge(turn) == x) {
+						turns.addFirst(turn);
+						break;
+					}
 				}
+				x = previous[x];
 			}
-			x = previous[x];
 		}
 
 		newStartEdge = x;
