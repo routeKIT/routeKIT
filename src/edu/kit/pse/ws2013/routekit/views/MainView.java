@@ -430,9 +430,25 @@ public class MainView extends JFrame implements RouteModelListener {
 				updateRenderer();
 			}
 		});
+		JCheckBoxMenuItem useArc = new JCheckBoxMenuItem("ArcFlags verwenden",
+				true);
+		useArc.setMnemonic('o');
+		useArc.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				AbstractButton aButton = (AbstractButton) event.getSource();
+				boolean selected = aButton.getModel().isSelected();
+				if (selected) {
+					MainController.getInstance().setUseArcFlags(true);
+				} else {
+					MainController.getInstance().setUseArcFlags(false);
+				}
+			}
+		});
 		admin.add(profile);
 		admin.add(map);
 		admin.add(osm);
+		admin.add(useArc);
 
 		menu.add(routeKIT);
 		menu.add(export);

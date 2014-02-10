@@ -19,6 +19,15 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
  * calculation is sped up by usage of Arc-Flags.
  */
 public class ArcFlagsDijkstra implements RouteCalculator {
+	boolean useArcFlags = true;
+
+	public ArcFlagsDijkstra() {
+		this.useArcFlags = true;
+	}
+
+	public ArcFlagsDijkstra(boolean useArcFlags) {
+		this.useArcFlags = useArcFlags;
+	}
 
 	@Override
 	public Route calculateRoute(final PointOnEdge start,
@@ -93,19 +102,24 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 						.getTargetEdge(currentTurn);
 
 				if (!ignore.contains(targetEdge)) {
-					// fetch Arc-Flags
-					final int arcFlag = data.getArcFlags().getFlag(currentTurn);
-					final int arcBit = (arcFlag >> destinationPartition) & 0x1;
+					int arcFlag = 0;
+					int arcBit = 0;
+					int correspondingArcBit = 0;
 
-					final int correspondingArcBit;
-					if (destinationCorrespondingEdge != -1) {
-						correspondingArcBit = (arcFlag >> destinationCorrespondingPartition) & 0x1;
-					} else {
-						correspondingArcBit = 0;
+					if (useArcFlags) {
+						// fetch Arc-Flags
+						arcFlag = data.getArcFlags().getFlag(currentTurn);
+						arcBit = (arcFlag >> destinationPartition) & 0x1;
+
+						if (destinationCorrespondingEdge != -1) {
+							correspondingArcBit = (arcFlag >> destinationCorrespondingPartition) & 0x1;
+						} else {
+							correspondingArcBit = 0;
+						}
 					}
 
 					// check arc bit
-					if (arcBit != 0 || correspondingArcBit != 0) {
+					if (!useArcFlags || arcBit != 0 || correspondingArcBit != 0) {
 						final int weight = weights.getWeight(currentTurn);
 						if (weight == Integer.MAX_VALUE) {
 							continue;

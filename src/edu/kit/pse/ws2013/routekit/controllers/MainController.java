@@ -279,6 +279,12 @@ public class MainController {
 		this.useOnlineMaps = useOnlineMaps;
 	}
 
+	public void setUseArcFlags(boolean useArcFlags) {
+		rc = new ArcFlagsDijkstra(useArcFlags);
+		// TODO: Direkt neu berechnen oder nicht?
+		// checkAndCalculate();
+	}
+
 	/**
 	 * Creates a new {@link ProfileManagerController}, which opens the profile
 	 * management dialog.
