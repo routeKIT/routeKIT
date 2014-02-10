@@ -171,18 +171,20 @@ public class ProfileMapManager {
 		}
 		// 1. save the precalculation
 		try {
-			precalculations.add(precalculation);
 			precalculation.save(new File(new File(root, precalculation
 					.getStreetMap().getName()), precalculation.getProfile()
 					.getName()));
 		} catch (IOException e) {
 			e.printStackTrace();
+			return; // don’t write an invalid index file
 		}
+		precalculations.add(precalculation);
 		// 2. write a new index file
 		try {
 			rewriteIndex();
 		} catch (IOException e) {
 			e.printStackTrace();
+			// don’t return – not critical
 		}
 		// 3. special case if that was the current combination
 		if (precalculation.getProfile().equals(current.getProfile())
@@ -235,6 +237,7 @@ public class ProfileMapManager {
 				rewriteIndex();
 			} catch (IOException e) {
 				e.printStackTrace();
+				// don’t return – not critical
 			}
 		}
 		for (CurrentCombinationListener listener : listeners) {
@@ -361,6 +364,7 @@ public class ProfileMapManager {
 						.getName()));
 			} catch (IOException e1) {
 				e1.printStackTrace();
+				// don’t return – not critical
 			}
 		}
 		try {
