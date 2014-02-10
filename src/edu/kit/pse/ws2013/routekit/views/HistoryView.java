@@ -55,8 +55,15 @@ public class HistoryView extends JDialog {
 	}
 
 	private JComponent initCenterPane(History history) {
-		historyvar = new JList<HistoryEntry>(history.getEntries().toArray(
-				new HistoryEntry[0]));
+		HistoryEntry[] entries = history.getEntries().toArray(
+				new HistoryEntry[0]);
+		int length = entries.length;
+		for (int i = 0; i < (length) / 2; i++) {
+			HistoryEntry temp = entries[i];
+			entries[i] = entries[length - i - 1];
+			entries[length - i - 1] = temp;
+		}
+		historyvar = new JList<HistoryEntry>(entries);
 		historyvar.setBackground(Color.lightGray);
 		historyvar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		historyvar.addMouseListener(new MouseAdapter() {
