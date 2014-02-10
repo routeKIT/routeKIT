@@ -47,6 +47,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		super(owner, "Berechne...");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setModal(true);
+		setResizable(false);
 		JPanel p = new JPanel(new BorderLayout());
 		bar = new JProgressBar();
 		bar.setStringPainted(true);
