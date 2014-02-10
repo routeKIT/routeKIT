@@ -432,7 +432,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		});
 		JCheckBoxMenuItem useArc = new JCheckBoxMenuItem("ArcFlags verwenden",
 				true);
-		useArc.setMnemonic('o');
+		useArc.setMnemonic('a');
 		useArc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
