@@ -6,17 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
 import edu.kit.pse.ws2013.routekit.map.Graph;
-import edu.kit.pse.ws2013.routekit.map.HighwayType;
-import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 
 public class TestGraph {
@@ -36,8 +30,14 @@ public class TestGraph {
 
 	@Test
 	public void testGetCoordinates() {
-		assertEquals(0, g.getCoordinates(1).getLatitude(), EPSILON);
+		assertEquals(1, g.getCoordinates(0).getLatitude(), EPSILON);
+		assertEquals(0, g.getCoordinates(0).getLongitude(), EPSILON);
+		assertEquals(1, g.getCoordinates(1).getLatitude(), EPSILON);
 		assertEquals(1, g.getCoordinates(1).getLongitude(), EPSILON);
+		assertEquals(0, g.getCoordinates(2).getLatitude(), EPSILON);
+		assertEquals(0, g.getCoordinates(2).getLongitude(), EPSILON);
+		assertEquals(0, g.getCoordinates(3).getLatitude(), EPSILON);
+		assertEquals(1, g.getCoordinates(3).getLongitude(), EPSILON);
 	}
 
 	@Test

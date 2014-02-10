@@ -52,8 +52,8 @@ public class TestDummies {
 		EdgeProperties[] edgeProps = new EdgeProperties[edges.length];
 		Arrays.fill(edgeProps, new EdgeProperties(HighwayType.Tertiary,
 				"Bogus Str.", null, 30));
-		float[] lat = new float[] { 0, 0, 1, 1 };
-		float[] lon = new float[] { 1, 0, 1, 0 };
+		float[] lat = new float[] { 1, 1, 0, 0 };
+		float[] lon = new float[] { 0, 1, 0, 1 };
 		graph = new Graph(nodes, edges, nodeProps, edgeProps, lat, lon);
 		eGraph = new EdgeBasedGraph(eEdges, eTurns, eTurnTypes,
 				new HashMap<Integer, Restriction>());
