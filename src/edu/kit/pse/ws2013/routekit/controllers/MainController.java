@@ -73,10 +73,12 @@ public class MainController {
 		}
 		pr.popTask("Lese Index");
 		profileMapManager = ProfileMapManager.getInstance();
-		pr.pushTask("Lade zuletzt verwendete Karte und Vorberechnung");
-		if (profileMapManager.getCurrentCombination().getClass() != ProfileMapCombination.class) {
-			profileMapManager.getCurrentCombination().ensureLoaded(pr);
+		String text = "Lade zuletzt verwendete Karte";
+		if (profileMapManager.getCurrentCombination().isCalculated()) {
+			text += " und Vorberechnung";
 		}
+		pr.pushTask(text);
+		profileMapManager.getCurrentCombination().ensureLoaded(pr);
 		pr.popTask();
 
 		profileMapManager.addCurrentCombinationListener(rm);
