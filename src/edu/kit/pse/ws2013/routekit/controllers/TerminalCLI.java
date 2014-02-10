@@ -15,6 +15,7 @@ public class TerminalCLI extends CLI {
 	private final String el;
 	private final String home;
 	private final int cols;
+	private final boolean isTerminal;
 
 	public TerminalCLI(String[] args) {
 		super(args);
@@ -22,6 +23,7 @@ public class TerminalCLI extends CLI {
 			// error in the options, don’t bother setting up the terminal
 			cuu = el = home = null;
 			cols = 0;
+			isTerminal = false;
 			return;
 		}
 		cuu = processOutput("tput", "cuu", "1");
@@ -34,8 +36,11 @@ public class TerminalCLI extends CLI {
 			_cols = 0;
 		}
 		cols = _cols;
-		System.out.println(); // move the cursor down
-		System.out.println(); // we move it up each time we print something
+		isTerminal = cuu != null && el != null && home != null && cols != 0;
+		if (isTerminal) {
+			System.out.println(); // move the cursor down
+			System.out.println(); // we move it up each time we print something
+		}
 	}
 
 	private String task = "";
@@ -44,20 +49,20 @@ public class TerminalCLI extends CLI {
 	@Override
 	public void startRoot(String name) {
 		this.task = name;
-		if (cuu == null || el == null || cols == 0) {
-			super.startRoot(name);
-		} else {
+		if (isTerminal) {
 			print();
+		} else {
+			super.startRoot(name);
 		}
 	}
 
 	@Override
 	public void beginTask(String name) {
 		this.task = name;
-		if (cuu == null || el == null || cols == 0) {
-			super.beginTask(name);
-		} else {
+		if (isTerminal) {
 			print();
+		} else {
+			super.beginTask(name);
 		}
 	}
 
@@ -65,30 +70,30 @@ public class TerminalCLI extends CLI {
 	public void progress(float progress, String name) {
 		this.task = name;
 		this.progress = progress;
-		if (cuu == null || el == null || cols == 0) {
-			super.progress(progress, name);
-		} else {
+		if (isTerminal) {
 			print();
+		} else {
+			super.progress(progress, name);
 		}
 	}
 
 	@Override
 	public void endTask(String name) {
 		this.task = name;
-		if (cuu == null || el == null || cols == 0) {
-			super.endTask(name);
-		} else {
+		if (isTerminal) {
 			print();
+		} else {
+			super.endTask(name);
 		}
 	}
 
 	@Override
 	public void finishRoot(String name) {
 		this.task = name;
-		if (cuu == null || el == null || cols == 0) {
-			super.finishRoot(name);
-		} else {
+		if (isTerminal) {
 			print();
+		} else {
+			super.finishRoot(name);
 		}
 	}
 
