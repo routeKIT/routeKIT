@@ -19,19 +19,18 @@ import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
  * calculation is sped up by usage of Arc-Flags.
  */
 public class ArcFlagsDijkstra implements RouteCalculator {
-	boolean useArcFlags = true;
-
-	public ArcFlagsDijkstra() {
-		this.useArcFlags = true;
-	}
-
-	public ArcFlagsDijkstra(boolean useArcFlags) {
-		this.useArcFlags = useArcFlags;
-	}
+	private final boolean DEBUG = false;
 
 	@Override
 	public Route calculateRoute(final PointOnEdge start,
 			final PointOnEdge destination, final ProfileMapCombination data) {
+
+		long startTime;
+		long estimatedTime;
+		if (DEBUG) {
+			startTime = System.currentTimeMillis();
+		}
+
 		final StreetMap streetMap = data.getStreetMap();
 		final Graph graph = streetMap.getGraph();
 		final EdgeBasedGraph edgeBasedGraph = streetMap.getEdgeBasedGraph();
@@ -106,7 +105,7 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 					int arcBit = 0;
 					int correspondingArcBit = 0;
 
-					if (useArcFlags) {
+					if (useArcFlags()) {
 						// fetch Arc-Flags
 						arcFlag = data.getArcFlags().getFlag(currentTurn);
 						arcBit = (arcFlag >> destinationPartition) & 0x1;
@@ -119,7 +118,8 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 					}
 
 					// check arc bit
-					if (!useArcFlags || arcBit != 0 || correspondingArcBit != 0) {
+					if (!useArcFlags() || arcBit != 0
+							|| correspondingArcBit != 0) {
 						final int weight = weights.getWeight(currentTurn);
 						if (weight == Integer.MAX_VALUE) {
 							continue;
@@ -184,6 +184,16 @@ public class ArcFlagsDijkstra implements RouteCalculator {
 
 		final Route route = new Route(data, newStart, newDestination, turns);
 
+		if (DEBUG) {
+			estimatedTime = System.currentTimeMillis() - startTime;
+			System.out.println("ArcFlags: " + useArcFlags());
+			System.out.println(estimatedTime);
+		}
+
 		return route;
+	}
+
+	protected boolean useArcFlags() {
+		return true;
 	}
 }

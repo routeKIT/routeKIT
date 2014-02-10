@@ -23,6 +23,7 @@ import edu.kit.pse.ws2013.routekit.models.RouteModel;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.routecalculation.ArcFlagsDijkstra;
+import edu.kit.pse.ws2013.routekit.routecalculation.Dijkstra;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteCalculator;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
@@ -280,7 +281,11 @@ public class MainController {
 	}
 
 	public void setUseArcFlags(boolean useArcFlags) {
-		rc = new ArcFlagsDijkstra(useArcFlags);
+		if (useArcFlags) {
+			rc = new ArcFlagsDijkstra();
+		} else {
+			rc = new Dijkstra();
+		}
 		// TODO: Direkt neu berechnen oder nicht?
 		// checkAndCalculate();
 	}
