@@ -11,10 +11,8 @@ import java.io.InputStreamReader;
  */
 public class TerminalCLI extends CLI {
 
-	private final String sc;
 	private final String cuu1;
 	private final String el;
-	private final String rc;
 	private final int cols;
 	private final boolean isTerminal;
 
@@ -22,15 +20,13 @@ public class TerminalCLI extends CLI {
 		super(args);
 		if (actions == ManagementActions.noActions) {
 			// error in the options, don’t bother setting up the terminal
-			sc = cuu1 = el = rc = null;
+			cuu1 = el = null;
 			cols = 0;
 			isTerminal = false;
 			return;
 		}
-		sc = processOutput("tput", "sc"); // save cursor
 		cuu1 = processOutput("tput", "cuu1"); // cursor up by one
 		el = processOutput("tput", "el"); // erase line
-		rc = processOutput("tput", "rc"); // restore cursor
 		int _cols;
 		try {
 			_cols = Integer.parseInt(processOutput("tput", "cols"));
@@ -38,10 +34,8 @@ public class TerminalCLI extends CLI {
 			_cols = 0;
 		}
 		cols = _cols;
-		isTerminal = sc != null && cuu1 != null && el != null && rc != null
-				&& cols != 0;
+		isTerminal = cuu1 != null && el != null && cols != 0;
 		if (isTerminal) {
-			System.out.print(sc); // save cursor
 			System.out.println(); // move the cursor down
 			System.out.println(); // we move it up each time we print something
 		}
@@ -112,7 +106,6 @@ public class TerminalCLI extends CLI {
 		System.out.print(el);
 		System.out.print(cuu1);
 		System.out.print(el);
-		System.out.print(rc);
 		System.out.println(task);
 		// print progress bar
 		System.out.print(String.format("%3d%% [", (int) (progress * 100)));
