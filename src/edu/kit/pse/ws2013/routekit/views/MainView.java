@@ -380,9 +380,13 @@ public class MainView extends JFrame implements RouteModelListener {
 		html.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fileChooser.showDialog(MainView.this, "Exportieren");
-				MainController.getInstance().exportHTML(
-						fileChooser.getSelectedFile());
+				int result = fileChooser.showDialog(MainView.this,
+						"Exportieren");
+				if (result == JFileChooser.APPROVE_OPTION
+						&& fileChooser.getSelectedFile() != null) {
+					MainController.getInstance().exportHTML(
+							fileChooser.getSelectedFile());
+				}
 			}
 		});
 		gpx = new JMenuItem("GPX...");
@@ -390,9 +394,13 @@ public class MainView extends JFrame implements RouteModelListener {
 		gpx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fileChooser.showDialog(MainView.this, "Exportieren");
-				MainController.getInstance().exportGPX(
-						fileChooser.getSelectedFile());
+				int result = fileChooser.showDialog(MainView.this,
+						"Exportieren");
+				if (result == JFileChooser.APPROVE_OPTION
+						&& fileChooser.getSelectedFile() != null) {
+					MainController.getInstance().exportGPX(
+							fileChooser.getSelectedFile());
+				}
 			}
 		});
 		export.add(html);
