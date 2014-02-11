@@ -61,6 +61,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	private JMenuItem history;
 	private JMenuItem html;
 	private JMenuItem gpx;
+	private JScrollPane routeScroll;
 
 	/**
 	 * A constructor that creates a new MainView.
@@ -194,7 +195,8 @@ public class MainView extends JFrame implements RouteModelListener {
 
 		left.add(controls, BorderLayout.NORTH);
 		routeDescription = new JList<String>(new DefaultListModel<String>());
-		left.add(new JScrollPane(routeDescription), BorderLayout.CENTER);
+		routeScroll = new JScrollPane(routeDescription);
+		left.add(routeScroll, BorderLayout.CENTER);
 		routeDescription.setCellRenderer(new DefaultListCellRenderer() {
 			private static final long serialVersionUID = 1L;
 
@@ -511,32 +513,31 @@ public class MainView extends JFrame implements RouteModelListener {
 					+ destination.getLongitude());
 		}
 		if (start != null && destination != null) {
-			textMessage("");
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
+							.getModel();
+					listModel.clear();
+					if (description == null) {
+						listModel.addElement("Keine Route gefunden.");
+						return;
+					}
+					for (TurnInstruction instruction : description
+							.getInstructions()) {
+						listModel.addElement(instruction.toString());
+					}
+					listModel.addElement("Sie haben Ihr Ziel erreicht.");
+				}
+			});
 		}
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
-						.getModel();
-				listModel.clear();
-				if (description == null) {
-					listModel.addElement("Keine Route gefunden.");
-					return;
-				}
-				for (TurnInstruction instruction : description
-						.getInstructions()) {
-					listModel.addElement(instruction.toString());
-				}
-				listModel.addElement("Sie haben Ihr Ziel erreicht.");
-			}
-		});
 
 	}
 
 	public void textMessage(String str) {
 		int i = 0;
 		int iPrev = 0;
-		int width = routeDescription.getWidth() / 7;
+		int width = routeScroll.getPreferredSize().width / 7;
 		DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
 				.getModel();
 		listModel.clear();
