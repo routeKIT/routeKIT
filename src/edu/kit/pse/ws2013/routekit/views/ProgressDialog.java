@@ -44,8 +44,13 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	private float progress;
 
 	public ProgressDialog(Window owner) {
+		this(owner, false);
+	}
+
+	public ProgressDialog(Window owner, boolean cancelable) {
 		super(owner, "Berechne...");
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(cancelable ? DISPOSE_ON_CLOSE
+				: DO_NOTHING_ON_CLOSE);
 		setModal(true);
 		setResizable(false);
 		JPanel p = new JPanel(new BorderLayout());
@@ -60,6 +65,10 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		pack();
 		setLocationRelativeTo(owner);
 		new Thread("ProgressDialog Refresh Thread") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				setPriority(MIN_PRIORITY);
@@ -109,13 +118,21 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 		setTitle(name + "... " + (int) (progress * 100) + "%");
 	}
 
+	private void checkCanceled() {
+		if (closed) {
+			throw new ThreadDeath();
+		}
+	}
+
 	@Override
 	public void startRoot(String name) {
+		checkCanceled();
 		bar.setString(name);
 	}
 
 	@Override
 	public void beginTask(String name) {
+		checkCanceled();
 		bar.setString(name);
 		updateTitle(name);
 		tasks.addLast(new AbstractMap.SimpleEntry<>(name, System
@@ -124,6 +141,7 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 
 	@Override
 	public void progress(float progress, String name) {
+		checkCanceled();
 		this.progress = progress;
 		bar.setValue((int) (progress * 100));
 		bar.setString(name);
@@ -132,18 +150,19 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 
 	@Override
 	public void endTask(String name) {
+		checkCanceled();
 		bar.setString(name);
 		tasks.removeLast();
 	}
 
 	@Override
 	public void finishRoot(String name) {
+		checkCanceled();
 		bar.setString(name);
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				// must be called on the event thread
-				setVisible(false);
 				dispose();
 			}
 		});
@@ -153,5 +172,11 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	public void setVisible(boolean b) {
 		closed = !b;
 		super.setVisible(b);
+	}
+
+	@Override
+	public void dispose() {
+		setVisible(false);
+		super.dispose();
 	}
 }

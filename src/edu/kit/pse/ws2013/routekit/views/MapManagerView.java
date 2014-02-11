@@ -154,7 +154,8 @@ public class MapManagerView extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (new Dialog(MapManagerView.this).clickedOk) {
-					ProgressDialog p = new ProgressDialog(MapManagerView.this);
+					ProgressDialog p = new ProgressDialog(MapManagerView.this,
+							true);
 					ProgressReporter reporter = new ProgressReporter();
 					reporter.addProgressListener(p);
 					reporter.pushTask("Speichere Änderungen");

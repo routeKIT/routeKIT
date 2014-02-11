@@ -128,7 +128,8 @@ public class MapView extends JPanel implements MouseListener,
 				while (!(parentWindow instanceof Window)) {
 					parentWindow = parentWindow.getParent();
 				}
-				ProgressDialog p = new ProgressDialog((Window) parentWindow);
+				ProgressDialog p = new ProgressDialog((Window) parentWindow,
+						true);
 				ProgressReporter reporter = new ProgressReporter();
 				reporter.addProgressListener(p);
 				reporter.pushTask("Speichere Änderungen");
