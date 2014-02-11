@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
  * characters. Falls back to {@link CLI} if the terminal doesn’t support moving
  * the cursor around.
  */
-public class TerminalCLI extends CLI {
+public class TerminalCLI extends EasterEggCLI {
 
 	private final String cuu1;
 	private final String el;

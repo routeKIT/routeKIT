@@ -58,7 +58,8 @@ public class CLI implements ProgressListener, Runnable {
 							"  --delete-precalculation <Kartenname> <Profilname>",
 							"      Löscht eine Vorberechnung.",
 							"  --precalculate <Kartenname> <Profilname>",
-							"      Führt eine Vorberechnung durch." }) {
+							"      Führt eine Vorberechnung durch.", "",
+							"Dieses Programm ist nicht aptitude." }) {
 						System.out.println(line);
 					}
 				}
