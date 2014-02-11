@@ -118,8 +118,7 @@ public class ArcFlagsCalculatorImpl implements ArcFlagsCalculator {
 				final int endEdge = edgeBasedGraph.getTargetEdge(currentTurn);
 				final int endPartition = edgeBasedGraph.getPartition(endEdge);
 
-				if (fhList[startEdge] != null
-						&& !(startPartition == edgePartition && startPartition == endPartition)) {
+				if (!(startPartition == edgePartition && startPartition == endPartition)) {
 					final int weight = weights.getWeight(currentTurn);
 					if (weight == Integer.MAX_VALUE) {
 						continue;
