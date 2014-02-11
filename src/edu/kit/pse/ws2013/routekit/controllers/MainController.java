@@ -297,10 +297,10 @@ public class MainController {
 	public void manageProfiles() {
 		ProfileManagerController c = new ProfileManagerController(view);
 		Profile selected = c.getSelectedProfile();
-		if (selected != null) {
-			load(selected, profileMapManager.getCurrentCombination()
-					.getStreetMap());
-			// TODO update view elements etc.
+		ProfileMapCombination current = profileMapManager
+				.getCurrentCombination();
+		if (selected != null && !selected.equals(current.getProfile())) {
+			load(selected, current.getStreetMap());
 		}
 	}
 
@@ -313,9 +313,10 @@ public class MainController {
 	public void manageMaps() {
 		mapManagement = new MapManagerController(view);
 		StreetMap selected = mapManagement.getSelectedMap();
-		if (selected != null) {
-			load(profileMapManager.getCurrentCombination().getProfile(),
-					selected);
+		ProfileMapCombination current = profileMapManager
+				.getCurrentCombination();
+		if (selected != null && !selected.equals(current.getStreetMap())) {
+			load(current.getProfile(), selected);
 		}
 	}
 
