@@ -8,6 +8,9 @@ import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,6 +58,20 @@ public class MapManagerView extends JDialog {
 	private JButton delete;
 	private int listenerCheck = 0;
 	private MapManagerController mmc;
+	private final KeyListener escEnterListener = new KeyAdapter() {
+		@Override
+		public void keyPressed(java.awt.event.KeyEvent e) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ENTER:
+				ok();
+				break;
+
+			case KeyEvent.VK_ESCAPE:
+				dispose();
+				break;
+			}
+		};
+	};
 
 	/**
 	 * A constructor that creates a new MapManagerView.
@@ -98,6 +115,9 @@ public class MapManagerView extends JDialog {
 
 		setContentPane(contentPane);
 
+		addKeyListener(escEnterListener);
+		contentPane.addKeyListener(escEnterListener);
+
 		setAvailableMaps(maps);
 		setCurrentMap(currentMap, currentMapProfiles);
 	}
@@ -105,6 +125,7 @@ public class MapManagerView extends JDialog {
 	private JPanel initNorthPane() {
 		JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		north.setBackground(Color.WHITE);
+		north.addKeyListener(escEnterListener);
 		JLabel map = new JLabel("Karte auswählen:");
 		mapname = new JComboBox<>();
 		mapname.addActionListener(new ActionListener() {
@@ -122,6 +143,7 @@ public class MapManagerView extends JDialog {
 		});
 		mapname.setMinimumSize(new Dimension(250, 26));
 		mapname.setPreferredSize(new Dimension(250, 26));
+		mapname.addKeyListener(escEnterListener);
 
 		north.add(map);
 		north.add(mapname);
@@ -134,6 +156,7 @@ public class MapManagerView extends JDialog {
 
 		JPanel buttons = initButtonsPane();
 		JPanel mapProfile = initMapProfilePane();
+		mapProfile.addKeyListener(escEnterListener);
 
 		center.add(buttons, BorderLayout.NORTH);
 		center.add(mapProfile, BorderLayout.CENTER);
@@ -153,16 +176,7 @@ public class MapManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (new Dialog(MapManagerView.this).clickedOk) {
-					ProgressDialog p = new ProgressDialog(MapManagerView.this,
-							true);
-					ProgressReporter reporter = new ProgressReporter();
-					reporter.addProgressListener(p);
-					reporter.pushTask("Speichere Änderungen");
-					mmc.saveAllChanges(reporter);
-					p.setVisible(true);
-					MapManagerView.this.dispose();
-				}
+				ok();
 			}
 		});
 		south.add(okButton);
@@ -296,6 +310,7 @@ public class MapManagerView extends JDialog {
 		listenModell = new DefaultListModel<String>();
 		profile = new JList<String>(listenModell);
 		profile.setBackground(Color.lightGray);
+		profile.addKeyListener(escEnterListener);
 
 		mapProfile.add(new JLabel("Profile für diese Karte:"),
 				BorderLayout.NORTH);
@@ -547,6 +562,18 @@ public class MapManagerView extends JDialog {
 			textPane.setFont(displayFont);
 			information.add(textPane);
 			return information;
+		}
+	}
+
+	private void ok() {
+		if (new Dialog(MapManagerView.this).clickedOk) {
+			ProgressDialog p = new ProgressDialog(MapManagerView.this, true);
+			ProgressReporter reporter = new ProgressReporter();
+			reporter.addProgressListener(p);
+			reporter.pushTask("Speichere Änderungen");
+			mmc.saveAllChanges(reporter);
+			p.setVisible(true);
+			MapManagerView.this.dispose();
 		}
 	}
 }
