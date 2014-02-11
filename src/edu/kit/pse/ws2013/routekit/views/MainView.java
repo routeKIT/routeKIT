@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
 import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
+import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
@@ -94,6 +95,7 @@ public class MainView extends JFrame implements RouteModelListener {
 						mapView.setEnabled(newCombination.isCalculated());
 						mapView.setTileSource(MainController.getInstance()
 								.getTileSource());
+						center(newCombination);
 						if (!newCombination.isCalculated()) {
 							enableButtons(false);
 							textMessage("Für diese Kombination aus Karte und"
@@ -126,6 +128,14 @@ public class MainView extends JFrame implements RouteModelListener {
 					+ "entweder jetzt eine Vorberechnung starten (Roter Knopf) "
 					+ "oder ein anderes Profil bzw. eine andere Karte auswählen.");
 		}
+	}
+
+	private void center(ProfileMapCombination Combination) {
+		Graph graph = Combination.getStreetMap().getGraph();
+		Coordinates firstNode = graph.getCoordinates(0);
+		Coordinates lastNode = graph
+				.getCoordinates(graph.getNumberOfNodes() - 1);
+		mapView.setMapLocation(firstNode, lastNode);
 	}
 
 	private void enableButtons(boolean value) {
@@ -333,6 +343,7 @@ public class MainView extends JFrame implements RouteModelListener {
 		right.setLayout(new BorderLayout());
 		right.add(buttons, BorderLayout.NORTH);
 		mapView = new MapView(MainController.getInstance().getTileSource(), rm);
+		center(ProfileMapManager.getInstance().getCurrentCombination());
 		right.add(mapView, BorderLayout.CENTER);
 		return right;
 	}

@@ -451,4 +451,20 @@ public class MapView extends JPanel implements MouseListener,
 		startCalc.setVisible(!enabled);
 		super.setEnabled(enabled);
 	}
+
+	public void setMapLocation(Coordinates firstNode, Coordinates lastNode) {
+		zoom = 14;
+		int width = getWidth();
+		if (width == 0) {
+			width = 712;
+		}
+		int height = getHeight();
+		if (height == 0) {
+			height = 600;
+		}
+		x = (firstNode.getSmtX(zoom) + lastNode.getSmtX(zoom)) / 2d - width
+				/ 512d;
+		y = (firstNode.getSmtY(zoom) + lastNode.getSmtY(zoom)) / 2d - height
+				/ 512d;
+	}
 }
