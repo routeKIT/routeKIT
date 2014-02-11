@@ -228,10 +228,12 @@ public class StreetMap {
 		public void ensureLoaded(ProgressReporter reporter) {
 			reporter.setSubTasks(new float[] { .9f, .1f });
 			reporter.pushTask("Lade Graphen");
-			try {
-				this.graph = Graph.load(graphFile, reporter);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (graph == null) {
+				try {
+					this.graph = Graph.load(graphFile, reporter);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			reporter.nextTask("Lade kantenbasierten Graphen");
 			getEdgeBasedGraph();
