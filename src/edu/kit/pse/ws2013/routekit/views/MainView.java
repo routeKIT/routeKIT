@@ -161,7 +161,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new HistoryView(MainController.getInstance().getHistory(),
-						MainView.this);
+						MainView.this, mapView);
 			}
 		});
 		controls.add(hist, BorderLayout.SOUTH);
@@ -362,7 +362,7 @@ public class MainView extends JFrame implements RouteModelListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new HistoryView(MainController.getInstance().getHistory(),
-						MainView.this);
+						MainView.this, mapView);
 			}
 		});
 		JMenuItem about = new JMenuItem("Über...");

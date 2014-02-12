@@ -29,6 +29,7 @@ import edu.kit.pse.ws2013.routekit.util.Coordinates;
 public class HistoryView extends JDialog {
 	private static final long serialVersionUID = 1L;
 	JList<HistoryEntry> historyvar;
+	private final MapView mapView;
 
 	/**
 	 * The constructor creates a HistoryView for the specified history. The
@@ -36,9 +37,15 @@ public class HistoryView extends JDialog {
 	 * 
 	 * @param history
 	 *            The history that is displayed.
+	 * @param The
+	 *            parent of the dialog.
+	 * @param mapView
+	 *            A {@link MapView} that’s centered on the new coordinates when
+	 *            they are selected.
 	 */
-	public HistoryView(History history, Window parent) {
+	public HistoryView(History history, Window parent, MapView mapView) {
 		super(parent, "Verlauf", ModalityType.APPLICATION_MODAL);
+		this.mapView = mapView;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(600, 500);
 		setLocationRelativeTo(getParent());
@@ -84,6 +91,7 @@ public class HistoryView extends JDialog {
 							.getDest();
 					MainController.getInstance().setStartAndDestinationPoint(
 							start, destination);
+					mapView.setMapLocation(start, start);
 				}
 			}
 		});
@@ -115,6 +123,7 @@ public class HistoryView extends JDialog {
 							.getDest();
 					MainController.getInstance().setStartAndDestinationPoint(
 							start, destination);
+					mapView.setMapLocation(start, start);
 				}
 			}
 		});
