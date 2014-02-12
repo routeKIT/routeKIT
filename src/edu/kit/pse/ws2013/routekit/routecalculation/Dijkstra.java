@@ -62,15 +62,72 @@ public class Dijkstra implements RouteCalculator {
 		}
 
 		// initialization
-		distance[startEdge] = 1;
-		fhList.put(startEdge, fh.add(startEdge, 1));
-
-		if (startCorrespondingEdge != -1) {
-			distance[startCorrespondingEdge] = 1;
-			fhList.put(startCorrespondingEdge,
-					fh.add(startCorrespondingEdge, 1));
-		}
 		boolean foundRoute = false;
+		if (startEdge == destinationEdge
+				|| startEdge == destinationCorrespondingEdge) {
+			// corner case: route on one edge
+			// if there’s any turn in our direction, that’s our route and we
+			// skip Dijkstra
+			int route = -1;
+			if (start.getPosition() < (startEdge == destinationEdge ? destination
+					.getPosition() : 1 - destination.getPosition())) {
+				for (int turn : edgeBasedGraph.getOutgoingTurns(startEdge)) {
+					if (allowsTurn(turn)) {
+						route = turn;
+						foundRoute = true;
+						previous[startEdge] = startEdge;
+						if (startEdge == destinationCorrespondingEdge) {
+							otherDestination = true;
+						}
+						break;
+					}
+				}
+			} else {
+				if (startCorrespondingEdge != -1) {
+					for (int turn : edgeBasedGraph
+							.getOutgoingTurns(startCorrespondingEdge)) {
+						if (allowsTurn(turn)) {
+							route = turn;
+							foundRoute = true;
+							otherDestination = true;
+							previous[destinationCorrespondingEdge] = destinationCorrespondingEdge;
+							break;
+						}
+					}
+				}
+			}
+			if (route == -1) {
+				// no turn in this direction, use regular Dijkstra –
+				// emulate first round: insert all reachable edges into heap
+				for (int currentTurn : edgeBasedGraph
+						.getOutgoingTurns(startEdge)) {
+					if (allowsTurn(currentTurn)) {
+						final int weight = weights.getWeight(currentTurn);
+						if (weight == Integer.MAX_VALUE) {
+							continue;
+						}
+						final int alt = 1 + weight;
+						final int targetEdge = edgeBasedGraph
+								.getTargetEdge(currentTurn);
+
+						distance[targetEdge] = alt;
+						previous[targetEdge] = startEdge;
+
+						fhList.put(targetEdge, fh.add(targetEdge, alt));
+					}
+				}
+			}
+		} else {
+			// regular route
+			distance[startEdge] = 1;
+			fhList.put(startEdge, fh.add(startEdge, distance[startEdge]));
+			if (startCorrespondingEdge != -1) {
+				distance[startCorrespondingEdge] = 1;
+				fhList.put(startCorrespondingEdge, fh.add(
+						startCorrespondingEdge,
+						distance[startCorrespondingEdge]));
+			}
+		}
 
 		// calculation
 		while (!fh.isEmpty()) {
@@ -98,7 +155,6 @@ public class Dijkstra implements RouteCalculator {
 
 				if (!ignore.contains(targetEdge)) {
 
-					// check arc bit
 					if (allowsTurn(currentTurn)) {
 						final int weight = weights.getWeight(currentTurn);
 						if (weight == Integer.MAX_VALUE) {
@@ -139,7 +195,7 @@ public class Dijkstra implements RouteCalculator {
 			// no route found
 			return null;
 		} else {
-			while (x != startEdge && x != startCorrespondingEdge) {
+			do {
 				final Set<Integer> outgoingTurns = edgeBasedGraph
 						.getOutgoingTurns(previous[x]);
 
@@ -150,7 +206,7 @@ public class Dijkstra implements RouteCalculator {
 					}
 				}
 				x = previous[x];
-			}
+			} while (x != startEdge && x != startCorrespondingEdge);
 		}
 
 		newStartEdge = x;
