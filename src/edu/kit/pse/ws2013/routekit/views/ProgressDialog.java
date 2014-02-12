@@ -115,7 +115,11 @@ public class ProgressDialog extends JDialog implements ProgressListener {
 	}
 
 	private void updateTitle(String name) {
-		setTitle(name + "... " + (int) (progress * 100) + "%");
+		if (name == null) {
+			setTitle("Fertig.");
+		} else {
+			setTitle(name + "... " + (int) (progress * 100) + "%");
+		}
 	}
 
 	private void checkCanceled() {
