@@ -195,19 +195,24 @@ public class GraphIndex {
 	 * @return The nearest point on an edge (edge + part of the edge)
 	 */
 	public PointOnEdge findNearestPointOnEdge(Coordinates coords) {
-		Coordinates left = new Coordinates(coords.getLatitude() - 0.1f,
+		final Coordinates left = new Coordinates(coords.getLatitude() - 0.1f,
 				coords.getLongitude() - 0.1f);
-		Coordinates right = new Coordinates(coords.getLatitude() + 0.1f,
+		final Coordinates right = new Coordinates(coords.getLatitude() + 0.1f,
 				coords.getLongitude() + 0.1f);
 		double nearest = Double.POSITIVE_INFINITY;
 		int emax = -1;
+		final double cx = coords.getSmtX(19);
+		final double cy = coords.getSmtY(19);
 		for (Integer e : getEdgesInRectangle(left, right)) {
-			Coordinates start = graph.getCoordinates(graph.getStartNode(e));
-			Coordinates end = graph.getCoordinates(graph.getTargetNode(e));
-			double l = Line2D.ptSegDistSq(start.getLatitude(),
-					start.getLongitude(), end.getLatitude(),
-					end.getLongitude(), coords.getLatitude(),
-					coords.getLongitude());
+			final Coordinates start = graph.getCoordinates(graph
+					.getStartNode(e));
+			final Coordinates end = graph
+					.getCoordinates(graph.getTargetNode(e));
+			final double sx = start.getSmtX(19);
+			final double sy = start.getSmtY(19);
+			final double ex = end.getSmtX(19);
+			final double ey = end.getSmtY(19);
+			double l = Line2D.ptSegDistSq(sx, sy, ex, ey, cx, cy);
 			if (l < nearest) {
 				nearest = l;
 				emax = e;
@@ -217,16 +222,15 @@ public class GraphIndex {
 		if (emax == -1) {
 			return null;
 		}
-		Coordinates start = graph.getCoordinates(graph.getStartNode(emax));
-		Coordinates end = graph.getCoordinates(graph.getTargetNode(emax));
-		double path = (coords.getLatitude() - start.getLatitude())
-				* (end.getLatitude() - start.getLatitude())
-				+ (coords.getLongitude() - start.getLongitude())
-				* (end.getLongitude() - start.getLongitude());
-		path /= (end.getLatitude() - start.getLatitude())
-				* (end.getLatitude() - start.getLatitude())
-				+ (end.getLongitude() - start.getLongitude())
-				* (end.getLongitude() - start.getLongitude());
+		final Coordinates start = graph
+				.getCoordinates(graph.getStartNode(emax));
+		final Coordinates end = graph.getCoordinates(graph.getTargetNode(emax));
+		final double sx = start.getSmtX(19);
+		final double sy = start.getSmtY(19);
+		final double ex = end.getSmtX(19);
+		final double ey = end.getSmtY(19);
+		double path = (cx - sx) * (ex - sx) + (cy - sy) * (ey - sy);
+		path /= (ex - sx) * (ex - sx) + (ey - sy) * (ey - sy);
 		return new PointOnEdge(emax, path < 0 ? 0 : path > 1 ? 1 : (float) path);
 	}
 
