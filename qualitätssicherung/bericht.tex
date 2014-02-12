@@ -1,0 +1,523 @@
+% das Papierformat zuerst
+\documentclass[a4paper, 11pt]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{hyperref} % clickable refs
+\usepackage{graphicx}
+\usepackage[toc, numberedsection]{glossaries}
+\usepackage{float}
+\usepackage{xparse} % powerful commands
+\usepackage{xspace} % \xspace for use in commands: put a space only if no punctuation follows
+\usepackage{enumitem} % for controlling indentation in list environments
+
+\makeglossary
+
+%Hack for referencing labels
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #2%
+    \def\@currentlabel{#2}%
+    \phantomsection\label{#1}\endgroup
+}
+\makeatother
+% End: Hack for referencing labels
+
+\newcommand{\none}[0]{
+%  % see http://tex.stackexchange.com/questions/61155/linespacing-without-packages
+%  \setlength\lineskiplimit{-1000pt} % allow overflowing of lines
+%  \linespread{0}\selectfont % don’t advance line after empty item
+  \item[] keine.
+}
+
+\makeatletter
+
+\newcommand{\@packagelabel}[1]{P:#1}
+\newcommand{\@typelabel}[1]{T:#1} % for classes and enums
+\newcommand{\@attrlabel}[2]{A:#1.#2}
+\newcommand{\@methodlabel}[2]{M:#1.#2}
+\newcommand{\@paramlabel}[3]{P:#1.#2.#3}
+\newcommand{\@constantlabel}[2]{C:#1.#2}
+
+% evaluate #2 if the label #1 exists, else #3.
+\newcommand{\ifhaslabel}[3]{%
+  \@ifundefined{r@#1}%
+               {#3}%
+               {#2}%
+}
+
+\newcommand{\bug}[4]{%
+  \item
+    \begin{description}
+    \item[Symptom] #1
+    \item[Ursache] #2
+    \item[Maßnahme] #3
+    \item[Status] #4
+    \end{description}
+}
+
+\newcommand{\test}[4]{%
+  \item
+    \begin{description}
+    \item[Was wird getestet] #1
+    \item[Beschreibung] #2
+    \item[Bestanden wenn] #3
+    \item[Status] #4
+    \end{description}
+}
+
+% Argumente:
+% 1. Name
+% 2. Beschreibung
+% 3. Klassen (ein oder mehrere \class)
+\newcommand{\package}[3]{%
+  \subsection{Paket #1}\label{\@packagelabel{#1}}
+  #2
+  \begin{description}
+   #3%
+  \end{description}
+}
+% Argumente:
+% 1. Klassenname
+% 2. Beschreibung
+% 3. Attribute (ein oder mehrere \attr, oder \none)
+% 4. Methoden (ein oder mehrere \method, oder \none)
+\newcommand{\class}[4]{%
+  \newcommand{\currentclass}[0]{#1}%
+  \item[\namedlabel{\@typelabel{#1}}{\code{#1}}] #2
+    \ifstrequal{#3#4}{\none\none}{%
+      % \none attributes and \none methods, skip
+    }{%
+      \begin{description}[leftmargin=0em,itemindent=0em]
+        \ifstrequal{#3}{\none}{%
+          % \none attributes, skip
+        }{%
+        \item[Attribute] \hfill % \hfill forces the following description into the next line
+          \begin{description}
+            #3%
+          \end{description}
+        }%
+        \ifstrequal{#4}{\none}{%
+          % \none methods, skip
+        }{%
+        \item[Methoden] \hfill% \hfill forces the following description into the next line
+          \begin{description}
+            #4%
+          \end{description}
+        }%
+      \end{description}
+    }%
+  \let\currentclass=\undefined%
+}
+% Argumente:
+% 1. Name
+% 2. Typ
+% 3. kurze Beschreibung
+\newcommand{\attr}[3]{%
+  \item[\namedlabel{\@attrlabel{\currentclass}{#1}}{\code{#1}}] #3 Typ:~\reftype{#2}
+}
+% Argumente:
+% 1. Name
+% 2. (optional) Typ – default: void (wird nicht angezeigt); wird automatisch gelinkt, falls vorhanden
+% 3. Parameter (ein oder mehrere \param, oder \none)
+% 4. Beschreibung
+\NewDocumentCommand{\method}{m o m +m}{% the ‘+m’ means that parameter 4 can contain several paragraphs, see http://tex.stackexchange.com/questions/64328/blank-lines-break-xparse-or-ifthen-macro
+  \newcommand{\currentmethod}[0]{#1}%
+  \item[\namedlabel{\@methodlabel{\currentclass}{#1}}{\code{#1}}] #4%
+    \ifstrequal{#3}{\none}{%
+      % \none parameters, skip
+    }{%
+      \\Parameter:
+      \begin{description}[leftmargin=0em,itemindent=0em]
+        #3%
+      \end{description}
+    }%
+    \IfValueTF{#2}% if the optional “type” argument is given...
+              { Rückgabetyp:~\reftype{#2}}% then show the return type...
+              {}% else don’t.
+  \let\currentmethod=\undefined%
+}
+% Argumente:
+% 1. Name
+% 2. Typ
+% 3. kurze Beschreibung
+\newcommand{\param}[3]{%
+  \item[\namedlabel{\@paramlabel{\currentclass}{\currentmethod}{#1}}{\code{#1}}] #3 Typ:~\reftype{#2}%
+}
+% Argumente:
+% 1. Name
+% 2. Beschreibung
+% 3. Konstanten (ein oder mehrere \constant, oder \none)
+\newcommand{\enum}[3]{%
+  \newcommand{\currentenum}[0]{#1}%
+  \item[\namedlabel{\@typelabel{#1}}{\code{#1}}] #2
+    \ifstrequal{#3}{\none}{%
+      % \none cases, skip
+    }{%
+      Instanzen:
+      \begin{description}
+        #3
+      \end{description}
+    }%
+  \let\currentenum=\undefined%
+}
+% Argumente:
+% 1. Name
+% 2. Beschreibung
+\newcommand{\constant}[2]{%
+  \item[\namedlabel{\@constantlabel{\currentenum}{#1}}{\code{#1}}] #2
+}
+
+\NewDocumentCommand{\refpackage}{mO{#1}}{%
+  \hyperref[\@packagelabel{#1}]{\code{#2}}\xspace%
+}
+% Argumente:
+% 1. Typ (Klasse oder Enum)
+% 2. (optional) Text – default: Typ
+\NewDocumentCommand{\reftype}{mO{#1}}{%
+  \def\@reftype@tmp@text{\code{#2}}%
+  \ifhaslabel{\@typelabel{#1}}{% if the label exists...
+    \hyperref[\@typelabel{#1}]{\@reftype@tmp@text}}{% then reference it...
+    \@reftype@tmp@text}% else just print the text.
+  \let\@reftype@tmp@text=\undefined%
+}
+% DEPRECATED
+\NewDocumentCommand{\refclass}{mO{#1}}{%
+  \GenericWarning{}{The command \refclass is deprecated -- use \reftype instead}%
+  \reftype{#1}[#2]%
+}
+% Argumente:
+% 1. Klasse
+% 2. Attribut
+% 3. (optional) Text – default: Attribut innerhalb der Klasse, sonst Klasse.Attribut
+\NewDocumentCommand{\refattr}{mmO{__DEFAULT__}}{%
+  \def\@refattr@tmp@text{\code{%
+      \ifthenelse{\equal{#3}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          #2% we’re inside the same class, only use the attribute name
+        }{%
+          #1.#2%
+        }%
+      }{%
+        #3%
+  }}\xspace}
+  \ifhaslabel{\@attrlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@attrlabel{#1}{#2}]{\@refattr@tmp@text}}{% the reference it...
+    \@refattr@tmp@text}% else just print the text.
+  \let\@refattr@tmp@text=\undefined%
+}
+% Argumente:
+% 1. Klasse
+% 2. Methode
+% 3. (optional) Text – default: Methode innerhalb der Klasse, sonst Klasse.Methode
+\NewDocumentCommand{\refmethod}{mmO{__DEFAULT__}}{%
+  \def\@refmethod@tmp@text{\code{%
+      \ifthenelse{\equal{#3}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          #2% we’re inside the same class, only use the method name
+        }{%
+          #1.#2%
+        }%
+      }{%
+        #3%
+    }}\xspace}%
+  \ifhaslabel{\@methodlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@methodlabel{#1}{#2}]{\@refmethod@tmp@text}}{% then reference it...
+    \@refmethod@tmp@text}% else just print the text.
+  \let\@refmethod@tmp@text=\undefined%
+}
+% Argumente:
+% 1. Klasse
+% 2. Methode
+% 3. Parameter
+% 4. (optional) Text – default: Parameter innerhalb der Methode, sonst Methode.Parameter innerhalb der Klasse, sonst Klasse.Methode.Parameter
+\NewDocumentCommand{\refparam}{mmmO{__DEFAULT__}}{%
+  \def\@refparam@tmp@text{\code{%
+      \ifthenelse{\equal{#4}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentclass}{#1}}{%
+          \ifthenelse{\equal{\currentmethod}{#2}}{%
+            #3% we’re inside the same method, only use the parameter name
+          }{%
+            #2.#3% we’re inside the same class, only use the method and parameter name
+        }}{%
+          #1.#2.#3%
+      }}{%
+        #4%
+  }}\xspace}%
+  \ifhaslabel{\@paramlabel{#1}{#2}{#3}}{% if the label exists...
+    \hyperref[\@paramlabel{#1}{#2}{#3}]{\@refparam@tmp@text}}{% then reference it...
+      \@refparam@tmp@text}% else just print the text.
+  \let\@refparam@tmp@text=\undefined%
+}
+% Argumente:
+% 1. Enum
+% 2. Konstante
+% 3. (optional) Text – default: Konstante innerhalb der Enum, sonst Enum.Konstante
+\NewDocumentCommand{\refconstant}{mmO{__DEFAULT__}}{%
+  \def\@refconstant@tmp@text{\code{%
+      \ifthenelse{\equal{#3}{__DEFAULT__}}{%
+        \ifthenelse{\equal{\currentenum}{#1}}{%
+          #2% we’re inside the same enum, only use the constant name
+        }{%
+          #1.#2%
+        }%
+      }{%
+        #3%
+  }}\xspace}%
+  \ifhaslabel{\@constantlabel{#1}{#2}}{% if the label exists...
+    \hyperref[\@constantlabel{#1}{#2}]{\@refconstant@tmp@text}}{% then reference it...
+    \@refconstant@tmp@text}% else just print the text.
+  \let\@refconstant@tmp@text=\undefined%
+}
+
+
+\makeatother
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Glossar: alle Einträge, aber ohne extra Referenzen
+% http://tex.stackexchange.com/questions/115635/glossaries-suppress-pages-when-using-glsaddall
+\newcommand*{\glsgobblenumber}[1]{}
+\makeatletter
+\newcommand*{\glsaddnp}[2][]{%
+  \glsdoifexists{#2}{%
+    \def\@glsnumberformat{glsgobblenumber}%
+    \edef\@gls@counter{\csname glo@#2@counter\endcsname}%
+    \setkeys{glossadd}{#1}%
+    \@gls@saveentrycounter%
+    \@do@wrglossary{#2}%
+  }%
+}
+\newcommand{\glsaddallunused}[1][]{%
+  \edef\@glo@type{\@glo@types}%
+  \setkeys{glossadd}{#1}%
+  \forallglsentries[\@glo@type]{\@glo@entry}{%
+    \ifglsused{\@glo@entry}{}{%
+      \typeout{****Glossary entry '\@glo@entry' unused****}%
+      \glsaddnp[#1]{\@glo@entry}}}%
+}
+\makeatother
+
+\renewcommand{\glsnamefont}[1]{\mdseries #1} % glossary entries shouldn’t be bold
+
+% Glossar
+
+% So sieht ein Glossar-Eintrag aus:
+%
+%\newglossaryentry{dijkstra}{
+%  name={Dijkstra’s Algorithmus},
+%  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+%}
+%\newglossaryentry{arc}{
+%  name={Arc-Flags},
+%  description={eine Technik, um Routenberechnung zu beschleunigen},
+%  see={dijkstra}
+%}
+%
+% Und so kann er im Dokument verwendet werden:
+%
+% lorem ipsum dolor sit \gls{arc}, consectetur
+%
+% End: Glossar
+
+\makeatletter
+
+\begin{document}
+\shorthandoff{"}
+
+\sloppy % fix overfull hboxes
+
+% place a symbol before clickable links
+% this has to come *after* \begin{document} because hyperref installs a \AtBeginDocument hook that updates the ref command.
+\newcommand{\refsymbol}[0]{\scalebox{0.5}{$\nearrow$}}
+\let\oldref\ref
+\renewcommand{\ref}[1]{\refsymbol\oldref{#1}}
+\let\oldgls\gls
+\renewcommand{\gls}[1]{\refsymbol\oldgls{#1}}
+\let\oldGls\Gls
+\renewcommand{\Gls}[1]{\refsymbol\oldGls{#1}}
+\let\oldglspl\glspl
+\renewcommand{\glspl}[1]{\refsymbol\oldglspl{#1}}
+\let\oldGlspl\Glspl
+\renewcommand{\Glspl}[1]{\refsymbol\oldGlspl{#1}}
+\let\oldglslink\glslink
+\renewcommand{\glslink}[2]{\refsymbol\oldglslink{#1}{#2}}
+\let\oldhyperref\hyperref
+\renewcommand{\hyperref}[2][notActuallyOptional]{\refsymbol\oldhyperref[#1]{#2}}
+\let\oldautoref\autoref
+\renewcommand{\autoref}[1]{\refsymbol\oldautoref{#1}}
+
+\newcommand{\abbildung}[1]{\autoref{fig:#1}}
+\newcommand{\routeKIT}[0]{\emph{routeKIT}\xspace}
+
+
+% alle Glossareinträge
+\newglossaryentry{profil}{
+  name={Profil},
+  description={enthält für die Routenplanung relevante Informationen, z.\,B. die Höhe und das Gewicht des Fahrzeugs},
+  plural={Profile}
+}
+\newglossaryentry{karte}{
+  name={Karte},
+  description={enthält die Daten aus \gls{osm} sowie einen Namen},
+  plural={Karten}
+}
+\newglossaryentry{osmkachel}{
+  name={OSM-Kachel},
+  description={die öffentlichen gerenderten \gls{osm}-Kacheln z.\,B. auf\\\mbox{\url{http://a.tile.openstreetmap.org/}}},
+  plural={OSM-Kacheln}
+}
+\newglossaryentry{route}{
+  name={Route},
+  description={ein Weg von einem Start- zu einem Zielpunkt},
+  plural={Routen}
+}
+\newglossaryentry{vorberechnung}{
+  name={Vorberechnung},
+  description={verbindet die \gls{karte} mit den auf einem \gls{profil} basierenden Informationen und ermöglicht, unter anderem mittels \gls{arc}, später eine Beschleunigung der Berechnung einer \gls{route}; muss für jede neue \gls{karte}/\gls{profil}-Kombination einmal ausgeführt werden},
+  plural={Vorberechnungen},
+  see={arc}
+}
+\newglossaryentry{rendern}{
+  name={rendern},
+  description={Berechnung einer Bildkachel aus den zu rendernden Daten}
+}
+\newglossaryentry{wegbeschreibung}{
+  name={Wegbeschreibung},
+  description={Beschreibung einer \gls{route} durch eine Liste von Abbiegeanweisungen}
+}
+\newglossaryentry{dijkstra}{
+  name={Dijkstra’s Algorithmus},
+  description={ein Algorithmus, um den optimalen Pfad in einem gerichteten Graphen zu finden}
+}
+\newglossaryentry{arc}{
+ name={Arc-Flags},
+ description={eine Technik, um eine Routenberechnung zu beschleunigen}
+}
+\newglossaryentry{verlauf}{
+  name={Verlauf},
+  description={speichert Routenanfragen für spätere Wiederverwendung. Es existiert nur ein Verlauf für die gesamte Anwendung}
+}
+\newglossaryentry{mercator}{
+  name={Mercator-Projektion},
+  description={die Zylinderprojektion der Weltkugel}
+}
+\newglossaryentry{entwurfsmuster}{
+  name={Entwurfsmuster},
+  description={Eine Schablone, die eine Lösung für ein oder mehrere Entwurfsprobleme darstellt. Ihre Verwendung erleichtert Änderungen im Entwurf}
+}
+\newglossaryentry{beobachter}{
+  name={Beobachter},
+  description={Ein \gls{entwurfsmuster}, das bei Änderung des Zustands eines Objektes alle abhängenden Objekte benachrichtigt}
+}
+\newglossaryentry{einzelstueck}{
+  name={Einzelstück},
+  description={Ein \gls{entwurfsmuster}, das zusichert, dass eine Klasse genau ein Exemplar besitzt und stellt einen globalen Zugriffspunkt darauf bereit}
+}
+\newglossaryentry{dekorierer}{
+  name={Dekorierer},
+  description={Ein \gls{entwurfsmuster}, das dynamisch neue Funktionalität zum Objekt hinzufügt}
+}
+\newglossaryentry{strategie}{
+  name={Strategie},
+  description={Ein \gls{entwurfsmuster}, das eine Familie von Algorithmen definiert, sie kapselt und austauschbar macht}
+}
+\newglossaryentry{G_smt}{
+  name={Slippy Map Tile},
+  description={
+    Koordinaten, durch die Kartenkacheln einer graphischen Darstellung (mit \gls{mercator}) adressiert werden können.
+    Drei Bestandteile: x, y, zoom.
+    Mit nicht-ganzzahligen Werten für x und y können nicht nur Kacheln, sondern auch Geokoordinaten adressiert werden}
+}
+\newglossaryentry{smt}{
+  type=\acronymtype,
+  name={SMT},
+  description={Slippy Map Tile},
+  first={Slippy Map Tile (SMT)},
+  see=[Glossareintrag:]{G_smt}
+}
+\newglossaryentry{opaque}{
+  name={deckend},
+  description={
+    Die innere Implementierung wird vor anderen Klassen verborgen; Zugriff ist nur über das definierte Interface der Klasse/Methode möglich. (engl. “opaque”)}
+}
+
+\newacronym[longplural=Personenkraftwagen]{pkw}{PKW}{Personenkraftwagen}
+\newacronym[longplural=Lastkraftwagen]{lkw}{LKW}{Lastkraftwagen}
+\newacronym{osm}{OSM}{OpenStreetMap}
+\newacronym{gui}{GUI}{Graphical User Interface}
+\newacronym{gpx}{GPX}{GPS Exchange Format}
+\newacronym{mvc}{MVC}{Model View Controller}
+\newacronym{cli}{CLI}{Command Line Interface}
+
+
+
+\begin{titlepage}
+\makeatletter
+\begin{center}
+~\\[5em]
+{\Huge routeKIT}\\[3em]
+{\huge Testdokument}\\[1em]
+{\large\today}\\[2.5em]
+{\LARGE
+Kevin Birke\\
+Felix Dörre\\
+Fabian Hafner\\
+Lucas Werkmeister\\
+Dominic Ziegler\\
+Anastasia Zinkina\\[3em]}
+betreut durch\\[2em]
+{\Large
+Julian~Arz\\
+G.~Veit~Batz\\
+Dr.~Dennis~Luxen\\
+Dennis~Schieferdecker\\[1em]}
+am\\[1em]
+{\Large
+Karlsruher Institut für~Technologie\\
+Institut für Theoretische~Informatik\\
+Algorithmik~II\\
+\large
+Prof.~Dr.~Peter~Sanders}
+\end{center}
+\makeatother
+\end{titlepage}
+\tableofcontents
+\newpage
+
+
+\section{Einleitung}
+Dieses Dokument erläutert und protokolliert die Qualitätssicherung der Anwendung \routeKIT. Es dokumentiert die gefundenen Fehler, die durchgeführten Unit-Tests, die Testüberdeckung und die durchgeführten Änderungen seit der Implementierungsphase.
+
+\routeKIT ist eine Anwendung zur Routenplanung; durch Verwendung von \glslink{profil}{Profilen} kann sie dem Benutzer die optimalen \glspl{route} für sein spezielles Fahrzeug angeben.
+Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} eine zeitaufwändige \gls{vorberechnung} durchgeführt.
+
+\section{Fehlerprotokoll}
+
+\subsection{kritischer Fehler}
+
+\subsection{funktionale Fehler}
+
+\subsection{Benutzbarkeitsfehler}
+
+\section{Protokoll der Unit-Tests}
+
+\section{Testüberdeckung}
+
+\section{Änderungen seit der Implementierung}
+Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
+
+\makeatletter
+\newglossarystyle{myAltlist}{
+  \glossarystyle{altlist} % base this style on altlist
+  \renewcommand*{\glossaryentryfield}[5]{
+  \item[\glsentryitem{##1}\glstarget{##1}{##2}]
+    \mbox{}\par\nobreak\@afterheading
+    ##3\glspostdescription\space Auf Seite ##5.
+  }
+}
+\makeatother
+\printglossary[type=main, title={Glossar}, toctitle={Glossar}, style=myAltlist]
+
+\end{document}
