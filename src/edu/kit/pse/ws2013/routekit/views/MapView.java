@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import edu.kit.pse.ws2013.routekit.controllers.MainController;
+import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileFinishedListener;
 import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
@@ -233,6 +234,33 @@ public class MapView extends JPanel implements MouseListener,
 			i++;
 		}
 		g.drawPolyline(xPoints, yPoints, xPoints.length);
+
+		Stroke stroke = new BasicStroke(6, // Width
+				BasicStroke.CAP_ROUND, // End cap
+				BasicStroke.JOIN_ROUND, // Join style
+				10.0f, // Miter limit
+				new float[] { 5.0f, 10.0f }, // Dash pattern
+				0.0f); // Dash phase
+		g2.setStroke(stroke);
+		int startEdge = r.getStart().getEdge();
+		int destEdge = r.getDestination().getEdge();
+		Graph graph = r.getData().getStreetMap().getGraph();
+		Coordinates startOnEdge = graph.getCoordinates(
+				graph.getStartNode(startEdge)).goIntoDirection(
+				graph.getCoordinates(graph.getTargetNode(startEdge)),
+				r.getStart().getPosition());
+		Coordinates destOnEdge = graph.getCoordinates(
+				graph.getStartNode(destEdge)).goIntoDirection(
+				graph.getCoordinates(graph.getTargetNode(destEdge)),
+				r.getDestination().getPosition());
+		g2.drawLine((int) ((rm.getStart().getSmtX(zoom) - x) * 256), (int) ((rm
+				.getStart().getSmtY(zoom) - y) * 256), (int) ((startOnEdge
+				.getSmtX(zoom) - x) * 256),
+				(int) ((startOnEdge.getSmtY(zoom) - y) * 256));
+		g2.drawLine((int) ((rm.getDestination().getSmtX(zoom) - x) * 256),
+				(int) ((rm.getDestination().getSmtY(zoom) - y) * 256),
+				(int) ((destOnEdge.getSmtX(zoom) - x) * 256),
+				(int) ((destOnEdge.getSmtY(zoom) - y) * 256));
 		g2.setStroke(s);
 	}
 
