@@ -320,6 +320,7 @@ public class MapView extends JPanel implements MouseListener,
 
 	int dx = -1;
 	int dy = -1;
+	int ozoom;
 	double orgX;
 	double orgY;
 
@@ -328,6 +329,7 @@ public class MapView extends JPanel implements MouseListener,
 		y = orgY - (e.getY() - dy) / 256f;
 		int limit = 1 << zoom;
 		x = (x % limit + limit) % limit;
+		zoom = ozoom;
 		repaint();
 	}
 
@@ -351,6 +353,7 @@ public class MapView extends JPanel implements MouseListener,
 		} else if (e.getButton() == MouseEvent.BUTTON1) {
 			dx = e.getX();
 			dy = e.getY();
+			ozoom = zoom;
 			orgX = x;
 			orgY = y;
 		}
@@ -409,7 +412,7 @@ public class MapView extends JPanel implements MouseListener,
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		if (!isEnabled()) {
+		if (!isEnabled() || dx != -1) {
 			return;
 		}
 		int klick = e.getWheelRotation();
