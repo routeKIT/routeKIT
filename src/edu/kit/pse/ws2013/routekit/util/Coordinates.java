@@ -21,6 +21,12 @@ public class Coordinates {
 		if (lat < -90 || lat > 90 || lon <= -181 || lon >= 181) {
 			throw new IllegalArgumentException();
 		}
+		if (lat < -85) {
+			lat = -85;
+		}
+		if (lat > 85) {
+			lat = 85;
+		}
 
 		this.lat = lat;
 		this.lon = lon;
