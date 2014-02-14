@@ -315,7 +315,7 @@ public class MainController {
 		StreetMap selected = mapManagement.getSelectedMap();
 		ProfileMapCombination current = profileMapManager
 				.getCurrentCombination();
-		if (selected != null && !selected.equals(current.getStreetMap())) {
+		if (selected != null) {
 			load(current.getProfile(), selected);
 		}
 	}
