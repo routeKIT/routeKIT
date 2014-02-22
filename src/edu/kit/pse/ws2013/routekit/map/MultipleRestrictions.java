@@ -44,6 +44,18 @@ public class MultipleRestrictions extends Restriction {
 	}
 
 	@Override
+	public boolean equals(Object other) {
+		if (other instanceof Restriction) {
+			if (restrictions.length == 1 && restrictions[0].equals(other)) {
+				return true;
+			}
+			return Arrays.asList(restrictions).containsAll(
+					Arrays.asList(((MultipleRestrictions) other).restrictions));
+		}
+		return false;
+	}
+
+	@Override
 	public boolean allows(Profile profile) {
 		for (Restriction r : restrictions) {
 			if (!r.allows(profile)) {
