@@ -27,6 +27,11 @@ public class TurnRestrictionTest {
 		onlyTurn = new TurnRestriction(42, to2, true);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructorNull() {
+		new TurnRestriction(0, null, true);
+	}
+
 	@Test
 	public void testGetFrom() {
 		assertEquals(42, noTurn.getFrom());
