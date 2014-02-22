@@ -1,7 +1,7 @@
-package test.edu.kit.pse.ws2013.routekit.history;
+package edu.kit.pse.ws2013.routekit.history;
 
+import static edu.kit.pse.ws2013.routekit.history.TestHistoryEntry.assertHistoryEntryEquals;
 import static org.junit.Assert.*;
-import static test.edu.kit.pse.ws2013.routekit.history.TestHistoryEntry.assertHistoryEntryEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,8 +9,6 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.history.History;
-import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestHistory {

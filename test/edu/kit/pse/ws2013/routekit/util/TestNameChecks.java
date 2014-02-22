@@ -1,10 +1,9 @@
-package test.edu.kit.pse.ws2013.routekit.util;
+package edu.kit.pse.ws2013.routekit.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 public class TestNameChecks {
 

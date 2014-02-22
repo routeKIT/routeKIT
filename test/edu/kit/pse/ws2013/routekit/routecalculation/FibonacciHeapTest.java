@@ -1,13 +1,10 @@
-package test.edu.kit.pse.ws2013.routekit.routecalculation;
+package edu.kit.pse.ws2013.routekit.routecalculation;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeap;
-import edu.kit.pse.ws2013.routekit.routecalculation.FibonacciHeapEntry;
 
 public class FibonacciHeapTest {
 	FibonacciHeap fh;

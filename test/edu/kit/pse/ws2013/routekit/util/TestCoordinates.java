@@ -1,10 +1,9 @@
-package test.edu.kit.pse.ws2013.routekit.util;
+package edu.kit.pse.ws2013.routekit.util;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestCoordinates {
 	public static final double EPSILON = 0.00001;

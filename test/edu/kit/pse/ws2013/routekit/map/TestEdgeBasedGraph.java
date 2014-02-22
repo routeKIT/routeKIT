@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.map;
+package edu.kit.pse.ws2013.routekit.map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,12 +10,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
-import edu.kit.pse.ws2013.routekit.map.MultipleRestrictions;
-import edu.kit.pse.ws2013.routekit.map.Restriction;
-import edu.kit.pse.ws2013.routekit.map.TurnType;
-import edu.kit.pse.ws2013.routekit.map.VehicleTypeRestriction;
-import edu.kit.pse.ws2013.routekit.map.WeightRestriction;
 import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 public class TestEdgeBasedGraph {

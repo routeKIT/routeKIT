@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.map;
+package edu.kit.pse.ws2013.routekit.map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -6,11 +6,11 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.map.Graph;
 import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 
 public class TestGraph {

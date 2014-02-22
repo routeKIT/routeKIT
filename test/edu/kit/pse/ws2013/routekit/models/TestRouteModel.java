@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.models;
+package edu.kit.pse.ws2013.routekit.models;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -8,8 +8,6 @@ import static org.junit.Assert.assertSame;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.models.RouteModel;
-import edu.kit.pse.ws2013.routekit.models.RouteModelListener;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.routecalculation.RouteDescription;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;

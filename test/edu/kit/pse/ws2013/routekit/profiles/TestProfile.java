@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.profiles;
+package edu.kit.pse.ws2013.routekit.profiles;
 
 import static org.junit.Assert.*;
 
@@ -6,9 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.Test;
-
-import edu.kit.pse.ws2013.routekit.profiles.Profile;
-import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 
 @SuppressWarnings("static-method")
 public class TestProfile {

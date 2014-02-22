@@ -1,13 +1,12 @@
-package test.edu.kit.pse.ws2013.routekit.history;
+package edu.kit.pse.ws2013.routekit.history;
 
+import static edu.kit.pse.ws2013.routekit.util.TestCoordinates.assertCoordinatesEquals;
 import static org.junit.Assert.assertEquals;
-import static test.edu.kit.pse.ws2013.routekit.util.TestCoordinates.assertCoordinatesEquals;
 
 import java.util.Date;
 
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.history.HistoryEntry;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestHistoryEntry {

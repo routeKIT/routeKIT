@@ -1,21 +1,14 @@
-package test.edu.kit.pse.ws2013.routekit.map;
+package edu.kit.pse.ws2013.routekit.map;
+
+import static edu.kit.pse.ws2013.routekit.map.TurnType.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
-import edu.kit.pse.ws2013.routekit.map.EdgeBasedGraph;
-import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
-import edu.kit.pse.ws2013.routekit.map.Graph;
-import edu.kit.pse.ws2013.routekit.map.HighwayType;
-import edu.kit.pse.ws2013.routekit.map.NodeProperties;
-import edu.kit.pse.ws2013.routekit.map.Restriction;
-import edu.kit.pse.ws2013.routekit.map.StreetMap;
-import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
-import static edu.kit.pse.ws2013.routekit.map.TurnType.*;
 
 public class TestDummies {
 	private final int[] nodes;

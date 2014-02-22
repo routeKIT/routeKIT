@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.export;
+package edu.kit.pse.ws2013.routekit.export;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.xml.sax.SAXException;
 
-import test.edu.kit.pse.ws2013.routekit.map.TestDummies;
-import edu.kit.pse.ws2013.routekit.export.GPXExporter;
+import edu.kit.pse.ws2013.routekit.map.TestDummies;
 import edu.kit.pse.ws2013.routekit.routecalculation.Route;
 import edu.kit.pse.ws2013.routekit.util.PointOnEdge;
 

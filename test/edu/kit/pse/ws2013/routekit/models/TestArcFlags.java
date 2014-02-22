@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.models;
+package edu.kit.pse.ws2013.routekit.models;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,8 +8,6 @@ import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 
 public class TestArcFlags {
 

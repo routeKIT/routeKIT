@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.mapdisplay;
+package edu.kit.pse.ws2013.routekit.mapdisplay;
 
 import java.awt.image.BufferedImage;
 
@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import edu.kit.pse.ws2013.routekit.mapdisplay.TileCache;
-import edu.kit.pse.ws2013.routekit.mapdisplay.TileSource;
 
 public class TestTileCache {
 	class DummySource implements TileSource {

@@ -1,4 +1,4 @@
-package test.edu.kit.pse.ws2013.routekit.map;
+package edu.kit.pse.ws2013.routekit.map;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,11 +6,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import edu.kit.pse.ws2013.routekit.map.EdgeProperties;
-import edu.kit.pse.ws2013.routekit.map.Graph;
-import edu.kit.pse.ws2013.routekit.map.GraphIndex;
-import edu.kit.pse.ws2013.routekit.map.HighwayType;
-import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class TestGraphIndex {
