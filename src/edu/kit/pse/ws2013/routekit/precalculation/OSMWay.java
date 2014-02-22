@@ -53,8 +53,13 @@ public class OSMWay {
 	 * 
 	 * @param id
 	 *            the ID to set
+	 * @throws IllegalArgumentException
+	 *             if {@code id} is negative
 	 */
 	public void setId(int id) {
+		if (id < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.id = id;
 	}
 

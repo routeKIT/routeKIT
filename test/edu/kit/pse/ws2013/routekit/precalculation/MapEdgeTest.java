@@ -42,4 +42,9 @@ public class MapEdgeTest {
 		edge.setId(0);
 		assertEquals(0, edge.getId());
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetIdNegative() {
+		edge.setId(-2);
+	}
 }

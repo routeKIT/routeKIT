@@ -52,7 +52,6 @@ public class MapEdge {
 		if (id < 0) {
 			throw new IllegalStateException();
 		}
-
 		return id;
 	}
 
@@ -61,8 +60,13 @@ public class MapEdge {
 	 * 
 	 * @param id
 	 *            the identifier to set
+	 * @throws IllegalArgumentException
+	 *             if {@code id} is negative
 	 */
 	public void setId(int id) {
+		if (id < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.id = id;
 	}
 
