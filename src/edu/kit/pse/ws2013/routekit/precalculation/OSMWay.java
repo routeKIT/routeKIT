@@ -90,7 +90,7 @@ public class OSMWay {
 				String[] parts = tags.get("maxwidth").split(" ");
 				int multiplier;
 				if (parts.length <= 1 || "m".equals(parts[1])) {
-					multiplier = 1;
+					multiplier = 100;
 				} else {
 					// will be caught
 					throw new NumberFormatException("Unknown weight unit "
@@ -107,7 +107,7 @@ public class OSMWay {
 				String[] parts = tags.get("maxheight").split(" ");
 				int multiplier;
 				if (parts.length <= 1 || "m".equals(parts[1])) {
-					multiplier = 1;
+					multiplier = 100;
 				} else {
 					// will be caught
 					throw new NumberFormatException("Unknown height unit "
