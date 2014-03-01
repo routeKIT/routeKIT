@@ -2,6 +2,8 @@ package edu.kit.pse.ws2013.routekit.routecalculation;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +71,29 @@ public class FibonacciHeapTest {
 		assertEquals(fh.deleteMin().getValue(), 100);
 		assertEquals(fh.deleteMin().getValue(), 10);
 		assertEquals(fh.deleteMin().getValue(), 299);
+	}
+
+	@Test
+	public void sizeTest() {
+		fh.add(1, 1);
+
+		assertEquals(fh.getSize(), 1);
+	}
+
+	@Test
+	public void cutTest() {
+		List<FibonacciHeapEntry> fhList = new ArrayList<FibonacciHeapEntry>();
+
+		for (int i = 1; i <= 50; i++) {
+			fhList.add(fh.add(i, i + 1));
+		}
+
+		fhList.remove(fh.deleteMin());
+		// fhList.remove(fh.deleteMin());
+
+		for (FibonacciHeapEntry entry : fhList) {
+			fh.decreaseKey(entry, 1);
+		}
 	}
 
 }
