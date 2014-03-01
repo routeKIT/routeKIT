@@ -498,9 +498,57 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \subsection{kritischer Fehler}
 
 \subsection{funktionale Fehler}
+\begin{itemize}
+\bug{
+Im vergröberten Graph fehlen Straßen.
+}{
+Die entsprechenden Kanten werden weggeworfen.
+}{
+Der Fehler liegt in einem break, das nach der ersten ein-Kanten-Straße das Kanten-erzeugen abgebrochen hat.
+}{
+behoben
+}
+\bug{
+Das Rendern der Kacheln ist auf Zoomstufen weiter weg zu langsam.
+}{
+Es werden immernoch viele feine "Kanten" gezeichnet.
+}{
+Der Graph muss für die Anzeige behoben werden.
+}{
+behoben
+}
+\bug{
+Die Projektion von angeklickten Koordinaten auf Kanten war manchmal leicht schief.
+}{
+Die Projektion fand im Geokoordinatensystem statt und nicht nach der Mercator-Projektion (also im SMT-Koordinatensystem)
+}{
+Den Code anpassen, damit er die SMT Koordinaten benutzt.
+}{
+behoben
+}
+\bug{
+Eine Route auf einer einzelnen Kante, die nur in eine Richtung benutzbar ist, kann die Kante auch in die falsche Richtung benutzen.
+}{
+Es wird nur verhindert, dass man in Einbahnstraßen falschrum einbiegt und nicht falschrum darin losfährt.
+}{
+Führe den ersten Schritt der Routenberechnung gesondert aus, um dies als Spezialfall zu behandeln.
+}{
+behoben
+}
+\end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
-
+\begin{itemize}
+\bug{
+Die Routenberechnung ist zu langsam, auch für kurze Routen.
+}{
+Der Algorithmus hat trotzdem über alle Kanten des Graphen iteriert, obwohl das eigentlich dank der ArcFlags und einer kurzen Route nicht nötig wäre.
+}{
+Initialisiere mehrere Daterstrukturen "lazy". (nicht eingefügte Kanten sind "unendlich" weit weg.... usw.)
+}{
+behoben
+}
+\end{itemize}
 \section{Protokoll der Unit-Tests}
 
 \section{Testüberdeckung}
