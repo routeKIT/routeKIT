@@ -57,11 +57,12 @@
     \end{description}
 }
 
-\newcommand{\guitest}[2]{%
+\newcommand{\guitest}[3]{%
   \item
     \begin{description}
     \item[Aktion] #1
     \item[Ergebnis] #2
+    \item[Status] #3
     \end{description}
 }
 
@@ -556,35 +557,65 @@ Initialisiere mehrere Daterstrukturen "lazy". (nicht eingefügte Kanten sind "un
 }{
 behoben
 }
+\bug{
+Die Vorberechnung ist zu langsam.
+}{
+Es wurden für jeden der Dijkstras am Anfang alle Kanten des Graphen eingefügt.
+}{
+Es wird nur noch nötig die erste Kante am Anfang einzufügen.
+}{
+behoben
+}
 \end{itemize}
 \section{Protokoll der Unit-Tests}
-
+\begin{itemize}
+\test{
+FibonacciHeap
+}{
+Es werden die verschiedenen Operationen für den Heap getestet.
+So wird das Einfügen und Entfernen von Elementen, sowie das Ändern der Priorität getestet.
+}{
+Alle Operation müssen die erwarteten Werte zurückgeben. So muss die deleteMin-Methode nachdem Elemente hinzugefügt und Prioritäten geändert wurden immer das Element mit der minimalen Priorität zurückgeben.
+}{
+bestanden
+}
+\end{itemize}
 \section{Protokoll des GUI-Tests}
 \begin{itemize}
 \guitest{
 Start der Anwendung.
 }{
 Ein Progressdialog gibt den Anteil der ausgeführten Operationen und die jeweils benötigte Zeit an. Beim Erreichen von 100 Prozent schließt der Progressdialog und das Hauptfenster der Anwendung öffnet sich. Die zuletzt verwendete Kombination aus Profil und Karte ist eingeblendet. Auf dem Kartenausschnitt sind Straßen zu sehen. Es ist keine Start/Zielpunkt ausgewählt. Es wird keine Route angezeigt. Das Feld der Wegbeshreibung ist leer.
+}{
+bestanden
 }
 \guitest{
 Eingabe von ungültigen Koordinaten ins Start- bwz. Zielfeld und Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
 }{
 Das entschprechende Feld enthällt die Eingabe und färbt sich rot. Keine Route wird berechnet.
+}{
+bestanden
 }
 \guitest{
 Eingabe von gültigen Koordinaten nur ins Start- oder nur ins Zielfeld. Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
 }{
 Das Feld enthällt die Eingabe und die Grundfarbe ist weiß. Auf der Karte erscheint eine Fahne, die den eingegebenen Koordinaten entspricht. Keine Route wird berechnet, wenn das andere Feld ungültige Eingaben enthällt oder leer ist.
+}{
+bestanden
 }
 \guitest{
 Eingabe von gültigen Koordinaten in das zweite Feld. Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
 }{
 Das Feld enthällt die Eingabe und die Grundfarbe ist weiß. Auf der Karte erscheint eine Fahne, die den eingegebenen Koordinaten entspricht. Die Route wird auf der Karte angezeigt. Die Wegbeschreibung erscheint im dafür vorgesehenen Fenster.
+}{
+bestanden
 }
 \guitest{
 Der Verlauf-Knopf wird gedrückt. Alternativ, wird in der Menuleiste "routeKIT/Verlauf..." angeklickt. 
 }{
 Ein Fenster mit der Verlauf-Ansicht geht auf, welches die letzten Anfragen zeitlich sortiert enthält.
+}{
+bestanden
 }
 \end{itemize}
 
