@@ -548,7 +548,7 @@ public class MainView extends JFrame implements RouteModelListener {
 	public void textMessage(String str) {
 		int i = 0;
 		int iPrev = 0;
-		int width = routeScroll.getPreferredSize().width / 7;
+		int width = routeScroll.getParent().getPreferredSize().width / 7;
 		DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
 				.getModel();
 		listModel.clear();
