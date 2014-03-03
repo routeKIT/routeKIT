@@ -294,21 +294,21 @@ public class MainView extends JFrame implements RouteModelListener {
 	}
 
 	private void callController(JTextField textfield) {
+		Coordinates coordinates = null;
 		try {
-			Coordinates coordinates = Coordinates.fromString(textfield
-					.getText()); // can throw IllegalArgumentException
+			coordinates = Coordinates.fromString(textfield.getText());
+			// can throw IllegalArgumentException
 
-			if (textfield == startField) {
-				MainController.getInstance().setStartPoint(coordinates);
-			} else {
-				MainController.getInstance().setDestinationPoint(coordinates);
-			}
 		} catch (IllegalArgumentException e) {
 			textfield.setBackground(Color.RED);
 			textMessage("Falsche Koordinaten wurden eingegeben."
 					+ " Bitte halten Sie sich an das Format: \"Breitengrad Längengrad\","
 					+ " die jeweils der Form [+-]?[0-9]+.[0-9]* sein sollen.");
-			return;
+		}
+		if (textfield == startField) {
+			MainController.getInstance().setStartPoint(coordinates);
+		} else {
+			MainController.getInstance().setDestinationPoint(coordinates);
 		}
 	}
 
