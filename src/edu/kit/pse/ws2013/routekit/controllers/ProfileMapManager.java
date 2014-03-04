@@ -23,6 +23,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Dummies;
+import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
@@ -139,8 +140,7 @@ public class ProfileMapManager {
 						&& profileName.equals(current.getValue())) {
 					this.current = combination;
 					// un-lazy
-					combination.getWeights();
-					combination.getArcFlags();
+					combination.ensureLoaded(new DummyProgressReporter());
 				}
 			}
 		}
