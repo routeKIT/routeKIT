@@ -2,15 +2,10 @@ package edu.kit.pse.ws2013.routekit.util;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public class TestCoordinates {
+public class CoordinatesTest {
 	public static final double EPSILON = 0.00001;
-
-	@Before
-	public void setUp() throws Exception {
-	}
 
 	@Test
 	public void testAngleBetween() {
