@@ -95,6 +95,7 @@ public class RobotUI {
 		delay(6000);
 		clickAt(449, 396);// yes, I am sure
 		delay(3000);
+		waitForColor();
 	}
 
 	private static void testImportPrecalcMix() {
