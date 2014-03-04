@@ -105,7 +105,7 @@ public class Graph {
 		threads[0] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
-				indices[0] = new GraphIndex(Graph.this,
+				indices[0] = new TreeGraphIndex(Graph.this,
 						HighwayType.Residential, new ReducedGraphView(
 								Graph.this, HighwayType.Primary, 10));
 			}
@@ -113,7 +113,7 @@ public class Graph {
 		threads[1] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
-				indices[1] = new GraphIndex(Graph.this,
+				indices[1] = new TreeGraphIndex(Graph.this,
 						HighwayType.Residential, new ReducedGraphView(
 								Graph.this, HighwayType.Tertiary, 13));
 			}
@@ -121,7 +121,7 @@ public class Graph {
 		threads[2] = new Thread("L0 Graph-Index") {
 			@Override
 			public void run() {
-				indices[2] = new GraphIndex(Graph.this,
+				indices[2] = new TreeGraphIndex(Graph.this,
 						HighwayType.Residential, new IdentityGraphView(
 								Graph.this));
 			}
