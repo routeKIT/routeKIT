@@ -31,12 +31,12 @@ public class TreeGraphIndex implements GraphIndex {
 				|| (lat ? to.getLatitude() : to.getLongitude()) >= threshhold;
 	}
 
-	private class Node {
+	class Node {
 		Node left;
 		Node right;
 		float threshhold;
 		Set<Integer> contents;
-		private boolean splitLat;
+		boolean splitLat;
 
 		public Node(Set<Integer> contents, boolean splitLat) {
 			if (contents.size() < 50) {
@@ -246,6 +246,10 @@ public class TreeGraphIndex implements GraphIndex {
 		});
 		root.addAll(graph, leftTop, rightBottom, ints);
 		return ints;
+	}
+
+	public Graph getGraph() {
+		return graph;
 	}
 
 	@Override
