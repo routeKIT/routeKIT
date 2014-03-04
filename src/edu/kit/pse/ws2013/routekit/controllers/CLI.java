@@ -219,8 +219,16 @@ public class CLI implements ProgressListener, Runnable {
 			}
 			}
 		}
-		actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
-				deletedPrecalculations, newPrecalculations);
+		if (args.length == 0) {
+			// Note: this only happens if EasterEggCLI passes no arguments to
+			// the super constructor; if there really are no command line
+			// arguments, MainController detects that and skips the CLI
+			// completely
+			actions = ManagementActions.noActions;
+		} else {
+			actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
+					deletedPrecalculations, newPrecalculations);
+		}
 	}
 
 	@Override
