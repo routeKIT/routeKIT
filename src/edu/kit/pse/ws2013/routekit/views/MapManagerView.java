@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -248,6 +249,13 @@ public class MapManagerView extends JDialog {
 										"Ungültiger Name – bitte geben Sie einen anderen Namen ein.",
 										"Fehler", JOptionPane.ERROR_MESSAGE);
 						continue;
+					} catch (FileNotFoundException ex) {
+						JOptionPane
+								.showMessageDialog(
+										MapManagerView.this,
+										"Datei existiert nicht – bitte geben Sie einen gültigen Dateinamen ein.",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
+						continue;
 					}
 				} while (true);
 			}
@@ -284,8 +292,16 @@ public class MapManagerView extends JDialog {
 				if (result == JOptionPane.OK_OPTION) {
 					if (!pathUpdate.getText().equals("")) {
 						File newfile = new File(pathUpdate.getText());
-						mmc.importMap((String) mapname.getSelectedItem(),
-								newfile);
+						try {
+							mmc.importMap((String) mapname.getSelectedItem(),
+									newfile);
+						} catch (FileNotFoundException e1) {
+							JOptionPane
+									.showMessageDialog(
+											MapManagerView.this,
+											"Datei existiert nicht – bitte geben Sie einen gültigen Dateinamen ein.",
+											"Fehler", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 			}

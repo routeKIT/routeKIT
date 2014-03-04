@@ -1,6 +1,7 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -188,13 +189,18 @@ public class MapManagerController {
 	 *            The name of the new map.
 	 * @param file
 	 *            The file from which it should be loaded (later).
+	 * @throws FileNotFoundException
+	 *             If the file doesn’t exists.
 	 * @throws IllegalArgumentException
 	 *             If the map name is {@link MapManager#checkMapName(String)
 	 *             invalid}.
 	 */
-	public void importMap(String name, File file) {
+	public void importMap(String name, File file) throws FileNotFoundException {
 		if (!MapManager.getInstance().checkMapName(name)) {
 			throw new IllegalArgumentException("Invalid map name!");
+		}
+		if (!file.exists()) {
+			throw new FileNotFoundException();
 		}
 		currentMap = new FutureMap(name, file);
 		StreetMap previousMap = mapsByName.get(name);
