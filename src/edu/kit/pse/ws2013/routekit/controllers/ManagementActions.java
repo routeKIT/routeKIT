@@ -160,6 +160,10 @@ public class ManagementActions {
 							.getMessage());
 					e.printStackTrace();
 					failedMaps.add(map);
+					if (selectedMap != null
+							&& selectedMap.getName().equals(map.getName())) {
+						selectedMap = null;
+					}
 					continue;
 				}
 				try (CloseableTask task3 = reporter
