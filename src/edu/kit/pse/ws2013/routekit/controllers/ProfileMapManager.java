@@ -106,8 +106,17 @@ public class ProfileMapManager {
 		for (Entry<String, Set<String>> entry : combinations.entrySet()) {
 			String mapName = entry.getKey();
 			StreetMap map = mapsByName.get(mapName);
+			if (map == null) {
+				System.err.println("Map '" + mapName + "' not found, skipping");
+				continue;
+			}
 			for (String profileName : entry.getValue()) {
 				Profile profile = profilesByName.get(profileName);
+				if (profile == null) {
+					System.err.println("Profile '" + profileName
+							+ "' not found, skipping");
+					continue;
+				}
 				ProfileMapCombination combination;
 				try {
 					combination = ProfileMapCombination
@@ -118,10 +127,6 @@ public class ProfileMapManager {
 							&& current.getValue().equals(profileName)) {
 						// the current combination may not have been
 						// precalculated
-						if (map == null) {
-							// skip
-							continue;
-						}
 						combination = new ProfileMapCombination(map, profile);
 						this.current = combination;
 						continue;
