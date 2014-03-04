@@ -55,4 +55,28 @@ public class TestEasterEggCLI {
 				"     /_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\",
 				"    /_/o/_/_/@/_/_/o/_/0/_\\", "             [___]  ");
 	}
+
+	@Test
+	public void testHelp() {
+		doTest(new String[] { "--help" },
+				"routeKIT: Programm zur Routenplanung und -berechnung.", "",
+				"Optionen:", "", "  --help", "  --usage",
+				"      Gibt diesen Hilfetext aus.", "  --version",
+				"      Gibt die Version von routeKIT aus.",
+				"  --import <Name> <Datei>", "  --import-map <Name> <Datei>",
+				"      Importiert eine Karte aus einer OSM-Datei.",
+				"  --update <Name> <Datei>", "  --update-map <Name> <Datei>",
+				"      Aktualisiert eine Karte aus einer OSM-Datei.",
+				"  --delete-map <Name>", "      Löscht eine Karte.",
+				"  --delete-precalculation <Kartenname> <Profilname>",
+				"      Löscht eine Vorberechnung.",
+				"  --precalculate <Kartenname> <Profilname>",
+				"      Führt eine Vorberechnung durch.", "",
+				"Dieses Programm ist nicht aptitude.");
+	}
+
+	@Test
+	public void testVersion() {
+		doTest(new String[] { "--version" }, "routeKIT version 1.0.0");
+	}
 }
