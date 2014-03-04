@@ -406,11 +406,6 @@ public class MainController {
 	 */
 	public static void main(String[] args) {
 		if (args.length != 0) {
-			try {
-				ProfileMapManager.init(FileUtil.getRootDir(), null);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			new TerminalCLI(args).run();
 			return;
 		}

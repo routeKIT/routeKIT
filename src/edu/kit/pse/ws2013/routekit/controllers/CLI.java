@@ -1,6 +1,7 @@
 package edu.kit.pse.ws2013.routekit.controllers;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,14 +20,36 @@ public class CLI implements ProgressListener, Runnable {
 	protected final ManagementActions actions;
 
 	public CLI(String[] args) {
+		final MapManager mapManager;
+		final ProfileManager profileManager;
+		final ProfileMapManager profileMapManager;
+		if (args.length == 0) {
+			actions = ManagementActions.noActions;
+			return;
+		} else if (args.length == 1
+				&& (args[0].equals("-h") || args[0].equals("--help")
+						|| args[0].equals("--usage") || args[0]
+							.equals("--version"))) {
+			// these options don’t need the ProfileMapManager, skip init
+			mapManager = null;
+			profileManager = null;
+			profileMapManager = null;
+		} else {
+			try {
+				ProfileMapManager.init(FileUtil.getRootDir(), null);
+				mapManager = MapManager.getInstance();
+				profileManager = ProfileManager.getInstance();
+				profileMapManager = ProfileMapManager.getInstance();
+			} catch (IOException e) {
+				e.printStackTrace();
+				actions = ManagementActions.noActions;
+				return;
+			}
+		}
 		final Set<FutureMap> newOrUpdatedMaps = new HashSet<>();
 		final Set<StreetMap> deletedMaps = new HashSet<>();
 		final Set<ProfileMapCombination> deletedPrecalculations = new HashSet<>();
 		final Set<ProfileMapCombination> newPrecalculations = new HashSet<>();
-		final MapManager mapManager = MapManager.getInstance();
-		final ProfileManager profileManager = ProfileManager.getInstance();
-		final ProfileMapManager profileMapManager = ProfileMapManager
-				.getInstance();
 		for (int i = 0; i < args.length; i++) {
 			final String arg = args[i];
 			switch (arg) {
@@ -219,16 +242,8 @@ public class CLI implements ProgressListener, Runnable {
 			}
 			}
 		}
-		if (args.length == 0) {
-			// Note: this only happens if EasterEggCLI passes no arguments to
-			// the super constructor; if there really are no command line
-			// arguments, MainController detects that and skips the CLI
-			// completely
-			actions = ManagementActions.noActions;
-		} else {
-			actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
-					deletedPrecalculations, newPrecalculations);
-		}
+		actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
+				deletedPrecalculations, newPrecalculations);
 	}
 
 	@Override
