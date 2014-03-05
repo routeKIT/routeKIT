@@ -35,6 +35,9 @@ public class RobotUI {
 		switchOSM();
 		testOpenAdminMenu();
 		testZoom();
+		openMenu('v', 'a');
+		delay(1000);
+		openMenu('v', 'a');
 
 		testRoute("49.01u628 8.409197", "49.008965 8.412416");
 		swap();
@@ -74,9 +77,13 @@ public class RobotUI {
 		type("testprofile1");
 		type(KeyEvent.VK_ENTER);
 		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_SPACE);
 		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_SPACE);
 		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_SPACE);
 		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_SPACE);
 		type(KeyEvent.VK_TAB);
 		selectAll();
 		type("400");
@@ -91,8 +98,22 @@ public class RobotUI {
 		type("1");
 		type(KeyEvent.VK_TAB);
 		selectAll();
-		type("1");
-		clickAt(672, 530);
+		type("1"); //
+
+		clickAt(672, 530); // ok
+		openMenu('v', 'p');
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_UP);
+		type(KeyEvent.VK_TAB);
+		tester.keyPress(KeyEvent.VK_SHIFT);
+		delay(200);
+		type(KeyEvent.VK_TAB);
+		delay(200);
+		tester.keyRelease(KeyEvent.VK_SHIFT);
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_TAB);
+		clickAt(672, 530); // ok
 		openMenu('v', 'k');
 
 		clickAt(717, 314); // hinzufügen
