@@ -1,8 +1,6 @@
 package edu.kit.pse.ws2013.routekit.map;
 
 import java.awt.geom.Line2D;
-import java.util.HashMap;
-
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class ReducedGraphView implements GraphView {
@@ -166,17 +164,6 @@ public class ReducedGraphView implements GraphView {
 			used[startIdx] = true;
 			used[endIdx - 1] = true;
 		}
-	}
-
-	public static void main(String[] args) {
-		EdgeProperties ep = new EdgeProperties(HighwayType.Residential, "", "",
-				10);
-		Graph g = new Graph(new int[] { 0, 1, 2, 3, 4, 6 }, new int[] { 1, 2,
-				3, 4, 3, 5, 4 }, new HashMap<Integer, NodeProperties>(),
-				new EdgeProperties[] { ep, ep, ep, ep, ep, ep, ep },
-				new float[] { 0, 1, 0.5f, 0, 0, 0 }, new float[] { 0, 1, 2, 3,
-						4, 5 });
-		new ReducedGraphView(g, HighwayType.Residential, 10);
 	}
 
 	@Override

@@ -21,7 +21,6 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ArcFlags;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.Weights;
-import edu.kit.pse.ws2013.routekit.precalculation.DummyMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -68,33 +67,6 @@ public class Dummies {
 		new PreCalculator().doPrecalculation(karlsruheCar,
 				new DummyProgressReporter());
 		ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
-	}
-
-	/**
-	 * Creates a dummy installation with an almost-empty map and complete
-	 * (i.&nbsp;e., useless) arc flags.
-	 * 
-	 * @param rootDir
-	 *            The root directory of the routeKIT installation.
-	 * @see DummyMapImporter
-	 */
-	public static void createDummies(File rootDir) throws IOException,
-			SAXException {
-		rootDir.mkdir();
-		new File(rootDir, "routeKIT.idx").createNewFile();
-		ProfileMapManager.init(rootDir, new DummyProgressReporter());
-		ProfileMapCombination combination = new ProfileMapCombination(
-				new DummyMapImporter().importMap(new File("dummy"),
-						"Karlsruhe", new DummyProgressReporter()),
-				Profile.defaultCar);
-		int[] arc = new int[7];
-		int[] w = new int[7];
-		Arrays.fill(arc, -1);
-		Arrays.fill(w, 1);
-		combination.setArcFlags(new ArcFlags(arc), 1000);
-		combination.setWeights(new Weights(w), 1000);
-		MapManager.getInstance().saveMap(combination.getStreetMap());
-		ProfileMapManager.getInstance().setCurrentCombination(combination);
 	}
 
 	/**

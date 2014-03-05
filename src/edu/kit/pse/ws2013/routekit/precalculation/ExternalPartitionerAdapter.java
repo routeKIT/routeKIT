@@ -34,9 +34,6 @@ public class ExternalPartitionerAdapter implements GraphPartitioner {
 			} catch (IOException | InterruptedException f) {
 				e.printStackTrace();
 				f.printStackTrace();
-				System.err.println("Falling back to “dummy” partitions...");
-				new DummyGraphPartitioner().partitionGraph(graph,
-						numberOfPartitions);
 				return;
 			}
 		}
