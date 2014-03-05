@@ -250,7 +250,7 @@ public class ProfileMapManager {
 		}
 	}
 
-	private void rewriteIndex() throws IOException {
+	void rewriteIndex() throws IOException {
 		Map<StreetMap, Set<ProfileMapCombination>> combinationsByMap = new HashMap<>();
 		for (ProfileMapCombination combo : precalculations) {
 			Set<ProfileMapCombination> combos = combinationsByMap.get(combo

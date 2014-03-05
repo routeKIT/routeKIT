@@ -82,6 +82,11 @@ public class MapManager {
 		}
 		deletePrecalculations(map);
 		removeMap(map);
+		try {
+			ProfileMapManager.getInstance().rewriteIndex();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
