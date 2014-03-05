@@ -268,6 +268,13 @@ public class ProfileMapManager {
 		}
 		currentMapCombos.add(current);
 		combinationsByMap.put(current.getStreetMap(), currentMapCombos);
+		for (StreetMap map : MapManager.getInstance().getMaps()) {
+			if (!combinationsByMap.containsKey(map)) {
+				// maps with no precalculations should still be in the index
+				combinationsByMap
+						.put(map, new HashSet<ProfileMapCombination>());
+			}
+		}
 		try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(new File(root, "routeKIT.idx")),
 				INDEX_FILE_CHARSET))) {
