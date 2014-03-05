@@ -28,28 +28,49 @@ public class TestCLI {
 	@Test
 	public void testPrecalculate() throws IOException, InterruptedException,
 			ReflectiveOperationException {
-		runCLI("--import", "testmap1", Resources.getKarlsruheBigLocation());
-		runCLI("--precalculate", "testmap1", "PKW (Standard)");
+
+		runCLI(false, "--import", "testmap1",
+				Resources.getKarlsruheBigLocation());
+		runCLI(false, "--select", "testmap1", "PKW (Standard)");
+		runCLI(true, "--import", "testmap1",
+				Resources.getKarlsruheBigLocation());
+		runCLI(true, "--update", "testmap2",
+				Resources.getKarlsruheBigLocation());
+		runCLI(true, "--import");
+		runCLI(true, "--import", " + ", Resources.getKarlsruheBigLocation());
+		runCLI(true, "--delete-map");
+		runCLI(false, "--precalculate", "testmap1", "PKW (Standard)");
+		runCLI(true, "--precalculate", "testmap1", "PKW (Standard)");
+		runCLI(true, "--precalculate", "testmap1", "PKW Non-existent");
+
+		runCLI(false, "--select", "Regierungsbezirk Karlsruhe",
+				"PKW (Standard)");
 		System.gc();
 		System.gc();
 		System.gc();
 		// if (true) {
 		// return;
 		// }
-		runCLI("--delete-precalculation", "testmap1", "PKW (Standard)",
+		runCLI(false, "--delete-precalculation", "testmap1", "PKW (Standard)",
 				"--delete-map", "testmap1");
+		runCLI(true, "--delete-precalculation", "Regierungsbezirk Karlsruhe",
+				"LKW (Standard)");
 
 	}
 
-	private void runCLI(String... args) throws IOException,
-			ReflectiveOperationException, InterruptedException {
+	private void runCLI(final boolean shouldFail, String... args)
+			throws IOException, ReflectiveOperationException,
+			InterruptedException {
 		final PrintStream err = System.err;
 		final PrintStream out = System.out;
+		fail = false;
 		try (PrintStream newErr = new PrintStream(new OutputStream() {
 			@Override
 			public void write(int b) throws IOException {
 				fail = true;
-				err.write(b);
+				if (!shouldFail) {
+					err.write(b);
+				}
 			}
 		}); PrintStream newOut = new PrintStream(new OutputStream() {
 
@@ -64,7 +85,7 @@ public class TestCLI {
 		}
 		System.setErr(err);
 		System.setOut(out);
-		if (fail) {
+		if (shouldFail ^ fail) {
 			Assert.fail();
 		}
 	}
