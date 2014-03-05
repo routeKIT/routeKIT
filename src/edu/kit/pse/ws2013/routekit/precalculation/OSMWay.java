@@ -22,7 +22,8 @@ import edu.kit.pse.ws2013.routekit.profiles.VehicleType;
 public class OSMWay {
 	private final Map<String, String> tags;
 	private EdgeProperties props = null;
-	private int id = -1;
+	private int id;
+	private boolean idSet = false;
 
 	/**
 	 * Creates a new object from the given OSM tags.
@@ -42,7 +43,7 @@ public class OSMWay {
 	 *             if the ID has not been set yet
 	 */
 	public int getId() {
-		if (id < 0) {
+		if (!idSet) {
 			throw new IllegalStateException();
 		}
 		return id;
@@ -53,14 +54,10 @@ public class OSMWay {
 	 * 
 	 * @param id
 	 *            the ID to set
-	 * @throws IllegalArgumentException
-	 *             if {@code id} is negative
 	 */
 	public void setId(int id) {
-		if (id < 0) {
-			throw new IllegalArgumentException();
-		}
 		this.id = id;
+		idSet = true;
 	}
 
 	/**

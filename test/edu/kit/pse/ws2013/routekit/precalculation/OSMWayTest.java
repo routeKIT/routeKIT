@@ -44,11 +44,6 @@ public class OSMWayTest {
 		assertEquals(42, dummyWay.getId());
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetIdNegative() {
-		dummyWay.setId(-2);
-	}
-
 	@Test
 	public void testGetRestrictionsNone() {
 		assertNull(dummyWay.getRestriction());
