@@ -181,7 +181,7 @@ public class RobotUI {
 		delay(400);
 		tester.mouseWheel(-1);
 		delay(400);
-		testRoute("49.008312 8.407717", "49.009594 8.406794");
+		testRoute("49.008312 8.407717", "49.00843 8.407524");
 		delay(1000);
 		swap();
 		tester.mouseWheel(1);
