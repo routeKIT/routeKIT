@@ -1,6 +1,15 @@
 package edu.kit.pse.ws2013.routekit.map;
 
 import java.awt.geom.Line2D;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -157,5 +166,37 @@ public class ArrayGraphIndex implements GraphIndex {
 	@Override
 	public GraphView getView() {
 		return graphView;
+	}
+
+	public void save(File file, File viewFile) throws IOException {
+		try (RandomAccessFile raf = new RandomAccessFile(file, "rw");
+				FileChannel fc = raf.getChannel()) {
+			MappedByteBuffer mbb = fc.map(MapMode.READ_WRITE, 0,
+					(2 + contents.length + nodes.length) * 4);
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().put(contents.length)
+					.put(nodes.length).put(contents).put(nodes);
+			mbb.force();
+
+			graphView.save(viewFile);
+		}
+	}
+
+	public static ArrayGraphIndex load(Graph graph, File file, File viewFile)
+			throws IOException {
+		try (FileInputStream fis = new FileInputStream(file);
+				DataInputStream dis = new DataInputStream(fis);
+				FileChannel fc = fis.getChannel()) {
+			int contentLength = dis.readInt();
+			int nodesLength = dis.readInt();
+			MappedByteBuffer mbb = fc.map(MapMode.READ_ONLY, 8,
+					(contentLength + nodesLength) * 4);
+			int[] content = new int[contentLength];
+			int[] nodes = new int[nodesLength];
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(content)
+					.get(nodes);
+
+			return new ArrayGraphIndex(graph, GraphView.load(graph, viewFile),
+					content, nodes);
+		}
 	}
 }

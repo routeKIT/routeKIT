@@ -1,6 +1,11 @@
 package edu.kit.pse.ws2013.routekit.map;
 
-public class IdentityGraphView implements GraphView {
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class IdentityGraphView extends GraphView {
 	Graph g;
 
 	public IdentityGraphView(Graph g) {
@@ -27,4 +32,11 @@ public class IdentityGraphView implements GraphView {
 		return edg;
 	}
 
+	@Override
+	public void save(File file) throws IOException {
+		try (FileOutputStream fos = new FileOutputStream(file);
+				DataOutputStream dos = new DataOutputStream(fos)) {
+			dos.writeInt(0);
+		}
+	}
 }
