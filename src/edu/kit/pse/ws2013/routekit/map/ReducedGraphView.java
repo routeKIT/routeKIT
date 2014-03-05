@@ -1,9 +1,20 @@
 package edu.kit.pse.ws2013.routekit.map;
 
 import java.awt.geom.Line2D;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteOrder;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel.MapMode;
+import java.util.HashMap;
+
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
-public class ReducedGraphView implements GraphView {
+public class ReducedGraphView extends GraphView {
 
 	int[] startnodes;
 	int[] endnodes;
@@ -133,6 +144,13 @@ public class ReducedGraphView implements GraphView {
 		mapping = out;
 	}
 
+	private ReducedGraphView(Graph graph, int[] mapping, int[] startnodes,
+			int[] endnodes) {
+		this.mapping = mapping;
+		this.startnodes = startnodes;
+		this.endnodes = endnodes;
+	}
+
 	private void addEdge(int start, int end, int org) {
 		startnodes[edgepos] = start;
 		endnodes[edgepos] = end;
@@ -184,5 +202,35 @@ public class ReducedGraphView implements GraphView {
 	@Override
 	public int translate(int edg) {
 		return mapping[edg];
+	}
+
+	@Override
+	public void save(File file) throws IOException {
+		try (RandomAccessFile raf = new RandomAccessFile(file, "rw");
+				FileChannel fc = raf.getChannel()) {
+			MappedByteBuffer mbb = fc.map(MapMode.READ_WRITE, 0,
+					(1 + 3 * edgepos) * 4);
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().put(edgepos)
+					.put(mapping).put(startnodes).put(endnodes);
+			mbb.force();
+		}
+	}
+
+	public static ReducedGraphView load(Graph graph, File file)
+			throws IOException {
+		try (FileInputStream fis = new FileInputStream(file);
+				DataInputStream dis = new DataInputStream(fis);
+				FileChannel fc = fis.getChannel()) {
+			int edgepos = dis.readInt();
+			MappedByteBuffer mbb = fc
+					.map(MapMode.READ_ONLY, 4, edgepos * 3 * 4);
+			int[] mapping = new int[edgepos];
+			int[] startnodes = new int[edgepos];
+			int[] endnodes = new int[edgepos];
+			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(mapping)
+					.get(startnodes).get(endnodes);
+
+			return new ReducedGraphView(graph, mapping, startnodes, endnodes);
+		}
 	}
 }

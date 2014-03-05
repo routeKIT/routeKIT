@@ -35,7 +35,7 @@ public class Graph {
 	EdgeProperties[] edgeProps;
 	float[] lat;
 	float[] lon;
-	GraphIndex[] indices;
+	ArrayGraphIndex[] indices;
 	int[] correspondingEdges;
 
 	/**
@@ -63,6 +63,12 @@ public class Graph {
 	public Graph(int[] nodes, int[] edges,
 			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
 			float[] lat, float[] lon) {
+		this(nodes, edges, nodeProps, edgeProps, lat, lon, null);
+	}
+
+	public Graph(int[] nodes, int[] edges,
+			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
+			float[] lat, float[] lon, ArrayGraphIndex[] indices) {
 		if (edgeProps.length != edges.length) {
 			throw new IllegalArgumentException(
 					"Must have as many EdgeProperties as Edges!");
@@ -96,34 +102,49 @@ public class Graph {
 				}
 			}
 		}
-		initIndices();
+		if (indices == null || indices.length != 4) {
+			initIndices();
+		} else {
+			this.indices = indices;
+		}
 	}
 
 	private void initIndices() {
-		Thread[] threads = new Thread[3];
-		indices = new GraphIndex[3];
-		threads[0] = new Thread("L2 Graph-Index") {
+		Thread[] threads = new Thread[4];
+		indices = new ArrayGraphIndex[4];
+		threads[0] = new Thread("L3 Graph-Index") {
 			@Override
 			public void run() {
-				indices[0] = new GraphIndex(Graph.this,
-						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Primary, 10));
+				indices[0] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Primary,
+								10))).getIndex();
 			}
 		};
-		threads[1] = new Thread("L1 Graph-Index") {
+		threads[1] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
-				indices[1] = new GraphIndex(Graph.this,
-						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Tertiary, 13));
+				indices[1] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Secondary,
+								12))).getIndex();
 			}
 		};
-		threads[2] = new Thread("L0 Graph-Index") {
+		threads[2] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
-				indices[2] = new GraphIndex(Graph.this,
-						HighwayType.Residential, new IdentityGraphView(
-								Graph.this));
+				indices[2] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Tertiary,
+								14))).getIndex();
+			}
+		};
+		threads[3] = new Thread("L0 Graph-Index") {
+			@Override
+			public void run() {
+				indices[3] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new IdentityGraphView(Graph.this))).getIndex();
 			}
 		};
 		for (Thread t : threads) {
@@ -207,7 +228,10 @@ public class Graph {
 	 * @return the {@link GraphIndex} data structure
 	 */
 	public GraphIndex getIndex(int zoom) {
-		if (zoom > 13) {
+		if (zoom > 14) {
+			return indices[3];
+		}
+		if (zoom > 12) {
 			return indices[2];
 		}
 		if (zoom > 10) {
@@ -276,6 +300,31 @@ public class Graph {
 	 */
 	public int getNumberOfNodes() {
 		return nodes.length;
+	}
+
+	private void saveIndexes(File dir) throws IOException {
+		for (int i = 0; i < indices.length; i++) {
+			final ArrayGraphIndex index = indices[i];
+			final File file = new File(dir, "L" + (3 - i) + ".index");
+			final File viewFile = new File(dir, file.getName().replace("index",
+					"view"));
+			index.save(file, viewFile);
+		}
+	}
+
+	private static ArrayGraphIndex[] loadIndexes(Graph graph, File dir) {
+		try {
+			ArrayGraphIndex[] indices = new ArrayGraphIndex[4];
+			for (int i = 0; i < indices.length; i++) {
+				final File file = new File(dir, "L" + (3 - i) + ".index");
+				final File viewFile = new File(dir, file.getName().replace(
+						"index", "view"));
+				indices[i] = ArrayGraphIndex.load(graph, file, viewFile);
+			}
+			return indices;
+		} catch (IOException e) {
+			return null;
+		}
 	}
 
 	/**
@@ -375,6 +424,12 @@ public class Graph {
 				}
 			}
 			raf.writeInt(0);
+
+			try {
+				saveIndexes(file.getAbsoluteFile().getParentFile());
+			} catch (IOException e) {
+				// ignore
+			}
 		}
 	}
 
@@ -454,9 +509,26 @@ public class Graph {
 			reporter.popTask("Lese Datei");
 			reporter.pushTask("Baue Graphstruktur");
 
+			// loading the indices requires a Graph object, but the Graph takes
+			// the indices as constructor arguments, so we get a little tricksy
+
+			ArrayGraphIndex[] indices = new ArrayGraphIndex[4];
 			Graph graph = new Graph(nodes, edges, nodeProps, edgeProps, lats,
-					lons);
+					lons, indices);
+			ArrayGraphIndex[] loadedIndices = loadIndexes(graph,
+					file.getParentFile());
+			if (loadedIndices == null) {
+				// no indices saved, build the indices from scratch
+				graph.initIndices();
+				// then save them for next time
+				graph.saveIndexes(file.getParentFile());
+			} else {
+				// inject indices into graph
+				System.arraycopy(loadedIndices, 0, indices, 0,
+						loadedIndices.length);
+			}
 			reporter.popTask();
+
 			return graph;
 		}
 	}
