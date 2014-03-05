@@ -78,6 +78,8 @@ public class CLI implements ProgressListener, Runnable {
 							"      Aktualisiert eine Karte aus einer OSM-Datei.",
 							"  --delete-map <Name>",
 							"      Löscht eine Karte.",
+							"  --select <Kartenname> <Profilname>",
+							"      Wählt eine Kombination aus.",
 							"  --delete-precalculation <Kartenname> <Profilname>",
 							"      Löscht eine Vorberechnung.",
 							"  --precalculate <Kartenname> <Profilname>",
@@ -111,6 +113,18 @@ public class CLI implements ProgressListener, Runnable {
 				newOrUpdatedMaps.add(new FutureMap(name, new File(file)));
 				break;
 			}
+			case "--select": {
+				checkOptionCount(args, i, arg, 2);
+				String mapName = args[++i];
+				String profileName = args[++i];
+				StreetMap map = findMap(mapManager, mapName, true);
+				Profile profile = findProfile(profileManager, profileName);
+				ProfileMapCombination combination = profileMapManager
+						.getPrecalculation(profile, map);
+				ProfileMapManager.getInstance().setCurrentCombination(
+						combination);
+				break;
+			}
 			case "--delete-map": {
 				checkOptionCount(args, i, arg, 1);
 				String name = args[++i];
@@ -123,10 +137,8 @@ public class CLI implements ProgressListener, Runnable {
 				checkOptionCount(args, i, arg, 2);
 				String mapName = args[++i];
 				String profileName = args[++i];
-				StreetMap map = null;
-				map = findMap(mapManager, mapName, true);
-				Profile profile = null;
-				profile = findProfile(profileManager, profileName);
+				StreetMap map = findMap(mapManager, mapName, true);
+				Profile profile = findProfile(profileManager, profileName);
 				ProfileMapCombination combination = profileMapManager
 						.getPrecalculation(profile, map);
 				if (combination == null) {
