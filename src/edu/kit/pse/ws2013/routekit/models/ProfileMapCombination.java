@@ -220,8 +220,8 @@ public class ProfileMapCombination {
 		File weightsFile = new File(directory, name + ".weights");
 		File arcFlagsFile = new File(directory, name + ".arcflags");
 		File timeFile = new File(directory, name + ".time");
-		weights.save(weightsFile);
-		arcFlags.save(arcFlagsFile);
+		getWeights().save(weightsFile);
+		getArcFlags().save(arcFlagsFile);
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(timeFile))) {
 			bw.write(Integer.toString(calculationTime) + "\n");
 		}
