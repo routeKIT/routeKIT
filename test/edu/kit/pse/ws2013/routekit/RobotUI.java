@@ -12,13 +12,6 @@ public class RobotUI {
 
 	private static Robot tester;
 
-	private static void waitForColor() {
-		delay(2000);
-		while (Color.white.equals(tester.getPixelColor(450, 428))) {
-			delay(500);
-		}
-	}
-
 	public static void main(String[] args) throws AWTException {
 		tester = new Robot();
 		delay(5000);
@@ -52,27 +45,27 @@ public class RobotUI {
 		testZoom2();// for one-way arrows
 		testProfile();
 		testHistory();
-		testRMProfileInMap();
+		testRemoveProfileInMap();
 		deleteMap();
 		deleteProfile();
 		delay(5000);
 		System.out.println(MouseInfo.getPointerInfo().getLocation());
 	}
 
-	private static void testDrag() {
-		tester.mouseMove(700, 300);
-		delay(500);
-		tester.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-		delay(500);
-		tester.mouseMove(800, 350);
-		delay(500);
-		tester.mouseMove(700, 300);
-		delay(500);
-		tester.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-		delay(500);
+	private static void testHistory() {
+		openMenu('r', 'v');
+		clickAt(535, 573); // Abbrechen
+		clickAt(135, 141); // Verlauf Button
+		clickAt(441, 567); // OK ohne selection
+		clickAt(377, 147); // Selection
+		clickAt(441, 567); // OK
+		openMenu('r', 'v');
+		clickAt(377, 147); // Selection
+		clickAt(377, 147); // Selection
+
 	}
 
-	private static void testRMProfileInMap() {
+	private static void testRemoveProfileInMap() {
 		openMenu('v', 'k');
 		type(KeyEvent.VK_TAB);
 		type(KeyEvent.VK_TAB);
@@ -88,19 +81,6 @@ public class RobotUI {
 		delay(6000);
 		clickAt(447, 419);// yes, I am sure
 		delay(1000);
-
-	}
-
-	private static void testHistory() {
-		openMenu('r', 'v');
-		clickAt(535, 573); // Abbrechen
-		clickAt(135, 141); // Verlauf Button
-		clickAt(441, 567); // OK ohne selection
-		clickAt(377, 147); // Selection
-		clickAt(441, 567); // OK
-		openMenu('r', 'v');
-		clickAt(377, 147); // Selection
-		clickAt(377, 147); // Selection
 
 	}
 
@@ -221,13 +201,27 @@ public class RobotUI {
 		waitForColor();
 	}
 
-	private static void assertColor(int i, int j, Color toTest) {
-		Color c = tester.getPixelColor(i, j);
-		if (!c.equals(toTest)) {
-			System.out.println(c);
-			System.out.println("Error");
-		}
+	private static void testOpenAdminMenu() {
+		openMenu('v', 'k');
+		// type(KeyEvent.VK_ESCAPE);
+		clickAt(762, 529); // TODO?
+		delay(500);
+		openMenu('v', 'p');
+		type(KeyEvent.VK_ESCAPE);
+		delay(500);
+	}
 
+	private static void testDrag() {
+		tester.mouseMove(700, 300);
+		delay(500);
+		tester.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		delay(500);
+		tester.mouseMove(800, 350);
+		delay(500);
+		tester.mouseMove(700, 300);
+		delay(500);
+		tester.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		delay(500);
 	}
 
 	private static void testZoom2() {
@@ -270,24 +264,6 @@ public class RobotUI {
 		openMenu('v', 'o');
 	}
 
-	private static void testOpenAdminMenu() {
-		openMenu('v', 'k');
-		// type(KeyEvent.VK_ESCAPE);
-		clickAt(762, 529); // TODO?
-		delay(500);
-		openMenu('v', 'p');
-		type(KeyEvent.VK_ESCAPE);
-		delay(500);
-	}
-
-	private static void focus() {
-		clickAt(100, 200);
-	}
-
-	private static void swap() {
-		clickAt(36, 81);
-	}
-
 	private static void testRoute(String a, String b) {
 		clickAt(188, 71);
 		selectAll();
@@ -315,24 +291,12 @@ public class RobotUI {
 		clickAt(980, 490);
 	}
 
-	private static void selectAll() {
-		// type(KeyEvent.VK_END);
-		// delay(500);
-		// tester.keyPress(KeyEvent.VK_SHIFT);
-		// System.out.println("HIFT");
-		// delay(1000);
-		type(KeyEvent.VK_HOME);
-		// delay(1000);
-		// System.out.println("EHS");
-		// tester.keyRelease(KeyEvent.VK_SHIFT);
-		// for (int i = 0; i < 30; i++) {
-		// type(KeyEvent.VK_DELETE);
-		// }
-		tester.keyPress(KeyEvent.VK_CONTROL);
-		delay(100);
-		type(KeyEvent.VK_A);
-		delay(100);
-		tester.keyRelease(KeyEvent.VK_CONTROL);
+	private static void focus() {
+		clickAt(100, 200);
+	}
+
+	private static void swap() {
+		clickAt(36, 81);
 	}
 
 	private static void exportHTML() {
@@ -346,14 +310,6 @@ public class RobotUI {
 		type("test.html");
 		type(KeyEvent.VK_ENTER);
 		delay(1000);
-	}
-
-	private static void openMenu(char menu, char sub) {
-		tester.keyPress(KeyEvent.VK_ALT);
-		type(KeyEvent.VK_A + menu - 'a');
-		tester.keyRelease(KeyEvent.VK_ALT);
-		type(KeyEvent.VK_A + sub - 'a');
-		delay(500);
 	}
 
 	private static void exportGPX() {
@@ -378,6 +334,45 @@ public class RobotUI {
 		tester.keyPress(KeyEvent.VK_ALT);
 		type(KeyEvent.VK_F4);
 		tester.keyRelease(KeyEvent.VK_ALT);
+	}
+
+	// --- Util Functions ---
+
+	private static void assertColor(int i, int j, Color toTest) {
+		Color c = tester.getPixelColor(i, j);
+		if (!c.equals(toTest)) {
+			System.out.println(c);
+			System.out.println("Error");
+		}
+
+	}
+
+	private static void selectAll() {
+		// type(KeyEvent.VK_END);
+		// delay(500);
+		// tester.keyPress(KeyEvent.VK_SHIFT);
+		// System.out.println("HIFT");
+		// delay(1000);
+		type(KeyEvent.VK_HOME);
+		// delay(1000);
+		// System.out.println("EHS");
+		// tester.keyRelease(KeyEvent.VK_SHIFT);
+		// for (int i = 0; i < 30; i++) {
+		// type(KeyEvent.VK_DELETE);
+		// }
+		tester.keyPress(KeyEvent.VK_CONTROL);
+		delay(100);
+		type(KeyEvent.VK_A);
+		delay(100);
+		tester.keyRelease(KeyEvent.VK_CONTROL);
+	}
+
+	private static void openMenu(char menu, char sub) {
+		tester.keyPress(KeyEvent.VK_ALT);
+		type(KeyEvent.VK_A + menu - 'a');
+		tester.keyRelease(KeyEvent.VK_ALT);
+		type(KeyEvent.VK_A + sub - 'a');
+		delay(500);
 	}
 
 	private static void type(String s) {
@@ -431,6 +426,13 @@ public class RobotUI {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 	}
+
+	private static void waitForColor() {
+		delay(2000);
+		while (Color.white.equals(tester.getPixelColor(450, 428))) {
+			delay(500);
+		}
+	}
+
 }
