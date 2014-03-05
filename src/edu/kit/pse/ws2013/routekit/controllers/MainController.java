@@ -128,6 +128,8 @@ public class MainController {
 		checkAndCalculate();
 	}
 
+	Thread calculator;
+
 	/**
 	 * If a start and destination point are present, adds a history entry and
 	 * starts route calculation.
@@ -153,7 +155,8 @@ public class MainController {
 					e.printStackTrace();
 				}
 			}
-			new Thread("Route calc") {
+			rm.setCurrentRoute(null);
+			calculator = new Thread("Route calc") {
 				{
 					setDaemon(true);
 				}
@@ -174,6 +177,9 @@ public class MainController {
 					}
 					Route r = rc.calculateRoute(startPointOnEdge,
 							destinationPointOnEdge, currentCombination);
+					if (calculator != Thread.currentThread()) {
+						return;
+					}
 					rm.setCurrentRoute(r);
 
 					RouteDescription rd = r == null ? null : rdg
@@ -181,7 +187,8 @@ public class MainController {
 					rm.setCurrentDescription(rd);
 
 				}
-			}.start();
+			};
+			calculator.start();
 		}
 	}
 
