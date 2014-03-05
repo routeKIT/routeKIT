@@ -255,15 +255,6 @@ public class StreetMap {
 
 	@Override
 	public int hashCode() {
-		int hashcode = name.hashCode();
-		Graph g = getGraph();
-		EdgeBasedGraph e = getEdgeBasedGraph();
-		if (g != null) {
-			hashcode ^= g.hashCode();
-		}
-		if (e != null) {
-			hashcode ^= e.hashCode();
-		}
-		return hashcode;
+		return name.hashCode() ^ Boolean.valueOf(isDefault).hashCode();
 	}
 }
