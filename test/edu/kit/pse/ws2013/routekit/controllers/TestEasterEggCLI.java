@@ -68,6 +68,8 @@ public class TestEasterEggCLI {
 				"  --update <Name> <Datei>", "  --update-map <Name> <Datei>",
 				"      Aktualisiert eine Karte aus einer OSM-Datei.",
 				"  --delete-map <Name>", "      Löscht eine Karte.",
+				"  --select <Kartenname> <Profilname>",
+				"      Wählt eine Kombination aus.",
 				"  --delete-precalculation <Kartenname> <Profilname>",
 				"      Löscht eine Vorberechnung.",
 				"  --precalculate <Kartenname> <Profilname>",
