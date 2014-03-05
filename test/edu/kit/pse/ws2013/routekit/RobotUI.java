@@ -35,6 +35,7 @@ public class RobotUI {
 		switchOSM();
 		testOpenAdminMenu();
 		testZoom();
+		testDrag();
 		openMenu('v', 'a');
 		delay(1000);
 		openMenu('v', 'a');
@@ -56,6 +57,19 @@ public class RobotUI {
 		deleteProfile();
 		delay(5000);
 		System.out.println(MouseInfo.getPointerInfo().getLocation());
+	}
+
+	private static void testDrag() {
+		tester.mouseMove(700, 300);
+		delay(500);
+		tester.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+		delay(500);
+		tester.mouseMove(800, 350);
+		delay(500);
+		tester.mouseMove(700, 300);
+		delay(500);
+		tester.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+		delay(500);
 	}
 
 	private static void testRMProfileInMap() {
