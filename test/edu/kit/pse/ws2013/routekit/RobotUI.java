@@ -36,6 +36,14 @@ public class RobotUI {
 		testOpenAdminMenu();
 		testZoom();
 
+		testRoute("49.01u628 8.409197", "49.008965 8.412416");
+		swap();
+		swap();
+
+		testRoute("90.00000000001 8.409197", "49.008965 8.412416");
+		swap();
+		swap();
+
 		testImportPrecalcMix();
 		testZoom2();// for one-way arrows
 		testProfile();
