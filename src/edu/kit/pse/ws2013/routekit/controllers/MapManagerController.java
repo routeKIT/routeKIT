@@ -12,6 +12,7 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.FileUtil;
 import edu.kit.pse.ws2013.routekit.views.MainView;
 import edu.kit.pse.ws2013.routekit.views.MapManagerView;
 
@@ -196,7 +197,7 @@ public class MapManagerController {
 	 *             invalid}.
 	 */
 	public void importMap(String name, File file) throws FileNotFoundException {
-		if (!MapManager.getInstance().checkMapName(name)) {
+		if (!FileUtil.checkMapName(name)) {
 			throw new IllegalArgumentException("Invalid map name!");
 		}
 		if (!file.exists()) {
@@ -353,5 +354,10 @@ class FutureMap extends StreetMap {
 
 	public File getOsmFile() {
 		return osmFile;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this == obj;
 	}
 }
