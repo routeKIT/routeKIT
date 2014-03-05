@@ -52,6 +52,7 @@ public class TestDummies {
 				new HashMap<Integer, Restriction>());
 		eGraph.setPartitions(partitions);
 		map = new StreetMap(graph, eGraph);
+		map.setName("Dummy map for testing");
 		pmc = new ProfileMapCombination(map, Profile.defaultCar, this.weights,
 				this.arcFlags, 10);
 	}

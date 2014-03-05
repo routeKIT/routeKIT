@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -214,6 +215,24 @@ public class EdgeBasedGraph {
 	 */
 	public int getNumberOfTurns() {
 		return turns.length;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EdgeBasedGraph) {
+			EdgeBasedGraph other = (EdgeBasedGraph) obj;
+			return Arrays.equals(edges, other.edges)
+					&& Arrays.equals(turns, other.turns)
+					&& Arrays.equals(turnTypes, other.turnTypes)
+					&& Arrays.equals(partitions, other.partitions)
+					&& restrictions.equals(other.restrictions);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return edges[0] ^ turns[0];
 	}
 
 	/**

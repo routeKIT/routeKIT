@@ -240,4 +240,30 @@ public class StreetMap {
 			reporter.popTask();
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof StreetMap) {
+			StreetMap other = (StreetMap) obj;
+			return name.equals(other.getName())
+					&& isDefault == other.isDefault()
+					&& getGraph().equals(other.getGraph())
+					&& getEdgeBasedGraph().equals(other.getEdgeBasedGraph());
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int hashcode = name.hashCode();
+		Graph g = getGraph();
+		EdgeBasedGraph e = getEdgeBasedGraph();
+		if (g != null) {
+			hashcode ^= g.hashCode();
+		}
+		if (e != null) {
+			hashcode ^= e.hashCode();
+		}
+		return hashcode;
+	}
 }

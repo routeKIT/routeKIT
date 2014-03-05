@@ -7,6 +7,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -300,6 +301,25 @@ public class Graph {
 	 */
 	public int getNumberOfNodes() {
 		return nodes.length;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Graph) {
+			Graph other = (Graph) obj;
+			return Arrays.equals(nodes, other.nodes)
+					&& Arrays.equals(edges, other.edges)
+					&& Arrays.equals(lat, other.lat)
+					&& Arrays.equals(lon, other.lon)
+					&& nodeProps.equals(other.nodeProps)
+					&& Arrays.equals(edgeProps, other.edgeProps);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return nodes[0] ^ edges[0];
 	}
 
 	private void saveIndexes(File dir) throws IOException {
