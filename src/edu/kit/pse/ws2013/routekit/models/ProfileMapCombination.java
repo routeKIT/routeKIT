@@ -357,8 +357,8 @@ public class ProfileMapCombination {
 		if (obj instanceof ProfileMapCombination) {
 			ProfileMapCombination other = (ProfileMapCombination) obj;
 			return profile.equals(other.profile) && map.equals(other.map)
-					&& arcFlags.equals(other.getArcFlags())
-					&& weights.equals(other.getWeights());
+					&& getArcFlags().equals(other.getArcFlags())
+					&& getWeights().equals(other.getWeights());
 		}
 		return false;
 	}
