@@ -35,7 +35,7 @@ public class Graph {
 	EdgeProperties[] edgeProps;
 	float[] lat;
 	float[] lon;
-	GraphIndex[] indices;
+	ArrayGraphIndex[] indices;
 	int[] correspondingEdges;
 
 	/**
@@ -63,6 +63,12 @@ public class Graph {
 	public Graph(int[] nodes, int[] edges,
 			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
 			float[] lat, float[] lon) {
+		this(nodes, edges, nodeProps, edgeProps, lat, lon, null);
+	}
+
+	public Graph(int[] nodes, int[] edges,
+			Map<Integer, NodeProperties> nodeProps, EdgeProperties[] edgeProps,
+			float[] lat, float[] lon, ArrayGraphIndex[] indices) {
 		if (edgeProps.length != edges.length) {
 			throw new IllegalArgumentException(
 					"Must have as many EdgeProperties as Edges!");
@@ -96,42 +102,49 @@ public class Graph {
 				}
 			}
 		}
-		initIndices();
+		if (indices == null || indices.length != 4) {
+			initIndices();
+		} else {
+			this.indices = indices;
+		}
 	}
 
 	private void initIndices() {
 		Thread[] threads = new Thread[4];
-		indices = new GraphIndex[4];
+		indices = new ArrayGraphIndex[4];
 		threads[0] = new Thread("L3 Graph-Index") {
 			@Override
 			public void run() {
-				indices[0] = new TreeGraphIndex(Graph.this,
-						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Primary, 10));
+				indices[0] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Primary,
+								10))).getIndex();
 			}
 		};
 		threads[1] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
-				indices[1] = new TreeGraphIndex(Graph.this,
-						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Secondary, 12));
+				indices[1] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Secondary,
+								12))).getIndex();
 			}
 		};
 		threads[2] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
-				indices[2] = new TreeGraphIndex(Graph.this,
-						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Tertiary, 14));
+				indices[2] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new ReducedGraphView(Graph.this, HighwayType.Tertiary,
+								14))).getIndex();
 			}
 		};
 		threads[3] = new Thread("L0 Graph-Index") {
 			@Override
 			public void run() {
-				indices[3] = new TreeGraphIndex(Graph.this,
-						HighwayType.Residential, new IdentityGraphView(
-								Graph.this));
+				indices[3] = new GraphIndexConverter(new TreeGraphIndex(
+						Graph.this, HighwayType.Residential,
+						new IdentityGraphView(Graph.this))).getIndex();
 			}
 		};
 		for (Thread t : threads) {
