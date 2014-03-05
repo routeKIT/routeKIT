@@ -354,11 +354,8 @@ public class ProfileMapManager {
 	 */
 	public void deletePrecalculation(ProfileMapCombination precalculation,
 			boolean deleteFromDisk) {
-		if (!precalculation.isCalculated()) {
-			throw new IllegalArgumentException(
-					"Can’t delete a not precalculated ProfileMapCombination!");
-		}
-		if (!precalculations.contains(precalculation)) {
+		if (!precalculations.contains(precalculation)
+				&& precalculation != current) {
 			throw new IllegalArgumentException("Unknown precalculation!");
 		}
 		precalculations.remove(precalculation);
