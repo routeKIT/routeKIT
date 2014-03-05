@@ -302,6 +302,31 @@ public class Graph {
 		return nodes.length;
 	}
 
+	private void saveIndexes(File dir) throws IOException {
+		for (int i = 0; i < indices.length; i++) {
+			final ArrayGraphIndex index = indices[i];
+			final File file = new File(dir, "L" + (3 - i) + ".index");
+			final File viewFile = new File(dir, file.getName().replace("index",
+					"view"));
+			index.save(file, viewFile);
+		}
+	}
+
+	private static ArrayGraphIndex[] loadIndexes(Graph graph, File dir) {
+		try {
+			ArrayGraphIndex[] indices = new ArrayGraphIndex[4];
+			for (int i = 0; i < indices.length; i++) {
+				final File file = new File(dir, "L" + (3 - i) + ".index");
+				final File viewFile = new File(dir, file.getName().replace(
+						"index", "view"));
+				indices[i] = ArrayGraphIndex.load(graph, file, viewFile);
+			}
+			return indices;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
 	/**
 	 * Save this graph to the specified file.
 	 * <p>
@@ -399,6 +424,12 @@ public class Graph {
 				}
 			}
 			raf.writeInt(0);
+
+			try {
+				saveIndexes(file.getAbsoluteFile().getParentFile());
+			} catch (IOException e) {
+				// ignore
+			}
 		}
 	}
 
@@ -478,9 +509,26 @@ public class Graph {
 			reporter.popTask("Lese Datei");
 			reporter.pushTask("Baue Graphstruktur");
 
+			// loading the indices requires a Graph object, but the Graph takes
+			// the indices as constructor arguments, so we get a little tricksy
+
+			ArrayGraphIndex[] indices = new ArrayGraphIndex[4];
 			Graph graph = new Graph(nodes, edges, nodeProps, edgeProps, lats,
-					lons);
+					lons, indices);
+			ArrayGraphIndex[] loadedIndices = loadIndexes(graph,
+					file.getParentFile());
+			if (loadedIndices == null) {
+				// no indices saved, build the indices from scratch
+				graph.initIndices();
+				// then save them for next time
+				graph.saveIndexes(file.getParentFile());
+			} else {
+				// inject indices into graph
+				System.arraycopy(loadedIndices, 0, indices, 0,
+						loadedIndices.length);
+			}
 			reporter.popTask();
+
 			return graph;
 		}
 	}
