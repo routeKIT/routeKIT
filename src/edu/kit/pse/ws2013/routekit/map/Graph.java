@@ -100,9 +100,9 @@ public class Graph {
 	}
 
 	private void initIndices() {
-		Thread[] threads = new Thread[3];
-		indices = new GraphIndex[3];
-		threads[0] = new Thread("L2 Graph-Index") {
+		Thread[] threads = new Thread[4];
+		indices = new GraphIndex[4];
+		threads[0] = new Thread("L3 Graph-Index") {
 			@Override
 			public void run() {
 				indices[0] = new TreeGraphIndex(Graph.this,
@@ -110,18 +110,26 @@ public class Graph {
 								Graph.this, HighwayType.Primary, 10));
 			}
 		};
-		threads[1] = new Thread("L1 Graph-Index") {
+		threads[1] = new Thread("L2 Graph-Index") {
 			@Override
 			public void run() {
 				indices[1] = new TreeGraphIndex(Graph.this,
 						HighwayType.Residential, new ReducedGraphView(
-								Graph.this, HighwayType.Tertiary, 13));
+								Graph.this, HighwayType.Secondary, 12));
 			}
 		};
-		threads[2] = new Thread("L0 Graph-Index") {
+		threads[2] = new Thread("L1 Graph-Index") {
 			@Override
 			public void run() {
 				indices[2] = new TreeGraphIndex(Graph.this,
+						HighwayType.Residential, new ReducedGraphView(
+								Graph.this, HighwayType.Tertiary, 14));
+			}
+		};
+		threads[3] = new Thread("L0 Graph-Index") {
+			@Override
+			public void run() {
+				indices[3] = new TreeGraphIndex(Graph.this,
 						HighwayType.Residential, new IdentityGraphView(
 								Graph.this));
 			}
@@ -207,7 +215,10 @@ public class Graph {
 	 * @return the {@link GraphIndex} data structure
 	 */
 	public GraphIndex getIndex(int zoom) {
-		if (zoom > 13) {
+		if (zoom > 14) {
+			return indices[3];
+		}
+		if (zoom > 12) {
 			return indices[2];
 		}
 		if (zoom > 10) {
