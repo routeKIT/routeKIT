@@ -22,7 +22,7 @@ public class RobotUI {
 	public static void main(String[] args) throws AWTException {
 		tester = new Robot();
 		System.out.println(MouseInfo.getPointerInfo().getLocation());
-		delay(1000);
+		delay(5000);
 		focus();
 		testAbout();
 		testRoute("49.010628 8.409197", "49.008965 8.412416");
@@ -112,7 +112,7 @@ public class RobotUI {
 		delay(300);
 		type(KeyEvent.VK_TAB);
 		delay(300);
-		type("C:\\Users\\Felix\\git\\pse\\karlsruhe_big.osm");
+		type(Resources.getKarlsruheBigLocation());
 		type(KeyEvent.VK_TAB);
 		type("testkarte");
 		type(KeyEvent.VK_ENTER);
@@ -154,6 +154,8 @@ public class RobotUI {
 		clickAt(664, 529);// ok
 		delay(6000);
 		clickAt(449, 442);// yes, I am sure
+		delay(2000);
+		waitForColor();
 	}
 
 	private static void assertColor(int i, int j, Color toTest) {
