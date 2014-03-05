@@ -9,6 +9,7 @@ import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.Arrays;
 
 /**
  * Stores Arc-Flags for a precalculated graph.
@@ -64,5 +65,18 @@ public class ArcFlags {
 			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(flags);
 			return new ArcFlags(flags);
 		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ArcFlags) {
+			return Arrays.equals(flags, ((ArcFlags) obj).flags);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return flags[0];
 	}
 }

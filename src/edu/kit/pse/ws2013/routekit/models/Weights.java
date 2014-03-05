@@ -9,6 +9,7 @@ import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
+import java.util.Arrays;
 
 /**
  * Stores edge weights for a precalculated graph.
@@ -61,5 +62,18 @@ public class Weights {
 			mbb.order(ByteOrder.BIG_ENDIAN).asIntBuffer().get(weights);
 			return new Weights(weights);
 		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Weights) {
+			return Arrays.equals(weights, ((Weights) obj).weights);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return weights[0];
 	}
 }

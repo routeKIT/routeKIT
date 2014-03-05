@@ -351,4 +351,20 @@ public class ProfileMapCombination {
 			reporter.popTask();
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ProfileMapCombination) {
+			ProfileMapCombination other = (ProfileMapCombination) obj;
+			return profile.equals(other.profile) && map.equals(other.map)
+					&& arcFlags.equals(other.getArcFlags())
+					&& weights.equals(other.getWeights());
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return calculationTime ^ profile.hashCode() ^ map.hashCode();
+	}
 }
