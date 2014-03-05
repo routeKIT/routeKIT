@@ -132,7 +132,8 @@ public class TreeGraphIndex implements GraphIndex {
 	 * @param maxType
 	 *            The maximum {@link HighwayType} to include.
 	 */
-	public TreeGraphIndex(final Graph graph, HighwayType maxType, GraphView view) {
+	public TreeGraphIndex(final Graph graph, HighwayType maxType,
+			final GraphView view) {
 		this.graph = graph;
 		this.view = view;
 		final int numberOfEdges = view.getNumberOfEdges();
@@ -149,7 +150,8 @@ public class TreeGraphIndex implements GraphIndex {
 						if (eaten) {
 							eaten = false;
 							while (++current < numberOfEdges) {
-								EdgeProperties props = graph.getEdgeProperties(current);
+								EdgeProperties props = graph.getEdgeProperties(view
+										.translate(current));
 								if (props.getType().ordinal() <= maxTypeInt) {
 									return;
 								}
