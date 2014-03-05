@@ -17,7 +17,7 @@ import edu.kit.pse.ws2013.routekit.util.FileUtil;
  * interaction.
  */
 public class CLI implements ProgressListener, Runnable {
-	protected final ManagementActions actions;
+	protected ManagementActions actions;
 
 	public CLI(String[] args) {
 		final MapManager mapManager;
@@ -93,98 +93,40 @@ public class CLI implements ProgressListener, Runnable {
 			case "--import-map":
 			case "--update":
 			case "--update-map": {
-				if (args.length < i + 2) {
-					System.err.println("Nicht genug Argumente für Option "
-							+ arg + "!");
-					actions = ManagementActions.noActions;
-					return;
-				}
+				checkOptionCount(args, i, arg, 2);
 				String name = args[++i];
 				String file = args[++i];
 				if (!FileUtil.checkMapName(name)) {
 					System.err.println("Ungültiger Kartenname: " + name);
 					actions = ManagementActions.noActions;
-					return;
+					throw new Error();
 				}
-				if (arg.startsWith("--import")
-						&& !mapManager.checkMapName(name)) {
+				StreetMap existingMap = findMap(mapManager, name,
+						arg.startsWith("--update"));
+				if (arg.startsWith("--import") && existingMap != null) {
 					System.err.println("Kartenname bereits vergeben: " + name);
 					actions = ManagementActions.noActions;
-					return;
-				}
-				StreetMap existingMap = null;
-				for (StreetMap map : mapManager.getMaps()) {
-					if (map.getName().equals(name)) {
-						existingMap = map;
-						break;
-					}
-				}
-				if (arg.startsWith("--update") && existingMap == null) {
-					System.err.println("Keine Karte mit diesem Namen: " + name);
-					actions = ManagementActions.noActions;
-					return;
+					throw new Error();
 				}
 				newOrUpdatedMaps.add(new FutureMap(name, new File(file)));
 				break;
 			}
 			case "--delete-map": {
-				if (args.length < i + 1) {
-					System.err.println("Nicht genug Argumente für Option "
-							+ arg + "!");
-					actions = ManagementActions.noActions;
-					return;
-				}
+				checkOptionCount(args, i, arg, 1);
 				String name = args[++i];
 				StreetMap deletedMap = null;
-				for (StreetMap map : mapManager.getMaps()) {
-					if (map.getName().equals(name)) {
-						deletedMap = map;
-						break;
-					}
-				}
-				if (deletedMap == null) {
-					System.err.println("Keine Karte mit diesem Namen: " + name);
-					actions = ManagementActions.noActions;
-					return;
-				}
+				deletedMap = findMap(mapManager, name, true);
 				deletedMaps.add(deletedMap);
 				break;
 			}
 			case "--delete-precalculation": {
-				if (args.length < i + 2) {
-					System.err.println("Nicht genug Argumente für Option "
-							+ arg + "!");
-					actions = ManagementActions.noActions;
-					return;
-				}
+				checkOptionCount(args, i, arg, 2);
 				String mapName = args[++i];
 				String profileName = args[++i];
 				StreetMap map = null;
-				for (StreetMap existingMap : mapManager.getMaps()) {
-					if (existingMap.getName().equals(mapName)) {
-						map = existingMap;
-						break;
-					}
-				}
-				if (map == null) {
-					System.err.println("Keine Karte mit diesem Namen: "
-							+ mapName);
-					actions = ManagementActions.noActions;
-					return;
-				}
+				map = findMap(mapManager, mapName, true);
 				Profile profile = null;
-				for (Profile existingProfile : profileManager.getProfiles()) {
-					if (existingProfile.getName().equals(profileName)) {
-						profile = existingProfile;
-						break;
-					}
-				}
-				if (profile == null) {
-					System.err.println("Kein Profil mit diesem Namen: "
-							+ profileName);
-					actions = ManagementActions.noActions;
-					return;
-				}
+				profile = findProfile(profileManager, profileName);
 				ProfileMapCombination combination = profileMapManager
 						.getPrecalculation(profile, map);
 				if (combination == null) {
@@ -192,46 +134,17 @@ public class CLI implements ProgressListener, Runnable {
 							.println("Keine Vorberechnung für diese Kombination: "
 									+ mapName + " + " + profileName);
 					actions = ManagementActions.noActions;
-					return;
+					throw new Error();
 				}
 				deletedPrecalculations.add(combination);
 				break;
 			}
 			case "--precalculate": {
-				if (args.length < i + 2) {
-					System.err.println("Nicht genug Argumente für Option "
-							+ arg + "!");
-					actions = ManagementActions.noActions;
-					return;
-				}
+				checkOptionCount(args, i, arg, 2);
 				String mapName = args[++i];
 				String profileName = args[++i];
-				StreetMap map = null;
-				for (StreetMap existingMap : mapManager.getMaps()) {
-					if (existingMap.getName().equals(mapName)) {
-						map = existingMap;
-						break;
-					}
-				}
-				if (map == null) {
-					System.err.println("Keine Karte mit diesem Namen: "
-							+ mapName);
-					actions = ManagementActions.noActions;
-					return;
-				}
-				Profile profile = null;
-				for (Profile existingProfile : profileManager.getProfiles()) {
-					if (existingProfile.getName().equals(profileName)) {
-						profile = existingProfile;
-						break;
-					}
-				}
-				if (profile == null) {
-					System.err.println("Kein Profil mit diesem Namen: "
-							+ profileName);
-					actions = ManagementActions.noActions;
-					return;
-				}
+				StreetMap map = findMap(mapManager, mapName, true);
+				Profile profile = findProfile(profileManager, profileName);
 				ProfileMapCombination combination = profileMapManager
 						.getPrecalculation(profile, map);
 				if (combination != null) {
@@ -244,6 +157,49 @@ public class CLI implements ProgressListener, Runnable {
 		}
 		actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
 				deletedPrecalculations, newPrecalculations);
+	}
+
+	private void checkOptionCount(String[] args, int i, final String arg,
+			int needed) throws Error {
+		if (args.length <= i + needed) {
+			System.err.println("Nicht genug Argumente für Option " + arg + "!");
+			actions = ManagementActions.noActions;
+			throw new Error();
+		}
+	}
+
+	private Profile findProfile(final ProfileManager profileManager,
+			String profileName) throws Error {
+		Profile profile = null;
+		for (Profile existingProfile : profileManager.getProfiles()) {
+			if (existingProfile.getName().equalsIgnoreCase(profileName)) {
+				profile = existingProfile;
+				break;
+			}
+		}
+		if (profile == null) {
+			System.err.println("Kein Profil mit diesem Namen: " + profileName);
+			actions = ManagementActions.noActions;
+			throw new Error();
+		}
+		return profile;
+	}
+
+	private StreetMap findMap(final MapManager mapManager, String mapName,
+			boolean require) throws Error {
+		StreetMap map = null;
+		for (StreetMap existingMap : mapManager.getMaps()) {
+			if (existingMap.getName().equalsIgnoreCase(mapName)) {
+				map = existingMap;
+				break;
+			}
+		}
+		if (map == null && require) {
+			System.err.println("Keine Karte mit diesem Namen: " + mapName);
+			actions = ManagementActions.noActions;
+			throw new Error();
+		}
+		return map;
 	}
 
 	@Override
