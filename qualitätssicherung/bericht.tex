@@ -579,6 +579,15 @@ Alle Operation müssen die erwarteten Werte zurückgeben. So muss die deleteMin-
 }{
 bestanden
 }
+\test{GPXExporter}{Es wird die GPX-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
+\test{HTMLExporter}{Es wird die HTML-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
+\test{History}{Es wird die Speicher- und Lade-Funktion des Verlaufs getestet.}{Der Verlauf muss nach dem Speichern und anschließenden Laden die gleichen Einträge enthalten wie davor.}{bestanden}
+\test{HistoryEntry}{Es werden die toString und fromString Methoden der Verlaufseinträge getestet.}{Ein HistoryEntry muss nach Anwenden von fromString auf den von toString erzeugten String den selben Start- und Zielpunkt sowie Zeitstempel enthalten.}{bestanden}
+\test{EdgeProperties}{Es werden die Getter von EdgeProperties und insbesondere getMaxSpeed getestet.}{Die Getter müssen den korrekten Wert zurückgeben. getMaxSpeed muss, je nach Straßentyp und übergebenem Profil, die korrekte Höchstgeschwindigkeit des gegebenen Fahrzeugtyps auf diesem Straßentyp zurückgeben.}{bestanden}
+\test{Restriction}{Es wird für verschiedene Restrictions (Height-, Width-, Weight-, VehicleType-, Multiple-, NoRestriction) die allows Methode für die Profile defaultCar und defaultTruck getestet.}{Bei jeder getesteten Restriction muss allows für defaultCar und defaultTruck die korrekte Ausgabe haben.}{bestanden}
+\test{EdgeBasedGraph}{Es wird die Speicher- und Lade-Funktion von EdgeBasedGraph getestet.}{Der EdgeBasedGraph muss nach dem Speichern und anschließenden Laden die gleichen Edges und Turns enthalten wie davor.}{bestanden}
+\test{Graph}{Es werden die Getter sowie die Speicher- und Lade-Funktion von Graph getestet.}{Die Getter müssen den korrekten Wert zurückgeben. Der Graph muss nach dem Speichern und anschließenden Laden die gleichen Nodes und Edges enthalten wie davor.}{bestanden}
+\test{GraphIndex}{arg2}{arg3}{arg4}//TODO (Was genau macht dieser Test eigentlich?)
 \end{itemize}
 \section{Protokoll des GUI-Tests}
 \begin{itemize}
