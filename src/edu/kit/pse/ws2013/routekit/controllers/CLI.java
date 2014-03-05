@@ -20,155 +20,161 @@ public class CLI implements ProgressListener, Runnable {
 	protected ManagementActions actions;
 
 	public CLI(String[] args) {
-		final MapManager mapManager;
-		final ProfileManager profileManager;
-		final ProfileMapManager profileMapManager;
-		if (args.length == 0) {
-			actions = ManagementActions.noActions;
-			return;
-		} else if (args.length == 1
-				&& (args[0].equals("-h") || args[0].equals("--help")
-						|| args[0].equals("--usage") || args[0]
-							.equals("--version"))) {
-			// these options don’t need the ProfileMapManager, skip init
-			mapManager = null;
-			profileManager = null;
-			profileMapManager = null;
-		} else {
-			try {
-				ProfileMapManager.init(FileUtil.getRootDir(), null);
-				mapManager = MapManager.getInstance();
-				profileManager = ProfileManager.getInstance();
-				profileMapManager = ProfileMapManager.getInstance();
-			} catch (IOException e) {
-				e.printStackTrace();
+		try {
+			final MapManager mapManager;
+			final ProfileManager profileManager;
+			final ProfileMapManager profileMapManager;
+			if (args.length == 0) {
 				actions = ManagementActions.noActions;
 				return;
+			} else if (args.length == 1
+					&& (args[0].equals("-h") || args[0].equals("--help")
+							|| args[0].equals("--usage") || args[0]
+								.equals("--version"))) {
+				// these options don’t need the ProfileMapManager, skip init
+				mapManager = null;
+				profileManager = null;
+				profileMapManager = null;
+			} else {
+				try {
+					ProfileMapManager.init(FileUtil.getRootDir(), null);
+					mapManager = MapManager.getInstance();
+					profileManager = ProfileManager.getInstance();
+					profileMapManager = ProfileMapManager.getInstance();
+				} catch (IOException e) {
+					e.printStackTrace();
+					actions = ManagementActions.noActions;
+					return;
+				}
 			}
-		}
-		final Set<FutureMap> newOrUpdatedMaps = new HashSet<>();
-		final Set<StreetMap> deletedMaps = new HashSet<>();
-		final Set<ProfileMapCombination> deletedPrecalculations = new HashSet<>();
-		final Set<ProfileMapCombination> newPrecalculations = new HashSet<>();
-		for (int i = 0; i < args.length; i++) {
-			final String arg = args[i];
-			switch (arg) {
-			case "-h":
-			case "--help":
-			case "--usage":
-			case "--version": {
-				if (arg.equalsIgnoreCase("--version")) {
-					System.out.println("routeKIT version 1.0.0");
-				} else {
-					for (String line : new String[] {
-							"routeKIT: Programm zur Routenplanung und -berechnung.",
-							"",
-							"Optionen:",
-							"",
-							"  --help",
-							"  --usage",
-							"      Gibt diesen Hilfetext aus.",
-							"  --version",
-							"      Gibt die Version von routeKIT aus.",
-							"  --import <Name> <Datei>",
-							"  --import-map <Name> <Datei>",
-							"      Importiert eine Karte aus einer OSM-Datei.",
-							"  --update <Name> <Datei>",
-							"  --update-map <Name> <Datei>",
-							"      Aktualisiert eine Karte aus einer OSM-Datei.",
-							"  --delete-map <Name>",
-							"      Löscht eine Karte.",
-							"  --select <Kartenname> <Profilname>",
-							"      Wählt eine Kombination aus.",
-							"  --delete-precalculation <Kartenname> <Profilname>",
-							"      Löscht eine Vorberechnung.",
-							"  --precalculate <Kartenname> <Profilname>",
-							"      Führt eine Vorberechnung durch.", "",
-							"Dieses Programm ist nicht aptitude." }) {
-						System.out.println(line);
+			final Set<FutureMap> newOrUpdatedMaps = new HashSet<>();
+			final Set<StreetMap> deletedMaps = new HashSet<>();
+			final Set<ProfileMapCombination> deletedPrecalculations = new HashSet<>();
+			final Set<ProfileMapCombination> newPrecalculations = new HashSet<>();
+			for (int i = 0; i < args.length; i++) {
+				final String arg = args[i];
+				switch (arg) {
+				case "-h":
+				case "--help":
+				case "--usage":
+				case "--version": {
+					if (arg.equalsIgnoreCase("--version")) {
+						System.out.println("routeKIT version 1.0.0");
+					} else {
+						for (String line : new String[] {
+								"routeKIT: Programm zur Routenplanung und -berechnung.",
+								"",
+								"Optionen:",
+								"",
+								"  --help",
+								"  --usage",
+								"      Gibt diesen Hilfetext aus.",
+								"  --version",
+								"      Gibt die Version von routeKIT aus.",
+								"  --import <Name> <Datei>",
+								"  --import-map <Name> <Datei>",
+								"      Importiert eine Karte aus einer OSM-Datei.",
+								"  --update <Name> <Datei>",
+								"  --update-map <Name> <Datei>",
+								"      Aktualisiert eine Karte aus einer OSM-Datei.",
+								"  --delete-map <Name>",
+								"      Löscht eine Karte.",
+								"  --select <Kartenname> <Profilname>",
+								"      Wählt eine Kombination aus.",
+								"  --delete-precalculation <Kartenname> <Profilname>",
+								"      Löscht eine Vorberechnung.",
+								"  --precalculate <Kartenname> <Profilname>",
+								"      Führt eine Vorberechnung durch.", "",
+								"Dieses Programm ist nicht aptitude." }) {
+							System.out.println(line);
+						}
 					}
-				}
-				actions = ManagementActions.noActions;
-				return;
-			}
-			case "--import":
-			case "--import-map":
-			case "--update":
-			case "--update-map": {
-				checkOptionCount(args, i, arg, 2);
-				String name = args[++i];
-				String file = args[++i];
-				if (!FileUtil.checkMapName(name)) {
-					System.err.println("Ungültiger Kartenname: " + name);
 					actions = ManagementActions.noActions;
-					throw new Error();
+					return;
 				}
-				StreetMap existingMap = findMap(mapManager, name,
-						arg.startsWith("--update"));
-				if (arg.startsWith("--import") && existingMap != null) {
-					System.err.println("Kartenname bereits vergeben: " + name);
-					actions = ManagementActions.noActions;
-					throw new Error();
+				case "--import":
+				case "--import-map":
+				case "--update":
+				case "--update-map": {
+					checkOptionCount(args, i, arg, 2);
+					String name = args[++i];
+					String file = args[++i];
+					if (!FileUtil.checkMapName(name)) {
+						System.err.println("Ungültiger Kartenname: " + name);
+						actions = ManagementActions.noActions;
+						throw new Error();
+					}
+					StreetMap existingMap = findMap(mapManager, name,
+							arg.startsWith("--update"));
+					if (arg.startsWith("--import") && existingMap != null) {
+						System.err.println("Kartenname bereits vergeben: "
+								+ name);
+						actions = ManagementActions.noActions;
+						throw new Error();
+					}
+					newOrUpdatedMaps.add(new FutureMap(name, new File(file)));
+					break;
 				}
-				newOrUpdatedMaps.add(new FutureMap(name, new File(file)));
-				break;
-			}
-			case "--select": {
-				checkOptionCount(args, i, arg, 2);
-				String mapName = args[++i];
-				String profileName = args[++i];
-				StreetMap map = findMap(mapManager, mapName, true);
-				Profile profile = findProfile(profileManager, profileName);
-				ProfileMapCombination combination = profileMapManager
-						.getPrecalculation(profile, map);
-				ProfileMapManager.getInstance().setCurrentCombination(
-						combination);
-				break;
-			}
-			case "--delete-map": {
-				checkOptionCount(args, i, arg, 1);
-				String name = args[++i];
-				StreetMap deletedMap = null;
-				deletedMap = findMap(mapManager, name, true);
-				deletedMaps.add(deletedMap);
-				break;
-			}
-			case "--delete-precalculation": {
-				checkOptionCount(args, i, arg, 2);
-				String mapName = args[++i];
-				String profileName = args[++i];
-				StreetMap map = findMap(mapManager, mapName, true);
-				Profile profile = findProfile(profileManager, profileName);
-				ProfileMapCombination combination = profileMapManager
-						.getPrecalculation(profile, map);
-				if (combination == null) {
-					System.err
-							.println("Keine Vorberechnung für diese Kombination: "
-									+ mapName + " + " + profileName);
-					actions = ManagementActions.noActions;
-					throw new Error();
+				case "--select": {
+					checkOptionCount(args, i, arg, 2);
+					String mapName = args[++i];
+					String profileName = args[++i];
+					StreetMap map = findMap(mapManager, mapName, true);
+					Profile profile = findProfile(profileManager, profileName);
+					ProfileMapCombination combination = profileMapManager
+							.getPrecalculation(profile, map);
+					ProfileMapManager.getInstance().setCurrentCombination(
+							combination);
+					break;
 				}
-				deletedPrecalculations.add(combination);
-				break;
-			}
-			case "--precalculate": {
-				checkOptionCount(args, i, arg, 2);
-				String mapName = args[++i];
-				String profileName = args[++i];
-				StreetMap map = findMap(mapManager, mapName, true);
-				Profile profile = findProfile(profileManager, profileName);
-				ProfileMapCombination combination = profileMapManager
-						.getPrecalculation(profile, map);
-				if (combination != null) {
+				case "--delete-map": {
+					checkOptionCount(args, i, arg, 1);
+					String name = args[++i];
+					StreetMap deletedMap = null;
+					deletedMap = findMap(mapManager, name, true);
+					deletedMaps.add(deletedMap);
+					break;
+				}
+				case "--delete-precalculation": {
+					checkOptionCount(args, i, arg, 2);
+					String mapName = args[++i];
+					String profileName = args[++i];
+					StreetMap map = findMap(mapManager, mapName, true);
+					Profile profile = findProfile(profileManager, profileName);
+					ProfileMapCombination combination = profileMapManager
+							.getPrecalculation(profile, map);
+					if (combination == null) {
+						System.err
+								.println("Keine Vorberechnung für diese Kombination: "
+										+ mapName + " + " + profileName);
+						actions = ManagementActions.noActions;
+						throw new Error();
+					}
 					deletedPrecalculations.add(combination);
+					break;
 				}
-				newPrecalculations.add(new ProfileMapCombination(map, profile));
-				break;
+				case "--precalculate": {
+					checkOptionCount(args, i, arg, 2);
+					String mapName = args[++i];
+					String profileName = args[++i];
+					StreetMap map = findMap(mapManager, mapName, true);
+					Profile profile = findProfile(profileManager, profileName);
+					ProfileMapCombination combination = profileMapManager
+							.getPrecalculation(profile, map);
+					if (combination != null) {
+						deletedPrecalculations.add(combination);
+					}
+					newPrecalculations.add(new ProfileMapCombination(map,
+							profile));
+					break;
+				}
+				}
 			}
-			}
+			actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
+					deletedPrecalculations, newPrecalculations);
+		} catch (Error r) {
+			// No-op, syntax error
 		}
-		actions = new ManagementActions(newOrUpdatedMaps, deletedMaps,
-				deletedPrecalculations, newPrecalculations);
 	}
 
 	private void checkOptionCount(String[] args, int i, final String arg,
