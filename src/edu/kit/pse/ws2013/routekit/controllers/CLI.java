@@ -121,10 +121,8 @@ public class CLI implements ProgressListener, Runnable {
 					String profileName = args[++i];
 					StreetMap map = findMap(mapManager, mapName, true);
 					Profile profile = findProfile(profileManager, profileName);
-					ProfileMapCombination combination = profileMapManager
-							.getPrecalculation(profile, map);
-					ProfileMapManager.getInstance().setCurrentCombination(
-							combination);
+					ProfileMapManager.getInstance().selectProfileAndMap(
+							profile, map);
 					break;
 				}
 				case "--delete-map": {
