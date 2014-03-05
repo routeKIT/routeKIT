@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-581' action='modify' visible='true' lat='48.910534999324206' lon='8.547609656760535' />
+  <node id='-579' action='modify' visible='true' lat='48.910534999324206' lon='8.557401293357438' />
+  <node id='-577' action='modify' visible='true' lat='48.910534999324206' lon='8.56629461467022' />
+  <node id='-575' action='modify' visible='true' lat='48.90604771412282' lon='8.55749112488585' />
+  <way id='-587' action='modify' visible='true'>
+    <nd ref='-579' />
+    <nd ref='-575' />
+    <tag k='highway' v='secondary' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='L 123' />
+  </way>
+  <way id='-585' action='modify' visible='true'>
+    <nd ref='-581' />
+    <nd ref='-579' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Hauptstraße' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='B 42' />
+  </way>
+  <way id='-583' action='modify' visible='true'>
+    <nd ref='-579' />
+    <nd ref='-577' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Hauptstraße' />
+    <tag k='ref' v='B 42' />
+  </way>
+  <relation id='-589' action='modify' visible='true'>
+    <member type='way' ref='-585' role='from' />
+    <member type='node' ref='-579' role='via' />
+    <member type='way' ref='-587' role='to' />
+    <tag k='restriction' v='only_right_turn' />
+    <tag k='type' v='restriction' />
+  </relation>
+</osm>

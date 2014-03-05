@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-363' action='modify' visible='true' lat='48.910534999324206' lon='8.547609656760535' />
+  <node id='-361' action='modify' visible='true' lat='48.910534999324206' lon='8.557401293357438' />
+  <node id='-359' action='modify' visible='true' lat='48.90504392412393' lon='8.557401293357438' />
+  <node id='-357' action='modify' visible='true' lat='48.91065308033507' lon='8.567103098425928' />
+  <way id='-367' action='modify' visible='true'>
+    <nd ref='-361' />
+    <nd ref='-357' />
+    <tag k='highway' v='secondary' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='L 123' />
+  </way>
+  <way id='-365' action='modify' visible='true'>
+    <nd ref='-363' />
+    <nd ref='-361' />
+    <nd ref='-359' />
+    <tag k='highway' v='primary' />
+    <tag k='name' v='Hauptstraße' />
+    <tag k='oneway' v='yes' />
+    <tag k='ref' v='B 42' />
+  </way>
+</osm>

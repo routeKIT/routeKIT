@@ -248,6 +248,10 @@ public class Coordinates {
 	 *             if the string cannot be parsed
 	 */
 	public static float parseLatitude(String s) {
+		if (s == null) {
+			throw new IllegalArgumentException();
+		}
+
 		float lat;
 		try {
 			lat = Float.parseFloat(s);
@@ -272,6 +276,10 @@ public class Coordinates {
 	 *             if the string cannot be parsed
 	 */
 	public static float parseLongitude(String s) {
+		if (s == null) {
+			throw new IllegalArgumentException();
+		}
+
 		float lon;
 		try {
 			lon = Float.parseFloat(s);

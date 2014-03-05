@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-458' action='modify' visible='true' lat='48.89972940584064' lon='8.576535408909184' />
+  <node id='-448' action='modify' visible='true' lat='48.90433535433799' lon='8.580398164630896' />
+  <node id='-446' action='modify' visible='true' lat='48.904453450000005' lon='8.57177433790335'>
+    <tag k='highway' v='motorway_junction' />
+    <tag k='name' v='Buxtehude West' />
+    <tag k='ref' v='42' />
+  </node>
+  <node id='-445' action='modify' visible='true' lat='48.904394402203884' lon='8.562342027420096' />
+  <way id='-459' action='modify' visible='true'>
+    <nd ref='-446' />
+    <nd ref='-458' />
+    <tag k='highway' v='motorway_link' />
+  </way>
+  <way id='-447' action='modify' visible='true'>
+    <nd ref='-445' />
+    <nd ref='-446' />
+    <nd ref='-448' />
+    <tag k='highway' v='motorway' />
+    <tag k='ref' v='A 8' />
+  </way>
+</osm>

@@ -59,4 +59,13 @@ public class IntArraySet extends AbstractCollection<Integer> implements
 	public Iterator<Integer> iterator() {
 		return new IntArrayIterator();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Set<?>) {
+			return ((Set<?>) obj).containsAll(this)
+					&& this.containsAll((Set<?>) obj);
+		}
+		return false;
+	}
 }

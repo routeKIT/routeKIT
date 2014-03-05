@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-431' action='modify' visible='true' lat='48.90770097134372' lon='8.575277767511416' />
+  <node id='-421' action='modify' visible='true' lat='48.90994459008397' lon='8.558569103226791' />
+  <node id='-419' action='modify' visible='true' lat='48.907819059052194' lon='8.563420005761039' />
+  <node id='-418' action='modify' visible='true' lat='48.90575248386324' lon='8.558748766283616' />
+  <way id='-432' action='modify' visible='true'>
+    <nd ref='-431' />
+    <nd ref='-419' />
+    <tag k='highway' v='tertiary' />
+    <tag k='ref' v='K 2014' />
+  </way>
+  <way id='-420' action='modify' visible='true'>
+    <nd ref='-418' />
+    <nd ref='-419' />
+    <nd ref='-421' />
+    <nd ref='-418' />
+    <tag k='highway' v='tertiary' />
+    <tag k='junction' v='roundabout' />
+    <tag k='name' v='Kreisverkehr' />
+    <tag k='ref' v='K 2014' />
+  </way>
+</osm>
