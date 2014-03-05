@@ -21,8 +21,8 @@ public class RobotUI {
 
 	public static void main(String[] args) throws AWTException {
 		tester = new Robot();
-		System.out.println(MouseInfo.getPointerInfo().getLocation());
 		delay(5000);
+		System.out.println(MouseInfo.getPointerInfo().getLocation());
 		focus();
 		testAbout();
 		testRoute("49.010628 8.409197", "49.008965 8.412416");
@@ -51,10 +51,30 @@ public class RobotUI {
 		testZoom2();// for one-way arrows
 		testProfile();
 		testHistory();
+		testRMProfileInMap();
 		deleteMap();
 		deleteProfile();
 		delay(5000);
 		System.out.println(MouseInfo.getPointerInfo().getLocation());
+	}
+
+	private static void testRMProfileInMap() {
+		openMenu('v', 'k');
+		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_TAB);
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_DOWN);
+		type(KeyEvent.VK_DOWN);
+		clickAt(717, 343); // entfernen
+		delay(200);
+		clickAt(665, 527);// ok
+		delay(6000);
+		clickAt(447, 419);// yes, I am sure
+		delay(1000);
+
 	}
 
 	private static void testHistory() {
