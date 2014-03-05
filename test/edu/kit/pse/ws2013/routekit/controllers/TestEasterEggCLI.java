@@ -14,7 +14,7 @@ public class TestEasterEggCLI {
 		StringBuilder sb = new StringBuilder();
 		for (String s : expected) {
 			sb.append(s);
-			sb.append('\n');
+			sb.append(System.getProperty("line.separator"));
 		}
 		final byte[] data = new byte[sb.toString().getBytes().length];
 		try (PrintStream out = new PrintStream(new OutputStream() {
