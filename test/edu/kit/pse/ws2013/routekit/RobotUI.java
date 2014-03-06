@@ -30,6 +30,7 @@ public class RobotUI {
 		testZoom();
 		testDrag();
 		openMenu('v', 'a');
+		swap();
 		delay(1000);
 		openMenu('v', 'a');
 
