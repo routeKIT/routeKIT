@@ -47,8 +47,8 @@ public class RobotUI {
 		testProfile();
 		testHistory();
 		testRemoveProfileInMap();
-		deleteMap();
 		deleteProfile();
+		deleteMap();
 		delay(5000);
 		System.out.println(MouseInfo.getPointerInfo().getLocation());
 	}
@@ -74,8 +74,7 @@ public class RobotUI {
 		type(KeyEvent.VK_TAB);
 		type(KeyEvent.VK_DOWN);
 		type(KeyEvent.VK_DOWN);
-		type(KeyEvent.VK_DOWN);
-		type(KeyEvent.VK_DOWN);
+		// type(KeyEvent.VK_DOWN);
 		clickAt(717, 343); // entfernen
 		delay(200);
 		clickAt(665, 527);// ok
@@ -188,6 +187,10 @@ public class RobotUI {
 		clickAt(665, 196);
 		delay(300);
 		clickAt(664, 529);// ok
+		delay(500);
+		type(KeyEvent.VK_TAB); // Ja ich will Vorber. loesch.
+		type(KeyEvent.VK_SPACE);
+		delay(3000);
 	}
 
 	private static void deleteMap() {
