@@ -207,14 +207,10 @@ public class ProfileMapManager {
 	/**
 	 * Sets the current combination to the given one.
 	 * <p>
-	 * If the given combination is not
-	 * {@link ProfileMapCombination#isCalculated() precalculated}, then it is
-	 * only remembered as the "current" one, and forgotten as soon as this
-	 * method is called with another combination; if it is precalculated, it’s
-	 * stored in the internal list of {@link ProfileMapCombination
-	 * ProfileMapCombinations} and
-	 * {@link #savePrecalculation(ProfileMapCombination) saved} to disk (it’s
-	 * assumed that the profile and the map are already saved).
+	 * The index file is rewritten, but for performance reasons, the
+	 * precalculation (if it’s a precalculation) isn’t saved; if you’re not sure
+	 * if the precalculation has been saved, use
+	 * {@link #savePrecalculation(ProfileMapCombination)}.
 	 * <p>
 	 * Note that you’d usually want to use
 	 * {@link #selectProfileAndMap(Profile, StreetMap)} instead of this method,
@@ -231,16 +227,11 @@ public class ProfileMapManager {
 			throw new IllegalArgumentException("combination must not be null!");
 		}
 		current = combination;
-		if (current.isCalculated()) {
-			precalculations.add(combination);
-			savePrecalculation(combination);
-		} else {
-			try {
-				rewriteIndex();
-			} catch (IOException e) {
-				e.printStackTrace();
-				// don’t return – not critical
-			}
+		try {
+			rewriteIndex();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// don’t return – not critical
 		}
 		for (CurrentCombinationListener listener : listeners) {
 			listener.currentCombinationChanged(combination);

@@ -63,6 +63,7 @@ public class Dummies {
 				karlsruhe_big, Profile.defaultCar);
 		new PreCalculator().doPrecalculation(karlsruheCar,
 				new DummyProgressReporter());
+		ProfileMapManager.getInstance().savePrecalculation(karlsruheCar);
 		ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
 	}
 
