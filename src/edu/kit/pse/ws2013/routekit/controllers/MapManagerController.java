@@ -141,6 +141,10 @@ public class MapManagerController {
 	 */
 	public void saveAllChanges(final ProgressReporter reporter) {
 		new Thread("MapManagerController Worker Thread") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				final ManagementActions changes = getChanges();

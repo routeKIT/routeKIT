@@ -256,6 +256,10 @@ public class MainController {
 	 */
 	public void startPrecalculation(final ProgressReporter reporter) {
 		new Thread("MainController Precalculation Thread") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				ProfileMapCombination combination = profileMapManager
@@ -340,6 +344,10 @@ public class MainController {
 		reporter.addProgressListener(p);
 		reporter.pushTask("Lade ausgewählte Karte und Vorberechnung");
 		new Thread("Load map + precalculation") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				theNewCombination.ensureLoaded(reporter);
@@ -420,6 +428,10 @@ public class MainController {
 
 		final ProgressDialog pd = new ProgressDialog(null);
 		new Thread("Upstart") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				ProgressReporter pr = new ProgressReporter();

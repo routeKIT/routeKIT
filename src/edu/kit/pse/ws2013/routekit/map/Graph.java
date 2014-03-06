@@ -114,6 +114,10 @@ public class Graph {
 		Thread[] threads = new Thread[4];
 		indices = new ArrayGraphIndex[4];
 		threads[0] = new Thread("L3 Graph-Index") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				indices[0] = new GraphIndexConverter(new TreeGraphIndex(
@@ -123,6 +127,10 @@ public class Graph {
 			}
 		};
 		threads[1] = new Thread("L2 Graph-Index") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				indices[1] = new GraphIndexConverter(new TreeGraphIndex(
@@ -132,6 +140,10 @@ public class Graph {
 			}
 		};
 		threads[2] = new Thread("L1 Graph-Index") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				indices[2] = new GraphIndexConverter(new TreeGraphIndex(
@@ -141,6 +153,10 @@ public class Graph {
 			}
 		};
 		threads[3] = new Thread("L0 Graph-Index") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				indices[3] = new GraphIndexConverter(new TreeGraphIndex(

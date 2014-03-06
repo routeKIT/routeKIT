@@ -448,6 +448,9 @@ public class MapManagerView extends JDialog {
 			setContentPane(contentPane);
 			pack();
 			new Thread("MapManagerView Button Timeout Thread") {
+				{
+					setDaemon(true);
+				}
 
 				@Override
 				public void run() {

@@ -143,7 +143,11 @@ public class ProfileManagerController {
 	 * @see ProfileManager#deleteProfile(Profile)
 	 */
 	public void saveAllChanges(final ProgressReporter reporter) {
-		new Thread() {
+		new Thread("ProfileManagerController Worker Thread") {
+			{
+				setDaemon(true);
+			}
+
 			@Override
 			public void run() {
 				selectedProfile = currentProfile;
