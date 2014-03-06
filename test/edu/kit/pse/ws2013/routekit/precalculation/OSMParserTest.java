@@ -59,6 +59,16 @@ public class OSMParserTest {
 	}
 
 	@Test(expected = SAXParseException.class)
+	public void testMissingTagNameNode() throws Exception {
+		parser.parseOSM(getTestFile("testMissingTagNameNode.osm"), reporter);
+	}
+
+	@Test(expected = SAXParseException.class)
+	public void testMissingTagValueNode() throws Exception {
+		parser.parseOSM(getTestFile("testMissingTagValueNode.osm"), reporter);
+	}
+
+	@Test(expected = SAXParseException.class)
 	public void testMissingCoordinates() throws Exception {
 		parser.parseOSM(getTestFile("testMissingCoordinates.osm"), reporter);
 	}
