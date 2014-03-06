@@ -9,7 +9,6 @@ import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 
 public class OSMMapImporter extends MapImporter {
-	OSMParser parser = new OSMParser();
 	GraphPartitioner part = new ExternalPartitionerAdapter();
 
 	@Override
@@ -17,6 +16,7 @@ public class OSMMapImporter extends MapImporter {
 			throws IOException, SAXException {
 		reporter.setSubTasks(new float[] { .5f, .5f }); // TODO review factors
 		reporter.pushTask("Lese OSM-Datei");
+		OSMParser parser = new OSMParser(); // Thing is not reentrant
 		StreetMap stm = parser.parseOSM(file, reporter);
 		reporter.popTask();
 		stm.setName(name);
