@@ -672,11 +672,9 @@ behoben
 }{bestanden}
 
 \test{graphIndex}{GraphIndex}{
-  Beide GraphIndex-Implementierungen (Array- und Tree-) werden mit demselben Graphen 
-  (einem Gitter aus unverbundenen Straßenstücken) initialisiert.
+  Es werden beide GraphIndex-Implementierungen (Array- und Tree-) getestet. Dazu werden sie mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert.
   Dann werden verschieden Bereiche von Kanten angefordert und verglichen.
   Danach werden noch Koordinaten mit dem Index projeziert.
-  %TODO Umformulieren und an den Rest anpassen.
 }{
   die resultierenden Kantenmengen und der Punkt auf der Kante jeweils mit den erwarteten Werten übereinstimmen.
 }{bestanden}
@@ -706,8 +704,7 @@ behoben
 }{bestanden}
 
 \test{routeModel}{RouteModel}{
-  Testet ob bei den Benutzung von RouteModel immer die spezifizierte Anzahl an Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.
-  %TODO Umformulieren und an den Rest anpassen.
+  Es wird das Beobachtermuster der RouteModel-Klasse getestet. Dazu wird eine überprüft, ob in verschiedenen Situationen Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.
 }{
   die gemessene Anzahl der ausgelösten Events an alles Stellen mit der erwarteten Anzahl übereinstimmt.
 }{bestanden}
@@ -728,7 +725,7 @@ behoben
   Es wird die Verarbeitung verschiedener Karteneigenschaften
   (verschiedene Abbiegetypen, Einbahnstraßen, Ampeln, Kreisverkehre, \ldots) sowie das Erkennen von Kartenfehlern (Eigenschaften ohne Name, Eigenschaften ohne Wert, fehlende Koordinaten, Ungültige Koordinaten,\ldots) durch den OSMParser getestet.
 }{
-  alle gültigen Strukturen korrekt in den Graph übernommen werden und ungültige Karten einen Fehler auslösen. %TODO Bessere Formulierung: Fehler auslösen klingt fast so, als ob das Programm abstürzen würde oder so, aber mir fällt nichts besseres ein gerade...
+  alle gültigen Strukturen korrekt in den Graph übernommen werden und ungültige Karten vom Programm erkannt werden und der Import abgebrochen wird.
 }{bestanden}
 
 \test{osmWay}{OSMWay}{
@@ -764,7 +761,7 @@ behoben
 \test{coords}{Coordinates}{
   Es werden distanceTo, angleBetween sowie toString/toSMT und fromString/fromSMT getestet.
 }{
-  distanceTo die korrekte Entfernung zwischen zwei Punkten zurückgibt, angleBetween korrekt den zwischen zwei (durch zwei Punkte angegebenen) Geraden eingeschlossenen Winkel berechnet und durch die Anwendung von fromString/fromSMT auf den/die von toString/toSMT erzeugten String/SMT-Koordinaten Coordinates mit den gleichen Koordinaten wie die ursprünglichen Coordinates erzeugt werden. %TODO etwas verschachtelt... Umformulieren?
+  distanceTo und angleBetween die erwarteten Werte zurückgeben und eine Transformation und Rücktransformation mit den Konvertierungsmethoden die Testkoordinaten unverändert lässt.
 }{bestanden}
 
 \test{pointOnEdge}{PointOnEdge}{
