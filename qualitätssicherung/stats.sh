@@ -20,7 +20,7 @@ comment_regex='^[[:space:]]*\(//\|/\?\*\).*$'
 for part in src test; do
     all=$(eval "$finder" | wc -l)
     no_empty=$(eval "$finder" | grep -v "$empty_regex" | wc -l)
-    clean=$(eval "$finder" | grep -v "$empty_regex" | grep -v "$import_regex" | grep -v "$single_closing_brace_regex" | grep -v "$comment_regex" | wc -l)
+    clean=$(eval "$finder" | grep -ve "$empty_regex" -e "$import_regex" -e "$single_closing_brace_regex" -e "$comment_regex" | wc -l)
     
     output $part $all $no_empty $clean
     echo
