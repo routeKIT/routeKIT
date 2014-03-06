@@ -604,7 +604,7 @@ Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „k
 }{
 Begonnene Routenberechnungen wurden dem RouteModel nicht mitgeteilt, so dass die MainView nicht erfahren konnte, dass gerade eine Berechnung lief.
 }{
-Hinzufügen von \code{isCalculated()} zum RouteModel; siehe auch TODO ref! unten.
+Hinzufügen von \code{isCalculated()} zum RouteModel; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.
 }{
 behoben
 }
@@ -880,7 +880,7 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
   \item \code{Graph} verwendet \code{ArrayGraphIndex}.
   \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind. Dies beschleunigt den Start der Anwendung erheblich.
   \end{itemize}
-\item \ref{BG:routeCalcKeineRoute}
+\item\label{change:routeCalcKeineRoute} \ref{BG:routeCalcKeineRoute}
   \begin{itemize}
   \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating()}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating()}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
     (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute()}.)
