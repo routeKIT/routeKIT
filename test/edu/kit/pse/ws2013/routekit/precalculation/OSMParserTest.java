@@ -83,6 +83,18 @@ public class OSMParserTest {
 		parser.parseOSM(getTestFile("testInvalidWayID.osm"), reporter);
 	}
 
+	@Test(expected = SAXParseException.class)
+	public void testInvalidWayMemberReference() throws Exception {
+		parser.parseOSM(getTestFile("testInvalidWayMemberReference.osm"),
+				reporter);
+	}
+
+	@Test(expected = SAXParseException.class)
+	public void testMissingNodeMemberReference() throws Exception {
+		parser.parseOSM(getTestFile("testMissingNodeMemberReference.osm"),
+				reporter);
+	}
+
 	@Test
 	public void testWay() throws Exception {
 		StreetMap map = parser.parseOSM(getTestFile("testWay.osm"), reporter);
@@ -350,6 +362,15 @@ public class OSMParserTest {
 	public void testNdTagOutsideWay() throws Exception {
 		Graph graph = parser.parseOSM(getTestFile("testNdTagOutsideWay.osm"),
 				reporter).getGraph();
+		assertEquals(4, graph.getNumberOfEdges());
+		assertEquals(3, graph.getNumberOfNodes());
+	}
+
+	@Test
+	public void testMemberTagOutsideRelation() throws Exception {
+		Graph graph = parser.parseOSM(
+				getTestFile("testMemberTagOutsideRelation.osm"), reporter)
+				.getGraph();
 		assertEquals(4, graph.getNumberOfEdges());
 		assertEquals(3, graph.getNumberOfNodes());
 	}
