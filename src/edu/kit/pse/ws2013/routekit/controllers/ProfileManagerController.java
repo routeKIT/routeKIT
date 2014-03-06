@@ -96,7 +96,6 @@ public class ProfileManagerController {
 		profiles.remove(currentProfile.getName());
 		setAvailableProfiles();
 		changeTemporaryProfile(profiles.values().iterator().next().getName());
-		// TODO use the last selected profile instead of an arbitrary one
 	}
 
 	/**

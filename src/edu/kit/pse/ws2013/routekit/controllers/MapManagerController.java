@@ -95,7 +95,7 @@ public class MapManagerController {
 		precalculations.remove(currentMap);
 		mapsByName.remove(currentMap.getName());
 		Set<StreetMap> availableMaps = precalculations.keySet();
-		currentMap = availableMaps.iterator().next(); // TODO use previous map
+		currentMap = availableMaps.iterator().next();
 		mmv.setAvailableMaps(availableMaps);
 		mmv.setCurrentMap(currentMap, precalculations.get(currentMap));
 	}
