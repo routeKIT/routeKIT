@@ -599,6 +599,15 @@ Es wird nur noch nötig die erste Kante am Anfang einzufügen.
 }{
 behoben
 }
+\bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}{
+Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“.
+}{
+Begonnene Routenberechnungen wurden dem RouteModel nicht mitgeteilt, so dass die MainView nicht erfahren konnte, dass gerade eine Berechnung lief.
+}{
+Hinzufügen von \code{isCalculated()} zum RouteModel; siehe auch TODO ref! unten.
+}{
+behoben
+}
 \end{itemize}
 \section{Testfälle aus dem Pflichtenheft}
 
@@ -750,6 +759,11 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
     Sie verwendet nur zwei int-Arrays und ist dadurch leicht schneller und lässt sich gut speichern/laden.
   \item \code{Graph} verwendet \code{ArrayGraphIndex}.
   \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind. Dies beschleunigt den Start der Anwendung erheblich.
+  \end{itemize}
+\item \ref{BG:routeCalcKeineRoute}
+  \begin{itemize}
+  \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating()}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating()}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
+    (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute()}.)
   \end{itemize}
 \end{itemize}
 
