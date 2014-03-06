@@ -323,8 +323,8 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \bug{profileNoWarning}{Profilverwaltung: Warnung bei Enter}
     {Wenn im Profilverwaltungsdialog Vorberechnungen gelöscht werden und er mit \textit{Enter} geschlossen wird, erscheint keine Warnung. Beim Klick auf \textit{OK} erscheint sie aber.}
-    {Der Code, der die Warnung erzeugt, liegt im Programmcode des Knopfes und nicht in der Methode des \code{ProfileManager}, die den Dialog schließt.}
-    {Den Code, der die Warnung erzeugt, in den \code{ProfileManager} verschieben.}
+    {Der Code, der die Warnung erzeugt, liegt im Event-Handler des Buttons und nicht in der Methode der \code{ProfileManagerView}, die den Dialog schließt.}
+    {Den Code, der die Warnung erzeugt, in die \code{ok}-Methode der \code{ProfileManagerView} verschieben.}
     {behoben}
 \end{itemize}
 
