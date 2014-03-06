@@ -303,6 +303,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \section{Fehlerprotokoll}
 
 \subsection{Kritische Fehler}
+\begin{itemize}
+\bug{corruptIndex}{Korrupte Indexdatei}
+    {Wenn die Indexdatei Karten oder Profile enthält, die nicht existieren, stürzt \routeKIT beim Programmstart ab.}
+    {Es wird versucht, auf Karten/Profile, die \code{null} sind, zuzugreifen.}
+    {Karte oder Profil überspringen, wenn es \code{null} ist.}
+    {behoben}
+\end{itemize}
 
 \subsection{Funktionale Fehler}
 \begin{itemize}
