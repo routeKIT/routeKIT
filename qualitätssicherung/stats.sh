@@ -13,9 +13,9 @@ SUM_EMPTY=0
 SUM_CLEAN=0
 
 for part in src test; do
-ALL=`find $part -name '*.java' -exec cat {} \+ | wc -l`
-NO_EMPTY=`find $part -name '*.java' -exec cat {} \+ | grep -v '^$' | wc -l`
-CLEAN=`find $part -name '*.java' -exec cat {} \+ | grep -v '^$' | grep -v '^import .*;$' | grep -v '^[[:space:]]*}[[:space:]]*$'  | grep -v '^[[:space:]]*\(//\|/\?\*\).*$' | wc -l`
+ALL=$(find $part -name '*.java' -exec cat {} \+ | wc -l)
+NO_EMPTY=$(find $part -name '*.java' -exec cat {} \+ | grep -v '^$' | wc -l)
+CLEAN=$(find $part -name '*.java' -exec cat {} \+ | grep -v '^$' | grep -v '^import .*;$' | grep -v '^[[:space:]]*}[[:space:]]*$'  | grep -v '^[[:space:]]*\(//\|/\?\*\).*$' | wc -l)
 
 output $part $ALL $NO_EMPTY $CLEAN
 echo
