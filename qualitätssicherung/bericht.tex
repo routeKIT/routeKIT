@@ -333,6 +333,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Der Code, der die Warnung erzeugt, liegt im Event-Handler des Buttons und nicht in der Methode der \code{ProfileManagerView}, die den Dialog schließt.}
     {Den Code, der die Warnung erzeugt, in die \code{ok}-Methode der \code{ProfileManagerView} verschieben.}
     {behoben}
+\bug{testCLIHelp}{CLI Help Test}
+    {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
+    mit einer \code{ArrayIndexOutOfBoundsException} fehl,
+    obwohl er auf Linux-Systemen funktioniert.}
+    {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
+    {Erzeuge einen plattformabhängigen Referenzstring mit den richtigen Zeilenumbrüchen, damit er mit der Ausgabe exakt übereinstimmt.}
+    {behoben}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
