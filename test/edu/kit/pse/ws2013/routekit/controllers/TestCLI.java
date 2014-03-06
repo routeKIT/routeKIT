@@ -40,7 +40,6 @@ public class TestCLI {
 		runCLI(true, "--import", " + ", Resources.getKarlsruheBigLocation());
 		runCLI(true, "--delete-map");
 		runCLI(false, "--precalculate", "testmap1", "PKW (Standard)");
-		runCLI(false, "--precalculate", "testmap1", "PKW (Standard)");
 		runCLI(true, "--precalculate", "testmap1", "PKW Non-existent");
 
 		runCLI(false, "--select", "Regierungsbezirk Karlsruhe",
