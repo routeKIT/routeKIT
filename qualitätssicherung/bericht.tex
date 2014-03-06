@@ -567,6 +567,15 @@ Führe den ersten Schritt der Routenberechnung gesondert aus, um dies als Spezia
 }{
 behoben
 }
+\bug{
+Wenn im ProfileManager-Dialog Vorberechnungen gelöscht werden und er mit "Enter" geschlossen wird erscheint keine Warnung. Beim Klick auf den "OK"-Knopf erscheint Sie aber.
+}{
+Der Programmcode der die Warnung erzeugt war explizit im Programmcode für den Knopf und nicht im gemeinsamen Programmcode, der abspeichert.
+}{
+Verschiebe die Warnungs-Programmcode in den gemeinsamen code, sodass er für beide Möglichkeiten des Schließens ausgeführt wird.
+}{
+behoben
+}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
