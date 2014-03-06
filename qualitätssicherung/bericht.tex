@@ -576,6 +576,14 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
   \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
   (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute}.)
   \end{itemize}
+  \item MainController-Änderungen
+    \begin{itemize}
+    \item Die Klasse \code{MainController} enthält nun eine Methode \code{setUseArcFlags} zum abschalten der ArcFlags bei der Routenberechnung. Hierzu wird entweder eine Instanz von ArcFlagsDijkstra oder Dijkstra zur Routenberechnung verwendet.
+    \end{itemize}
+  \item ArcFlagsDijkstra-Änderungen
+    \begin{itemize}
+    \item Die Klasse \code{ArcFlagsDijkstra} erbt nun von der neuen Klasse \code{Dijkstra}, welche den normalen Dijkstra-Algorithmus implementiert und ergänzt diese mit den \code{ArcFlags}.
+    \end{itemize}
 \end{itemize}
 
 \makeatletter
