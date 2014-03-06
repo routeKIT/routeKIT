@@ -59,7 +59,7 @@ public class HTMLExporter {
 			html.writeEmptyElement("meta");
 			html.writeAttribute("charset", "utf-8");
 
-			// TODO stylesheet here
+			// this would be a great place to add a stylesheet
 
 			html.writeEndElement(); // head
 
@@ -108,7 +108,7 @@ public class HTMLExporter {
 
 			html.close();
 		} catch (XMLStreamException e) {
-			// TODO
+			// this shouldn’t happen, we don’t do anything crazy with the XML
 			e.printStackTrace();
 		}
 	}
