@@ -246,9 +246,7 @@ public class StreetMap {
 		if (obj instanceof StreetMap) {
 			StreetMap other = (StreetMap) obj;
 			return name.equals(other.getName())
-					&& isDefault == other.isDefault()
-					&& getGraph().equals(other.getGraph())
-					&& getEdgeBasedGraph().equals(other.getEdgeBasedGraph());
+					&& isDefault == other.isDefault();
 		}
 		return false;
 	}
