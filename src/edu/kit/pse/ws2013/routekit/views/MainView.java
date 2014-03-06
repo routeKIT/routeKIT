@@ -530,8 +530,16 @@ public class MainView extends JFrame implements RouteModelListener {
 					DefaultListModel<String> listModel = (DefaultListModel<String>) routeDescription
 							.getModel();
 					listModel.clear();
-					if (description == null) {
+					if (routeModel.isCalculating()) {
+						listModel.addElement("Route wird berechnet...");
+						return;
+					}
+					if (routeModel.getCurrentRoute() == null) {
 						listModel.addElement("Keine Route gefunden.");
+						return;
+					}
+					if (description == null) {
+						listModel.addElement("Beschreibung wird erstellt...");
 						return;
 					}
 					for (TurnInstruction instruction : description

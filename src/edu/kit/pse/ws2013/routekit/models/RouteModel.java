@@ -18,6 +18,7 @@ public class RouteModel implements CurrentCombinationListener {
 	private Route currentRoute;
 	private Coordinates start;
 	private Coordinates destination;
+	private boolean isCalculating;
 
 	public RouteDescription getCurrentDescription() {
 		return currentDescription;
@@ -35,6 +36,27 @@ public class RouteModel implements CurrentCombinationListener {
 		return start;
 	}
 
+	/**
+	 * Find out if a route calculation is currently taking place.
+	 * 
+	 * @return {@code true} if the route is being calculated, {@code false}
+	 *         otherwise.
+	 * @see #startCalculating()
+	 */
+	public boolean isCalculating() {
+		return isCalculating;
+	}
+
+	/**
+	 * Report the start of a route calculation. Route calculation is assumed to
+	 * end on the next {@link #setCurrentRoute(Route)} call.
+	 * 
+	 * @see #isCalculating
+	 */
+	public void startCalculating() {
+		isCalculating = true;
+	}
+
 	public void setCurrentDescription(RouteDescription currentDescription) {
 		this.currentDescription = currentDescription;
 		fireListeners();
@@ -49,6 +71,7 @@ public class RouteModel implements CurrentCombinationListener {
 	 */
 	public void setCurrentRoute(Route currentRoute) {
 		this.currentRoute = currentRoute;
+		isCalculating = false;
 		setCurrentDescription(null);
 	}
 

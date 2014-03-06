@@ -163,6 +163,7 @@ public class MainController {
 
 				@Override
 				public void run() {
+					rm.startCalculating();
 					ProfileMapCombination currentCombination = profileMapManager
 							.getCurrentCombination();
 					GraphIndex index = currentCombination.getStreetMap()
@@ -177,7 +178,7 @@ public class MainController {
 					}
 					Route r = rc.calculateRoute(startPointOnEdge,
 							destinationPointOnEdge, currentCombination);
-					if (calculator != Thread.currentThread()) {
+					if (calculator != this) {
 						return;
 					}
 					rm.setCurrentRoute(r);
