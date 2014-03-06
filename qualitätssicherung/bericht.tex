@@ -622,7 +622,21 @@ behoben
 \test{EdgeBasedGraph}{Es wird die Speicher- und Lade-Funktion von EdgeBasedGraph getestet.}{Der EdgeBasedGraph muss nach dem Speichern und anschließenden Laden die gleichen Edges und Turns enthalten wie davor.}{bestanden}
 \test{Graph}{Es werden die Getter sowie die Speicher- und Lade-Funktion von Graph getestet.}{Die Getter müssen den korrekten Wert zurückgeben. Der Graph muss nach dem Speichern und anschließenden Laden die gleichen Nodes und Edges enthalten wie davor.}{bestanden}
 \test{GraphIndex}{arg2}{arg3}{arg4}//TODO (Was genau macht dieser Test eigentlich?)
-\test{TileCache}{arg2}{arg3}{arg4} //TODO (Ich verteh nicht ganz, was diese assertDummy und assertNotDummy genau machen...)
+\test{TileCache}{
+  Es wird getestet, dass der TileCache Kacheln zwischenspeichert.
+}{
+  Eine Kachel, die bei der ersten Anfrage noch eine Dummy-Kachel war, soll bei einer zweiten Anfrage nach 100ms keine Dummy-Kachel mehr sein.
+}{bestanden}
+\test{TileCache}{
+  Es wird getestet, dass Prefetching (vorsorgliche Berechnung von benachbarten Kacheln, auch wenn diese noch nicht direkt angefragt wurden) funktioniert.
+}{
+  Nachdem Kacheln angefragt wurden und 100ms gewartet wurde, sollen auch benachbarte Kacheln keine Dummy-Kacheln mehr sein.
+}{bestanden}
+\test{TileCache}{
+  Es wird getestet, dass der TileCache auch Kacheln wegwirft.
+}{
+  Eine Kachel wird angefragt, dann werden $50^2$ andere Kacheln angefragt. Wenn die erste Kachel erneut angefragt wird, soll sie eine Dummy-Kachel sein.
+}{bestanden}
 \test{ArcFlags}{Es wird die Speicher- und Lade-Funktion der ArcFlags getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen ArcFlags gesetzt sein wie davor.}{bestanden}
 \test{RouteModel}{arg2}{arg3}{arg4} //TODO (Ich versteh nicht genau, was der Test prüft)
 \test{RouteModel}{arg2}{arg3}{arg4} //TODO (same)
