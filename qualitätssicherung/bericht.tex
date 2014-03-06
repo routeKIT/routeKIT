@@ -78,13 +78,13 @@
     \end{description}
 }
 
-\newcommand{\test}[4]{%
-  \item
+\newcommand{\test}[5]{%
+  \oitem{UT}{#1} 
     \begin{description}
-    \item[Was wird getestet] #1
-    \item[Beschreibung] #2
-    \item[Bestanden wenn] #3
-    \item[Status] #4
+    \item[Was wird getestet] #2
+    \item[Beschreibung] #3
+    \item[Bestanden, wenn] #4
+    \item[Status] #5
     \end{description}
 }
 
@@ -613,40 +613,40 @@ behoben
 
 \section{Protokoll der Unit-Tests}
 \begin{itemize}
-\test{GPXExporter}{Es wird die GPX-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
-\test{HTMLExporter}{Es wird die HTML-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
-\test{History}{Es wird die Speicher- und Lade-Funktion des Verlaufs getestet.}{Der Verlauf muss nach dem Speichern und anschließenden Laden die gleichen Einträge enthalten wie davor.}{bestanden}
-\test{HistoryEntry}{Es werden die toString und fromString Methoden der Verlaufseinträge getestet.}{Ein HistoryEntry muss nach Anwenden von fromString auf den von toString erzeugten String den selben Start- und Zielpunkt sowie Zeitstempel enthalten.}{bestanden}
-\test{EdgeProperties}{Es werden die Getter von EdgeProperties und insbesondere getMaxSpeed getestet.}{Die Getter müssen den korrekten Wert zurückgeben. getMaxSpeed muss, je nach Straßentyp und übergebenem Profil, die korrekte Höchstgeschwindigkeit des gegebenen Fahrzeugtyps auf diesem Straßentyp zurückgeben.}{bestanden}
-\test{Restriction}{Es wird für verschiedene Restrictions (Height-, Width-, Weight-, VehicleType-, Multiple-, NoRestriction) die allows Methode für die Profile defaultCar und defaultTruck getestet.}{Bei jeder getesteten Restriction muss allows für defaultCar und defaultTruck die korrekte Ausgabe haben.}{bestanden}
-\test{EdgeBasedGraph}{Es wird die Speicher- und Lade-Funktion von EdgeBasedGraph getestet.}{Der EdgeBasedGraph muss nach dem Speichern und anschließenden Laden die gleichen Edges und Turns enthalten wie davor.}{bestanden}
-\test{Graph}{Es werden die Getter sowie die Speicher- und Lade-Funktion von Graph getestet.}{Die Getter müssen den korrekten Wert zurückgeben. Der Graph muss nach dem Speichern und anschließenden Laden die gleichen Nodes und Edges enthalten wie davor.}{bestanden}
-\test{GraphIndex}{Beide GraphIndex-Implementierungen (Array- und Tree-) werden mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert. Dann werden verschieden Bereiche von Kanten angefordert und verglichen. Danach werden noch Koordinaten mit dem Index projeziert.}{Die resultierenden Kantenmengen und der Punkt auf der Kante stimmen jeweils mit den erwarteten überein.}{bestanden}
-\test{TileCache}{
+\test{gpxExport}{GPXExporter}{Es wird die GPX-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
+\test{htmlExprt}{HTMLExporter}{Es wird die HTML-Export-Funktion des Programms getestet.}{Die erzeugte Datei muss ein gültiges XML-Dokument sein.}{bestanden}
+\test{history}{History}{Es wird die Speicher- und Lade-Funktion des Verlaufs getestet.}{Der Verlauf muss nach dem Speichern und anschließenden Laden die gleichen Einträge enthalten wie davor.}{bestanden}
+\test{historyEntry}{HistoryEntry}{Es werden die toString und fromString Methoden der Verlaufseinträge getestet.}{Ein HistoryEntry muss nach Anwenden von fromString auf den von toString erzeugten String den selben Start- und Zielpunkt sowie Zeitstempel enthalten.}{bestanden}
+\test{edgeProps}{EdgeProperties}{Es werden die Getter von EdgeProperties und insbesondere getMaxSpeed getestet.}{Die Getter müssen den korrekten Wert zurückgeben. getMaxSpeed muss, je nach Straßentyp und übergebenem Profil, die korrekte Höchstgeschwindigkeit des gegebenen Fahrzeugtyps auf diesem Straßentyp zurückgeben.}{bestanden}
+\test{restriction}{Restriction}{Es wird für verschiedene Restrictions (Height-, Width-, Weight-, VehicleType-, Multiple-, NoRestriction) die allows Methode für die Profile defaultCar und defaultTruck getestet.}{Bei jeder getesteten Restriction muss allows für defaultCar und defaultTruck die korrekte Ausgabe haben.}{bestanden}
+\test{edgeBasedGraph}{EdgeBasedGraph}{Es wird die Speicher- und Lade-Funktion von EdgeBasedGraph getestet.}{Der EdgeBasedGraph muss nach dem Speichern und anschließenden Laden die gleichen Edges und Turns enthalten wie davor.}{bestanden}
+\test{graph}{Graph}{Es werden die Getter sowie die Speicher- und Lade-Funktion von Graph getestet.}{Die Getter müssen den korrekten Wert zurückgeben. Der Graph muss nach dem Speichern und anschließenden Laden die gleichen Nodes und Edges enthalten wie davor.}{bestanden}
+\test{graphIndex}{GraphIndex}{Beide GraphIndex-Implementierungen (Array- und Tree-) werden mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert. Dann werden verschieden Bereiche von Kanten angefordert und verglichen. Danach werden noch Koordinaten mit dem Index projeziert.}{Die resultierenden Kantenmengen und der Punkt auf der Kante stimmen jeweils mit den erwarteten überein.}{bestanden}
+\test{tileCacheCache}{TileCache Cache}{
   Es wird getestet, dass der TileCache Kacheln zwischenspeichert.
 }{
   Eine Kachel, die bei der ersten Anfrage noch eine Dummy-Kachel war, soll bei einer zweiten Anfrage nach 100ms keine Dummy-Kachel mehr sein.
 }{bestanden}
-\test{TileCache}{
+\test{tileCachePrefetch}{TileCache Prefetch}{
   Es wird getestet, dass Prefetching (vorsorgliche Berechnung von benachbarten Kacheln, auch wenn diese noch nicht direkt angefragt wurden) funktioniert.
 }{
   Nachdem Kacheln angefragt wurden und 100ms gewartet wurde, sollen auch benachbarte Kacheln keine Dummy-Kacheln mehr sein.
 }{bestanden}
-\test{TileCache}{
+\test{tileCacheCleanup}{TileCache Cleanup}{
   Es wird getestet, dass der TileCache auch Kacheln wegwirft.
 }{
   Eine Kachel wird angefragt, dann werden $50^2$ andere Kacheln angefragt. Wenn die erste Kachel erneut angefragt wird, soll sie eine Dummy-Kachel sein.
 }{bestanden}
-\test{ArcFlags}{Es wird die Speicher- und Lade-Funktion der ArcFlags getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen ArcFlags gesetzt sein wie davor.}{bestanden}
-\test{RouteModel}{Testet ob bei den Benutzung von RouteModel immer die spezifizierte Anzahl an Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.}{Die gemessene Anzahl der ausgelösten Events an alles Stellen mit der erwarteten übereinstimmt}{bestanden}
-\test{Weights}{Es wird die Speicher- und Lade-Funktion der Weights getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen Kantengewichte gesetzt sein wie davor.}{bestanden}
-\test{MapEdge}{Es wird die MapEdge-Klasse getestet, die vom OSMParser verwendet wird.}{Das Setzen der ID muss korrekt funktionieren. Die Getter müssen die richtigen Werte zurückgeben.}{bestanden}
-\test{OSMParser}{arg2}{arg3}{arg4} //TODO (Keine Ahnung, was hier alles getestet wird..)
-\test{OSMWay}{Es wird die OSMWay-Klasse getestet, die vom OSMParser verwendet wird.}{arg3}{arg4} //TODO (irgendwie sehen alle Tests gleich aus, was genau wird in den einzelnen Methodne getestet?)
-\test{ProfileMapCombination}{Es wird die Speicher- und Lade-Funktion von ProfileMapCombination getestet.}{Die ProfileMapCombination muss nach dem Speichern und anschließenden Laden das gleiche Profil und die gleiche Streetmap sowie, falls vorhanden, die gleiche abgeschlossene Vorberechnung (Weights, ArcFlags, benötigte Zeit) enthalten wie davor.}{bestanden} //TODO Den entsprechenden Test umbenennen von TestPrecalculationSaveLoad in ProfileMapCombinationSaveLoad?
-\test{TurnRestriction}{Es wird die Funktionalität von TurnRestrictions getestet.}{Eine TurnRestriction muss ihren Start- und Ziel-OSMWay korrekt zurückgeben. allowsTurn muss korrekt entscheiden, ob ein Turn auf einen OSMWay erlaubt ist oder nicht.}{bestanden}
-\test{Profile}{Es werden equals und clone sowie die Setter, Getter und die Speicher- und Lade-Funktion der Profile getestet.}{equals und clone müssen wie erwartet funktionieren. Die Setter müssen die verschiedenen Werte (VehicleType, Height, Width, etc.) korrekt setzen. Die Setter dürfen die Werte von Standardprofilen nicht verändern. Die Getter müssen die korrekten Werte zurückgeben. Das Profil muss nach dem Speichern und anschließenden Laden die gleichen Werte enthalten wie davor.}{bestanden}
-\test{
+\test{arcflags}{ArcFlags}{Es wird die Speicher- und Lade-Funktion der ArcFlags getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen ArcFlags gesetzt sein wie davor.}{bestanden}
+\test{routeModel}{RouteModel}{Testet ob bei den Benutzung von RouteModel immer die spezifizierte Anzahl an Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.}{Die gemessene Anzahl der ausgelösten Events an alles Stellen mit der erwarteten übereinstimmt}{bestanden}
+\test{weights}{Weights}{Es wird die Speicher- und Lade-Funktion der Weights getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen Kantengewichte gesetzt sein wie davor.}{bestanden}
+\test{mapEdge}{MapEdge}{Es wird die MapEdge-Klasse getestet, die vom OSMParser verwendet wird.}{Das Setzen der ID muss korrekt funktionieren. Die Getter müssen die richtigen Werte zurückgeben.}{bestanden}
+\test{osmParser}{OSMParser}{arg2}{arg3}{arg4} //TODO (Keine Ahnung, was hier alles getestet wird..)
+\test{osmWay}{OSMWay}{Es wird die OSMWay-Klasse getestet, die vom OSMParser verwendet wird.}{arg3}{arg4} //TODO (irgendwie sehen alle Tests gleich aus, was genau wird in den einzelnen Methodne getestet?)
+\test{profileMapComb}{ProfileMapCombination}{Es wird die Speicher- und Lade-Funktion von ProfileMapCombination getestet.}{Die ProfileMapCombination muss nach dem Speichern und anschließenden Laden das gleiche Profil und die gleiche Streetmap sowie, falls vorhanden, die gleiche abgeschlossene Vorberechnung (Weights, ArcFlags, benötigte Zeit) enthalten wie davor.}{bestanden} //TODO Den entsprechenden Test umbenennen von TestPrecalculationSaveLoad in ProfileMapCombinationSaveLoad?
+\test{turnRestriction}{TurnRestriction}{Es wird die Funktionalität von TurnRestrictions getestet.}{Eine TurnRestriction muss ihren Start- und Ziel-OSMWay korrekt zurückgeben. allowsTurn muss korrekt entscheiden, ob ein Turn auf einen OSMWay erlaubt ist oder nicht.}{bestanden}
+\test{profile}{Profile}{Es werden equals und clone sowie die Setter, Getter und die Speicher- und Lade-Funktion der Profile getestet.}{equals und clone müssen wie erwartet funktionieren. Die Setter müssen die verschiedenen Werte (VehicleType, Height, Width, etc.) korrekt setzen. Die Setter dürfen die Werte von Standardprofilen nicht verändern. Die Getter müssen die korrekten Werte zurückgeben. Das Profil muss nach dem Speichern und anschließenden Laden die gleichen Werte enthalten wie davor.}{bestanden}
+\test{fibHeap}{
 FibonacciHeap
 }{
 Es werden die verschiedenen Operationen für den Heap getestet.
@@ -656,9 +656,9 @@ Alle Operation müssen die erwarteten Werte zurückgeben. So muss die deleteMin-
 }{
 bestanden
 }
-\test{Coordinates}{Es werden die distanceTo, angleBetween sowie to/fromString/SMT Methoden von Coordinates getestet.}{distanceTo muss die korrekte Entfernung zwischen zwei Punkten zurückgeben. angleBetween muss den korrekten, zwischen zwei durch zwei Punkte angegebenen Geraden eingeschlossenen Winkel zurückgeben. Anwenden von von fromString/fromSMT auf den/die von toString/toSMT erzeugten String/SMT-Koordinaten muss Coordinates mit gleichen Koordinaten wie die ursprünglichen Coordinates erzeugen.}{bestanden}
-\test{PointOnEdge}{Es werden der Konstruktor sowie die Getter von PointOnEdge getestet.}{Der Konstruktor darf nur positive EdgeIDs sowie Positionen zwischen 0 und 1 annehmen. Die Getter müssen die korrekten Werte zurückgeben.}{bestanden}
-\test{FileUtil}{Es werden checkMapName und checkProfileName getestet.}{checkMapName/checkProfileName muss zulässige Map-/Profilnamen akzeptieren und alles andere ablehnen.}{bestanden}
+\test{coords}{Coordinates}{Es werden die distanceTo, angleBetween sowie to/fromString/SMT Methoden von Coordinates getestet.}{distanceTo muss die korrekte Entfernung zwischen zwei Punkten zurückgeben. angleBetween muss den korrekten, zwischen zwei durch zwei Punkte angegebenen Geraden eingeschlossenen Winkel zurückgeben. Anwenden von von fromString/fromSMT auf den/die von toString/toSMT erzeugten String/SMT-Koordinaten muss Coordinates mit gleichen Koordinaten wie die ursprünglichen Coordinates erzeugen.}{bestanden}
+\test{pointOnEdge}{PointOnEdge}{Es werden der Konstruktor sowie die Getter von PointOnEdge getestet.}{Der Konstruktor darf nur positive EdgeIDs sowie Positionen zwischen 0 und 1 annehmen. Die Getter müssen die korrekten Werte zurückgeben.}{bestanden}
+\test{fileUtil}{FileUtil}{Es werden checkMapName und checkProfileName getestet.}{checkMapName/checkProfileName muss zulässige Map-/Profilnamen akzeptieren und alles andere ablehnen.}{bestanden}
 \end{itemize}
 
 \section{Protokoll des GUI-Tests}
