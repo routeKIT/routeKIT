@@ -385,7 +385,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {die Getter die korrekten Werte zurückgeben und \code{getMaxSpeed}, je nach Straßentyp und übergebenem Profil, die korrekte Höchstgeschwindigkeit des gegebenen Fahrzeugtyps auf diesem Straßentyp liefert.}
      {bestanden}
 \test{restriction}{Restriction}
-     {Es wird für verschiedene Beschränkungen (\code{Height}-, \code{Width}-, \code{Weight}-, \code{VehicleType}-, \code{Multiple}-, \code{NoRestriction}) die \code{allows}-Methode für die Profile „PKW (Standard)“ und „LKW (Standard)“ getestet.}
+     {Es wird für verschiedene Beschränkungen (\mbox{\code{Height}-,} \mbox{\code{Width}-,} \mbox{\code{Weight}-,} \mbox{\code{VehicleType}-,} \mbox{\code{Multiple}-,} \code{NoRestriction}) die \code{allows}-Methode für die Profile „PKW (Standard)“ und „LKW (Standard)“ getestet.}
      {bei jeder getesteten Beschränkung \code{allows} für die jeweiligen Profile die korrekte Ausgabe liefert.}
      {bestanden}
 \test{edgeBasedGraph}{EdgeBasedGraph}
@@ -397,7 +397,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {die Getter die korrekten Werte zurückgeben und der Graph nach dem Speichern und anschließenden Laden die gleichen Knoten und Kanten enthält wie davor.}
      {bestanden}
 \test{graphIndex}{GraphIndex}
-     {Es werden beide \code{GraphIndex}-Implementierungen (\code{Array}- und \code{Tree}-) getestet. Dazu werden sie mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert.
+     {Es werden beide \code{GraphIndex}-Implementierungen (\code{Array}- und \mbox{\code{Tree}-)} getestet. Dazu werden sie mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert.
      Dann werden verschieden Bereiche von Kanten angefordert und verglichen.
      Danach werden noch Koordinaten mit dem Index projiziert.}
      {die resultierenden Kantenmengen und der Punkt auf der Kante jeweils mit den erwarteten Werten übereinstimmen.}
@@ -464,7 +464,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {bestanden}
 \test{fileUtil}{FileUtil}
      {Es werden \code{checkMapName} und \code{checkProfileName} getestet.}
-     {\code{checkMapName}/\code{checkProfileName} zulässige Karten-/Profilnamen akzeptiert und unzulässige ablehnt.}
+     {\code{checkMapName}/\code{checkProfileName} zulässige \mbox{Karten-/}\hspace{0pt}Profilnamen akzeptiert und unzulässige ablehnt.}
      {bestanden}
 \end{itemize}
 
