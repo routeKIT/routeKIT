@@ -584,14 +584,16 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 
 \end{description}
 
+\newpage
+
 Startbedingung: Eine Internetverbindung ist hergestellt. Die aktuelle Konfiguration (auch alle Profile und Karten) ist gelöscht.
 Bei allen Tests außer "Start" erfüllt "Start" eine Vorbedingung.
 \begin{longtable}{||c|c|c|c|c||}
 ID& Testname & Testnummer & bestanden & Vorbedingungen\\ 
  & & & & erfüllt in\\ \hline\hline
 \endfirsthead
-\rowno[start] & Start** &/TF30/ & \cmark &  * \\ \hline
-\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \cmark & * \\ \hline
+\rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server runtergeladen. Damit wird gesichert, dass der Test mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \cmark &  \footnote{Neustart der Anwendung} \\ \hline
+\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \cmark & \footnotemark[2] \\ \hline
 \rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \cmark & \ref{aboutopen} \\ \hline
 \rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \cmark &  \\ \hline
 \rowno[firstpoint] & Auswahl des ersten Punkts &  /TF80/ & \cmark & \\
@@ -634,14 +636,7 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \cmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
 \rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \cmark & \ref{neuprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \cmark & \ref{correctmapimport} \\ \hline
-
-
-
-
 \end{longtable}
-*= Neustart der Anwendung
-
-**= Die Konfiguration wird neu vom Server runtergeladen. Damit wird gesichert, dass der Test mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.
 
 \section{Testüberdeckung}
 
