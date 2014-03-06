@@ -638,8 +638,7 @@ behoben
   Eine Kachel wird angefragt, dann werden $50^2$ andere Kacheln angefragt. Wenn die erste Kachel erneut angefragt wird, soll sie eine Dummy-Kachel sein.
 }{bestanden}
 \test{ArcFlags}{Es wird die Speicher- und Lade-Funktion der ArcFlags getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen ArcFlags gesetzt sein wie davor.}{bestanden}
-\test{RouteModel}{arg2}{arg3}{arg4} //TODO (Ich versteh nicht genau, was der Test prüft)
-\test{RouteModel}{arg2}{arg3}{arg4} //TODO (same)
+\test{RouteModel}{Testet ob bei den Benutzung von RouteModel immer die spezifizierte Anzahl an Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.}{Die gemessene Anzahl der ausgelösten Events an alles Stellen mit der erwarteten übereinstimmt}{bestanden}
 \test{Weights}{Es wird die Speicher- und Lade-Funktion der Weights getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen Kantengewichte gesetzt sein wie davor.}{bestanden}
 \test{MapEdge}{Es wird die MapEdge-Klasse getestet, die vom OSMParser verwendet wird.}{Das Setzen der ID muss korrekt funktionieren. Die Getter müssen die richtigen Werte zurückgeben.}{bestanden}
 \test{OSMParser}{arg2}{arg3}{arg4} //TODO (Keine Ahnung, was hier alles getestet wird..)
