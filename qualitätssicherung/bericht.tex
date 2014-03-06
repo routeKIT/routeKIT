@@ -11,6 +11,10 @@
 \usepackage{xparse} % powerful commands
 \usepackage{xspace} % \xspace for use in commands: put a space only if no punctuation follows
 \usepackage{enumitem} % for controlling indentation in list environments
+\usepackage{amssymb} % for checkmark
+\usepackage{pifont}
+
+\newcommand{\cmark}{\ding{51}}
 
 \makeglossary
 
@@ -32,6 +36,13 @@
 }
 
 \makeatletter
+
+\newcommand{\oitem}[2]{
+  % define the counter
+  \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
+  \addtocounter{oitem#1}{10}
+  \item[\namedlabel{#1:#2}{/#1\arabic{oitem#1}/}]
+}
 
 \newcommand{\@packagelabel}[1]{P:#1}
 \newcommand{\@typelabel}[1]{T:#1} % for classes and enums
@@ -74,6 +85,18 @@
     \item[Bestanden wenn] #3
     \item[Status] #4
     \end{description}
+}
+
+% usage: \testfall{szenario}{ablauf}{ergebnis} oder \testfall[\ref{F:getesteteFunktion}]{szenario}{ablauf}{ergebnis}
+\newcommand{\testfall}[4][]{
+  \begin{description}
+    \ifthenelse{\equal{#1}{}}
+               {} % optional argument #1 is empty: skip
+               {\item[Testet] #1}
+    \item[Vorbedingungen] #2
+    \item[Ablauf] #3
+    \item[Erwartetes Ergebnis] #4
+  \end{description}
 }
 
 % Argumente:
@@ -614,44 +637,82 @@ bestanden
 \test{PointOnEdge}{Es werden der Konstruktor sowie die Getter von PointOnEdge getestet.}{Der Konstruktor darf nur positive EdgeIDs sowie Positionen zwischen 0 und 1 annehmen. Die Getter müssen die korrekten Werte zurückgeben.}{bestanden}
 \test{FileUtil}{Es werden checkMapName und checkProfileName getestet.}{checkMapName/checkProfileName muss zulässige Map-/Profilnamen akzeptieren und alles andere ablehnen.}{bestanden}
 \end{itemize}
+
 \section{Protokoll des GUI-Tests}
-\begin{itemize}
-\guitest{
-Start der Anwendung.
-}{
-Ein Progressdialog gibt den Anteil der ausgeführten Operationen und die jeweils benötigte Zeit an. Beim Erreichen von 100 Prozent schließt der Progressdialog und das Hauptfenster der Anwendung öffnet sich. Die zuletzt verwendete Kombination aus Profil und Karte ist eingeblendet. Auf dem Kartenausschnitt sind Straßen zu sehen. Es ist keine Start/Zielpunkt ausgewählt. Es wird keine Route angezeigt. Das Feld der Wegbeschreibung ist leer.
-}{
-bestanden
-}
-\guitest{
-Eingabe von ungültigen Koordinaten ins Start- bwz. Zielfeld und Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
-}{
-Das entschprechende Feld enthält die Eingabe und färbt sich rot. Keine Route wird berechnet.
-}{
-bestanden
-}
-\guitest{
-Eingabe von gültigen Koordinaten nur ins Start- oder nur ins Zielfeld. Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
-}{
-Das Feld enthält die Eingabe und die Grundfarbe ist weiß. Auf der Karte erscheint eine Fahne, die den eingegebenen Koordinaten entspricht. Keine Route wird berechnet, wenn das andere Feld ungültige Eingaben enthält oder leer ist.
-}{
-bestanden
-}
-\guitest{
-Eingabe von gültigen Koordinaten in das zweite Feld. Bestätigung durch die Tasten "Enter", "Tab" oder Mausklick auf ein anderes Feld.
-}{
-Das Feld enthält die Eingabe und die Grundfarbe ist weiß. Auf der Karte erscheint eine Fahne, die den eingegebenen Koordinaten entspricht. Die Route wird auf der Karte angezeigt. Die Wegbeschreibung erscheint im dafür vorgesehenen Fenster.
-}{
-bestanden
-}
-\guitest{
-Der Verlauf-Knopf wird gedrückt. Alternativ, wird in der Menuleiste "routeKIT/Verlauf..." angeklickt. 
-}{
-Ein Fenster mit der Verlauf-Ansicht geht auf, welches die letzten Anfragen zeitlich sortiert enthält.
-}{
-bestanden
-}
-\end{itemize}
+\subsection{Automatisierter Test}
+Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist.
+\begin{description}
+\newcounter{oitemTF}
+\setcounter{oitemTF}{400}
+\oitem{TF}{aboutviewopen} Über-Fenster öffnen
+\testfall
+    {Alle Fenster außer dem Hauptfenster sind geschlossen.}
+    {"routeKIT/Über..." in der Menuleiste wird ausgewählt.}
+    {Das Fenster mit den Informationen über das Programm erscheint.}
+\oitem{TF}{aboutviewclose} Über-Fenster schließen
+\testfall
+    {Das Über-Fenster ist geöffnet.}
+    {Die Tastenkombination Alt-F4 drücken.}
+    {Das Über-Fenster wird geschlossen.}
+\oitem{TF}{swap} Koordinaten vertauschen
+\testfall
+    {Das Start- und das Zielfeld enthalten gültige Koordinaten.}
+    {Der Start/Ziel-tauschen-Button wird gedrückt.}
+    {Die Eingaben von Start- und Zielfeld werden vertauscht und die Markierungen auf der Karte werden neu gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet.}
+\oitem{TF}{waydescription} Wegbeschreibung
+\testfall
+    {Das Start- oder das Zielfeld enthält eine gültige Koordinate.}
+    {Die fehlende gültige Koordinate wird eingegeben.}
+    {Die Markierungen auf der Karte wird gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet. Die Wegbeschreibung wird in das Wegbeschreibungsfeld ausgegeben.}
+\oitem{TF}{mapmanagerviewopen} Kartenverwaltung-Fenster öffnen
+\testfall
+    {Alle Fenster außer dem Hauptfenster sind geschlossen.}
+    {Der Karte-Knopf wird gedrückt.}
+    {Das Fenster der Kartenverwaltung erscheint.}
+\oitem{TF}{mapimportcorrect} Karte importieren (genauer als /TF290/)
+\testfall
+    {Das Fenster Kartenverwaaltung ist offen.}
+    {Der Importieren-Knopf wird gedrückt. Im Dialog wird der korrekte Pfad und Name der Karte angegeben und zwei mal bestätigt.}
+    {Die Kartenverwaltung wird geschlossen. Die importierte Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet.}
+\oitem{TF}{profilemanagerviewopen} Profilverwaltung-Fenster öffnen
+\testfall
+    {Alle Fenster außer dem Hauptfenster sind geschlossen.}
+    {Der Profil-Knopf wird gedrückt.}
+    {Das Fenster der Profilverwaltung erscheint.}
+
+
+
+
+\end{description}
+
+Der Test wird mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet. Eine Internetverbindung ist hergestellt.
+\begin{longtable}{||c|c|c||}
+Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
+\endfirsthead
+/TF30/ & \cmark &  Neustart der Anwendung  \\ \hline
+\ref{TF:aboutviewopen}& \cmark & Neustart der Anwendung \\ \hline
+\ref{TF:aboutviewclose}& \cmark & \ref{TF:aboutviewopen} \\ \hline
+/TF150/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
+/TF80/ und /TF100/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
+/TF90/ und \ref{TF:waydescription} & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
+/TF70/ & \cmark & /TF90/ \\ \hline
+/TF20/ & \cmark & /TF90/ und \ref{TF:waydescription} \\ \hline
+\ref{TF:swap} & \cmark & /TF90/ und \ref{TF:waydescription} \\ \hline
+/TF200/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
+/TF210/ & \cmark & /TF30/ und /TF200/ \\ \hline
+/TF120/ und /TF220/& \cmark & /TF30/ \\ \hline
+/TF130/ und /TF220/& \cmark & /TF30/ \\ \hline
+\ref{TF:mapmanagerviewopen} & \cmark & \ref{TF:aboutviewclose} \\ \hline
+\ref{TF:mapimportcorrect}& \cmark & \ref{TF:mapmanagerviewopen} \\ \hline
+/TF10/ & \cmark & /TF30/ und \ref{TF:mapimportcorrect} \\ \hline
+\ref{TF:profilemanagerviewopen} & \cmark & /TF30/ und \ref{TF:mapimportcorrect} \\ \hline
+/TF240/ & \cmark & der Bedingung für den Test \\ \hline
+/TF10/ & \cmark & /TF30/ und /TF240/ \\ \hline
+
+
+
+
+\end{longtable}
 
 \section{Testüberdeckung}
 
