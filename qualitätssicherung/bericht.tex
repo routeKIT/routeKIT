@@ -58,13 +58,14 @@
                {#2}%
 }
 
-\newcommand{\bug}[4]{%
-  \item
+\newcommand{\bug}[6]{%
+  \oitem{BG}{#1}
+  	#2
     \begin{description}
-    \item[Symptom] #1
-    \item[Ursache] #2
-    \item[Maßnahme] #3
-    \item[Status] #4
+    \item[Symptom] #3
+    \item[Ursache] #4
+    \item[Maßnahme] #5
+    \item[Status] #6
     \end{description}
 }
 
@@ -531,7 +532,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \subsection{Funktionale Fehler}
 \begin{itemize}
-\bug{
+\bug{missingStreet}{Fehlende Straßen}{
 Im vergröberten Graph fehlen Straßen.
 }{
 Die entsprechenden Kanten werden weggeworfen.
@@ -540,25 +541,25 @@ Der Fehler liegt in einem break, das nach der ersten ein-Kanten-Straße das Kant
 }{
 behoben
 }
-\bug{
+\bug{slowRender}{Vergröberung nötig}{
 Das Rendern der Kacheln ist auf Zoomstufen weiter weg zu langsam.
 }{
 Es werden immernoch viele feine "Kanten" gezeichnet.
 }{
-Der Graph muss für die Anzeige behoben werden.
+Der Graph muss für die Anzeige vergröbert werden, sodass weniger Kanten gezeichnet werden müssen.
 }{
 behoben
 }
-\bug{
+\bug{pointProjection}{Punkt Projektion}{
 Die Projektion von angeklickten Koordinaten auf Kanten war manchmal leicht schief.
 }{
 Die Projektion fand im Geokoordinatensystem statt und nicht nach der Mercator-Projektion (also im SMT-Koordinatensystem)
 }{
-Den Code anpassen, damit er die SMT Koordinaten benutzt.
+Den Code muss für die Abstandsberechnung SMT Koordinaten benutzen und keine Geokoordinaten.
 }{
 behoben
 }
-\bug{
+\bug{cornerOneway}{Einbahnstraßen Randfall}{
 Eine Route auf einer einzelnen Kante, die nur in eine Richtung benutzbar ist, kann die Kante auch in die falsche Richtung benutzen.
 }{
 Es wird nur verhindert, dass man in Einbahnstraßen falschrum einbiegt und nicht falschrum darin losfährt.
@@ -567,7 +568,7 @@ Führe den ersten Schritt der Routenberechnung gesondert aus, um dies als Spezia
 }{
 behoben
 }
-\bug{
+\bug{profileNoWarning}{ProfileManager Warnung bei Enter}{
 Wenn im ProfileManager-Dialog Vorberechnungen gelöscht werden und er mit "Enter" geschlossen wird erscheint keine Warnung. Beim Klick auf den "OK"-Knopf erscheint Sie aber.
 }{
 Der Programmcode der die Warnung erzeugt war explizit im Programmcode für den Knopf und nicht im gemeinsamen Programmcode, der abspeichert.
@@ -580,7 +581,7 @@ behoben
 
 \subsection{Benutzbarkeitsfehler}
 \begin{itemize}
-\bug{
+\bug{routeCalcAllEdges}{Routenberechnung alle Kanten}{
 Die Routenberechnung ist zu langsam, auch für kurze Routen.
 }{
 Der Algorithmus hat trotzdem über alle Kanten des Graphen iteriert, obwohl das eigentlich dank der ArcFlags und einer kurzen Route nicht nötig wäre.
@@ -589,7 +590,7 @@ Initialisiere mehrere Daterstrukturen "lazy". (nicht eingefügte Kanten sind "un
 }{
 behoben
 }
-\bug{
+\bug{precalc}{Vorberechnung alle Kanten}{
 Die Vorberechnung ist zu langsam.
 }{
 Es wurden für jeden der Dijkstras am Anfang alle Kanten des Graphen eingefügt.
