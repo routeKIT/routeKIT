@@ -336,7 +336,7 @@ public class ProfileManagerView extends JDialog {
 		highway.setBackground(Color.WHITE);
 		JLabel highwaySpeed = new JLabel(
 				"Durchschnittsgeschwindigkeit auf der Autobahn:");
-		hSpeedspinner = new JSpinner(new SpinnerNumberModel(60, 0, 300, 5));
+		hSpeedspinner = new JSpinner(new SpinnerNumberModel(60, 60, 300, 5));
 		hSpeedspinner.setPreferredSize(new Dimension(50, 20));
 		hSpeedspinner.addKeyListener(escEnterListener);
 		JLabel kmPerh = new JLabel("km/h");
@@ -352,7 +352,7 @@ public class ProfileManagerView extends JDialog {
 		secondaryRoad.setBackground(Color.WHITE);
 		JLabel secondaryRoadSpeed = new JLabel(
 				"Durchschnittsgeschwindigkeit auf der Landstraße:");
-		srSpeedspinner = new JSpinner(new SpinnerNumberModel(50, 0, 150, 5));
+		srSpeedspinner = new JSpinner(new SpinnerNumberModel(50, 30, 150, 5));
 		srSpeedspinner.setPreferredSize(new Dimension(50, 20));
 		srSpeedspinner.addKeyListener(escEnterListener);
 		JLabel kmPerh = new JLabel("km/h");
@@ -366,7 +366,7 @@ public class ProfileManagerView extends JDialog {
 		JPanel height = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		height.setBackground(Color.WHITE);
 		JLabel vehicleHeight = new JLabel("Höhe des Fahrzeugs:");
-		heightspinner = new JSpinner(new SpinnerNumberModel(100, 0, 400, 10));
+		heightspinner = new JSpinner(new SpinnerNumberModel(100, 100, 400, 10));
 		heightspinner.setPreferredSize(new Dimension(50, 20));
 		heightspinner.addKeyListener(escEnterListener);
 		JLabel cm = new JLabel("cm");
@@ -380,7 +380,7 @@ public class ProfileManagerView extends JDialog {
 		JPanel width = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		width.setBackground(Color.WHITE);
 		JLabel vehicleWidth = new JLabel("Breite des Fahrzeugs:");
-		widthspinner = new JSpinner(new SpinnerNumberModel(150, 0, 300, 10));
+		widthspinner = new JSpinner(new SpinnerNumberModel(150, 80, 300, 10));
 		widthspinner.setPreferredSize(new Dimension(50, 20));
 		widthspinner.addKeyListener(escEnterListener);
 		JLabel cm = new JLabel("cm");
@@ -394,8 +394,8 @@ public class ProfileManagerView extends JDialog {
 		JPanel weight = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
 		weight.setBackground(Color.WHITE);
 		JLabel vehicleWeight = new JLabel("Gewicht des Fahrzeugs:");
-		weightspinner = new JSpinner(
-				new SpinnerNumberModel(1500, 0, 50000, 100));
+		weightspinner = new JSpinner(new SpinnerNumberModel(1500, 50, 50000,
+				100));
 		weightspinner.setPreferredSize(new Dimension(70, 20));
 		weightspinner.addKeyListener(escEnterListener);
 		JLabel kg = new JLabel("kg");
