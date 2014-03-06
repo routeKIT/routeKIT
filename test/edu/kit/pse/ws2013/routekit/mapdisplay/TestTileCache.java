@@ -54,13 +54,13 @@ public class TestTileCache {
 		assertDummy(tc.renderTile(0, 0, 4));
 		assertDummy(tc.renderTile(0, 0, 6));
 		Thread.sleep(100);
-		assertNotDummy(tc.renderTile(0, 0, 5));
-		assertNotDummy(tc.renderTile(0, 1, 5));
-		assertNotDummy(tc.renderTile(1, 0, 5));
-		assertNotDummy(tc.renderTile(0, -1, 5));
-		assertNotDummy(tc.renderTile(-1, 0, 5));
 		assertNotDummy(tc.renderTile(0, 0, 4));
-		assertNotDummy(tc.renderTile(0, 0, 6));
+		assertNotDummy(tc.renderTile(0, 1, 4));
+		assertNotDummy(tc.renderTile(1, 0, 4));
+		assertNotDummy(tc.renderTile(0, -1, 4));
+		assertNotDummy(tc.renderTile(-1, 0, 4));
+		assertNotDummy(tc.renderTile(0, 0, 3));
+		assertNotDummy(tc.renderTile(0, 0, 7));
 	}
 
 	@Test
