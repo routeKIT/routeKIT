@@ -30,6 +30,18 @@
 
 \makeatletter
 
+\providecommand{\rowno}[1][__empty__]{%
+\ifthenelse{\isundefined{\c@rowno}}{%
+\newcounter{rowno}}{}%
+\addtocounter{rowno}{1}
+\ifthenelse{\equal{#1}{__empty__}}{%
+\therowno%
+}{%
+\namedlabel{#1}{\therowno}%
+}%
+
+}
+
 \newcommand{\oitem}[2]{
   % define the counter
   \@ifundefined{c@oitem#1}{\newcounter{oitem#1}}{} % initialized at 0
@@ -498,6 +510,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Protokoll des GUI-Tests}
 \subsection{Automatisierter Test}
+Alle Testfälle mit kleineren Nummern wurden im Pfichtenheft beschrieben.
 Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist.
 \begin{description}
 \newcounter{oitemTF}
@@ -517,6 +530,11 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Das Start- und das Zielfeld enthalten gültige Koordinaten.}
     {Der Start/Ziel-Tauschen-Button wird gedrückt.}
     {Die Eingaben von Start- und Zielfeld werden vertauscht und die Markierungen auf der Karte werden neu gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet.}
+\oitem{TF}{falsecoordinates} Ungültige Koordinaten
+\testfall
+    {Das Profil ist für die aktuelle Karte vorberechnet.}
+    {Ins Start- oder Zielfeld wird eine ungültige Koordinate eingegeben.}
+    {Das Feld färbt sich rot. Es wird keine Routenberechnung durchgeführt.}
 \oitem{TF}{waydescription} Wegbeschreibung
 \testfall
     {Das Start- oder das Zielfeld enthält eine gültige Koordinate.}
@@ -527,42 +545,102 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Alle Fenster außer dem Hauptfenster sind geschlossen.}
     {Der Karte-Knopf wird gedrückt.}
     {Das Fenster der Kartenverwaltung erscheint.}
-\oitem{TF}{mapimportcorrect} Karte importieren (genauer als /TF290/)
-\testfall
-    {Das Fenster Kartenverwaltung ist offen.}
-    {Der Importieren-Knopf wird gedrückt. Im Dialog wird der korrekte Pfad und Name der Karte angegeben und zwei mal bestätigt.}
-    {Die Kartenverwaltung wird geschlossen. Die importierte Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet.}
 \oitem{TF}{profilemanagerviewopen} Profilverwaltung-Fenster öffnen
 \testfall
     {Alle Fenster außer dem Hauptfenster sind geschlossen.}
     {Der Profil-Knopf wird gedrückt.}
     {Das Fenster der Profilverwaltung erscheint.}
+\oitem{TF}{oneway} Einbahnstraße benutzen
+\testfall
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße }
+    {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Ziel weiter in Einbahnstraßenrichtung als Start. }
+    {Eine Route, die den Einbahnstraßenabschnitt enthällt wird gefunden.}
+\oitem{TF}{addprofile} Profil hinzufügen
+\testfall
+    {Die Kartenverwaltung ist offen.}
+    {Der Hinzufügen-Knopf wird gedrückt. Ein Profil wird ausgewählt und die Wahl wird drei mal bestätigt.}
+    {Die Kartenverwaltung wird geschlossen. Das Profil wird für die Karte vorberechnet.}
+\oitem{TF}{historyopen} Verlauf-Fenster öffnen
+\testfall
+    {Alle Fenster außer dem Hauptfenster sind geschlossen.}
+    {Der Verlauf-Knopf wird gedrückt.}
+    {Das Verlauf-Fenster wird geöffnet.}
+\oitem{TF}{removeprofileinmap} Vorberechnung für Profil entfernen
+\testfall
+    {Profil ist für die Karte vorberechnet. Kartenverwaltung ist offen.}
+    {Ein Profil wird ausgewählt. Der Entfernen-Button wird gedrückt.}
+    {Die Vorberechnung von dem Profil wird gelöscht.}
+\oitem{TF}{deactivatearcflgs} Keine \gls{arc} verwenden
+\testfall
+    {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind aktiviert.}
+    {In der Menüleiste werden die \gls{arc} abgewählt.}
+    {Es werden keine \gls{arc} für die Vorberechnung verwendet.}
+\oitem{TF}{activatearcflgs}  \gls{arc} verwenden
+\testfall
+    {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind deaktiviert.}
+    {In der Menüleiste werden die \gls{arc} gewählt.}
+    {Es werden \gls{arc} für die Vorberechnung verwendet.}
+
+
 \end{description}
 
-Der Test wird mit der Karte „Regierungsbezirk Karlsruhe“ und dem dafür vorberechneten Standardprofil „PKW (Standard)“ gestartet. Eine Internetverbindung ist hergestellt.
-\begin{longtable}{||c|c|c||}
-Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
+Startbedingung: Der Test wird mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet. Eine Internetverbindung ist hergestellt. Es werden beim Start eigene Kacheln verwendet und die \gls{arc} sind aktiviert.
+Bei allen Tests außer "Start" erfüllt "Start" eine Vorbedingung.
+\begin{longtable}{||c|c|c|c|c||}
+ID& Testname & Testnummer & bestanden & Vorbedingungen\\ 
+ & & & & erfüllt in\\ \hline\hline
 \endfirsthead
-/TF30/ & \cmark &  Neustart der Anwendung  \\ \hline
-\ref{TF:aboutviewopen}& \cmark & Neustart der Anwendung \\ \hline
-\ref{TF:aboutviewclose}& \cmark & \ref{TF:aboutviewopen} \\ \hline
-/TF150/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
-/TF80/ und /TF100/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
-/TF90/ und \ref{TF:waydescription} & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
-/TF70/ & \cmark & /TF90/ \\ \hline
-/TF20/ & \cmark & /TF90/ und \ref{TF:waydescription} \\ \hline
-\ref{TF:swap} & \cmark & /TF90/ und \ref{TF:waydescription} \\ \hline
-/TF200/ & \cmark & /TF30/ und der Bedingung für den Test \\ \hline
-/TF210/ & \cmark & /TF30/ und /TF200/ \\ \hline
-/TF120/ und /TF220/& \cmark & /TF30/ \\ \hline
-/TF130/ und /TF220/& \cmark & /TF30/ \\ \hline
-\ref{TF:mapmanagerviewopen} & \cmark & \ref{TF:aboutviewclose} \\ \hline
-\ref{TF:mapimportcorrect}& \cmark & \ref{TF:mapmanagerviewopen} \\ \hline
-/TF10/ & \cmark & /TF30/ und \ref{TF:mapimportcorrect} \\ \hline
-\ref{TF:profilemanagerviewopen} & \cmark & /TF30/ und \ref{TF:mapimportcorrect} \\ \hline
-/TF240/ & \cmark & der Bedingung für den Test \\ \hline
-/TF10/ & \cmark & /TF30/ und /TF240/ \\ \hline
+\rowno[start] & Start &/TF30/ & \cmark &  * \\ \hline
+\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \cmark & * \\ \hline
+\rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \cmark & \ref{aboutopen} \\ \hline
+\rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \cmark & ** \\ \hline
+\rowno[firstpoint] & Auswahl des ersten Punkts &  /TF80/ & \cmark & ** \\
+ & &/TF100/ & & \\ \hline
+\rowno[secondpoint] & Auswahl des zweiten Punkts & /TF90/ & \cmark & ** \\ 
+& &\ref{TF:waydescription} & & \\ \hline
+\rowno[gpx] & GPX-Export & /TF70/ & \cmark & \ref{secondpoint} \\ \hline
+\rowno[html] & HTML-Export &/TF20/ & \cmark & \ref{secondpoint} \\ \hline
+\rowno[swap] & Vertauschen von Eingaben &\ref{TF:swap} & \cmark & \ref{secondpoint} \\ \hline
+\rowno[osm] & OSM-Kacheln & /TF200/ & \cmark & ** \\ \hline
+\rowno[selftile] & Eigene Kacheln & /TF210/ & \cmark & \ref{osm} \\ \hline
+\rowno[zoomin] & Reinzoomen & /TF120/ & \cmark & \\ 
+& & /TF220/ & & \\ \hline
+\rowno[zoomout] & Rauszoomen &/TF130/ & \cmark & \\
+& & /TF220/ & & \\ \hline
+\rowno[drag] & Karte ziehen &/TF110/ & \cmark & ** \\ \hline
+\rowno[noarcs] &  Deaktivierung der\gls{arc}& \ref{TF:deactivatearcflgs} & \cmark & ** \\ \hline
+\rowno[swapnoarc] & Vertauschen von Eingaben & \ref{TF:swap} & \cmark & \ref{swap}\\ \hline
+\rowno[arcs] & Aktivierung der \gls{arc} & \ref{TF:activatearcflgs} & \cmark & \ref{noarcs} und ** \\ \hline
+
+\rowno[falsecoords] & Ungültige Koordinaten & \ref{TF:falsecoordinates}/ & \cmark & ** \\ \hline
+\rowno[mapmanageropen1] & Öffnung der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \cmark & \ref{aboutclose} \\ \hline
+\rowno[correctmapimport] & Import einer Karte & /TF290/& \cmark & \ref{mapmanageropen1} \\ 
+& & /TF330/ & & \\ \hline
+\rowno[precalc1] & Vorberechnung & /TF10/ & \cmark & \ref{correctmapimport} \\ \hline
+\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \cmark & \ref{correctmapimport} \\ \hline
+\rowno[selectprofile] & Auswahl eines Profils & /TF240/ & \cmark & ** \\ \hline
+\rowno[precalc2] & Vorberechnung & /TF10/ & \cmark & \ref{selectprofile} \\ \hline
+\rowno[oneway] & Einbahnstraße in Fahrtrichtung & \ref{TF:oneway}& \cmark & \ref{precalc2}\\ \hline
+&  &\ref{TF:swap}& &  \\ 
+\rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \cmark & \ref{oneway} \\
+& &  /TF340/ & & \\ \hline
+\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \cmark & \ref{correctmapimport} \\ \hline
+\rowno[neuprofile] & Neues Profil& /TF230/ & \cmark & \\ \hline
+\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \cmark & \ref{neuprofile} \\ \hline
+\rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \cmark & \ref{mapmanageropen2} \\ \hline
+\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \cmark & \ref{addprofileformap}\\ \hline
+\rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \cmark & \ref{swaponeway} \\ \hline
+\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \cmark & \ref{loadfromhistory} \\ \hline
+\rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \cmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
+\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \cmark & \ref{neuprofile} \\ \hline
+\rowno[deletemap] & Entfernung einer Karte & /TF310/ & \cmark & \ref{correctmapimport} \\ \hline
+
+
+
+
 \end{longtable}
+*= Neustart der Anwendung\\
+**= Bedingung für den Test
 
 \section{Testüberdeckung}
 
