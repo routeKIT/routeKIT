@@ -475,17 +475,17 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \oitem{TF}{aboutviewopen} Über-Fenster öffnen
 \testfall
     {Alle Fenster außer dem Hauptfenster sind geschlossen.}
-    {"routeKIT/Über..." in der Menuleiste wird ausgewählt.}
+    {„routeKIT/Über\dots“ in der Menüleiste wird ausgewählt.}
     {Das Fenster mit den Informationen über das Programm erscheint.}
 \oitem{TF}{aboutviewclose} Über-Fenster schließen
 \testfall
     {Das Über-Fenster ist geöffnet.}
-    {Die Tastenkombination Alt-F4 drücken.}
+    {Die Tastenkombination \textit{Alt}+\textit{F4} drücken.}
     {Das Über-Fenster wird geschlossen.}
 \oitem{TF}{swap} Koordinaten vertauschen
 \testfall
     {Das Start- und das Zielfeld enthalten gültige Koordinaten.}
-    {Der Start/Ziel-tauschen-Button wird gedrückt.}
+    {Der Start/Ziel-Tauschen-Button wird gedrückt.}
     {Die Eingaben von Start- und Zielfeld werden vertauscht und die Markierungen auf der Karte werden neu gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet.}
 \oitem{TF}{waydescription} Wegbeschreibung
 \testfall
@@ -499,7 +499,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Das Fenster der Kartenverwaltung erscheint.}
 \oitem{TF}{mapimportcorrect} Karte importieren (genauer als /TF290/)
 \testfall
-    {Das Fenster Kartenverwaaltung ist offen.}
+    {Das Fenster Kartenverwaltung ist offen.}
     {Der Importieren-Knopf wird gedrückt. Im Dialog wird der korrekte Pfad und Name der Karte angegeben und zwei mal bestätigt.}
     {Die Kartenverwaltung wird geschlossen. Die importierte Karte ist ausgewählt, die Karte ist für das aktuelle Profil nicht vorberechnet.}
 \oitem{TF}{profilemanagerviewopen} Profilverwaltung-Fenster öffnen
@@ -507,13 +507,9 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Alle Fenster außer dem Hauptfenster sind geschlossen.}
     {Der Profil-Knopf wird gedrückt.}
     {Das Fenster der Profilverwaltung erscheint.}
-
-
-
-
 \end{description}
 
-Der Test wird mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet. Eine Internetverbindung ist hergestellt.
+Der Test wird mit der Karte „Regierungsbezirk Karlsruhe“ und dem dafür vorberechneten Standardprofil „PKW (Standard)“ gestartet. Eine Internetverbindung ist hergestellt.
 \begin{longtable}{||c|c|c||}
 Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
 \endfirsthead
@@ -536,10 +532,6 @@ Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
 \ref{TF:profilemanagerviewopen} & \cmark & /TF30/ und \ref{TF:mapimportcorrect} \\ \hline
 /TF240/ & \cmark & der Bedingung für den Test \\ \hline
 /TF10/ & \cmark & /TF30/ und /TF240/ \\ \hline
-
-
-
-
 \end{longtable}
 
 \section{Testüberdeckung}
@@ -548,18 +540,18 @@ Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
 \begin{itemize}
-\item GraphIndex-Änderungen
+\item Änderungen am \code{GraphIndex}
   \begin{itemize}
-  \item Die Klasse \code{GraphIndex} wurde zu einem Interface geändert und die bisherige Implementierung in die Klasse \code{TreeGraphIndex} verschoben.
+  \item Die Klasse \code{GraphIndex} wurde in eine Schnittstelle geändert und die bisherige Implementierung in die Klasse \code{TreeGraphIndex} verschoben.
   \item Eine weitere Implementierung von \code{GraphIndex}, \code{ArrayGraphIndex}, wurde geschrieben.
-    Sie verwendet nur zwei int-Arrays und ist dadurch leicht schneller und lässt sich gut speichern/laden.
+  Sie verwendet nur zwei \code{int}-Arrays und ist dadurch etwas schneller und lässt sich gut speichern/laden.
   \item \code{Graph} verwendet \code{ArrayGraphIndex}.
   \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind. Dies beschleunigt den Start der Anwendung erheblich.
   \end{itemize}
 \item\label{change:routeCalcKeineRoute} \ref{BG:routeCalcKeineRoute}
   \begin{itemize}
-  \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating()}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating()}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
-    (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute()}.)
+  \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
+  (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute}.)
   \end{itemize}
 \end{itemize}
 
