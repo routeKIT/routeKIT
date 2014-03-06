@@ -57,13 +57,13 @@
     \end{description}
 }
 
-\newcommand{\test}[5]{%
+\NewDocumentCommand{\test}{m m O{} m m m}{%
   \oitem{UT}{#1} 
     \begin{description}
-    \item[Was wird getestet] \code{#2}
-    \item[Beschreibung] #3
-    \item[Bestanden, wenn] #4
-    \item[Status] #5
+    \item[Was wird getestet] \code{#2} #3
+    \item[Beschreibung] #4
+    \item[Bestanden, wenn] #5
+    \item[Status] #6
     \end{description}
 }
 
@@ -402,15 +402,15 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      Danach werden noch Koordinaten mit dem Index projiziert.}
      {die resultierenden Kantenmengen und der Punkt auf der Kante jeweils mit den erwarteten Werten übereinstimmen.}
      {bestanden}
-\test{tileCacheCache}{TileCache}
+\test{tileCacheCache}{TileCache}[Cache]
      {Es wird das Speichern von Kacheln im \code{TileCache} getestet.}
      {eine Kachel innerhalb von 100\,ms nach der ersten Anfrage im Cache liegt.}
      {bestanden}
-\test{tileCachePrefetch}{TileCache}
+\test{tileCachePrefetch}{TileCache}[Prefetch]
      {Es wird das Prefetching (vorsorgliche Berechnung von benachbarten Kacheln, auch wenn diese noch nicht direkt angefragt wurden) des \code{TileCache} getestet.}
      {nach dem Anfragen einer Kachel innerhalb von 100\,ms benachbarte Kacheln ebenfalls im Cache liegen.}
      {bestanden}
-\test{tileCacheCleanup}{TileCache}
+\test{tileCacheCleanup}{TileCache}[Cleanup]
      {Es wird das Entfernen von Kacheln aus dem \code{TileCache} getestet.}
      {nach dem Anfragen von $50^2$ anderen Kacheln die älteste Kachel aus dem Cache entfernt wird.}
      {bestanden}
