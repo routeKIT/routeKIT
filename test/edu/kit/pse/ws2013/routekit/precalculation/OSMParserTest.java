@@ -43,11 +43,10 @@ public class OSMParserTest {
 		parser.parseOSM(null, reporter);
 	}
 
-	/*
-	 * @Test(expected = SAXParseException.class) public void testNoOSMFile()
-	 * throws Exception { parser.parseOSM(getTestFile("testNoOSM.xml"),
-	 * reporter); }
-	 */
+	@Test(expected = SAXParseException.class)
+	public void testNoOSMFile() throws Exception {
+		parser.parseOSM(getTestFile("testNoOSM.xml"), reporter);
+	}
 
 	@Test(expected = SAXParseException.class)
 	public void testMissingTagName() throws Exception {

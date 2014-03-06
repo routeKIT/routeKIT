@@ -257,6 +257,10 @@ public class OSMParser {
 		@Override
 		public void startElement(String uri, String localName, String qName,
 				Attributes attr) throws SAXException {
+			if (enclosing == null && !qName.equals("osm")) {
+				throw new SAXParseException("No OSM root element found",
+						locator);
+			}
 			switch (qName) {
 			case "way":
 				try {
