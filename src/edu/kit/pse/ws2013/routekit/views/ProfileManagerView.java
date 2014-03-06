@@ -237,28 +237,6 @@ public class ProfileManagerView extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!currentProfile.isDefault()) {
-					Profile current = writeValues(currentProfile.getName());
-					pmc.saveTemporaryProfile(current);
-				}
-				int time;
-				if ((time = pmc.getDeletionTime()) != 0) {
-					StringBuilder text = new StringBuilder();
-					text.append("Sie speichern hiermit alle\n");
-					text.append("vorgenommenen Änderungen für alle Profile.\n");
-					text.append("Sie löschen ");
-					TimeUtil.timeSpanString(text, time);
-					text.append(" an Arbeit.\n");
-					text.append("Wollen Sie die Änderungen vornehmen?");
-					int showOptionDialog = JOptionPane.showOptionDialog(
-							ProfileManagerView.this, text.toString(),
-							"Bestätigung", JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, new String[] {
-									"Ja", "Nein" }, "Nein");
-					if (showOptionDialog != JOptionPane.YES_OPTION) {
-						return;
-					}
-				}
 				ok();
 			}
 		});
@@ -515,6 +493,24 @@ public class ProfileManagerView extends JDialog {
 			Profile current = writeValues(currentProfile.getName());
 			pmc.saveTemporaryProfile(current);
 		}
+		int time;
+		if ((time = pmc.getDeletionTime()) != 0) {
+			StringBuilder text = new StringBuilder();
+			text.append("Sie speichern hiermit alle\n");
+			text.append("vorgenommenen Änderungen für alle Profile.\n");
+			text.append("Sie löschen ");
+			TimeUtil.timeSpanString(text, time);
+			text.append(" an Arbeit.\n");
+			text.append("Wollen Sie die Änderungen vornehmen?");
+			int showOptionDialog = JOptionPane.showOptionDialog(
+					ProfileManagerView.this, text.toString(), "Bestätigung",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+					null, new String[] { "Ja", "Nein" }, "Nein");
+			if (showOptionDialog != JOptionPane.YES_OPTION) {
+				return;
+			}
+		}
+
 		ProgressDialog p = new ProgressDialog(ProfileManagerView.this);
 		ProgressReporter reporter = new ProgressReporter();
 		reporter.addProgressListener(p);
