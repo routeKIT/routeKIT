@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import edu.kit.pse.ws2013.routekit.controllers.ProfileManagerController.ProfilesDiff;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
@@ -164,13 +165,25 @@ public class MapManagerController {
 		ProfileManagerController c = new ProfileManagerController(mmv);
 		Profile addedProfile = c.getSelectedProfile();
 		if (addedProfile != null) {
+			ProfilesDiff diff = c.diff();
+			for (Set<Profile> p : precalculations.values()) {
+				Map<Profile, Profile> changed = new HashMap<>();
+				for (Profile pr : p) {
+					for (Profile q : diff.getChangedProfiles()) {
+						if (pr.getName().equals(q.getName())) {
+							changed.put(pr, q);
+							break;
+						}
+					}
+				}
+				for (Entry<Profile, Profile> e : changed.entrySet()) {
+					p.remove(e.getKey());
+					p.add(e.getValue());
+				}
+				p.removeAll(diff.getDeletedProfiles());
+			}
 			// the ProfileManager can delete precalculations and add profiles
 			initProfilesByName();
-			for (ProfileMapCombination deletedCombination : c
-					.getDeletedPrecalculations()) {
-				precalculations.get(deletedCombination.getStreetMap()).remove(
-						deletedCombination.getProfile());
-			}
 			Set<Profile> profiles = precalculations.get(currentMap);
 			if (profiles == null) {
 				profiles = new HashSet<>();

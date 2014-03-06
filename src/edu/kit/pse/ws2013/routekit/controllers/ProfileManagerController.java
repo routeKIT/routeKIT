@@ -23,6 +23,8 @@ public class ProfileManagerController {
 	private Profile currentProfile;
 	private Profile selectedProfile; // set in saveAllChanges
 
+	private ProfilesDiff diff = null;
+
 	public ProfileManagerController(final Window parent) {
 		combinationsAtStartup = new HashSet<>(ProfileMapManager.getInstance()
 				.getPrecalculations());
@@ -152,7 +154,7 @@ public class ProfileManagerController {
 				selectedProfile = currentProfile;
 				reporter.setSubTasks(new float[] { .1f, .4f, .5f });
 				reporter.pushTask("Ermittle Änderungen");
-				final ProfilesDiff diff = diff();
+				diff = diff();
 				reporter.popTask();
 				final ProfileManager manager = ProfileManager.getInstance();
 				reporter.pushTask("Lösche Profile");
@@ -241,12 +243,15 @@ public class ProfileManagerController {
 		return ret;
 	}
 
-	private ProfilesDiff diff() {
+	public ProfilesDiff diff() {
+		if (diff != null) {
+			return diff;
+		}
 		return ProfilesDiff.calc(ProfileManager.getInstance().getProfiles(),
 				new HashSet<>(profiles.values()));
 	}
 
-	private static class ProfilesDiff {
+	public static class ProfilesDiff {
 		/**
 		 * {@link Profile Profiles} that need to be
 		 * {@link ProfileManager#deleteProfile(Profile) deleted}.
@@ -273,7 +278,7 @@ public class ProfileManagerController {
 			return changedProfiles;
 		}
 
-		public static ProfilesDiff calc(final Set<Profile> from,
+		private static ProfilesDiff calc(final Set<Profile> from,
 				final Set<Profile> to) {
 			final Set<Profile> deletedProfiles = new HashSet<>();
 			final Set<Profile> changedProfiles = new HashSet<>();
