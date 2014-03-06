@@ -11,14 +11,16 @@ sum=0
 sum_empty=0
 sum_clean=0
 
+finder='find $part -name '"'"'*.java'"'"' -exec cat {} \+'
+empty_regex='^$'
+import_regex='^import .*;$'
+single_closing_brace_regex='^[[:space:]]*}[[:space:]]*$'
+comment_regex='^[[:space:]]*\(//\|/\?\*\).*$'
+
 for part in src test; do
-    t_all="$(find $part -name '*.java' -exec cat {} \+)"
-    t_no_empty="$(grep -v '^$' <<< "$t_all")"
-    t_clean="$(grep -v '^import .*;$' <<< "$t_no_empty" | grep -v '^[[:space:]]*}[[:space:]]*$' | grep -v '^[[:space:]]*\(//\|/\?\*\).*$')"
-    
-    all=$(wc -l <<< "$t_all")
-    no_empty=$(wc -l <<< "$t_no_empty")
-    clean=$(wc -l <<< "$t_clean")
+    all=$(eval "$finder" | wc -l)
+    no_empty=$(eval "$finder" | grep -v "$empty_regex" | wc -l)
+    clean=$(eval "$finder" | grep -v "$empty_regex" | grep -v "$import_regex" | grep -v "$single_closing_brace_regex" | grep -v "$comment_regex" | wc -l)
     
     output $part $all $no_empty $clean
     echo
