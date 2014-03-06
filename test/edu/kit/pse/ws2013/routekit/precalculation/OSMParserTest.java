@@ -345,4 +345,19 @@ public class OSMParserTest {
 					.getType() == HighwayType.Primary);
 		}
 	}
+
+	@Test
+	public void testNdTagOutsideWay() throws Exception {
+		Graph graph = parser.parseOSM(getTestFile("testNdTagOutsideWay.osm"),
+				reporter).getGraph();
+		assertEquals(4, graph.getNumberOfEdges());
+		assertEquals(3, graph.getNumberOfNodes());
+	}
+
+	@Test
+	public void testOtherHighway() throws Exception {
+		Graph graph = parser.parseOSM(getTestFile("testOtherHighway.osm"),
+				reporter).getGraph();
+		assertEquals(0, graph.getNumberOfEdges());
+	}
 }

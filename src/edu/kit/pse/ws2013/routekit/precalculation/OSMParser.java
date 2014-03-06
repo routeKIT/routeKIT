@@ -272,12 +272,14 @@ public class OSMParser {
 				enclosing = qName;
 				break;
 			case "nd":
-				try {
-					wayNodes.add(Long.parseLong(attr.getValue("ref")));
-				} catch (NumberFormatException e) {
-					throw new SAXParseException("Way " + wayId
-							+ ": Invalid or missing node ID reference",
-							locator, e);
+				if (enclosing.equals("way")) {
+					try {
+						wayNodes.add(Long.parseLong(attr.getValue("ref")));
+					} catch (NumberFormatException e) {
+						throw new SAXParseException("Way " + wayId
+								+ ": Invalid or missing node ID reference",
+								locator, e);
+					}
 				}
 				break;
 			case "tag":

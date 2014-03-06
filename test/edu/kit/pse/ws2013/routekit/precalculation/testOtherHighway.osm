@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' upload='true' generator='JOSM'>
+  <node id='-8' action='modify' visible='true' lat='48.910534999324206' lon='8.547609656760535' />
+  <node id='-6' action='modify' visible='true' lat='48.910534999324206' lon='8.557401293357438' />
+  <way id='-10' action='modify' visible='true'>
+    <nd ref='-8' />
+    <nd ref='-6' />
+    <tag k='highway' v='footway' />
+  </way>
+</osm>
