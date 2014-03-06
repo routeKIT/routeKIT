@@ -18,6 +18,7 @@ import edu.kit.pse.ws2013.routekit.map.NodeProperties;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.map.TurnType;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
+import edu.kit.pse.ws2013.routekit.profiles.Profile;
 
 public class OSMParserTest {
 	private static final float EPSILON = 1E-6F;
@@ -212,6 +213,17 @@ public class OSMParserTest {
 		assertEquals(8.547609656760535,
 				graph.getCoordinates(graph.getTargetNode(0)).getLongitude(),
 				EPSILON);
+	}
+
+	@Test
+	public void testMaxweightRestriction() throws Exception {
+		StreetMap map = parser.parseOSM(
+				getTestFile("testMaxweightRestriction.osm"), reporter);
+		EdgeBasedGraph ebg = map.getEdgeBasedGraph();
+
+		assertEquals(1, ebg.getNumberOfTurns());
+		assertTrue(ebg.allowsTurn(0, Profile.defaultCar));
+		assertFalse(ebg.allowsTurn(0, Profile.defaultTruck));
 	}
 
 	@Test
