@@ -720,9 +720,14 @@ Testnummer & bestanden & Vorbedingungen erfüllt wegen\\ \hline\hline
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
 \begin{itemize}
-\item Die Klasse \code{GraphIndex} wurde zu einem Interface geändert und die bisherige Implementierung in die Klasse \code{TreeGraphIndex} verschoben.
-  Dies soll die Einführung einer weiteren Implementierung basierend auf int-Arrays, welche weniger Speicher benötigt und sich schnell laden / speichern lässt, ermöglichen.
-  Dadurch könnte das Aufbauen des GraphIndex in die Vorberechnung verschoben werden, was insbesondere auf großen Karten den Programmstart beschleunigen sollte.
+\item GraphIndex-Änderungen
+  \begin{itemize}
+  \item Die Klasse \code{GraphIndex} wurde zu einem Interface geändert und die bisherige Implementierung in die Klasse \code{TreeGraphIndex} verschoben.
+  \item Eine weitere Implementierung von \code{GraphIndex}, \code{ArrayGraphIndex}, wurde geschrieben.
+    Sie verwendet nur zwei int-Arrays und ist dadurch leicht schneller und lässt sich gut speichern/laden.
+  \item \code{Graph} verwendet \code{ArrayGraphIndex}.
+  \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind. Dies beschleunigt den Start der Anwendung erheblich.
+  \end{itemize}
 \end{itemize}
 
 \makeatletter
