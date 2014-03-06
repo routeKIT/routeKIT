@@ -23,7 +23,6 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Dummies;
-import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
@@ -139,8 +138,6 @@ public class ProfileMapManager {
 				if (current != null && mapName.equals(current.getKey())
 						&& profileName.equals(current.getValue())) {
 					this.current = combination;
-					// un-lazy
-					combination.ensureLoaded(new DummyProgressReporter());
 				}
 			}
 		}
@@ -400,6 +397,7 @@ public class ProfileMapManager {
 
 	public static ProfileMapCombination init(File rootDirectory,
 			ProgressReporter pr) throws IOException {
+		pr.setSubTasks(new float[] { .1f, .1f, .1f, .7f });
 		if (!rootDirectory.exists()) {
 			// initFirstStart(rootDirectory);
 			rootDirectory.mkdir();
@@ -411,9 +409,16 @@ public class ProfileMapManager {
 		if (instance != null) {
 			throw new IllegalStateException("Already initialized!");
 		}
+		pr.pushTask("Initialisiere ProfileManager");
 		ProfileManager.init(rootDirectory);
+		pr.nextTask("Initialisiere MapManager");
 		MapManager.init(rootDirectory);
+		pr.nextTask("Erstelle ProfileMapManager");
 		instance = new ProfileMapManager(rootDirectory);
+		pr.nextTask("Lade Vorberechnung");
+		// un-lazy
+		instance.getCurrentCombination().ensureLoaded(pr);
+		pr.popTask();
 		return instance.getCurrentCombination();
 	}
 
