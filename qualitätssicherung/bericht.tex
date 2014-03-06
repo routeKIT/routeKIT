@@ -337,6 +337,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \subsection{Benutzbarkeitsfehler}
 \begin{itemize}
+\bug{routeCalcRaceCondition}{Wettlauf bei der Routenberechnung}
+    {Wenn während einer aktiven Routenberechnung eine weitere gestartet wird, kann es passieren,
+    dass die erste Route angezeigt wird, obwohl Start und Ziel von der zweiten ausgewählt sind.}
+    {Wenn die zweite Routenberechnung schneller ist, schreibt sie ihr Ergebnis zuerst und die erste Routenberechnung überschreibt dann anschließend die Route.}
+    {Der aktuelle Berechnungsthread wird gespeichert. Die berechnete Route wird nur noch abgeschickt wenn der berechnende Thread der aktuelle ist.}
+    {behoben}
 \bug{zoomAndDrag}{Zoom und Ziehen}
     {Wenn die Karte während einer Ziehgeste gezoomt wird, verändert sich die Kartenansicht,
     sodass man auf einem komplett anderen Teil der Karte ist.}
