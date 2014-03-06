@@ -397,30 +397,28 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {die Getter die korrekten Werte zurückgeben und der Graph nach dem Speichern und anschließenden Laden die gleichen Knoten und Kanten enthält wie davor.}
      {bestanden}
 \test{graphIndex}{GraphIndex}
-     {Es werden beide \code{GraphIndex}-Implementierungen (\code{Array}- und \mbox{\code{Tree}-)} getestet. Dazu werden sie mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert.
-     Dann werden verschieden Bereiche von Kanten angefordert und verglichen.
-     Danach werden noch Koordinaten mit dem Index projiziert.}
-     {die resultierenden Kantenmengen und der Punkt auf der Kante jeweils mit den erwarteten Werten übereinstimmen.}
+     {Es werden findNearestPointOnEdge und getEdgesInRectangle der beiden \code{GraphIndex}-Implementierungen (\code{Array}- und \code{Tree}-) getestet.}
+     {die resultierenden Kantenmengen und die \code{PointOnEdge}s jeweils mit den erwarteten Werten übereinstimmen.}
      {bestanden}
 \test{tileCacheCache}{TileCache}[Cache]
      {Es wird das Speichern von Kacheln im \code{TileCache} getestet.}
-     {eine Kachel innerhalb von 100\,ms nach der ersten Anfrage im Cache liegt.}
+     {eine Kachel innerhalb von 100\,ms nach der ersten Anfrage im \code{TileCache} gespeichert wird.}
      {bestanden}
 \test{tileCachePrefetch}{TileCache}[Prefetch]
      {Es wird das Prefetching (vorsorgliche Berechnung von benachbarten Kacheln, auch wenn diese noch nicht direkt angefragt wurden) des \code{TileCache} getestet.}
-     {nach dem Anfragen einer Kachel innerhalb von 100\,ms benachbarte Kacheln ebenfalls im Cache liegen.}
+     {nach dem Anfragen einer Kachel innerhalb von 100\,ms benachbarte Kacheln ebenfalls im \code{TileCache} gespeichert werden.}
      {bestanden}
 \test{tileCacheCleanup}{TileCache}[Cleanup]
      {Es wird das Entfernen von Kacheln aus dem \code{TileCache} getestet.}
-     {nach dem Anfragen von $50^2$ anderen Kacheln die älteste Kachel aus dem Cache entfernt wird.}
+     {nach dem Anfragen von $50^2$ anderen Kacheln die älteste gespeicherte Kachel aus dem \code{TileCache} entfernt wird.}
      {bestanden}
 \test{arcflags}{ArcFlags}
      {Es wird die Speicher- und Lade-Funktion der Arc-Flags getestet.}
      {nach dem Speichern und anschließenden Laden die gleichen Arc-Flags gesetzt sind wie davor.}
      {bestanden}
 \test{routeModel}{RouteModel}
-     {Es wird das Beobachtermuster der \code{RouteModel}-Klasse getestet. Dazu wird überprüft, ob in verschiedenen Situationen Ereignisse an alle Listener ausgegeben werden, indem ein Testlistener registriert wird und verschiedene Änderungen an den Daten durchgeführt werden.}
-     {die gemessene Anzahl der ausgelösten Ereignisse an allen Stellen mit der erwarteten Anzahl übereinstimmt.}
+     {Es wird das Beobachtermuster der \code{RouteModel}-Klasse getestet.}
+     {die von einem \code{TestListener} gemessene Anzahl an ausgelösten Ereignissen an allen Stellen mit der erwarteten Anzahl übereinstimmt.}
      {bestanden}
 \test{weights}{Weights}
      {Es wird die Speicher- und Lade-Funktion der Kantengewichte getestet.}
