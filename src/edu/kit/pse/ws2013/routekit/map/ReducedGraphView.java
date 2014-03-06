@@ -10,8 +10,6 @@ import java.nio.ByteOrder;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
-import java.util.HashMap;
-
 import edu.kit.pse.ws2013.routekit.util.Coordinates;
 
 public class ReducedGraphView extends GraphView {
