@@ -604,7 +604,7 @@ behoben
 
 \begin{tabular}{|l|l|}
 	\hline
-	Test & Status \\
+ö	Test & Status \\
 	\hline
 	\hline
 	TF10 & bestanden \\
@@ -641,8 +641,8 @@ behoben
 \test{routeModel}{RouteModel}{Testet ob bei den Benutzung von RouteModel immer die spezifizierte Anzahl an Events an alle Listener ausgegeben wird. Dafür wird ein Testlistener registriert und verschiedene Änderungen an den Daten durchgeführt.}{Die gemessene Anzahl der ausgelösten Events an alles Stellen mit der erwarteten übereinstimmt}{bestanden}
 \test{weights}{Weights}{Es wird die Speicher- und Lade-Funktion der Weights getestet.}{Nach dem Speichern und anschließenden Laden müssen die gleichen Kantengewichte gesetzt sein wie davor.}{bestanden}
 \test{mapEdge}{MapEdge}{Es wird die MapEdge-Klasse getestet, die vom OSMParser verwendet wird.}{Das Setzen der ID muss korrekt funktionieren. Die Getter müssen die richtigen Werte zurückgeben.}{bestanden}
-\test{osmParser}{OSMParser}{arg2}{arg3}{arg4} //TODO (Keine Ahnung, was hier alles getestet wird..)
-\test{osmWay}{OSMWay}{Es wird die OSMWay-Klasse getestet, die vom OSMParser verwendet wird.}{arg3}{arg4} //TODO (irgendwie sehen alle Tests gleich aus, was genau wird in den einzelnen Methodne getestet?)
+\test{osmParser}{OSMParser}{Testet verschiedene Karteneigenschaften (verschiedene Abbiegetypen, Einbahnstraßen, Ampeln, Kreisverkehre, \ldots) und auch Kartenfehler (Eigenschaften ohne Name, Eigenschaften ohne Wert, fehlende Koordinaten, Ungültige Koordinaten,\ldots)}{die gültigen Strukturen genau so im Graph nachher vorhanden sind und bei allen ungültigen Karten ein Fehler ausgelöst wird}{bestanden}
+\test{osmWay}{OSMWay}{Es wird getestet, ob die OSMWay Klasse verschiedene OSMTags richtig verarbeitet.}{alle OSM Tags auf die richtigen Strukturen im Graph abgebildet werden. (Straßentyp, Kreisverkehr, \ldots)}{bestanden}
 \test{profileMapComb}{ProfileMapCombination}{Es wird die Speicher- und Lade-Funktion von ProfileMapCombination getestet.}{Die ProfileMapCombination muss nach dem Speichern und anschließenden Laden das gleiche Profil und die gleiche Streetmap sowie, falls vorhanden, die gleiche abgeschlossene Vorberechnung (Weights, ArcFlags, benötigte Zeit) enthalten wie davor.}{bestanden} //TODO Den entsprechenden Test umbenennen von TestPrecalculationSaveLoad in ProfileMapCombinationSaveLoad?
 \test{turnRestriction}{TurnRestriction}{Es wird die Funktionalität von TurnRestrictions getestet.}{Eine TurnRestriction muss ihren Start- und Ziel-OSMWay korrekt zurückgeben. allowsTurn muss korrekt entscheiden, ob ein Turn auf einen OSMWay erlaubt ist oder nicht.}{bestanden}
 \test{profile}{Profile}{Es werden equals und clone sowie die Setter, Getter und die Speicher- und Lade-Funktion der Profile getestet.}{equals und clone müssen wie erwartet funktionieren. Die Setter müssen die verschiedenen Werte (VehicleType, Height, Width, etc.) korrekt setzen. Die Setter dürfen die Werte von Standardprofilen nicht verändern. Die Getter müssen die korrekten Werte zurückgeben. Das Profil muss nach dem Speichern und anschließenden Laden die gleichen Werte enthalten wie davor.}{bestanden}
