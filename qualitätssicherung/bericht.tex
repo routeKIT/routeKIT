@@ -338,7 +338,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{routeCalcAllEdges}{Routenberechnung: alle Kanten}
     {Die Routenberechnung ist zu langsam, auch für kurze Routen.}
     {Der Algorithmus fügt zu Beginn der Berechnung alle vorhandenen Kanten in einen Heap ein, obwohl die eigentliche Routenberechnung durch \gls{arc} oder nah beieinander liegende Start- und Zielpunkte möglicherweise nur auf einen Bruchteil der Kanten zugreifen muss.}
-    {Mehrere Datenstrukturen „lazy“ initialisieren (nicht eingefügte Kanten sind „unendlich“ weit entfernt usw.).}
+    {Den Heap „lazy“ initialisieren (nicht eingefügte Kanten sind „unendlich“ weit entfernt).}
     {behoben}
 \bug{precalc}{Vorberechnung: alle Kanten}
     {Die Vorberechnung ist zu langsam.}
