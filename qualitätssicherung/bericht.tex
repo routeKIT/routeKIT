@@ -621,7 +621,7 @@ behoben
 \test{Restriction}{Es wird für verschiedene Restrictions (Height-, Width-, Weight-, VehicleType-, Multiple-, NoRestriction) die allows Methode für die Profile defaultCar und defaultTruck getestet.}{Bei jeder getesteten Restriction muss allows für defaultCar und defaultTruck die korrekte Ausgabe haben.}{bestanden}
 \test{EdgeBasedGraph}{Es wird die Speicher- und Lade-Funktion von EdgeBasedGraph getestet.}{Der EdgeBasedGraph muss nach dem Speichern und anschließenden Laden die gleichen Edges und Turns enthalten wie davor.}{bestanden}
 \test{Graph}{Es werden die Getter sowie die Speicher- und Lade-Funktion von Graph getestet.}{Die Getter müssen den korrekten Wert zurückgeben. Der Graph muss nach dem Speichern und anschließenden Laden die gleichen Nodes und Edges enthalten wie davor.}{bestanden}
-\test{GraphIndex}{arg2}{arg3}{arg4}//TODO (Was genau macht dieser Test eigentlich?)
+\test{GraphIndex}{Beide GraphIndex-Implementierungen (Array- und Tree-) werden mit demselben Graphen (einem Gitter aus unverbundenen Straßenstücken) initialisiert. Dann werden verschieden Bereiche von Kanten angefordert und verglichen. Danach werden noch Koordinaten mit dem Index projeziert.}{Die resultierenden Kantenmengen und der Punkt auf der Kante stimmen jeweils mit den erwarteten überein.}{bestanden}
 \test{TileCache}{
   Es wird getestet, dass der TileCache Kacheln zwischenspeichert.
 }{
