@@ -306,85 +306,53 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \subsection{Funktionale Fehler}
 \begin{itemize}
-\bug{missingStreet}{Fehlende Straßen}{
-Im vergröberten Graph fehlen Straßen.
-}{
-Die entsprechenden Kanten werden weggeworfen.
-}{
-Ein "break" entfernen, das nach der ersten Ein-Kanten-Straße das Erzeugen von Kanten abbricht.
-}{
-behoben
-}
-\bug{pointProjection}{Punkt-Projektion}{
-Die Projektion von angeklickten Koordinaten auf Kanten ist manchmal leicht schief.
-}{
-Die Projektion findet im Geokoordinatensystem statt und nicht nach der Mercator-Projektion (im SMT-Koordinatensystem)
-}{
-Den Code muss für die Abstandsberechnung SMT Koordinaten benutzen und keine Geokoordinaten.
-}{
-behoben
-}
-\bug{cornerOneway}{Einbahnstraßen Randfall}{
-Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.
-}{
-Es wird nur verhindert, dass man in Einbahnstraßen entgegen der Fahrtrichtung einbiegt, aber nicht, dass man darin entgegen der Fahrtrichtung losfährt.
-}{
-Den ersten Schritt der Routenberechnung gesondert ausführen, um dies als Spezialfall zu behandeln.
-}{
-behoben
-}
-\bug{profileNoWarning}{ProfileManager Warnung bei Enter}{
-Wenn im ProfileManager-Dialog Vorberechnungen gelöscht werden und er mit "Enter" geschlossen wird, erscheint keine Warnung. Beim Klick auf den "OK"-Knopf erscheint Sie.
-}{
-Der Code, der die Warnung erzeugt, liegt im Programmcode des Knopfes und nicht in der Methode des ProfileManagers, die den Dialog schließt.
-}{
-Den Code, der die Warnung erzeugt, in den ProfileManager verschieben.
-}{
-behoben
-}
+\bug{missingStreet}{Fehlende Straßen}
+    {Im vergröberten Graph fehlen Straßen.}
+    {Die entsprechenden Kanten werden weggeworfen.}
+    {Ein falsches \code{break} entfernen, das nach der ersten Ein-Kanten-Straße das Erzeugen von Kanten abbricht.}
+    {behoben}
+\bug{pointProjection}{Punkt-Projektion}
+    {Die Projektion von angeklickten Koordinaten auf Kanten ist manchmal leicht schief.}
+    {Die Projektion findet im Geokoordinatensystem statt und nicht nach der \gls{mercator} (also im SMT-Koordinatensystem).}
+    {Den Code muss für die Abstandsberechnung SMT-Koordinaten benutzen und keine Geokoordinaten.}
+    {behoben}
+\bug{cornerOneway}{Einbahnstraßen, Randfall}
+    {Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.}
+    {Es wird nur verhindert, dass man in Einbahnstraßen entgegen der Fahrtrichtung einbiegt, aber nicht, dass man darin entgegen der Fahrtrichtung losfährt.}
+    {Den ersten Schritt der Routenberechnung gesondert ausführen, um dies als Spezialfall zu behandeln.}
+    {behoben}
+\bug{profileNoWarning}{Profilverwaltung: Warnung bei Enter}
+    {Wenn im Profilverwaltungsdialog Vorberechnungen gelöscht werden und er mit \textit{Enter} geschlossen wird, erscheint keine Warnung. Beim Klick auf \textit{OK} erscheint sie aber.}
+    {Der Code, der die Warnung erzeugt, liegt im Programmcode des Knopfes und nicht in der Methode des \code{ProfileManager}, die den Dialog schließt.}
+    {Den Code, der die Warnung erzeugt, in den \code{ProfileManager} verschieben.}
+    {behoben}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
 \begin{itemize}
-\bug{slowRender}{Vergröberung nötig}{
-Das Rendern der Kacheln ist auf niedrigen Zoomstufen zu langsam.
-}{
-Es werden zu viele feine "Kanten" gezeichnet.
-}{
-Der Graph muss für die Anzeige vergröbert werden, sodass weniger Kanten gezeichnet werden müssen.
-}{
-behoben
-}
-\bug{routeCalcAllEdges}{Routenberechnung über alle Kanten}{
-Die Routenberechnung ist zu langsam, auch für kurze Routen.
-}{
-Der Algorithmus fügt zu Beginn der Berechnung alle vorhandenen Kanten in einen Heap ein, obwohl die eigentliche Routenberechnung durch ArcFlags oder nah beieinander liegende Start- und Zielpunkte möglicherweise nur auf einen Bruchteil der Kanten zugreifen muss.
-}{
-Mehrere Datenstrukturen "lazy" initialisieren. (Nicht eingefügte Kanten sind "unendlich" weit weg\ldots)
-}{
-behoben
-}
-\bug{precalc}{Vorberechnung alle Kanten}{
-Die Vorberechnung ist zu langsam.
-}{
-Es werden für jeden der Dijkstras am Anfang alle Kanten des Graphen in den Heap eingefügt, auch wenn später möglicherweise nie darauf zugegriffen wird.
-}{
-Kanten nur noch bei Bedarf in den Heap einfügen.
-}{
-behoben
-}
-\bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}{
-Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.
-}{
-Begonnene Routenberechnungen werden dem RouteModel nicht mitgeteilt, sodass die MainView nicht erfahren kann, dass gerade eine Berechnung läuft.
-}{
-Hinzufügen von \code{isCalculated()} zum RouteModel; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.
-}{
-behoben
-}
+\bug{slowRender}{Vergröberung nötig}
+    {Das Rendern der Kacheln ist auf kleineren Zoomstufen zu langsam.}
+    {Es werden zu viele feine Kanten gezeichnet.}
+    {Der Graph muss für die Anzeige vergröbert werden, sodass weniger Kanten gezeichnet werden müssen.}
+    {behoben}
+\bug{routeCalcAllEdges}{Routenberechnung: alle Kanten}
+    {Die Routenberechnung ist zu langsam, auch für kurze Routen.}
+    {Der Algorithmus fügt zu Beginn der Berechnung alle vorhandenen Kanten in einen Heap ein, obwohl die eigentliche Routenberechnung durch \gls{arc} oder nah beieinander liegende Start- und Zielpunkte möglicherweise nur auf einen Bruchteil der Kanten zugreifen muss.}
+    {Mehrere Datenstrukturen „lazy“ initialisieren (nicht eingefügte Kanten sind „unendlich“ weit entfernt usw.).}
+    {behoben}
+\bug{precalc}{Vorberechnung: alle Kanten}
+    {Die Vorberechnung ist zu langsam.}
+    {Es werden für jeden der Dijkstra-Durchläufe am Anfang alle Kanten des Graphen in den Heap eingefügt, auch wenn später möglicherweise nie darauf zugegriffen wird.}
+    {Kanten nur noch bei Bedarf in den Heap einfügen.}
+    {behoben}
+\bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}
+    {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
+    {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
+    {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
+    {behoben}
 \end{itemize}
-\section{Testfälle aus dem Pflichtenheft}
 
+\section{Testfälle aus dem Pflichtenheft}
 \begin{tabular}{|l|l|}
 	\hline
 	Test & Status \\
