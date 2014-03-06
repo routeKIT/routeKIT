@@ -311,34 +311,34 @@ Im vergröberten Graph fehlen Straßen.
 }{
 Die entsprechenden Kanten werden weggeworfen.
 }{
-Der Fehler liegt in einem break, das nach der ersten ein-Kanten-Straße das Kanten-erzeugen abgebrochen hat.
+Ein "break" entfernen, das nach der ersten Ein-Kanten-Straße das Erzeugen von Kanten abbricht.
 }{
 behoben
 }
-\bug{pointProjection}{Punkt Projektion}{
-Die Projektion von angeklickten Koordinaten auf Kanten war manchmal leicht schief.
+\bug{pointProjection}{Punkt-Projektion}{
+Die Projektion von angeklickten Koordinaten auf Kanten ist manchmal leicht schief.
 }{
-Die Projektion fand im Geokoordinatensystem statt und nicht nach der Mercator-Projektion (also im SMT-Koordinatensystem)
+Die Projektion findet im Geokoordinatensystem statt und nicht nach der Mercator-Projektion (im SMT-Koordinatensystem)
 }{
 Den Code muss für die Abstandsberechnung SMT Koordinaten benutzen und keine Geokoordinaten.
 }{
 behoben
 }
 \bug{cornerOneway}{Einbahnstraßen Randfall}{
-Eine Route auf einer einzelnen Kante, die nur in eine Richtung benutzbar ist, kann die Kante auch in die falsche Richtung benutzen.
+Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.
 }{
-Es wird nur verhindert, dass man in Einbahnstraßen falschrum einbiegt und nicht falschrum darin losfährt.
+Es wird nur verhindert, dass man in Einbahnstraßen entgegen der Fahrtrichtung einbiegt, aber nicht, dass man darin entgegen der Fahrtrichtung losfährt.
 }{
-Führe den ersten Schritt der Routenberechnung gesondert aus, um dies als Spezialfall zu behandeln.
+Den ersten Schritt der Routenberechnung gesondert ausführen, um dies als Spezialfall zu behandeln.
 }{
 behoben
 }
 \bug{profileNoWarning}{ProfileManager Warnung bei Enter}{
-Wenn im ProfileManager-Dialog Vorberechnungen gelöscht werden und er mit "Enter" geschlossen wird erscheint keine Warnung. Beim Klick auf den "OK"-Knopf erscheint Sie aber.
+Wenn im ProfileManager-Dialog Vorberechnungen gelöscht werden und er mit "Enter" geschlossen wird, erscheint keine Warnung. Beim Klick auf den "OK"-Knopf erscheint Sie.
 }{
-Der Programmcode der die Warnung erzeugt war explizit im Programmcode für den Knopf und nicht im gemeinsamen Programmcode, der abspeichert.
+Der Code, der die Warnung erzeugt, liegt im Programmcode des Knopfes und nicht in der Methode des ProfileManagers, die den Dialog schließt.
 }{
-Verschiebe die Warnungs-Programmcode in den gemeinsamen code, sodass er für beide Möglichkeiten des Schließens ausgeführt wird.
+Den Code, der die Warnung erzeugt, in den ProfileManager verschieben.
 }{
 behoben
 }
@@ -347,36 +347,36 @@ behoben
 \subsection{Benutzbarkeitsfehler}
 \begin{itemize}
 \bug{slowRender}{Vergröberung nötig}{
-Das Rendern der Kacheln ist auf Zoomstufen weiter weg zu langsam.
+Das Rendern der Kacheln ist auf niedrigen Zoomstufen zu langsam.
 }{
-Es werden immernoch viele feine "Kanten" gezeichnet.
+Es werden zu viele feine "Kanten" gezeichnet.
 }{
 Der Graph muss für die Anzeige vergröbert werden, sodass weniger Kanten gezeichnet werden müssen.
 }{
 behoben
 }
-\bug{routeCalcAllEdges}{Routenberechnung alle Kanten}{
+\bug{routeCalcAllEdges}{Routenberechnung über alle Kanten}{
 Die Routenberechnung ist zu langsam, auch für kurze Routen.
 }{
-Der Algorithmus hat trotzdem über alle Kanten des Graphen iteriert, obwohl das eigentlich dank der ArcFlags und einer kurzen Route nicht nötig wäre.
+Der Algorithmus fügt zu Beginn der Berechnung alle vorhandenen Kanten in einen Heap ein, obwohl die eigentliche Routenberechnung durch ArcFlags oder nah beieinander liegende Start- und Zielpunkte möglicherweise nur auf einen Bruchteil der Kanten zugreifen muss.
 }{
-Initialisiere mehrere Daterstrukturen "lazy". (nicht eingefügte Kanten sind "unendlich" weit weg.... usw.)
+Mehrere Datenstrukturen "lazy" initialisieren. (Nicht eingefügte Kanten sind "unendlich" weit weg\ldots)
 }{
 behoben
 }
 \bug{precalc}{Vorberechnung alle Kanten}{
 Die Vorberechnung ist zu langsam.
 }{
-Es wurden für jeden der Dijkstras am Anfang alle Kanten des Graphen eingefügt.
+Es werden für jeden der Dijkstras am Anfang alle Kanten des Graphen in den Heap eingefügt, auch wenn später möglicherweise nie darauf zugegriffen wird.
 }{
-Es wird nur noch nötig die erste Kante am Anfang einzufügen.
+Kanten nur noch bei Bedarf in den Heap einfügen.
 }{
 behoben
 }
 \bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}{
-Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“.
+Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.
 }{
-Begonnene Routenberechnungen wurden dem RouteModel nicht mitgeteilt, so dass die MainView nicht erfahren konnte, dass gerade eine Berechnung lief.
+Begonnene Routenberechnungen werden dem RouteModel nicht mitgeteilt, sodass die MainView nicht erfahren kann, dass gerade eine Berechnung läuft.
 }{
 Hinzufügen von \code{isCalculated()} zum RouteModel; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.
 }{
