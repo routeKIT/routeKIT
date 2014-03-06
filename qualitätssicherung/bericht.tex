@@ -14,7 +14,6 @@
 \usepackage{amssymb} % for checkmark
 \usepackage{pifont}
 
-\newcommand{\cmark}{\ding{51}}
 
 \makeglossary
 
@@ -592,50 +591,50 @@ Bei allen Tests außer "Start" erfüllt "Start" eine Vorbedingung.
 ID& Testname & Testnummer & bestanden & Vorbedingungen\\ 
  & & & & erfüllt in\\ \hline\hline
 \endfirsthead
-\rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server runtergeladen. Damit wird gesichert, dass der Test mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \cmark &  \footnote{Neustart der Anwendung} \\ \hline
-\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \cmark & \footnotemark[2] \\ \hline
-\rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \cmark & \ref{aboutopen} \\ \hline
-\rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \cmark &  \\ \hline
-\rowno[firstpoint] & Auswahl des ersten Punkts &  /TF80/ & \cmark & \\
+\rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server runtergeladen. Damit wird gesichert, dass der Test mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \checkmark &  \footnote{Neustart der Anwendung} \\ \hline
+\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \checkmark & \footnotemark[2] \\ \hline
+\rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \checkmark & \ref{aboutopen} \\ \hline
+\rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \checkmark &  \\ \hline
+\rowno[firstpoint] & Auswahl des ersten Punkts &  /TF80/ & \checkmark & \\
  & &/TF100/ & & \\ \hline
-\rowno[secondpoint] & Auswahl des zweiten Punkts & /TF90/ & \cmark &  \\ 
+\rowno[secondpoint] & Auswahl des zweiten Punkts & /TF90/ & \checkmark &  \\ 
 & &\ref{TF:waydescription} & & \\ \hline
-\rowno[gpx] & GPX-Export & /TF70/ & \cmark & \ref{secondpoint} \\ \hline
-\rowno[html] & HTML-Export &/TF20/ & \cmark & \ref{secondpoint} \\ \hline
-\rowno[swap] & Vertauschen von Eingaben &\ref{TF:swap} & \cmark & \ref{secondpoint} \\ \hline
-\rowno[osm] & OSM-Kacheln & /TF200/ & \cmark & \\ \hline
-\rowno[selftile] & Eigene Kacheln & /TF210/ & \cmark & \ref{osm} \\ \hline
-\rowno[zoomin] & Reinzoomen & /TF120/ & \cmark & \\ 
+\rowno[gpx] & GPX-Export & /TF70/ & \checkmark & \ref{secondpoint} \\ \hline
+\rowno[html] & HTML-Export &/TF20/ & \checkmark & \ref{secondpoint} \\ \hline
+\rowno[swap] & Vertauschen von Eingaben &\ref{TF:swap} & \checkmark & \ref{secondpoint} \\ \hline
+\rowno[osm] & OSM-Kacheln & /TF200/ & \checkmark & \\ \hline
+\rowno[selftile] & Eigene Kacheln & /TF210/ & \checkmark & \ref{osm} \\ \hline
+\rowno[zoomin] & Reinzoomen & /TF120/ & \checkmark & \\ 
 & & /TF220/ & & \\ \hline
-\rowno[zoomout] & Rauszoomen &/TF130/ & \cmark & \\
+\rowno[zoomout] & Rauszoomen &/TF130/ & \checkmark & \\
 & & /TF220/ & & \\ \hline
-\rowno[drag] & Karte ziehen &/TF110/ & \cmark & \\ \hline
-\rowno[noarcs] &  Deaktivierung der\gls{arc}& \ref{TF:deactivatearcflgs} & \cmark & \\ \hline
-\rowno[swapnoarc] & Vertauschen von Eingaben & \ref{TF:swap} & \cmark & \ref{swap}\\ \hline
-\rowno[arcs] & Aktivierung der \gls{arc} & \ref{TF:activatearcflgs} & \cmark & \ref{noarcs} \\ \hline
+\rowno[drag] & Karte ziehen &/TF110/ & \checkmark & \\ \hline
+\rowno[noarcs] &  Deaktivierung der\gls{arc}& \ref{TF:deactivatearcflgs} & \checkmark & \\ \hline
+\rowno[swapnoarc] & Vertauschen von Eingaben & \ref{TF:swap} & \checkmark & \ref{swap}\\ \hline
+\rowno[arcs] & Aktivierung der \gls{arc} & \ref{TF:activatearcflgs} & \checkmark & \ref{noarcs} \\ \hline
 
-\rowno[falsecoords] & Ungültige Koordinaten & \ref{TF:falsecoordinates}/ & \cmark & \\ \hline
-\rowno[mapmanageropen1] & Öffnung der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \cmark & \ref{aboutclose} \\ \hline
-\rowno[correctmapimport] & Import einer Karte & /TF290/& \cmark & \ref{mapmanageropen1} \\ 
+\rowno[falsecoords] & Ungültige Koordinaten & \ref{TF:falsecoordinates}/ & \checkmark & \\ \hline
+\rowno[mapmanageropen1] & Öffnung der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \checkmark & \ref{aboutclose} \\ \hline
+\rowno[correctmapimport] & Import einer Karte & /TF290/& \checkmark & \ref{mapmanageropen1} \\ 
 & & /TF330/ & & \\ \hline
-\rowno[precalc1] & Vorberechnung & /TF10/ & \cmark & \ref{correctmapimport} \\ \hline
-\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \cmark & \ref{correctmapimport} \\ \hline
-\rowno[selectprofile] & Auswahl eines Profils & /TF240/ & \cmark & \\ \hline
-\rowno[precalc2] & Vorberechnung & /TF10/ & \cmark & \ref{selectprofile} \\ \hline
-\rowno[oneway] & Einbahnstraße in Fahrtrichtung & \ref{TF:oneway}& \cmark & \ref{precalc2}\\ \hline
+\rowno[precalc1] & Vorberechnung & /TF10/ & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[selectprofile] & Auswahl eines Profils & /TF240/ & \checkmark & \\ \hline
+\rowno[precalc2] & Vorberechnung & /TF10/ & \checkmark & \ref{selectprofile} \\ \hline
+\rowno[oneway] & Einbahnstraße in Fahrtrichtung & \ref{TF:oneway}& \checkmark & \ref{precalc2}\\ \hline
 &  &\ref{TF:swap}& &  \\ 
-\rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \cmark & \ref{oneway} \\
+\rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \checkmark & \ref{oneway} \\
 & &  /TF340/ & & \\ \hline
-\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \cmark & \ref{correctmapimport} \\ \hline
-\rowno[neuprofile] & Neues Profil& /TF230/ & \cmark & \\ \hline
-\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \cmark & \ref{neuprofile} \\ \hline
-\rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \cmark & \ref{mapmanageropen2} \\ \hline
-\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \cmark & \ref{addprofileformap}\\ \hline
-\rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \cmark & \ref{swaponeway} \\ \hline
-\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \cmark & \ref{loadfromhistory} \\ \hline
-\rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \cmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
-\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \cmark & \ref{neuprofile} \\ \hline
-\rowno[deletemap] & Entfernung einer Karte & /TF310/ & \cmark & \ref{correctmapimport} \\ \hline
+\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[neuprofile] & Neues Profil& /TF230/ & \checkmark & \\ \hline
+\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{neuprofile} \\ \hline
+\rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \checkmark & \ref{mapmanageropen2} \\ \hline
+\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap}\\ \hline
+\rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \checkmark & \ref{swaponeway} \\ \hline
+\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory} \\ \hline
+\rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
+\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{neuprofile} \\ \hline
+\rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \end{longtable}
 
 \section{Testüberdeckung}
