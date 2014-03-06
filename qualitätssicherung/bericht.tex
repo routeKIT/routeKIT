@@ -330,6 +330,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \subsection{Benutzbarkeitsfehler}
 \begin{itemize}
+\bug{zoomAndDrag}{Zoom und Ziehen}
+    {Wenn die Karte während einer Ziehgeste gezoomt wird, verändert sich die Kartenansicht,
+    sodass man auf einem komplett anderen Teil der Karte ist.}
+    {Während der Ziehgeste werden die Ursprungskoordinaten der Geste gespeichert.
+    Durch das Zoomen werden nun die Koordinaten halbiert (oder verdoppelt),
+    was sich aber nicht direkt auf die gespeicherten Koordinaten auswirkt.
+    Wird nun die Ziehgeste fortgesetzt, werden diese halb (oder doppelt) so großen Koordinaten
+    zurückgeschrieben, was den Sprung auf der Karte verursacht.}
+    {Verhindere alles Zoomen während einer Ziehgeste.}
+    {behoben}
 \bug{slowRender}{Vergröberung nötig}
     {Das Rendern der Kacheln ist auf kleineren Zoomstufen zu langsam.}
     {Es werden zu viele feine Kanten gezeichnet.}
