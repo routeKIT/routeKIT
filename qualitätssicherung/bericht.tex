@@ -317,7 +317,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{corruptIndex}{Korrupte Indexdatei}
     {Wenn die Indexdatei Karten oder Profile enthält, die nicht existieren, stürzt \routeKIT beim Programmstart ab.}
     {Es wird versucht, auf Karten/Profile, die \code{null} sind, zuzugreifen.}
-    {Karte oder Profil überspringen, wenn es \code{null} ist.}
+    {Karten oder Profile überspringen, die \code{null} sind.}
     {behoben}
 \end{itemize}
 
@@ -344,14 +344,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Den Code, der die Warnung erzeugt, in die \code{ok}-Methode der \code{ProfileManagerView} verschieben.}
     {behoben}
 \bug{testCLIHelp}{CLI-Hilfe Test}
-    {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
+    {Der Test für die Ausgabe des Hilfetextes für das Konsoleninterface schlägt auf Windows-Systemen
     mit einer \code{ArrayIndexOutOfBoundsException} fehl, obwohl er auf Linux-Systemen funktioniert.}
-    {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
+    {Die Ausgabe des Hilfetextes wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
     {Den Referenzstring plattformabhängig mit den richtigen Zeilenumbrüchen erzeugen, damit er mit der Ausgabe exakt übereinstimmt.}
     {behoben}
 \bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung: Inkonsistenz}
     {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet oder soll vorberechnet werden.
-    Jetzt wird dieses Profil im Dialog für das Hinzufügen neuer Profile gelöscht.
+    Dieses Profil wird im Dialog für das Hinzufügen neuer Profile gelöscht.
     Das Profil ist weiterhin in der Liste der Karte vorhanden.}
     {Beim Beenden des Dialogs werden gelöschte Profile nicht richtig erkannt und verarbeitet.}
     {Weiteren Code hinzufügen, der alle gelöschten Profile ermittelt und sie direkt aus den Listen löscht.}
@@ -360,7 +360,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Das einzige Nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht und der Dialog mit \textit{OK} geschlossen.
     Beim erneuten Öffnen des Hinzufügen-Dialogs ist ein Standardprofil ausgewählt und die Eingaben sind nicht deaktiviert.}
     {Der Dialog lädt das nicht mehr existierende aktuelle Profil und deaktiviert deshalb die Eingaben nicht.
-    Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist, was nun ein Standardprofil ist.}
+    Da das Profil nicht mehr in der Liste steht, wird automatisch ein anderes Profil gewählt, in diesem Fall ein Standardprofil.}
     {Beim Löschen eines Profils oder einer Karte immer sicherstellen, dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
     {behoben}
 \bug{noRouteWirdBerechnet}{Falscher Infotext, wenn keine Route gefunden wird}
@@ -370,7 +370,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 	{Zu Beginn der Routenberechnung wird \code{startCalculating} aufgerufen, wodurch „Route wird berechnet\dots“ angezeigt wird.
 	In der Abbruchbedingung bei Start/Ziel \code{== null} wird die Routenberechnung abgebrochen,
 	ohne \code{currentRoute} und \code{currentDescription} auf \code{null} zu setzen.
-	Der Infotext bleibt unverändert auf „Route wird berechnet\dots“}
+	Der Infotext bleibt unverändert auf „Route wird berechnet\dots“.}
 	{In der Abbruchbedingung \code{currentRoute} und \code{currentDescription} auf \code{null} setzen, wodurch „Keine Route gefunden.“ angezeigt wird.}
 	{behoben}
 \end{itemize}
@@ -409,14 +409,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Kanten nur noch bei Bedarf in den Heap einfügen.}
     {behoben}
 \bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}
-    {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
+    {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „Keine Route gefunden.“ an.}
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Methode \code{isCalculated} zum \code{RouteModel} hinzufügen und verwenden; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
     {behoben}
 \bug{centerMapProfileChange}{Kartenausschnitt zentriert bei Profilwechsel}
 	{Der sichtbare Kartenausschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
 	{Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{ProfileMapCombination} ändert.}
-	{Den Kartenausschnitt nur zentrieren, wenn sich die aktuelle Karte Ändert.}
+	{Den Kartenausschnitt nur zentrieren, wenn sich die aktuelle Karte ändert.}
 	{behoben}
 \bug{textfieldsProfileMapChange}{Textfelder für Start und Ziel beim Profil-/Kartenwechsel}
 	{Wird die Karte oder das Profil geändert, bleiben in den Textfeldern für Start und Ziel die alten Koordinaten stehen.}
@@ -560,7 +560,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Das Start- oder das Zielfeld enthält eine gültige Koordinate.}
     {Die fehlende gültige Koordinate wird eingegeben.}
-    {Die Markierungen auf der Karte wird gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet. Die Wegbeschreibung wird in das Wegbeschreibungsfeld ausgegeben.}
+    {Die Markierungen auf der Karte wird gesetzt. Die Route zwischen Start- und Zielpunkt wird berechnet. Die Wegbeschreibung wird im Wegbeschreibungsfeld ausgegeben.}
 \oitem{TF}{mapmanagerviewopen} Kartenverwaltung-Fenster öffnen
 \testfall
     {Alle Fenster außer dem Hauptfenster sind geschlossen.}
@@ -579,7 +579,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \oitem{TF}{addprofile} Profil hinzufügen
 \testfall
     {Die Kartenverwaltung ist offen.}
-    {Der Hinzufügen-Button wird gedrückt. Ein Profil wird ausgewählt und die Wahl wird drei mal bestätigt.}
+    {Der Hinzufügen-Button wird gedrückt. Ein Profil wird ausgewählt und die Wahl wird dreimal bestätigt.}
     {Die Kartenverwaltung wird geschlossen. Das Profil wird für die Karte vorberechnet.}
 \oitem{TF}{historyopen} Verlauf-Fenster öffnen
 \testfall
@@ -590,7 +590,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Profil ist für die Karte vorberechnet. Kartenverwaltung ist offen.}
     {Ein Profil wird ausgewählt. Der Entfernen-Button wird gedrückt.}
-    {Die Vorberechnung von dem Profil wird gelöscht.}
+    {Die Vorberechnung des Profils wird gelöscht.}
 \oitem{TF}{deactivatearcflgs} Keine \gls{arc} verwenden
 \testfall
     {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind aktiviert.}
@@ -658,7 +658,7 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \end{longtable}
 
 \subsection{Manuelle Tests}
-Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit \code{3c2b61df374375029a4fe853dce074f05488f9b6} am 07.\,03.\,2014 ausgeführt und wurden bestanden.\\
+Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit \code{3c2b61df374375029a4fe853dce074f05488f9b6} am 07.\,03.\,2014 ausgeführt und bestanden.\\
 Die Tests in Tabelle \ref{tab:manTests} wurden auf dem Commit \code{680d84bff40fce53b812\-6ed23e148572ca364474} am 07.\,03.\,2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
 \begin{longtable}{||c|c|c|c|c||}
 Testnummer & bestanden & Startkoordinate & Begründung\\ 
@@ -684,7 +684,7 @@ Testnummer & bestanden & Startkoordinate & Begründung\\
 Somit wurden alle Test aus dem Pflichtenheft (von /TF10/ bis /TF400/) durchgeführt und bestanden.
 
 \section{Testüberdeckung}
-Die Abdeckung des Quellcodes im \code{src}-Ordner (also ohne Testfälle) während dem Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist in Tabelle \ref{tab:coverageData} dargestellt.\\
+Die Abdeckung des Quellcodes im \code{src}-Ordner (also ohne Testfälle) während des Commits \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist in Tabelle \ref{tab:coverageData} dargestellt.\\
 \begin{longtable}{||c|c|c|c||}
 Testteil & Anweisungsüberdeckung & Zeilenüberdeckung & Zweigüberdeckung\\ \hline\hline
 RobotUI & 78.1\%&79.8\%&56.9\%\\ \hline
