@@ -765,11 +765,11 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
   \begin{itemize}
   \item Die abstrakte Klasse \code{GraphView} wurde hinzugefügt.
     Sie kapselt eine „Ansicht“ eines Graphen zum Rendern und gibt für jede Kante den Start- und Endknoten zurück.
-    Die einfachste Ausführung ist \code{IdentityGraphView}, die den Graphen nicht verwendet.
+    Die einfachste Ausführung ist \code{IdentityGraphView}, die den Graphen unverändert darstellt.
   \item Für kleinere Zoomstufen mit mehr sichtbaren Kanten wird hingegen \code{ReducedGraphView} verwendet, die den Graphen vergröbert.
     Zum Vergröbern des Graphen wird der Douglas-Peucker-Algorithmus verwendet. %TODO gls douglas peucker?
   \item Zu jedem \code{GraphIndex} gehört eine \code{GraphView};
-    \code{GraphView} erhält deshalb die neue Methode \code{getView}.
+    \code{GraphIndex} erhält deshalb die neue Methode \code{getView}.
   \item Um den Start der Anwendung zu beschleunigen, wird auch die \code{GraphView} auf die Festplatte gespeichert und, falls vorhanden, geladen.
     (Fehlt die Datei auf der Festplatte oder kann sie nicht geladen werden, so wird die View einfach neu aufgebaut.)
   \end{itemize}
