@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
@@ -155,6 +157,13 @@ public class ManagementActions {
 						.openTask("Importiere Karte '" + map.getName() + "'")) {
 					importedMap = importer.importMap(map.getOsmFile(),
 							map.getName(), reporter);
+					if (importedMap.getEdgeBasedGraph().getNumberOfTurns() == 0) {
+						// Easter Egg-ish
+						JOptionPane.showMessageDialog(
+								MainController.getInstance().view,
+								"Your map is bad\nand you should feel bad");
+						System.exit(1337);
+					}
 				} catch (IOException | SAXException e) {
 					MainController.getInstance().view.textMessage(e
 							.getMessage());
