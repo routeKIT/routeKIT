@@ -637,20 +637,20 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[correctmapimport] & Import einer Karte & /TF290/& \checkmark & \ref{mapmanageropen1} \\ 
 & & /TF330/ & & \\ \hline
 \rowno[precalc1] & Vorberechnung & /TF10/ & \checkmark & \ref{correctmapimport} \\ \hline
-\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
 \rowno[selectprofile] & Auswahl eines Profils & /TF240/ & \checkmark & \\ \hline
-\rowno[precalc2] & Vorberechnung & /TF10/ & \checkmark & \ref{selectprofile} \\ \hline
+\rowno[precalc2] & Vorberechnung & /TF10/ & \checkmark & \ref{selectprofile} (schließen) \\ \hline
 \rowno[oneway] & Einbahnstraße in Fahrtrichtung & \ref{TF:oneway}& \checkmark & \ref{precalc2}\\ \hline
 &  &\ref{TF:swap}& &  \\ 
 \rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \checkmark & \ref{oneway} \\
 & &  /TF340/ & & \\ \hline
-\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
 \rowno[neuprofile] & Neues Profil& /TF230/ & \checkmark & \\ \hline
-\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{neuprofile} \\ \hline
+\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{neuprofile} (schließen) \\ \hline
 \rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \checkmark & \ref{mapmanageropen2} \\ \hline
-\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap}\\ \hline
+\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap} (schließen)\\ \hline
 \rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \checkmark & \ref{swaponeway} \\ \hline
-\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory} \\ \hline
+\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory}  (schließen) \\ \hline
 \rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
 \rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{neuprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
