@@ -96,6 +96,8 @@ public class MainView extends JFrame implements RouteModelListener {
 						mapView.setEnabled(newCombination.isCalculated());
 						mapView.setTileSource(MainController.getInstance()
 								.getTileSource());
+						startField.setText("");
+						targetField.setText("");
 						if (!mapLabel.getText().equals(oldMap)) {
 							center(newCombination);
 						}
