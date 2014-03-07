@@ -65,13 +65,16 @@ public class Dijkstra implements RouteCalculator {
 		boolean foundRoute = false;
 		if (startEdge == destinationEdge
 				|| startEdge == destinationCorrespondingEdge) {
-			// corner case: route on one edge
-			// if there’s any turn in our direction, that’s our route and we
-			// skip Dijkstra
+			// Corner case: route on one edge.
+			// If we can take this edge, that’s our route and we skip Dijkstra.
+			// Note that checking this isn’t quite straightforward, since
+			// Arc-flags record the restrictions of the *target* edge;
+			// therefore, we need to check the Arc-flags of all *incoming* turns
+			// to verify that we can take this edge.
 			int route = -1;
 			if (start.getPosition() < (startEdge == destinationEdge ? destination
 					.getPosition() : 1 - destination.getPosition())) {
-				for (int turn : edgeBasedGraph.getOutgoingTurns(startEdge)) {
+				for (int turn : edgeBasedGraph.getIncomingTurns(startEdge)) {
 					if (allowsTurn(turn)) {
 						route = turn;
 						foundRoute = true;
@@ -85,7 +88,7 @@ public class Dijkstra implements RouteCalculator {
 			} else {
 				if (startCorrespondingEdge != -1) {
 					for (int turn : edgeBasedGraph
-							.getOutgoingTurns(startCorrespondingEdge)) {
+							.getIncomingTurns(startCorrespondingEdge)) {
 						if (allowsTurn(turn)) {
 							route = turn;
 							foundRoute = true;
@@ -99,33 +102,72 @@ public class Dijkstra implements RouteCalculator {
 			if (route == -1) {
 				// no turn in this direction, use regular Dijkstra –
 				// emulate first round: insert all reachable edges into heap
-				for (int currentTurn : edgeBasedGraph
-						.getOutgoingTurns(startEdge)) {
+				Set<Integer> startTurns = new HashSet<>(
+						edgeBasedGraph.getOutgoingTurns(startEdge));
+				if (startCorrespondingEdge != -1) {
+					startTurns.addAll(edgeBasedGraph
+							.getOutgoingTurns(startCorrespondingEdge));
+				}
+				for (int currentTurn : startTurns) {
 					if (allowsTurn(currentTurn)) {
-						final int weight = weights.getWeight(currentTurn);
-						if (weight == Integer.MAX_VALUE) {
-							continue;
+						boolean reallyAllowed = false;
+						// reallyAllowed checks if we can start on the start
+						// edge, i. e. if we can take the start edge, which is
+						// (as above) determined via the incoming edges
+						// note that this is only necessary for the
+						for (int incoming : edgeBasedGraph
+								.getIncomingTurns(edgeBasedGraph
+										.getStartEdge(currentTurn))) {
+							if (allowsTurn(incoming)) {
+								reallyAllowed = true;
+								break;
+							}
 						}
-						final int alt = 1 + weight;
-						final int targetEdge = edgeBasedGraph
-								.getTargetEdge(currentTurn);
+						if (reallyAllowed) {
+							final int weight = weights.getWeight(currentTurn);
+							if (weight == Integer.MAX_VALUE) {
+								continue;
+							}
+							final int alt = 1 + weight;
+							final int targetEdge = edgeBasedGraph
+									.getTargetEdge(currentTurn);
 
-						distance[targetEdge] = alt;
-						previous[targetEdge] = startEdge;
+							distance[targetEdge] = alt;
+							previous[targetEdge] = startEdge;
 
-						fhList.put(targetEdge, fh.add(targetEdge, alt));
+							fhList.put(targetEdge, fh.add(targetEdge, alt));
+						}
 					}
 				}
 			}
 		} else {
 			// regular route
-			distance[startEdge] = 1;
-			fhList.put(startEdge, fh.add(startEdge, distance[startEdge]));
+			boolean startEdgeAllowed = false;
+			for (int incoming : edgeBasedGraph.getIncomingTurns(startEdge)) {
+				if (allowsTurn(incoming)) {
+					startEdgeAllowed = true;
+					break;
+				}
+			}
+			if (startEdgeAllowed) {
+				distance[startEdge] = 1;
+				fhList.put(startEdge, fh.add(startEdge, distance[startEdge]));
+			}
 			if (startCorrespondingEdge != -1) {
-				distance[startCorrespondingEdge] = 1;
-				fhList.put(startCorrespondingEdge, fh.add(
-						startCorrespondingEdge,
-						distance[startCorrespondingEdge]));
+				boolean startCorrespondingEdgeAllowed = false;
+				for (int incoming : edgeBasedGraph
+						.getIncomingTurns(startCorrespondingEdge)) {
+					if (allowsTurn(incoming)) {
+						startCorrespondingEdgeAllowed = true;
+						break;
+					}
+				}
+				if (startCorrespondingEdgeAllowed) {
+					distance[startCorrespondingEdge] = 1;
+					fhList.put(startCorrespondingEdge, fh.add(
+							startCorrespondingEdge,
+							distance[startCorrespondingEdge]));
+				}
 			}
 		}
 
