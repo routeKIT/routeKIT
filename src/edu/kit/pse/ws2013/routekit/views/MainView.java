@@ -90,12 +90,15 @@ public class MainView extends JFrame implements RouteModelListener {
 					@Override
 					public void currentCombinationChanged(
 							ProfileMapCombination newCombination) {
+						String oldMap = mapLabel.getText();
 						setCurrentProfile(newCombination.getProfile());
 						setCurrentMap(newCombination.getStreetMap());
 						mapView.setEnabled(newCombination.isCalculated());
 						mapView.setTileSource(MainController.getInstance()
 								.getTileSource());
-						center(newCombination);
+						if (!mapLabel.getText().equals(oldMap)) {
+							center(newCombination);
+						}
 						if (!newCombination.isCalculated()) {
 							enableButtons(false);
 							textMessage("Für diese Kombination aus Karte und"
