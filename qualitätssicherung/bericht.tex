@@ -697,7 +697,7 @@ Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die ein
 
 Die fehlende Abdeckung von \code{TerminalCLI} ist dadurch zu erklären, dass diese Klasse die Benutzung der Import- und Vorberechnungsfunktion in einer Kommandozeile abstrahiert. Dies 
 
-Die auch eher niedrige Abdeckung der anderen Klassen soll hier
+Die teilweise eher niedrige Abdeckung der anderen Klassen soll hier
 durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCoverage}) erklärt werden.
 
 \begin{figure}[h]
@@ -706,9 +706,9 @@ durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCov
 \label{fig:errorCoverage}
 \end{figure}
 
-Man kann hier sehr deutlich sehen, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen haben wir keine Testfälle geschrieben die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
+Man kann hier sehr deutlich sehen, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
 
-Diese Problematik wird an eine anderen Stelle wird bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann:
+Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann:
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{tryWithResources}
@@ -717,7 +717,12 @@ Diese Problematik wird an eine anderen Stelle wird bei der Benutzung des Java-Ko
 \end{figure}
 
 Man kann erkennen, dass die nicht überdeckten Anweisungen dieser 2 Methoden in den try-Blöcken liegen.
-Es sind die Anweisungen, die dafür sorgen, dass die Resourcen (\code{RandomAccessFile},\code{FileChannel},\code{FileInputStream},\code{DataInputStream}) auch im Fehlerfall ordnungsgemäß geschlossen werden (und auch, dass die anderen Resources geschlossen werden, wenn das schließen einer andere fehlschlägt). So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
+Es sind die Anweisungen, die dafür sorgen, dass die Ressourcen 
+(\code{RandomAccessFile}, \code{FileChannel}, \code{FileInputStream}, \code{DataInputStream}) 
+auch im Fehlerfall ordnungsgemäß geschlossen werden
+(und auch, dass die anderen Ressourcen geschlossen werden,
+wenn das Schließen einer anderen fehlschlägt).
+So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
 
 \section{Änderungen seit der Implementierung}
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
