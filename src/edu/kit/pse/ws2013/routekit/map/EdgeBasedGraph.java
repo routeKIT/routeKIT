@@ -90,7 +90,11 @@ public class EdgeBasedGraph {
 	 */
 	private int[] rturns;
 
-	private void reverseGraph() {
+	/**
+	 * Ensures that the reverse access structure (for
+	 * {@link #getIncomingTurns(int)}) is built.
+	 */
+	public void reverseGraph() {
 		if (redges != null) {
 			return;
 		}

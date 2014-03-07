@@ -58,7 +58,8 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 		}
 		reporter.nextTask("Baue Kürzeste-Pfade-Bäume zu den Schnittkanten der Partitionen auf");
 		currentlyCalculatedPartition = 1;
-		edgeBasedGraph.getIncomingTurns(1);
+		edgeBasedGraph.reverseGraph(); // for concurrency issues ensure building
+										// now.
 		numberOfThreads = Math.max(
 				Runtime.getRuntime().availableProcessors() / 2, 1);
 		final Worker[] workers = new Worker[numberOfThreads];
