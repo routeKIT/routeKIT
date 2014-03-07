@@ -238,6 +238,30 @@ public class ProfileMapManager {
 		}
 	}
 
+	/**
+	 * Checks if the profile and map of the {@link #getCurrentCombination()
+	 * current combination} still exist (in the {@link MapManager} and
+	 * {@link ProfileManager}); if they don’t, another profile / map is
+	 * selected.
+	 */
+	public void checkIfCurrentStillExists() {
+		Profile newProfile = current.getProfile();
+		if (!ProfileManager.getInstance().getProfiles().contains(newProfile)) {
+			// profile was deleted, choose another
+			newProfile = ProfileManager.getInstance().getProfiles().iterator()
+					.next();
+		}
+		StreetMap newMap = current.getStreetMap();
+		if (!MapManager.getInstance().getMaps().contains(newMap)) {
+			// map was deleted, choose another
+			newMap = MapManager.getInstance().getMaps().iterator().next();
+		}
+		if (!(newProfile == current.getProfile())
+				|| !(newMap == current.getStreetMap())) {
+			selectProfileAndMap(newProfile, newMap);
+		}
+	}
+
 	void rewriteIndex() throws IOException {
 		Map<StreetMap, Set<ProfileMapCombination>> combinationsByMap = new HashMap<>();
 		for (ProfileMapCombination combo : precalculations) {

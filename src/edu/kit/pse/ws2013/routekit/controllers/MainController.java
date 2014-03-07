@@ -302,26 +302,6 @@ public class MainController {
 		// checkAndCalculate();
 	}
 
-	private void checkIfCurrentStillExists() {
-		ProfileMapCombination current = profileMapManager
-				.getCurrentCombination();
-		Profile newProfile = current.getProfile();
-		if (!ProfileManager.getInstance().getProfiles().contains(newProfile)) {
-			// profile was deleted, choose another
-			newProfile = ProfileManager.getInstance().getProfiles().iterator()
-					.next();
-		}
-		StreetMap newMap = current.getStreetMap();
-		if (!MapManager.getInstance().getMaps().contains(newMap)) {
-			// map was deleted, choose another
-			newMap = MapManager.getInstance().getMaps().iterator().next();
-		}
-		if (!(newProfile == current.getProfile())
-				|| !(newMap == current.getStreetMap())) {
-			profileMapManager.selectProfileAndMap(newProfile, newMap);
-		}
-	}
-
 	/**
 	 * Creates a new {@link ProfileManagerController}, which opens the profile
 	 * management dialog.
@@ -334,7 +314,7 @@ public class MainController {
 		if (selected != null && !selected.equals(current.getProfile())) {
 			load(selected, current.getStreetMap());
 		}
-		checkIfCurrentStillExists();
+		profileMapManager.checkIfCurrentStillExists();
 	}
 
 	MapManagerController mapManagement;
@@ -351,7 +331,7 @@ public class MainController {
 		if (selected != null) {
 			load(current.getProfile(), selected);
 		}
-		checkIfCurrentStillExists();
+		profileMapManager.checkIfCurrentStillExists();
 	}
 
 	private void load(Profile profile, StreetMap map) {

@@ -85,6 +85,12 @@ public class ProfileManager {
 		profiles.get(profile).delete();
 		deletePrecalculations(profile);
 		removeProfile(profile);
+		ProfileMapManager.getInstance().checkIfCurrentStillExists();
+		try {
+			ProfileMapManager.getInstance().rewriteIndex();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

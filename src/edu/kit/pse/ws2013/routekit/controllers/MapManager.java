@@ -82,6 +82,7 @@ public class MapManager {
 		}
 		deletePrecalculations(map);
 		removeMap(map);
+		ProfileMapManager.getInstance().checkIfCurrentStillExists();
 		try {
 			ProfileMapManager.getInstance().rewriteIndex();
 		} catch (IOException e) {
