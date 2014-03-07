@@ -331,7 +331,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{pointProjection}{Punkt-Projektion}
     {Die Projektion von eingegebenen Koordinaten auf die nächstliegenden Kanten ist oft schief.}
     {Die Projektion findet im Geokoordinatensystem statt und nicht nach der \gls{mercator} (also im \gls{smt}-Koordinatensystem).}
-    {Den Code muss für die Abstandsberechnung \gls{smt}-Koordinaten benutzen und keine Geokoordinaten.}
+    {Für die Abstandsberechnung \gls{smt}-Koordinaten anstelle von Geokoordinaten benutzen.}
     {behoben}
 \bug{cornerOneway}{Einbahnstraßen, Randfall}
     {Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.}
@@ -381,7 +381,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Wenn während einer aktiven Routenberechnung eine weitere gestartet wird, kann es passieren,
     dass die erste Route angezeigt wird, obwohl Start und Ziel der zweiten ausgewählt sind.}
     {Wenn die zweite Routenberechnung schneller ist, schreibt sie ihr Ergebnis zuerst und die erste Routenberechnung überschreibt dann anschließend die Route.}
-    {Der aktuelle Berechnungsthread wird gespeichert. Die berechnete Route wird nur noch abgeschickt, wenn der berechnende Thread der aktuelle ist.}
+    {Den aktuellen Berechnungsthread speichern und die berechnete Route nur noch abschicken, wenn der berechnende Thread der aktuelle ist.}
     {behoben}
 \bug{zoomAndDrag}{Zoom und Ziehen}
     {Wenn die Karte während einer Ziehgeste gezoomt wird, verändert sich die Kartenansicht,
@@ -391,12 +391,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     was sich aber nicht direkt auf die gespeicherten Koordinaten auswirkt.
     Wird nun die Ziehgeste fortgesetzt, werden diese halb (oder doppelt) so großen Koordinaten
     zurückgeschrieben, was den Sprung auf der Karte verursacht.}
-    {Verhindere Zoomen während einer Ziehgeste.}
+    {Zoomen während einer Ziehgeste verhindern.}
     {behoben}
 \bug{slowRender}{Vergröberung nötig}
     {Das Rendern der Kacheln ist auf kleineren Zoomstufen zu langsam.}
     {Es werden zu viele feine Kanten gezeichnet.}
-    {Der Graph muss für die Anzeige vergröbert werden, sodass weniger Kanten gezeichnet werden müssen.}
+    {Den Graph für die Anzeige vergröbern, sodass weniger Kanten gezeichnet werden müssen.}
     {behoben}
 \bug{routeCalcAllEdges}{Routenberechnung: alle Kanten}
     {Die Routenberechnung ist zu langsam, auch für kurze Routen.}
@@ -411,7 +411,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{routeCalcKeineRoute}{Falscher Infotext während Routenberechnung}
     {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
-    {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
+    {Methode \code{isCalculated} zum \code{RouteModel} hinzufügen und verwenden; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
     {behoben}
 \bug{centerMapProfileChange}{Kartenausschnitt zentriert bei Profilwechsel}
 	{Der sichtbare Kartenausschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
@@ -421,7 +421,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{textfieldsProfileMapChange}{Textfelder für Start und Ziel beim Profil-/Kartenwechsel}
 	{Wird die Karte oder das Profil geändert, bleiben in den Textfeldern für Start und Ziel die alten Koordinaten stehen.}
 	{Die Route wird zwar zurückgesetzt, aber die Textfelder werden nicht geleert.}
-	{Die Textfelder werden nun geleert, sobald die Karte oder das Profil geändert werden.}
+	{Die Textfelder leeren, sobald die Karte oder das Profil geändert werden.}
 	{behoben}
 \end{itemize}
 
