@@ -168,6 +168,8 @@ public class MainController {
 							.findNearestPointOnEdge(destination);
 					if (startPointOnEdge == null
 							|| destinationPointOnEdge == null) {
+						rm.setCurrentRoute(null);
+						rm.setCurrentDescription(null);
 						return;
 					}
 					Route r = rc.calculateRoute(startPointOnEdge,
