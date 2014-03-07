@@ -345,14 +345,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \bug{testCLIHelp}{CLI-Hilfe Testfall}
     {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
-    mit einer \code{ArrayIndexOutOfBoundsException} fehl,
-    obwohl er auf Linux-Systemen funktioniert.}
+    mit einer \code{ArrayIndexOutOfBoundsException} fehl, obwohl er auf Linux-Systemen funktioniert.}
     {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
     {Erzeuge einen plattformabhängigen Referenzstring mit den richtigen Zeilenumbrüchen, damit er mit der Ausgabe exakt übereinstimmt.}
     {behoben}
 \bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung: Inkonsistenz}
-    {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet
-    oder soll vorberechnet werden.
+    {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet oder soll vorberechnet werden.
     Jetzt wird dieses Profil im Dialog für das Hinzufügen neuer Profile gelöscht.
     Das Profil ist weiterhin in der Liste der Karte vorhanden.}
     {Beim Beenden des Dialogs werden gelöschte Profile nicht richtig erkannt und verarbeitet.}
@@ -360,14 +358,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \bug{currentProfileNotExisting}{Gelöschtes aktuelles Profil}
     {Das einzige Nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht und der Dialog mit \textit{OK} geschlossen.
-    Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standardprofil ausgewählt
-    und die Eingaben sind nicht deaktiviert.}
-    {Der Dialog lädt das nicht mehr existierende aktuelle Profil
-    und deaktiviert deshalb die Eingaben nicht.
-    Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist,
-    was nun ein Standardprofil ist.}
-    {Beim Löschen eines Profils oder einer Karte immer sicherstellen,
-    dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
+    Beim erneuten Öffnen des Hinzufügen-Dialogs ist ein Standardprofil ausgewählt und die Eingaben sind nicht deaktiviert.}
+    {Der Dialog lädt das nicht mehr existierende aktuelle Profil und deaktiviert deshalb die Eingaben nicht.
+    Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist, was nun ein Standardprofil ist.}
+    {Beim Löschen eines Profils oder einer Karte immer sicherstellen, dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
     {behoben}
 \bug{noRouteWirdBerechnet}{Falscher Infotext wenn keine Route gefunden wird}
 	{Liegen Start- und/oder Zielpunkt außerhalb der Karte,
@@ -418,14 +412,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
-<<<<<<< Upstream, based on branch 'master' of https://pse.dogcraft.de/
-=======
-    {behoben}
-\bug{centerMapProfileChange}{Kartenauschnitt zentriert bei Profilwechsel}
-    {Der sichtbare Kartenauschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
-    {Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{Pro\-file\-Map\-Com\-bi\-na\-tion} ändert.}
-    {Den Kartenauschnitt nur zentrieren, wenn sich die aktuelle Karte ändert.}
->>>>>>> 27edcae Testdokument: kleinere Verbesserungen, Anführungszeichen
     {behoben}
 \end{itemize}
 
@@ -604,9 +590,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind deaktiviert.}
     {In der Menüleiste werden die \gls{arc} gewählt.}
-    {Es werden \gls{arc} bei der Routenberechnung verwendet.}
-
-
+    {Es werden \gls{arc} für die Vorberechnung verwendet.}
 \end{description}
 
 \newpage
@@ -638,7 +622,6 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[noarcs] &  Deaktivierung der\gls{arc}& \ref{TF:deactivatearcflgs} & \checkmark & \\ \hline
 \rowno[swapnoarc] & Vertauschen von Eingaben & \ref{TF:swap} & \checkmark & \ref{swap}\\ \hline
 \rowno[arcs] & Aktivierung der \gls{arc} & \ref{TF:activatearcflgs} & \checkmark & \ref{noarcs} \\ \hline
-
 \rowno[falsecoords] & Ungültige Koordinaten & \ref{TF:falsecoordinates}/ & \checkmark & \\ \hline
 \rowno[mapmanageropen1] & Öffnung der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \checkmark & \ref{aboutclose} \\ \hline
 \rowno[correctmapimport] & Import einer Karte & /TF290/& \checkmark & \ref{mapmanageropen1} \\ 
@@ -662,9 +645,10 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{neuprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \end{longtable}
+
 \subsection{Manuelle Tests}
 Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit \code{3c2b61df374375029a4fe853dce074f05488f9b6} am 7.\,03.\,2014 ausgeführt und wurden bestanden.\\
-Die folgenden Tests wurden auf dem Commit \code{680d84bff40fce53b8126ed23e148572ca364474} am 7.03.2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
+Die folgenden Tests wurden auf dem Commit \code{680d84bff40fce53b8126ed23e148572ca364474} am 7.\,03.\,2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
 \begin{longtable}{||c|c|c|c|c||}
 Testnummer & bestanden & Startkoordinate & Begründung\\ 
  & & Zielkoordinate & \\ \hline \hline
