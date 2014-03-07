@@ -723,6 +723,24 @@ auch im Fehlerfall ordnungsgemäß geschlossen werden
 wenn das Schließen einer anderen fehlschlägt).
 So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
 
+\section{Statistik}
+Das System enthielt zum Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} (07.\,03.\,2014) die in Tabelle \ref{tab:codestat} ersichtliche Anzahl an Zeilen.\\
+\begin{longtable}{||c|c|c||c||}
+ & Quelltext & Testcode & Gesamt\\ \hline\hline
+Alle Zeilen & 14514 & 2767 & 17281\\ \hline
+keine Leerzeilen & 13201 & 2363 & 15562\\ \hline \hline
+keine leeren Zeilen\footnote{Leerzeilen oder Zeilen mit nur schließender Klammer}, keine imports& 7388 & 1816 & 9204\\
+ und keine Kommentare &&& \\\hline
+\caption{Codestatistik. Mit \code{qualitätssicherung/stats.sh} erstellt.}
+\label{tab:codestat}
+\end{longtable}
+
+Für die erste Zahl wurden einfach alle Zeilen gezählt. Wenn die Datei dabei auf einen Zeilenumbruch endet wird dies nicht als zusätzliche Zeile gewertet.
+
+Für die zweite wurden alle Leerzeilen entfernt.
+
+Für die dritte wurden zudem alle import-Zeilen, alle Kommentare und Zeilen, die nur eine schließende geschweifte Klammer enthalten, entfernt.
+
 \section{Änderungen seit der Implementierung}
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
@@ -749,6 +767,7 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
     \item Die Klasse \code{ArcFlagsDijkstra} erbt nun von der neuen Klasse \code{Dijkstra}, welche den normalen \gls{dijkstra} implementiert und ergänzt diese mit den \gls{arc}.
     \end{itemize}
 \end{itemize}
+
 
 \makeatletter
 \newglossarystyle{myAltlist}{
