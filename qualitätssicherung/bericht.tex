@@ -423,16 +423,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \end{itemize}
 
-\section{Testfälle aus dem Pflichtenheft}
-\begin{tabular}{|l|l|}
-	\hline
-	Test & Status \\
-	\hline
-	\hline
-	TF10 & bestanden \\
-	\hline
-\end{tabular}
-
 \section{Protokoll der Unit-Tests}
 \begin{itemize}
 \test{gpxExport}{GPXExporter}
@@ -666,6 +656,25 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{neuprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \end{longtable}
+\subsection{Manuelle Tests}
+Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit 3c2b61df374375029a4fe853dce074f05488f9b6 am 7.03.2014 ausgeführt und wurden bestanden.\\
+Die folgenden Test wurden auf dem Commit 680d84bff40fce53b8126ed23e148572ca364474  am 7.03.2014 ausgeführt.
+\begin{longtable}{||c|c|c|c|c||}
+Testnummer & bestanden & Startkoordinate & Begründung\\ 
+ & & Zielkoordinate & \\ \hline \hline
+\endfirsthead
+/TF360/ & \checkmark & 49.007614 8.394907 & links abbiegen verboten\\ 
+ & & 49.00796 8.394949 & \\ \hline
+/TF370/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5m), \\
+ & & 49.00988 8.3951645 & Profil LKW (Standard) \\ \hline
+/TF380/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5m), \\ 
+ & & 49.00988 8.3951645 &  Profil PKW (Standard)\\ \hline
+/TF390/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
+ & & 48.965534 8.613367 & Profil LKW (Standard) \\ \hline
+/TF400/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
+ & & 48.965534 8.613367 & Profil PKW (Standard) \\ \hline
+\end{longtable}
+Somit wurden alle Test aus dem Pflichtenheft (von /TF10/ bis /TF400/) durchgeführt und bestanden.
 
 \section{Testüberdeckung}
 
