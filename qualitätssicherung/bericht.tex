@@ -696,8 +696,8 @@ Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die ein
 \label{fig:overallCoverage}
 \end{figure}
 
-Die teilweise eher niedrige Abdeckung der anderen Klassen soll hier
-durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCoverage}) erklärt werden.
+Die teilweise eher niedrige Abdeckung der IO-lastigen Klassen soll hier
+anhand eines Ausschnittes aus \code{ManagementActions} (Abbildung \ref{fig:errorCoverage}) erklärt werden.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{errorCoverage}
@@ -705,7 +705,7 @@ durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCov
 \label{fig:errorCoverage}
 \end{figure}
 
-Man kann hier sehr deutlich sehen, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
+Hier sieht man deutlich, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
 
 Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
 
