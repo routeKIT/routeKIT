@@ -350,6 +350,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
     {Erzeuge einen plattformabhängigen Referenzstring mit den richtigen Zeilenumbrüchen, damit er mit der Ausgabe exakt übereinstimmt.}
     {behoben}
+\bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung Inkonsistenz}
+    {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet
+    oder soll vorberechnet werden.
+    Jetzt wird dieses Profil im Dialog für das Hinzufügen neuer Profile gelöscht.
+    Das Profil ist weiterhin in der Liste der Karte vorhanden.}
+    {Beim Beenden des Dialogs werden gelöschte Profile nicht richtig erkannt und verarbeitet.}
+    {Weiteren Code hinzufügen, der alle gelöschten Profile ermittelt und sie direkt aus den Listen löscht.}
+    {behoben}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
