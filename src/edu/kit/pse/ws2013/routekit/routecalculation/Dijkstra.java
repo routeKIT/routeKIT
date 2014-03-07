@@ -63,6 +63,13 @@ public class Dijkstra implements RouteCalculator {
 
 		// initialization
 		boolean foundRoute = false;
+		final Set<Integer> startIncomingTurns = edgeBasedGraph
+				.getIncomingTurns(startEdge);
+		Set<Integer> startCorrespondingIncomingTurns = null;
+		if (startCorrespondingEdge != -1) {
+			startCorrespondingIncomingTurns = edgeBasedGraph
+					.getIncomingTurns(startCorrespondingEdge);
+		}
 		if (startEdge == destinationEdge
 				|| startEdge == destinationCorrespondingEdge) {
 			// Corner case: route on one edge.
@@ -71,35 +78,59 @@ public class Dijkstra implements RouteCalculator {
 			// Arc-flags record the restrictions of the *target* edge;
 			// therefore, we need to check the Arc-flags of all *incoming* turns
 			// to verify that we can take this edge.
-			int route = -1;
 			if (start.getPosition() < (startEdge == destinationEdge ? destination
 					.getPosition() : 1 - destination.getPosition())) {
-				for (int turn : edgeBasedGraph.getIncomingTurns(startEdge)) {
+				boolean allowed = false;
+				for (int turn : startIncomingTurns) {
 					if (allowsTurn(turn)) {
-						route = turn;
-						foundRoute = true;
-						previous[startEdge] = startEdge;
-						if (startEdge == destinationCorrespondingEdge) {
-							otherDestination = true;
-						}
+						allowed = true;
 						break;
 					}
 				}
-			} else {
-				if (startCorrespondingEdge != -1) {
-					for (int turn : edgeBasedGraph
-							.getIncomingTurns(startCorrespondingEdge)) {
+				if (startIncomingTurns.isEmpty()) {
+					// dead-end; it’s allowed if any outgoing turn is allowed
+					for (int turn : edgeBasedGraph.getOutgoingTurns(startEdge)) {
 						if (allowsTurn(turn)) {
-							route = turn;
-							foundRoute = true;
-							otherDestination = true;
-							previous[destinationCorrespondingEdge] = destinationCorrespondingEdge;
+							allowed = true;
 							break;
 						}
 					}
 				}
+				if (allowed) {
+					foundRoute = true;
+					previous[startEdge] = startEdge;
+					if (startEdge == destinationCorrespondingEdge) {
+						otherDestination = true;
+					}
+				}
+			} else {
+				if (startCorrespondingEdge != -1) {
+					boolean allowed = false;
+					for (int turn : startCorrespondingIncomingTurns) {
+						if (allowsTurn(turn)) {
+							allowed = true;
+							break;
+						}
+					}
+					if (startCorrespondingIncomingTurns.isEmpty()) {
+						// dead-end; it’s allowed if any outgoing turn is
+						// allowed
+						for (int turn : edgeBasedGraph
+								.getOutgoingTurns(startCorrespondingEdge)) {
+							if (allowsTurn(turn)) {
+								allowed = true;
+								break;
+							}
+						}
+					}
+					if (allowed) {
+						foundRoute = true;
+						otherDestination = true;
+						previous[destinationCorrespondingEdge] = destinationCorrespondingEdge;
+					}
+				}
 			}
-			if (route == -1) {
+			if (!foundRoute) {
 				// no turn in this direction, use regular Dijkstra –
 				// emulate first round: insert all reachable edges into heap
 				Set<Integer> startTurns = new HashSet<>(
@@ -143,11 +174,17 @@ public class Dijkstra implements RouteCalculator {
 		} else {
 			// regular route
 			boolean startEdgeAllowed = false;
-			for (int incoming : edgeBasedGraph.getIncomingTurns(startEdge)) {
+			for (int incoming : startIncomingTurns) {
 				if (allowsTurn(incoming)) {
 					startEdgeAllowed = true;
 					break;
 				}
+			}
+			if (startIncomingTurns.isEmpty()) {
+				// corner case: dead-end.
+				// we have no way of knowing if a route is allowed here; we just
+				// always allow it, assuming that this is the more common case.
+				startEdgeAllowed = true;
 			}
 			if (startEdgeAllowed) {
 				distance[startEdge] = 1;
@@ -155,12 +192,15 @@ public class Dijkstra implements RouteCalculator {
 			}
 			if (startCorrespondingEdge != -1) {
 				boolean startCorrespondingEdgeAllowed = false;
-				for (int incoming : edgeBasedGraph
-						.getIncomingTurns(startCorrespondingEdge)) {
+				for (int incoming : startCorrespondingIncomingTurns) {
 					if (allowsTurn(incoming)) {
 						startCorrespondingEdgeAllowed = true;
 						break;
 					}
+				}
+				if (startCorrespondingIncomingTurns.isEmpty()) {
+					// same as above
+					startCorrespondingEdgeAllowed = true;
 				}
 				if (startCorrespondingEdgeAllowed) {
 					distance[startCorrespondingEdge] = 1;
