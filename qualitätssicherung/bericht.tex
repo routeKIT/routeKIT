@@ -371,6 +371,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Beim Löschen eines Profils oder einer Karte immer sicherstellen,
     dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
     {behoben}
+\bug{noRouteWirdBerechnet}{Falscher Infotext wenn keine Route gefunden wird}
+	{Liegen Start- und/oder Zielpunkt außerhalb der Karte,
+	d.h. findNearestPointOnEdge liefert \code{null},
+	so wird der Infotext "Route wird berechnet..." angezeigt, obwohl keine Route existiert.}
+	{Zu Beginn der Routenberechnung wir startCalculating() aufgerufen, wodurch "Route wird berechnet..." angezeigt wird.
+	In der Abbruchbedingung bei Start/Ziel == \code{null} wird die Routenberechnung abgebrochen,
+	ohne currentRoute und currentDescription auf \code{null} zu setzen.
+	Der Infotext bleibt unverändert auf "Route wird berechnet..."}
+	{In der Abbruchbedingung currentRoute und currentDescription auf \code{null} setzen, wodurch "Keine Route gefunden." angezeigt wird.}
+	{behoben}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
