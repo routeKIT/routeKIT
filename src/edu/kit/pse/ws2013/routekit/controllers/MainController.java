@@ -301,6 +301,7 @@ public class MainController {
 	 * management dialog.
 	 */
 	public void manageProfiles() {
+		profileMapManager.pauseEvents();
 		ProfileManagerController c = new ProfileManagerController(view);
 		Profile selected = c.getSelectedProfile();
 		ProfileMapCombination current = profileMapManager
@@ -308,6 +309,7 @@ public class MainController {
 		if (selected != null && !selected.equals(current.getProfile())) {
 			load(selected, current.getStreetMap());
 		}
+		profileMapManager.resumeEvents();
 	}
 
 	MapManagerController mapManagement;
@@ -317,6 +319,7 @@ public class MainController {
 	 * management dialog.
 	 */
 	public void manageMaps() {
+		profileMapManager.pauseEvents();
 		mapManagement = new MapManagerController(view);
 		StreetMap selected = mapManagement.getSelectedMap();
 		ProfileMapCombination current = profileMapManager
@@ -324,6 +327,7 @@ public class MainController {
 		if (selected != null) {
 			load(current.getProfile(), selected);
 		}
+		profileMapManager.resumeEvents();
 	}
 
 	private void load(Profile profile, StreetMap map) {

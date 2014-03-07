@@ -43,6 +43,9 @@ public class ProfileMapManager {
 	private final Set<ProfileMapCombination> precalculations;
 	private final Set<CurrentCombinationListener> listeners = new HashSet<>();
 
+	private boolean dispatchEvents = true;
+	private boolean eventsDirty = false;
+
 	private ProfileMapManager(File root) throws IOException {
 		this.root = root;
 		if (!root.isDirectory()) {
@@ -197,10 +200,7 @@ public class ProfileMapManager {
 			}
 			// 3.2 update current
 			current = precalculation;
-			// 3.3 notify listeners
-			for (CurrentCombinationListener listener : listeners) {
-				listener.currentCombinationChanged(precalculation);
-			}
+			dispatchEvent();
 		}
 	}
 
@@ -233,8 +233,16 @@ public class ProfileMapManager {
 			e.printStackTrace();
 			// don’t return – not critical
 		}
-		for (CurrentCombinationListener listener : listeners) {
-			listener.currentCombinationChanged(combination);
+		dispatchEvent();
+	}
+
+	private void dispatchEvent() {
+		eventsDirty = true;
+		if (dispatchEvents) {
+			for (CurrentCombinationListener listener : listeners) {
+				listener.currentCombinationChanged(current);
+			}
+			eventsDirty = false;
 		}
 	}
 
@@ -408,6 +416,28 @@ public class ProfileMapManager {
 
 	public Set<ProfileMapCombination> getPrecalculations() {
 		return Collections.unmodifiableSet(precalculations);
+	}
+
+	/**
+	 * Pause sending events. The manager will not send
+	 * {@link CurrentCombinationListener#currentCombinationChanged(ProfileMapCombination)
+	 * events} to its
+	 * {@link #addCurrentCombinationListener(CurrentCombinationListener)
+	 * registered} listeners until {@link #resumeEvents()} is called.
+	 */
+	public void pauseEvents() {
+		dispatchEvents = false;
+	}
+
+	/**
+	 * Resume sending events. If at least one event should have been sent since
+	 * {@link #pauseEvents()}, an event will be sent now.
+	 */
+	public void resumeEvents() {
+		dispatchEvents = true;
+		if (eventsDirty) {
+			dispatchEvent();
+		}
 	}
 
 	public static ProfileMapCombination init(File rootDirectory,
