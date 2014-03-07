@@ -530,7 +530,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \end{itemize}
 
 \section{Protokoll des GUI-Tests}
-\subsection{Automatisierter Test}
+\subsection{Neue GUI-Tests}
 Alle Testfälle mit kleineren Nummern wurden im Pflichtenheft beschrieben.
 Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist.
 \begin{description}
@@ -603,7 +603,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Es werden \gls{arc} bei der Routenberechnung verwendet.}
 \end{description}
 
-\newpage
+\subsection{Ablauf des automatisierten Tests}
 
 Startbedingung: Eine Internetverbindung ist hergestellt. Die aktuelle Konfiguration (auch alle Profile und Karten) ist gelöscht.
 Bei allen Tests außer sich selbst erfüllt „Start“ eine Vorbedingung.
@@ -654,11 +654,13 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
 \rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{newprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
+\caption{Der Ablauf des automatisierten GUI Tests}
+\label{tab:autoGUITest}
 \end{longtable}
 
 \subsection{Manuelle Tests}
 Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit \code{3c2b61df374375029a4fe853dce074f05488f9b6} am 07.\,03.\,2014 ausgeführt und wurden bestanden.\\
-Die folgenden Tests wurden auf dem Commit \code{680d84bff40fce53b8126ed23e148572ca364474} am 07.\,03.\,2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
+Die Tests in Tabelle \ref{tab:manTests} wurden auf dem Commit \code{680d84bff40fce53b812\-6ed23e148572ca364474} am 07.\,03.\,2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
 \begin{longtable}{||c|c|c|c|c||}
 Testnummer & bestanden & Startkoordinate & Begründung\\ 
  & & Zielkoordinate & \\ \hline \hline
@@ -677,16 +679,20 @@ Testnummer & bestanden & Startkoordinate & Begründung\\
  & & 49.392353 8.784149 & erstelltes Profil Motorrad \\ \hline
 /TF400/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
  & & 48.965534 8.613367 & Profil PKW (Standard) \\ \hline
+\caption{Die Manuell auf der einer Karte ausgeführten Tests.}
+\label{tab:manTests}
 \end{longtable}
 Somit wurden alle Test aus dem Pflichtenheft (von /TF10/ bis /TF400/) durchgeführt und bestanden.
 
 \section{Testüberdeckung}
-Die Abdeckung des Quellcodes im "src"-Ordner (also ohne Testfälle) während dem Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist:\\
+Die Abdeckung des Quellcodes im "src"-Ordner (also ohne Testfälle) während dem Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist in Tabelle \ref{tab:coverageData}.\\
 \begin{longtable}{||c|c|c|c||}
 Testteil & Instruction Coverage & Line coverage & Branch coverage\\ \hline\hline
 RobotUI & 78.1\%&79.8\%&56.9\%\\ \hline
 Unit Tests & 51.3\%&51.1\%&44.9\%\\ \hline \hline
 Merged & 87.0\%&89.0\%&66.3\%\\ \hline
+\caption{Die Quellcodeabdeckung der Tests nach verschiedenen Kriterien}
+\label{tab:coverageData}
 \end{longtable}
 
 Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die einzelnen Teilpakete ist in Abbildung \ref{fig:overallCoverage} dargestellt.
