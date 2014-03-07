@@ -473,7 +473,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {bestanden}
 \test{tileCacheCleanup}{TileCache}[Cleanup]
      {Es wird das Entfernen von Kacheln aus dem \code{TileCache} getestet.}
-     {nach dem Anfragen von $50^2$ anderen Kacheln die älteste gespeicherte Kachel aus dem \code{TileCache} entfernt wird.}
+     {nach dem Anfragen von $50^2$ anderen Kacheln die älteste gespeicherte Kachel nicht mehr im \code{TileCache} vorhanden ist.}
      {bestanden}
 \test{arcflags}{ArcFlags}
      {Es wird die Speicher- und Lade-Funktion der Arc-Flags getestet.}
