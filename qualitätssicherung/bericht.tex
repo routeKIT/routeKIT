@@ -604,7 +604,6 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \end{description}
 
 \subsection{Ablauf des automatisierten Tests}
-
 Startbedingung: Eine Internetverbindung ist hergestellt. Die aktuelle Konfiguration (auch alle Profile und Karten) ist gelöscht.
 Bei allen Tests außer sich selbst erfüllt „Start“ eine Vorbedingung.
 \begin{longtable}{||c|c|c|c|c||}
@@ -612,8 +611,8 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
  & & & & erfüllt in\\ \hline\hline
 \endfirsthead
 \rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server heruntergeladen. Damit wird gesichert, dass der Test mit der Karte „Regierungsbezirk Karlsruhe“ und dem dafür vorberechneten Standardprofil „PKW (Standard)“ gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \checkmark &  \footnote{Neustart der Anwendung} \\ \hline
-\rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \checkmark & \footnotemark[2] \\ \hline
-\rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \checkmark & \ref{aboutopen} \\ \hline
+\rowno[aboutopen] & Öffnen des Über-Fensters & \ref{TF:aboutviewopen}& \checkmark & \footnotemark[2] \\ \hline
+\rowno[aboutclose] & Schließen des Über-Fensters & \ref{TF:aboutviewclose}& \checkmark & \ref{aboutopen} \\ \hline
 \rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \checkmark &  \\ \hline
 \rowno[firstpoint] & Auswahl des ersten Punkts &  /TF80/ & \checkmark & \\
  & &/TF100/ & & \\ \hline
@@ -624,36 +623,36 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[swap] & Vertauschen von Eingaben &\ref{TF:swap} & \checkmark & \ref{secondpoint} \\ \hline
 \rowno[osm] & OSM-Kacheln & /TF200/ & \checkmark & \\ \hline
 \rowno[selftile] & Eigene Kacheln & /TF210/ & \checkmark & \ref{osm} \\ \hline
-\rowno[zoomin] & Reinzoomen & /TF120/ & \checkmark & \\ 
+\rowno[zoomin] & Hineinzoomen & /TF120/ & \checkmark & \\ 
 & & /TF220/ & & \\ \hline
-\rowno[zoomout] & Rauszoomen &/TF130/ & \checkmark & \\
+\rowno[zoomout] & Herauszoomen &/TF130/ & \checkmark & \\
 & & /TF220/ & & \\ \hline
 \rowno[drag] & Karte ziehen &/TF110/ & \checkmark & \\ \hline
 \rowno[noarcs] &  Deaktivierung der\gls{arc}& \ref{TF:deactivatearcflgs} & \checkmark & \\ \hline
 \rowno[swapnoarc] & Vertauschen von Eingaben & \ref{TF:swap} & \checkmark & \ref{swap}\\ \hline
 \rowno[arcs] & Aktivierung der \gls{arc} & \ref{TF:activatearcflgs} & \checkmark & \ref{noarcs} \\ \hline
 \rowno[falsecoords] & Ungültige Koordinaten & \ref{TF:falsecoordinates}/ & \checkmark & \\ \hline
-\rowno[mapmanageropen1] & Öffnung der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \checkmark & \ref{aboutclose} \\ \hline
+\rowno[mapmanageropen1] & Öffnen der Kartenverwaltung & \ref{TF:mapmanagerviewopen} & \checkmark & \ref{aboutclose} \\ \hline
 \rowno[correctmapimport] & Import einer Karte & /TF290/& \checkmark & \ref{mapmanageropen1} \\ 
 & & /TF330/ & & \\ \hline
 \rowno[precalc1] & Vorberechnung & /TF10/ & \checkmark & \ref{correctmapimport} \\ \hline
-\rowno[profilemanageropen1] & Öffnung der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
+\rowno[profilemanageropen1] & Öffnen der Profilverwaltung & \ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
 \rowno[selectprofile] & Auswahl eines Profils & /TF240/ & \checkmark & \\ \hline
 \rowno[precalc2] & Vorberechnung & /TF10/ & \checkmark & \ref{selectprofile} (schließen) \\ \hline
 \rowno[oneway] & Einbahnstraße in Fahrtrichtung & \ref{TF:oneway}& \checkmark & \ref{precalc2}\\ \hline
 &  &\ref{TF:swap}& &  \\ 
 \rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \checkmark & \ref{oneway} \\
 & &  /TF340/ & & \\ \hline
-\rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
+\rowno[profilemanageropen2] & Öffnen der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
 \rowno[newprofile] & Neues Profil& /TF230/ & \checkmark & \\ \hline
-\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{newprofile} (schließen) \\ \hline
+\rowno[mapmanageropen2] & Öffnen der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{newprofile} (schließen) \\ \hline
 \rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \checkmark & \ref{mapmanageropen2} \\ \hline
-\rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap} (schließen)\\ \hline
+\rowno[historyopen] & Öffnen des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap} (schließen)\\ \hline
 \rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \checkmark & \ref{swaponeway} \\ \hline
-\rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory}  (schließen) \\ \hline
-\rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
-\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{newprofile} \\ \hline
-\rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
+\rowno[mapmanageropen3] & Öffnen der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory}  (schließen) \\ \hline
+\rowno[removeprofilefrommap] & Entfernen einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
+\rowno[deleteprofile] & Entfernen eines Profils & /TF250/ & \checkmark & \ref{newprofile} \\ \hline
+\rowno[deletemap] & Entfernen einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \caption{Der Ablauf des automatisierten GUI Tests}
 \label{tab:autoGUITest}
 \end{longtable}
@@ -668,26 +667,26 @@ Testnummer & bestanden & Startkoordinate & Begründung\\
 /TF360/ & \checkmark & 49.007614 8.394907 & links abbiegen verboten\\ 
  & & 49.00796 8.394949 & \\ \hline
 /TF370/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5\,m), \\
- & & 49.00988 8.3951645 & Profil LKW (Standard) \\ \hline
+ & & 49.00988 8.3951645 & Profil „LKW (Standard)“ \\ \hline
 /TF380/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5\,m), \\ 
- & & 49.00988 8.3951645 &  Profil PKW (Standard)\\ \hline
+ & & 49.00988 8.3951645 &  Profil „PKW (Standard)“\\ \hline
 /TF390/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
- & & 48.965534 8.613367 & Profil LKW (Standard) \\ \hline
+ & & 48.965534 8.613367 & Profil „LKW (Standard)“ \\ \hline
 /TF390/ & \checkmark & 49.43081 8.691645 & Bus-Verbot, \\ 
- & & 49.430744 8.692374 & erstelltes Profil Bus \\ \hline
+ & & 49.430744 8.692374 & erstelltes Profil „Bus“ \\ \hline
 /TF390/ & \checkmark & 49.392246 8.783075 & Motorrad-Verbot, \\ 
- & & 49.392353 8.784149 & erstelltes Profil Motorrad \\ \hline
+ & & 49.392353 8.784149 & erstelltes Profil „Motorrad“ \\ \hline
 /TF400/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
- & & 48.965534 8.613367 & Profil PKW (Standard) \\ \hline
+ & & 48.965534 8.613367 & Profil „PKW (Standard)“ \\ \hline
 \caption{Die manuell auf der einer Karte ausgeführten Tests.}
 \label{tab:manTests}
 \end{longtable}
 Somit wurden alle Test aus dem Pflichtenheft (von /TF10/ bis /TF400/) durchgeführt und bestanden.
 
 \section{Testüberdeckung}
-Die Abdeckung des Quellcodes im "src"-Ordner (also ohne Testfälle) während dem Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist in Tabelle \ref{tab:coverageData}.\\
+Die Abdeckung des Quellcodes im \code{src}-Ordner (also ohne Testfälle) während dem Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} ist in Tabelle \ref{tab:coverageData} dargestellt.\\
 \begin{longtable}{||c|c|c|c||}
-Testteil & Instruction Coverage & Line coverage & Branch coverage\\ \hline\hline
+Testteil & Anweisungsüberdeckung & Zeilenüberdeckung & Zweigüberdeckung\\ \hline\hline
 RobotUI & 78.1\%&79.8\%&56.9\%\\ \hline
 Unit Tests & 51.3\%&51.1\%&44.9\%\\ \hline \hline
 Merged & 87.0\%&89.0\%&66.3\%\\ \hline
@@ -695,7 +694,7 @@ Merged & 87.0\%&89.0\%&66.3\%\\ \hline
 \label{tab:coverageData}
 \end{longtable}
 
-Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die einzelnen Teilpakete ist in Abbildung \ref{fig:overallCoverage} dargestellt.
+Eine Aufteilung der Anweisungsüberdeckung des vereinigten Durchlaufs in die einzelnen Teilpakete ist in Abbildung \ref{fig:overallCoverage} dargestellt.
 \begin{figure}[h]
 \includegraphics[scale=0.7]{overallCoverage}
 \caption{Die Instruction Coverage des gesamten Testlaufs.}
@@ -713,7 +712,7 @@ anhand eines Ausschnittes aus \code{ManagementActions} (Abbildung \ref{fig:error
 
 Hier sieht man deutlich, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
 
-Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resources" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
+Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts „try-with-Resources“ noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
 
 \begin{figure}[H]
 \includegraphics[scale=0.7]{tryWithResources}
@@ -721,7 +720,7 @@ Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konst
 \label{fig:tryWithResources}
 \end{figure}
 
-Man kann erkennen, dass die nicht überdeckten Anweisungen dieser 2 Methoden in den try-Blöcken liegen.
+Man kann erkennen, dass die nicht überdeckten Anweisungen dieser zwei Methoden in den \code{try}-Blöcken liegen.
 Es sind die Anweisungen, die dafür sorgen, dass die Ressourcen 
 (\code{RandomAccessFile}, \code{FileChannel}, \code{FileInputStream}, \code{DataInputStream}) 
 auch im Fehlerfall ordnungsgemäß geschlossen werden
@@ -729,13 +728,14 @@ auch im Fehlerfall ordnungsgemäß geschlossen werden
 wenn das Schließen einer anderen fehlschlägt).
 So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
 
+\newpage
 \section{Statistik}
 Das System enthielt zum Commit \code{6d239a2ab7402c7a469b48299c42e8d56f547884} (07.\,03.\,2014) die in Tabelle \ref{tab:codestat} ersichtliche Anzahl an Zeilen.\\
 \begin{longtable}{||c|c|c||c||}
  & Quelltext & Testcode & Gesamt\\ \hline\hline
 alle Zeilen & 14514 & 2767 & 17281\\ \hline
 ohne Leerzeilen & 13201 & 2363 & 15562\\ \hline \hline
-ohne leere Zeilen, imports& 7388 & 1816 & 9204\\
+ohne leere Zeilen, \code{import}s& 7388 & 1816 & 9204\\
  und Kommentare &&& \\\hline
 \caption{Codestatistik. Mit \code{qualitätssicherung/stats.sh} erstellt.}
 \label{tab:codestat}
@@ -745,7 +745,7 @@ Für die erste Zahl wurden einfach alle Zeilen gezählt. Wenn die Datei dabei mi
 
 Für die zweite wurden alle Leerzeilen entfernt.
 
-Für die dritte wurden zudem alle import-Zeilen, alle Kommentare und alle Zeilen, die nur eine schließende geschweifte Klammer enthalten, entfernt.
+Für die dritte wurden zudem alle \code{import}-Zeilen, alle Kommentare und alle Zeilen, die nur eine schließende geschweifte Klammer enthalten, entfernt.
 
 \section{Änderungen seit der Implementierung}
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
