@@ -21,7 +21,7 @@ public class TestCLI {
 		ClassLoader c = new URLClassLoader(new URL[] { new File("bin").toURI()
 				.toURL() }, TestCLI.class.getClassLoader().getParent());
 		Class<Runnable> cli = (Class<Runnable>) c
-				.loadClass("edu.kit.pse.ws2013.routekit.controllers.CLI");
+				.loadClass("edu.kit.pse.ws2013.routekit.controllers.TerminalCLI");
 		return cli.getConstructor(String[].class).newInstance((Object) args);
 	}
 
