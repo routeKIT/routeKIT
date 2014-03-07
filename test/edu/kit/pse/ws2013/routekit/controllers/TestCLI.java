@@ -50,10 +50,9 @@ public class TestCLI {
 		// if (true) {
 		// return;
 		// }
+		runCLI(true, "--delete-precalculation", "testmap1", "LKW (Standard)");
 		runCLI(false, "--delete-precalculation", "testmap1", "PKW (Standard)",
 				"--delete-map", "testmap1");
-		runCLI(true, "--delete-precalculation", "Regierungsbezirk Karlsruhe",
-				"LKW (Standard)");
 
 	}
 
