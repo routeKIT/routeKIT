@@ -696,8 +696,6 @@ Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die ein
 \label{fig:overallCoverage}
 \end{figure}
 
-Die fehlende Abdeckung von \code{TerminalCLI} ist dadurch zu erklären, dass diese Klasse die Benutzung der Import- und Vorberechnungsfunktion in einer Kommandozeile abstrahiert. Dies 
-
 Die teilweise eher niedrige Abdeckung der anderen Klassen soll hier
 durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCoverage}) erklärt werden.
 
@@ -709,9 +707,9 @@ durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCov
 
 Man kann hier sehr deutlich sehen, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
 
-Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann:
+Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[scale=0.7]{tryWithResources}
 \caption{Ein Codeausschnitt aus \code{ArcFlags} mit der Abdeckung des gesamten Testlaufs.}
 \label{fig:tryWithResources}
