@@ -10,6 +10,7 @@ import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressListener;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
+import edu.kit.pse.ws2013.routekit.util.DummyProgressReporter;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
 
 /**
@@ -37,7 +38,8 @@ public class CLI implements ProgressListener, Runnable {
 				profileMapManager = null;
 			} else {
 				try {
-					ProfileMapManager.init(FileUtil.getRootDir(), null);
+					ProfileMapManager.init(FileUtil.getRootDir(),
+							new DummyProgressReporter());
 					mapManager = MapManager.getInstance();
 					profileManager = ProfileManager.getInstance();
 					profileMapManager = ProfileMapManager.getInstance();
