@@ -343,7 +343,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Der Code, der die Warnung erzeugt, liegt im Event-Handler des Buttons und nicht in der Methode der \code{ProfileManagerView}, die den Dialog schließt.}
     {Den Code, der die Warnung erzeugt, in die \code{ok}-Methode der \code{ProfileManagerView} verschieben.}
     {behoben}
-\bug{testCLIHelp}{CLI-Hilfe Testfall}
+\bug{testCLIHelp}{CLI-Hilfe Test}
     {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
     mit einer \code{ArrayIndexOutOfBoundsException} fehl, obwohl er auf Linux-Systemen funktioniert.}
     {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
@@ -600,7 +600,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind deaktiviert.}
     {In der Menüleiste werden die \gls{arc} gewählt.}
-    {Es werden \gls{arc} für die Vorberechnung verwendet.}
+    {Es werden \gls{arc} bei der Routenberechnung verwendet.}
 \end{description}
 
 \newpage
