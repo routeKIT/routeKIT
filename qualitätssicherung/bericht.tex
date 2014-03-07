@@ -360,12 +360,12 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \bug{currentProfileNotExisting}{Gelöschtes aktuelles Profil}
     {Das einzige Nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht und der Dialog mit \textit{OK} geschlossen.
-    Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standard-Profil ausgewählt
+    Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standardprofil ausgewählt
     und die Eingaben sind nicht deaktiviert.}
     {Der Dialog lädt das nicht mehr existierende aktuelle Profil
     und deaktiviert deshalb die Eingaben nicht.
     Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist,
-    was nun ein Standard-Profil ist.}
+    was nun ein Standardprofil ist.}
     {Beim Löschen eines Profils oder einer Karte immer sicherstellen,
     dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
     {behoben}
@@ -579,7 +579,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße.}
     {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Ziel weiter in Einbahnstraßenrichtung als Start. }
-    {Eine Route, die den Einbahnstraßenabschnitt enthällt wird gefunden.}
+    {Eine Route, die den Einbahnstraßenabschnitt enthält, wird gefunden.}
 \oitem{TF}{addprofile} Profil hinzufügen
 \testfall
     {Die Kartenverwaltung ist offen.}
