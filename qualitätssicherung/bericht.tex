@@ -343,14 +343,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Der Code, der die Warnung erzeugt, liegt im Event-Handler des Buttons und nicht in der Methode der \code{ProfileManagerView}, die den Dialog schließt.}
     {Den Code, der die Warnung erzeugt, in die \code{ok}-Methode der \code{ProfileManagerView} verschieben.}
     {behoben}
-\bug{testCLIHelp}{CLI Help Test}
+\bug{testCLIHelp}{CLI-Hilfe Testfall}
     {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
     mit einer \code{ArrayIndexOutOfBoundsException} fehl,
     obwohl er auf Linux-Systemen funktioniert.}
     {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
     {Erzeuge einen plattformabhängigen Referenzstring mit den richtigen Zeilenumbrüchen, damit er mit der Ausgabe exakt übereinstimmt.}
     {behoben}
-\bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung Inkonsistenz}
+\bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung: Inkonsistenz}
     {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet
     oder soll vorberechnet werden.
     Jetzt wird dieses Profil im Dialog für das Hinzufügen neuer Profile gelöscht.
@@ -359,8 +359,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Weiteren Code hinzufügen, der alle gelöschten Profile ermittelt und sie direkt aus den Listen löscht.}
     {behoben}
 \bug{currentProfileNotExisting}{Gelöschtes aktuelles Profil}
-    {Das einzige nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht
-    und der Dialog mit "ok" geschlossen.
+    {Das einzige Nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht und der Dialog mit \textit{OK} geschlossen.
     Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standard-Profil ausgewählt
     und die Eingaben sind nicht deaktiviert.}
     {Der Dialog lädt das nicht mehr existierende aktuelle Profil
@@ -372,13 +371,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {behoben}
 \bug{noRouteWirdBerechnet}{Falscher Infotext wenn keine Route gefunden wird}
 	{Liegen Start- und/oder Zielpunkt außerhalb der Karte,
-	d.h. findNearestPointOnEdge liefert \code{null},
-	so wird der Infotext "Route wird berechnet..." angezeigt, obwohl keine Route existiert.}
-	{Zu Beginn der Routenberechnung wir startCalculating() aufgerufen, wodurch "Route wird berechnet..." angezeigt wird.
-	In der Abbruchbedingung bei Start/Ziel == \code{null} wird die Routenberechnung abgebrochen,
-	ohne currentRoute und currentDescription auf \code{null} zu setzen.
-	Der Infotext bleibt unverändert auf "Route wird berechnet..."}
-	{In der Abbruchbedingung currentRoute und currentDescription auf \code{null} setzen, wodurch "Keine Route gefunden." angezeigt wird.}
+	d.\,h. \code{find\-Nearest\-Point\-On\-Edge} liefert \code{null},
+	so wird der Infotext „Route wird berechnet \dots“ angezeigt, obwohl keine Route existiert.}
+	{Zu Beginn der Routenberechnung wird \code{startCalculating} aufgerufen, wodurch „Route wird berechnet \dots“ angezeigt wird.
+	In der Abbruchbedingung bei Start/Ziel \code{== null} wird die Routenberechnung abgebrochen,
+	ohne \code{currentRoute} und \code{currentDescription} auf \code{null} zu setzen.
+	Der Infotext bleibt unverändert auf „Route wird berechnet \dots“}
+	{In der Abbruchbedingung \code{currentRoute} und \code{currentDescription} auf \code{null} setzen, wodurch „Keine Route gefunden.“ angezeigt wird.}
 	{behoben}
 \end{itemize}
 
@@ -386,9 +385,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \begin{itemize}
 \bug{routeCalcRaceCondition}{Wettlauf bei der Routenberechnung}
     {Wenn während einer aktiven Routenberechnung eine weitere gestartet wird, kann es passieren,
-    dass die erste Route angezeigt wird, obwohl Start und Ziel von der zweiten ausgewählt sind.}
+    dass die erste Route angezeigt wird, obwohl Start und Ziel der zweiten ausgewählt sind.}
     {Wenn die zweite Routenberechnung schneller ist, schreibt sie ihr Ergebnis zuerst und die erste Routenberechnung überschreibt dann anschließend die Route.}
-    {Der aktuelle Berechnungsthread wird gespeichert. Die berechnete Route wird nur noch abgeschickt wenn der berechnende Thread der aktuelle ist.}
+    {Der aktuelle Berechnungsthread wird gespeichert. Die berechnete Route wird nur noch abgeschickt, wenn der berechnende Thread der aktuelle ist.}
     {behoben}
 \bug{zoomAndDrag}{Zoom und Ziehen}
     {Wenn die Karte während einer Ziehgeste gezoomt wird, verändert sich die Kartenansicht,
@@ -419,6 +418,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
+<<<<<<< Upstream, based on branch 'master' of https://pse.dogcraft.de/
+=======
+    {behoben}
+\bug{centerMapProfileChange}{Kartenauschnitt zentriert bei Profilwechsel}
+    {Der sichtbare Kartenauschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
+    {Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{Pro\-file\-Map\-Com\-bi\-na\-tion} ändert.}
+    {Den Kartenauschnitt nur zentrieren, wenn sich die aktuelle Karte ändert.}
+>>>>>>> 27edcae Testdokument: kleinere Verbesserungen, Anführungszeichen
     {behoben}
 \end{itemize}
 
@@ -441,7 +448,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {ein Verlaufseintrag nach Anwenden von \code{fromString} auf den von \code{toString} erzeugten String denselben Start- und Zielpunkt sowie Zeitstempel enthält wie davor.}
      {bestanden}
 \test{edgeProps}{EdgeProperties}
-     {Es werden die Getter von \code{EdgeProperties} und insbesondere \code{getMaxSpeed} getestet.}
+     {Es werden die Getter von \code{EdgeProperties} und insbesondere \code{get\-Max\-Speed} getestet.}
      {die Getter die korrekten Werte zurückgeben und \code{getMaxSpeed}, je nach Straßentyp und übergebenem Profil, die korrekte Höchstgeschwindigkeit des gegebenen Fahrzeugtyps auf diesem Straßentyp liefert.}
      {bestanden}
 \test{restriction}{Restriction}
@@ -497,7 +504,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {alle OSM-Tags auf die richtigen Strukturen im Graph abgebildet werden.}
      {bestanden}
 \test{profileMapComb}{ProfileMapCombination}
-     {Es wird die Speicher- und Lade-Funktion von \code{ProfileMapCombination} getestet.}
+     {Es wird die Speicher- und Lade-Funktion von \code{Pro\-file\-Map\-Com\-bi\-na\-tion} getestet.}
      {die \code{ProfileMapCombination} nach dem Speichern und anschließenden Laden das gleiche Profil und die gleiche \code{StreetMap} sowie, falls vorhanden, die gleiche abgeschlossene Vorberechnung (Kantengewichte, Arc-Flags, benötigte Zeit) enthält wie davor.}
      {bestanden}
 \test{turnRestriction}{TurnRestriction}
@@ -541,7 +548,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \oitem{TF}{aboutviewclose} Über-Fenster schließen
 \testfall
     {Das Über-Fenster ist geöffnet.}
-    {Die Tastenkombination \textit{Alt}+\textit{F4} drücken.}
+    {Die Tastenkombination \textit{Alt}\,+\,\textit{F4} drücken.}
     {Das Über-Fenster wird geschlossen.}
 \oitem{TF}{swap} Koordinaten vertauschen
 \testfall
@@ -570,7 +577,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
     {Das Fenster der Profilverwaltung erscheint.}
 \oitem{TF}{oneway} Einbahnstraße benutzen
 \testfall
-    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße }
+    {Karte ist sichtbar, Profil ist vorberechnet (für die aktuelle Karte), Karte enthält eine Einbahnstraße.}
     {Als Start- und Zielpunkt werden Punkte auf der Einbahnstraße gewählt. Dabei ist Ziel weiter in Einbahnstraßenrichtung als Start. }
     {Eine Route, die den Einbahnstraßenabschnitt enthällt wird gefunden.}
 \oitem{TF}{addprofile} Profil hinzufügen
@@ -605,12 +612,12 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \newpage
 
 Startbedingung: Eine Internetverbindung ist hergestellt. Die aktuelle Konfiguration (auch alle Profile und Karten) ist gelöscht.
-Bei allen Tests außer sich selbst erfüllt "Start" eine Vorbedingung.
+Bei allen Tests außer sich selbst erfüllt „Start“ eine Vorbedingung.
 \begin{longtable}{||c|c|c|c|c||}
 ID& Testname & Testnummer & bestanden & Vorbedingungen\\ 
  & & & & erfüllt in\\ \hline\hline
 \endfirsthead
-\rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server runtergeladen. Damit wird gesichert, dass der Test mit der Karte "Regierungsbezirk Karlsruhe" und dem dafür vorberechneten Standardprofil "PKW (Standard)" gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \checkmark &  \footnote{Neustart der Anwendung} \\ \hline
+\rowno[start] & Start\footnote{Die Konfiguration wird neu vom Server heruntergeladen. Damit wird gesichert, dass der Test mit der Karte „Regierungsbezirk Karlsruhe“ und dem dafür vorberechneten Standardprofil „PKW (Standard)“ gestartet wird, eigene Kacheln verwendet werden und die \gls{arc} aktiviert sind.} &/TF30/ & \checkmark &  \footnote{Neustart der Anwendung} \\ \hline
 \rowno[aboutopen] & Öffnung des Über-Fenster & \ref{TF:aboutviewopen}& \checkmark & \footnotemark[2] \\ \hline
 \rowno[aboutclose] & Schließen des Über-Fenster & \ref{TF:aboutviewclose}& \checkmark & \ref{aboutopen} \\ \hline
 \rowno[coordinates] & Eingabe der Koordinaten & /TF150/ & \checkmark &  \\ \hline
@@ -656,17 +663,17 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \end{longtable}
 \subsection{Manuelle Tests}
-Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit 3c2b61df374375029a4fe853dce074f05488f9b6 am 7.03.2014 ausgeführt und wurden bestanden.\\
-Die folgenden Tests wurden auf dem Commit 680d84bff40fce53b8126ed23e148572ca364474 am 7.03.2014 für die Karte "Regierungsbezirk Karlsruhe" ausgeführt.
+Die Tests /TF40/, /TF60/, /TF140/, /TF160/, /TF170/, /TF 180/, /TF190/, /TF260/, /TF270/, /TF280/, /TF300/, /TF320/ aus dem Pflichtenheft wurden manuell auf dem Commit \code{3c2b61df374375029a4fe853dce074f05488f9b6} am 7.\,03.\,2014 ausgeführt und wurden bestanden.\\
+Die folgenden Tests wurden auf dem Commit \code{680d84bff40fce53b8126ed23e148572ca364474} am 7.03.2014 für die Karte „Regierungsbezirk Karlsruhe“ ausgeführt.
 \begin{longtable}{||c|c|c|c|c||}
 Testnummer & bestanden & Startkoordinate & Begründung\\ 
  & & Zielkoordinate & \\ \hline \hline
 \endfirsthead
 /TF360/ & \checkmark & 49.007614 8.394907 & links abbiegen verboten\\ 
  & & 49.00796 8.394949 & \\ \hline
-/TF370/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5m), \\
+/TF370/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5\,m), \\
  & & 49.00988 8.3951645 & Profil LKW (Standard) \\ \hline
-/TF380/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5m), \\ 
+/TF380/ & \checkmark & 49.00889 8.395014 & Beschränkung nach Höhe (3,5\,m), \\ 
  & & 49.00988 8.3951645 &  Profil PKW (Standard)\\ \hline
 /TF390/ & \checkmark & 48.964893 8.613882 & LKW-Verbot, \\ 
  & & 48.965534 8.613367 & Profil LKW (Standard) \\ \hline
@@ -728,7 +735,7 @@ So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
 \begin{itemize}
-\item Änderungen am \code{GraphIndex}
+\item \code{GraphIndex}
   \begin{itemize}
   \item Die Klasse \code{GraphIndex} wurde in ein Interface geändert und die bisherige Implementierung in die Klasse \code{TreeGraphIndex} verschoben.
   \item Eine weitere Implementierung von \code{GraphIndex}, \code{ArrayGraphIndex}, wurde geschrieben.
@@ -741,13 +748,13 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
   \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
   (Eine Routenberechnung endet implizit bei Aufruf von \code{setCurrentRoute}.)
   \end{itemize}
-  \item MainController-Änderungen
+  \item \code{MainController}
     \begin{itemize}
-    \item Die Klasse \code{MainController} enthält nun eine Methode \code{setUseArcFlags} zum abschalten der ArcFlags bei der Routenberechnung. Hierzu wird entweder eine Instanz von ArcFlagsDijkstra oder Dijkstra zur Routenberechnung verwendet.
+    \item Die Klasse \code{MainController} enthält nun eine Methode \code{setUseArcFlags} zum Abschalten der \gls{arc} bei der Routenberechnung. Hierzu wird entweder eine Instanz von \code{ArcFlagsDijkstra} oder \code{Dijkstra} zur Routenberechnung verwendet.
     \end{itemize}
-  \item ArcFlagsDijkstra-Änderungen
+  \item \code{ArcFlagsDijkstra}
     \begin{itemize}
-    \item Die Klasse \code{ArcFlagsDijkstra} erbt nun von der neuen Klasse \code{Dijkstra}, welche den normalen Dijkstra-Algorithmus implementiert und ergänzt diese mit den \code{ArcFlags}.
+    \item Die Klasse \code{ArcFlagsDijkstra} erbt nun von der neuen Klasse \code{Dijkstra}, welche den normalen \gls{dijkstra} implementiert und ergänzt diese mit den \gls{arc}.
     \end{itemize}
 \end{itemize}
 
