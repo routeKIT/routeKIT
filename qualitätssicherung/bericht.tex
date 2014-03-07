@@ -413,10 +413,10 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
     {behoben}
-\bug{centerMapProfileChange}{Kartenauschnitt zentriert bei Profilwechsel}
-	{Der sichtbare Kartenauschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
+\bug{centerMapProfileChange}{Kartenausschnitt zentriert bei Profilwechsel}
+	{Der sichtbare Kartenausschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
 	{Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{ProfileMapCombination} ändert.}
-	{Den Kartenauschnitt nur zentrieren, wenn sich die aktuelle Karte Ändert.}
+	{Den Kartenausschnitt nur zentrieren, wenn sich die aktuelle Karte Ändert.}
 	{behoben}
 \bug{textfieldsProfileMapChange}{Textfelder für Start und Ziel beim Profil-/Kartenwechsel}
 	{Wird die Karte oder das Profil geändert, bleiben in den Textfeldern für Start und Ziel die alten Koordinaten stehen.}
@@ -707,7 +707,7 @@ anhand eines Ausschnittes aus \code{ManagementActions} (Abbildung \ref{fig:error
 
 Hier sieht man deutlich, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen, haben wir keine Testfälle geschrieben, die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
 
-Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
+Diese Problematik wird an einer anderen Stelle, bei der Benutzung des Java-Konstrukts "try-with-Resources" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann.
 
 \begin{figure}[H]
 \includegraphics[scale=0.7]{tryWithResources}
