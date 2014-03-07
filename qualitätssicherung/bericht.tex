@@ -688,6 +688,37 @@ Unit Tests & 50.5\%&50.1\%&44.1\%\\ \hline \hline
 Merged & 86.2\%&88.0\%&65.7\%\\ \hline
 \end{longtable}
 
+Eine Aufteilung der "Instruction Coverage" des vereinigten Durchlaufs in die einzelnen Teilpakete ist in Abbildung \ref{fig:overallCoverage} dargestellt.
+\begin{figure}[h]
+\includegraphics[scale=0.7]{overallCoverage}
+\caption{Die Instruction Coverage des gesamten Testlaufs.}
+\label{fig:overallCoverage}
+\end{figure}
+
+Die fehlende Abdeckung von \code{TerminalCLI} ist dadurch zu erklären, dass diese Klasse die Benutzung der Import- und Vorberechnungsfunktion in einer Kommandozeile abstrahiert. Dies 
+
+Die auch eher niedrige Abdeckung der anderen Klassen soll hier
+durch einen Ausschnitt aus \code{ManagementActions} (Abbildung \ref{fig:errorCoverage}) erklärt werden.
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{errorCoverage}
+\caption{Ein Codeausschnitt aus \code{ManagementActions} mit der Abdeckung des gesamten Testlaufs.}
+\label{fig:errorCoverage}
+\end{figure}
+
+Man kann hier sehr deutlich sehen, dass die fehlende Abdeckung durch IO-Fehlerbehandlungscode verursacht wird. Da sehr viele Dateien in verschiedensten Situationen gespeichert und geladen werden müssen haben wir keine Testfälle geschrieben die explizit hier Dateien entfernen oder die Festplatte komplett füllen, sodass keine Datei mehr angelegt werden kann.
+
+Diese Problematik wird an eine anderen Stelle wird bei der Benutzung des Java-Konstrukts "try-with-Resouces" noch deutlicher, wie man in Abbildung \ref{fig:tryWithResources} erkennen kann:
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{tryWithResources}
+\caption{Ein Codeausschnitt aus \code{ArcFlags} mit der Abdeckung des gesamten Testlaufs.}
+\label{fig:tryWithResources}
+\end{figure}
+
+Man kann erkennen, dass die nicht überdeckten Anweisungen dieser 2 Methoden in den try-Blöcken liegen.
+Es sind die Anweisungen, die dafür sorgen, dass die Resourcen (\code{RandomAccessFile},\code{FileChannel},\code{FileInputStream},\code{DataInputStream}) auch im Fehlerfall ordnungsgemäß geschlossen werden (und auch, dass die anderen Resources geschlossen werden, wenn das schließen einer andere fehlschlägt). So sind allein im sichtbaren Programmcode 96 Befehle, die nicht überdeckt sind.
+
 \section{Änderungen seit der Implementierung}
 Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzugefügten Klassen, Methoden und Attribute aufgeführt.
 
