@@ -61,7 +61,7 @@ public class MainController {
 	 */
 	private MainController(ProgressReporter pr) {
 		pr.pushTask("Starte routeKIT");
-		pr.setSubTasks(new float[] { 0.98f, 0.01f });
+		pr.setSubTasks(new float[] { 0.99f, 0.01f });
 		instance = this;
 		pr.pushTask("Lese Index");
 		try {
