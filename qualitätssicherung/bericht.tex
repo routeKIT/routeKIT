@@ -645,14 +645,14 @@ ID& Testname & Testnummer & bestanden & Vorbedingungen\\
 \rowno[swaponeway]& Einbahnstraße gegen die Fahrtrichtung & /TF350/ & \checkmark & \ref{oneway} \\
 & &  /TF340/ & & \\ \hline
 \rowno[profilemanageropen2] & Öffnung der Profilverwaltung &\ref{TF:profilemanagerviewopen} & \checkmark & \ref{correctmapimport}  (schließen) \\ \hline
-\rowno[neuprofile] & Neues Profil& /TF230/ & \checkmark & \\ \hline
-\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{neuprofile} (schließen) \\ \hline
+\rowno[newprofile] & Neues Profil& /TF230/ & \checkmark & \\ \hline
+\rowno[mapmanageropen2] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{newprofile} (schließen) \\ \hline
 \rowno[addprofileformap] & Hinzufügen von Profil zur Karte & \ref{TF:addprofile} & \checkmark & \ref{mapmanageropen2} \\ \hline
 \rowno[historyopen] & Öffnung des Verlaufs & \ref{TF:historyopen} & \checkmark & \ref{addprofileformap} (schließen)\\ \hline
 \rowno[loadfromhistory] & Laden aus Verlauf & /TF50/ & \checkmark & \ref{swaponeway} \\ \hline
 \rowno[mapmanageropen3] & Öffnung der Kartenverwaltung &\ref{TF:mapmanagerviewopen} & \checkmark & \ref{loadfromhistory}  (schließen) \\ \hline
 \rowno[removeprofilefrommap] & Entfernung einer Vorberechnung für Profil & \ref{TF:removeprofileinmap} & \checkmark & \ref{mapmanageropen3} und \ref{precalc2}\\ \hline
-\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{neuprofile} \\ \hline
+\rowno[deleteprofile] & Entfernung eines Profils & /TF250/ & \checkmark & \ref{newprofile} \\ \hline
 \rowno[deletemap] & Entfernung einer Karte & /TF310/ & \checkmark & \ref{correctmapimport} \\ \hline
 \end{longtable}
 
