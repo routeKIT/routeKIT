@@ -413,6 +413,16 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
     {behoben}
+\bug{centerMapProfileChange}{Kartenauschnitt zentriert bei Profilwechsel}
+	{Der sichtbare Kartenauschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
+	{Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{ProfileMapCombination} ändert.}
+	{Den Kartenauschnitt nur zentrieren, wenn sich die aktuelle Karte Ändert.}
+	{behoben}
+\bug{TextfieldsProfileChange}{Textfelder für Start und Ziel beim Profil-/Kartenwechsel}
+	{Wird die Karte oder das Profil geändert blieben in den Textfeldern für Start und Ziel die alten Koordinaten stehen.}
+	{Die Route wird zwar zurückgesetzt aber die Textfelder nicht geleert.}
+	{Die Textfelder werden nun geleert, sobald die Karte oder das Profil geändert werden.}
+	{behoben}
 \end{itemize}
 
 \section{Protokoll der Unit-Tests}
