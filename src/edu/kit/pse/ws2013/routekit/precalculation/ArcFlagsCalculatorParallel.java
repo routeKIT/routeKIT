@@ -92,7 +92,9 @@ public class ArcFlagsCalculatorParallel extends ArcFlagsCalculatorImpl {
 					final int startEdgePartition = edgeBasedGraph
 							.getPartition(edgeBasedGraph.getStartEdge(turn));
 					if (startEdgePartition == currentPartition) {
-						setFlag(turn, currentPartition, flagsArray);
+						if (weights.getWeight(turn) != Integer.MAX_VALUE) {
+							setFlag(turn, currentPartition, flagsArray);
+						}
 					} else {
 						edgesWithTurnsToOtherPartitions.add(edge);
 					}
