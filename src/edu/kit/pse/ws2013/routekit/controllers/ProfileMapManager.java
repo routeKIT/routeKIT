@@ -412,7 +412,7 @@ public class ProfileMapManager {
 
 	public static ProfileMapCombination init(File rootDirectory,
 			ProgressReporter pr) throws IOException {
-		pr.setSubTasks(new float[] { .1f, .1f, .1f, .7f });
+		pr.setSubTasks(new float[] { .01f, .01f, .01f, .97f });
 		if (!rootDirectory.exists()) {
 			// initFirstStart(rootDirectory);
 			rootDirectory.mkdir();

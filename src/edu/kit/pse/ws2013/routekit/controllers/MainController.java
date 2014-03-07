@@ -61,7 +61,7 @@ public class MainController {
 	 */
 	private MainController(ProgressReporter pr) {
 		pr.pushTask("Starte routeKIT");
-		pr.setSubTasks(new float[] { .01f, 0.98f, 0.01f });
+		pr.setSubTasks(new float[] { 0.98f, 0.01f });
 		instance = this;
 		pr.pushTask("Lese Index");
 		try {
@@ -72,15 +72,9 @@ public class MainController {
 			profileMapManager = null;
 			return;
 		}
-		pr.popTask("Lese Index");
 		profileMapManager = ProfileMapManager.getInstance();
-		String text = "Lade zuletzt verwendete Karte";
-		if (profileMapManager.getCurrentCombination().isCalculated()) {
-			text += " und Vorberechnung";
-		}
-		pr.pushTask(text);
 		profileMapManager.getCurrentCombination().ensureLoaded(pr);
-		pr.popTask();
+		pr.popTask("Lese Index");
 
 		profileMapManager.addCurrentCombinationListener(rm);
 		History _history; // because history is final
@@ -314,7 +308,6 @@ public class MainController {
 		if (selected != null && !selected.equals(current.getProfile())) {
 			load(selected, current.getStreetMap());
 		}
-		profileMapManager.checkIfCurrentStillExists();
 	}
 
 	MapManagerController mapManagement;
@@ -331,7 +324,6 @@ public class MainController {
 		if (selected != null) {
 			load(current.getProfile(), selected);
 		}
-		profileMapManager.checkIfCurrentStillExists();
 	}
 
 	private void load(Profile profile, StreetMap map) {
