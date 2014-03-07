@@ -329,13 +329,13 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Ein falsches \code{break} entfernen, das nach der ersten Ein-Kanten-Straße das Erzeugen von Kanten abbricht.}
     {behoben}
 \bug{pointProjection}{Punkt-Projektion}
-    {Die Projektion von angeklickten Koordinaten auf Kanten ist manchmal leicht schief.}
+    {Die Projektion von eingegebenen Koordinaten auf Kanten ist oft schief.}
     {Die Projektion findet im Geokoordinatensystem statt und nicht nach der \gls{mercator} (also im SMT-Koordinatensystem).}
     {Den Code muss für die Abstandsberechnung SMT-Koordinaten benutzen und keine Geokoordinaten.}
     {behoben}
 \bug{cornerOneway}{Einbahnstraßen, Randfall}
     {Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.}
-    {Es wird nur verhindert, dass man in Einbahnstraßen entgegen der Fahrtrichtung einbiegt, aber nicht, dass man darin entgegen der Fahrtrichtung losfährt.}
+    {Es wird nicht verhindert, dass man in Einbahnstraßen entgegen der Fahrtrichtung losfährt.}
     {Den ersten Schritt der Routenberechnung gesondert ausführen, um dies als Spezialfall zu behandeln.}
     {behoben}
 \bug{profileNoWarning}{Profilverwaltung: Warnung bei Enter}
@@ -359,8 +359,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Weiteren Code hinzufügen, der alle gelöschten Profile ermittelt und sie direkt aus den Listen löscht.}
     {behoben}
 \bug{currentProfileNotExisting}{Gelöschtes aktuelles Profil}
-    {Ein nicht-Standard-Profil ist ausgewählt. Es gibt nur ein nicht-Standard-Profil.
-    In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht
+    {Das einziege nicht-Standard-Profil ist ausgewählt. In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht
     und der Dialog mit "ok" geschlossen.
     Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standard-Profil ausgewählt
     und die Eingaben sind nicht deaktiviert.}
@@ -399,7 +398,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     was sich aber nicht direkt auf die gespeicherten Koordinaten auswirkt.
     Wird nun die Ziehgeste fortgesetzt, werden diese halb (oder doppelt) so großen Koordinaten
     zurückgeschrieben, was den Sprung auf der Karte verursacht.}
-    {Verhindere alles Zoomen während einer Ziehgeste.}
+    {Verhindere Zoomen während einer Ziehgeste.}
     {behoben}
 \bug{slowRender}{Vergröberung nötig}
     {Das Rendern der Kacheln ist auf kleineren Zoomstufen zu langsam.}
