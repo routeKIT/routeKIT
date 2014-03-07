@@ -374,7 +374,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 	{Liegen Start- und/oder Zielpunkt außerhalb der Karte,
 	d.h. findNearestPointOnEdge liefert \code{null},
 	so wird der Infotext "Route wird berechnet..." angezeigt, obwohl keine Route existiert.}
-	{Zu Beginn der Routenberechnung wird startCalculating() aufgerufen, wodurch "Route wird berechnet..." angezeigt wird.
+	{Zu Beginn der Routenberechnung wir startCalculating() aufgerufen, wodurch "Route wird berechnet..." angezeigt wird.
 	In der Abbruchbedingung bei Start/Ziel == \code{null} wird die Routenberechnung abgebrochen,
 	ohne currentRoute und currentDescription auf \code{null} zu setzen.
 	Der Infotext bleibt unverändert auf "Route wird berechnet..."}
@@ -419,11 +419,6 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Während der Routenberechnung zeigt die Wegbeschreibungs-/Info-Box den Text „keine Route gefunden“ an.}
     {Begonnene Routenberechnungen werden dem \code{RouteModel} nicht mitgeteilt, so dass die \code{MainView} nicht erfahren kann, dass gerade eine Berechnung läuft.}
     {Hinzufügen der Methode \code{isCalculated} zum \code{RouteModel}; siehe auch Abschnitt \ref{change:routeCalcKeineRoute}.}
-    {behoben}
-\bug{centerMapProfileChange}{Kartenauschnitt zentriert bei Profilwechsel}
-    {Der sichtbare Kartenauschnitt wird auf das Zentrum der Karte verschoben, obwohl man nur ein anderes Profil ausgewählt hat.}
-    {Der Kartenausschnitt wird zentriert, sobald sich die aktuelle \code{ProfileMapCombination} ändert.}
-    {Den Kartenauschnitt nur zentrieren, wenn sich die aktuelle Karte ändert.}
     {behoben}
 \end{itemize}
 
@@ -533,7 +528,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 
 \section{Protokoll des GUI-Tests}
 \subsection{Automatisierter Test}
-Alle Testfälle mit kleineren Nummern wurden im Pfichtenheft beschrieben.
+Alle Testfälle mit kleineren Nummern wurden im Pflichtenheft beschrieben.
 Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT gestartet ist.
 \begin{description}
 \newcounter{oitemTF}
@@ -597,12 +592,12 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \testfall
     {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind aktiviert.}
     {In der Menüleiste werden die \gls{arc} abgewählt.}
-    {Es werden keine \gls{arc} für die Vorberechnung verwendet.}
+    {Es werden keine \gls{arc} bei der Routenberechnung verwendet.}
 \oitem{TF}{activatearcflgs}  \gls{arc} verwenden
 \testfall
     {Das Profil ist für die Karte vorberechnet. Die \gls{arc} sind deaktiviert.}
     {In der Menüleiste werden die \gls{arc} gewählt.}
-    {Es werden \gls{arc} für die Vorberechnung verwendet.}
+    {Es werden \gls{arc} bei der Routenberechnung verwendet.}
 
 
 \end{description}
@@ -610,7 +605,7 @@ Bei allen hier beschriebenen Testfällen gilt als Vorbedingung, dass \routeKIT g
 \newpage
 
 Startbedingung: Eine Internetverbindung ist hergestellt. Die aktuelle Konfiguration (auch alle Profile und Karten) ist gelöscht.
-Bei allen Tests außer "Start" erfüllt "Start" eine Vorbedingung.
+Bei allen Tests außer sich selbst erfüllt "Start" eine Vorbedingung.
 \begin{longtable}{||c|c|c|c|c||}
 ID& Testname & Testnummer & bestanden & Vorbedingungen\\ 
  & & & & erfüllt in\\ \hline\hline
