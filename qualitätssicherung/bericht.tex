@@ -329,9 +329,9 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Ein falsches \code{break} entfernen, das nach der ersten Ein-Kanten-Straße das Erzeugen von Kanten abbricht.}
     {behoben}
 \bug{pointProjection}{Punkt-Projektion}
-    {Die Projektion von eingegebenen Koordinaten auf Kanten ist oft schief.}
-    {Die Projektion findet im Geokoordinatensystem statt und nicht nach der \gls{mercator} (also im SMT-Koordinatensystem).}
-    {Den Code muss für die Abstandsberechnung SMT-Koordinaten benutzen und keine Geokoordinaten.}
+    {Die Projektion von eingegebenen Koordinaten auf die nächstliegenden Kanten ist oft schief.}
+    {Die Projektion findet im Geokoordinatensystem statt und nicht nach der \gls{mercator} (also im \gls{smt}-Koordinatensystem).}
+    {Den Code muss für die Abstandsberechnung \gls{smt}-Koordinaten benutzen und keine Geokoordinaten.}
     {behoben}
 \bug{cornerOneway}{Einbahnstraßen, Randfall}
     {Eine Route auf einer einzelnen Kante, die nur in einer Richtung befahrbar ist, kann die Kante auch entgegen der Fahrtrichtung benutzen.}
@@ -347,7 +347,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Der Test für die Ausgabe des Hilfetext für das Konsoleninterface schlägt auf Windows-Systemen
     mit einer \code{ArrayIndexOutOfBoundsException} fehl, obwohl er auf Linux-Systemen funktioniert.}
     {Die Ausgabe des Hilfetexts wird in ein Bytearray geschrieben. Dieses wird mit der Größe des Referenzstrings alloziert. Da auf Linux nur ein Byte für den Zeilenumbruch genutzt wird und auf Windows zwei, läuft das Array über.}
-    {Erzeuge einen plattformabhängigen Referenzstring mit den richtigen Zeilenumbrüchen, damit er mit der Ausgabe exakt übereinstimmt.}
+    {Den Referenzstring plattformabhängig mit den richtigen Zeilenumbrüchen erzeugen, damit er mit der Ausgabe exakt übereinstimmt.}
     {behoben}
 \bug{deleteProfileWhileAddingToMap}{Karten- und Profilverwaltung: Inkonsistenz}
     {In der Kartenverwaltung ist ein Profil für die aktuelle Karte vorberechnet oder soll vorberechnet werden.
@@ -363,14 +363,14 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist, was nun ein Standardprofil ist.}
     {Beim Löschen eines Profils oder einer Karte immer sicherstellen, dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
     {behoben}
-\bug{noRouteWirdBerechnet}{Falscher Infotext wenn keine Route gefunden wird}
+\bug{noRouteWirdBerechnet}{Falscher Infotext, wenn keine Route gefunden wird}
 	{Liegen Start- und/oder Zielpunkt außerhalb der Karte,
 	d.\,h. \code{find\-Nearest\-Point\-On\-Edge} liefert \code{null},
-	so wird der Infotext „Route wird berechnet \dots“ angezeigt, obwohl keine Route existiert.}
-	{Zu Beginn der Routenberechnung wird \code{startCalculating} aufgerufen, wodurch „Route wird berechnet \dots“ angezeigt wird.
+	so wird der Infotext „Route wird berechnet\dots“ angezeigt, obwohl keine Route existiert.}
+	{Zu Beginn der Routenberechnung wird \code{startCalculating} aufgerufen, wodurch „Route wird berechnet\dots“ angezeigt wird.
 	In der Abbruchbedingung bei Start/Ziel \code{== null} wird die Routenberechnung abgebrochen,
 	ohne \code{currentRoute} und \code{currentDescription} auf \code{null} zu setzen.
-	Der Infotext bleibt unverändert auf „Route wird berechnet \dots“}
+	Der Infotext bleibt unverändert auf „Route wird berechnet\dots“}
 	{In der Abbruchbedingung \code{currentRoute} und \code{currentDescription} auf \code{null} setzen, wodurch „Keine Route gefunden.“ angezeigt wird.}
 	{behoben}
 \end{itemize}
