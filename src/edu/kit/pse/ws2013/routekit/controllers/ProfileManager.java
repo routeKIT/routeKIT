@@ -112,7 +112,7 @@ public class ProfileManager {
 			if (existing.equals(profile)) {
 				return;
 			}
-			deletePrecalculations(existing);
+			deleteProfile(existing);
 		}
 		File f = profiles.get(existing);
 		if (f == null) {
