@@ -358,6 +358,19 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
     {Beim Beenden des Dialogs werden gelöschte Profile nicht richtig erkannt und verarbeitet.}
     {Weiteren Code hinzufügen, der alle gelöschten Profile ermittelt und sie direkt aus den Listen löscht.}
     {behoben}
+\bug{currentProfileNotExisting}{Gelöschtes aktuelles Profil}
+    {Ein nicht-Standard-Profil ist ausgewählt. Es gibt nur ein nicht-Standard-Profil.
+    In der Kartenverwaltung wird dieses Profil (im Hinzufügen-Dialog) gelöscht
+    und der Dialog mit "ok" geschlossen.
+    Beim erneuten Öffnen des Hinzufügen Dialogs ist ein Standard-Profil ausgewählt
+    und die Eingaben sind nicht deaktiviert.}
+    {Der Dialog lädt das nicht mehr existierende aktuelle Profil
+    und deaktiviert deshalb die Eingaben nicht.
+    Das Profil fehlt aber in der Liste, wodurch ein anderes Profil ausgewählt ist,
+    was nun ein Standard-Profil ist.}
+    {Beim Löschen eines Profils oder einer Karte immer sicherstellen,
+    dass die aktuelle Kombination nur aus nicht gelöschten Teilen besteht.}
+    {behoben}
 \end{itemize}
 
 \subsection{Benutzbarkeitsfehler}
