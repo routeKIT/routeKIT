@@ -484,7 +484,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {die von einem \code{TestListener} gemessene Anzahl an ausgelösten Ereignissen an allen Stellen mit der erwarteten Anzahl übereinstimmt.}
      {bestanden}
 \test{weights}{Weights}
-     {Es wird die Speicher- und Lade-Funktion der Kantengewichte getestet.}
+     {Es wird die Speicher- und die Lade-Funktion der Kantengewichte getestet.}
      {nach dem Speichern und anschließenden Laden die gleichen Kantengewichte gesetzt sind wie davor.}
      {bestanden}
 \test{mapEdge}{MapEdge}
@@ -500,7 +500,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {alle OSM-Tags auf die richtigen Strukturen im Graph abgebildet werden.}
      {bestanden}
 \test{profileMapComb}{ProfileMapCombination}
-     {Es wird die Speicher- und Lade-Funktion von \code{Pro\-file\-Map\-Com\-bi\-na\-tion} getestet.}
+     {Es wird die Speicher- und die Lade-Funktion von \code{Pro\-file\-Map\-Com\-bi\-na\-tion} getestet.}
      {die \code{ProfileMapCombination} nach dem Speichern und anschließenden Laden das gleiche Profil und die gleiche \code{StreetMap} sowie, falls vorhanden, die gleiche abgeschlossene Vorberechnung (Kantengewichte, Arc-Flags, benötigte Zeit) enthält wie davor.}
      {bestanden}
 \test{turnRestriction}{TurnRestriction}
@@ -508,7 +508,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
      {eine Abbiegebeschränkung ihre Start- und Zielkante korrekt zurückgibt und \code{allowsTurn} korrekt entscheidet, ob ein Abbiegevorgang auf eine bestimmte Kante erlaubt ist oder nicht.}
      {bestanden}
 \test{profile}{Profile}
-     {Es werden \code{equals} und \code{clone} sowie die Setter, Getter und die Speicher- und Lade-Funktion der Profile getestet.}
+     {Es werden \code{equals} und \code{clone} sowie die Setter, Getter und die Speicher- und Lade-Funktionen von \code{Profile} getestet.}
      {\code{equals} und \code{clone} erwartungsgemäß funktionieren, die Setter die verschiedenen Werte (Fahrzeugtyp, Höhe, Breite, \dots) korrekt setzen, die Werte von Standardprofilen jedoch nicht verändern, die Getter die korrekten Werte zurückgeben und das Profil nach dem Speichern und anschließenden Laden die gleichen Werte enthält wie davor.}
      {bestanden}
 \test{fibHeap}{FibonacciHeap}
