@@ -396,7 +396,7 @@ Um die Routenberechnung zu beschleunigen, wird pro \gls{profil} und \gls{karte} 
 \bug{slowRender}{Vergröberung nötig}
     {Das Rendern der Kacheln ist auf kleineren Zoomstufen zu langsam.}
     {Es werden zu viele feine Kanten gezeichnet.}
-    {Den Graph für die Anzeige vergröbern, sodass weniger Kanten gezeichnet werden müssen.}
+    {Den Graph für die Anzeige vergröbern, sodass weniger Kanten gezeichnet werden müssen; siehe auch Abschnitt \ref{change:graphView}.}
     {behoben}
 \bug{routeCalcAllEdges}{Routenberechnung: alle Kanten}
     {Die Routenberechnung ist zu langsam, auch für kurze Routen.}
@@ -757,8 +757,23 @@ Im Folgenden sind die gegenüber der Implementierung geänderten und neu hinzuge
   \item Eine weitere Implementierung von \code{GraphIndex}, \code{ArrayGraphIndex}, wurde geschrieben.
   Sie verwendet nur zwei \code{int}-Arrays und ist dadurch etwas schneller und lässt sich gut speichern/laden.
   \item \code{Graph} verwendet \code{ArrayGraphIndex}.
-  \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind. Dies beschleunigt den Start der Anwendung erheblich.
+  \item \code{Graph} lädt \code{ArrayGraphIndex} von der Festplatte, statt sie neu aufzubauen, wenn die Dateien vorhanden sind.
+    Dies beschleunigt den Start der Anwendung erheblich.
+    (Fehlt die Datei auf der Festplatte oder kann sie nicht geladen werden, so wird der Index einfach neu aufgebaut.)
   \end{itemize}
+\item\label{change:graphView} \code{GraphView} (\ref{BG:slowRender})
+  \begin{itemize}
+  \item Die abstrakte Klasse \code{GraphView} wurde hinzugefügt.
+    Sie kapselt eine „Ansicht“ eines Graphen zum Rendern und gibt für jede Kante den Start- und Endknoten zurück.
+    Die einfachste Ausführung ist \code{IdentityGraphView}, die den Graphen nicht verwendet.
+  \item Für kleinere Zoomstufen mit mehr sichtbaren Kanten wird hingegen \code{ReducedGraphView} verwendet, die den Graphen vergröbert.
+    Zum Vergröbern des Graphen wird der Douglas-Peucker-Algorithmus verwendet. %TODO gls douglas peucker?
+  \item Zu jedem \code{GraphIndex} gehört eine \code{GraphView};
+    \code{GraphView} erhält deshalb die neue Methode \code{getView}.
+  \item Um den Start der Anwendung zu beschleunigen, wird auch die \code{GraphView} auf die Festplatte gespeichert und, falls vorhanden, geladen.
+    (Fehlt die Datei auf der Festplatte oder kann sie nicht geladen werden, so wird die View einfach neu aufgebaut.)
+  \end{itemize}
+  
 \item\label{change:routeCalcKeineRoute} \ref{BG:routeCalcKeineRoute}
   \begin{itemize}
   \item \code{RouteModel} erhält die neuen Methoden \code{startCalculating}, um den Beginn einer Routenberechnung zu melden, und \code{isCalculating}, um abzufragen, ob aktuell eine Routenberechnung stattfindet.
