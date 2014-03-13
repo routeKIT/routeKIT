@@ -53,6 +53,7 @@ public class EdgeBasedGraph {
 			}
 			turnsReverse[i] = currentEdge;
 		}
+		reverseGraph();
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class EdgeBasedGraph {
 	 * Ensures that the reverse access structure (for
 	 * {@link #getIncomingTurns(int)}) is built.
 	 */
-	public void reverseGraph() {
+	private void reverseGraph() {
 		if (redges != null) {
 			return;
 		}
@@ -206,7 +207,6 @@ public class EdgeBasedGraph {
 	 * @return all incoming turns of the edge
 	 */
 	public Set<Integer> getIncomingTurns(int edge) {
-		reverseGraph();
 		return new IntArraySet(redges[edge],
 				(edge == redges.length - 1 ? rturns.length : redges[edge + 1])
 						- redges[edge], rturns);
