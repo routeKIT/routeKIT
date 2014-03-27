@@ -17,6 +17,7 @@ public class OSMRenderer implements TileSource {
 
 	private final Matcher matcher;
 	private final Random random;
+	private final String ext;
 
 	/**
 	 * Creates a new {@link OSMRenderer}.
@@ -25,8 +26,10 @@ public class OSMRenderer implements TileSource {
 	 *            The tile server to use. The string may contain regex-like
 	 *            groups to account for load balancing, like this:
 	 *            {@code http://[abc].tile.openstreetmap.org/}
+	 * @throws IOException
+	 *             If the server can’t be reached.
 	 */
-	public OSMRenderer(String tileServer) {
+	public OSMRenderer(String tileServer) throws IOException {
 		if (tileServer == null) {
 			throw new IllegalArgumentException("tileServer must not be null!");
 		}
@@ -35,6 +38,28 @@ public class OSMRenderer implements TileSource {
 		}
 		matcher = Pattern.compile("\\[[^\\]]+\\]").matcher(tileServer);
 		random = new Random();
+
+		// find out what extension we need
+		// try .png first
+		URL uPng = new URL(getTileServer() + "0/0/0.png");
+		HttpURLConnection cPng = (HttpURLConnection) uPng.openConnection();
+		cPng.setRequestMethod("HEAD"); // we’re not interested in the content
+		cPng.connect();
+		if (cPng.getResponseCode() == 200 /* OK */) {
+			ext = ".png";
+		} else {
+			// try .jpg instead
+			URL uJpg = new URL(getTileServer() + "0/0/0.jpg");
+			HttpURLConnection cJpg = (HttpURLConnection) uJpg.openConnection();
+			cJpg.setRequestMethod("HEAD");
+			cJpg.connect();
+			if (cJpg.getResponseCode() == 200) {
+				ext = ".jpg";
+			} else {
+				throw new IOException(
+						"No tiles found with .jpg or .png suffixes!");
+			}
+		}
 	}
 
 	private synchronized String getTileServer() {
@@ -73,8 +98,7 @@ public class OSMRenderer implements TileSource {
 			return null;
 		}
 		try {
-			URL url = new URL(getTileServer() + zoom + "/" + x + "/" + y
-					+ ".png");
+			URL url = new URL(getTileServer() + zoom + "/" + x + "/" + y + ext);
 			HttpURLConnection huc = ((HttpURLConnection) url.openConnection());
 			huc.setRequestProperty("User-Agent", "routeKit/1.0 (study project)");
 			return ImageIO.read(huc.getInputStream());

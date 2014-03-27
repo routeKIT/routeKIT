@@ -392,17 +392,32 @@ public class MainController {
 		if (useOnlineMaps) {
 			String tileServer = FileUtil.getTileServer();
 			if (tileServer != null) {
-				return cache = new TileCache(new OSMRenderer(tileServer));
+				try {
+					return cache = new TileCache(new OSMRenderer(tileServer));
+				} catch (IOException e) {
+					// OSMRenderer couldn’t construct, server not reachable
+					JOptionPane
+							.showMessageDialog(
+									view,
+									"Der Server für die Onlinekacheln kann nicht verwendet werden.\n"
+											+ "Bitte überprüfen Sie den Inhalt der Datei tileServer.txt im Ordner "
+											+ FileUtil.getRootDir()
+											+ "\noder verwenden sie einen anderen Server,\n"
+											+ "zum Beispiel http://[abc].tile.openstreetmap.org/.",
+									"Kachelserver nicht verwendbar",
+									JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane
+						.showMessageDialog(
+								view,
+								"Es wurde noch kein Server für die Onlinekacheln eingestellt.\n"
+										+ "Bitte legen Sie eine Datei tileServer.txt im Ordner "
+										+ FileUtil.getRootDir()
+										+ " an,\n"
+										+ "zum Beispiel mit dem Inhalt http://[abc].tile.openstreetmap.org/.",
+								"Kein Kachelserver", JOptionPane.ERROR_MESSAGE);
 			}
-			JOptionPane
-					.showMessageDialog(
-							view,
-							"Es wurde noch kein Server für die Onlinekacheln eingestellt.\n"
-									+ "Bitte legen sie eine Datei tileServer.txt im Ordner "
-									+ FileUtil.getRootDir()
-									+ " an,\n"
-									+ "zum Beispiel mit dem Inhalt http://[abc].tile.openstreetmap.org/.",
-							"Kein Kachelserver", JOptionPane.ERROR_MESSAGE);
 			// fallthrough / fallback to own renderer
 		}
 		return cache = new TileCache(new TileRenderer(profileMapManager
