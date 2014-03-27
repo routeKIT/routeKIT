@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.xml.stream.XMLStreamException;
 
 import edu.kit.pse.ws2013.routekit.export.GPXExporter;
@@ -389,11 +390,23 @@ public class MainController {
 			cache.stop();
 		}
 		if (useOnlineMaps) {
-			return cache = new TileCache(new OSMRenderer());
-		} else {
-			return cache = new TileCache(new TileRenderer(profileMapManager
-					.getCurrentCombination().getStreetMap().getGraph()));
+			String tileServer = FileUtil.getTileServer();
+			if (tileServer != null) {
+				return cache = new TileCache(new OSMRenderer(tileServer));
+			}
+			JOptionPane
+					.showMessageDialog(
+							view,
+							"Es wurde noch kein Server für die Onlinekacheln eingestellt.\n"
+									+ "Bitte legen sie eine Datei tileServer.txt im Ordner "
+									+ FileUtil.getRootDir()
+									+ " an,\n"
+									+ "zum Beispiel mit dem Inhalt http://[abc].tile.openstreetmap.org/.",
+							"Kein Kachelserver", JOptionPane.ERROR_MESSAGE);
+			// fallthrough / fallback to own renderer
 		}
+		return cache = new TileCache(new TileRenderer(profileMapManager
+				.getCurrentCombination().getStreetMap().getGraph()));
 	}
 
 	/**

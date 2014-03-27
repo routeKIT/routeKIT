@@ -1,6 +1,8 @@
 package edu.kit.pse.ws2013.routekit.util;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -63,7 +65,7 @@ public class FileUtil {
 	 * @throws IOException
 	 *             If the operating system is neither of the above.
 	 */
-	public static File getRootDir() throws IOException {
+	public static File getRootDir() {
 		String os = System.getProperty("os.name").toUpperCase();
 		if (os.contains("WIN")) {
 			return new File(System.getenv("APPDATA"), "routeKIT");
@@ -75,7 +77,7 @@ public class FileUtil {
 					new File(System.getProperty("user.home"), ".config"),
 					"routeKIT");
 		} else {
-			throw new IOException("Unknown operating system " + os);
+			throw new RuntimeException("Unknown operating system " + os);
 		}
 	}
 
@@ -84,6 +86,25 @@ public class FileUtil {
 	 */
 	public static File getHistoryFile() throws IOException {
 		return new File(getRootDir(), "routeKIT.history");
+	}
+
+	/**
+	 * Gets the tile server from the {@code tileServer.txt} file in the
+	 * {@link #getRootDir() root directory} of the installation.
+	 * 
+	 * @return The contents of the file, or {@code null} if it doesn’t exist or
+	 *         can’t be read.
+	 */
+	public static String getTileServer() {
+		File file = new File(getRootDir(), "tileServer.txt");
+		if (file.isFile()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+				return br.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	// @formatter:off – uses bad indentation
