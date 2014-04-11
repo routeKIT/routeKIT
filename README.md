@@ -12,3 +12,12 @@ In developing the software, we followed the [waterfall model](https://en.wikiped
 * `qualitätssicherung/` (verification and testing report)
 
 Please understand that we won’t bother to translate them into English :)
+
+External libraries
+------------------
+
+*routeKIT* uses the following libraries:
+
+* the JDK;
+* [METIS](http://glaros.dtc.umn.edu/gkhome/views/metis) to partition a graph when a map is imported – it is assumed that you have a `gpmetis` or a `kmetis` in your PATH;
+* [jbzip2](https://code.google.com/p/jbzip2/) to decompress the map that is downloaded when no map is found (on first program start) – included in this repository (see LICENSE-jbzip2).

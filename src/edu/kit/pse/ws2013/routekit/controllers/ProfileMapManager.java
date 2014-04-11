@@ -17,10 +17,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.xml.sax.SAXException;
+
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.CurrentCombinationListener;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
 import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter.CloseableTask;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
 import edu.kit.pse.ws2013.routekit.util.Dummies;
 import edu.kit.pse.ws2013.routekit.util.FileUtil;
@@ -442,14 +445,16 @@ public class ProfileMapManager {
 
 	public static ProfileMapCombination init(File rootDirectory,
 			ProgressReporter pr) throws IOException {
-		pr.setSubTasks(new float[] { .01f, .01f, .01f, .97f });
+		boolean mustCreateInstall = false;
 		if (!rootDirectory.exists()) {
-			// initFirstStart(rootDirectory);
-			rootDirectory.mkdir();
-			Dummies.downloadInstall(rootDirectory);
+			pr.setSubTasks(new float[] { .0025f, .0025f, .0025f, .99f, .0025f });
+			initFirstStart(rootDirectory);
+			mustCreateInstall = true;
 		} else if (!rootDirectory.isDirectory()) {
 			throw new IllegalArgumentException(rootDirectory.toString()
 					+ " is not a directory!");
+		} else {
+			pr.setSubTasks(new float[] { .01f, .01f, .01f, .97f });
 		}
 		if (instance != null) {
 			throw new IllegalStateException("Already initialized!");
@@ -460,7 +465,15 @@ public class ProfileMapManager {
 		MapManager.init(rootDirectory);
 		pr.nextTask("Erstelle ProfileMapManager");
 		instance = new ProfileMapManager(rootDirectory);
-		pr.nextTask("Lade Vorberechnung");
+		pr.popTask();
+		if (mustCreateInstall) {
+			try (CloseableTask task = pr.openTask("Schließe Installation ab")) {
+				Dummies.createInstall(rootDirectory, pr);
+			} catch (SAXException e) {
+				throw new RuntimeException("Couldn’t import initial map!", e);
+			}
+		}
+		pr.pushTask("Lade Vorberechnung");
 		// un-lazy
 		instance.getCurrentCombination().ensureLoaded(pr);
 		pr.popTask();

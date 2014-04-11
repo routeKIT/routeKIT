@@ -4,20 +4,21 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.itadaki.bzip2.BZip2InputStream;
 import org.xml.sax.SAXException;
 
 import edu.kit.pse.ws2013.routekit.controllers.MapManager;
 import edu.kit.pse.ws2013.routekit.controllers.ProfileMapManager;
 import edu.kit.pse.ws2013.routekit.map.StreetMap;
 import edu.kit.pse.ws2013.routekit.models.ProfileMapCombination;
+import edu.kit.pse.ws2013.routekit.models.ProgressReporter;
 import edu.kit.pse.ws2013.routekit.precalculation.OSMMapImporter;
 import edu.kit.pse.ws2013.routekit.precalculation.PreCalculator;
 import edu.kit.pse.ws2013.routekit.profiles.Profile;
@@ -31,40 +32,51 @@ public class Dummies {
 	 * Creates a full-fledged installation by downloading a map of the
 	 * governmental district of Karlsruhe from {@code geofabrik.de} and
 	 * executing a precalculation for {@link Profile#defaultCar}.
+	 * <p>
+	 * {@link MapManager} and {@link ProfileMapManager} are expected to have
+	 * been initialized already.
 	 * 
 	 * @param rootDir
 	 *            The root directory of the routeKIT installation.
+	 * @param pr
+	 *            The {@link ProgressReporter} to report progress to.
 	 */
-	public static void createInstall(File rootDir) throws IOException,
-			SAXException {
-		rootDir.mkdir();
-		new File(rootDir, "routeKIT.idx").createNewFile();
-		ProfileMapManager.init(rootDir, new DummyProgressReporter());
-
+	public static void createInstall(File rootDir, ProgressReporter pr)
+			throws IOException, SAXException {
+		pr.setSubTasks(new float[] { .05f, .05f, .9f });
+		pr.pushTask("Lade Standardkarte herunter");
 		URL url = new URL(
 				"http://download.geofabrik.de/europe/germany/baden-wuerttemberg/karlsruhe-regbez-latest.osm.bz2");
-		ReadableByteChannel rbc = Channels.newChannel(url.openConnection()
-				.getInputStream());
 		File file = File.createTempFile("routeKIT_map_", ".osm");
-		FileOutputStream fos = new FileOutputStream(file);
-		fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-		fos.close();
+		try (InputStream is = new BZip2InputStream(url.openStream(), false);
+				FileOutputStream fos = new FileOutputStream(file)) {
+			byte[] data = new byte[65536];
+			while (true) {
+				int read = is.read(data);
+				if (read == -1) {
+					break;
+				}
+				fos.write(data, 0, read);
+			}
 
-		StreetMap karlsruhe_big = new OSMMapImporter().importMap(file,
-				"Karlsruhe", new DummyProgressReporter());
-		MapManager.getInstance().saveMap(karlsruhe_big);
-		Properties p = new Properties();
-		p.setProperty("default", "true");
-		try (FileWriter writer = new FileWriter(new File(new File(rootDir,
-				"Karlsruhe"), "Karlsruhe.properties"))) {
-			p.store(writer, null);
+			pr.nextTask("Importiere und speichere Standardkarte");
+			StreetMap karlsruhe_big = new OSMMapImporter().importMap(file,
+					"Karlsruhe", pr);
+			MapManager.getInstance().saveMap(karlsruhe_big);
+			Properties p = new Properties();
+			p.setProperty("default", "true");
+			try (FileWriter writer = new FileWriter(new File(new File(rootDir,
+					"Karlsruhe"), "Karlsruhe.properties"))) {
+				p.store(writer, null);
+			}
+			pr.nextTask("Erstelle Standard-Vorberechnung");
+			ProfileMapCombination karlsruheCar = new ProfileMapCombination(
+					karlsruhe_big, Profile.defaultCar);
+			new PreCalculator().doPrecalculation(karlsruheCar, pr);
+			ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
+			ProfileMapManager.getInstance().savePrecalculation(karlsruheCar);
+			pr.popTask();
 		}
-		ProfileMapCombination karlsruheCar = new ProfileMapCombination(
-				karlsruhe_big, Profile.defaultCar);
-		new PreCalculator().doPrecalculation(karlsruheCar,
-				new DummyProgressReporter());
-		ProfileMapManager.getInstance().savePrecalculation(karlsruheCar);
-		ProfileMapManager.getInstance().setCurrentCombination(karlsruheCar);
 	}
 
 	/**
