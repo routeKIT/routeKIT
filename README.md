@@ -13,6 +13,8 @@ In developing the software, we followed the [waterfall model](https://en.wikiped
 
 Please understand that we won’t bother to translate them into English :)
 
+You can find rendered versions of the documents in the `PDFs` branch.
+
 External libraries
 ------------------
 
