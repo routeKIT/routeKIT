@@ -15,14 +15,17 @@ Please understand that we won’t bother to translate them into English :)
 
 You can find rendered versions of the documents in the `PDFs` branch.
 
-External libraries
-------------------
+Attribution
+-----------
 
 *routeKIT* uses the following libraries:
 
 * the JDK;
 * [METIS](http://glaros.dtc.umn.edu/gkhome/views/metis) to partition a graph when a map is imported – it is assumed that you have a `gpmetis` or a `kmetis` in your PATH;
 * [jbzip2](https://code.google.com/p/jbzip2/) to decompress the map that is downloaded when no map is found (on first program start) – included in this repository (see LICENSE-jbzip2).
+
+The map data comes from the [OpenStreetMap project](www.openstreetmap.org/);
+specifically, the initial map that is downloaded on first startup when no existing installation is found is downloaded from [geofabrik.de](http://www.geofabrik.de/).
 
 Commit hashes
 -------------
